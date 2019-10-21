@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/misc/other/grave.gd" type="Script" id=1]
+[ext_resource path="res://src/misc/other/Grave.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/misc/grave.res" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -17,12 +17,13 @@ use_parent_material = true
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 
-[node name="area" type="Area2D" parent="img"]
+[node name="area2d" type="Area2D" parent="img"]
 position = Vector2( 0, 2 )
 collision_layer = 0
 collision_mask = 4
 
-[node name="detect" type="CollisionShape2D" parent="img/area"]
+[node name="detect" type="CollisionShape2D" parent="img/area2d"]
 shape = SubResource( 1 )
-[connection signal="area_entered" from="img/area" to="." method="_on_deceased_area_entered"]
-[connection signal="area_exited" from="img/area" to="." method="_on_deceased_area_exited"]
+[connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
+[connection signal="area_entered" from="img/area2d" to="." method="_OnAreaEntered"]
+[connection signal="area_exited" from="img/area2d" to="." method="_OnAreaExited"]

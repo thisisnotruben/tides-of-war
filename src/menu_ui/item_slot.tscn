@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://asset/img/ui/brown_bg_icon.res" type="Texture" id=1]
-[ext_resource path="res://src/menu_ui/item_slot.gd" type="Script" id=2]
+[ext_resource path="res://src/menu_ui/ItemSlot.cs" type="Script" id=2]
 [ext_resource path="res://asset/img/font/mago1_80.res" type="DynamicFont" id=3]
 
 [node name="item_slot" type="TextureButton"]
@@ -67,10 +67,10 @@ custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 16
-[connection signal="button_down" from="." to="." method="_on_item_slot_button_down"]
-[connection signal="button_up" from="." to="." method="_on_item_slot_button_up"]
-[connection signal="pressed" from="." to="." method="_on_item_slot_pressed"]
-[connection signal="tween_completed" from="tween" to="." method="_on_tween_tween_completed"]
-[connection signal="tween_step" from="tween" to="." method="_on_tween_tween_step"]
-[connection signal="draw" from="m/label" to="." method="_on_label_draw"]
-[connection signal="hide" from="m/label" to="." method="_on_label_hide"]
+[connection signal="button_down" from="." to="." method="_OnItemSlotButtonDown"]
+[connection signal="button_up" from="." to="." method="_OnItemSlotButtonUp"]
+[connection signal="pressed" from="." to="." method="_OnItemSlotPressed"]
+[connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
+[connection signal="tween_step" from="tween" to="." method="_OnTweenStep"]
+[connection signal="draw" from="m/label" to="." method="_OnLabelDraw"]
+[connection signal="hide" from="m/label" to="." method="_OnLabelHide"]

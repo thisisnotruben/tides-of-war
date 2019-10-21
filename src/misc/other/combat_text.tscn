@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/misc/other/combat_text.gd" type="Script" id=1]
+[ext_resource path="res://src/misc/other/CombatText.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/font/mago1_16.res" type="DynamicFont" id=2]
 
 [sub_resource type="Animation" id=1]
@@ -30,7 +30,7 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "queue"
+"method": "Queue"
 } ]
 }
 
@@ -56,3 +56,4 @@ custom_fonts/font = ExtResource( 2 )
 anims/label_fade = SubResource( 1 )
 
 [node name="tween" type="Tween" parent="."]
+[connection signal="animation_finished" from="anim" to="." method="_OnAnimFinished"]

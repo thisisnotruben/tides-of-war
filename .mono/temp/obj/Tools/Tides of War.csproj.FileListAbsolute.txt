@@ -1,0 +1,6 @@
+C:\Users\rubsz\Documents\godot\my_games\Tides_of_War\.mono\temp\bin\Tools\Tides of War.dll
+C:\Users\rubsz\Documents\godot\my_games\Tides_of_War\.mono\temp\bin\Tools\Tides of War.pdb
+C:\Users\rubsz\Documents\godot\my_games\Tides_of_War\.mono\temp\obj\Tools\Tides of War.csprojAssemblyReference.cache
+C:\Users\rubsz\Documents\godot\my_games\Tides_of_War\.mono\temp\obj\Tools\Tides of War.csproj.CoreCompileInputs.cache
+C:\Users\rubsz\Documents\godot\my_games\Tides_of_War\.mono\temp\obj\Tools\Tides of War.dll
+C:\Users\rubsz\Documents\godot\my_games\Tides_of_War\.mono\temp\obj\Tools\Tides of War.pdb

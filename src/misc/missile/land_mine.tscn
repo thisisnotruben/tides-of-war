@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://src/misc/missile/land_mine.gd" type="Script" id=1]
+[ext_resource path="res://src/misc/missile/LandMine.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/missile-spell/land_mine.res" type="Texture" id=2]
 [ext_resource path="res://asset/snd/spell/explosion.ogg" type="AudioStream" id=3]
 [ext_resource path="res://asset/img/light/fire_scale.res" type="Texture" id=4]
 [ext_resource path="res://asset/img/light/fire_gradient.res" type="Texture" id=5]
-[ext_resource path="res://src/misc/missile/combust.gd" type="Script" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -17,7 +16,7 @@ flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 16.0
-angular_velocity = 6.01853e-36
+angular_velocity = 6.01853e-036
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
@@ -38,6 +37,7 @@ flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 22.0
+angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
@@ -58,6 +58,7 @@ flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 22.0
+angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
@@ -127,7 +128,6 @@ local_coords = false
 process_material = SubResource( 8 )
 
 [node name="affected_area" type="Area2D" parent="img"]
-visible = false
 monitorable = false
 collision_layer = 0
 collision_mask = 10
@@ -139,11 +139,10 @@ shape = SubResource( 9 )
 monitoring = false
 collision_layer = 8
 collision_mask = 0
-script = ExtResource( 6 )
 
 [node name="shape" type="CollisionShape2D" parent="img/body"]
 position = Vector2( -0.5, 0 )
 shape = SubResource( 10 )
-[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
-[connection signal="tween_completed" from="tween" to="." method="_on_tween_completed"]
-[connection signal="area_entered" from="img/affected_area" to="." method="_on_affected_area_entered"]
+[connection signal="timeout" from="timer" to="." method="_OnTimerTimeout"]
+[connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
+[connection signal="area_entered" from="img/affected_area" to="." method="_OnAffectedAreaEntered"]

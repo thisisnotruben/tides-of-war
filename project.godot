@@ -8,190 +8,22 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "GridContainer",
-"class": "Bag",
-"language": "GDScript",
-"path": "res://src/menu_ui/item_list.gd"
-}, {
-"base": "Particles2D",
-"class": "BuffAnim",
-"language": "GDScript",
-"path": "res://src/misc/other/buff_anim.gd"
-}, {
-"base": "Node2D",
-"class": "Character",
-"language": "GDScript",
-"path": "res://src/character/character.gd"
-}, {
-"base": "Node2D",
-"class": "CombatText",
-"language": "GDScript",
-"path": "res://src/misc/other/combat_text.gd"
-}, {
-"base": "Node2D",
-"class": "Combustible",
-"language": "GDScript",
-"path": "res://src/misc/missile/combust.gd"
-}, {
-"base": "Sprite",
-"class": "Cursor",
-"language": "GDScript",
-"path": "res://src/menu_ui/move_cursor.gd"
-}, {
-"base": "Timer",
-"class": "DayTime",
-"language": "GDScript",
-"path": "res://src/map/doodads/day_time.gd"
-}, {
-"base": "Node2D",
-"class": "FootStep",
-"language": "GDScript",
-"path": "res://src/misc/other/footstep.gd"
-}, {
-"base": "Node",
-"class": "Globals",
-"language": "GDScript",
-"path": "res://src/globals/globals.gd"
-}, {
-"base": "Node2D",
-"class": "Grave",
-"language": "GDScript",
-"path": "res://src/misc/other/grave.gd"
-}, {
-"base": "Control",
-"class": "Hotkeys",
-"language": "GDScript",
-"path": "res://src/menu_ui/hotkeys.gd"
-}, {
-"base": "Node",
-"class": "Igm",
-"language": "GDScript",
-"path": "res://src/menu_ui/in_game_menu.gd"
-}, {
-"base": "Node2D",
-"class": "Item",
-"language": "GDScript",
-"path": "res://src/misc/loot/item.gd"
-}, {
-"base": "Node",
-"class": "LandMine",
-"language": "GDScript",
-"path": "res://src/misc/missile/land_mine.gd"
-}, {
-"base": "Node2D",
-"class": "Map",
-"language": "GDScript",
-"path": "res://src/map/map.gd"
-}, {
-"base": "Node2D",
-"class": "MiniMap",
-"language": "GDScript",
-"path": "res://src/menu_ui/mini_map.gd"
-}, {
-"base": "Area2D",
-"class": "Missile",
-"language": "GDScript",
-"path": "res://src/misc/missile/missile.gd"
-}, {
-"base": "Node2D",
-"class": "Pickable",
-"language": "GDScript",
-"path": "res://src/misc/pickable.gd"
-}, {
-"base": "CenterContainer",
-"class": "PopUp",
-"language": "GDScript",
-"path": "res://src/menu_ui/popup.gd"
-}, {
-"base": "Node",
-"class": "Quest",
-"language": "GDScript",
-"path": "res://src/quest_system/quest_template.gd"
-}, {
-"base": "HBoxContainer",
-"class": "QuestEntry",
-"language": "GDScript",
-"path": "res://src/menu_ui/quest_entry.gd"
-}, {
-"base": "Container",
-"class": "SaveLoad",
-"language": "GDScript",
-"path": "res://src/menu_ui/save_load.gd"
-}, {
-"base": "TextureButton",
-"class": "Slot",
-"language": "GDScript",
-"path": "res://src/menu_ui/item_slot.gd"
-}, {
-"base": "Node2D",
-"class": "Spell",
-"language": "GDScript",
-"path": "res://src/spell/spell.gd"
-}, {
-"base": "Node2D",
-"class": "SpellEffect",
-"language": "GDScript",
-"path": "res://src/spell/effects/spell_effects.gd"
-}, {
-"base": "Control",
-"class": "StartMenu",
-"language": "GDScript",
-"path": "res://src/menu_ui/start_menu.gd"
-}, {
-"base": "Node",
-"class": "Stats",
-"language": "GDScript",
-"path": "res://src/globals/stats.gd"
-}, {
-"base": "Node2D",
-"class": "TargetDummy",
-"language": "GDScript",
-"path": "res://src/misc/other/target_dummy.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"Bag": "",
-"BuffAnim": "",
-"Character": "",
-"CombatText": "",
-"Combustible": "",
-"Cursor": "",
-"DayTime": "",
-"FootStep": "",
-"Globals": "",
-"Grave": "",
-"Hotkeys": "",
-"Igm": "",
-"Item": "",
-"LandMine": "",
-"Map": "",
-"MiniMap": "",
-"Missile": "",
-"Pickable": "",
-"PopUp": "",
-"Quest": "",
-"QuestEntry": "",
-"SaveLoad": "",
-"Slot": "",
-"Spell": "",
-"SpellEffect": "",
-"StartMenu": "",
-"Stats": "",
-"TargetDummy": ""
+
 }
 
 [application]
 
 config/name="Tides of War"
-run/main_scene="res://src/menu_ui/start_menu.tscn"
+run/main_scene="res://src/map/map-1.tscn"
 config/icon="res://icon.png"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
 
 [autoload]
 
-globals="*res://src/globals/globals.tscn"
-world_quests="*res://src/quest_system/quest_system.tscn"
+Globals="*res://src/globals/Globals.cs"
 
 [debug]
 
@@ -202,7 +34,6 @@ gdscript/warnings/enable=false
 window/size/width=720
 window/size/height=1280
 window/dpi/allow_hidpi=true
-window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
@@ -288,7 +119,6 @@ pointing/emulate_touch_from_mouse=true
 
 [logging]
 
-file_logging/enable_file_logging=true
 file_logging/log_path=""
 
 [rendering]
