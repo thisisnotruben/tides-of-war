@@ -19,8 +19,7 @@ namespace Game.Actor
         {
             Globals.player = this;
             SetImg("res://asset/img/character/goblin/bow-null-16.png");
-            EmitSignal(nameof(UpdateHud), new Godot.Collections.Array() { "hp", GetWorldName(), hp, hpMax });
-            EmitSignal(nameof(UpdateHud), new Godot.Collections.Array() { "mana", GetWorldName(), mana, manaMax });
+            UpdateHUD();
         }
         public override void _UnhandledInput(InputEvent @event)
         {
@@ -35,6 +34,7 @@ namespace Game.Actor
                 {
                     if (GetState() == States.MOVING && path.Count > 0 && GetNode<Tween>("tween").IsActive())
                     {
+                        reservedPath = Globals.GetMap().ResetPath(reservedPath);
                         List<Vector2> _path = Globals.GetMap().getAPath(
                             Globals.GetMap().GetGridPosition(GetGlobalPosition()), eventGlobalPosition);
                         if (_path[0] != path[0])
@@ -64,14 +64,15 @@ namespace Game.Actor
             {
                 SetState(States.MOVING);
                 MoveTo(path[0]);
-                return;
             }
             else if (target != null && target.IsEnemy(this) && GetCenterPos().DistanceTo(target.GetCenterPos()) <= weaponRange)
             {
                 SetState(States.ATTACKING);
-                return;
             }
-            SetState(States.IDLE);
+            else
+            {
+                SetState(States.IDLE);
+            }
         }
         public void _OnAnimFinished(string animName)
         {
@@ -98,17 +99,14 @@ namespace Game.Actor
         }
         public override void MoveTo(Vector2 worldPosition)
         {
-            Vector2 direction = GetDirection(worldPosition);
-            GD.PrintT("direction:", direction);
+            Vector2 direction = GetDirection(GetGlobalPosition(), worldPosition);
             if (!direction.Equals(new Vector2()))
             {
                 RayCast2D ray = GetNode<RayCast2D>("ray");
                 worldPosition = Globals.GetMap().RequestMove(GetGlobalPosition(), direction);
                 ray.LookAt(worldPosition);
-                GD.Print("world position: ", worldPosition);
                 if (!worldPosition.Equals(new Vector2()))
                 {
-                    GD.Print(Stats.MapAnimMoveSpeed(animSpeed));
                     reservedPath.Add(worldPosition);
                     Move(worldPosition, Stats.MapAnimMoveSpeed(animSpeed));
                     path.RemoveAt(0);
@@ -122,7 +120,7 @@ namespace Game.Actor
                     path.RemoveAt(0);
                 }
             }
-            else
+            else if (path.Count > 0)
             {
                 path.RemoveAt(0);
             }
@@ -149,48 +147,47 @@ namespace Game.Actor
         }
         public override void SetState(States state)
         {
-            if (GetState() == state)
+            if (GetState() != state)
             {
-                return;
+                AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
+                Sprite img = GetNode<Sprite>("img");
+                switch (state)
+                {
+                    case States.IDLE:
+                        anim.Stop();
+                        img.SetFrame(0);
+                        img.SetFlipH(false);
+                        SetTime(regenTime);
+                        engaging = false;
+                        break;
+                    case States.MOVING:
+                        img.SetFlipH(false);
+                        anim.Play("moving", -1, animSpeed);
+                        anim.Seek(0.3f, true);
+                        break;
+                    case States.ATTACKING:
+                        SetState(States.IDLE);
+                        SetTime(weaponSpeed, true);
+                        engaging = true;
+                        break;
+                    case States.DEAD:
+                        SetDead(true);
+                        break;
+                    case States.ALIVE:
+                        SetDead(false);
+                        break;
+                }
+                base.SetState(state);
             }
-            AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
-            Sprite img = GetNode<Sprite>("img");
-            switch (state)
-            {
-                case States.IDLE:
-                    anim.Stop();
-                    img.SetFrame(0);
-                    img.SetFlipH(false);
-                    SetTime(regenTime);
-                    engaging = false;
-                    break;
-                case States.MOVING:
-                    img.SetFlipH(false);
-                    anim.Play("moving", -1, animSpeed);
-                    anim.Seek(0.3f, true);
-                    break;
-                case States.ATTACKING:
-                    SetState(States.IDLE);
-                    SetTime(weaponSpeed, true);
-                    engaging = false;
-                    break;
-                case States.DEAD:
-                    SetDead(true);
-                    break;
-                case States.ALIVE:
-                    SetDead(false);
-                    break;
-            }
-            base.SetState(state);
         }
         public override void SetTarget(Character character)
         {
             if (target != null)
             {
-                target.Disconnect(nameof(UpdateHud), GetMenu(), nameof(Character.UpdateHUD));
-                if (target is Npc)
+                target.Disconnect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                Npc npc = target as Npc;
+                if (npc != null)
                 {
-                    Npc npc = (Npc)target;
                     switch (npc.GetWorldType())
                     {
                         case WorldTypes.TRAINER:
@@ -205,11 +202,11 @@ namespace Game.Actor
             if (character != null)
             {
                 GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
-                character.Connect(nameof(UpdateHud), GetMenu(), nameof(Character.UpdateHUD));
+                character.Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
                 character.UpdateHUD();
-                if (character is Npc)
+                Npc npc = character as Npc;
+                if (npc != null)
                 {
-                    Npc npc = (Npc)character;
                     switch (npc.GetWorldType())
                     {
                         case WorldTypes.TRAINER:
@@ -312,7 +309,7 @@ namespace Game.Actor
         }
         public InGameMenu GetMenu()
         {
-            return GetNode<InGameMenu>("igm");
+            return GetNode<InGameMenu>("in_game_menu");
         }
         public Vector2 GetGravePos()
         {

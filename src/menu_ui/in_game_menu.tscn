@@ -1003,7 +1003,6 @@ __meta__ = {
 }
 
 [node name="controls" type="Control" parent="c"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 1036.0
@@ -1074,7 +1073,6 @@ mouse_filter = 2
 expand = true
 
 [node name="mini_map" type="TextureRect" parent="c/controls/right"]
-editor/display_folded = true
 margin_left = 122.0
 margin_right = 234.0
 margin_bottom = 112.0

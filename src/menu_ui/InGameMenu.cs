@@ -126,7 +126,7 @@ namespace Game.Ui
                 $"Mana: {player.mana} / {player.manaMax}\nXP: {player.xp}\nLevel: {player.GetLevel()}\n" +
                 $"Gold: {player.GetGold()}\nStamina: {player.stamina}\nIntellect: {player.intellect}\n" +
                 $"Agility: {player.agility}\nArmor: {player.armor}\nDamage: {player.minDamage} - {player.maxDamage}\n" +
-                $"Attack Speed: {player.weaponSpeed}\nAttack Range: {player.weaponRange}";
+                $"Attack Speed: {player.weaponSpeed.ToString("0.00")}\nAttack Range: {player.weaponRange}";
             statsMenu.GetNode<RichTextLabel>("s/v/c/label").SetBbcode(statsDescription);
             menu.Hide();
             statsMenu.Show();
@@ -414,12 +414,12 @@ namespace Game.Ui
                 if (selectedPickable is Spell.Spell)
                 {
                     bool trained = false;
-                    foreach (Pickable spell in spellBook.GetItems(false))
+                    List<Pickable> spells = spellBook.GetItems(false);
+                    for (int i = 0; i < spells.Count && !trained; i++)
                     {
-                        if (selectedPickable.Equals(spell))
+                        if (selectedPickable.Equals(spells[i]))
                         {
                             trained = true;
-                            break;
                         }
                     }
                     if (!trained)

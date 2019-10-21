@@ -103,7 +103,7 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="player" groups=[
+[node name="player" index="0" groups=[
 "save",
 "players",
 ] instance=ExtResource( 1 )]

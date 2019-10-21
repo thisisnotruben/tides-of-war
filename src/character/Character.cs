@@ -57,7 +57,6 @@ namespace Game.Actor
         [Signal]
         public delegate void UpdateHud(string type, string worldName, short amount, short maxAmount);
 
-
         public override void _Ready()
         {
             snd = GetNode<AudioStreamPlayer2D>("snd");
@@ -186,7 +185,7 @@ namespace Game.Actor
                            CombatText.TextType.HIT, GetNode<Node2D>("img").GetPosition());
                         if (!IsDead() && GetState() == States.ATTACKING || GetState() == States.IDLE)
                         {
-                            Bump(GetDirection(attacker.GetGlobalPosition()).Rotated((float)Math.PI) / 4.0f);
+                            Bump(GetDirection(GetGlobalPosition(), attacker.GetGlobalPosition()).Rotated((float)Math.PI) / 4.0f);
                         }
                         SetHp((short)-damage);
                     }
@@ -233,14 +232,14 @@ namespace Game.Actor
             bumping = true;
             SetProcess(false);
             Tween tween = GetNode<Tween>("tween");
-            tween.InterpolateProperty(this, "@:global_position", GetGlobalPosition(), GetGlobalPosition() + direction,
+            tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), GetGlobalPosition() + direction,
                 GetGlobalPosition().DistanceTo(GetGlobalPosition() + direction) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
             tween.Start();
 
             await ToSignal(tween, "tween_completed");
 
             Vector2 gridPos = Globals.GetMap().GetGridPosition(GetGlobalPosition());
-            tween.InterpolateProperty(this, "@:global_position", GetGlobalPosition(), gridPos,
+            tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), gridPos,
                 gridPos.DistanceTo(GetGlobalPosition()) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.In);
             tween.Start();
 
@@ -312,9 +311,9 @@ namespace Game.Actor
                 SetMana(regenAmount);
             }
         }
-        public Vector2 GetDirection(Vector2 targetPos)
+        private protected static Vector2 GetDirection(Vector2 currentPos, Vector2 targetPos)
         {
-            Vector2 myPos = Globals.GetMap().GetGridPosition(GetGlobalPosition());
+            Vector2 myPos = Globals.GetMap().GetGridPosition(currentPos);
             targetPos = Globals.GetMap().GetGridPosition(targetPos);
             Vector2 direction = new Vector2();
             if (myPos.x > targetPos.x)
@@ -340,7 +339,7 @@ namespace Game.Actor
             SetProcess(false);
             Tween tween = GetNode<Tween>("tween");
             tween.StopAll();
-            tween.InterpolateProperty(this, "@:global_position", GetGlobalPosition(), targetPosition,
+            tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), targetPosition,
                 GetGlobalPosition().DistanceTo(targetPosition) / 16.0f * speedModifier,
                 Tween.TransitionType.Linear, Tween.EaseType.InOut);
             tween.Start();
@@ -441,7 +440,7 @@ namespace Game.Actor
             {
                 SetState((short)States.ALIVE);
             }
-            EmitSignal(nameof(UpdateHud), nameof(hp), this, hp, hpMax);
+            EmitSignal(nameof(UpdateHud), nameof(hp), GetWorldName(), hp, hpMax);
         }
         public void SetMana(short mana)
         {
@@ -462,7 +461,7 @@ namespace Game.Actor
             {
                 this.mana = 0;
             }
-            EmitSignal(nameof(UpdateHud), nameof(mana), this, mana, manaMax);
+            EmitSignal(nameof(UpdateHud), nameof(mana), GetWorldName(), mana, manaMax);
         }
         public Item GetWeapon()
         {
@@ -526,7 +525,7 @@ namespace Game.Actor
                     spellQueue.Add(spell);
                     spell.Connect(nameof(Spell.Spell.Unmake), this, nameof(RemoveFromSpellQueue), new Godot.Collections.Array() { spell });
                 }
-                EmitSignal(nameof(UpdateHud), "icon", this, spell, seek);
+                EmitSignal(nameof(UpdateHud), "icon", GetWorldName(), spell, seek);
             }
         }
         public void RemoveFromSpellQueue(Spell.Spell spell)
@@ -558,7 +557,7 @@ namespace Game.Actor
                 }
                 if (buff.GetPickableSubType() != Item.WorldTypes.HEALING && buff.GetPickableSubType() != Item.WorldTypes.MANA)
                 {
-                    EmitSignal(nameof(UpdateHud), "icon", this, buff, seek);
+                    EmitSignal(nameof(UpdateHud), "icon", GetWorldName(), buff, seek);
                 }
                 buffs["active"].Remove(buff);
                 buffPool.Remove(buff);
@@ -598,8 +597,8 @@ namespace Game.Actor
         }
         public void UpdateHUD()
         {
-            EmitSignal(nameof(UpdateHud), new Godot.Collections.Array() { "hp", GetWorldName(), hp, hpMax });
-            EmitSignal(nameof(UpdateHud), new Godot.Collections.Array() { "mana", GetWorldName(), mana, manaMax });
+            EmitSignal(nameof(UpdateHud), nameof(hp), GetWorldName(), hp, hpMax);
+            EmitSignal(nameof(UpdateHud), nameof(mana), GetWorldName(), mana, manaMax);
             GD.Print("Partially implemented");
         }
         public void SetImg(string imgPath, bool loaded = false)

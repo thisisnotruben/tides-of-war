@@ -182,7 +182,7 @@ namespace Game.Actor
             }
             else
             {
-                Vector2 direction = GetDirection(path[0]);
+                Vector2 direction = GetDirection(GetGlobalPosition(), path[0]);
                 if (!direction.Equals(new Vector2()))
                 {
                     worldPosition = Globals.GetMap().RequestMove(GetGlobalPosition(), direction);

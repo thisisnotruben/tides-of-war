@@ -10,10 +10,11 @@ namespace Game.Map
     public class Map : Node2D
     {
         private TileMap mapGrid;
-        private AStar aStar = new AStar();
-        private Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
+        private readonly AStar aStar = new AStar();
+        private readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
         private const float ASTAR_OCCUPIED_WEIGHT = 25.0f;
         private const float ASTAR_NORMAL_WEIGHT = 1.0f;
+        private const int OBSTACLE_TILE = 4577;
         private List<Vector2> mapObstacles = new List<Vector2>();
         private Vector2 mapSize;
         private Vector2 pathStartPosition;
@@ -74,13 +75,10 @@ namespace Game.Map
                 if (character != null)
                 {
                     Vector2 originPosition = GetGridPosition(character.GetGlobalPosition());
-                    if (!originPosition.Equals(new Vector2()))
-                    {
-                        character.origin = originPosition;
-                        character.SetGlobalPosition(originPosition);
-                        character.path.Add(GetOriginCell(originPosition));
-
-                    }
+                    character.origin = originPosition;
+                    character.SetGlobalPosition(originPosition);
+                    character.path.Add(originPosition);
+                    OccupyOriginCell(originPosition);
                     Npc npc = character as Npc;
                     if (npc != null)
                     {
@@ -138,53 +136,37 @@ namespace Game.Map
         {
             string raceName = npc.GetName().ToLower().Split('-')[0];
             string directoryPath = "res://asset/img/character".PlusFile(raceName);
-            string ext = ".import";
+            string ext = "png";
             List<string> spriteList = new List<string>();
-
             Directory dir = new Directory();
-            string resource = dir.GetNext();
             dir.Open(directoryPath);
             dir.ListDirBegin(true, true);
-
+            string resource = dir.GetNext();
             while (!resource.Empty())
             {
                 resource = directoryPath.PlusFile(resource);
-                if (dir.FileExists(resource) && !resource.Extension().Equals("tsx")
-                && !resource.Contains("tsx.import") && !resource.Contains("flail"))
+                if (resource.Extension().Equals(ext) && !resource.Contains("flail")
+                && !((npc.GetName().Contains("critter") && !resource.Contains(npc.GetName().Split('-')[1]))
+                || ((npc.GetName().Contains("<#>") && !resource.Contains("comm"))
+                || (!npc.GetName().Contains("<#>") && resource.Contains("comm")))))
                 {
-                    if (npc.GetName().Contains("critter") && !resource.Contains(npc.GetName().Split('-')[1]))
-                    {
-                        // Checks if critter race is equal with sprite race
-                        // and if not, onto the next
-                        continue;
-                    }
-                    else if ((npc.GetName().Contains("<#>") && !resource.Contains("comm"))
-                    || (!npc.GetName().Contains("<#>") && resource.Contains("comm")))
-                    {
-                        // Same condition as critters, but for commoners
-                        continue;
-                    }
-                    else
-                    {
-                        resource = (resource.Contains(ext)) ? resource.Remove(resource.Find(ext)) : resource;
-                        spriteList.Add(resource);
-                    }
+                    spriteList.Add(resource);
                 }
+                resource = dir.GetNext();
             }
             dir.ListDirEnd();
             resource = spriteList[(int)(GD.Randi() % spriteList.Count)];
             npc.SetWorldName(UnitDB.GetUnitName(npc.GetNode<Sprite>("img").GetTexture().GetPath()));
             npc.SetEnemy(UnitDB.GetUnitEnemy(npc.GetWorldName()));
-            resource = dir.GetNext();
         }
         private void SetObstacles()
         {
-            List<Vector2> obstacles = new List<Vector2>();
+            mapObstacles.Clear();
             foreach (Vector2 cell in mapGrid.GetUsedCells())
             {
-                if (mapGrid.GetCellv(cell) == 4577)
+                if (mapGrid.GetCellv(cell) == OBSTACLE_TILE)
                 {
-                    obstacles.Add(cell);
+                    mapObstacles.Add(cell);
                 }
             }
         }
@@ -261,9 +243,9 @@ namespace Game.Map
             }
             return false;
         }
-        private void SetPointWeight(Vector2 point, float weight)
+        private void SetPointWeight(Vector2 worldPosition, float weight)
         {
-            int pointIndex = CalculatePointIndex(point);
+            int pointIndex = CalculatePointIndex(mapGrid.WorldToMap(worldPosition));
             aStar.SetPointWeightScale(pointIndex, weight);
         }
         public List<Vector2> getAPath(Vector2 worldStart, Vector2 worldEnd)
@@ -287,7 +269,7 @@ namespace Game.Map
             Vector2 cellStart = mapGrid.WorldToMap(currentWorldPosition);
             Vector2 cellTarget = cellStart + direction;
             int pointIndex = CalculatePointIndex(cellTarget);
-            if (aStar.HasPoint(pointIndex) && aStar.GetPointWeightScale(pointIndex) != ASTAR_NORMAL_WEIGHT)
+            if (aStar.HasPoint(pointIndex) && aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT)
             {
                 aStar.SetPointWeightScale(CalculatePointIndex(cellStart), ASTAR_NORMAL_WEIGHT);
                 aStar.SetPointWeightScale(pointIndex, ASTAR_OCCUPIED_WEIGHT);
@@ -331,7 +313,7 @@ namespace Game.Map
             Vector2 randomizedSlot = mapGrid.MapToWorld(pointList[(int)GD.Randi() % pointList.Count]) + HALF_CELL_SIZE;
             return getAPath(currentWorldPosition, randomizedSlot);
         }
-        private Vector2 GetOriginCell(Vector2 worldPosition)
+        private void OccupyOriginCell(Vector2 worldPosition)
         {
             // Used in SetUnits method; used for placing units in they're origin cell
             Vector2 point = mapGrid.WorldToMap(worldPosition);
@@ -339,12 +321,12 @@ namespace Game.Map
             {
                 int pointIndex = CalculatePointIndex(point);
                 aStar.SetPointWeightScale(pointIndex, ASTAR_OCCUPIED_WEIGHT);
-                Vector3 pointWorldPosition = aStar.GetPointPosition(pointIndex);
-                return mapGrid.MapToWorld(new Vector2(pointWorldPosition.x, pointWorldPosition.y)) + HALF_CELL_SIZE;
             }
-            GD.PrintErr(String.Format("Object incorrectly placed at\ngrid position: {0}\nglobal position: {1}\n",
-                point, mapGrid.MapToWorld(point)));
-            return new Vector2();
+            else
+            {
+                GD.PrintErr(String.Format("Object incorrectly placed at\ngrid position: {0}\nglobal position: {1}\n",
+                    point, mapGrid.MapToWorld(point)));
+            }
         }
     }
 }

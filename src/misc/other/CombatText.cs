@@ -50,9 +50,9 @@ namespace Game.Misc.Other
             }
             SetModulate(selfColor);
 
-            tween.InterpolateProperty(this, "@:position", centerPos,
+            tween.InterpolateProperty(this, ":position", centerPos,
                 new Vector2(centerPos.x, centerPos.y - 14.0f), TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
-            tween.InterpolateProperty(label, "@:modulate", colorBeginning, colorEnd, TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
+            tween.InterpolateProperty(label, ":modulate", colorBeginning, colorEnd, TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
 
             CombatText combatText = GetParent().GetChild(GetIndex() - 1) as CombatText;
             if (combatText != null)

@@ -14,7 +14,7 @@ namespace Game.Ui
 
         public override void _Ready()
         {
-            player = Globals.player;
+            player = ((InGameMenu)GetOwner()).player;
             SetProcess(false);
             return;
             string mapName = Globals.GetMap().GetName();

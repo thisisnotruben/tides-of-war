@@ -44,7 +44,7 @@ namespace Game.Misc.Other
             deceasedPlayer.SetState(Character.States.ALIVE);
 
             Tween tween = GetNode<Tween>("tween");
-            tween.InterpolateProperty(this, "@:modulate", GetModulate(),
+            tween.InterpolateProperty(this, ":modulate", GetModulate(),
                 new Color(1.0f, 1.0f, 1.0f, 0.0f), 0.75f, Tween.TransitionType.Circ, Tween.EaseType.Out);
             tween.Start();
         }

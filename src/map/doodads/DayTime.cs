@@ -6,16 +6,9 @@ namespace Game.Map.Doodads
     public class DayTime : Timer, ISaveable
     {
         private const float LENGTH_OF_DAY = 210.0f;
-        private bool dayTime;
+        private bool dayTime = true;
 
-        public override void _Ready()
-        {
-            if (IsStopped())
-            {
-                Start();
-            }
-        }
-        public void _onTimerTimeout()
+        public void _OnTimerTimeout()
         {
             AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
             if (dayTime)
@@ -28,7 +21,7 @@ namespace Game.Map.Doodads
             }
             SetDayTime(!dayTime);
         }
-        public void _onAnimFinished()
+        public void _OnAnimFinished(string animName)
         {
             SetWaitTime(LENGTH_OF_DAY);
             Start();

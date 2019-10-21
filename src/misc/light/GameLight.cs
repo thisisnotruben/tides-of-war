@@ -11,11 +11,11 @@ namespace Game.Misc.Light
         {
             gameLights.Add(this);
         }
-        public abstract void Start();
-        public abstract void Stop();
         public static List<GameLight> GetLights()
         {
             return gameLights;
         }
+        public abstract void Start();
+        public abstract void Stop();
     }
 }
