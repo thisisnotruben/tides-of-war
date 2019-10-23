@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UnitDB>
+    <generic>
+        <gnoll enemy="true">
+            <sprite imgName="bow-null-16-b">
+                <worldName>Gnoll Scout</worldName>
+            </sprite>
+            <sprite imgName="bow-null-16-g">
+                <worldName>Gnoll Scout</worldName>
+            </sprite>
+            <sprite imgName="axe-swing_medium-17-b">
+                <worldName>Gnoll Butcher</worldName>
+            </sprite>
+            <sprite imgName="axe-swing_medium-17-g">
+                <worldName>Gnoll Butcher</worldName>
+            </sprite>
+            <sprite imgName="club-swing_small-17-b">
+                <worldName>Gnoll Brute</worldName>
+            </sprite>
+            <sprite imgName="club-swing_small-17-b">
+                <worldName>Gnoll Brute</worldName>
+            </sprite>
+            <sprite imgName="hatchet-swing_medium-17-b">
+                <worldName>Gnoll Enforcer</worldName>
+            </sprite>
+            <sprite imgName="hatchet-swing_medium-17-g">
+                <worldName>Gnoll Enforcer</worldName>
+            </sprite>
+            <sprite imgName="sickle-swing_small-17-b">
+                <worldName>Gnoll Assassin</worldName>
+            </sprite>
+            <sprite imgName="sickle-swing_small-17-g">
+                <worldName>Gnoll Assassin</worldName>
+            </sprite>
+        </gnoll>
+        <warthog enemy="true">
+            <sprite imgName="axe-swing_medium-17-b">
+                <worldName>Warthog Brute</worldName>
+            </sprite>
+            <sprite imgName="axe-swing_medium-17-w">
+                <worldName>Warthog Brute</worldName>
+            </sprite>
+            <sprite imgName="mace-swing_medium-17-b">
+                <worldName>Warthog Savage</worldName>
+            </sprite>
+            <sprite imgName="mace-swing_medium-17-w">
+                <worldName>Warthog Savage</worldName>
+            </sprite>
+            <sprite imgName="rock-null-17-b">
+                <worldName>Warthog Thrower</worldName>
+            </sprite>
+            <sprite imgName="rock-null-17-w">
+                <worldName>Warthog Thrower</worldName>
+            </sprite>
+        </warthog>
+        <orc enemy="false">
+            <sprite imgName="axe-swing_medium-17">
+                <worldName>Grunt</worldName>
+            </sprite>
+            <sprite imgName="mace-swing_medium-17">
+                <worldName>Grunt</worldName>
+            </sprite>
+            <sprite imgName="magic-null-17">
+                <worldName>Shaman</worldName>
+            </sprite>
+            <sprite imgName="comm-0-10">
+                <worldName>Peon</worldName>
+            </sprite>
+            <sprite imgName="comm-1-10">
+                <worldName>Peon</worldName>
+            </sprite>
+            <sprite imgName="comm-2-10">
+                <worldName>Peon</worldName>
+            </sprite>
+            <sprite imgName="comm-3-10">
+                <worldName>Peon</worldName>
+            </sprite>
+            <sprite imgName="comm-4-10">
+                <worldName>Peon</worldName>
+            </sprite>
+            <sprite imgName="comm-5-10">
+                <worldName>Peon</worldName>
+            </sprite>
+            <sprite imgName="comm-6-10">
+                <worldName>Peon</worldName>
+            </sprite>
+        </orc>
+        <critter enemy="true">
+            <sprite imgName="crab-club-swing_medium-16-blue">
+                <worldName>Tide Crawler</worldName>
+            </sprite>
+            <sprite imgName="crab-club-swing_medium-16-red">
+                <worldName>Tide Crawler</worldName>
+            </sprite>
+            <sprite imgName="snake-club-swing_medium-16">
+                <worldName>Desert Serpant</worldName>
+            </sprite>
+        </critter>
+    </generic>
+    <map-1>
+        <unit name="Gragor">
+            <img>orc/comm-3-10.png</img>
+            <enemy>false</enemy>
+            <dialogue>[center]Wassup Bro[/center]</dialogue>
+            <level>1</level>
+            <quests>
+                <quest name="plug">
+                </quest>
+                <quest name ="make_friends">
+                </quest>
+            </quests>
+        </unit>
+        <unit name="Dur">
+            <img>orc/comm-0-10.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Otoll">
+            <img>orc/comm-0-10.png</img>
+            <enemy>false</enemy>
+            <dialogue>"[center]Want to see my flesh wand [b]hobbits?[/b][/center]</dialogue>
+            <level>1</level>
+        </unit>
+        <unit name="Oglub">
+            <img>orc/comm-5-10.png</img>
+            <enemy>false</enemy>
+            <dialogue>[center]Do you require healing? I offer my services for a fee of {0} gold.[/center]</dialogue>
+            <level>1</level>
+        </unit>
+        <unit name="Zog">
+            <img>orc/comm-2-10.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Veek">
+            <img>goblin/dagger-swing_small-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Bigi">
+            <img>goblin/dagger-swing_small-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Jimi">
+            <img>goblin/dagger-swing_small-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Jugog">
+            <img>orc/comm-4-10.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Gnoth">
+            <img>orc/comm-4-10.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Xorag">
+            <img>orc/comm-5-10.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Darfu">
+            <img>orc/comm-4-10.png</img>
+            <enemy>false</enemy>
+            <actorType>trainer</actorType>
+            <spells>
+                <spell name="fireball">
+                </spell>
+                <spell name="shadow_bolt">
+                </spell>
+                <spell name="frost_bolt">
+                </spell>
+                <spell name="divine_heal">
+                </spell>
+                <spell name="siphon_mana">
+                </spell>
+                <spell name="haste">
+                </spell>
+                <spell name="slow">
+                </spell>
+                <spell name="arcane_bolt">
+                </spell>
+                <spell name="mind_blast">
+                </spell>
+                <spell name="meteor">
+                </spell>
+            </spells>
+        </unit>
+        <unit name="Golag">
+            <img>orc/axe-swing_medium-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Mokral">
+            <img>orc/mace-swing_medium-17.png</img>
+            <enemy>false</enemy>
+            <actorType>trainer</actorType>
+            <spells>
+                <spell name="fireball">
+                </spell>
+                <spell name="searing_arrow">
+                </spell>
+                <spell name="concussive_shot">
+                </spell>
+                <spell name="piercing_shot">
+                </spell>
+                <spell name="stinging_shot">
+                </spell>
+                <spell name="explosive_arrow">
+                </spell>
+                <spell name="precise_shot">
+                </spell>
+                <spell name="explosive_trap">
+                </spell>
+                <spell name="volley">
+                </spell>
+                <spell name="sniper_shot">
+                </spell>
+            </spells>
+        </unit>
+        <unit name="Bugdal">
+            <img>orc/comm-4-10.png</img>
+            <enemy>false</enemy>
+            <actorType>trainer</actorType>
+            <spells>
+                <spell name="devastate">
+                </spell>
+                <spell name="intimidating_shout">
+                </spell>
+                <spell name="cleave">
+                </spell>
+                <spell name="fortify">
+                </spell>
+                <spell name="bash">
+                </spell>
+                <spell name="stomp">
+                </spell>
+                <spell name="overpower">
+                </spell>
+                <spell name="frenzy">
+                </spell>
+            </spells>
+        </unit>
+        <unit name="Nogugh">
+            <img>orc/comm-3-10.png</img>
+            <enemy>false</enemy>
+            <actorType>merchant</actorType>
+            <items>
+                <item name="Champion's Greatsword">
+                </item>
+                <item name="Enchanted Dagger">
+                </item>
+                <item name="Platemail Armor">
+                </item>
+                <item name="Grizzly Grapes">
+                </item>
+            </items>
+        </unit>
+        <unit name="Nuruk">
+            <img>orc/magic-null-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Shab">
+            <img>orc/magic-null-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Detzar">
+            <img>orc/magic-null-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Tharg">
+            <img>orc/comm-4-10.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Ogrill">
+            <img>orc/comm-5-10.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Drak">
+            <img>orc/comm-6-10.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Grunt">
+            <img>orc/axe-swing_medium-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+        <unit name="Guard">
+            <img>orc/mace-swing_medium-17.png</img>
+            <enemy>false</enemy>
+        </unit>
+    </map-1>
+</UnitDB>

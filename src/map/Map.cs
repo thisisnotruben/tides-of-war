@@ -82,8 +82,7 @@ namespace Game.Map
                     Npc npc = character as Npc;
                     if (npc != null)
                     {
-                        if (npc.GetName().Contains("<*>") ||
-                        ((Godot.Collections.Dictionary)Globals.unitMeta[GetName()]).ContainsKey(npc.GetName()))
+                        if (npc.GetName().Contains("<*>") || UnitDB.IsUnitUnique(npc.GetName(), GetName()))
                         {
                             SetDeterminedUnit(npc);
                         }
@@ -102,35 +101,35 @@ namespace Game.Map
             {
                 unitNodeName = unitNodeName.Split("-")[0];
             }
-            Godot.Collections.Dictionary unitMeta = (Godot.Collections.Dictionary)((Godot.Collections.Dictionary)Globals.unitMeta[GetName()])[unitNodeName];
-            foreach (string attribute in unitMeta.Keys)
-            {
-                switch (attribute)
-                {
-                    case "img":
-                        npc.SetImg("res://asset/img/character".PlusFile((string)unitMeta[attribute]));
-                        break;
-                    case "item":
-                    case "spell":
-                        if (unitMeta["type"].Equals("trainer") || unitMeta["type"].Equals("merchant"))
-                        {
-                            foreach (Godot.Collections.Dictionary item in (Godot.Collections.Array)unitMeta[attribute])
-                            {
-                                Pickable itm = (Pickable)((((string)attribute).Equals("item") ? Globals.item : Globals.spell)).Instance();
-                                foreach (string itemAttribute in item.Keys)
-                                {
-                                    itm.Set(itemAttribute, item[itemAttribute]);
-                                }
-                                itm.GetPickable(npc, false);
-                            }
-                        }
-
-                        break;
-                    default:
-                        npc.Set(attribute, unitMeta[attribute]);
-                        break;
-                }
-            }
+            npc.SetUniqueData(UnitDB.GetUniqueUnitData(npc.GetName(), GetName()));
+            // Godot.Collections.Dictionary unitMeta = (Godot.Collections.Dictionary)((Godot.Collections.Dictionary)Globals.unitMeta[GetName()])[unitNodeName];
+            // foreach (string attribute in unitMeta.Keys)
+            // {
+            //     switch (attribute)
+            //     {
+            //         case "img":
+            //             npc.SetImg("res://asset/img/character".PlusFile((string)unitMeta[attribute]));
+            //             break;
+            //         case "item":
+            //         case "spell":
+            //             if (unitMeta["type"].Equals("trainer") || unitMeta["type"].Equals("merchant"))
+            //             {
+            //                 foreach (Godot.Collections.Dictionary item in (Godot.Collections.Array)unitMeta[attribute])
+            //                 {
+            //                     Pickable itm = (Pickable)((((string)attribute).Equals("item") ? Globals.item : Globals.spell)).Instance();
+            //                     foreach (string itemAttribute in item.Keys)
+            //                     {
+            //                         itm.Set(itemAttribute, item[itemAttribute]);
+            //                     }
+            //                     itm.GetPickable(npc, false);
+            //                 }
+            //             }
+            //             break;
+            //         default:
+            //             npc.Set(attribute, unitMeta[attribute]);
+            //             break;
+            //     }
+            // }
         }
         private void SetRandomizedUnit(Npc npc)
         {
@@ -156,8 +155,8 @@ namespace Game.Map
             }
             dir.ListDirEnd();
             resource = spriteList[(int)(GD.Randi() % spriteList.Count)];
-            npc.SetWorldName(UnitDB.GetUnitName(npc.GetNode<Sprite>("img").GetTexture().GetPath()));
-            npc.SetEnemy(UnitDB.GetUnitEnemy(npc.GetWorldName()));
+            npc.SetWorldName(UnitDB.GetGenericUnitName(resource));
+            npc.SetEnemy(UnitDB.GetGenericUnitEnemy(resource));
         }
         private void SetObstacles()
         {

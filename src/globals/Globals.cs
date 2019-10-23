@@ -21,7 +21,6 @@ namespace Game
         {
             {nameof(gameMeta),"res://meta/game_meta.json"},
             {nameof(itemMeta),"res://meta/item_meta.json"},
-            {nameof(unitMeta),"res://meta/unit_meta.json"},
             {nameof(questMeta),"res://meta/quest_meta.json"},
             {nameof(spellMeta),"res://meta/spell_meta.json"},
             {"SAVE_SLOT_0","res://meta/save_slot_0.json"},
@@ -56,7 +55,6 @@ namespace Game
         public static Godot.Collections.Dictionary questMeta = null;
         public static Godot.Collections.Dictionary spellMeta = null;
         public static Godot.Collections.Dictionary itemMeta = null;
-        public static Godot.Collections.Dictionary unitMeta = null;
         public static Godot.Collections.Dictionary gameMeta = null;
         private static Godot.Collections.Dictionary sceneMeta = null;
         public static Dictionary<string, AudioStream> sndMeta = new Dictionary<string, AudioStream>();
@@ -100,9 +98,6 @@ namespace Game
                             break;
                         case nameof(itemMeta):
                             itemMeta = data;
-                            break;
-                        case nameof(unitMeta):
-                            unitMeta = data;
                             break;
                         case nameof(questMeta):
                             questMeta = data;

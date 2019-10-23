@@ -372,5 +372,38 @@ namespace Game.Actor
         {
             return enemy;
         }
+        public void SetUniqueData(Dictionary<string, string> data)
+        {
+            foreach (string key in data.Keys)
+            {
+                switch (key)
+                {
+                    case "img":
+                        // SetImg()
+                        break;
+                    case "enemy":
+                        enemy = bool.Parse(data[key]);
+                        break;
+                    case "level":
+                        break;
+                    case "actorType":
+                        break;
+                    default:
+                        if (key.Contains("spell"))
+                        {
+
+                        }
+                        else if (key.Contains("item"))
+                        {
+
+                        }
+                        else
+                        {
+                            GD.PrintErr(string.Format("Unknown attribute value: {0} for unit.", key));
+                        }
+                        break;
+                }
+            }
+        }
     }
 }
