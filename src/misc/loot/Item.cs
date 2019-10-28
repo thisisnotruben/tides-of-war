@@ -14,14 +14,9 @@ namespace Game.Misc.Loot
         private short minValue;
         private short maxValue;
         private short value;
-
         [Signal]
         public delegate void EquipItem(Item item, bool equip);
 
-        public override void _Ready()
-        {
-            Make();
-        }
         public override void _OnTimerTimeout()
         {
             if (GetOwner() is Character)
@@ -52,6 +47,7 @@ namespace Game.Misc.Loot
         public void Consume(Character character, float seek)
         {
             EmitSignal(nameof(PickableExchanged), this, false);
+            GD.Randomize();
             short amount = (short)Math.Round(GD.RandRange((double)minValue, (double)maxValue));
             switch (GetPickableSubType())
             {
@@ -135,7 +131,7 @@ namespace Game.Misc.Loot
             {
                 durability = 1.0f;
             }
-            GD.Print("Not Implemented");
+            GD.PrintErr("Not Implemented");
         }
         public void TakeDamage(bool byPass = false, float damageAmount = 0.1f)
         {
@@ -166,7 +162,7 @@ namespace Game.Misc.Loot
                     }
                 }
             }
-            GD.Print("Not Implemented");
+            GD.PrintErr("Not Implemented");
         }
         public override void Make()
         {
@@ -174,14 +170,13 @@ namespace Game.Misc.Loot
             string subKey = Enum.GetName(typeof(WorldTypes), GetPickableSubType()).ToLower();
             if (GetPickableType() == WorldTypes.POTION)
             {
-                SetWorldName(ItemDB.GetItemName(GetPickableType(), GetPickableSubType()));         
+                SetWorldName(ItemDB.GetItemName(GetPickableType(), GetPickableSubType()));
             }
             else
             {
                 SetWorldName(ItemDB.GetItemName(ItemDB.GetItemIconID(GetWorldName())));
             }
             icon = ItemDB.GetItemIcon(GetWorldName());
-    
             Tuple<short, short> itemStats = Stats.GetItemStats(GetLevel(), GetPickableType(), GetPickableSubType());
             goldWorth = Stats.GetItemGoldWorth(GetLevel(), GetPickableType(), durability);
             if (GetPickableType() == WorldTypes.POTION)
@@ -217,33 +212,33 @@ namespace Game.Misc.Loot
             switch (GetPickableType())
             {
                 case WorldTypes.WEAPON:
-                    pickableDescription = string.Format("-Damage: {0} - {1}", minValue, maxValue);
+                    pickableDescription = $"-Damage: {minValue} - {maxValue}";
                     break;
                 case WorldTypes.ARMOR:
-                    pickableDescription = string.Format("-Armor: {0}", value);
+                    pickableDescription = $"-Armor: {value}";
                     break;
                 case WorldTypes.FOOD:
-                    pickableDescription = string.Format("-Restores {0} - {1} health", minValue, maxValue);
+                    pickableDescription = $"-Restores {minValue} - {maxValue} health";
                     break;
                 default:
-                    pickableDescription = string.Format("-Grants {0} {1}\nfor {2} seconds.", value, subKey, GetDuration().ToString("0."));
+                    pickableDescription = $"-Grants {value} {subKey}\nfor {GetDuration().ToString("0.00")} seconds.";
                     switch (GetPickableSubType())
                     {
                         case WorldTypes.HEALING:
-                            pickableDescription = string.Format("-Restores {0} - {1} health", minValue, maxValue);
+                            pickableDescription = $"-Restores {minValue} - {maxValue} health";
                             break;
                         case WorldTypes.MANA:
-                            pickableDescription = string.Format("-Restores {0} - {1} mana", minValue, maxValue);
+                            pickableDescription = $"-Restores {minValue} - {maxValue} mana";
                             break;
                     }
                     break;
             }
-            pickableDescription += string.Format("\n-Gold: {0}", goldWorth);
+            pickableDescription += $"\n-Gold: {goldWorth}";
             switch (GetPickableType())
             {
                 case WorldTypes.WEAPON:
                 case WorldTypes.ARMOR:
-                    pickableDescription += string.Format("\n-Durability: {0}", durability.ToString("P"));
+                    pickableDescription += $"\n-Durability: {durability.ToString("P")}";
                     break;
             }
         }

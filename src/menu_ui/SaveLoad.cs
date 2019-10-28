@@ -20,10 +20,10 @@ namespace Game.Ui
         {
             for (int i = 0; i < GetNode<Node>("v/s/c/g").GetChildCount() / 2; i++)
             {
-                string slotText = string.Format("slot_{0}", i);
+                string slotText = $"slot_{i}";
                 if (Globals.gameMeta.ContainsKey(slotText) && !((string)Globals.gameMeta[slotText]).Empty())
                 {
-                    GetNode<Label>(string.Format("v/s/c/g/slot_label_{0}", i)).SetText((string)Globals.gameMeta[slotText]);
+                    GetNode<Label>($"v/s/c/g/slot_label_{i}").SetText((string)Globals.gameMeta[slotText]);
                 }
             }
         }

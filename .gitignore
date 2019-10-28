@@ -1,4 +1,6 @@
-*.py
-.vscode
 .import/
+.mono/
 asset/
+dev_notes/
+meta/
+.vscode

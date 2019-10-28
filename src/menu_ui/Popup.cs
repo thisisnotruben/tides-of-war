@@ -185,10 +185,9 @@ namespace Game.Ui
             if (menu is StartMenu)
             {
                 Globals.SaveGameMeta("", menu.selectedIdx);
-                menu.saveLoad.GetNode<Label>(
-                    string.Format("v/s/c/g/slot_label_{0}", menu.selectedIdx)).
-                        SetText(string.Format("Slot {0}", menu.selectedIdx + 1));
-                new Directory().Remove(Globals.SAVE_PATH[string.Format("SAVE_SLOT_{0}", menu.selectedIdx)]);
+                menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{menu.selectedIdx}").
+                    SetText($"Slot {menu.selectedIdx + 1}");
+                new Directory().Remove(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
                 _OnNoPressed();
             }
             else
@@ -215,8 +214,7 @@ namespace Game.Ui
                         playSnd = true;
                         ((Item)menu.selected).Unequip();
                         Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon.res");
-                        string nodePath = string.Format("s/v/h/{0}_slot",
-                            Enum.GetName(typeof(WorldObject.WorldTypes), ((Item)menu.selected).GetWorldType()).ToLower());
+                        string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), ((Item)menu.selected).GetWorldType()).ToLower()}_slot";
                         menu.inventory.GetNode<TextureButton>(nodePath).SetNormalTexture(texture);
                         menu.statsMenu.GetNode<TextureButton>(nodePath).SetNormalTexture(texture);
                         if (menu is InGameMenu && menu.itemInfo.GetNode("s/h/v/back").IsConnected("pressed", menu, nameof(InGameMenu.HideMenu)))
@@ -237,13 +235,13 @@ namespace Game.Ui
                         Globals.PlaySound("sell_buy", this, menu.snd);
                         ((Pickable)menu.selected).Buy(menu.player);
                         menu.merchant.GetNode<Label>("s/v/label2").SetText(
-                            string.Format("Gold: {0}", menu.player.GetGold()));
+                            $"Gold: {menu.player.GetGold()}");
                         menu.merchant.Show();
                         break;
                     case "Delete?":
                         Globals.SaveGameMeta("", menu.selectedIdx);
-                        ((Label)menu.selected).SetText(string.Format("Slot {0}", menu.selectedIdx + 1));
-                        new Directory().Remove(Globals.SAVE_PATH[string.Format("SAVE_SLOT_{0}", menu.selectedIdx)]);
+                        ((Label)menu.selected).SetText($"Slot {menu.selectedIdx + 1}");
+                        new Directory().Remove(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
                         menu.saveLoad.Show();
                         break;
                     case "Sell?":
@@ -253,7 +251,7 @@ namespace Game.Ui
                         menu.inventoryBag.RemoveItem(menu.selectedIdx, true, false, false);
                         ((Pickable)menu.selected).Sell(menu.player);
                         menu.merchant.GetNode<Label>("s/v/label2").SetText(
-                            string.Format("Gold: {0}", menu.player.GetGold()));
+                            $"Gold: {menu.player.GetGold()}");
                         menu.merchant.Show();
                         break;
                     case "Overwrite?":
@@ -356,14 +354,14 @@ namespace Game.Ui
                         break;
                 }
                 Hide();
-                menu.merchant.GetNode<Label>("s/v/label2").SetText(string.Format("Gold: {0}", menu.player.GetGold()));
+                menu.merchant.GetNode<Label>("s/v/label2").SetText($"Gold: {menu.player.GetGold()}");
                 menu.merchant.Show();
             }
         }
         public void _OnLoadPressed()
         {
             Globals.PlaySound("click0", this, menu.snd);
-            Globals.LoadGame(Globals.SAVE_PATH[string.Format("SAVE_SLOT_{0}", menu.selected)]);
+            Globals.LoadGame(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selected}"]);
             if (menu is InGameMenu)
             {
                 menu.GetNode<Control>("c/game_menu").Hide();
@@ -482,8 +480,8 @@ namespace Game.Ui
         {
             if (menu is StartMenu)
             {
-                if (!menu.saveLoad.GetNode<Label>(string.Format("v/s/c/g/slot_label_{0}", index)).
-                GetText().Equals(string.Format("Slot {0}", index + 1)))
+                if (!menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{index}").
+                GetText().Equals($"Slot {index + 1}"))
                 {
                     Globals.PlaySound("click2", this, menu.snd);
                     ((Control)menu.listOfMenus.GetParent()).Hide();
@@ -499,10 +497,10 @@ namespace Game.Ui
                 Globals.PlaySound("click2", this, menu.snd);
                 menu.saveLoad.Hide();
                 GetNode<Control>("m/save_load/save").Show();
-                menu.selected = menu.saveLoad.GetNode<Label>(string.Format("v/s/c/g/slot_label_{0}", index));
+                menu.selected = menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{index}");
                 Control load = GetNode<Control>("m/save_load/load");
                 Control delete = GetNode<Control>("m/save_load/delete");
-                if (((Label)menu.selected).GetText().Equals(string.Format("Slot {0}", index + 1)))
+                if (((Label)menu.selected).GetText().Equals($"Slot {index + 1}"))
                 {
                     load.Hide();
                     delete.Hide();
@@ -520,10 +518,10 @@ namespace Game.Ui
         private void SaveGame()
         {
             Godot.Collections.Dictionary date = OS.GetDatetime();
-            string time = string.Format("{0}-{1} {2}:{3}", date["month"], date["day"], date["hour"], date["minute"]);
+            string time = $"{date["month"]}-{date["day"]} {date["hour"]}:{date["minute"]}";
             ((Label)menu.selected).SetText(time);
             Globals.SaveGameMeta(time, menu.selectedIdx);
-            Globals.SaveGame(Globals.SAVE_PATH[string.Format("SAVE_SLOT_{0}", menu.selectedIdx)]);
+            Globals.SaveGame(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
             ((Label)menu.selected).SetText(time);
             menu.saveLoad.SetLabels();
         }

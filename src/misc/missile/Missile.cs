@@ -135,7 +135,7 @@ namespace Game.Misc.Missile
             string swingTypeName = Enum.GetName(typeof(WorldTypes), swingType).ToLower();
             uint sndIdx = GD.Randi() % Globals.WEAPON_TYPE[weaponTypeName];
             bool PlaySound = false;
-            string snd = string.Format("{0}{1}", weaponTypeName.ToLower(), sndIdx);
+            string snd = $"{weaponTypeName.ToLower()}{sndIdx}";
             CombatText.TextType hitType;
 
             if (diceRoll <= attackTable["RANGED"]["HIT"])
@@ -185,8 +185,7 @@ namespace Game.Misc.Missile
             }
             else
             {
-                string spellEffectPath = string.Format("res://src/spell/effects/{0}.tscn", spell.GetWorldName());
-
+                string spellEffectPath = $"res://src/spell/effects/{spell.GetWorldName()}.tscn";
                 if (new File().FileExists(spellEffectPath))
                 {
                     PackedScene effectScene = (PackedScene)GD.Load(texturePath);

@@ -31,7 +31,7 @@ namespace Game.Misc.Other
                 this.deceasedPlayer.GetMenu().GetNode<Control>("c/osb/").SetPosition(new Vector2(0.0f, 180.0f));
                 this.deceasedPlayer.GetMenu().GetNode<Label>("c/osb/m/cast/label").SetText("Revive");
                 SetGlobalPosition(this.deceasedPlayer.GetGlobalPosition());
-                SetName(String.Format("{0}", this.deceasedPlayer.GetWorldName()));
+                SetName(this.deceasedPlayer.GetWorldName());
             }
         }
         public void Revive()

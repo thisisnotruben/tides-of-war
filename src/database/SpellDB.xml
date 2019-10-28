@@ -2,203 +2,315 @@
 <SpellDB>
     <Melee>
         <spell name="devastate">
-            <iconID>1788</iconID>
+            <icon>1788</icon>
             <level>1</level>
-            <range>32</range>
+            <spellRange>32</spellRange>
             <cooldown>5</cooldown>
+            <percentDamage>1.1</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>true</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Strike the target for 10% damage.</description>
         </spell>
         <spell name="intimidating_shout">
-            <iconID>1780</iconID>
+            <icon>1780</icon>
             <level>2</level>
-            <range>0</range>
+            <spellRange>0</spellRange>
             <cooldown>45</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>false</requiresTarget>
             <description>Unleash a terrifying roar, reducing damage to your foes by 20% for 5 sec.</description>
         </spell>
         <spell name="cleave">
-            <iconID>1242</iconID>
+            <icon>1242</icon>
             <level>3</level>
-            <range>32</range>
+            <spellRange>32</spellRange>
             <cooldown>15</cooldown>
-            <description>Strikes opponent for 15%-20% damage with.</description>
+            <percentDamage>1.175</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>true</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
+            <description>Strikes opponent for 17.5% damage with.</description>
         </spell>
         <spell name="fortify">
-            <iconID>1248</iconID>
+            <icon>1248</icon>
             <level>4</level>
-            <range>0</range>
+            <spellRange>0</spellRange>
             <cooldown>120</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>false</requiresTarget>
             <description>Temporarily increases your armor by 25%, reducing damage dealt to you for 60 sec.</description>
         </spell>
         <spell name="bash">
-            <iconID>1249</iconID>
+            <icon>1249</icon>
             <level>5</level>
-            <range>32</range>
+            <spellRange>32</spellRange>
             <cooldown>15</cooldown>
+            <percentDamage>1.1</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>true</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Stuns opponent for 5 sec, and deals 10% damage.</description>
         </spell>
         <spell name="hemorrhage">
-            <iconID>1227</iconID>
+            <icon>1227</icon>
             <level>6</level>
-            <range>32</range>
+            <spellRange>32</spellRange>
             <cooldown>110</cooldown>
+            <percentDamage>1.05</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>true</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Tears open target dealing 5% damage initially, then deals up to 25 damage in 1 min.</description>
         </spell>
         <spell name="stomp">
-            <iconID>1253</iconID>
+            <icon>1253</icon>
             <level>7</level>
-            <range>0</range>
+            <spellRange>0</spellRange>
             <cooldown>30</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>false</requiresTarget>
             <description>Slams the ground, dealing 10 damage to nearby enemy units with a 20% chance to stun for 3 sec.</description>
         </spell>
         <spell name="overpower">
-            <iconID>1240</iconID>
+            <icon>1240</icon>
             <level>9</level>
-            <range>32</range>
+            <spellRange>32</spellRange>
             <cooldown>25</cooldown>
+            <percentDamage>1.15</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>true</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Strike at the opponent for 15% of damage. Cannot be blocked, dodged, or parried.</description>
         </spell>
         <spell name="frenzy">
-            <iconID>1345</iconID>
+            <icon>1345</icon>
             <level>10</level>
-            <range>0</range>
+            <spellRange>0</spellRange>
             <cooldown>180</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>false</requiresTarget>
             <description>Increases attack speed by 50% and movement by 25%, but deals 5 damage every 5 sec to you. Lasts 120 sec.</description>
         </spell>
     </Melee>
     <Ranged>
         <spell name="searing_arrow">
-            <iconID>1785</iconID>
+            <icon>1785</icon>
             <level>1</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>5</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Shoot a flaming arrow at target that deals up to 25 damage in 75 sec.</description>
         </spell>
         <spell name="concussive_shot">
-            <iconID>1779</iconID>
+            <icon>1779</icon>
             <level>2</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>10</cooldown>
+            <percentDamage>1.1</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Hits the target for 10% damage, and dazes the target. Slowing movement and attack speed by 50% for 10 sec.</description>
         </spell>
         <spell name="piercing_shot">
-            <iconID>1341</iconID>
+            <icon>1341</icon>
             <level>3</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>20</cooldown>
+            <percentDamage>1.1</percentDamage>
+            <ignoreArmor>true</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>A powerful shot at deals 10% damage that ignores target's armor.</description>
         </spell>
         <spell name="stinging_shot">
-            <iconID>1786</iconID>
+            <icon>1786</icon>
             <level>4</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>10</cooldown>
+            <percentDamage>1.2</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Fire a poison tipped arrow dealing 20% damage and 5 damage every 2 sec for 30 sec.</description>
         </spell>
         <spell name="explosive_arrow">
-            <iconID>1245</iconID>
+            <icon>1245</icon>
             <level>5</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>15</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Fire a dynamite tipped arrow at target. When detonated, damages all units in blast radius by 10 damage.</description>
         </spell>
         <spell name="precise_shot">
-            <iconID>1243</iconID>
+            <icon>1243</icon>
             <level>6</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>45</cooldown>
-            <description>Aimed shot that deals 10%-20% damage.</description>
+            <percentDamage>1.5</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
+            <description>Aimed shot that deals 15% damage.</description>
         </spell>
         <spell name="sniper_shot">
-            <iconID>1417</iconID>
+            <icon>1417</icon>
             <level>7</level>
-            <range>80</range>
+            <spellRange>80</spellRange>
             <cooldown>110</cooldown>
+            <percentDamage>1.15</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Fires a well-aimed shot dealing 15% damage. Range of shot increased by 25%.</description>
         </spell>
         <spell name="explosive_trap">
-            <iconID>1783</iconID>
+            <icon>1783</icon>
             <level>8</level>
-            <range>0</range>
+            <spellRange>0</spellRange>
             <cooldown>30</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>false</requiresTarget>
             <description>Plant an explosive trap, that'll explode when a unit passes near it. Arms itself in 5 sec, and self-destructs in 30 sec after.</description>
         </spell>
         <spell name="volley">
-            <iconID>1244</iconID>
+            <icon>1244</icon>
             <level>9</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>120</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Rapidly launch 3 arrows at target dealing 5% damage each arrow.</description>
         </spell>
     </Ranged>
     <Magic>
         <spell name="fireball">
-            <iconID>1179</iconID>
+            <icon>1179</icon>
             <level>1</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>5</cooldown>
+            <percentDamage>1.05</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Hurls a fiery ball that deals 5% of damage and 10 damage over 30 sec.</description>
         </spell>
         <spell name="shadow_bolt">
-            <iconID>1782</iconID>
+            <icon>1782</icon>
             <level>2</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>10</cooldown>
+            <percentDamage>1.12</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Sends a shadowy bolt at target, dealing 12% damage.</description>
         </spell>
         <spell name="frost_bolt">
-            <iconID>1784</iconID>
+            <icon>1784</icon>
             <level>3</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>15</cooldown>
+            <percentDamage>1.1</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Launches a bolt of frost at enemy. Deals 10% damage and slows target's movement by 30% for 10 sec.</description>
         </spell>
         <spell name="divine_heal">
-            <iconID>1789</iconID>
+            <icon>1789</icon>
             <level>4</level>
-            <range>0</range>
+            <spellRange>0</spellRange>
             <cooldown>30</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>false</requiresTarget>
             <description>Restores 10%-30% of health.</description>
         </spell>
         <spell name="siphon_mana">
-            <iconID>1425</iconID>
+            <icon>1425</icon>
             <level>5</level>
-            <range>40</range>
+            <spellRange>40</spellRange>
             <cooldown>20</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Drain up to 20% mana from enemy over 10 sec.</description>
         </spell>
         <spell name="haste">
-            <iconID>1423</iconID>
+            <icon>1423</icon>
             <level>6</level>
-            <range>0</range>
+            <spellRange>0</spellRange>
             <cooldown>60</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>false</requiresTarget>
             <description>Increase your movement speed by 50% for 10 sec.</description>
         </spell>
         <spell name="slow">
-            <iconID>1787</iconID>
+            <icon>1787</icon>
             <level>7</level>
-            <range>32</range>
+            <spellRange>32</spellRange>
             <cooldown>30</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Slows target's movement and attack speed by 50% for 15 sec.</description>
         </spell>
         <spell name="arcane_bolt">
-            <iconID>1790</iconID>
+            <icon>1790</icon>
             <level>8</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>20</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Hurl a lightning bolt at the enemy, dealing 12%, and then a 50% chance to jump to nearby enemies. Affects up to 3 units.</description>
         </spell>
         <spell name="mind_blast">
-            <iconID>1339</iconID>
+            <icon>1339</icon>
             <level>9</level>
-            <range>40</range>
+            <spellRange>40</spellRange>
             <cooldown>110</cooldown>
+            <percentDamage>1.2</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>true</requiresTarget>
             <description>Blast the target's mind for 20% damage.</description>
         </spell>
         <spell name="meteor">
-            <iconID>1781</iconID>
+            <icon>1781</icon>
             <level>10</level>
-            <range>64</range>
+            <spellRange>64</spellRange>
             <cooldown>180</cooldown>
+            <percentDamage>1.0</percentDamage>
+            <ignoreArmor>false</ignoreArmor>
+            <effectOnTarget>false</effectOnTarget>
+            <requiresTarget>false</requiresTarget>
             <description>Rain down a meteror at target location, dealing 20% damage at target and 5% damage to units within the blast radius.</description>
         </spell>
     </Magic>

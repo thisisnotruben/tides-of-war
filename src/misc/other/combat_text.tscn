@@ -34,9 +34,7 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="combat_text" type="Node2D" groups=[
-"combat_text",
-]]
+[node name="combat_text" type="Node2D"]
 modulate = Color( 1, 0, 0, 1 )
 use_parent_material = true
 script = ExtResource( 1 )

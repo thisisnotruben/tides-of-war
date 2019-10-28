@@ -18,7 +18,7 @@ namespace Game
             CASTING, DAMAGE_MODIFIER, CHOOSE_AREA_EFFECT,
             // Item WorldTypes
             WEAPON, ARMOR, POTION, FOOD, MISC,
-            T1, T2, HEALING, MANA, STAMINA, INTELLECT, AGILITY, STRENGTH, DEFENSE,
+            HEALING, MANA, STAMINA, INTELLECT, AGILITY, STRENGTH, DEFENSE,
             // Weapon WorldTypes 
             AXE, BOW, CLUB, DAGGER, SWORD, STAFF, CLAW, MAGIC, SPEAR, MACE,
             // Swing WorldTypes

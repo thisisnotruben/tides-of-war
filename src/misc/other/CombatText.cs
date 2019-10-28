@@ -10,6 +10,8 @@ namespace Game.Misc.Other
         private Tween tween;
         private Label label;
         private AnimationPlayer anim;
+        [Signal]
+        public delegate void QueueStart();
 
         public override void _Ready()
         {
@@ -17,12 +19,12 @@ namespace Game.Misc.Other
             label = GetNode<Label>("label");
             anim = GetNode<AnimationPlayer>("anim");
         }
-        public void SetType(String text, TextType textType, Vector2 centerPos)
+        public void SetType(String text, TextType textType, Vector2 localCenterPos)
         {
             label.SetText(text);
 
-            centerPos.x = label.GetSize().x / 2.0f;
-            centerPos.y -= 8.0f;
+            localCenterPos.x = -label.GetSize().x / 2.0f;
+            localCenterPos.y -= 8.0f;
 
             Color colorBeginning = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             Color colorEnd = new Color(1.0f, 1.0f, 1.0f, 0.0f);
@@ -50,19 +52,23 @@ namespace Game.Misc.Other
             }
             SetModulate(selfColor);
 
-            tween.InterpolateProperty(this, ":position", centerPos,
-                new Vector2(centerPos.x, centerPos.y - 14.0f), TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
+            tween.InterpolateProperty(this, ":position", localCenterPos,
+                new Vector2(localCenterPos.x, localCenterPos.y - 14.0f), TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
             tween.InterpolateProperty(label, ":modulate", colorBeginning, colorEnd, TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
 
             CombatText combatText = GetParent().GetChild(GetIndex() - 1) as CombatText;
             if (combatText != null)
             {
-                combatText.Connect(nameof(Queue), this, nameof(Start));
+                combatText.Connect(nameof(QueueStart), this, nameof(Start));
             }
             else
             {
                 Start();
             }
+        }
+        public void Queue()
+        {
+            EmitSignal(nameof(QueueStart));
         }
         public void Start()
         {
@@ -72,13 +78,9 @@ namespace Game.Misc.Other
                 anim.Play("label_fade");
             }
         }
-        public void Queue()
+        public void _OnAnimFinished(string animName)
         {
-            EmitSignal(nameof(Queue));
-        }
-        public void _OnAnimFinished()
-        {
-            EmitSignal(nameof(Queue));
+            EmitSignal(nameof(QueueStart));
             QueueFree();
         }
     }

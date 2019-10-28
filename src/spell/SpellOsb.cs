@@ -9,7 +9,6 @@ namespace Game.Spell
         Player player;
         List<Character> targets = new List<Character>();
 
-
         public override void _Ready()
         {
             SetProcess(false);
@@ -19,7 +18,6 @@ namespace Game.Spell
             base.GetPickable(character, addToBag);
             player = (Player)character;
         }
-
         public void _OnSpellAreaPressed()
         {
             SetProcess(false);

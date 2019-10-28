@@ -24,7 +24,7 @@ namespace Game.Spell
             }
             else
             {
-                GD.Print("Unexpected parent in class: Slow");
+                GD.PrintErr("Unexpected parent in class: Slow");
             }
         }
         public override void _OnTimerTimeout()

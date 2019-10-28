@@ -27,45 +27,42 @@ namespace Game.Misc.Other
         }
         public void Explode()
         {
-            if (exploded)
+            if (!exploded)
             {
-                return;
-            }
-
-            exploded = true;
-            GetNode<AudioStreamPlayer2D>("img/snd").Play();
-
-            foreach (Node node in GetNode("img/explode").GetChildren())
-            {
-                Particles2D particles2D = node as Particles2D;
-                if (particles2D != null)
+                exploded = true;
+                GetNode<AudioStreamPlayer2D>("img/snd").Play();
+                foreach (Node node in GetNode("img/explode").GetChildren())
                 {
-                    particles2D.SetEmitting(true);
-                }
-            }
-            
-            foreach (Area2D area2D in GetNode("img/affected_area").GetChildren())
-            {
-                int layer = area2D.GetCollisionLayer();
-                if (layer == Globals.Collision["CHARACTERS"] && area2D != exludedUnitArea)
-                {
-                    Character character = area2D.GetOwner() as Character;
-                    if (character != null)
+                    Particles2D particles2D = node as Particles2D;
+                    if (particles2D != null)
                     {
-                        character.TakeDamage((short)GD.RandRange((double)minDamage, (double)maxDamage),
-                            false, this, CombatText.TextType.HIT);
-                    }
-                    else
-                    {
-                        GD.Print("LandMine found an anomaly when exploding.");
+                        particles2D.SetEmitting(true);
                     }
                 }
-                else if (layer == Globals.Collision["COMBUSTIBLE"])
+                foreach (Area2D area2D in GetNode("img/affected_area").GetChildren())
                 {
-                    ICombustible obj = area2D.GetOwner() as ICombustible;
-                    if (obj != null)
+                    int layer = area2D.GetCollisionLayer();
+                    if (layer == Globals.Collision["CHARACTERS"] && area2D != exludedUnitArea)
                     {
-                        obj.Explode();
+                        Character character = area2D.GetOwner() as Character;
+                        if (character != null)
+                        {
+                            GD.Randomize();
+                            character.TakeDamage((short)GD.RandRange((double)minDamage, (double)maxDamage),
+                                false, this, CombatText.TextType.HIT);
+                        }
+                        else
+                        {
+                            GD.PrintErr("LandMine found an anomaly when exploding.");
+                        }
+                    }
+                    else if (layer == Globals.Collision["COMBUSTIBLE"])
+                    {
+                        ICombustible obj = area2D.GetOwner() as ICombustible;
+                        if (obj != null)
+                        {
+                            obj.Explode();
+                        }
                     }
                 }
             }

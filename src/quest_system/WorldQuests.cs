@@ -16,7 +16,7 @@ namespace Game.Quests
         }
         private void LoadQuests()
         {
-            GD.Print("Not implemented");
+            GD.PrintErr("Not implemented");
         }
         public void Reset()
         {

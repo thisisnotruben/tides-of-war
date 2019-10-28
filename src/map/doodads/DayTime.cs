@@ -47,12 +47,12 @@ namespace Game.Map.Doodads
         }
         public void SetSaveData(Godot.Collections.Dictionary data)
         {
-            Godot.GD.Print("Save Not Implemented");
+            GD.PrintErr("Save Not Implemented");
         }
         public Godot.Collections.Dictionary GetSaveData()
         {
             Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
-            Godot.GD.Print("Save Not Implemented");
+            GD.PrintErr("Save Not Implemented");
             return saveData;
         }
     }

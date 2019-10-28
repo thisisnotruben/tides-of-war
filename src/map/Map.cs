@@ -96,40 +96,8 @@ namespace Game.Map
         }
         private void SetDeterminedUnit(Npc npc)
         {
-            string unitNodeName = npc.GetName();
-            if (unitNodeName.Contains("<*>"))
-            {
-                unitNodeName = unitNodeName.Split("-")[0];
-            }
-            npc.SetUniqueData(UnitDB.GetUniqueUnitData(npc.GetName(), GetName()));
-            // Godot.Collections.Dictionary unitMeta = (Godot.Collections.Dictionary)((Godot.Collections.Dictionary)Globals.unitMeta[GetName()])[unitNodeName];
-            // foreach (string attribute in unitMeta.Keys)
-            // {
-            //     switch (attribute)
-            //     {
-            //         case "img":
-            //             npc.SetImg("res://asset/img/character".PlusFile((string)unitMeta[attribute]));
-            //             break;
-            //         case "item":
-            //         case "spell":
-            //             if (unitMeta["type"].Equals("trainer") || unitMeta["type"].Equals("merchant"))
-            //             {
-            //                 foreach (Godot.Collections.Dictionary item in (Godot.Collections.Array)unitMeta[attribute])
-            //                 {
-            //                     Pickable itm = (Pickable)((((string)attribute).Equals("item") ? Globals.item : Globals.spell)).Instance();
-            //                     foreach (string itemAttribute in item.Keys)
-            //                     {
-            //                         itm.Set(itemAttribute, item[itemAttribute]);
-            //                     }
-            //                     itm.GetPickable(npc, false);
-            //                 }
-            //             }
-            //             break;
-            //         default:
-            //             npc.Set(attribute, unitMeta[attribute]);
-            //             break;
-            //     }
-            // }
+            string unitEditorName = (GetName().Contains("<*>")) ? npc.GetName().Split("-")[0] : npc.GetName();
+            npc.SetUniqueData(UnitDB.GetUniqueUnitData(unitEditorName, GetName()));
         }
         private void SetRandomizedUnit(Npc npc)
         {
@@ -154,7 +122,9 @@ namespace Game.Map
                 resource = dir.GetNext();
             }
             dir.ListDirEnd();
+            GD.Randomize();
             resource = spriteList[(int)(GD.Randi() % spriteList.Count)];
+            npc.SetImg(resource);
             npc.SetWorldName(UnitDB.GetGenericUnitName(resource));
             npc.SetEnemy(UnitDB.GetGenericUnitEnemy(resource));
         }
@@ -285,13 +255,12 @@ namespace Game.Map
             }
             return false;
         }
-        public List<Vector2> ResetPath(List<Vector2> pointList)
+        public void ResetPath(List<Vector2> pointList)
         {
             foreach (Vector2 point in pointList)
             {
                 SetPointWeight(point, ASTAR_NORMAL_WEIGHT);
             }
-            return new List<Vector2>();
         }
         public List<Vector2> GetAttackSlot(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
         {
@@ -309,6 +278,7 @@ namespace Game.Map
                     }
                 }
             }
+            GD.Randomize();
             Vector2 randomizedSlot = mapGrid.MapToWorld(pointList[(int)GD.Randi() % pointList.Count]) + HALF_CELL_SIZE;
             return getAPath(currentWorldPosition, randomizedSlot);
         }
@@ -323,8 +293,7 @@ namespace Game.Map
             }
             else
             {
-                GD.PrintErr(String.Format("Object incorrectly placed at\ngrid position: {0}\nglobal position: {1}\n",
-                    point, mapGrid.MapToWorld(point)));
+                GD.PrintErr($"Object incorrectly placed at\ngrid position: {point}\nglobal position: {mapGrid.MapToWorld(point)}\n");
             }
         }
     }

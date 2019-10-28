@@ -18,14 +18,14 @@ namespace Game.Ui
             SetProcess(false);
             return;
             string mapName = Globals.GetMap().GetName();
-            string miniMapPath = string.Format("res://asset/img/map/{0}.png", mapName);
+            string miniMapPath = $"res://asset/img/map/{mapName}.png";
             if (new Directory().FileExists(miniMapPath))
             {
                 GetNode<Sprite>("map").SetTexture((Texture)GD.Load(miniMapPath));
             }
             else
             {
-                GD.Print("No mini-map found for map: " + mapName);
+                GD.PrintErr("No mini-map found for map: " + mapName);
             }
         }
         public override void _Process(float delta)

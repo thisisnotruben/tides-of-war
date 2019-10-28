@@ -36,7 +36,7 @@ namespace Game.Quests
         private void LoadText()
         {
             XMLParser xMLParser = new XMLParser();
-            if (xMLParser.Open(string.Format("res://meta/dialogue/{0}.xml", questName)) == Error.Ok)
+            if (xMLParser.Open($"res://meta/dialogue/{questName}.xml") == Error.Ok)
             {
                 string testString = "?";
                 while (xMLParser.Read() == Error.Ok)
@@ -81,7 +81,7 @@ namespace Game.Quests
         }
         public void SetReward()
         {
-            GD.Print("Not Implemented");
+            GD.PrintErr("Not Implemented");
         }
         public Pickable GetReward()
         {
@@ -187,12 +187,12 @@ namespace Game.Quests
                 }
                 else
                 {
-                    GD.Print("Unexpected type in method ChangeState");
+                    GD.PrintErr("Unexpected type in method ChangeState");
                 }
             }
             else
             {
-                GD.Print("Map doesn't have: " + questGiver);
+                GD.PrintErr("Map doesn't have: " + questGiver);
             }
         }
         public string GetState()

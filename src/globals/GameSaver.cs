@@ -7,7 +7,6 @@ namespace Game
     {
         public void SaveGame(string savePath)
         {
-            GD.Print(savePath);
             File file = new File();
             file.Open(savePath, (int)File.ModeFlags.Write);
             Dictionary<string, string> saveDict = new Dictionary<string, string>();

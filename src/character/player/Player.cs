@@ -17,8 +17,11 @@ namespace Game.Actor
 
         public override void _Ready()
         {
+            base._Ready();
             Globals.player = this;
-            SetImg("res://asset/img/character/goblin/bow-null-16.png");
+            SetImg("res://asset/img/character/orc/axe-swing_medium-17.png");
+            Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+            Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
             UpdateHUD();
         }
         public override void _UnhandledInput(InputEvent @event)
@@ -32,14 +35,16 @@ namespace Game.Actor
                 Vector2 eventGlobalPosition = Globals.GetMap().GetGridPosition(GetGlobalMousePosition());
                 if (Globals.GetMap().IsValidMove(eventGlobalPosition))
                 {
-                    if (GetState() == States.MOVING && path.Count > 0 && GetNode<Tween>("tween").IsActive())
+                    Tween tween = GetNode<Tween>("tween");
+                    if (GetState() == States.MOVING && path.Count > 0 && tween.IsActive())
                     {
-                        reservedPath = Globals.GetMap().ResetPath(reservedPath);
+                        Globals.GetMap().ResetPath(reservedPath);
+                        reservedPath.Clear();
                         List<Vector2> _path = Globals.GetMap().getAPath(
                             Globals.GetMap().GetGridPosition(GetGlobalPosition()), eventGlobalPosition);
                         if (_path[0] != path[0])
                         {
-                            GetNode<Tween>("tween").Remove(this, "global_position");
+                            tween.Remove(this, "global_position");
                         }
                         else
                         {
@@ -65,7 +70,7 @@ namespace Game.Actor
                 SetState(States.MOVING);
                 MoveTo(path[0]);
             }
-            else if (target != null && target.IsEnemy(this) && GetCenterPos().DistanceTo(target.GetCenterPos()) <= weaponRange)
+            else if (target != null && target.IsEnemy() && GetCenterPos().DistanceTo(target.GetCenterPos()) <= weaponRange)
             {
                 SetState(States.ATTACKING);
             }
@@ -125,9 +130,9 @@ namespace Game.Actor
                 path.RemoveAt(0);
             }
         }
-        public override void Attack(bool ignoreArmor, Dictionary<string, Dictionary<string, ushort>> attackTable = null)
+        public override void Attack(bool ignoreArmor = false)
         {
-            base.Attack(ignoreArmor, attackTable);
+            base.Attack(ignoreArmor);
             if (weapon != null)
             {
                 weapon.TakeDamage(dead);
@@ -185,6 +190,7 @@ namespace Game.Actor
             if (target != null)
             {
                 target.Disconnect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                target.Disconnect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
                 Npc npc = target as Npc;
                 if (npc != null)
                 {
@@ -203,6 +209,7 @@ namespace Game.Actor
             {
                 GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
                 character.Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                character.Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
                 character.UpdateHUD();
                 Npc npc = character as Npc;
                 if (npc != null)
@@ -235,7 +242,7 @@ namespace Game.Actor
             {
                 CombatText combatText = (CombatText)Globals.combatText.Instance();
                 AddChild(combatText);
-                combatText.SetType(string.Format("+{0:n0}", xp), (short)CombatText.TextType.XP, GetCenterPos());
+                combatText.SetType($"+{xp}", CombatText.TextType.XP, GetNode<Node2D>("img").GetPosition());
             }
             short _level = Stats.CheckLevel(xp);
             if (GetLevel() != _level && GetLevel() < Stats.MAX_LEVEL)

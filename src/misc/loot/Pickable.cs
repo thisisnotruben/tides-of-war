@@ -34,6 +34,7 @@ namespace Game.Misc.Loot
         public override void _Ready()
         {
             Connect(nameof(PickableExchanged), Globals.GetWorldQuests(), "UpdateQuestItem");
+            Make();
         }
         public virtual void _OnSightAreaEntered(Area2D area2D)
         {
@@ -99,7 +100,8 @@ namespace Game.Misc.Loot
                 {
                     CombatText combatText = (CombatText)Globals.combatText.Instance();
                     Globals.player.AddChild(combatText);
-                    combatText.SetType(string.Format("+{0:n0}", goldDrop), CombatText.TextType.GOLD, Globals.player.GetCenterPos());
+                    combatText.SetType($"+{goldDrop}", CombatText.TextType.GOLD,
+                        Globals.player.GetNode<Node2D>("img").GetPosition());
                     Globals.player.SetGold(goldDrop);
                     goldDrop = 0;
                 }
@@ -255,28 +257,21 @@ namespace Game.Misc.Loot
         }
         public void SetWorldTypes(WorldTypes type, WorldTypes subType, short level)
         {
-            if (Enum.IsDefined(typeof(WorldTypes), type) && Enum.IsDefined(typeof(WorldTypes), subType))
-            {
-                this.type = type;
-                this.subType = subType;
-                this.level = level;
-            }
-            {
-                GD.Print(string.Format("{0} and {1} for object ({2}) are not defined in-game.", type, subType, GetPath()));
-            }
+            this.type = type;
+            this.subType = subType;
+            this.level = level;
         }
         public void SetWorldTypes(string type, string subType, short level)
         {
             type = type.ToUpper();
             subType = subType.ToUpper();
-
             if (Enum.IsDefined(typeof(WorldTypes), type) && Enum.IsDefined(typeof(WorldTypes), subType))
             {
                 SetWorldTypes((WorldTypes)Enum.Parse(typeof(WorldTypes), type), (WorldTypes)Enum.Parse(typeof(WorldTypes), subType), level);
             }
             else
             {
-                GD.Print(string.Format("{0} and {1} for object ({2}) are not defined in-game.", type, subType, GetPath()));
+                GD.PrintErr($"{type} and {subType} for object ({GetPath()}) are not defined in-game.");
             }
         }
         public WorldTypes GetPickableSubType()

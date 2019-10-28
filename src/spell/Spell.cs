@@ -9,44 +9,44 @@ namespace Game.Spell
 {
     public abstract class Spell : Pickable
     {
-        private short manaCost;
-        private bool ignoreArmor;
+        private protected float percentDamage;
+        private protected short manaCost;
         private protected short spellRange;
-        private short count;
-        private protected Character caster;
+        private protected short count;
         private protected bool casted;
+        private protected bool ignoreArmor;
         private protected bool effectOnTarget;
         private protected bool requiresTarget;
         private protected Dictionary<string, ushort> attackTable;
+        private protected Character caster;
 
+        public void Init(WorldTypes worldType)
+        {
+            SetWorldType(worldType);
+            SetWorldName(Enum.GetName(typeof(WorldTypes), worldType).Capitalize());
+            Dictionary<string, string> spellData = SpellDB.GetSpellData(GetWorldName());
+
+            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.res");
+            level = short.Parse(spellData[nameof(level)]);
+            spellRange = short.Parse(spellData[nameof(spellRange)]);
+            cooldown = short.Parse(spellData[nameof(cooldown)]);
+            percentDamage = float.Parse(spellData[nameof(percentDamage)]);
+            ignoreArmor = bool.Parse(spellData[nameof(ignoreArmor)]);
+            effectOnTarget = bool.Parse(spellData[nameof(effectOnTarget)]);
+            requiresTarget = bool.Parse(spellData[nameof(requiresTarget)]);
+
+            attackTable = (spellRange > Stats.WEAPON_RANGE_MELEE) ? Stats.attackTable["RANGED"] : Stats.attackTable["MELEE"];
+            goldWorth = Stats.GetSpellWorthCost(level);
+            manaCost = Stats.GetSpellManaCost(level);
+
+            pickableDescription = $"-Mana Cost: {manaCost}\n-Range: {spellRange}\n" +
+                $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
+                $"\n\n-{spellData["description"]}";
+        }
         public override void GetPickable(Character character, bool addToBag)
         {
             base.GetPickable(character, addToBag);
             caster = character;
-        }
-        public virtual Dictionary<string, Dictionary<string, ushort>> GetAttackTable()
-        {
-            return Stats.attackTable;
-        }
-        public short GetManaCost()
-        {
-            return manaCost;
-        }
-        public short GetSpellRange()
-        {
-            return spellRange;
-        }
-        public bool RequiresTarget()
-        {
-            return requiresTarget;
-        }
-        public virtual bool IsIgnoreArmor()
-        {
-            return ignoreArmor;
-        }
-        public float GetCoolDownTime()
-        {
-            return cooldown;
         }
         public override void UnMake()
         {
@@ -68,6 +68,46 @@ namespace Game.Spell
             }
             base.UnMake();
         }
+        public override float GetTimeLeft()
+        {
+            Timer timer = GetNode<Timer>("timer");
+            return (count > 0) ? GetDuration() - (count * timer.GetWaitTime() - base.GetTimeLeft()) : base.GetTimeLeft();
+        }
+        public override void _OnTimerTimeout() { }
+        public abstract bool Casted();
+        public virtual float Cast()
+        {
+            if (!loaded)
+            {
+                caster.SetMana((short)-manaCost);
+            }
+            casted = true;
+            return percentDamage;
+        }
+        public Dictionary<string, ushort> GetAttackTable()
+        {
+            return attackTable;
+        }
+        public short GetManaCost()
+        {
+            return manaCost;
+        }
+        public short GetSpellRange()
+        {
+            return spellRange;
+        }
+        public bool RequiresTarget()
+        {
+            return requiresTarget;
+        }
+        public bool IsIgnoreArmor()
+        {
+            return ignoreArmor;
+        }
+        public float GetCoolDownTime()
+        {
+            return cooldown;
+        }
         public void SetTime(float time, bool setDuration = true)
         {
             if (!loaded)
@@ -80,11 +120,6 @@ namespace Game.Spell
             }
             GetNode<Timer>("timer").Start();
         }
-        public override float GetTimeLeft()
-        {
-            Timer timer = GetNode<Timer>("timer");
-            return (count > 0) ? GetDuration() - (count * timer.GetWaitTime() - base.GetTimeLeft()) : base.GetTimeLeft();
-        }
         public void SetCount(short count)
         {
             if (!loaded)
@@ -92,29 +127,9 @@ namespace Game.Spell
                 this.count = count;
             }
         }
-        public abstract float Cast();
-        public abstract bool Casted();
-        public override void _OnTimerTimeout()
-        {
-        }
-        public override void Make()
-        {
-            SetWorldName(Enum.GetName(typeof(WorldTypes), GetWorldType()).ToLower());
-            level = ItemDB.GetItemLevel(GetWorldName());
-            spellRange = SpellDB.GetSpellRange(GetWorldName());
-            cooldown = SpellDB.GetSpellCooldown(GetWorldName());
-            goldWorth = Stats.GetSpellWorthCost(GetLevel());
-            manaCost = Stats.GetSpellManaCost(GetLevel());
-            icon = (AtlasTexture)GD.Load(string.Format("res://asset/img/icon/spell/{0}_icon.res", SpellDB.GetSpellIconID(GetWorldName())));
-            attackTable = (spellRange > Stats.WEAPON_RANGE_MELEE) ? Stats.attackTable["RANGED"] : Stats.attackTable["MELEE"];
-            pickableDescription = string.Format("-Mana Cost: {0}\n-Range: {1}\n-Cooldown: {2}\n-Level: {3}\n\n-{4}",
-                manaCost, spellRange, string.Format("{0} sec.", cooldown), GetLevel(), SpellDB.GetSpellDescription(GetWorldName()));
-            
-            GD.Print("Not Implemented");
-        }
         public void ConfigureSpell()
         {
-            GD.Print("Not Implemented");
+            GD.PrintErr("Not Implemented");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Game.Actor
         public override void MoveTo(Vector2 WorldPosition)
         {
         }
-        public override void Attack(bool ignoreArmor, Dictionary<string, Dictionary<string, ushort>> attackTable = null)
+        public override void Attack(bool ignoreArmor)
         {
         }
         public override void TakeDamage(short damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)

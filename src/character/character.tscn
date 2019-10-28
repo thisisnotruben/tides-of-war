@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/character/Character.cs" type="Script" id=1]
-[ext_resource path="res://asset/img/character/resource/attacking_17f.res" type="Animation" id=2]
-[ext_resource path="res://asset/img/character/resource/cast.res" type="Animation" id=3]
-[ext_resource path="res://asset/img/character/resource/dying.res" type="Animation" id=4]
-[ext_resource path="res://asset/img/character/resource/moving.res" type="Animation" id=5]
+[ext_resource path="res://asset/img/character/resource/attacking_17f.tres" type="Animation" id=2]
+[ext_resource path="res://asset/img/character/resource/cast.tres" type="Animation" id=3]
+[ext_resource path="res://asset/img/character/resource/dying.tres" type="Animation" id=4]
+[ext_resource path="res://asset/img/character/resource/moving.tres" type="Animation" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -36,19 +36,26 @@ visible = false
 
 [node name="snd" type="AudioStreamPlayer2D" parent="."]
 
+[node name="head" type="Position2D" parent="."]
+
+[node name="select" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="ray" type="RayCast2D" parent="."]
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 18, 0 )
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="img" type="Sprite" parent="."]
 editor/display_folded = true
 use_parent_material = true
 
 [node name="missile" type="Position2D" parent="img"]
 
-[node name="head" type="Position2D" parent="."]
-
-[node name="select" type="TouchScreenButton" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-
 [node name="area" type="Area2D" parent="."]
-editor/display_folded = true
 monitoring = false
 collision_layer = 2
 collision_mask = 0
@@ -58,21 +65,12 @@ shape = SubResource( 1 )
 
 [node name="sight" type="Area2D" parent="."]
 editor/display_folded = true
-visible = false
 monitorable = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="distance" type="CollisionShape2D" parent="sight"]
 shape = SubResource( 2 )
-
-[node name="ray" type="RayCast2D" parent="."]
-enabled = true
-exclude_parent = false
-cast_to = Vector2( 18, 0 )
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
 [connection signal="timeout" from="timer" to="." method="_OnTimerTimeout"]
 [connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
 [connection signal="pressed" from="select" to="." method="_OnSelectPressed"]

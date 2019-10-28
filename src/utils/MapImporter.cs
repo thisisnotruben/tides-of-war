@@ -79,7 +79,7 @@ namespace Game.Utils
                     parsedName = parsedName.StripEdges().Capitalize();
                     if (node.GetName().Contains("<*>"))
                     {
-                        parsedName = parsedName.Split("<*>")[0] + string.Format("-{0}<*>", count);
+                        parsedName = parsedName.Split("<*>")[0] + $"-{count}<*>";
                         count++;
                     }
                     else if (parsedName.Empty() && !texturePath.ToLower().Contains("target_dummy"))
@@ -89,7 +89,7 @@ namespace Game.Utils
                         {
                             parsedName += '-' + texturePath.BaseName().GetFile().Split('-')[0];
                         }
-                        parsedName += string.Format("-{0}", count);
+                        parsedName += $"-{count}";
                         if (texturePath.GetFile().BaseName().ToLower().Contains("comm"))
                         {
                             parsedName += "<#>";
@@ -100,7 +100,7 @@ namespace Game.Utils
                     {
                         PackedScene targetDummyScene = (PackedScene)GD.Load("res://src/misc/other/target_dummy.tscn");
                         character = targetDummyScene.Instance() as Node2D;
-                        parsedName = string.Format("Target Dummy-{0}", count);
+                        parsedName = $"Target Dummy-{count}";
                         count++;
                     }
                     else
@@ -141,7 +141,7 @@ namespace Game.Utils
                     light.SetGlobalPosition(cell * new Vector2(16.0f, 16.0f) + new Vector2(8.0f, 16.0f));
                     map.GetNode(zedz1).AddChild(light);
                     light.SetOwner(map);
-                    light.SetName(string.Format("light-{0}", count));
+                    light.SetName($"light-{count}");
                     count++;
                 }
             }
@@ -174,7 +174,7 @@ namespace Game.Utils
                         light.SetGlobalPosition(cell * new Vector2(16.0f, 16.0f) + new Vector2(8.0f, 8.0f) - light.GetOffset());
                         map.GetNode(zedz1).AddChild(light);
                         light.SetOwner(map);
-                        light.SetName(string.Format("light-{0}", count));
+                        light.SetName($"light-{count}");
                         count++;
                     }
                 }

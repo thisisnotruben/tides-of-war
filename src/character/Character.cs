@@ -12,17 +12,16 @@ namespace Game.Actor
     public abstract class Character : WorldObject, ISaveable
     {
         public enum States { ALIVE, DEAD, MOVING, IDLE, ATTACKING, RETURNING };
-        // public enum WorldTypes { AXE, BOW, CLUB, DAGGER, SWORD, STAFF, CLAW, MAGIC }
-        States state;
+        private States state;
         public WorldTypes weaponType;
         private short level;
-        private String swingType;
-        public Vector2 origin;
+        private string swingType;
+        public Vector2 origin = new Vector2();
         private protected bool dead;
-        private bool enemy;
+        private bool enemy = true;
         public short armor;
-        private protected Character target;
-        public ushort weaponRange;
+        private protected Character target = null;
+        public ushort weaponRange = Stats.WEAPON_RANGE_MELEE;
         public short hp;
         public short hpMax;
         public short mana;
@@ -31,15 +30,15 @@ namespace Game.Actor
         private protected bool engaging;
         private protected float animSpeed = 1.0f;
         public float weaponSpeed = 1.3f;
-        private protected Item weapon;
-        private protected Item vest;
+        private protected Item weapon = null;
+        private protected Item vest = null;
         private bool bumping;
         public short minDamage;
         public short maxDamage;
         public short stamina;
         public short intellect;
         public short agility;
-        private protected Spell.Spell spell;
+        private protected Spell.Spell spell = null;
         public List<Vector2> path = new List<Vector2>();
         private List<Spell.Spell> spellQueue = new List<Spell.Spell>();
         private protected Dictionary<Character, short> targetList = new Dictionary<Character, short>();
@@ -56,20 +55,18 @@ namespace Game.Actor
         public delegate void Died();
         [Signal]
         public delegate void UpdateHud(string type, string worldName, short amount, short maxAmount);
+        [Signal]
+        public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
 
         public override void _Ready()
         {
             snd = GetNode<AudioStreamPlayer2D>("snd");
-            Connect(nameof(Talked), Globals.GetWorldQuests(), "update_quest_unit", new Godot.Collections.Array { this });
-            Connect(nameof(Died), Globals.GetWorldQuests(), "update_quest_unit", new Godot.Collections.Array { this });
+            // Connect(nameof(Talked), Globals.GetWorldQuests(), "update_quest_unit", new Godot.Collections.Array { this });
+            // Connect(nameof(Died), Globals.GetWorldQuests(), "update_quest_unit", new Godot.Collections.Array { this });
             GetNode<RayCast2D>("ray").AddException(GetNode<Area2D>("area"));
         }
-        public virtual void Attack(bool ignoreArmor, Dictionary<string, Dictionary<string, ushort>> attackTable = null)
+        public virtual void Attack(bool ignoreArmor = false)
         {
-            if (attackTable == null)
-            {
-                attackTable = Stats.attackTable;
-            }
             if (target != null && !target.IsDead() && !IsDead())
             {
                 if (weaponType == WorldTypes.BOW || weaponType == WorldTypes.MAGIC)
@@ -84,42 +81,40 @@ namespace Game.Actor
                     ushort diceRoll = (ushort)(GD.Randi() % 100 + 1);
                     short damage = (short)Math.Round(GD.RandRange(
                         (double)minDamage, (double)maxDamage));
+                    ushort sndIdx = Globals.WEAPON_TYPE[weaponType.ToString()];
+                    string snd = weaponType.ToString().ToLower() + sndIdx.ToString();
                     CombatText.TextType hitType;
-                    ushort sndIdx = Globals.WEAPON_TYPE[nameof(weaponType)];
-                    string snd = nameof(weaponType) + sndIdx;
-
+                    Dictionary<string, ushort> attackTable = Stats.attackTable["MELEE"];
                     if (spell != null && !spell.Casted())
                     {
                         attackTable = spell.GetAttackTable();
-                        if (diceRoll <= attackTable["MELEE"]["CRITICAL"])
+                        if (diceRoll <= attackTable["CRITICAL"])
                         {
                             ignoreArmor = spell.IsIgnoreArmor();
                             damage = (short)Math.Round((float)damage * spell.Cast());
                             target.SetSpell(spell);
-
                         }
                         else
                         {
                             SetMana(spell.GetManaCost());
                         }
-
                     }
-                    if (diceRoll <= attackTable["MELEE"]["HIT"])
+                    if (diceRoll <= attackTable["HIT"])
                     {
                         hitType = CombatText.TextType.HIT;
                     }
-                    else if (diceRoll <= attackTable["MELEE"]["CRITICAL"])
+                    else if (diceRoll <= attackTable["CRITICAL"])
                     {
                         hitType = CombatText.TextType.CRITICAL;
                         damage *= 2;
                     }
-                    else if (diceRoll <= attackTable["MELEE"]["DODGE"])
+                    else if (diceRoll <= attackTable["DODGE"])
                     {
                         hitType = CombatText.TextType.DODGE;
                         damage = 0;
-                        snd = nameof(swingType) + GD.Randi() % Globals.WEAPON_TYPE[nameof(swingType)];
+                        snd = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
                     }
-                    else if (diceRoll <= attackTable["MELEE"]["PARRY"]
+                    else if (diceRoll <= attackTable["PARRY"]
                             && target.weaponType != WorldTypes.BOW
                             && target.GetState() == States.ATTACKING)
                     {
@@ -144,7 +139,7 @@ namespace Game.Actor
                     {
                         hitType = CombatText.TextType.MISS;
                         damage = 0;
-                        snd = nameof(swingType) + GD.Randi() % Globals.WEAPON_TYPE[nameof(swingType)];
+                        snd = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
                     }
                     target.TakeDamage(damage, ignoreArmor, this, hitType);
                 }
@@ -181,13 +176,12 @@ namespace Game.Actor
                     AddChild(combatText);
                     if (damage > 0)
                     {
-                        combatText.SetType(String.Format("-{0}", damage),
-                           CombatText.TextType.HIT, GetNode<Node2D>("img").GetPosition());
+                        SetHp((short)-damage);
+                        combatText.SetType($"-{damage}", CombatText.TextType.HIT, GetNode<Node2D>("img").GetPosition());
                         if (!IsDead() && GetState() == States.ATTACKING || GetState() == States.IDLE)
                         {
                             Bump(GetDirection(GetGlobalPosition(), attacker.GetGlobalPosition()).Rotated((float)Math.PI) / 4.0f);
                         }
-                        SetHp((short)-damage);
                     }
                     else
                     {
@@ -196,7 +190,7 @@ namespace Game.Actor
                             case CombatText.TextType.DODGE:
                             case CombatText.TextType.PARRY:
                             case CombatText.TextType.MISS:
-                                combatText.SetType(nameof(textType),
+                                combatText.SetType(textType.ToString(),
                                     CombatText.TextType.HIT, GetNode<Node2D>("img").GetPosition());
                                 break;
                         }
@@ -287,16 +281,17 @@ namespace Game.Actor
             {
                 if (target != null && !IsDead() && !target.IsDead())
                 {
+                    Sprite img = GetNode<Sprite>("img");
                     Node2D missile = GetNode<Node2D>("img/missile");
-                    Vector2 missilePos = missile.GetGlobalPosition();
-                    if (target.GetGlobalPosition().x - GetGlobalPosition().x > 0)
+                    Vector2 missilePos = missile.GetPosition();
+                    if (target.GetGlobalPosition().x - GetGlobalPosition().x > 0.0f)
                     {
-                        GetNode<Sprite>("img").SetFlipH(false);
+                        img.SetFlipH(false);
                         missilePos.x = Math.Abs(missilePos.x);
                     }
                     else
                     {
-                        GetNode<Sprite>("img").SetFlipH(true);
+                        img.SetFlipH(true);
                         missilePos.x = Math.Abs(missilePos.x) * -1.0f;
                     }
                     missile.SetPosition(missilePos);
@@ -305,8 +300,8 @@ namespace Game.Actor
             }
             else if (!engaging && (hp < hpMax || mana < manaMax))
             {
-                string img = GetNode<Sprite>("img").GetTexture().GetPath();
-                short regenAmount = Stats.HpManaRegenAmount(GetLevel(), Stats.GetMultiplier(this is Npc, img));
+                string imgPath = GetNode<Sprite>("img").GetTexture().GetPath();
+                short regenAmount = Stats.HpManaRegenAmount(GetLevel(), Stats.GetMultiplier(this is Npc, imgPath));
                 SetHp(regenAmount);
                 SetMana(regenAmount);
             }
@@ -366,7 +361,7 @@ namespace Game.Actor
             area2D.SetCollisionLayerBit(Globals.Collision["DEAD_CHARACTERS"], !dead);
             if (dead)
             {
-                EmitSignal("died");
+                EmitSignal(nameof(Died));
                 SetProcess(false);
                 SetTarget(null);
                 GetNode<Tween>("tween").RemoveAll();
@@ -393,7 +388,6 @@ namespace Game.Actor
                 {
                     spell.UnMake();
                 }
-
                 foreach (Node node in GetChildren())
                 {
                     if (node is CombatText)
@@ -416,38 +410,38 @@ namespace Game.Actor
                 }
             }
         }
-        public void SetHp(short hp)
+        public void SetHp(short addedHp)
         {
-            this.hp += hp;
-            if (this.hp >= hpMax)
+            hp += addedHp;
+            if (hp >= hpMax)
             {
-                this.hp = hpMax;
+                hp = hpMax;
                 if (this is Npc && !spellQueue.Any() && IsInGroup(Globals.SAVE_GROUP))
                 {
                     RemoveFromGroup(Globals.SAVE_GROUP);
                 }
             }
-            else if (this.hp <= 0)
+            else if (hp <= 0)
             {
-                this.hp = 0;
+                hp = 0;
                 SetState(States.DEAD);
             }
             else if (this is Npc && !IsInGroup(Globals.SAVE_GROUP))
             {
                 AddToGroup(Globals.SAVE_GROUP);
             }
-            if (this.hp > 0 && IsDead())
+            if (hp > 0 && IsDead())
             {
                 SetState((short)States.ALIVE);
             }
             EmitSignal(nameof(UpdateHud), nameof(hp), GetWorldName(), hp, hpMax);
         }
-        public void SetMana(short mana)
+        public void SetMana(short addedMana)
         {
-            this.mana += mana;
-            if (this.mana >= manaMax)
+            mana += addedMana;
+            if (mana >= manaMax)
             {
-                this.mana = manaMax;
+                mana = manaMax;
                 if (this is Npc && !spellQueue.Any() && IsInGroup(Globals.SAVE_GROUP))
                 {
                     RemoveFromGroup(Globals.SAVE_GROUP);
@@ -457,9 +451,9 @@ namespace Game.Actor
             {
                 AddToGroup(Globals.SAVE_GROUP);
             }
-            if (this.mana < 0)
+            if (mana < 0)
             {
-                this.mana = 0;
+                mana = 0;
             }
             EmitSignal(nameof(UpdateHud), nameof(mana), GetWorldName(), mana, manaMax);
         }
@@ -525,7 +519,7 @@ namespace Game.Actor
                     spellQueue.Add(spell);
                     spell.Connect(nameof(Spell.Spell.Unmake), this, nameof(RemoveFromSpellQueue), new Godot.Collections.Array() { spell });
                 }
-                EmitSignal(nameof(UpdateHud), "icon", GetWorldName(), spell, seek);
+                EmitSignal(nameof(UpdateHudIcon), GetWorldName(), spell, seek);
             }
         }
         public void RemoveFromSpellQueue(Spell.Spell spell)
@@ -557,7 +551,7 @@ namespace Game.Actor
                 }
                 if (buff.GetPickableSubType() != Item.WorldTypes.HEALING && buff.GetPickableSubType() != Item.WorldTypes.MANA)
                 {
-                    EmitSignal(nameof(UpdateHud), "icon", GetWorldName(), buff, seek);
+                    EmitSignal(nameof(UpdateHudIcon), GetWorldName(), buff, seek);
                 }
                 buffs["active"].Remove(buff);
                 buffPool.Remove(buff);
@@ -591,15 +585,19 @@ namespace Game.Actor
                 footStep.SetGlobalPosition(stepPos);
             }
         }
-        public bool IsEnemy(Character character)
+        public bool IsEnemy()
         {
             return enemy;
         }
         public void UpdateHUD()
         {
-            EmitSignal(nameof(UpdateHud), nameof(hp), GetWorldName(), hp, hpMax);
-            EmitSignal(nameof(UpdateHud), nameof(mana), GetWorldName(), mana, manaMax);
-            GD.Print("Partially implemented");
+            EmitSignal(nameof(UpdateHud), "HP", GetWorldName(), hp, hpMax);
+            EmitSignal(nameof(UpdateHud), "MANA", GetWorldName(), mana, manaMax);
+            // EmitSignal(nameof(UpdateHud), "ICON_HIDE", GetWorldName(), hp, hpMax);
+            foreach (Spell.Spell spell in spellQueue)
+            {
+                EmitSignal(nameof(UpdateHudIcon), spell, spell.GetTimeLeft());
+            }
         }
         public void SetImg(string imgPath, bool loaded = false)
         {
@@ -613,49 +611,56 @@ namespace Game.Actor
             }
             if (parsedImg[0].Equals("comm"))
             {
-                img.SetHframes(Int32.Parse(parsedImg[2]));
+                img.SetHframes(int.Parse(parsedImg[2]));
                 SetWorldType(WorldTypes.COMMONER);
             }
             else
             {
-                byte idx = 0;
-                if (raceName.Equals("critter"))
+                int idx = (raceName.Equals("critter")) ? 1 : 0;
+                switch (parsedImg[idx].ToUpper())
                 {
-                    idx = 1;
+                    case nameof(WorldTypes.MAGIC):
+                    case nameof(WorldTypes.DAGGER):
+                    case nameof(WorldTypes.CLAW):
+                    case "SICKLE":
+                        weaponType = WorldTypes.DAGGER;
+                        break;
+                    case nameof(WorldTypes.SWORD):
+                    case nameof(WorldTypes.SPEAR):
+                    case "HATCHET":
+                        weaponType = WorldTypes.SWORD;
+                        break;
+                    case nameof(WorldTypes.AXE):
+                        weaponType = WorldTypes.AXE;
+                        break;
+                    case nameof(WorldTypes.STAFF):
+                    case nameof(WorldTypes.MACE):
+                    case "ROCK":
+                        weaponType = WorldTypes.CLUB;
+                        break;
+                    case nameof(WorldTypes.BOW):
+                        weaponType = WorldTypes.BOW;
+                        weaponRange = Stats.WEAPON_RANGE_RANGE;
+                        break;
+                    case "NULL":
+                        // This is a commoner
+                        break;
+                    default:
+                        GD.PrintErr($"{imgPath} doesn't have a valid weaponType");
+                        break;
                 }
-                if (!parsedImg[idx].ToUpper().Equals("null"))
+                if (this is Player)
                 {
-                    switch (parsedImg[idx].ToUpper())
-                    {
-                        case "SICKLE":
-                        case "MAGIC":
-                            weaponType = WorldTypes.DAGGER;
-                            break;
-                        case "HATCHET":
-                        case "SPEAR":
-                            weaponType = WorldTypes.SWORD;
-                            break;
-                        case "STAFF":
-                        case "MACE":
-                        case "ROCK":
-                            weaponType = WorldTypes.CLUB;
-                            break;
-                        case "BOW":
-                            weaponRange = Stats.WEAPON_RANGE_RANGE;
-                            break;
-                        default:
-                            GD.PrintErr(string.Format("{0} doesn't have a valid weaponType", imgPath));
-                            break;
-                    }
+                    SetWorldType(WorldTypes.PLAYER);
                 }
                 swingType = parsedImg[idx + 1];
-                img.SetHframes(Int32.Parse(parsedImg[idx + 2]));
+                img.SetHframes(int.Parse(parsedImg[idx + 2]));
                 if (img.GetHframes() != 17)
                 {
                     AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
                     anim.RemoveAnimation("attacking");
                     anim.AddAnimation("attacking",
-                        (Animation)GD.Load(string.Format("res://asset/img/character/resource/attacking_{0}f.res", parsedImg[idx + 2])));
+                        (Animation)GD.Load($"res://asset/img/character/resource/attacking_{parsedImg[idx + 2]}f.tres"));
                 }
                 string bodyName = raceName;
                 if (raceName.Equals("human"))
@@ -676,20 +681,18 @@ namespace Game.Actor
                 {
                     bodyName = imgPath.GetFile().BaseName().Split('-')[0];
                 }
-                if (this is Player)
-                {
-                    SetWorldType(WorldTypes.PLAYER);
-                }
-                AtlasTexture texture = (AtlasTexture)GD.Load(string.Format("res://asset/img/character/resource/{0}_body.res", bodyName));
+                AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/{bodyName}_body.res");
                 TouchScreenButton select = GetNode<TouchScreenButton>("select");
                 Vector2 textureSize = texture.GetRegion().Size;
+                Node2D sightDistance = GetNode<Node2D>("sight/distance");
                 Node2D areaBody = GetNode<Node2D>("area/body");
+                Node2D head = GetNode<Node2D>("head");
                 select.SetTexture(texture);
                 img.SetPosition(new Vector2(0.0f, -img.GetTexture().GetHeight() / 2.0f));
-                GetNode<Node2D>("head").SetPosition(new Vector2(0.0f, -texture.GetHeight()));
+                head.SetPosition(new Vector2(0.0f, -texture.GetHeight()));
                 select.SetPosition(new Vector2(-textureSize.x / 2.0f, -textureSize.y));
                 areaBody.SetPosition(new Vector2(-0.5f, -textureSize.y / 2.0f));
-                GetNode<Node2D>("sight/distance").SetPosition(areaBody.GetGlobalPosition());
+                sightDistance.SetPosition(areaBody.GetPosition());
                 Dictionary<string, double> stats = Stats.UnitMake((double)level, Stats.GetMultiplier(this is Npc, imgPath));
                 foreach (string attribute in stats.Keys)
                 {
@@ -705,11 +708,11 @@ namespace Game.Actor
         }
         public virtual void SetSaveData(Godot.Collections.Dictionary saveData)
         {
-            GD.Print("Save Not Implemented");
+            GD.PrintErr("Save Not Implemented");
         }
         public virtual Godot.Collections.Dictionary GetSaveData()
         {
-            GD.Print("Save Not Implemented");
+            GD.PrintErr("Save Not Implemented");
             return new Godot.Collections.Dictionary();
         }
     }

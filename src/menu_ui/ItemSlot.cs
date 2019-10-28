@@ -134,15 +134,8 @@ namespace Game.Ui
             }
             else
             {
-                string texPath = "res://asset/img/ui/{0}.res";
-                if (IsConnected("pressed", this, nameof(_OnShortcutPressed)))
-                {
-                    texPath = string.Format(texPath, "black_bg_icon_used0");
-                }
-                else
-                {
-                    texPath = string.Format(texPath, "black_bg_icon_used1");
-                }
+                string texPath = "res://asset/img/ui/black_bg_icon_used" + 
+                    $"{((IsConnected("pressed", this, nameof(_OnShortcutPressed))) ? 0 : 1)}.res";
                 if (!GetNormalTexture().GetPath().Equals(texPath))
                 {
                     SetNormalTexture((Texture)GD.Load(texPath));

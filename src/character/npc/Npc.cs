@@ -12,12 +12,12 @@ namespace Game.Actor
         private bool patroller;
         private string text;
         private List<Vector2> patrolPath = new List<Vector2>();
-
         [Signal]
         public delegate void DropLoot(Npc npc, Vector2 worldPosition, int idk);
 
         public override void _Ready()
         {
+            base._Ready();
             SetProcess(false);
         }
         public override void _Process(float delta)
@@ -29,7 +29,7 @@ namespace Game.Actor
                     SetState(States.RETURNING);
                     if (patroller)
                     {
-                        if (GetGlobalPosition() != patrolPath[-1])
+                        if (GetGlobalPosition() != patrolPath[patrolPath.Count - 1])
                         {
                             MoveTo(patrolPath[0]);
                             return;
@@ -42,7 +42,7 @@ namespace Game.Actor
                     }
                     SetState(States.IDLE);
                 }
-                else if (!GetNode<AnimationPlayer>("anim").HasAnimation("attackig"))
+                else if (!GetNode<AnimationPlayer>("anim").HasAnimation("attacking"))
                 {
                     // flee code here
                 }
@@ -69,17 +69,17 @@ namespace Game.Actor
         public void _OnSightAreaEntered(Area2D area2D)
         {
             Character character = (Character)area2D.GetOwner();
-            if (!dead && (target == null || character.IsDead()))
+            if (!dead && (target == null || character.IsDead()) && character != this)
             {
                 if (!enemy && character is Player)
                 {
                     // friendly npcs' don't attack player
                     return;
                 }
-                else if (!engaging && enemy != character.IsEnemy(this))
+                else if (!engaging && enemy != character.IsEnemy())
                 {
-                    SetTarget(character);
                     engaging = true;
+                    SetTarget(character);
                     SetProcess(true);
                 }
             }
@@ -142,30 +142,30 @@ namespace Game.Actor
                             tween.SetPauseMode(PauseModeEnum.Process);
                             menu.itemInfo.GetNode<TextureButton>("s/v/c/v/bg").SetDisabled(true);
                             menu.merchant.GetNode<Label>("s/v/label").SetText(GetWorldName());
-                            menu.merchant.GetNode<Label>("s/v/label2").SetText(string.Format("Gold: {0:n0}", player.GetGold()));
+                            menu.merchant.GetNode<Label>("s/v/label2").SetText($"Gold: {player.GetGold()}");
                             menu.menu.Hide();
                             menu.merchant.Show();
                             menu.GetNode<Control>("c/game_menu").Show();
                             break;
                         default:
                             EmitSignal(nameof(Talked));
-                            if (text.Empty())
+                            if (!text.Empty())
                             {
-                                return;
+
+                                Globals.PlaySound("turn_page", this, new AudioStreamPlayer());
+                                menu.menu.Hide();
+                                if (GetWorldType() == WorldTypes.HEALER)
+                                {
+                                    menu.dialogue.GetNode<Control>("s/s/v/heal").Show();
+                                }
+                                else
+                                {
+                                    menu.dialogue.GetNode<Label>("s/s/label2").SetText(text);
+                                }
+                                menu.dialogue.GetNode<Label>("s/label").SetText(GetWorldName());
+                                menu.dialogue.Show();
+                                menu.GetNode<Control>("c/game_menu").Show();
                             }
-                            Globals.PlaySound("turn_page", this, new AudioStreamPlayer());
-                            menu.menu.Hide();
-                            if (GetWorldType() == WorldTypes.HEALER)
-                            {
-                                menu.dialogue.GetNode<Control>("s/s/v/heal").Show();
-                            }
-                            else
-                            {
-                                menu.dialogue.GetNode<Label>("s/s/label2").SetText(text);
-                            }
-                            menu.dialogue.GetNode<Label>("s/label").SetText(GetWorldName());
-                            menu.dialogue.Show();
-                            menu.GetNode<Control>("c/game_menu").Show();
                             break;
                     }
                     player.path.Clear();
@@ -176,7 +176,7 @@ namespace Game.Actor
         }
         public override void MoveTo(Vector2 worldPosition)
         {
-            if (path.Count == 0 || path[-1].DistanceTo(worldPosition) > weaponRange)
+            if (path.Count == 0 || path[path.Count - 1].DistanceTo(worldPosition) > weaponRange)
             {
                 path = Globals.GetMap().getAPath(GetGlobalPosition(), worldPosition);
             }
@@ -256,6 +256,7 @@ namespace Game.Actor
                 EmitSignal(nameof(DropLoot), this, GetGlobalPosition(), 0);
                 Hide();
                 SetProcess(false);
+                GD.Randomize();
                 SetTime((float)GD.RandRange(60.0, 240.0), true);
                 if (!IsInGroup(Globals.SAVE_GROUP))
                 {
@@ -286,49 +287,48 @@ namespace Game.Actor
         }
         public override void SetState(States state)
         {
-            if (GetState() == state)
+            if (GetState() != state)
             {
-                return;
+                AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
+                Sprite img = GetNode<Sprite>("img");
+                switch (state)
+                {
+                    case States.IDLE:
+                        SetProcess(false);
+                        SetTarget(null);
+                        SetTime(regenTime);
+                        anim.Stop();
+                        img.SetFlipH(false);
+                        img.SetFrame(0);
+                        engaging = false;
+                        foreach (Area2D area2D in GetNode<Area2D>("sight").GetOverlappingAreas())
+                        {
+                            CheckSight(area2D);
+                        }
+                        break;
+                    case States.ATTACKING:
+                        SetTime(weaponSpeed / 2.0f, true);
+                        break;
+                    case States.MOVING:
+                        img.SetFlipH(false);
+                        anim.Play("moving", -1, animSpeed);
+                        anim.Seek(0.3f, true);
+                        break;
+                    case States.RETURNING:
+                        SetState(States.MOVING);
+                        SetTime(regenTime);
+                        break;
+                    case States.DEAD:
+                        if (target != null && target is Player)
+                        {
+                            target.SetTarget(null);
+                        }
+                        SetState(States.IDLE);
+                        SetDead(true);
+                        break;
+                }
+                base.SetState(state);
             }
-            AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
-            Sprite img = GetNode<Sprite>("img");
-            switch (state)
-            {
-                case States.IDLE:
-                    SetProcess(false);
-                    SetTarget(null);
-                    SetTime(regenTime);
-                    anim.Stop();
-                    img.SetFlipH(false);
-                    img.SetFrame(0);
-                    engaging = false;
-                    foreach (Area2D area2D in GetNode<Area2D>("sight").GetOverlappingAreas())
-                    {
-                        CheckSight(area2D);
-                    }
-                    break;
-                case States.ATTACKING:
-                    SetTime(weaponSpeed / 2.0f, true);
-                    break;
-                case States.MOVING:
-                    img.SetFlipH(false);
-                    anim.Play("moving", -1, animSpeed);
-                    anim.Seek(0.3f, true);
-                    break;
-                case States.RETURNING:
-                    SetState(States.MOVING);
-                    SetTime(regenTime);
-                    break;
-                case States.DEAD:
-                    if (target != null && target is Player)
-                    {
-                        target.SetTarget(null);
-                    }
-                    SetState(States.IDLE);
-                    SetDead(true);
-                    break;
-            }
-            base.SetState(state);
         }
         public void SetText(string text)
         {
@@ -368,10 +368,6 @@ namespace Game.Actor
         {
             this.enemy = enemy;
         }
-        public bool IsEnemy()
-        {
-            return enemy;
-        }
         public void SetUniqueData(Dictionary<string, string> data)
         {
             foreach (string key in data.Keys)
@@ -379,27 +375,29 @@ namespace Game.Actor
                 switch (key)
                 {
                     case "img":
-                        // SetImg()
+                        SetImg("res://asset/img/character/".PlusFile(data[key]));
                         break;
                     case "enemy":
                         enemy = bool.Parse(data[key]);
                         break;
                     case "level":
+                        SetLevel(short.Parse(data[key]));
                         break;
                     case "actorType":
+                        SetWorldType((WorldTypes)System.Enum.Parse(typeof(WorldTypes), data[key].ToUpper()));
                         break;
                     default:
                         if (key.Contains("spell"))
                         {
-
+                            // instance spells here
                         }
                         else if (key.Contains("item"))
                         {
-
+                            // instance items here
                         }
                         else
                         {
-                            GD.PrintErr(string.Format("Unknown attribute value: {0} for unit.", key));
+                            GD.PrintErr($"Unknown attribute value: {key} for unit.");
                         }
                         break;
                 }

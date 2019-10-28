@@ -20,9 +20,7 @@ namespace Game
         public static readonly Dictionary<string, string> SAVE_PATH = new Dictionary<string, string>
         {
             {nameof(gameMeta),"res://meta/game_meta.json"},
-            {nameof(itemMeta),"res://meta/item_meta.json"},
             {nameof(questMeta),"res://meta/quest_meta.json"},
-            {nameof(spellMeta),"res://meta/spell_meta.json"},
             {"SAVE_SLOT_0","res://meta/save_slot_0.json"},
             {"SAVE_SLOT_1","res://meta/save_slot_1.json"},
             {"SAVE_SLOT_2","res://meta/save_slot_2.json"},
@@ -40,7 +38,14 @@ namespace Game
             {"SWORD", 8},
             {"BOW", 5},
             {"ARROW_HIT_ARMOR", 5},
-            {"ARROW_PASS", 6}
+            {"ARROW_PASS", 6},
+            {"SWING_SMALL", 3},
+            {"SWING_MEDIUM", 3},
+            {"SWING_LARGE", 3},
+            {"SWING_VERY_LARGE", 3},
+            {"BLOCK_METAL_METAL", 5},
+            {"BLOCK_METAL_WOOD", 3},
+            {"BLOCK_WOOD_WOOD", 3},
         };
         public static readonly Dictionary<string, int> Collision = new Dictionary<string, int>
         {
@@ -52,13 +57,11 @@ namespace Game
         public const string HUD_SHORTCUT_GROUP = "HUD-shortcut";
         public const string SAVE_GROUP = "save";
         public static Player player = null;
+        public static Dictionary<string, AudioStream> sndMeta = new Dictionary<string, AudioStream>();
         public static Godot.Collections.Dictionary questMeta = null;
-        public static Godot.Collections.Dictionary spellMeta = null;
-        public static Godot.Collections.Dictionary itemMeta = null;
         public static Godot.Collections.Dictionary gameMeta = null;
         private static Godot.Collections.Dictionary sceneMeta = null;
-        public static Dictionary<string, AudioStream> sndMeta = new Dictionary<string, AudioStream>();
-        private static File file = new File();
+        private static readonly File file = new File();
         private static WorldQuests worldQuests = null;
         private static Map.Map map = null;
 
@@ -78,7 +81,7 @@ namespace Game
         public static void SaveGameMeta(string gameData, int index)
         {
             file.Open(SAVE_PATH[nameof(gameMeta)], (int)File.ModeFlags.Write);
-            gameMeta[string.Format("slot_{0}", index)] = gameData;
+            gameMeta[$"slot_{index}"] = gameData;
             file.StoreLine(JSON.Print(gameMeta));
             file.Close();
         }
@@ -96,14 +99,8 @@ namespace Game
                         case nameof(gameMeta):
                             gameMeta = data;
                             break;
-                        case nameof(itemMeta):
-                            itemMeta = data;
-                            break;
                         case nameof(questMeta):
                             questMeta = data;
-                            break;
-                        case nameof(spellMeta):
-                            spellMeta = data;
                             break;
                     }
                 }
@@ -172,7 +169,7 @@ namespace Game
             return;
             if (!sndMeta.ContainsKey(sndName))
             {
-                GD.PrintErr(string.Format("{0} doesn't contain sound: {1}", nameof(sndMeta), sndName));
+                GD.PrintErr($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
             }
             else
             {
@@ -203,7 +200,7 @@ namespace Game
             return;
             if (!sndMeta.ContainsKey(sndName))
             {
-                GD.PrintErr(string.Format("{0} doesn't contain sound: {1}", nameof(sndMeta), sndName));
+                GD.PrintErr($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
             }
             else
             {
