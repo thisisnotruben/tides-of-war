@@ -101,7 +101,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.PrintErr($"{GetName()} on method \"RemoveItem\" slotIdx out of bounds");
+                GD.Print($"{GetName()} on method \"RemoveItem\" slotIdx out of bounds");
             }
         }
         public void Clear()
@@ -132,7 +132,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.PrintErr($"{GetName()} on method \"SetSlotCoolDown\" slotIdx out of bounds");
+                GD.Print($"{GetName()} on method \"SetSlotCoolDown\" slotIdx out of bounds");
             }
             return null;
         }
@@ -145,7 +145,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.PrintErr($"{GetName()} on method \"SetSlotCoolDown\" slotIdx out of bounds");
+                GD.Print($"{GetName()} on method \"SetSlotCoolDown\" slotIdx out of bounds");
             }
         }
         public int GetItemCount()
@@ -161,7 +161,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.PrintErr($"{GetName()} on method \"IsSlotCoolingDown\" slotIdx out of bounds");
+                GD.Print($"{GetName()} on method \"IsSlotCoolingDown\" slotIdx out of bounds");
             }
             return false;
         }

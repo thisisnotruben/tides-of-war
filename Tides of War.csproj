@@ -55,6 +55,8 @@
     <Compile Include="src\character\target_dummy\TargetDummy.cs" />
     <Compile Include="src\character\Character.cs" />
     <Compile Include="src\database\ItemDB.cs" />
+    <Compile Include="src\database\PickableFactory.cs" />
+    <Compile Include="src\database\QuestDB.cs" />
     <Compile Include="src\database\SpellDB.cs" />
     <Compile Include="src\database\UnitDB.cs" />
     <Compile Include="src\globals\GameSaver.cs" />
@@ -87,7 +89,7 @@
     <Compile Include="src\misc\other\CombatText.cs" />
     <Compile Include="src\misc\other\FootStep.cs" />
     <Compile Include="src\misc\other\Grave.cs" />
-    <Compile Include="src\quest_system\QuestTemplate.cs" />
+    <Compile Include="src\quest_system\Quest.cs" />
     <Compile Include="src\quest_system\WorldQuests.cs" />
     <Compile Include="src\spell\Spell.cs" />
     <Compile Include="src\spell\SpellEffect.cs" />

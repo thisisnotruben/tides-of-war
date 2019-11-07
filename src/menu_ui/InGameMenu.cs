@@ -5,12 +5,14 @@ using Game.Misc.Other;
 using Game.Quests;
 using Game.Database;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Game.Ui
 {
     public class InGameMenu : Menu
     {
+        private static readonly PackedScene questEntryScene = (PackedScene)GD.Load("res://src/menu_ui/quest_entry.tscn");
         public Control spellMenu;
         public Control hpMana;
 
@@ -279,7 +281,7 @@ namespace Game.Ui
                 }
                 else
                 {
-                    GD.PrintErr("Unexpected type in method _OnBackPressed on condition itemInfo.IsVisible()");
+                    GD.Print("Unexpected type in method _OnBackPressed on condition itemInfo.IsVisible()");
                 }
                 selected = null;
                 selectedIdx = -1;
@@ -345,11 +347,11 @@ namespace Game.Ui
             selectedIdx = idx;
             if (spellBook.IsSlotCoolingDown(idx) || player.IsDead())
             {
-                ItemInfoHideExcept(new List<string>());
+                ItemInfoHideExcept();
             }
             else
             {
-                ItemInfoHideExcept(new List<string> { "cast" });
+                ItemInfoHideExcept("cast");
 
             }
             selectedPickable.Describe();
@@ -366,7 +368,7 @@ namespace Game.Ui
         }
         public void _OnBagIndexSelected(int idx, bool sift = false)
         {
-            ItemInfoHideExcept(new List<string>());
+            ItemInfoHideExcept();
             selectedIdx = idx;
             ItemList bag = inventoryBag;
             Pickable selectedPickable;
@@ -379,7 +381,7 @@ namespace Game.Ui
                 inventory.Hide();
                 selected = inventoryBag.GetItemMetaData(idx);
                 selectedPickable = (Pickable)selected;
-                switch (selectedPickable.GetPickableType())
+                switch (selectedPickable.GetWorldType())
                 {
                     case WorldObject.WorldTypes.WEAPON:
                     case WorldObject.WorldTypes.ARMOR:
@@ -391,7 +393,7 @@ namespace Game.Ui
                     case WorldObject.WorldTypes.FOOD:
                     case WorldObject.WorldTypes.POTION:
                         itemInfo.GetNode<Label>("s/h/v/use/label").SetText(
-                            $"{((selectedPickable.GetPickableType() == WorldObject.WorldTypes.FOOD) ? "Eat" : "Drink")}");
+                            $"{((selectedPickable.GetWorldType() == WorldObject.WorldTypes.FOOD) ? "Eat" : "Drink")}");
                         break;
                 }
                 if (!player.IsDead())
@@ -423,7 +425,7 @@ namespace Game.Ui
                     if (!trained)
                     {
                         itemInfo.GetNode<Label>("s/h/v/buy/label").SetText("Train");
-                        ItemInfoHideExcept(new List<string> { "buy" });
+                        ItemInfoHideExcept("buy");
                     }
                 }
                 else
@@ -433,12 +435,12 @@ namespace Game.Ui
                         Globals.PlaySound(SndConfigure(), this, snd);
                         if (merchant.GetNode<Label>("s/v/label").GetText().Equals("Inventory"))
                         {
-                            ItemInfoHideExcept(new List<string> { "sell" });
+                            ItemInfoHideExcept("sell");
 
                         }
                         else
                         {
-                            ItemInfoHideExcept(new List<string> { "buy" });
+                            ItemInfoHideExcept("buy");
                         }
                     }
                 }
@@ -479,12 +481,12 @@ namespace Game.Ui
             Item selectedPickable = selected as Item;
             if (selectedPickable == null)
             {
-                GD.PrintErr("Unexpected selected type in method _OnEquipPressed");
+                GD.Print("Unexpected selected type in method _OnEquipPressed");
                 return;
             }
             if (!inventoryBag.IsFull())
             {
-                switch (selectedPickable.GetPickableType())
+                switch (selectedPickable.GetWorldType())
                 {
                     case WorldObject.WorldTypes.WEAPON:
                         if (player.GetWeapon() != null)
@@ -500,8 +502,8 @@ namespace Game.Ui
                         break;
                 }
             }
-            else if ((selectedPickable.GetPickableType() == WorldObject.WorldTypes.WEAPON & player.GetWeapon() != null)
-            || (selectedPickable.GetPickableType() == WorldObject.WorldTypes.ARMOR & player.GetArmor() != null))
+            else if ((selectedPickable.GetWorldType() == WorldObject.WorldTypes.WEAPON & player.GetWeapon() != null)
+            || (selectedPickable.GetWorldType() == WorldObject.WorldTypes.ARMOR & player.GetArmor() != null))
             {
                 popup.GetNode<Label>("m/error/label").SetText("Inventory\nFull!");
                 popup.GetNode<Control>("m/error").Show();
@@ -517,7 +519,7 @@ namespace Game.Ui
                 Globals.PlaySound(SndConfigure(true), this, snd);
             }
             Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon_used0.res");
-            string path = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), selectedPickable.GetPickableType()).ToLower()}_slot";
+            string path = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), selectedPickable.GetWorldType()).ToLower()}_slot";
             inventory.GetNode<TextureButton>(path).SetNormalTexture(texture);
             statsMenu.GetNode<TextureButton>(path).SetNormalTexture(texture);
             selectedIdx = -1;
@@ -560,11 +562,11 @@ namespace Game.Ui
         {
             if (selected is Item)
             {
-                GD.PrintErr("Unexpected selected type in method _OnUsePressed");
+                GD.Print("Unexpected selected type in method _OnUsePressed");
                 return;
             }
             Item selectedItem = (Item)selected;
-            switch (selectedItem.GetPickableType())
+            switch (selectedItem.GetWorldType())
             {
                 case WorldObject.WorldTypes.FOOD:
                     if (player.GetState() == Character.States.ATTACKING)
@@ -593,7 +595,7 @@ namespace Game.Ui
                     break;
             }
             Item metaItem = inventoryBag.GetItemMetaData(selectedIdx) as Item;
-            if (metaItem != null && selectedItem.GetPickableType() == WorldObject.WorldTypes.POTION)
+            if (metaItem != null && selectedItem.GetWorldType() == WorldObject.WorldTypes.POTION)
             {
                 inventoryBag.SetSlotCoolDown(selectedIdx, metaItem.GetDuration(), 0.0f);
             }
@@ -615,7 +617,7 @@ namespace Game.Ui
         {
             Globals.PlaySound("quest_accept", this, snd);
             Globals.GetWorldQuests().StartFocusedQuest();
-            QuestEntry questEntry = (QuestEntry)Globals.questEntry.Instance();
+            QuestEntry questEntry = (QuestEntry)questEntryScene.Instance();
             questEntry.AddToQuestLog(questLog);
             questEntry.SetQuest(Globals.GetWorldQuests().GetFocusedQuest());
             dialogue.GetNode<Control>("s/s/v/accept").Hide();
@@ -660,7 +662,7 @@ namespace Game.Ui
             Pickable selectedPickable = selected as Pickable;
             if (selectedPickable == null)
             {
-                GD.PrintErr("Unexpected selected type in method _OnBuyPressed");
+                GD.Print("Unexpected selected type in method _OnBuyPressed");
                 return;
             }
             itemInfo.Hide();
@@ -736,7 +738,7 @@ namespace Game.Ui
             Spell.Spell selectedSpell = selected as Spell.Spell;
             if (selectedSpell == null)
             {
-                GD.PrintErr("Unexpected selected type in method _OnCastPressed");
+                GD.Print("Unexpected selected type in method _OnCastPressed");
                 return;
             }
             if (player.mana >= selectedSpell.GetManaCost())
@@ -780,7 +782,8 @@ namespace Game.Ui
                 return;
             }
             Globals.PlaySound("click2", this, snd);
-            Spell.Spell spell = (Spell.Spell)Globals.spell.Instance();
+            PackedScene spellScene = (PackedScene)GD.Load(selectedSpell.GetFilename());
+            Spell.Spell spell = (Spell.Spell)spellScene.Instance();
             spell.Init(selectedSpell.GetWorldType());
             spell.GetPickable(player, false);
             spell.ConfigureSpell();
@@ -885,7 +888,7 @@ namespace Game.Ui
             Pickable selectedPickable = selected as Pickable;
             if (selectedPickable == null)
             {
-                GD.PrintErr("Unexpected selected type in method _OnCastPressed");
+                GD.Print("Unexpected selected type in method _OnCastPressed");
                 return;
             }
             int index = 0;
@@ -1027,7 +1030,7 @@ namespace Game.Ui
             Pickable selectedPickable = selected as Pickable;
             if (selectedPickable == null)
             {
-                GD.PrintErr("Unexpected selected type in method _OnAddToHudPressed");
+                GD.Print("Unexpected selected type in method _OnAddToHudPressed");
                 return;
             }
             short count = 1;
@@ -1061,7 +1064,7 @@ namespace Game.Ui
             Pickable selectedPickable = selected as Pickable;
             if (selectedPickable == null)
             {
-                GD.PrintErr("Unexpected selected type in method _OnAddToHudPressed");
+                GD.Print("Unexpected selected type in method _OnAddToHudPressed");
                 return;
             }
             string pickableDescription = pickable.GetPickableWorldDescription();
@@ -1092,7 +1095,7 @@ namespace Game.Ui
         }
         public void _OnEquipItem(Item item, bool on)
         {
-            switch (item.GetPickableType())
+            switch (item.GetWorldType())
             {
                 case WorldObject.WorldTypes.WEAPON:
                     Tuple<short, short> values = item.GetValues();
@@ -1105,7 +1108,7 @@ namespace Game.Ui
                     player.armor += (on) ? item.GetValue() : (short)-item.GetValue();
                     break;
             }
-            string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), item.GetPickableType()).ToLower()}_slot/m/icon";
+            string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), item.GetWorldType()).ToLower()}_slot/m/icon";
             inventory.GetNode<TextureRect>(nodePath).SetTexture((on) ? item.GetIcon() : null);
             statsMenu.GetNode<TextureRect>(nodePath).SetTexture((on) ? item.GetIcon() : null);
             if (on)
@@ -1144,7 +1147,7 @@ namespace Game.Ui
             Pickable selectedPickable = selected as Pickable;
             if (selectedPickable == null)
             {
-                GD.PrintErr("Unexpected selected type in method SndConfigure");
+                GD.Print("Unexpected selected type in method SndConfigure");
                 return "";
             }
             string sndName = "";
@@ -1154,10 +1157,10 @@ namespace Game.Ui
             }
             else
             {
-                switch (selectedPickable.GetPickableType())
+                switch (selectedPickable.GetWorldType())
                 {
                     case WorldObject.WorldTypes.ARMOR:
-                        sndName = $"{ItemDB.GetItemMaterial(selectedPickable.GetWorldName())}_on";
+                        sndName = $"{ItemDB.GetItemArmorMaterial(selectedPickable.GetWorldName())}_on";
                         break;
                     case WorldObject.WorldTypes.WEAPON:
                         switch (selectedPickable.GetPickableSubType())
@@ -1243,7 +1246,7 @@ namespace Game.Ui
             if (pickable != null)
             {
                 selected = pickable;
-                ItemInfoHideExcept(new List<string>());
+                ItemInfoHideExcept();
                 itemInfo.GetNode<Control>("s/h/left").Hide();
                 itemInfo.GetNode<Control>("s/h/right").Hide();
                 Globals.PlaySound(SndConfigure(false, true), this, snd);
@@ -1252,14 +1255,14 @@ namespace Game.Ui
                 {
                     statsMenu.Hide();
                     // selectedIdx = statsMenu;
-                    ItemInfoHideExcept(new List<string>());
+                    ItemInfoHideExcept();
                 }
                 else if (inventory.IsVisible() || selected == null)
                 {
                     inventory.Hide();
                     if (!player.IsDead())
                     {
-                        ItemInfoHideExcept(new List<string> { "unequip" });
+                        ItemInfoHideExcept("unequip");
                     }
                 }
                 itemInfo.Show();
@@ -1272,7 +1275,7 @@ namespace Game.Ui
                 Pickable selectedPickable = selected as Pickable;
                 if (selectedPickable == null)
                 {
-                    GD.PrintErr("Unexpected selected type in method HideMenu");
+                    GD.Print("Unexpected selected type in method HideMenu");
                     return;
                 }
                 if (itemInfo.IsVisible())
@@ -1295,7 +1298,7 @@ namespace Game.Ui
             }
             GetNode<Control>("c/game_menu").Hide();
         }
-        public void ItemInfoHideExcept(List<string> nodesToShow)
+        public void ItemInfoHideExcept(params string[] nodesToShow)
         {
             foreach (Control node in itemInfo.GetNode("s/h/v").GetChildren())
             {
@@ -1334,7 +1337,7 @@ namespace Game.Ui
                     backButton.Disconnect("pressed", this, nameof(_OnBackPressed));
                     backButton.Connect("pressed", this, nameof(HideMenu));
                     ItemInfoGo(pickable);
-                    ItemInfoHideExcept(new List<string> { "unequip" });
+                    ItemInfoHideExcept("unequip");
                     menu.Hide();
                     GetNode<Control>("c/game_menu").Show();
                 }

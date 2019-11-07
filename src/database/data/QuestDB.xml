@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuestDB>
+    <quest name="test1">
+        <active>false</active>
+        <completed>false</completed>
+        <delivered>false</delivered>
+        <keepPickables>false</keepPickables>
+        <questGiver>map-1/zed/z1/Darfu</questGiver>
+        <chainQuests>
+            <chainQuest name="test2"></chainQuest>
+        </chainQuests>
+        <reward>
+            <pickable name="Steelforged Sword"></pickable>
+            <gold>50</gold>
+        </reward>
+        <objective>
+            <kill name="Desert Serpent">
+                <killed>0</killed>
+                <toKill>3</toKill>
+            </kill>
+        </objective>
+    </quest>
+    <quest name="test2">
+        <active>false</active>
+        <completed>false</completed>
+        <delivered>false</delivered>
+        <keepPickables>false</keepPickables>
+        <questGiver>map-1/zed/z1/Darfu</questGiver>
+        <reward>
+            <pickable name="Steelforged Sword"></pickable>
+            <gold>50</gold>
+        </reward>
+        <objective>
+            <kill name="Desert Serpent">
+                <killed>0</killed>
+                <toKill>3</toKill>
+            </kill>
+        </objective>
+    </quest>
+</QuestDB>

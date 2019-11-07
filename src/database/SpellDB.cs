@@ -5,7 +5,7 @@ namespace Game.Database
 {
     public static class SpellDB
     {
-        private static string DB_PATH = "res://src/Database/SpellDB.xml";
+        private static readonly string DB_PATH = "res://src/database/data/SpellDB.xml";
         private static readonly XMLParser xMLParser = new XMLParser();
 
         public static Dictionary<string, string> GetSpellData(string worldName)
@@ -21,8 +21,8 @@ namespace Game.Database
                     while (xMLParser.Read() == Error.Ok)
                     {
                         string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
-                            ? keyName = xMLParser.GetNodeName() :
-                            "";
+                            ? xMLParser.GetNodeName()
+                            : "";
                         if (!keyName.Empty() && xMLParser.Read() == Error.Ok
                         && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
                         {
@@ -31,8 +31,24 @@ namespace Game.Database
                     }
                 }
             }
-            
             return spellData;
+        }
+        public static bool HasSpell(string nameCheck)
+        {
+            while (xMLParser.Read() == Error.Ok)
+            {
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
+                {
+                    string key = (xMLParser.GetNodeName().Equals("spell"))
+                        ? xMLParser.GetNamedAttributeValue("name")
+                        : "";
+                    if (key.Equals(nameCheck))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

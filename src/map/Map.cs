@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using Game.Actor;
 using Game.Misc.Loot;
@@ -75,9 +74,7 @@ namespace Game.Map
                 if (character != null)
                 {
                     Vector2 originPosition = GetGridPosition(character.GetGlobalPosition());
-                    character.origin = originPosition;
-                    character.SetGlobalPosition(originPosition);
-                    character.path.Add(originPosition);
+                    character.SetOrigin(originPosition);
                     OccupyOriginCell(originPosition);
                     Npc npc = character as Npc;
                     if (npc != null)
@@ -293,7 +290,7 @@ namespace Game.Map
             }
             else
             {
-                GD.PrintErr($"Object incorrectly placed at\ngrid position: {point}\nglobal position: {mapGrid.MapToWorld(point)}\n");
+                GD.Print($"Object incorrectly placed at\ngrid position: {point}\nglobal position: {mapGrid.MapToWorld(point)}\n");
             }
         }
     }

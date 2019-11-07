@@ -7,6 +7,8 @@ namespace Game
     {
         public enum WorldTypes : byte
         {
+            // For the unset
+            NOT_SET,
             // Actor WorldTypes
             PLAYER, QUEST_GIVER, TRAINER, MERCHANT, HEALER, COMMONER,
             // Spell WorldTypes
@@ -18,9 +20,10 @@ namespace Game
             CASTING, DAMAGE_MODIFIER, CHOOSE_AREA_EFFECT,
             // Item WorldTypes
             WEAPON, ARMOR, POTION, FOOD, MISC,
-            HEALING, MANA, STAMINA, INTELLECT, AGILITY, STRENGTH, DEFENSE,
-            // Weapon WorldTypes 
-            AXE, BOW, CLUB, DAGGER, SWORD, STAFF, CLAW, MAGIC, SPEAR, MACE,
+            // (Pickable SubTypes) Armor, Food, and Misc doesn't have a subType
+                HEALING, MANA, STAMINA, INTELLECT, AGILITY, STRENGTH, DEFENSE,
+                // Weapon WorldTypes 
+                AXE, BOW, CLUB, DAGGER, SWORD, STAFF, CLAW, MAGIC, SPEAR, MACE,
             // Swing WorldTypes
             ARROW_HIT_ARMOR, ARROW_PASS
         }

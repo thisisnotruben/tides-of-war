@@ -22,7 +22,7 @@ namespace Game.Spell
             }
             else
             {
-                GD.PrintErr("Owner not bolt in class MindBlast");
+                GD.Print("Owner not bolt in class MindBlast");
             }
         }
         public override void _OnTimerTimeout()

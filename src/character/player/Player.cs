@@ -7,7 +7,8 @@ namespace Game.Actor
 {
     public class Player : Character
     {
-        private static readonly PackedScene moveCursor = (PackedScene)GD.Load("res://src/menu_ui/move_cursor.tscn");
+        private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/move_cursor.tscn");
+        private static readonly PackedScene graveScene = (PackedScene)GD.Load("res://src/misc/other/grave.tscn");
         private List<Vector2> reservedPath = new List<Vector2>();
         private Vector2 gravePos;
         public short xp;
@@ -19,6 +20,7 @@ namespace Game.Actor
         {
             base._Ready();
             Globals.player = this;
+            SetWorldName(GetName()); // for debugging purposes
             SetImg("res://asset/img/character/orc/axe-swing_medium-17.png");
             Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
             Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
@@ -58,7 +60,7 @@ namespace Game.Actor
                         path = Globals.GetMap().getAPath(Globals.GetMap().GetGridPosition(GetGlobalPosition()), eventGlobalPosition);
                     }
                     EmitSignal(nameof(PosChanged));
-                    MoveCursor cursor = (MoveCursor)moveCursor.Instance();
+                    MoveCursor cursor = (MoveCursor)moveCursorScene.Instance();
                     cursor.AddToMap(this, eventGlobalPosition);
                 }
             }
@@ -189,8 +191,8 @@ namespace Game.Actor
         {
             if (target != null)
             {
-                target.Disconnect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-                target.Disconnect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
+                target.Disconnect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                target.Disconnect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
                 Npc npc = target as Npc;
                 if (npc != null)
                 {
@@ -207,29 +209,29 @@ namespace Game.Actor
             }
             if (character != null)
             {
-                GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
-                character.Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-                character.Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
+                character.Connect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                character.Connect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
                 character.UpdateHUD();
+                GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
                 Npc npc = character as Npc;
                 if (npc != null)
                 {
                     switch (npc.GetWorldType())
                     {
                         case WorldTypes.TRAINER:
-                            npc.SetUpShop(GetMenu(), false, GetWorldType());
+                            npc.SetUpShop(GetMenu(), true, GetWorldType());
                             break;
                         case WorldTypes.MERCHANT:
-                            npc.SetUpShop(GetMenu(), false, GetWorldType());
+                            npc.SetUpShop(GetMenu(), true, GetWorldType());
                             break;
                     }
                 }
-                else
-                {
-                    GetMenu().hpMana.GetNode<Control>("m/h/u").Hide();
-                }
-                base.SetTarget(character);
             }
+            else
+            {
+                GetMenu().hpMana.GetNode<Control>("m/h/u").Hide();
+            }
+            base.SetTarget(character);
         }
         public void SetXP(short addedXP, bool showLabel = true, bool fromSaveFile = false)
         {
@@ -282,7 +284,7 @@ namespace Game.Actor
             if (dead)
             {
                 await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
-                Grave grave = (Grave)Globals.grave.Instance();
+                Grave grave = (Grave)graveScene.Instance();
                 AddChild(grave);
                 grave.SetDeceasedPlayer(this);
                 gravePos = grave.GetGlobalPosition();

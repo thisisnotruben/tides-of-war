@@ -33,8 +33,8 @@ namespace Game.Misc.Loot
 
         public override void _Ready()
         {
-            Connect(nameof(PickableExchanged), Globals.GetWorldQuests(), "UpdateQuestItem");
-            Make();
+            Connect(nameof(PickableExchanged), Globals.GetWorldQuests(),
+                nameof(Game.Quests.WorldQuests.UpdateQuestPickable));
         }
         public virtual void _OnSightAreaEntered(Area2D area2D)
         {
@@ -209,11 +209,7 @@ namespace Game.Misc.Loot
         }
         public bool Equals(Pickable pickable)
         {
-            if (GetWorldName() == pickable.GetWorldName())
-            {
-                return true;
-            }
-            return false;
+            return (GetWorldName() == pickable.GetWorldName()) ? true : false;
         }
         public void Buy(Player buyer)
         {
@@ -261,26 +257,13 @@ namespace Game.Misc.Loot
             this.subType = subType;
             this.level = level;
         }
-        public void SetWorldTypes(string type, string subType, short level)
+        public void SetPickableSubType(WorldTypes subType)
         {
-            type = type.ToUpper();
-            subType = subType.ToUpper();
-            if (Enum.IsDefined(typeof(WorldTypes), type) && Enum.IsDefined(typeof(WorldTypes), subType))
-            {
-                SetWorldTypes((WorldTypes)Enum.Parse(typeof(WorldTypes), type), (WorldTypes)Enum.Parse(typeof(WorldTypes), subType), level);
-            }
-            else
-            {
-                GD.PrintErr($"{type} and {subType} for object ({GetPath()}) are not defined in-game.");
-            }
+            this.subType = subType;
         }
         public WorldTypes GetPickableSubType()
         {
             return subType;
-        }
-        public WorldTypes GetPickableType()
-        {
-            return type;
         }
         public void SetLevel(short level)
         {
@@ -290,7 +273,6 @@ namespace Game.Misc.Loot
         {
             return level;
         }
-        public abstract void Make();
         public short GetGold()
         {
             return goldWorth;

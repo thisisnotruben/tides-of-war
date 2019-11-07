@@ -1,0 +1,714 @@
+<!-- 
+Potion name format:
+    {Minor} {Healing} Potion : for mana/healing potions
+    Elixir Of {Minor} {Defense} : for all other
+ -->
+<?xml version="1.0" encoding="UTF-8"?>
+<ItemDB>
+    <Weapon>
+        <itemClass name="sword">
+            <item name="Shortsword">
+                <icon>1713</icon>
+                <level>1</level>
+            </item>
+            <item name="Champion's Greatsword">
+                <icon>1717</icon>
+                <level>2</level>
+            </item>
+            <item name="Steelforged Sword">
+                <icon>1719</icon>
+                <level>3</level>
+            </item>
+            <item name="Corrupted Sword">
+                <icon>1720</icon>
+                <level>4</level>
+            </item>
+            <item name="Crusader's Warblade">
+                <icon>1721</icon>
+                <level>5</level>
+            </item>
+            <item name="Bloodforged Sword">
+                <icon>1722</icon>
+                <level>6</level>
+            </item>
+            <item name="Crystalforged Sword">
+                <icon>1723</icon>
+                <level>7</level>
+            </item>
+            <item name="Heart Stopper">
+                <icon>1724</icon>
+                <level>8</level>
+            </item>
+            <item name="Blade of Angels">
+                <icon>1725</icon>
+                <level>9</level>
+            </item>
+            <item name="Apocolypse">
+                <icon>1732</icon>
+                <level>10</level>
+            </item>
+        </itemClass>
+        <itemClass name="dagger">
+            <item name="Carving Knife">
+                <icon>1551</icon>
+                <level>1</level>
+            </item>
+            <item name="Fine Shanker">
+                <icon>1555</icon>
+                <level>2</level>
+            </item>
+            <item name="Backstabber's Knife">
+                <icon>1557</icon>
+                <level>3</level>
+            </item>
+            <item name="Blackfire Dagger">
+                <icon>1558</icon>
+                <level>4</level>
+            </item>
+            <item name="Divine Toothpick">
+                <icon>1559</icon>
+                <level>5</level>
+            </item>
+            <item name="Gut Ripper">
+                <icon>1560</icon>
+                <level>6</level>
+            </item>
+            <item name="Enchanted Dagger">
+                <icon>1561</icon>
+                <level>7</level>
+            </item>
+            <item name="Devil's Mercy">
+                <icon>1562</icon>
+                <level>8</level>
+            </item>
+            <item name="Skull Carver">
+                <icon>1563</icon>
+                <level>9</level>
+            </item>
+            <item name="Skin Shredder">
+                <icon>1564</icon>
+                <level>10</level>
+            </item>
+        </itemClass>
+        <itemClass name="spear">
+            <item name="Farmer's Pike">
+                <icon>1643</icon>
+                <level>1</level>
+            </item>
+            <item name="Jagged Pike">
+                <icon>1647</icon>
+                <level>2</level>
+            </item>
+            <item name="Piercing Spear">
+                <icon>1649</icon>
+                <level>3</level>
+            </item>
+            <item name="Shadowstrike">
+                <icon>1650</icon>
+                <level>4</level>
+            </item>
+            <item name="Peacemaker">
+                <icon>1651</icon>
+                <level>5</level>
+            </item>
+            <item name="Bloodpike">
+                <icon>1652</icon>
+                <level>6</level>
+            </item>
+            <item name="Hope Killer">
+                <icon>1653</icon>
+                <level>7</level>
+            </item>
+            <item name="Dreaded Stick">
+                <icon>1654</icon>
+                <level>8</level>
+            </item>
+            <item name="Warlord's Glaive">
+                <icon>1655</icon>
+                <level>9</level>
+            </item>
+            <item name="Bloodfall">
+                <icon>1656</icon>
+                <level>10</level>
+            </item>
+        </itemClass>
+        <itemClass name="axe">
+            <item name="Primal Axe">
+                <icon>1461</icon>
+                <level>1</level>
+            </item>
+            <item name="Chef's Cleaver">
+                <icon>1465</icon>
+                <level>2</level>
+            </item>
+            <item name="Battle Axe">
+                <icon>1467</icon>
+                <level>3</level>
+            </item>
+            <item name="Soul Hacker">
+                <icon>1468</icon>
+                <level>4</level>
+            </item>
+            <item name="Head Chopper">
+                <icon>1469</icon>
+                <level>5</level>
+            </item>
+            <item name="Decapitater">
+                <icon>1470</icon>
+                <level>6</level>
+            </item>
+            <item name="Bone Chiller">
+                <icon>1471</icon>
+                <level>7</level>
+            </item>
+            <item name="Howling Reaper">
+                <icon>1472</icon>
+                <level>8</level>
+            </item>
+            <item name="Butcher's Friend">
+                <icon>1473</icon>
+                <level>9</level>
+            </item>
+            <item name="Executioner's Final Word">
+                <icon>1476</icon>
+                <level>10</level>
+            </item>
+        </itemClass>
+        <itemClass name="claw">
+            <item name="Pincers">
+                <icon>1521</icon>
+                <level>1</level>
+            </item>
+            <item name="Wolf's Paw">
+                <icon>1525</icon>
+                <level>2</level>
+            </item>
+            <item name="Spiked Knuckles">
+                <icon>1527</icon>
+                <level>3</level>
+            </item>
+            <item name="Soul Hacker">
+                <icon>1468</icon>
+                <level>4</level>
+            </item>
+            <item name="Death's Grip">
+                <icon>1528</icon>
+                <level>5</level>
+            </item>
+            <item name="Holy Fist">
+                <icon>1529</icon>
+                <level>6</level>
+            </item>
+            <item name="Tenderizer">
+                <icon>1530</icon>
+                <level>7</level>
+            </item>
+            <item name="Cold Hands">
+                <icon>1531</icon>
+                <level>8</level>
+            </item>
+            <item name="Bone Shredder">
+                <icon>1532</icon>
+                <level>9</level>
+            </item>
+            <item name="Claws of Agony">
+                <icon>1533</icon>
+                <level>10</level>
+            </item>
+        </itemClass>
+        <itemClass name="mace">
+            <item name="Large Club">
+                <icon>1607</icon>
+                <level>1</level>
+            </item>
+            <item name="Warmaul">
+                <icon>1611</icon>
+                <level>2</level>
+            </item>
+            <item name="Warhammer">
+                <icon>1613</icon>
+                <level>3</level>
+            </item>
+            <item name="Grave Maker">
+                <icon>1614</icon>
+                <level>4</level>
+            </item>
+            <item name="Oath Keeper">
+                <icon>1615</icon>
+                <level>5</level>
+            </item>
+            <item name="Pain Bringer">
+                <icon>1616</icon>
+                <level>6</level>
+            </item>
+            <item name="Celestial Rod">
+                <icon>1617</icon>
+                <level>7</level>
+            </item>
+            <item name="Sorrow's End">
+                <icon>1618</icon>
+                <level>9</level>
+            </item>
+            <item name="Breath Taker">
+                <icon>1619</icon>
+                <level>9</level>
+            </item>
+            <item name="Annhilation">
+                <icon>1621</icon>
+                <level>10</level>
+            </item>
+        </itemClass>
+        <itemClass name="staff">
+            <item name="Walking Cane">
+                <icon>1663</icon>
+                <level>1</level>
+            </item>
+            <item name="Fighting Stick">
+                <icon>1667</icon>
+                <level>2</level>
+            </item>
+            <item name="War Staff">
+                <icon>1669</icon>
+                <level>3</level>
+            </item>
+            <item name="Scept of the Dead">
+                <icon>1670</icon>
+                <level>4</level>
+            </item>
+            <item name="Light Bringer">
+                <icon>1671</icon>
+                <level>5</level>
+            </item>
+            <item name="Tormented Scepter">
+                <icon>1672</icon>
+                <level>6</level>
+            </item>
+            <item name="Spire of Hope">
+                <icon>1673</icon>
+                <level>7</level>
+            </item>
+            <item name="Scept of the Ancients">
+                <icon>1674</icon>
+                <level>9</level>
+            </item>
+            <item name="Staff of Damnation">
+                <icon>1675</icon>
+                <level>9</level>
+            </item>
+            <item name="The Reckoning">
+                <icon>1683</icon>
+                <level>10</level>
+            </item>
+        </itemClass>
+        <itemClass name="bow">
+            <item name="Needle Threader">
+                <icon>1491</icon>
+                <level>1</level>
+            </item>
+            <item name="Hunter's Bow">
+                <icon>1495</icon>
+                <level>2</level>
+            </item>
+            <item name="Repeating Longbow">
+                <icon>1497</icon>
+                <level>3</level>
+            </item>
+            <item name="Widowmaker">
+                <icon>1498</icon>
+                <level>4</level>
+            </item>
+            <item name="Angel's Harp">
+                <icon>1499</icon>
+                <level>5</level>
+            </item>
+            <item name="Bloodseeker">
+                <icon>1500</icon>
+                <level>6</level>
+            </item>
+            <item name="Chord of Justice">
+                <icon>1501</icon>
+                <level>7</level>
+            </item>
+            <item name="Last Kiss">
+                <icon>1502</icon>
+                <level>9</level>
+            </item>
+            <item name="High Strung">
+                <icon>1506</icon>
+                <level>9</level>
+            </item>
+            <item name="Throat Needler">
+                <icon>1508</icon>
+                <level>10</level>
+            </item>
+        </itemClass>
+    </Weapon>
+    <Armor>
+        <item name="Linen Robe">
+            <icon>56</icon>
+            <level>1</level>
+            <material>cloth</material>
+        </item>
+        <item name="Scout's Cloak">
+            <icon>88</icon>
+            <level>1</level>
+            <material>cloth</material>
+        </item>
+        <item name="Chainvest">
+            <icon>91</icon>
+            <level>2</level>
+            <material>metal0</material>
+        </item>
+        <item name="Leather Vest">
+            <icon>59</icon>
+            <level>2</level>
+            <material>cloth</material>
+        </item>
+        <item name="Leather Breastplate">
+            <icon>60</icon>
+            <level>3</level>
+            <material>cloth</material>
+        </item>
+        <item name="Studded Leather Tunic">
+            <icon>72</icon>
+            <level>3</level>
+            <material>cloth</material>
+        </item>
+        <item name="Tarnished Plate Vest">
+            <icon>61</icon>
+            <level>4</level>
+            <material>metal0</material>
+        </item>
+        <item name="Embriodered Leather Armor">
+            <icon>161</icon>
+            <level>4</level>
+            <material>cloth</material>
+        </item>
+        <item name="Platemail Armor">
+            <icon>73</icon>
+            <level>5</level>
+            <material>metal0</material>
+        </item>
+        <item name="Metal Tunic">
+            <icon>68</icon>
+            <level>5</level>
+            <material>metal0</material>
+        </item>
+        <item name="Vanguard Breastplate">
+            <icon>62</icon>
+            <level>6</level>
+            <material>metal0</material>
+        </item>
+        <item name="Steelforged Chestguard">
+            <icon>124</icon>
+            <level>6</level>
+            <material>metal0</material>
+        </item>
+        <item name="Warlord's Cuirass">
+            <icon>64</icon>
+            <level>7</level>
+            <material>metal0</material>
+        </item>
+        <item name="Embriodered Armor">
+            <icon>148</icon>
+            <level>7</level>
+            <material>metal0</material>
+        </item>
+        <item name="Ceremonial Breastplate">
+            <icon>63</icon>
+            <level>8</level>
+            <material>metal0</material>
+        </item>
+        <item name="Heavy Plated Armor">
+            <icon>76</icon>
+            <level>8</level>
+            <material>metal0</material>
+        </item>
+        <item name="Ancient Oriental Breastplate">
+            <icon>75</icon>
+            <level>9</level>
+            <material>metal0</material>
+        </item>
+        <item name="Polished Chestplate">
+            <icon>151</icon>
+            <level>9</level>
+            <material>metal0</material>
+        </item>
+        <item name="Immortal's Armor">
+            <icon>78</icon>
+            <level>10</level>
+            <material>metal0</material>
+        </item>
+        <item name="Juggernaut Breastplate">
+            <icon>67</icon>
+            <level>10</level>
+            <material>metal0</material>
+        </item>
+    </Armor>
+    <Potion>
+        <itemClass name="Minor">
+            <icon name="healing">800</icon>
+            <icon name="mana">805</icon>
+            <icon name="stamina">801</icon>
+            <icon name="intellect">806</icon>
+            <icon name="agility">803</icon>
+            <icon name="strength">802</icon>
+            <icon name="defense">809</icon>
+            <level>1</level>
+        </itemClass>
+        <itemClass name="Lesser">
+            <icon name="healing">786</icon>
+            <icon name="mana">791</icon>
+            <icon name="stamina">787</icon>
+            <icon name="intellect">792</icon>
+            <icon name="agility">789</icon>
+            <icon name="strength">788</icon>
+            <icon name="defense">795</icon>
+            <level>2</level>
+        </itemClass>
+        <itemClass name="">
+            <icon name="healing">604</icon>
+            <icon name="mana">609</icon>
+            <icon name="stamina">605</icon>
+            <icon name="intellect">610</icon>
+            <icon name="agility">607</icon>
+            <icon name="strength">606</icon>
+            <icon name="defense">613</icon>
+            <level>3</level>
+        </itemClass>
+        <itemClass name="Greater">
+            <icon name="healing">646</icon>
+            <icon name="mana">651</icon>
+            <icon name="stamina">647</icon>
+            <icon name="intellect">652</icon>
+            <icon name="agility">649</icon>
+            <icon name="strength">648</icon>
+            <icon name="defense">655</icon>
+            <level>4</level>
+        </itemClass>
+        <itemClass name="Superior">
+            <icon name="healing">618</icon>
+            <icon name="mana">623</icon>
+            <icon name="stamina">619</icon>
+            <icon name="intellect">624</icon>
+            <icon name="agility">621</icon>
+            <icon name="strength">620</icon>
+            <icon name="defense">627</icon>
+            <level>5</level>
+        </itemClass>
+        <itemClass name="Major">
+            <icon name="healing">744</icon>
+            <icon name="mana">749</icon>
+            <icon name="stamina">745</icon>
+            <icon name="intellect">750</icon>
+            <icon name="agility">747</icon>
+            <icon name="strength">746</icon>
+            <icon name="defense">753</icon>
+            <level>6</level>
+        </itemClass>
+        <itemClass name="Master">
+            <icon name="healing">772</icon>
+            <icon name="mana">777</icon>
+            <icon name="stamina">773</icon>
+            <icon name="intellect">778</icon>
+            <icon name="agility">775</icon>
+            <icon name="strength">774</icon>
+            <icon name="defense">781</icon>
+            <level>7</level>
+        </itemClass>
+        <itemClass name="Legendary">
+            <icon name="healing">590</icon>
+            <icon name="mana">595</icon>
+            <icon name="stamina">591</icon>
+            <icon name="intellect">596</icon>
+            <icon name="agility">593</icon>
+            <icon name="strength">592</icon>
+            <icon name="defense">599</icon>
+            <level>8</level>
+        </itemClass>
+        <itemClass name="Mythical">
+            <icon name="healing">688</icon>
+            <icon name="mana">693</icon>
+            <icon name="stamina">689</icon>
+            <icon name="intellect">694</icon>
+            <icon name="agility">691</icon>
+            <icon name="strength">690</icon>
+            <icon name="defense">697</icon>
+            <level>9</level>
+        </itemClass>
+        <itemClass name="Ancient">
+            <icon name="healing">758</icon>
+            <icon name="mana">763</icon>
+            <icon name="stamina">759</icon>
+            <icon name="intellect">764</icon>
+            <icon name="agility">761</icon>
+            <icon name="strength">760</icon>
+            <icon name="defense">767</icon>
+            <level>1</level>
+        </itemClass>
+    </Potion>
+    <Food>
+        <item name="Macho Banana">
+            <icon>262</icon>
+            <level>1</level>
+        </item>
+        <item name="Roasted Carrot">
+            <icon>305</icon>
+            <level>1</level>
+        </item>
+        <item name="Angel Peach">
+            <icon>260</icon>
+            <level>2</level>
+        </item>
+        <item name="Juicy Apple">
+            <icon>257</icon>
+            <level>2</level>
+        </item>
+        <item name="Moonberry">
+            <icon>263</icon>
+            <level>3</level>
+        </item>
+        <item name="Grizzly Grapes">
+            <icon>308</icon>
+            <level>3</level>
+        </item>
+        <item name="Ripe Watermelon">
+            <icon>264</icon>
+            <level>4</level>
+        </item>
+        <item name="Sweet Pineapple">
+            <icon>261</icon>
+            <level>4</level>
+        </item>
+        <item name="Corn on the Cob">
+            <icon>313</icon>
+            <level>5</level>
+        </item>
+        <item name="Nutty Acorn">
+            <icon>321</icon>
+            <level>5</level>
+        </item>
+        <item name="Sun Dried Mushroom">
+            <icon>310</icon>
+            <level>6</level>
+        </item>
+        <item name="Herb Baked Egg">
+            <icon>291</icon>
+            <level>6</level>
+        </item>
+        <item name="Hard Cheese">
+            <icon>289</icon>
+            <level>7</level>
+        </item>
+        <item name="Spice Bread">
+            <icon>297</icon>
+            <level>7</level>
+        </item>
+        <item name="Oatmeal Muffin">
+            <icon>327</icon>
+            <level>8</level>
+        </item>
+        <item name="Chocolate Chip Cookie">
+            <icon>273</icon>
+            <level>8</level>
+        </item>
+        <item name="Queenfish">
+            <icon>292</icon>
+            <level>9</level>
+        </item>
+        <item name="Massive Chicken Leg">
+            <icon>293</icon>
+            <level>9</level>
+        </item>
+        <item name="Marinated Steak">
+            <icon>304</icon>
+            <level>10</level>
+        </item>
+        <item name="Bowl of Honey">
+            <icon>280</icon>
+            <level>10</level>
+        </item>
+    </Food>
+    <Misc>
+        <item name="Spider Fang">
+            <icon>217</icon>
+            <level>1</level>
+        </item>
+        <item name="Light Feather">
+            <icon>213</icon>
+            <level>1</level>
+        </item>
+        <item name="Brown Button">
+            <icon>230</icon>
+            <level>2</level>
+        </item>
+        <item name="Petrified Bone">
+            <icon>201</icon>
+            <level>2</level>
+        </item>
+        <item name="Seashell">
+            <icon>214</icon>
+            <level>3</level>
+        </item>
+        <item name="Bat Ear">
+            <icon>204</icon>
+            <level>3</level>
+        </item>
+        <item name="Crab Pincer">
+            <icon>205</icon>
+            <level>4</level>
+        </item>
+        <item name="Cat Eye">
+            <icon>218</icon>
+            <level>4</level>
+        </item>
+        <item name="Blue Feather">
+            <icon>197</icon>
+            <level>5</level>
+        </item>
+        <item name="Candle">
+            <icon>240</icon>
+            <level>5</level>
+        </item>
+        <item name="Rugged Leather">
+            <icon>195</icon>
+            <level>6</level>
+        </item>
+        <item name="Course Leather">
+            <icon>210</icon>
+            <level>6</level>
+        </item>
+        <item name="Wolf Tail">
+            <icon>222</icon>
+            <level>7</level>
+        </item>
+        <item name="Shattered Mirror">
+            <icon>243</icon>
+            <level>7</level>
+        </item>
+        <item name="Cat Claw">
+            <icon>196</icon>
+            <level>8</level>
+        </item>
+        <item name="Metal Plate">
+            <icon>225</icon>
+            <level>8</level>
+        </item>
+        <item name="Canine">
+            <icon>193</icon>
+            <level>9</level>
+        </item>
+        <item name="Ruined Pelt">
+            <icon>194</icon>
+            <level>9</level>
+        </item>
+        <item name="Red Yarn">
+            <icon>229</icon>
+            <level>10</level>
+        </item>
+        <item name="Broken Glass">
+            <icon>813</icon>
+            <level>10</level>
+        </item>
+    </Misc>
+</ItemDB>

@@ -5,7 +5,7 @@ namespace Game.Database
 {
     public static class UnitDB
     {
-        private static string DB_PATH = "res://src/Database/UnitDB.xml";
+        private static readonly string DB_PATH = "res://src/database/data/UnitDB.xml";
         private static readonly XMLParser xMLParser = new XMLParser();
 
         public static Dictionary<string, string> GetUniqueUnitData(string unitEditorName, string mapName)
@@ -52,53 +52,49 @@ namespace Game.Database
                     }
                 }
             }
-            
             return unitData;
         }
         public static bool IsUnitUnique(string unitEditorName, string mapName)
         {
-            bool isUnique = false;
             xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok && !isUnique)
+            while (xMLParser.Read() == Error.Ok)
             {
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
                 && xMLParser.GetNodeName().Equals(mapName))
                 {
-                    while (xMLParser.Read() == Error.Ok && !isUnique)
+                    while (xMLParser.Read() == Error.Ok)
                     {
                         if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
                         && xMLParser.GetNamedAttributeValueSafe("name").Equals(unitEditorName))
                         {
-                            isUnique = true;
+                            return true;
                         }
                     }
                 }
             }
-            
-            return isUnique;
+            return false;
         }
         public static bool GetGenericUnitEnemy(string imgPath)
         {
             string[] splittedPath = imgPath.Split("/");
             string raceName = splittedPath[splittedPath.Length - 2];
-            string isEnemy = "";
             xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok && isEnemy.Empty())
+            while (xMLParser.Read() == Error.Ok)
             {
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
                 && xMLParser.GetNodeName().Equals("generic"))
                 {
-                    while (xMLParser.Read() == Error.Ok && isEnemy.Empty())
+                    while (xMLParser.Read() == Error.Ok)
                     {
                         if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
                         && xMLParser.GetNodeName().Equals(raceName))
                         {
-                            isEnemy = xMLParser.GetNamedAttributeValue("enemy");
+                            return bool.Parse(xMLParser.GetNamedAttributeValue("enemy"));
                         }
                     }
                 }
             }
-            return bool.Parse(isEnemy);
+            return false;
         }
         public static string GetGenericUnitName(string imgPath)
         {

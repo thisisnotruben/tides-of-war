@@ -43,6 +43,10 @@ namespace Game.Spell
                 $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
                 $"\n\n-{spellData["description"]}";
         }
+        public void Init(string nameDB)
+        {
+            Init((WorldTypes)Enum.Parse(typeof(WorldTypes), nameDB.ToUpper()));
+        }
         public override void GetPickable(Character character, bool addToBag)
         {
             base.GetPickable(character, addToBag);
@@ -129,7 +133,7 @@ namespace Game.Spell
         }
         public void ConfigureSpell()
         {
-            GD.PrintErr("Not Implemented");
+            GD.Print("Not Implemented");
         }
     }
 }

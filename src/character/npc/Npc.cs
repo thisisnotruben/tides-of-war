@@ -8,7 +8,6 @@ namespace Game.Actor
 {
     public class Npc : Character
     {
-        private bool enemy = true;
         private bool patroller;
         private string text;
         private List<Vector2> patrolPath = new List<Vector2>();
@@ -168,10 +167,11 @@ namespace Game.Actor
                             }
                             break;
                     }
-                    player.path.Clear();
-                    return;
                 }
-                Globals.PlaySound("click4", this, new AudioStreamPlayer());
+                else
+                {
+                    Globals.PlaySound("click4", this, new AudioStreamPlayer());
+                }
             }
         }
         public override void MoveTo(Vector2 worldPosition)
@@ -343,24 +343,20 @@ namespace Game.Actor
                 this.text = text;
             }
         }
-        public void SetUpShop(Node gameMenu, bool setUp, WorldTypes actorType)
+        public void SetUpShop(InGameMenu inGameMenu, bool setUp, WorldTypes actorType)
         {
-            Node bag = GetNode("inventory");
-            if (actorType == WorldTypes.TRAINER)
-            {
-                bag = GetNode("spells");
-            }
+            Node bag = (actorType == WorldTypes.TRAINER) ? GetNode("spells") : GetNode("inventory");
             foreach (Pickable pickable in bag.GetChildren())
             {
                 if (setUp)
                 {
-                    pickable.Connect(nameof(Pickable.SetInMenu), gameMenu, "_OnSetPickableInMenu");
-                    pickable.Connect(nameof(Pickable.DescribePickable), gameMenu, "_OnDescribePickable");
+                    pickable.Connect(nameof(Pickable.SetInMenu), inGameMenu, nameof(InGameMenu._OnSetPickableInMenu));
+                    pickable.Connect(nameof(Pickable.DescribePickable), inGameMenu, nameof(InGameMenu._OnDescribePickable));
                 }
                 else
                 {
-                    pickable.Disconnect(nameof(Pickable.SetInMenu), gameMenu, "_OnSetPickableInMenu");
-                    pickable.Disconnect(nameof(Pickable.DescribePickable), gameMenu, "_OnDescribePickable");
+                    pickable.Disconnect(nameof(Pickable.SetInMenu), inGameMenu, nameof(InGameMenu._OnSetPickableInMenu));
+                    pickable.Disconnect(nameof(Pickable.DescribePickable), inGameMenu, nameof(InGameMenu._OnDescribePickable));
                 }
             }
         }
@@ -370,14 +366,17 @@ namespace Game.Actor
         }
         public void SetUniqueData(Dictionary<string, string> data)
         {
+            string imgKey = "img";
+            if (data.ContainsKey(imgKey))
+            {
+                SetImg("res://asset/img/character/".PlusFile(data[imgKey]));
+            }
+            SetWorldName(GetName());
             foreach (string key in data.Keys)
             {
                 switch (key)
                 {
-                    case "img":
-                        SetImg("res://asset/img/character/".PlusFile(data[key]));
-                        break;
-                    case "enemy":
+                    case nameof(enemy):
                         enemy = bool.Parse(data[key]);
                         break;
                     case "level":
@@ -395,9 +394,9 @@ namespace Game.Actor
                         {
                             // instance items here
                         }
-                        else
+                        else if (!key.Equals(imgKey))
                         {
-                            GD.PrintErr($"Unknown attribute value: {key} for unit.");
+                            GD.Print($"Unknown attribute value: {key} for unit.");
                         }
                         break;
                 }

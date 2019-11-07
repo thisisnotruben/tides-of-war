@@ -1,9 +1,15 @@
 using Godot;
+using Game.Actor;
+using Game.Misc.Loot;
+using Game.Database;
+using System;
+using System.Collections.Generic;
 
 namespace Game.Quests
 {
     public class WorldQuests : Node
     {
+        public enum QuestState : byte { AVAILABLE, ACTIVE, COMPLETED, DELIVERED };
         private Node availableQuests;
         private Node activeQuests;
         private Node completedQuests;
@@ -12,11 +18,48 @@ namespace Game.Quests
 
         public override void _Ready()
         {
+            availableQuests = GetNode(QuestState.AVAILABLE.ToString());
+            activeQuests = GetNode(QuestState.ACTIVE.ToString());
+            completedQuests = GetNode(QuestState.COMPLETED.ToString());
+            deliveredQuests = GetNode(QuestState.DELIVERED.ToString());
             LoadQuests();
         }
         private void LoadQuests()
         {
-            GD.PrintErr("Not implemented");
+            Dictionary<string, Dictionary<string, string>> allQuestData = QuestDB.GetAllQuestData();
+            Dictionary<string, List<string>> chainQuestQueue = new Dictionary<string, List<string>>();
+            PackedScene questScene = (PackedScene)GD.Load("res://src/quest_system/Quest.tscn");
+            foreach (string questName in allQuestData.Keys)
+            {
+                foreach (string key in allQuestData[questName].Keys)
+                {
+                    if (key.Contains("chainQuest"))
+                    {
+                        string chainQuestName = allQuestData[questName][key];
+                        if (chainQuestQueue.ContainsKey(questName))
+                        {
+                            chainQuestQueue[questName].Add(chainQuestName);
+                        }
+                        else
+                        {
+                            chainQuestQueue.Add(questName, new List<string>() { chainQuestName });
+                        }
+                    }
+                }
+                Quest quest = (Quest)questScene.Instance();
+                availableQuests.AddChild(quest);
+                quest.SetData(allQuestData[questName]);
+            }
+            foreach (string rootQuestName in chainQuestQueue.Keys)
+            {
+                Quest rootQuest = (Quest)availableQuests.GetNode(rootQuestName);
+                foreach (string questName in chainQuestQueue[rootQuestName])
+                {
+                    Quest linkedQuest = (Quest)availableQuests.GetNode(questName);
+                    MoveQuest(linkedQuest, rootQuest);
+                }
+                rootQuest.ChangeState((QuestState)Enum.Parse(typeof(QuestState), availableQuests.GetName()));
+            }
         }
         public void Reset()
         {
@@ -29,16 +72,6 @@ namespace Game.Quests
             }
             LoadQuests();
         }
-        private void MoveQuest(Quest quest, Node to)
-        {
-            quest.GetParent().RemoveChild(quest);
-            to.AddChild(quest);
-            quest.ChangeState(to.GetName());
-            if (to == deliveredQuests && quest.GetChildCount() > 0)
-            {
-                MoveQuest((Quest)quest.GetChild(0), availableQuests);
-            }
-        }
         public bool IsFocusedQuestChained()
         {
             return focusedQuest.GetChildCount() > 0;
@@ -49,11 +82,7 @@ namespace Game.Quests
         }
         public void FinishFocusedQuest()
         {
-            Quest linkedQuest = null;
-            if (IsFocusedQuestChained())
-            {
-                linkedQuest = (Quest)focusedQuest.GetChild(0);
-            }
+            Quest linkedQuest = (IsFocusedQuestChained()) ? (Quest)focusedQuest.GetChild(0) : null;
             MoveQuest(focusedQuest, deliveredQuests);
             focusedQuest = linkedQuest;
         }
@@ -63,8 +92,76 @@ namespace Game.Quests
             {
                 foreach (Quest quest in questCatagory.GetChildren())
                 {
-                    quest.ChangeState(questCatagory.GetName());
+                    quest.ChangeState((QuestState)Enum.Parse(typeof(QuestState), questCatagory.GetName()));
                 }
+            }
+        }
+        public void UpdateQuestPickable(Pickable pickable, bool add)
+        {
+            foreach (Node questCatagory in new Node[] { activeQuests, completedQuests })
+            {
+                if (questCatagory == completedQuests && add)
+                {
+                    break;
+                }
+                foreach (Quest quest in questCatagory.GetChildren())
+                {
+                    if (quest.IsPartOf(pickable))
+                    {
+                        if (quest.CheckQuest(pickable, add))
+                        {
+                            MoveQuest(quest, completedQuests);
+                        }
+                        else
+                        {
+                            MoveQuest(quest, activeQuests);
+                        }
+                    }
+                }
+            }
+        }
+        public void UpdateQuestCharacter(Character character)
+        {
+            foreach (Quest quest in activeQuests.GetChildren())
+            {
+                if (quest.IsPartOf(character) && quest.CheckQuest(character, true))
+                {
+                    MoveQuest(quest, completedQuests);
+                }
+            }
+            foreach (Node questCatagory in new Node[] { availableQuests, completedQuests })
+            {
+                foreach (Quest quest in questCatagory.GetChildren())
+                {
+                    if (character.GetPath().Equals(quest.GetQuestGiverPath()))
+                    {
+                        focusedQuest = quest;
+                        if (questCatagory == availableQuests)
+                        {
+                            Globals.player.GetMenu().dialogue.GetNode<Control>("s/s/v/accept").Show();
+                        }
+                        else
+                        {
+                            Globals.player.GetMenu().dialogue.GetNode<Control>("s/s/v/finish").Show();
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        private void MoveQuest(Quest quest, Node to)
+        {
+            quest.GetParent().RemoveChild(quest);
+            to.AddChild(quest);
+            QuestState state;
+            if (Enum.TryParse(to.GetName(), out state))
+            {
+                GD.Print(state.ToString());
+                quest.ChangeState(state);
+            }
+            if (to == deliveredQuests && quest.GetChildCount() > 0)
+            {
+                MoveQuest((Quest)quest.GetChild(0), availableQuests);
             }
         }
         public Quest GetFocusedQuest()

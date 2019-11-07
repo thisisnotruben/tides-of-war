@@ -9,18 +9,10 @@ namespace Game
 {
     public class Globals : Node
     {
-        public static readonly PackedScene footStep = (PackedScene)GD.Load("res://src/misc/other/footstep.tscn");
-        public static readonly PackedScene grave = (PackedScene)GD.Load("res://src/misc/other/grave.tscn");
         public static readonly PackedScene combatText = (PackedScene)GD.Load("res://src/misc/other/combat_text.tscn");
-        public static readonly PackedScene buffAnim = (PackedScene)GD.Load("res://src/misc/other/buff_anim.tscn");
-        public static readonly PackedScene missile = (PackedScene)GD.Load("res://src/misc/missile/missile.tscn");
-        public static readonly PackedScene item = (PackedScene)GD.Load("res://src/misc/loot/item.tscn");
-        public static readonly PackedScene questEntry = (PackedScene)GD.Load("res://src/menu_ui/quest_entry.tscn");
-        public static readonly PackedScene spell = (PackedScene)GD.Load("res://src/spell/spell.tscn");
         public static readonly Dictionary<string, string> SAVE_PATH = new Dictionary<string, string>
         {
             {nameof(gameMeta),"res://meta/game_meta.json"},
-            {nameof(questMeta),"res://meta/quest_meta.json"},
             {"SAVE_SLOT_0","res://meta/save_slot_0.json"},
             {"SAVE_SLOT_1","res://meta/save_slot_1.json"},
             {"SAVE_SLOT_2","res://meta/save_slot_2.json"},
@@ -58,8 +50,7 @@ namespace Game
         public const string SAVE_GROUP = "save";
         public static Player player = null;
         public static Dictionary<string, AudioStream> sndMeta = new Dictionary<string, AudioStream>();
-        public static Godot.Collections.Dictionary questMeta = null;
-        public static Godot.Collections.Dictionary gameMeta = null;
+        public static Dictionary<string, string> gameMeta = new Dictionary<string, string>();
         private static Godot.Collections.Dictionary sceneMeta = null;
         private static readonly File file = new File();
         private static WorldQuests worldQuests = null;
@@ -87,23 +78,12 @@ namespace Game
         }
         public static void LoadGameMeta()
         {
-            foreach (string fileName in SAVE_PATH.Keys)
+            file.Open(SAVE_PATH[(nameof(gameMeta))], (int)File.ModeFlags.Read);
+            Godot.Collections.Dictionary gameData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).GetResult();
+            file.Close();
+            foreach (string key in gameData.Keys)
             {
-                if (fileName.Contains("Meta"))
-                {
-                    file.Open(SAVE_PATH[fileName], (int)File.ModeFlags.Read);
-                    Godot.Collections.Dictionary data = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).GetResult();
-                    file.Close();
-                    switch (fileName)
-                    {
-                        case nameof(gameMeta):
-                            gameMeta = data;
-                            break;
-                        case nameof(questMeta):
-                            questMeta = data;
-                            break;
-                    }
-                }
+                gameMeta.Add(key, (string)gameData[key]);
             }
         }
         private void LoadSnd(string path = "res://asset/snd")
@@ -169,7 +149,7 @@ namespace Game
             return;
             if (!sndMeta.ContainsKey(sndName))
             {
-                GD.PrintErr($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
+                GD.Print($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
             }
             else
             {
@@ -200,7 +180,7 @@ namespace Game
             return;
             if (!sndMeta.ContainsKey(sndName))
             {
-                GD.PrintErr($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
+                GD.Print($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
             }
             else
             {

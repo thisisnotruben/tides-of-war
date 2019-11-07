@@ -11,35 +11,40 @@ namespace Game.Actor
 {
     public abstract class Character : WorldObject, ISaveable
     {
+        public static readonly PackedScene footStepScene = (PackedScene)GD.Load("res://src/misc/other/footstep.tscn");
+        public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/misc/other/buff_anim.tscn");
+        public static readonly PackedScene missileScene = (PackedScene)GD.Load("res://src/misc/missile/missile.tscn");
+
         public enum States { ALIVE, DEAD, MOVING, IDLE, ATTACKING, RETURNING };
         private States state;
-        public WorldTypes weaponType;
-        private short level;
         private string swingType;
-        public Vector2 origin = new Vector2();
+        private bool bumping;
+        private protected bool enemy = true;
+        private protected bool engaging;
         private protected bool dead;
-        private bool enemy = true;
+        private short level;
         public short armor;
-        private protected Character target = null;
-        public ushort weaponRange = Stats.WEAPON_RANGE_MELEE;
         public short hp;
         public short hpMax;
         public short mana;
         public short manaMax;
         public short regenTime;
-        private protected bool engaging;
-        private protected float animSpeed = 1.0f;
-        public float weaponSpeed = 1.3f;
-        private protected Item weapon = null;
-        private protected Item vest = null;
-        private bool bumping;
         public short minDamage;
         public short maxDamage;
         public short stamina;
         public short intellect;
         public short agility;
+        public ushort weaponRange = Stats.WEAPON_RANGE_MELEE;
+        public float weaponSpeed = 1.3f;
+        private protected float animSpeed = 1.0f;
+        private protected Vector2 origin;
+        private protected WorldTypes weaponType;
+        private protected Item weapon = null;
+        private protected Item vest = null;
         private protected Spell.Spell spell = null;
-        public List<Vector2> path = new List<Vector2>();
+        private protected Character target = null;
+        private protected AudioStreamPlayer2D snd;
+        private protected List<Vector2> path = new List<Vector2>();
         private List<Spell.Spell> spellQueue = new List<Spell.Spell>();
         private protected Dictionary<Character, short> targetList = new Dictionary<Character, short>();
         private Dictionary<Character, short> attackerTable = new Dictionary<Character, short>();
@@ -48,7 +53,6 @@ namespace Game.Actor
                 {"active", new List<Item>()},
                 {"pending", new List<Item>()}
             };
-        private protected AudioStreamPlayer2D snd;
         [Signal]
         public delegate void Talked();
         [Signal]
@@ -61,8 +65,10 @@ namespace Game.Actor
         public override void _Ready()
         {
             snd = GetNode<AudioStreamPlayer2D>("snd");
-            // Connect(nameof(Talked), Globals.GetWorldQuests(), "update_quest_unit", new Godot.Collections.Array { this });
-            // Connect(nameof(Died), Globals.GetWorldQuests(), "update_quest_unit", new Godot.Collections.Array { this });
+            // Connect(nameof(Talked), Globals.GetWorldQuests(),
+            //     nameof(Game.Quests.WorldQuests.UpdateQuestCharacter), new Godot.Collections.Array { this });
+            // Connect(nameof(Died), Globals.GetWorldQuests(),
+            //     nameof(Game.Quests.WorldQuests.UpdateQuestCharacter), new Godot.Collections.Array { this });
             GetNode<RayCast2D>("ray").AddException(GetNode<Area2D>("area"));
         }
         public virtual void Attack(bool ignoreArmor = false)
@@ -71,7 +77,7 @@ namespace Game.Actor
             {
                 if (weaponType == WorldTypes.BOW || weaponType == WorldTypes.MAGIC)
                 {
-                    Bolt missile = (Bolt)Globals.missile.Instance();
+                    Bolt missile = (Bolt)missileScene.Instance();
                     GetParent().AddChild(missile);
                     missile.SetUp(this, GetGlobalPosition(), spell);
                 }
@@ -82,7 +88,7 @@ namespace Game.Actor
                     short damage = (short)Math.Round(GD.RandRange(
                         (double)minDamage, (double)maxDamage));
                     ushort sndIdx = Globals.WEAPON_TYPE[weaponType.ToString()];
-                    string snd = weaponType.ToString().ToLower() + sndIdx.ToString();
+                    string sndName = weaponType.ToString().ToLower() + sndIdx.ToString();
                     CombatText.TextType hitType;
                     Dictionary<string, ushort> attackTable = Stats.attackTable["MELEE"];
                     if (spell != null && !spell.Casted())
@@ -112,7 +118,7 @@ namespace Game.Actor
                     {
                         hitType = CombatText.TextType.DODGE;
                         damage = 0;
-                        snd = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
+                        sndName = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
                     }
                     else if (diceRoll <= attackTable["PARRY"]
                             && target.weaponType != WorldTypes.BOW
@@ -124,24 +130,25 @@ namespace Game.Actor
                         WorldTypes[] wood = { WorldTypes.CLUB, WorldTypes.STAFF, WorldTypes.CLAW };
                         if (metal.Contains(weaponType) && metal.Contains(target.weaponType))
                         {
-                            snd = "block_metal_metal" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_METAL_METAL"];
+                            sndName = "block_metal_metal" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_METAL_METAL"];
                         }
                         else if (wood.Contains(weaponType) && wood.Contains(target.weaponType))
                         {
-                            snd = "block_wood_wood" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_WOOD_WOOD"];
+                            sndName = "block_wood_wood" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_WOOD_WOOD"];
                         }
                         else
                         {
-                            snd = "block_metal_wood" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_METAL_WOOD"];
+                            sndName = "block_metal_wood" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_METAL_WOOD"];
                         }
                     }
                     else
                     {
                         hitType = CombatText.TextType.MISS;
                         damage = 0;
-                        snd = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
+                        sndName = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
                     }
                     target.TakeDamage(damage, ignoreArmor, this, hitType);
+                    Globals.PlaySound(sndName, this, snd);
                 }
                 GetNode<Timer>("timer").Start();
             }
@@ -216,6 +223,12 @@ namespace Game.Actor
         public Vector2 GetCenterPos()
         {
             return GetNode<Node2D>("img").GetGlobalPosition();
+        }
+        public void SetOrigin(Vector2 origin)
+        {
+            this.origin = origin;
+            SetGlobalPosition(origin);
+            path.Add(origin);
         }
         public async void Bump(Vector2 direction)
         {
@@ -536,7 +549,7 @@ namespace Game.Actor
             {
                 if (seek == 0.0f)
                 {
-                    BuffAnim buffAnim = (BuffAnim)Globals.buffAnim.Instance();
+                    BuffAnim buffAnim = (BuffAnim)buffAnimScene.Instance();
                     GetNode("img").AddChild(buffAnim);
                     buffAnim.SetItem(buff);
                     buff.Connect(nameof(Item.UnMake), buffAnim, nameof(QueueFree));
@@ -577,7 +590,7 @@ namespace Game.Actor
         {
             if (!IsDead())
             {
-                FootStep footStep = (FootStep)Globals.footStep.Instance();
+                FootStep footStep = (FootStep)footStepScene.Instance();
                 Vector2 stepPos = GetGlobalPosition();
                 stepPos.y -= 3;
                 stepPos.x += (step) ? 1.0f : -4.0f;
@@ -635,6 +648,7 @@ namespace Game.Actor
                         break;
                     case nameof(WorldTypes.STAFF):
                     case nameof(WorldTypes.MACE):
+                    case nameof(WorldTypes.CLUB):
                     case "ROCK":
                         weaponType = WorldTypes.CLUB;
                         break;
@@ -646,12 +660,13 @@ namespace Game.Actor
                         // This is a commoner
                         break;
                     default:
-                        GD.PrintErr($"{imgPath} doesn't have a valid weaponType");
+                        GD.Print($"{imgPath} doesn't have a valid weaponType");
                         break;
                 }
                 if (this is Player)
                 {
                     SetWorldType(WorldTypes.PLAYER);
+                    enemy = false;
                 }
                 swingType = parsedImg[idx + 1];
                 img.SetHframes(int.Parse(parsedImg[idx + 2]));
@@ -708,11 +723,11 @@ namespace Game.Actor
         }
         public virtual void SetSaveData(Godot.Collections.Dictionary saveData)
         {
-            GD.PrintErr("Save Not Implemented");
+            GD.Print("Save Not Implemented");
         }
         public virtual Godot.Collections.Dictionary GetSaveData()
         {
-            GD.PrintErr("Save Not Implemented");
+            GD.Print("Save Not Implemented");
             return new Godot.Collections.Dictionary();
         }
     }

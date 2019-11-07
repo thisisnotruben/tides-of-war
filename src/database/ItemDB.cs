@@ -1,156 +1,81 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
 namespace Game.Database
 {
     public static class ItemDB
     {
-        public enum potionClasses : byte
-        {
-            HEALING, MANA, STAMINA, INTELLECT, AGILITY, STRENGTH, DEFENSE,
-            MINOR, LESSER, NORMAL, GREATER, SUPERIOR, MAJOR, MASTER, LEGENDARY, MYTHICAL, ANCIENT
-        };
-        private static string DB_PATH = "res://src/Database/ItemDB.xml";
+        private static readonly string DB_PATH = "res://src/database/data/ItemDB.xml";
         private static readonly XMLParser xMLParser = new XMLParser();
 
-        public static AtlasTexture GetItemIcon(string worldName)
+        public static Dictionary<string, string> GetItemData(string worldName)
         {
-            AtlasTexture texture = null;
+            bool potion = (worldName.ToLower().Contains("potion")
+                || worldName.ToLower().Contains("elixir"));
+            Dictionary<string, string> itemData = new Dictionary<string, string>();
             xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok && texture == null)
+            string itemType = "";
+            string itemSubType = "";
+            while (xMLParser.Read() == Error.Ok)
+            {
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
+                {
+                    if (xMLParser.GetNodeName().Equals("itemClass"))
+                    {
+                        // To get Weapon/Potion subTypes
+                        itemSubType = xMLParser.GetNamedAttributeValue("name");
+                    }
+                    else if (xMLParser.GetNodeName().Equals("item")
+                    && (xMLParser.GetNamedAttributeValue("name").Equals(worldName)
+                    || (potion && worldName.Contains(xMLParser.GetNamedAttributeValue("name")))))
+                    {
+                        itemData.Add("type", itemType);
+                        itemData.Add("subType", itemSubType);
+                        while (xMLParser.Read() == Error.Ok
+                        && (xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
+                        && xMLParser.GetNodeName().Equals("item")))
+                        {
+                            if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
+                            {
+                                string key = xMLParser.GetNodeName();
+                                itemSubType = xMLParser.GetNamedAttributeValueSafe("name"); // To get the potion subType
+                                if (potion && (xMLParser.GetAttributeCount() == 0
+                                || worldName.ToLower().Contains(xMLParser.GetNamedAttributeValueSafe("name")))
+                                && xMLParser.Read() == Error.Ok && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
+                                {
+                                    itemData.Add(key, xMLParser.GetNodeData());
+                                    itemData["subType"] = itemSubType;
+                                }
+                                else if (!potion && xMLParser.Read() == Error.Ok
+                                && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
+                                {
+                                    itemData.Add(key, xMLParser.GetNodeData());
+                                }
+                            }
+                        }
+                        break;
+                    }
+                    itemType = xMLParser.GetNodeName();
+                }
+            }
+            return itemData;
+        }
+        public static string GetItemArmorMaterial(string worldName)
+        {
+            return GetItemData(worldName)["material"];
+        }
+        public static bool HasItem(string nameCheck)
+        {
+            while (xMLParser.Read() == Error.Ok)
             {
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNamedAttributeValueSafe("name").Equals(worldName))
+                && xMLParser.GetNodeName().Equals("itemClass")
+                && xMLParser.GetNamedAttributeValue("name").Equals(nameCheck))
                 {
-                    string iconID = "";
-                    string itemClass = (xMLParser.GetNodeName().Equals("itemClass"))
-                        ? xMLParser.GetNamedAttributeValueSafe("name").ToLower()
-                        : "";
-                    while (xMLParser.Read() == Error.Ok && iconID.Empty()
-                    || (xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
-                    && xMLParser.GetNodeName().Equals("itemClass")))
-                    {
-                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
-                        {
-                            iconID = xMLParser.GetNodeData();
-                        }
-                    }
-                    texture = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemClass}/{iconID}_icon.res");
+                    return true;
                 }
             }
-            
-            return texture;
-        }
-        public static AtlasTexture GetItemIcon(potionClasses potionClasses, potionClasses potionType)
-        {
-            AtlasTexture texture = null;
-            xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok && texture == null)
-            {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNodeName().Equals("Potion"))
-                {
-                    while (xMLParser.Read() == Error.Ok && texture == null)
-                    {
-                        string itemName = (xMLParser.GetNodeName().Equals("item"))
-                            ? xMLParser.GetNamedAttributeValueSafe("name")
-                            : "";
-                    }
-                }
-            }
-            
-            return texture;
-        }
-        public static int GetItemIconID(string worldName)
-        {
-            AtlasTexture texture = GetItemIcon(worldName);
-            return int.Parse(texture.GetPath().GetFile().Split("_")[0]);
-        }
-        public static short GetItemLevel(string worldName)
-        {
-            short itemLevel = -1;
-            xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok && itemLevel == -1)
-            {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNamedAttributeValueSafe("name").Equals(worldName))
-                {
-                    while (xMLParser.Read() == Error.Ok && itemLevel == -1
-                    || (xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
-                    && xMLParser.GetNodeName().Equals("itemClass")))
-                    {
-                        itemLevel = short.Parse(xMLParser.GetNodeData());
-                    }
-                }
-            }
-            
-            return itemLevel;
-        }
-        public static string GetItemName(WorldObject.WorldTypes type, WorldObject.WorldTypes subType)
-        {
-            GD.PrintErr("Not implemented");
-            return "";
-        }
-        public static string GetItemName(int iconID)
-        {
-            string worldName = "";
-            xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok && worldName.Empty())
-            {
-                string itemName = (xMLParser.GetNodeName().Equals("item"))
-                    ? xMLParser.GetNamedAttributeValueSafe("name")
-                    : "";
-                if (!itemName.Empty())
-                {
-                    while (xMLParser.Read() == Error.Ok && worldName.Empty()
-                    || (xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
-                    && xMLParser.GetNodeName().Equals("itemClass")))
-                    {
-                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                        && xMLParser.GetNodeName().Equals("iconID")
-                        && int.Parse(xMLParser.GetNodeData()) == iconID)
-                        {
-                            worldName = itemName;
-                        }
-                    }
-                }
-            }
-            
-            return worldName;
-        }
-        public static string GetItemName(short itemLevel)
-        // Not really a good function, the iconID works better
-        {
-            string worldName = "";
-            xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok && worldName.Empty())
-            {
-                string itemName = (xMLParser.GetNodeName().Equals("item"))
-                    ? xMLParser.GetNamedAttributeValueSafe("name")
-                    : "";
-                if (!itemName.Empty())
-                {
-                    while (xMLParser.Read() == Error.Ok && worldName.Empty()
-                    || (xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
-                    && xMLParser.GetNodeName().Equals("itemClass")))
-                    {
-                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                        && xMLParser.GetNodeName().Equals("level")
-                        && short.Parse(xMLParser.GetNodeData()) == itemLevel)
-                        {
-                            worldName = itemName;
-                        }
-                    }
-                }
-            }
-            
-            return worldName;
-        }
-        public static string GetItemMaterial(string worldName)
-        {
-            string material = "";
-            // Not implemented
-            return material;
+            return false;
         }
     }
 }

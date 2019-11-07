@@ -65,7 +65,7 @@ namespace Game.Ui
             Globals.PlaySound("click1", this, menu.snd);
             foreach (QuestEntry questSlot in menu.questLog.GetNode("s/v/s/v").GetChildren())
             {
-                if (!questSlot.GetQuest().GetState().Equals("active"))
+                if (questSlot.GetQuest().GetState() != Game.Quests.WorldQuests.QuestState.ACTIVE)
                 {
                     questSlot.Hide();
                 }
@@ -82,7 +82,7 @@ namespace Game.Ui
             Globals.PlaySound("click1", this, menu.snd);
             foreach (QuestEntry questSlot in menu.questLog.GetNode("s/v/s/v").GetChildren())
             {
-                if (!questSlot.GetQuest().GetState().Equals("delivered"))
+                if (questSlot.GetQuest().GetState() != Game.Quests.WorldQuests.QuestState.DELIVERED)
                 {
                     questSlot.Hide();
                 }

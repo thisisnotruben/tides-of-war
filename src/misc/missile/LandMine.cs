@@ -53,7 +53,7 @@ namespace Game.Misc.Other
                         }
                         else
                         {
-                            GD.PrintErr("LandMine found an anomaly when exploding.");
+                            GD.Print("LandMine found an anomaly when exploding.");
                         }
                     }
                     else if (layer == Globals.Collision["COMBUSTIBLE"])

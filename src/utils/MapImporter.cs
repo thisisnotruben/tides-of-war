@@ -4,13 +4,14 @@ namespace Game.Utils
 {
     public class MapImporter : Node
     {
-        public PackedScene mapToImport;
+        private string scenePath = "";
 
         public override void _Ready()
         {
-            GD.Print("Error code: ", CheckMap().ToString());
+            PackedScene packedScene = (PackedScene)GD.Load(scenePath);
+            GD.Print("Error code: " + CheckMap(packedScene).ToString());
         }
-        public Godot.Error CheckMap()
+        private Godot.Error CheckMap(PackedScene mapToImport)
         {
             Node map = mapToImport.Instance();
             string zedz1 = "zed/z1";
