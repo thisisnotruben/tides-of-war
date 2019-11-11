@@ -35,9 +35,26 @@ namespace Game.Database
                             : "";
                         if (!excludeNamedTags.Contains(keyName))
                         {
-                            if (namedTags.Contains(keyName))
+                            if (keyName.Equals("kill"))
                             {
-                                questdata.Add(keyName + count++.ToString(), xMLParser.GetNamedAttributeValue("name"));
+                                string UnitName = xMLParser.GetNamedAttributeValue("name");
+                                string killAmount = "";
+                                while (xMLParser.Read() == Error.Ok
+                                && killAmount.StripEdges().Empty()
+                                && !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
+                                && xMLParser.GetNodeName().Equals("kill")))
+                                {
+                                    if (xMLParser.GetNodeType() == XMLParser.NodeType.Text)
+                                    {
+                                        killAmount = "kill-" + xMLParser.GetNodeData();
+                                    }
+                                }
+                                questdata.Add(UnitName, killAmount);
+                            }
+                            else if (namedTags.Contains(keyName))
+                            {
+                                keyName = (questdata.ContainsKey(keyName)) ? keyName + count++.ToString() : keyName;
+                                questdata.Add(keyName, xMLParser.GetNamedAttributeValue("name"));
                             }
                             else if (!keyName.Empty() && xMLParser.Read() == Error.Ok
                             && xMLParser.GetNodeType() == XMLParser.NodeType.Text)

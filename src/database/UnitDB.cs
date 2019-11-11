@@ -74,6 +74,29 @@ namespace Game.Database
             }
             return false;
         }
+        public static bool IsUnitGeneric(string worldName)
+        {
+            xMLParser.Open(DB_PATH);
+            while (xMLParser.Read() == Error.Ok)
+            {
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
+                && xMLParser.GetNodeName().Equals("generic"))
+                {
+                    while (xMLParser.Read() == Error.Ok)
+                    {
+                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
+                        && xMLParser.GetNodeName().Equals("worldName")
+                        && xMLParser.Read() == Error.Ok
+                        && xMLParser.GetNodeType() == XMLParser.NodeType.Text
+                        && xMLParser.GetNodeData().Equals(worldName))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
         public static bool GetGenericUnitEnemy(string imgPath)
         {
             string[] splittedPath = imgPath.Split("/");

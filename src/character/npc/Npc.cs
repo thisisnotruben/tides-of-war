@@ -1,8 +1,9 @@
 using Godot;
 using Game.Misc.Loot;
-using System.Collections.Generic;
-using Game.Ui;
 using Game.Misc.Other;
+using Game.Ui;
+using Game.Database;
+using System.Collections.Generic;
 
 namespace Game.Actor
 {
@@ -388,11 +389,27 @@ namespace Game.Actor
                     default:
                         if (key.Contains("spell"))
                         {
-                            // instance spells here
+                            if (SpellDB.HasSpell(data[key]))
+                            {
+                                Spell.Spell spell = PickableFactory.GetMakeSpell(data[key]);
+                                spell.GetPickable(this, false);
+                            }
+                            else
+                            {
+                                GD.Print($"({GetWorldName()}) has invalid spell name: ({data[key]})");
+                            }
                         }
                         else if (key.Contains("item"))
                         {
-                            // instance items here
+                            if (ItemDB.HasItem(data[key]))
+                            {
+                                Item item = PickableFactory.GetMakeItem(data[key]);
+                                item.GetPickable(this, false);
+                            }
+                            else
+                            {
+                                GD.Print($"({GetWorldName()}) has invalid item name: ({data[key]})");
+                            }
                         }
                         else if (!key.Equals(imgKey))
                         {

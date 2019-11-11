@@ -101,9 +101,7 @@ namespace Game.Actor
                 SetProcess(true);
             }
         }
-        public override void _OnSelectPressed()
-        {
-        }
+        public override void _OnSelectPressed() { }
         public override void MoveTo(Vector2 worldPosition)
         {
             Vector2 direction = GetDirection(GetGlobalPosition(), worldPosition);

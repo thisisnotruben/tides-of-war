@@ -3,6 +3,7 @@ using Game.Misc.Loot;
 using Game.Spell;
 using Game.Actor;
 using Game.Database;
+using System;
 using System.Collections.Generic;
 
 namespace Game.Quests
@@ -70,7 +71,7 @@ namespace Game.Quests
             }
             else
             {
-                GD.Print("Map doesn't have: " + questGiver);
+                GD.Print($"Map doesn't have: ({questGiver}), for Quest: ({questName})");
             }
         }
         public bool IsPartOf(WorldObject worldObject)
@@ -136,97 +137,47 @@ namespace Game.Quests
         }
         public bool CheckQuest(WorldObject worldObject, bool add)
         {
-            // var keyContent = objective[worldObject.GetWorldName()];
-            // if (keyContent is Godot.Collections.Array)
-            // {
-            //     Godot.Collections.Array keyContentArray = (Godot.Collections.Array)keyContent;
-            //     if (keyContentArray.Count == 3)
-            //     {
-
-            //     }
-            //     else if ((short)keyContentArray[0] < (short)keyContentArray[1])
-            //     {
-            //         // ((short)keyContentArray[0])++;
-            //         if (keyContentArray.Count == 3)
-            //         {
-            //             Npc npc = (Npc)worldObject;
-            //             npc.SetText(questRecieverCompleted);
-            //         }
-            //     }
-            // }
-            // else if (keyContent is Godot.Collections.Dictionary)
-            // {
-
-            // }
+            foreach (string key in objective.Keys)
+            {
+                if (key.Equals(worldObject.GetWorldName()))
+                {
+                    string[] objectiveValues = objective[key].Split("-");
+                    byte tracker = byte.Parse(objectiveValues[1]);
+                    byte completion = byte.Parse(objectiveValues[2]);
+                    if (tracker < completion)
+                    {
+                        tracker++;
+                    }
+                    objective[key] = $"{objectiveValues[0]}-{tracker}-{completion}";
+                }
+            }
             return IsCompleted();
         }
         public bool IsCompleted()
         {
             short questCompletionTracker = 0;
-            // foreach (string task in objective.Keys)
-            // {
-            //     var keyContent = objective[task];
-            //     if (keyContent is Godot.Collections.Array)
-            //     {
-            //         Godot.Collections.Array keyContentArray = (Godot.Collections.Array)keyContent;
-            //         if (keyContentArray[0] == keyContentArray[1])
-            //         {
-            //             questCompletionTracker++;
-            //         }
-            //     }
-            //     else if (keyContent is Godot.Collections.Dictionary)
-            //     {
-            //         Godot.Collections.Dictionary keyContentDic = (Godot.Collections.Dictionary)keyContent;
-            //         if (keyContentDic.ContainsKey("amount"))
-            //         {
-            //             Godot.Collections.Array keyContentArray = (Godot.Collections.Array)keyContentDic["amount"];
-            //             if (keyContentArray[0] == keyContentArray[1])
-            //             {
-            //                 questCompletionTracker++;
-            //             }
-            //         }
-            //         else if (keyContentDic.ContainsKey("spoken"))
-            //         {
-            //             bool spoken = (bool)keyContentDic["spoken"];
-            //             if (spoken)
-            //             {
-            //                 questCompletionTracker++;
-            //             }
-            //         }
-            //     }
-            // }
+            foreach (string key in objective.Keys)
+            {
+                string[] objectiveValues = objective[key].Split("-");
+                byte tracker = byte.Parse(objectiveValues[1]);
+                byte completion = byte.Parse(objectiveValues[2]);
+                if (tracker == completion)
+                {
+                    questCompletionTracker++;
+                }
+            }
             return questCompletionTracker == objective.Count;
         }
         public string FormatWithObjectiveText()
         {
-            // string format = "{0}: {1}/{2}\n";
-            string text = "";
-            // foreach (string worldName in objective.Keys)
-            // {
-            //     var keyContent = objective[worldName];
-            //     if (keyContent is Godot.Collections.Array)
-            //     {
-            //         Godot.Collections.Array keyContentArray = (Godot.Collections.Array)keyContent;
-            //         text += string.Format(format, worldName, keyContentArray[0], keyContentArray[1]);
-            //     }
-            //     else if (keyContent is Godot.Collections.Dictionary)
-            //     {
-            //         Godot.Collections.Dictionary keyContentDic = (Godot.Collections.Dictionary)keyContent;
-            //         if (keyContentDic.ContainsKey("amount"))
-            //         {
-            //             Godot.Collections.Array keyContentArray = (Godot.Collections.Array)keyContentDic["amount"];
-            //             text += string.Format(format, worldName, keyContentArray[0], keyContentArray[1]);
-            //         }
-            //         else if (keyContentDic.ContainsKey("spoken"))
-            //         {
-            //             bool spoken = (bool)keyContentDic["spoken"];
-            //             text += string.Format(format, worldName, (spoken) ? 1 : 0, 1);
-            //         }
-            //     }
-            // }
-            // text = text.Remove(text.Length() - 2);
-            // text = "--Quest Objective--\n" + text;
-            // text = questStart.Insert(questStart.Find("--Rewards--"), text);
+            string text = "--Quest Objective--\n";
+            foreach (string key in objective.Keys)
+            {
+                string[] objectiveValues = objective[key].Split("-");
+                text += $"{key}: {objectiveValues[1]}/{objectiveValues[2]}\n";
+            }
+            text = text.Remove(text.Length() - 2); // remove the last "\n" character
+            text = questStart.Insert(questStart.Find("--Rewards--"), text);
             return text;
         }
         public void SetData(Dictionary<string, string> data)
@@ -260,10 +211,14 @@ namespace Game.Quests
                         }
                         else
                         {
-                            GD.Print($"Quest: {questName} has invalid reward name: {data[key]}");
+                            GD.Print($"Quest: ({questName}), has invalid reward name: {data[key]}");
                         }
                         break;
                     default:
+                        if (UnitDB.IsUnitGeneric(key) || UnitDB.IsUnitUnique(key, Globals.GetMap().GetName()))
+                        {
+                            objective.Add(key, data[key]);
+                        }
                         break;
                 }
             }

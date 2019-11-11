@@ -240,14 +240,10 @@
             <enemy>false</enemy>
             <actorType>merchant</actorType>
             <items>
-                <item name="Champion's Greatsword">
-                </item>
-                <item name="Enchanted Dagger">
-                </item>
-                <item name="Platemail Armor">
-                </item>
-                <item name="Grizzly Grapes">
-                </item>
+                <item name="Champion's Greatsword"></item>
+                <item name="Enchanted Dagger"></item>
+                <item name="Platemail Armor"></item>
+                <item name="Grizzly Grapes"></item>
             </items>
         </unit>
         <unit name="Nuruk">

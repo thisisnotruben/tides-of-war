@@ -21,8 +21,9 @@ namespace Game.Misc.Loot
         {
             Dictionary<string, string> itemData = ItemDB.GetItemData(worldName);
             SetWorldName(worldName);
+            GD.Print(GetWorldName());
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), itemData["type"].ToUpper()));
-            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData["type"]}/{itemData[nameof(icon)]}_icon.res");
+            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData["type"].ToLower()}/{itemData[nameof(icon)]}_icon.res");
             level = short.Parse(itemData[nameof(level)]);
             if (GetWorldType() == WorldTypes.WEAPON || GetWorldType() == WorldTypes.POTION)
             {

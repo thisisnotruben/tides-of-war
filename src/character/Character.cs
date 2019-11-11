@@ -663,11 +663,6 @@ namespace Game.Actor
                         GD.Print($"{imgPath} doesn't have a valid weaponType");
                         break;
                 }
-                if (this is Player)
-                {
-                    SetWorldType(WorldTypes.PLAYER);
-                    enemy = false;
-                }
                 swingType = parsedImg[idx + 1];
                 img.SetHframes(int.Parse(parsedImg[idx + 2]));
                 if (img.GetHframes() != 17)
@@ -677,48 +672,53 @@ namespace Game.Actor
                     anim.AddAnimation("attacking",
                         (Animation)GD.Load($"res://asset/img/character/resource/attacking_{parsedImg[idx + 2]}f.tres"));
                 }
-                string bodyName = raceName;
-                if (raceName.Equals("human"))
+            }
+            if (this is Player)
+            {
+                SetWorldType(WorldTypes.PLAYER);
+                enemy = false;
+            }
+            string bodyName = raceName;
+            if (raceName.Equals("human"))
+            {
+                switch (img.GetHframes())
                 {
-                    switch (img.GetHframes())
-                    {
-                        case 20:
-                        case 16:
-                        case 10:
-                            bodyName += "_unarmored";
-                            break;
-                        default:
-                            bodyName += "_armored";
-                            break;
-                    }
+                    case 20:
+                    case 16:
+                    case 10:
+                        bodyName += "_unarmored";
+                        break;
+                    default:
+                        bodyName += "_armored";
+                        break;
                 }
-                else if (raceName.Equals("critter"))
-                {
-                    bodyName = imgPath.GetFile().BaseName().Split('-')[0];
-                }
-                AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/{bodyName}_body.res");
-                TouchScreenButton select = GetNode<TouchScreenButton>("select");
-                Vector2 textureSize = texture.GetRegion().Size;
-                Node2D sightDistance = GetNode<Node2D>("sight/distance");
-                Node2D areaBody = GetNode<Node2D>("area/body");
-                Node2D head = GetNode<Node2D>("head");
-                select.SetTexture(texture);
-                img.SetPosition(new Vector2(0.0f, -img.GetTexture().GetHeight() / 2.0f));
-                head.SetPosition(new Vector2(0.0f, -texture.GetHeight()));
-                select.SetPosition(new Vector2(-textureSize.x / 2.0f, -textureSize.y));
-                areaBody.SetPosition(new Vector2(-0.5f, -textureSize.y / 2.0f));
-                sightDistance.SetPosition(areaBody.GetPosition());
-                Dictionary<string, double> stats = Stats.UnitMake((double)level, Stats.GetMultiplier(this is Npc, imgPath));
-                foreach (string attribute in stats.Keys)
-                {
-                    Set(attribute, (short)stats[attribute]);
-                }
-                SetTime(regenTime);
-                if (!loaded)
-                {
-                    SetHp(hpMax);
-                    SetMana(manaMax);
-                }
+            }
+            else if (raceName.Equals("critter"))
+            {
+                bodyName = imgPath.GetFile().BaseName().Split('-')[0];
+            }
+            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/{bodyName}_body.res");
+            TouchScreenButton select = GetNode<TouchScreenButton>("select");
+            Vector2 textureSize = texture.GetRegion().Size;
+            Node2D sightDistance = GetNode<Node2D>("sight/distance");
+            Node2D areaBody = GetNode<Node2D>("area/body");
+            Node2D head = GetNode<Node2D>("head");
+            select.SetTexture(texture);
+            img.SetPosition(new Vector2(0.0f, -img.GetTexture().GetHeight() / 2.0f));
+            head.SetPosition(new Vector2(0.0f, -texture.GetHeight()));
+            select.SetPosition(new Vector2(-textureSize.x / 2.0f, -textureSize.y));
+            areaBody.SetPosition(new Vector2(-0.5f, -textureSize.y / 2.0f));
+            sightDistance.SetPosition(areaBody.GetPosition());
+            Dictionary<string, double> stats = Stats.UnitMake((double)level, Stats.GetMultiplier(this is Npc, imgPath));
+            foreach (string attribute in stats.Keys)
+            {
+                Set(attribute, (short)stats[attribute]);
+            }
+            SetTime(regenTime);
+            if (!loaded)
+            {
+                SetHp(hpMax);
+                SetMana(manaMax);
             }
         }
         public virtual void SetSaveData(Godot.Collections.Dictionary saveData)

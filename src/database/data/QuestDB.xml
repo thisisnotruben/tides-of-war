@@ -15,8 +15,7 @@
         </reward>
         <objective>
             <kill name="Desert Serpent">
-                <killed>0</killed>
-                <toKill>3</toKill>
+                <amount>0-3</amount>
             </kill>
         </objective>
     </quest>
@@ -32,8 +31,7 @@
         </reward>
         <objective>
             <kill name="Desert Serpent">
-                <killed>0</killed>
-                <toKill>3</toKill>
+                <amount>0-3</amount>
             </kill>
         </objective>
     </quest>

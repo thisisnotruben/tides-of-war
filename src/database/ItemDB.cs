@@ -1,4 +1,5 @@
 using Godot;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Game.Database
@@ -6,6 +7,7 @@ namespace Game.Database
     public static class ItemDB
     {
         private static readonly string DB_PATH = "res://src/database/data/ItemDB.xml";
+        private static readonly string[] typeTags = { "Weapon", "Armor", "Potion", "Food", "Misc" };
         private static readonly XMLParser xMLParser = new XMLParser();
 
         public static Dictionary<string, string> GetItemData(string worldName)
@@ -14,25 +16,41 @@ namespace Game.Database
                 || worldName.ToLower().Contains("elixir"));
             Dictionary<string, string> itemData = new Dictionary<string, string>();
             xMLParser.Open(DB_PATH);
-            string itemType = "";
             string itemSubType = "";
             while (xMLParser.Read() == Error.Ok)
             {
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
                 {
-                    if (xMLParser.GetNodeName().Equals("itemClass"))
+                    if (typeTags.Contains(xMLParser.GetNodeName()))
+                    {
+                        if (itemData.ContainsKey("type"))
+                        {
+                            itemData["type"] = xMLParser.GetNodeName();
+                        }
+                        else
+                        {
+                            itemData.Add("type", xMLParser.GetNodeName());    
+                        }
+                    }
+                    else if (xMLParser.GetNodeName().Equals("itemClass"))
                     {
                         // To get Weapon/Potion subTypes
                         itemSubType = xMLParser.GetNamedAttributeValue("name");
+                        if (itemData.ContainsKey("subType"))
+                        {
+                            itemData["subType"] = itemSubType;
+                        }
+                        else
+                        {
+                            itemData.Add("subType", itemSubType);
+                        }
                     }
                     else if (xMLParser.GetNodeName().Equals("item")
                     && (xMLParser.GetNamedAttributeValue("name").Equals(worldName)
                     || (potion && worldName.Contains(xMLParser.GetNamedAttributeValue("name")))))
                     {
-                        itemData.Add("type", itemType);
-                        itemData.Add("subType", itemSubType);
                         while (xMLParser.Read() == Error.Ok
-                        && (xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
+                        && !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
                         && xMLParser.GetNodeName().Equals("item")))
                         {
                             if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
@@ -55,7 +73,6 @@ namespace Game.Database
                         }
                         break;
                     }
-                    itemType = xMLParser.GetNodeName();
                 }
             }
             return itemData;
@@ -66,10 +83,11 @@ namespace Game.Database
         }
         public static bool HasItem(string nameCheck)
         {
+            xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok)
             {
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNodeName().Equals("itemClass")
+                && xMLParser.GetNodeName().Equals("item")
                 && xMLParser.GetNamedAttributeValue("name").Equals(nameCheck))
                 {
                     return true;
