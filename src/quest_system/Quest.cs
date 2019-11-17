@@ -71,7 +71,7 @@ namespace Game.Quests
             }
             else
             {
-                GD.Print($"Map doesn't have: ({questGiver}), for Quest: ({questName})");
+                GD.Print($"Quest: ({questName}). Map doesn't have: ({questGiver})");
             }
         }
         public bool IsPartOf(WorldObject worldObject)
@@ -87,7 +87,7 @@ namespace Game.Quests
                 string testString = "?";
                 while (xMLParser.Read() == Error.Ok)
                 {
-                    if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
+                    if (xMLParser.GetNodeType() == XMLParser.NodeType.Element && !xMLParser.GetNodeName().Equals("dialogue"))
                     {
                         string varName = testString;
                         string tagName = xMLParser.GetNodeName();
@@ -114,7 +114,7 @@ namespace Game.Quests
                         }
                         if (varName.Equals(testString))
                         {
-                            GD.Print($"Invalid dialogue tag in Quest: ({questName}). Tag: {tagName}");
+                            GD.Print($"Quest: ({questName}). Invalid dialogue tag: {tagName}");
                         }
                         else if (xMLParser.Read() == Error.Ok
                         && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
@@ -125,14 +125,14 @@ namespace Game.Quests
                         }
                         else
                         {
-                            GD.Print($"Unexpected error in quest: ({questName}) in reading tags.");
+                            GD.Print($"Quest: ({questName}). Unexpected error in reading tags");
                         }
                     }
                 }
             }
             else
             {
-                GD.Print($"Quest: ({questName}) doesn't have dialogue file.");
+                GD.Print($"Quest: ({questName}). Doesn't have dialogue file");
             }
         }
         public bool CheckQuest(WorldObject worldObject, bool add)

@@ -11,7 +11,8 @@ namespace Game.Map
         private TileMap mapGrid;
         private readonly AStar aStar = new AStar();
         private readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
-        private const float ASTAR_OCCUPIED_WEIGHT = 25.0f;
+        private const float ASTAR_OCCUPIED_WEIGHT = 50.0f;
+        private const float ASTAR_ITEM_WEIGHT = 25.0f;
         private const float ASTAR_NORMAL_WEIGHT = 1.0f;
         private const int OBSTACLE_TILE = 4577;
         private List<Vector2> mapObstacles = new List<Vector2>();
@@ -234,11 +235,15 @@ namespace Game.Map
         {
             Vector2 cellStart = mapGrid.WorldToMap(currentWorldPosition);
             Vector2 cellTarget = cellStart + direction;
-            int pointIndex = CalculatePointIndex(cellTarget);
-            if (aStar.HasPoint(pointIndex) && aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT)
+            int targetPointIndex = CalculatePointIndex(cellTarget);
+            if (aStar.HasPoint(targetPointIndex) && aStar.GetPointWeightScale(targetPointIndex) == ASTAR_NORMAL_WEIGHT)
             {
-                aStar.SetPointWeightScale(CalculatePointIndex(cellStart), ASTAR_NORMAL_WEIGHT);
-                aStar.SetPointWeightScale(pointIndex, ASTAR_OCCUPIED_WEIGHT);
+                int currentPointIndex = CalculatePointIndex(cellStart);
+                if (aStar.GetPointWeightScale(currentPointIndex) != ASTAR_ITEM_WEIGHT)
+                {
+                    aStar.SetPointWeightScale(currentPointIndex, ASTAR_NORMAL_WEIGHT);
+                }
+                aStar.SetPointWeightScale(targetPointIndex, ASTAR_OCCUPIED_WEIGHT);
                 return mapGrid.MapToWorld(cellTarget) + HALF_CELL_SIZE;
             }
             return new Vector2();
@@ -278,6 +283,11 @@ namespace Game.Map
             GD.Randomize();
             Vector2 randomizedSlot = mapGrid.MapToWorld(pointList[(int)GD.Randi() % pointList.Count]) + HALF_CELL_SIZE;
             return getAPath(currentWorldPosition, randomizedSlot);
+        }
+        public Vector2 SetGetPickableLoc(Vector2 worldPosition, bool setWeight)
+        {
+            SetPointWeight(worldPosition, (setWeight) ? ASTAR_ITEM_WEIGHT : ASTAR_NORMAL_WEIGHT);
+            return GetGridPosition(worldPosition);
         }
         private void OccupyOriginCell(Vector2 worldPosition)
         {

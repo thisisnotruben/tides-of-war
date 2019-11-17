@@ -1,4 +1,5 @@
 using Godot;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Game.Database
@@ -6,6 +7,8 @@ namespace Game.Database
     public static class UnitDB
     {
         private static readonly string DB_PATH = "res://src/database/data/UnitDB.xml";
+        private static readonly string[] ignoreTags = { "items", "spells" };
+        private static readonly string[] namedTags = { "item", "spell" };
         private static readonly XMLParser xMLParser = new XMLParser();
 
         public static Dictionary<string, string> GetUniqueUnitData(string unitEditorName, string mapName)
@@ -24,30 +27,28 @@ namespace Game.Database
                         if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
                         && xMLParser.GetNamedAttributeValueSafe("name").Equals(unitEditorName))
                         {
-                            while (xMLParser.Read() == Error.Ok && !endLoop)
+                            while (xMLParser.Read() == Error.Ok
+                            && !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
+                            && xMLParser.GetNodeName().Equals("unit")))
                             {
-                                if (xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
-                                && xMLParser.GetNodeName().Equals("unit"))
+                                string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
+                                    ? keyName = xMLParser.GetNodeName() :
+                                    "";
+                                if (!ignoreTags.Contains(keyName))
                                 {
-                                    endLoop = true;
-                                }
-                                else
-                                {
-                                    string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
-                                        ? keyName = xMLParser.GetNodeName() :
-                                        "";
-                                    if (!keyName.Empty() && xMLParser.Read() == Error.Ok
+                                    if (namedTags.Contains(keyName))
+                                    {
+                                        keyName = (unitData.ContainsKey(keyName)) ? keyName + count++.ToString() : keyName;
+                                        unitData.Add(keyName, xMLParser.GetNamedAttributeValue("name"));
+                                    }
+                                    else if (!keyName.Empty() && xMLParser.Read() == Error.Ok
                                     && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
                                     {
-                                        if (unitData.ContainsKey(keyName))
-                                        {
-                                            keyName += count.ToString();
-                                            count++;
-                                        }
                                         unitData.Add(keyName, xMLParser.GetNodeData());
                                     }
                                 }
                             }
+                            endLoop = true;
                         }
                     }
                 }

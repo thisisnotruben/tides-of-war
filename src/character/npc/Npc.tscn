@@ -40,7 +40,7 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="npc" index="0" groups=[
+[node name="npc" groups=[
 "npc",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )

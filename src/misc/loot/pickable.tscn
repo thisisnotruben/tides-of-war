@@ -145,6 +145,7 @@ emission_box_extents = Vector3( 6, 4, 0 )
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
+angular_velocity = 3.08286e-43
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 2.0
@@ -177,6 +178,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="distance" type="CollisionShape2D" parent="sight"]
+visible = false
 shape = SubResource( 5 )
 
 [node name="img" type="Sprite" parent="."]
@@ -193,7 +195,8 @@ explosiveness = 0.25
 process_material = SubResource( 6 )
 
 [node name="select" type="TouchScreenButton" parent="."]
-position = Vector2( -1, -9 )
+visible = false
+position = Vector2( -0.5, -8.5 )
 shape = SubResource( 7 )
 [connection signal="timeout" from="timer" to="." method="_OnTimerTimeout"]
 [connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]

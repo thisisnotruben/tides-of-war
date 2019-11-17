@@ -68,8 +68,8 @@ namespace Game.Actor
         }
         public void _OnSightAreaEntered(Area2D area2D)
         {
-            Character character = (Character)area2D.GetOwner();
-            if (!dead && (target == null || character.IsDead()) && character != this)
+            Character character = area2D.GetOwner() as Character;
+            if (character != null && !dead && (target == null || character.IsDead()) && character != this)
             {
                 if (!enemy && character is Player)
                 {
@@ -121,28 +121,27 @@ namespace Game.Actor
                     {
                         case WorldTypes.MERCHANT:
                         case WorldTypes.TRAINER:
+                            string sndName = "merchant_open";
+                            string nodeName = "inventory";
                             if (GetWorldType() == WorldTypes.MERCHANT)
                             {
-                                Globals.PlaySound("merchant_open", this, new AudioStreamPlayer());
                                 menu.merchant.GetNode<Control>("s/v2/inventory").Show();
-                                foreach (Pickable pickable in GetNode("inventory").GetChildren())
-                                {
-                                    pickable.SetUpShop(false);
-                                }
                             }
                             else
                             {
-                                Globals.PlaySound("turn_page", this, new AudioStreamPlayer());
                                 menu.merchant.GetNode<Control>("s/v2/inventory").Hide();
-                                foreach (Pickable pickable in GetNode("spells").GetChildren())
-                                {
-                                    pickable.SetUpShop(false);
-                                }
+                                sndName = "turn_page";
+                                nodeName = "spells";
                             }
+                            foreach (Pickable pickable in GetNode(nodeName).GetChildren())
+                            {
+                                pickable.SetUpShop(false);
+                            }
+                            Globals.PlaySound(sndName, this, new AudioStreamPlayer());
                             tween.SetPauseMode(PauseModeEnum.Process);
                             menu.itemInfo.GetNode<TextureButton>("s/v/c/v/bg").SetDisabled(true);
                             menu.merchant.GetNode<Label>("s/v/label").SetText(GetWorldName());
-                            menu.merchant.GetNode<Label>("s/v/label2").SetText($"Gold: {player.GetGold()}");
+                            menu.merchant.GetNode<Label>("s/v/label2").SetText($"Gold: {player.GetGold().ToString("N0")}");
                             menu.menu.Hide();
                             menu.merchant.Show();
                             menu.GetNode<Control>("c/game_menu").Show();
@@ -151,7 +150,6 @@ namespace Game.Actor
                             EmitSignal(nameof(Talked));
                             if (!text.Empty())
                             {
-
                                 Globals.PlaySound("turn_page", this, new AudioStreamPlayer());
                                 menu.menu.Hide();
                                 if (GetWorldType() == WorldTypes.HEALER)

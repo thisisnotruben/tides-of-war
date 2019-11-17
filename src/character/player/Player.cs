@@ -25,6 +25,7 @@ namespace Game.Actor
             Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
             Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
             UpdateHUD();
+            SetGold(10_000);
         }
         public override void _UnhandledInput(InputEvent @event)
         {

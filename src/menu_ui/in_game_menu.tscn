@@ -1003,6 +1003,7 @@ __meta__ = {
 }
 
 [node name="controls" type="Control" parent="c"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 1036.0
@@ -1141,7 +1142,6 @@ anchor_bottom = 1.0
 color = Color( 0.431373, 0.431373, 0.431373, 1 )
 
 [node name="list_of_menus" type="Container" parent="c/game_menu"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -1152,7 +1152,6 @@ texture = ExtResource( 19 )
 expand = true
 
 [node name="m" type="MarginContainer" parent="c/game_menu/list_of_menus"]
-editor/display_folded = true
 margin_right = 720.0
 margin_bottom = 1280.0
 custom_constants/margin_right = 32
@@ -1161,13 +1160,13 @@ custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 
 [node name="main_menu" type="Container" parent="c/game_menu/list_of_menus/m"]
-editor/display_folded = true
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 688.0
 margin_bottom = 1248.0
 
 [node name="v" type="VBoxContainer" parent="c/game_menu/list_of_menus/m/main_menu"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
@@ -1670,7 +1669,6 @@ rect_pivot_offset = Vector2( 84, 84 )
 expand = true
 
 [node name="c" type="CenterContainer" parent="c/game_menu/list_of_menus/m/stats/s/v"]
-editor/display_folded = true
 margin_top = 364.0
 margin_right = 656.0
 margin_bottom = 1064.0
@@ -1688,18 +1686,6 @@ bbcode_enabled = true
 bbcode_text = "[color=red]Health: 1000[/color]
 [color=blue]Mana: 1000[/color]
 [color=purple]Xp: 10000 / 10000[/color]
-Level:100
-Gold: 1,450,00
-Strength:	
-Intellect:
-Agility:
-Armor:
-Damage:
-Attack Speed:
-Attack Range:"
-text = "Health: 1000
-Mana: 1000
-Xp: 10000 / 10000
 Level:100
 Gold: 1,450,00
 Strength:	
@@ -2050,7 +2036,6 @@ rect_pivot_offset = Vector2( 134, 134 )
 expand = true
 
 [node name="c" type="Container" parent="c/game_menu/list_of_menus/m/item_info/s/v/c/v"]
-editor/display_folded = true
 margin_top = 324.0
 margin_right = 600.0
 margin_bottom = 979.0
@@ -2433,8 +2418,10 @@ valign = 1
 [connection signal="button_down" from="c/game_menu/list_of_menus/m/inventory/s/v/h/armor_slot" to="." method="_OnButtonDown" binds= [ "c/game_menu/list_of_menus/m/inventory/s/v/h/armor_slot/m/icon" ]]
 [connection signal="button_up" from="c/game_menu/list_of_menus/m/inventory/s/v/h/armor_slot" to="." method="_OnButtonUp" binds= [ "c/game_menu/list_of_menus/m/inventory/s/v/h/armor_slot/m/icon" ]]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/inventory/s/v/h/armor_slot" to="." method="_OnArmorSlotPressed"]
+[connection signal="OnItemSelected" from="c/game_menu/list_of_menus/m/inventory/s/v/c/item_list" to="." method="_OnBagIndexSelected"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/inventory/s/v2/back" to="." method="_OnBackPressed"]
 [connection signal="draw" from="c/game_menu/list_of_menus/m/merchant" to="." method="_OnMerchantDraw"]
+[connection signal="OnItemSelected" from="c/game_menu/list_of_menus/m/merchant/s/v/c/merchant_list" to="." method="_OnBagIndexSelected"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/merchant/s/v2/merchant" to="." method="_OnMerchantPressed"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/merchant/s/v2/inventory" to="." method="_OnInventoryPressed"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/merchant/s/v2/repair" to="." method="_OnRepairPressed"]
@@ -2467,4 +2454,5 @@ valign = 1
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/item_info/s/h/v/drop" to="." method="_OnDropPressed"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/item_info/s/h/v/back" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/item_info/s/h/right" to="." method="_OnSiftConfigure" binds= [ true ]]
+[connection signal="OnItemSelected" from="c/game_menu/list_of_menus/m/spell_book/s/v/c/spell_list" to="." method="_OnBagIndexSelected"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/spell_book/s/v2/back" to="." method="_OnBackPressed"]

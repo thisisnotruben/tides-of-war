@@ -6,15 +6,15 @@ namespace Game.Ui
 {
     public class ItemList : Control
     {
-        public bool allowSlotsToCooldown;
-        public ushort ITEM_MAX;
+        public bool allowSlotsToCooldown = true;
+        public byte ITEM_MAX = 25;
 
         [Signal]
         public delegate void OnItemSelected(int itemIdx, bool sifting);
 
         public override void _Ready()
         {
-            for (ushort i = 0; i < ITEM_MAX - GetChildCount(); i++)
+            for (byte i = 0; i < ITEM_MAX - GetChildCount(); i++)
             {
                 PackedScene itemSlotScene = (PackedScene)GD.Load("res://src/menu_ui/item_slot.tscn");
                 ItemSlot itemSlot = (ItemSlot)itemSlotScene.Instance();
@@ -23,7 +23,7 @@ namespace Game.Ui
             foreach (Node node in GetChildren())
             {
                 ItemSlot itemSlot = node as ItemSlot;
-                if (node != null)
+                if (itemSlot != null)
                 {
                     itemSlot.Connect(nameof(ItemSlot.SlotSelected), this, nameof(_OnSlotSelected));
                     itemSlot.Connect(nameof(ItemSlot.StackSizeChanged), this, nameof(_OnStackSizeChanged));
@@ -44,7 +44,7 @@ namespace Game.Ui
         }
         public void _OnStackSizeChanged(string worldName, int slotSize, ItemSlot itemSlot)
         {
-            foreach (ItemSlot slot in GetUsedSlots(false))
+            foreach (ItemSlot slot in GetUsedSlots())
             {
                 if (itemSlot.GetItem().Equals(slot.GetItem()) && !itemSlot.IsFull())
                 {
@@ -60,17 +60,17 @@ namespace Game.Ui
             foreach (Node node in GetChildren())
             {
                 itemSlot = node as ItemSlot;
-                if ((itemSlot != null) && ((itemSlot.GetItem() != null) || (stackSlot && pickable.GetStackSize() > 0
+                if (itemSlot != null && (itemSlot.GetItem() == null || (stackSlot && pickable.GetStackSize() > 0
                 && pickable.Equals(itemSlot.GetItem()) && itemSlot.IsStacking() && !itemSlot.IsFull())))
                 {
                     itemSlot.SetItem(pickable);
                     break;
                 }
             }
-            if (allowSlotsToCooldown && itemSlot != null && !itemSlot.IsCoolingDown())
+            if (itemSlot != null && !itemSlot.IsCoolingDown() && allowSlotsToCooldown)
             {
                 // Add cooldown to current slot, if similar items are cooling down from bag
-                foreach (ItemSlot otherItemSlot in GetUsedSlots(true))
+                foreach (ItemSlot otherItemSlot in GetUsedSlots())
                 {
                     Pickable otherPickable = otherItemSlot.GetItem();
                     if (pickable.Equals(otherPickable) && pickable != otherPickable && otherItemSlot.IsCoolingDown())
@@ -106,7 +106,7 @@ namespace Game.Ui
         }
         public void Clear()
         {
-            foreach (ItemSlot itemSlot in GetUsedSlots(true))
+            foreach (ItemSlot itemSlot in GetUsedSlots())
             {
                 RemoveItem(itemSlot.GetIndex(), false, true, false);
             }
@@ -114,7 +114,7 @@ namespace Game.Ui
         public List<Pickable> GetItems(bool getFullStack)
         {
             List<Pickable> allItems = new List<Pickable>();
-            foreach (ItemSlot itemSlot in GetUsedSlots(true))
+            foreach (ItemSlot itemSlot in GetUsedSlots())
             {
                 foreach (Pickable pickable in itemSlot.GetItemStack())
                 {
@@ -150,7 +150,7 @@ namespace Game.Ui
         }
         public int GetItemCount()
         {
-            return GetUsedSlots(true).Count;
+            return GetUsedSlots().Count;
         }
         public bool IsSlotCoolingDown(int slotIdx)
         {
@@ -165,9 +165,9 @@ namespace Game.Ui
             }
             return false;
         }
-        public ItemSlot GetItemSlot(Pickable pickable, bool index = false)
+        public ItemSlot GetItemSlot(Pickable pickable)
         {
-            foreach (ItemSlot itemSlot in GetUsedSlots(false))
+            foreach (ItemSlot itemSlot in GetUsedSlots())
             {
                 foreach (Pickable otherPickable in itemSlot.GetItemStack())
                 {
@@ -179,7 +179,7 @@ namespace Game.Ui
             }
             return null;
         }
-        public List<ItemSlot> GetUsedSlots(bool includeStackedSlots)
+        public List<ItemSlot> GetUsedSlots()
         {
             List<ItemSlot> itemSlotList = new List<ItemSlot>();
             foreach (Node node in GetChildren())
@@ -187,17 +187,14 @@ namespace Game.Ui
                 ItemSlot itemSlot = node as ItemSlot;
                 if (itemSlot != null && itemSlot.GetItem() != null)
                 {
-                    if (!includeStackedSlots || (includeStackedSlots && itemSlot.IsStacking()))
-                    {
-                        itemSlotList.Add(itemSlot);
-                    }
+                    itemSlotList.Add(itemSlot);
                 }
             }
             return itemSlotList;
         }
         public bool HasItem(Pickable pickable)
         {
-            foreach (ItemSlot itemSlot in GetUsedSlots(true))
+            foreach (ItemSlot itemSlot in GetUsedSlots())
             {
                 foreach (Pickable otherPickable in itemSlot.GetItemStack())
                 {

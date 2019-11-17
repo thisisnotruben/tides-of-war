@@ -43,7 +43,7 @@ namespace Game.Spell
                 $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
                 $"\n\n-{spellData["description"]}";
         }
-        public void Init(string nameDB)
+        public override void Init(string nameDB)
         {
             Init((WorldTypes)Enum.Parse(typeof(WorldTypes), nameDB.ToUpper()));
         }

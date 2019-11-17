@@ -156,7 +156,6 @@ namespace Game.Quests
             QuestState state;
             if (Enum.TryParse(to.GetName(), out state))
             {
-                GD.Print(state.ToString());
                 quest.ChangeState(state);
             }
             if (to == deliveredQuests && quest.GetChildCount() > 0)

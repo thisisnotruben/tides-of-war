@@ -125,7 +125,7 @@ namespace Game.Ui
                 }
                 foreach (ItemSlot itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
                 {
-                    Tween tween = GetNode<Tween>("tween");
+                    Tween tween = itemSlot.GetNode<Tween>("tween");
                     tween.SetActive(true);
                     tween.ResumeAll();
                     itemSlot.GetNode<ColorRect>("m/icon/overlay").SetFrameColor(new Color(0.0f, 0.0f, 0.0f, 0.75f));
@@ -192,13 +192,12 @@ namespace Game.Ui
             }
             else
             {
-                bool playSnd = false;
+                string sndName = "click1";
                 Hide();
                 switch (GetNode<Label>("m/yes_no/label").GetText())
                 {
                     case "Drop?":
-                        Globals.PlaySound("inventory_drop", this, menu.snd);
-                        playSnd = true;
+                        sndName = "inventory_drop";
                         ((Pickable)menu.selected).Drop();
                         if (menu.itemInfo.GetNode<Control>("s/h/left").IsVisible())
                         {
@@ -210,8 +209,7 @@ namespace Game.Ui
                         }
                         break;
                     case "Unequip?":
-                        Globals.PlaySound("inventory_unequip", this, menu.snd);
-                        playSnd = true;
+                        sndName = "inventory_unequip";
                         ((Item)menu.selected).Unequip();
                         Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon.res");
                         string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), ((Item)menu.selected).GetWorldType()).ToLower()}_slot";
@@ -228,14 +226,15 @@ namespace Game.Ui
                         break;
                     case "Buy?":
                     case "Learn?":
+
                         if (GetNode<Label>("m/yes_no/label").GetText().Equals("Learn?"))
                         {
-                            Globals.PlaySound("learn_spell", this, menu.snd);
+                            sndName = "learn_spell";
                         }
                         Globals.PlaySound("sell_buy", this, menu.snd);
                         ((Pickable)menu.selected).Buy(menu.player);
                         menu.merchant.GetNode<Label>("s/v/label2").SetText(
-                            $"Gold: {menu.player.GetGold()}");
+                            $"Gold: {menu.player.GetGold().ToString("N0")}");
                         menu.merchant.Show();
                         break;
                     case "Delete?":
@@ -245,24 +244,20 @@ namespace Game.Ui
                         menu.saveLoad.Show();
                         break;
                     case "Sell?":
-                        Globals.PlaySound("sell_buy", this, menu.snd);
-                        playSnd = true;
+                        sndName = "sell_buy";
                         menu.merchantBag.RemoveItem(menu.selectedIdx, true, false, false);
                         menu.inventoryBag.RemoveItem(menu.selectedIdx, true, false, false);
                         ((Pickable)menu.selected).Sell(menu.player);
                         menu.merchant.GetNode<Label>("s/v/label2").SetText(
-                            $"Gold: {menu.player.GetGold()}");
+                            $"Gold: {menu.player.GetGold().ToString("N0")}");
                         menu.merchant.Show();
                         break;
                     case "Overwrite?":
                         SaveGame();
                         menu.saveLoad.Show();
                         break;
-                }
-                if (!playSnd)
-                {
-                    Globals.PlaySound("click1", this, menu.snd);
-                }
+                }               
+                Globals.PlaySound(sndName, this, menu.snd);
                 menu.selectedIdx = -1;
                 menu.selected = null;
             }
@@ -354,7 +349,7 @@ namespace Game.Ui
                         break;
                 }
                 Hide();
-                menu.merchant.GetNode<Label>("s/v/label2").SetText($"Gold: {menu.player.GetGold()}");
+                menu.merchant.GetNode<Label>("s/v/label2").SetText($"Gold: {menu.player.GetGold().ToString("N0")}");
                 menu.merchant.Show();
             }
         }

@@ -87,7 +87,7 @@ namespace Game.Ui
         }
         public void SetItem(Pickable pickable, bool shuffle = true, bool forceClear = false, bool funnel = false)
         {
-            if (pickable != null)
+            if (pickable == null)
             {
                 EmitSignal(nameof(SyncSlot), this, pickable);
                 if (forceClear)
@@ -173,11 +173,7 @@ namespace Game.Ui
         }
         public Pickable GetItem()
         {
-            if (itemStack.Count > 0)
-            {
-                return itemStack[0];
-            }
-            return null;
+            return (itemStack.Count > 0)? itemStack[0]: null;
         }
         public void CoolDown(Pickable itm, float value, float seek)
         {
@@ -212,7 +208,6 @@ namespace Game.Ui
         {
             return time;
         }
-    
         public bool IsStacking()
         {
             return stacking;

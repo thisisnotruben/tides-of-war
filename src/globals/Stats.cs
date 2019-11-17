@@ -167,7 +167,7 @@ namespace Game
                             break;
                         case Item.WorldTypes.WEAPON:
                             minValue = stats["minDamage"];
-                            minValue = stats["maxDamage"];
+                            maxValue = stats["maxDamage"];
                             break;
                         case Item.WorldTypes.FOOD:
                             maxValue = stats["hpMax"] * 0.09375;
