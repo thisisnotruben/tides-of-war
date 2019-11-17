@@ -4,10 +4,6 @@ namespace Game.Spell
 {
     public class HasteEffect : SpellEffect
     {
-        private protected override void OnReady()
-        {
-            SetWorldType(WorldTypes.HASTE);
-        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

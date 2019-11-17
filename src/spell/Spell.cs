@@ -20,11 +20,12 @@ namespace Game.Spell
         private protected Dictionary<string, ushort> attackTable;
         private protected Character caster;
 
-        public void Init(WorldTypes worldType)
+        public override void Init(string worldName)
         {
-            SetWorldType(worldType);
-            SetWorldName(Enum.GetName(typeof(WorldTypes), worldType).Capitalize());
-            Dictionary<string, string> spellData = SpellDB.GetSpellData(GetWorldName());
+            SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_")));
+            SetWorldName(worldName);
+            SetName(worldName);
+            Dictionary<string, string> spellData = SpellDB.GetSpellData(worldName);
 
             icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.res");
             level = short.Parse(spellData[nameof(level)]);
@@ -35,17 +36,13 @@ namespace Game.Spell
             effectOnTarget = bool.Parse(spellData[nameof(effectOnTarget)]);
             requiresTarget = bool.Parse(spellData[nameof(requiresTarget)]);
 
-            attackTable = (spellRange > Stats.WEAPON_RANGE_MELEE) ? Stats.attackTable["RANGED"] : Stats.attackTable["MELEE"];
+            attackTable = Stats.attackTable[(spellRange > Stats.WEAPON_RANGE_MELEE) ? "RANGED" : "MELEE"];
             goldWorth = Stats.GetSpellWorthCost(level);
             manaCost = Stats.GetSpellManaCost(level);
 
             pickableDescription = $"-Mana Cost: {manaCost}\n-Range: {spellRange}\n" +
                 $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
                 $"\n\n-{spellData["description"]}";
-        }
-        public override void Init(string nameDB)
-        {
-            Init((WorldTypes)Enum.Parse(typeof(WorldTypes), nameDB.ToUpper()));
         }
         public override void GetPickable(Character character, bool addToBag)
         {
@@ -54,7 +51,6 @@ namespace Game.Spell
         }
         public override void UnMake()
         {
-            _OnTimerTimeout();
             SetProcess(false);
             Player player = caster as Player;
             if (player != null)
@@ -78,7 +74,10 @@ namespace Game.Spell
             return (count > 0) ? GetDuration() - (count * timer.GetWaitTime() - base.GetTimeLeft()) : base.GetTimeLeft();
         }
         public override void _OnTimerTimeout() { }
-        public abstract bool Casted();
+        public virtual bool Casted()
+        {
+            return casted;
+        }
         public virtual float Cast()
         {
             if (!loaded)
@@ -88,6 +87,8 @@ namespace Game.Spell
             casted = true;
             return percentDamage;
         }
+        public virtual void ConfigureSpell() { }
+        public virtual void ConfigureSnd() { }
         public Dictionary<string, ushort> GetAttackTable()
         {
             return attackTable;
@@ -114,15 +115,16 @@ namespace Game.Spell
         }
         public void SetTime(float time, bool setDuration = true)
         {
+            Timer timer = GetNode<Timer>("timer");
             if (!loaded)
             {
-                GetNode<Timer>("timer").SetWaitTime(time);
+                timer.SetWaitTime(time);
             }
             if (setDuration)
             {
                 SetDuration((count > 0) ? time * count : time);
             }
-            GetNode<Timer>("timer").Start();
+            timer.Start();
         }
         public void SetCount(short count)
         {
@@ -131,9 +133,27 @@ namespace Game.Spell
                 this.count = count;
             }
         }
-        public void ConfigureSpell()
+        private protected void StunUnit(Character character, bool stun)
         {
-            GD.Print("Not Implemented");
+            character.SetProcess(false);
+            if (stun)
+            {
+                character.GetNode<Timer>("timer").Stop();
+                character.GetNode<AnimationPlayer>("anim").Stop();
+                character.GetNode<Sprite>("img").SetFrame(0);
+            }
+            else
+            {
+                character.SetState(character.GetState(), true);
+            }
+        }
+        private protected void PrepSight()
+        {
+            Node sight = GetNode("sight");
+            sight.Disconnect("area_entered", this, nameof(_OnSightAreaEntered));
+            sight.Disconnect("area_exited", this, nameof(_OnSightAreaExited));
+            sight.SetBlockSignals(false);
+            sight.GetNode<CollisionShape2D>("distance").SetDisabled(false);
         }
     }
 }

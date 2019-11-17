@@ -5,10 +5,6 @@ namespace Game.Spell
 {
     public class SlowEffect : SpellEffect
     {
-        private protected override void OnReady()
-        {
-            SetWorldType(WorldTypes.SLOW);
-        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

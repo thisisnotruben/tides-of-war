@@ -29,14 +29,10 @@ namespace Game.Spell
         public override void _Process(float delta)
         {
             SetGlobalPosition(player.GetCenterPos() + (GetGlobalMousePosition() - player.GetCenterPos()).Clamped(spellRange));
-            if (player.GetCenterPos().y > GetGlobalPosition().y)
-            {
-                player.GetMenu().GetNode<Control>("c/osb").SetPosition(new Vector2(0.0f, 666.0f));
-            }
-            else
-            {
-                player.GetMenu().GetNode<Control>("c/osb").SetPosition(new Vector2(0.0f, 180.0f));
-            }
+            player.GetMenu().GetNode<Control>("c/osb").
+                SetPosition((player.GetCenterPos().y > GetGlobalPosition().y)
+                ? new Vector2(0.0f, 666.0f)
+                : new Vector2(0.0f, 180.0f));
         }
         public void _OnTweenStarted(Godot.Object obj, NodePath nodePath)
         {

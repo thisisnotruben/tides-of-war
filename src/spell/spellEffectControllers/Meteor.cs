@@ -2,11 +2,10 @@ namespace Game.Spell
 {
     public class MeteorEffect : FireballEffect
     {
-        private protected override void OnReady()
+        public override void _Ready()
         {
-            SetWorldType(WorldTypes.METEOR);
+            base._Ready();
             SetProcess(true);
-
         }
     }
 }

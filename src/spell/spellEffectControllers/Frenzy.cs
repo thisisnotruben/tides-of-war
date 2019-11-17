@@ -4,10 +4,6 @@ namespace Game.Spell
 {
     public class FrenzyEffect : SpellEffect
     {
-        private protected override void OnReady()
-        {
-            SetWorldType(WorldTypes.FRENZY);
-        }
         public override void OnHit(Spell spell)
         {
             base.OnHit(spell);

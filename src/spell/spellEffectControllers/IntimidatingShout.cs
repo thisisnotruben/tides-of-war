@@ -4,10 +4,6 @@ namespace Game.Spell
 {
     public class IntimidatingshoutEffect : SpellEffect
     {
-        private protected override void OnReady()
-        {
-            SetWorldType(WorldTypes.INTIMIDATING_SHOUT);
-        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

@@ -5,10 +5,6 @@ namespace Game.Spell
 {
     public class MindblastEffect : SpellEffect
     {
-        private protected override void OnReady()
-        {
-            SetWorldType(WorldTypes.MIND_BLAST);
-        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

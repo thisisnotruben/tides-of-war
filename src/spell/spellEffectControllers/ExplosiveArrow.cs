@@ -4,10 +4,6 @@ namespace Game.Spell
 {
     public class ExplosivearrowEffect : SpellEffect
     {
-        private protected override void OnReady()
-        {
-            SetWorldType(WorldTypes.EXPLOSIVE_ARROW);
-        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

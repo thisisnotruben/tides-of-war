@@ -120,6 +120,15 @@
     <Compile Include="src\spell\spellEffectControllers\Snipershot.cs" />
     <Compile Include="src\spell\spellEffectControllers\Stingingshot.cs" />
     <Compile Include="src\spell\spellEffectControllers\Stomp.cs" />
+    <Compile Include="src\spell\spell\Bash" />
+    <Compile Include="src\spell\spell\Cleave" />
+    <Compile Include="src\spell\spell\Devastate" />
+    <Compile Include="src\spell\spell\Fortify" />
+    <Compile Include="src\spell\spell\Frenzy" />
+    <Compile Include="src\spell\spell\Hemorrhage" />
+    <Compile Include="src\spell\spell\IntimidatingShout" />
+    <Compile Include="src\spell\spell\Overpower" />
+    <Compile Include="src\spell\spell\Stomp" />
     <Compile Include="src\utils\DeleteSpeaker.cs" />
     <Compile Include="src\utils\MapImporter.cs" />
   </ItemGroup>

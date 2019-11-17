@@ -1,5 +1,6 @@
 using Godot;
 using Game.Actor;
+using System;
 
 namespace Game.Spell
 {
@@ -15,6 +16,7 @@ namespace Game.Spell
 
         public override void _Ready()
         {
+            SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), GetWorldName().ToUpper().Replace("", "_")));
             foreach (Node2D node2D in GetNode("idle").GetChildren())
             {
                 node2D.SetUseParentMaterial(true);
@@ -26,11 +28,7 @@ namespace Game.Spell
             tween = GetNode<Tween>("tween");
             timer = GetNode<Timer>("timer");
             SetProcess(false);
-            OnReady();
-        }
-        // Decalre Spell WorldType for every effect though OnReady Method
-        private protected abstract void OnReady();
-        
+        }        
         public override void _Process(float delta)
         {
             Tween tween = GetNode<Tween>("tween");

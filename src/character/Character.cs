@@ -36,7 +36,7 @@ namespace Game.Actor
         public short agility;
         public ushort weaponRange = Stats.WEAPON_RANGE_MELEE;
         public float weaponSpeed = 1.3f;
-        private protected float animSpeed = 1.0f;
+        public float animSpeed = 1.0f;
         private protected Vector2 origin;
         private protected WorldTypes weaponType;
         private protected Item weapon = null;
@@ -358,7 +358,7 @@ namespace Game.Actor
         {
             return state;
         }
-        public virtual void SetState(States state)
+        public virtual void SetState(States state, bool overrule = false)
         {
             this.state = state;
         }

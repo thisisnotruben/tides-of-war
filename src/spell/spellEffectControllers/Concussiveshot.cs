@@ -4,10 +4,6 @@ namespace Game.Spell
 {
     public class ConcussiveshotEffect : SpellEffect
     {
-        private protected override void OnReady()
-        {
-            SetWorldType(WorldTypes.CONCUSSIVE_SHOT);
-        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

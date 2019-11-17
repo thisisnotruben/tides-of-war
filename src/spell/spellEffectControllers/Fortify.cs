@@ -4,10 +4,6 @@ namespace Game.Spell
 {
     public class FortifyEffect : SpellEffect
     {
-        private protected override void OnReady()
-        {
-            SetWorldType(WorldTypes.FORTIFY);
-        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

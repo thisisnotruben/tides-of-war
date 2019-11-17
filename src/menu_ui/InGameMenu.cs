@@ -744,7 +744,7 @@ namespace Game.Ui
             Globals.PlaySound("click2", this, snd);
             PackedScene spellScene = (PackedScene)GD.Load(selectedSpell.GetFilename());
             Spell.Spell spell = (Spell.Spell)spellScene.Instance();
-            spell.Init(selectedSpell.GetWorldType());
+            spell.Init(selectedSpell.GetWorldName());
             spell.GetPickable(player, false);
             spell.ConfigureSpell();
             player.SetSpell(spell);

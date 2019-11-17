@@ -284,9 +284,9 @@ namespace Game.Actor
         {
             _OnSightAreaEntered(area2D);
         }
-        public override void SetState(States state)
+        public override void SetState(States state, bool overrule = false)
         {
-            if (GetState() != state)
+            if (GetState() != state || overrule)
             {
                 AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
                 Sprite img = GetNode<Sprite>("img");
