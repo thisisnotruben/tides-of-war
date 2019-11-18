@@ -69,8 +69,7 @@ func configure_buff(consumer, expire=false):
 		unmake()
 
 func take_damage(bypass=false, amount=-0.10):
-	"""If the item is a weapon, its takes possible damage if being used.
-	if the item is a vest, it takes possible damage is strucken upon"""
+	"""If the item is a weapon, its takes possible damage if being used. if the item is a vest, it takes possible damage is strucken upon"""
 	if randi() % 100 + 1 <= 10 or bypass:
 		var old_dur: float = durability
 		durability += amount
@@ -98,7 +97,7 @@ func make():
 	if type == TYPES.POTION:
 		path = path.plus_file("/%s/%s_icon.res" % [key, globals.item_meta[key][str(level)][sub_key]])
 		if sub_type == SUB_TYPES.HEALING or sub_type == SUB_TYPES.MANA:
-			set_obj_name("%s %s %s" % [globals.item_meta[key][str(level)]["name"], sub_key, "Potion"])
+			set_obj_name("%s %s Potion" % [globals.item_meta[key][str(level)]["name"], sub_key])
 		else:
 			set_obj_name("Elixir Of %s %s" % [globals.item_meta[key][str(level)]["name"], sub_key])
 	else:

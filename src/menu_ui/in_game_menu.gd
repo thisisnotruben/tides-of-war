@@ -783,8 +783,7 @@ func get_save_game() -> Dictionary:
 		save_dict.inventory.append({"type":item.get_type(true), \
 		"sub_type":item.get_sub_type(true),  "level":item.get_level(),
 		"gold":item.gold, "durability":item.durability, \
-		"equipped": true if item == player.weapon \
-		or item == player.vest else false})
+		"equipped": true if item == player.weapon or item == player.vest else false})
 	for buff in buffs:
 		dict = {"type":buff.get_type(true), "sub_type":buff.get_sub_type(true), "level":buff.get_level(),
 		"time":buff.get_time_left()}

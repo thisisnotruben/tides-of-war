@@ -68,7 +68,7 @@ func on_hit(spell=null) -> void:
 		"haste", "hemorrhage", "overpower", "devastate", "cleave":
 			set_position((get_owner() as Character).get_node(@"img").get_position())
 
-		"frost_bolt", "fireball", "shadow_bolt", "lightning_bolt", "siphon_mana", "meteor":
+		"frost_bolt", "fireball", "shadow_bolt", "arcane_bolt", "siphon_mana", "meteor":
 #			have the bolt fade away gradually
 			$tween.interpolate_property($idle/bolt, @":modulate", $idle/bolt.get_modulate(), \
 			Color(1.0, 1.0, 1.0, 0.0), 0.65,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -86,7 +86,9 @@ func on_hit(spell=null) -> void:
 
 		"slow":
 			var missile = get_owner()
-			missile.set_global_position(missile.target.get_center_pos())
+			get_parent().remove_child(self)
+			missile.target.add_child(self)
+			set_position((missile.target as Character).get_node(@"img").get_position())
 #			when spell ends, this effect ends as well
 			spell.connect("unmake", self, "_on_timer_timeout")
 

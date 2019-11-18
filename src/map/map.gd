@@ -59,7 +59,8 @@ func set_units() -> void:
 		if "character" in unit.get_filename():
 			unit.origin = get_grid_position(unit.get_global_position())
 			unit.set_global_position(unit.origin)
-			unit.path.append(occupy_origin_cell(unit.origin))
+			unit.path.append(unit.origin)
+			occupy_origin_cell(unit.origin)
 			if unit.npc:
 				if globals.unit_meta[get_name()].has(unit.get_name()) or "<*>" in unit.get_name():
 					set_determined_unit(unit)
@@ -244,13 +245,14 @@ func get_patrol_path(world_name: String) -> PoolVector2Array:
 		return PoolVector2Array()
 	return patrol_paths[find_unit].points
 
-func occupy_origin_cell(cur_pos: Vector2) -> Vector2:
+func occupy_origin_cell(cur_pos: Vector2) -> void:
 	cur_pos = _map.world_to_map(cur_pos)
 	if not cur_pos in obstacles and not is_outside_map_bounds(cur_pos):
 		var cell_point: int = calculate_point_index(cur_pos)
 		astar.set_point_weight_scale(cell_point, ASTAR_OCCUPIED_WEIGHT)
-		var cell_pos: Vector3 = astar.get_point_position(cell_point)
-		return Vector2(cell_pos.x, cell_pos.y)
-	print("Object incorrectly placed at\ngrid position: %s\nglobal position: %s\n" \
-	% [cur_pos, _map.map_to_world(cur_pos)])
-	return Vector2()
+		# var cell_pos: Vector3 = astar.get_point_position(cell_point)
+		# return Vector2(cell_pos.x, cell_pos.y)
+	else:
+		print("Object incorrectly placed at\ngrid position: %s\nglobal position: %s\n" \
+			% [cur_pos, _map.map_to_world(cur_pos)])
+	# return Vector2()

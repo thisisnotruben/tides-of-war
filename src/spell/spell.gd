@@ -45,8 +45,7 @@ func _process(delta: float) -> void:
 		caster.igm.get_node(@"c/osb").set_position(Vector2(0.0, 180.0))
 
 func unmake_if_caster_moved(caster: Object, state: String) -> void:
-	"""Deletes queued spell and hides OSB if caster moves,
-	connected from unit tween"""
+	"""Deletes queued spell and hides OSB if caster moves, connected from unit tween"""
 	if state ==":global_position" and caster.get_state(true) == "MOVING":
 		caster.igm.get_node(@"c/osb").hide()
 		unmake()
@@ -253,7 +252,7 @@ func configure_spell() -> void:
 
 func configure_snd() -> void:
 	match type:
-		TYPES.FIREBALL, TYPES.SHADOW_BOLT, TYPES.FROST_BOLT:
+		TYPES.FIREBALL, TYPES.SHADOW_BOLT, TYPES.FROST_BOLT, TYPES.ARCANE_BOLT:
 			globals.play_sample("%s_cast" % world_name, caster.get_node(@"snd"))
 
 #---End main methods---
@@ -379,8 +378,7 @@ func bash() -> float:
 	return 1.1
 
 func hemorrhage() -> float:
-	"""This spell lasts for 60 sec, 5*15=60,
-	damage is done every 15 sec."""
+	"""This spell lasts for 60 sec, 5*15=60, damage is done every 15 sec."""
 	set_data(caster.target)
 	set_count(5)
 	set_time(15.0)
@@ -454,7 +452,7 @@ func explosive_arrow() -> float:
 	return 1.0
 
 func precise_shot() -> float:
-	return rand_range(1.1, 1.2)
+	return 1.15
 
 func sniper_shot() -> float:
 	caster.weapon_range -= data
@@ -542,7 +540,7 @@ func slow() -> float:
 	set_time(10.0)
 	return 1.0
 
-func lightning_bolt() -> float:
+func arcane_bolt() -> float:
 	return 1.0
 
 func mind_blast() -> float:

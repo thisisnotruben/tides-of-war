@@ -174,8 +174,8 @@
     "range": 32,
     "des": "Slows target's movement and attack speed by 50% for 15 sec."
   },
-  "lightning_bolt": {
-    "icon": 1194,
+  "arcane_bolt": {
+    "icon": 1790,
     "cooldown": "0.20",
     "level": 8,
     "range": 64,
