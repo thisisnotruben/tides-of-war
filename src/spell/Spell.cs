@@ -12,7 +12,7 @@ namespace Game.Spell
         private protected float percentDamage;
         private protected short manaCost;
         private protected short spellRange;
-        private protected short count;
+        private protected byte count;
         private protected bool casted;
         private protected bool ignoreArmor;
         private protected bool effectOnTarget;
@@ -126,7 +126,7 @@ namespace Game.Spell
             }
             timer.Start();
         }
-        public void SetCount(short count)
+        public void SetCount(byte count)
         {
             if (!loaded)
             {

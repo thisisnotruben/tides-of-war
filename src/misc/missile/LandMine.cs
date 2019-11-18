@@ -5,7 +5,7 @@ namespace Game.Misc.Other
 {
     public class LandMine : WorldObject, ICombustible
     {
-        private Area2D exludedUnitArea;
+        public Area2D exludedUnitArea;
         private bool exploded;
         public short minDamage;
         public short maxDamage;

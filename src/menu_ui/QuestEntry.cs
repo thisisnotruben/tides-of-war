@@ -24,7 +24,6 @@ namespace Game.Ui
         }
         public void _OnQuestSlotPressed()
         {
-            GD.Print("Not Implemented");
             Globals.player.GetMenu().ShowQuestText(quest);
         }
     }

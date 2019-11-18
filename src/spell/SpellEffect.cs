@@ -6,7 +6,7 @@ namespace Game.Spell
 {
     public abstract class SpellEffect : WorldObject
     {
-        private protected Vector2 seekPos = new Vector2();
+        public Vector2 seekPos = new Vector2();
         private protected float lightFadeDelay = 0.65f;
         private protected bool MissileplaySound = false;
         private protected bool fadeLight = true;

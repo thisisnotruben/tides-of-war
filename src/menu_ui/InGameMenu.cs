@@ -742,9 +742,7 @@ namespace Game.Ui
                 return;
             }
             Globals.PlaySound("click2", this, snd);
-            PackedScene spellScene = (PackedScene)GD.Load(selectedSpell.GetFilename());
-            Spell.Spell spell = (Spell.Spell)spellScene.Instance();
-            spell.Init(selectedSpell.GetWorldName());
+            Spell.Spell spell = PickableFactory.GetMakeSpell(selectedSpell.GetWorldName());
             spell.GetPickable(player, false);
             spell.ConfigureSpell();
             player.SetSpell(spell);
@@ -1048,8 +1046,8 @@ namespace Game.Ui
                 case WorldObject.WorldTypes.WEAPON:
                     Tuple<short, short> values = item.GetValues();
                     player.SetWeapon((on) ? item : null);
-                    player.minDamage += (on) ? values.Item1 : (short)-values.Item2;
-                    player.maxDamage += (on) ? values.Item1 : (short)-values.Item2;
+                    player.minDamage += (on) ? values.Item1 : (short)-values.Item1;
+                    player.maxDamage += (on) ? values.Item2 : (short)-values.Item2;
                     break;
                 case WorldObject.WorldTypes.ARMOR:
                     player.SetArmor((on) ? item : null);

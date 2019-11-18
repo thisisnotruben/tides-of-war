@@ -3,7 +3,7 @@ using Game.Misc.Missile;
 
 namespace Game.Spell
 {
-    public class MindblastEffect : SpellEffect
+    public class MindBlastEffect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

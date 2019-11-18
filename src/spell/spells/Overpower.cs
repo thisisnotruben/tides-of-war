@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Game.Spell
 {
-    public class Overpower : Devastate
+    public class Overpower : Spell
     {
         public override void Init(string worldName)
         {

@@ -13,8 +13,10 @@ namespace Game.Database
     {
         public static Spell.Spell GetMakeSpell(string worldName)
         {
-            PackedScene packedScene = (PackedScene)GD.Load($"res://src/spell/spells/{worldName}");
-            Spell.Spell spell = (Spell.Spell)packedScene.Instance();
+            PackedScene packedScene = (PackedScene)GD.Load("res://src/spell/spell.tscn");
+            Node spellNode = packedScene.Instance();
+            spellNode.SetScript(GD.Load($"res://src/spell/spells/{worldName.Replace(" ", "")}.cs"));
+            Spell.Spell spell = (Spell.Spell)spellNode;
             spell.Init(worldName);
             return spell;
         }

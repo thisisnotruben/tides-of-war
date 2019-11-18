@@ -1,4 +1,4 @@
 namespace Game.Spell
 {
-    public class Cleave : Devastate { }
+    public class Cleave : Spell { }
 }

@@ -2,7 +2,7 @@ using Godot;
 
 namespace Game.Spell
 {
-    public class ConcussiveshotEffect : SpellEffect
+    public class ConcussiveShotEffect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

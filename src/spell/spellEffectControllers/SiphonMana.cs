@@ -1,6 +1,6 @@
 namespace Game.Spell
 {
-    public class SiphonmanaEffect : FireballEffect
+    public class SiphonManaEffect : FireballEffect
     {
         public override void OnHit(Spell spell = null)
         {

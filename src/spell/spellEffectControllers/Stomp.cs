@@ -1,6 +1,4 @@
-using Godot;
-
 namespace Game.Spell
 {
-    public class StompEffect : SearingarrowEffect { }
+    public class StompEffect : SearingArrowEffect { }
 }
