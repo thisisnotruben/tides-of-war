@@ -1,7 +1,6 @@
-using Godot;
 using System.Collections.Generic;
 using Game.Misc.Other;
-
+using Godot;
 namespace Game.Actor
 {
     public class TargetDummy : Npc
@@ -10,24 +9,16 @@ namespace Game.Actor
         {
             SetProcess(false);
         }
-        public override void _Process(float delta)
-        {
-        }
-        public override void MoveTo(Vector2 WorldPosition)
-        {
-        }
-        public override void Attack(bool ignoreArmor)
-        {
-        }
+        public override void _Process(float delta) { }
+        public override void MoveTo(Vector2 WorldPosition) { }
+        public override void Attack(bool ignoreArmor) { }
         public override void TakeDamage(short damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
         {
             base.TakeDamage(damage, ignoreArmor, worldObject, textType);
             hp = hpMax;
             mana = manaMax;
         }
-        public override void SetDead(bool dead)
-        {
-        }
+        public override void SetDead(bool dead) { }
         public override void _OnSelectPressed()
         {
             if (Globals.player.GetTarget() == this)

@@ -1,18 +1,16 @@
-using Godot;
 using System;
-
+using Godot;
 namespace Game.Misc.Other
 {
     public class CombatText : Node2D
     {
-        public enum TextType : byte { XP, GOLD, CRITICAL, MANA, DODGE, PARRY, MISS, HIT };
+        public enum TextType : byte { XP, GOLD, CRITICAL, MANA, DODGE, PARRY, MISS, HIT }
         private const float TIME = 1.1f;
         private Tween tween;
         private Label label;
         private AnimationPlayer anim;
         [Signal]
         public delegate void QueueStart();
-
         public override void _Ready()
         {
             tween = GetNode<Tween>("tween");
@@ -22,10 +20,8 @@ namespace Game.Misc.Other
         public void SetType(String text, TextType textType, Vector2 localCenterPos)
         {
             label.SetText(text);
-
             localCenterPos.x = -label.GetSize().x / 2.0f;
             localCenterPos.y -= 8.0f;
-
             Color colorBeginning = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             Color colorEnd = new Color(1.0f, 1.0f, 1.0f, 0.0f);
             Color selfColor = new Color("ff0000");
@@ -51,12 +47,10 @@ namespace Game.Misc.Other
                     break;
             }
             SetModulate(selfColor);
-
             tween.InterpolateProperty(this, ":position", localCenterPos,
                 new Vector2(localCenterPos.x, localCenterPos.y - 14.0f), TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
             tween.InterpolateProperty(label, ":modulate", colorBeginning, colorEnd, TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
-
-            CombatText combatText = GetParent().GetChild(GetIndex() - 1) as CombatText;
+            CombatText combatText = GetParent().GetChild(GetIndex() - 1)as CombatText;
             if (combatText != null)
             {
                 combatText.Connect(nameof(QueueStart), this, nameof(Start));

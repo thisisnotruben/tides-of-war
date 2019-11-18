@@ -1,12 +1,10 @@
-using Game.Actor;
 using System;
-
+using Game.Actor;
 namespace Game.Spell
 {
     public class ConcussiveShot : Spell
     {
         private Tuple<Character, float, float> values;
-
         public override float Cast()
         {
             values = new Tuple<Character, float, float>(

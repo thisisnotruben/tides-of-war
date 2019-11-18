@@ -1,21 +1,19 @@
-using Godot;
-using Game.Actor;
-using Game.Misc.Loot;
-using Game.Database;
 using System;
 using System.Collections.Generic;
-
+using Game.Actor;
+using Game.Database;
+using Game.Misc.Loot;
+using Godot;
 namespace Game.Quests
 {
     public class WorldQuests : Node
     {
-        public enum QuestState : byte { AVAILABLE, ACTIVE, COMPLETED, DELIVERED };
+        public enum QuestState : byte { AVAILABLE, ACTIVE, COMPLETED, DELIVERED }
         private Node availableQuests;
         private Node activeQuests;
         private Node completedQuests;
         private Node deliveredQuests;
         private Quest focusedQuest;
-
         public override void _Ready()
         {
             availableQuests = GetNode(QuestState.AVAILABLE.ToString());

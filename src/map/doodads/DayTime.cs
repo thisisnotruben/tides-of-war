@@ -1,13 +1,11 @@
-using Godot;
 using Game.Misc.Light;
-
+using Godot;
 namespace Game.Map.Doodads
 {
     public class DayTime : Timer, ISaveable
     {
         private const float LENGTH_OF_DAY = 210.0f;
         private bool dayTime = true;
-
         public void _OnTimerTimeout()
         {
             AnimationPlayer anim = GetNode<AnimationPlayer>("anim");

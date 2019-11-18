@@ -1,18 +1,16 @@
-using Godot;
-using Game.Misc.Loot;
 using System;
 using System.Collections.Generic;
-
+using Game.Misc.Loot;
+using Godot;
 namespace Game.Ui
 {
     public class Popup : Control
     {
         private Menu menu;
         public Control about;
-
         public override void _Ready()
         {
-            menu = GetOwner() as Menu;
+            menu = GetOwner()as Menu;
         }
         public void _OnDeletePressed()
         {
@@ -156,8 +154,8 @@ namespace Game.Ui
         public void _OnOkayPressed()
         {
             Globals.PlaySound("click1", this, menu.snd);
-            if (menu.player.GetTarget() != null && menu.player.GetTarget().GetWorldType() == WorldObject.WorldTypes.MERCHANT
-            && menu.selected == null && GetNode<Label>("m/error/label").GetText().Equals("Not Enough\nGold!"))
+            if (menu.player.GetTarget() != null && menu.player.GetTarget().GetWorldType() == WorldObject.WorldTypes.MERCHANT &&
+                menu.selected == null && GetNode<Label>("m/error/label").GetText().Equals("Not Enough\nGold!"))
             {
                 GetNode<Label>("m/error").Hide();
                 GetNode<Control>("m/repair").Show();
@@ -186,7 +184,7 @@ namespace Game.Ui
             {
                 Globals.SaveGameMeta("", menu.selectedIdx);
                 menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{menu.selectedIdx}").
-                    SetText($"Slot {menu.selectedIdx + 1}");
+                SetText($"Slot {menu.selectedIdx + 1}");
                 new Directory().Remove(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
                 _OnNoPressed();
             }
@@ -226,7 +224,6 @@ namespace Game.Ui
                         break;
                     case "Buy?":
                     case "Learn?":
-
                         if (GetNode<Label>("m/yes_no/label").GetText().Equals("Learn?"))
                         {
                             sndName = "learn_spell";
@@ -256,7 +253,7 @@ namespace Game.Ui
                         SaveGame();
                         menu.saveLoad.Show();
                         break;
-                }               
+                }
                 Globals.PlaySound(sndName, this, menu.snd);
                 menu.selectedIdx = -1;
                 menu.selected = null;
@@ -334,7 +331,7 @@ namespace Game.Ui
             {
                 Globals.PlaySound("sell_buy", this, menu.snd);
                 Globals.PlaySound("anvil", this, menu.snd);
-                menu.player.SetGold((short)-cost);
+                menu.player.SetGold((short) - cost);
                 switch (what)
                 {
                     case "all":
@@ -475,8 +472,7 @@ namespace Game.Ui
         {
             if (menu is StartMenu)
             {
-                if (!menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{index}").
-                GetText().Equals($"Slot {index + 1}"))
+                if (!menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{index}").GetText().Equals($"Slot {index + 1}"))
                 {
                     Globals.PlaySound("click2", this, menu.snd);
                     ((Control)menu.listOfMenus.GetParent()).Hide();

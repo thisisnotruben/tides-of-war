@@ -1,11 +1,10 @@
-using Godot;
-using Game.Misc.Loot;
-using Game.Spell;
-using Game.Actor;
-using Game.Database;
 using System;
 using System.Collections.Generic;
-
+using Game.Actor;
+using Game.Database;
+using Game.Misc.Loot;
+using Game.Spell;
+using Godot;
 namespace Game.Quests
 {
     public class Quest : Node
@@ -23,7 +22,6 @@ namespace Game.Quests
         private Pickable reward;
         private Dictionary<string, string> objective = new Dictionary<string, string>();
         private WorldQuests.QuestState state;
-
         public string GetQuestGiverPath()
         {
             return questGiver;
@@ -116,8 +114,8 @@ namespace Game.Quests
                         {
                             GD.Print($"Quest: ({questName}). Invalid dialogue tag: {tagName}");
                         }
-                        else if (xMLParser.Read() == Error.Ok
-                        && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
+                        else if (xMLParser.Read() == Error.Ok &&
+                            xMLParser.GetNodeType() == XMLParser.NodeType.Text)
                         {
                             string text = xMLParser.GetNodeData();
                             text = text.Replace("\n        ", " ").Replace("  ", " ").StripEdges();

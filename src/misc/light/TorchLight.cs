@@ -1,5 +1,4 @@
 using Godot;
-
 namespace Game.Misc.Light
 {
     public class TorchLight : GameLight

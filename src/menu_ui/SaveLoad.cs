@@ -1,5 +1,4 @@
 using Godot;
-
 namespace Game.Ui
 {
     public class SaveLoad : Control
@@ -7,7 +6,7 @@ namespace Game.Ui
         public override void _Ready()
         {
             SetLabels();
-            if (GetOwner() is StartMenu)
+            if (GetOwner()is StartMenu)
             {
                 GetNode<Label>("v/label").SetText("Load Game");
             }

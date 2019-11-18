@@ -1,8 +1,7 @@
 using Godot;
-
 namespace Game.Utils
 {
-    public class DeleteSpeaker: Node
+    public class DeleteSpeaker : Node
     {
         public void Delete(Node speaker)
         {

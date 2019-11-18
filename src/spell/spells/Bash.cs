@@ -1,11 +1,9 @@
 using Game.Actor;
-
 namespace Game.Spell
 {
     public class Bash : Spell
     {
         private Character target;
-
         public override float Cast()
         {
             target = caster.GetTarget();

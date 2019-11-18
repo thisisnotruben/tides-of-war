@@ -1,5 +1,4 @@
 using Godot;
-
 namespace Game.Spell
 {
     public class ExplosivearrowEffect : SpellEffect
@@ -7,9 +6,7 @@ namespace Game.Spell
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);
-
             GetNode<Node2D>("light").Show();
-
             tween.Start();
             timer.Start();
         }

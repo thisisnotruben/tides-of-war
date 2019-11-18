@@ -1,11 +1,9 @@
 using Godot;
-
 namespace Game.Ui
 {
     public class StartMenu : Menu
     {
         public Control settings;
-
         public override void _Ready()
         {
             listOfMenus = GetNode<Control>("list_of_menus/m");
@@ -15,7 +13,6 @@ namespace Game.Ui
             about = listOfMenus.GetNode<Control>("about");
             popup = GetNode<Popup>("popup");
             snd = GetNode<AudioStreamPlayer>("snd");
-
             saveLoad.GetNode("v/s/back").Connect("pressed", this, nameof(_OnBackPressed));
         }
         public void _OnNewGamePressed()

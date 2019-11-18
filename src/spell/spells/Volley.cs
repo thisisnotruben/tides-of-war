@@ -1,6 +1,5 @@
-using Godot;
 using Game.Actor;
-
+using Godot;
 namespace Game.Spell
 {
     public class Volley : Spell
@@ -8,7 +7,6 @@ namespace Game.Spell
         private Character target = null;
         private const float animSpeed = 1.5f;
         private const string animName = "attacking";
-
         public override float Cast()
         {
             // TODO: not sure how this class is going to work, need to test
@@ -17,7 +15,6 @@ namespace Game.Spell
         public void VolleyCast(string animName)
         {
             AnimationPlayer casterAnim = caster.GetNode<AnimationPlayer>("anim");
-
             if (target == null)
             {
                 if (!loaded)
@@ -40,7 +37,7 @@ namespace Game.Spell
                 }
                 else if (count < 0)
                 {
-                    caster.GetNode<Timer>("timer").SetBlockSignals(false);        
+                    caster.GetNode<Timer>("timer").SetBlockSignals(false);
                     caster.SetProcess(true);
                     UnMake();
                 }

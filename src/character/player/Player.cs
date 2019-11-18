@@ -1,8 +1,7 @@
-using Game.Ui;
-using Godot;
 using System.Collections.Generic;
 using Game.Misc.Other;
-
+using Game.Ui;
+using Godot;
 namespace Game.Actor
 {
     public class Player : Character
@@ -15,7 +14,6 @@ namespace Game.Actor
         private short gold;
         [Signal]
         public delegate void PosChanged();
-
         public override void _Ready()
         {
             base._Ready();
@@ -302,7 +300,6 @@ namespace Game.Actor
                 {
                     minVal = Mathf.Min(minVal, graveDist[i]);
                 }
-
                 SetGlobalPosition(Globals.GetMap().GetGridPosition(graveSites[minVal]));
                 SetProcessUnhandledInput(true);
                 SetProcess(true);

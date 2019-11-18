@@ -1,16 +1,14 @@
-using Godot;
-using Game.Misc.Other;
 using System;
-
+using Game.Misc.Other;
+using Godot;
 namespace Game.Spell
 {
     public class SiphonMana : Spell
     {
         public override float Cast()
         {
-
             short mana = (short)Math.Round((float)caster.GetTarget().mana * 0.2f);
-            caster.GetTarget().SetMana((short)-mana);
+            caster.GetTarget().SetMana((short) - mana);
             caster.SetMana(mana);
             PackedScene CombatTextScene = (PackedScene)GD.Load("res://src/misc/other/combat_text.tscn");
             CombatText combatText = (CombatText)CombatTextScene.Instance();

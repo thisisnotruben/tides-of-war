@@ -1,13 +1,11 @@
-using Godot;
 using System;
 using Game.Actor;
-
+using Godot;
 namespace Game.Spell
 {
     public class Slow : Spell
     {
         private Tuple<Character, float, float> values;
-
         public override float Cast()
         {
             values = new Tuple<Character, float, float>(

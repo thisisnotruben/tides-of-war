@@ -1,50 +1,46 @@
-using Godot;
 using System.Collections.Generic;
-using Game.Map;
 using Game.Actor;
-using Game.Utils;
+using Game.Map;
 using Game.Quests;
-
+using Game.Utils;
+using Godot;
 namespace Game
 {
     public class Globals : Node
     {
         public static readonly PackedScene combatText = (PackedScene)GD.Load("res://src/misc/other/combat_text.tscn");
         public static readonly Dictionary<string, string> SAVE_PATH = new Dictionary<string, string>
-        {
-            {nameof(gameMeta),"res://meta/game_meta.json"},
-            {"SAVE_SLOT_0","res://meta/save_slot_0.json"},
-            {"SAVE_SLOT_1","res://meta/save_slot_1.json"},
-            {"SAVE_SLOT_2","res://meta/save_slot_2.json"},
-            {"SAVE_SLOT_3","res://meta/save_slot_3.json"},
-            {"SAVE_SLOT_4","res://meta/save_slot_4.json"},
-            {"SAVE_SLOT_5","res://meta/save_slot_5.json"},
-            {"SAVE_SLOT_6","res://meta/save_slot_6.json"},
-            {"SAVE_SLOT_7","res://meta/save_slot_7.json"}
+        { { nameof(gameMeta), "res://meta/game_meta.json" },
+            { "SAVE_SLOT_0", "res://meta/save_slot_0.json" },
+            { "SAVE_SLOT_1", "res://meta/save_slot_1.json" },
+            { "SAVE_SLOT_2", "res://meta/save_slot_2.json" },
+            { "SAVE_SLOT_3", "res://meta/save_slot_3.json" },
+            { "SAVE_SLOT_4", "res://meta/save_slot_4.json" },
+            { "SAVE_SLOT_5", "res://meta/save_slot_5.json" },
+            { "SAVE_SLOT_6", "res://meta/save_slot_6.json" },
+            { "SAVE_SLOT_7", "res://meta/save_slot_7.json" }
         };
         public static readonly Dictionary<string, ushort> WEAPON_TYPE = new Dictionary<string, ushort>
-        {
-            {"AXE", 5},
-            {"CLUB", 3},
-            {"DAGGER", 3},
-            {"SWORD", 8},
-            {"BOW", 5},
-            {"ARROW_HIT_ARMOR", 5},
-            {"ARROW_PASS", 6},
-            {"SWING_SMALL", 3},
-            {"SWING_MEDIUM", 3},
-            {"SWING_LARGE", 3},
-            {"SWING_VERY_LARGE", 3},
-            {"BLOCK_METAL_METAL", 5},
-            {"BLOCK_METAL_WOOD", 3},
-            {"BLOCK_WOOD_WOOD", 3},
+        { { "AXE", 5 },
+            { "CLUB", 3 },
+            { "DAGGER", 3 },
+            { "SWORD", 8 },
+            { "BOW", 5 },
+            { "ARROW_HIT_ARMOR", 5 },
+            { "ARROW_PASS", 6 },
+            { "SWING_SMALL", 3 },
+            { "SWING_MEDIUM", 3 },
+            { "SWING_LARGE", 3 },
+            { "SWING_VERY_LARGE", 3 },
+            { "BLOCK_METAL_METAL", 5 },
+            { "BLOCK_METAL_WOOD", 3 },
+            { "BLOCK_WOOD_WOOD", 3 },
         };
         public static readonly Dictionary<string, int> Collision = new Dictionary<string, int>
-        {
-            {"WORLD", 1},
-            {"CHARACTERS", 2},
-            {"DEAD_CHARACTERS", 3},
-            {"COMBUSTIBLE", 8}
+        { { "WORLD", 1 },
+            { "CHARACTERS", 2 },
+            { "DEAD_CHARACTERS", 3 },
+            { "COMBUSTIBLE", 8 }
         };
         public const string HUD_SHORTCUT_GROUP = "HUD-shortcut";
         public const string SAVE_GROUP = "save";
@@ -55,7 +51,6 @@ namespace Game
         private static readonly File file = new File();
         private static WorldQuests worldQuests = null;
         private static Map.Map map = null;
-
         public override void _Ready()
         {
             LoadGameMeta();

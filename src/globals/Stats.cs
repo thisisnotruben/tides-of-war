@@ -1,8 +1,7 @@
-using Godot;
 using System;
 using System.Collections.Generic;
 using Game.Misc.Loot;
-
+using Godot;
 namespace Game
 {
     public static class Stats
@@ -19,32 +18,26 @@ namespace Game
         public static readonly Dictionary<string, Dictionary<string, ushort>> attackTable = new Dictionary<string, Dictionary<string, ushort>>
         {
             {
-                "RANGED", new Dictionary<string, ushort>
-                {
-                    {"HIT", 74},
-                    {"CRITICAL", 78},
-                    {"DODGE", 84},
-                    {"PARRY", 89}
-                }
+            "RANGED",
+            new Dictionary<string, ushort>
+            { { "HIT", 74 },
+            { "CRITICAL", 78 },
+            { "DODGE", 84 },
+            { "PARRY", 89 }
+            }
             },
             {
-                "MELEE", new Dictionary<string, ushort>
-                {
-                    {"HIT", 74},
-                    {"CRITICAL", 78},
-                    {"DODGE", 85},
-                    {"PARRY", 100}
-                    }
-                }
+            "MELEE",
+            new Dictionary<string, ushort>
+            { { "HIT", 74 },
+            { "CRITICAL", 78 },
+            { "DODGE", 85 },
+            { "PARRY", 100 }
+            }
+            }
         };
         public static readonly Dictionary<string, ushort> dropTable = new Dictionary<string, ushort>()
-        {
-            {"drop", 60},
-            {"questItem", 50},
-            {"misc", 50},
-            {"foodPotion", 70},
-            {"weapon", 60},
-            {"armor", 100}
+        { { "drop", 60 }, { "questItem", 50 }, { "misc", 50 }, { "foodPotion", 70 }, { "weapon", 60 }, { "armor", 100 }
         };
         public static Dictionary<string, double> UnitMake(double level, double unitMultiplier)
         {
@@ -57,18 +50,8 @@ namespace Game
             double minDamage = maxDamage / 2.0;
             double regenTime = 60 - 60 * agility * 0.01;
             double armor = ((stamina + agility) / 2.0) * ((minDamage + maxDamage) / 2.0) * 0.01;
-
             return new Dictionary<string, double>()
-            {
-                {nameof(stamina), stamina},
-                {nameof(intellect), intellect},
-                {nameof(agility), agility},
-                {nameof(hpMax), hpMax},
-                {nameof(manaMax), manaMax},
-                {nameof(maxDamage), maxDamage},
-                {nameof(minDamage), minDamage},
-                {nameof(regenTime), regenTime},
-                {nameof(armor), armor}
+            { { nameof(stamina), stamina }, { nameof(intellect), intellect }, { nameof(agility), agility }, { nameof(hpMax), hpMax }, { nameof(manaMax), manaMax }, { nameof(maxDamage), maxDamage }, { nameof(minDamage), minDamage }, { nameof(regenTime), regenTime }, { nameof(armor), armor }
             };
         }
         public static short HpManaRegenAmount(float level, float unitMultiplier)

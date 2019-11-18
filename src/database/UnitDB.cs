@@ -1,7 +1,6 @@
-using Godot;
-using System.Linq;
 using System.Collections.Generic;
-
+using System.Linq;
+using Godot;
 namespace Game.Database
 {
     public static class UnitDB
@@ -10,7 +9,6 @@ namespace Game.Database
         private static readonly string[] ignoreTags = { "items", "spells" };
         private static readonly string[] namedTags = { "item", "spell" };
         private static readonly XMLParser xMLParser = new XMLParser();
-
         public static Dictionary<string, string> GetUniqueUnitData(string unitEditorName, string mapName)
         {
             Dictionary<string, string> unitData = new Dictionary<string, string>();
@@ -19,20 +17,20 @@ namespace Game.Database
             xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok && !endLoop)
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNodeName().Equals(mapName))
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                    xMLParser.GetNodeName().Equals(mapName))
                 {
                     while (xMLParser.Read() == Error.Ok && !endLoop)
                     {
-                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                        && xMLParser.GetNamedAttributeValueSafe("name").Equals(unitEditorName))
+                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                            xMLParser.GetNamedAttributeValueSafe("name").Equals(unitEditorName))
                         {
-                            while (xMLParser.Read() == Error.Ok
-                            && !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
-                            && xMLParser.GetNodeName().Equals("unit")))
+                            while (xMLParser.Read() == Error.Ok &&
+                                !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd &&
+                                    xMLParser.GetNodeName().Equals("unit")))
                             {
-                                string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
-                                    ? keyName = xMLParser.GetNodeName() :
+                                string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element) ?
+                                    keyName = xMLParser.GetNodeName() :
                                     "";
                                 if (!ignoreTags.Contains(keyName))
                                 {
@@ -41,8 +39,8 @@ namespace Game.Database
                                         keyName = (unitData.ContainsKey(keyName)) ? keyName + count++.ToString() : keyName;
                                         unitData.Add(keyName, xMLParser.GetNamedAttributeValue("name"));
                                     }
-                                    else if (!keyName.Empty() && xMLParser.Read() == Error.Ok
-                                    && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
+                                    else if (!keyName.Empty() && xMLParser.Read() == Error.Ok &&
+                                        xMLParser.GetNodeType() == XMLParser.NodeType.Text)
                                     {
                                         unitData.Add(keyName, xMLParser.GetNodeData());
                                     }
@@ -60,13 +58,13 @@ namespace Game.Database
             xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok)
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNodeName().Equals(mapName))
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                    xMLParser.GetNodeName().Equals(mapName))
                 {
                     while (xMLParser.Read() == Error.Ok)
                     {
-                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                        && xMLParser.GetNamedAttributeValueSafe("name").Equals(unitEditorName))
+                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                            xMLParser.GetNamedAttributeValueSafe("name").Equals(unitEditorName))
                         {
                             return true;
                         }
@@ -80,16 +78,16 @@ namespace Game.Database
             xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok)
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNodeName().Equals("generic"))
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                    xMLParser.GetNodeName().Equals("generic"))
                 {
                     while (xMLParser.Read() == Error.Ok)
                     {
-                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                        && xMLParser.GetNodeName().Equals("worldName")
-                        && xMLParser.Read() == Error.Ok
-                        && xMLParser.GetNodeType() == XMLParser.NodeType.Text
-                        && xMLParser.GetNodeData().Equals(worldName))
+                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                            xMLParser.GetNodeName().Equals("worldName") &&
+                            xMLParser.Read() == Error.Ok &&
+                            xMLParser.GetNodeType() == XMLParser.NodeType.Text &&
+                            xMLParser.GetNodeData().Equals(worldName))
                         {
                             return true;
                         }
@@ -105,13 +103,13 @@ namespace Game.Database
             xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok)
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNodeName().Equals("generic"))
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                    xMLParser.GetNodeName().Equals("generic"))
                 {
                     while (xMLParser.Read() == Error.Ok)
                     {
-                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                        && xMLParser.GetNodeName().Equals(raceName))
+                        if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                            xMLParser.GetNodeName().Equals(raceName))
                         {
                             return bool.Parse(xMLParser.GetNamedAttributeValue("enemy"));
                         }
@@ -128,24 +126,24 @@ namespace Game.Database
             xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok && genericUnitName.Empty())
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNodeName().Equals("generic"))
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                    xMLParser.GetNodeName().Equals("generic"))
                 {
                     while (xMLParser.Read() == Error.Ok && genericUnitName.Empty())
                     {
                         if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
                         {
-                            string sprite = (xMLParser.GetNodeName().Equals("sprite"))
-                                ? xMLParser.GetNamedAttributeValueSafe("imgName")
-                                : "";
+                            string sprite = (xMLParser.GetNodeName().Equals("sprite")) ?
+                                xMLParser.GetNamedAttributeValueSafe("imgName") :
+                                "";
                             if (sprite.Equals(fileName))
                             {
                                 while (xMLParser.Read() == Error.Ok && genericUnitName.Empty())
                                 {
-                                    if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                                    && xMLParser.GetNodeName().Equals("worldName")
-                                    && xMLParser.Read() == Error.Ok
-                                    && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
+                                    if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                                        xMLParser.GetNodeName().Equals("worldName") &&
+                                        xMLParser.Read() == Error.Ok &&
+                                        xMLParser.GetNodeType() == XMLParser.NodeType.Text)
                                     {
                                         genericUnitName = xMLParser.GetNodeData();
                                     }

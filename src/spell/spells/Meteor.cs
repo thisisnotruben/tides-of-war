@@ -1,14 +1,12 @@
-using Godot;
-using Game.Actor;
 using System;
 using System.Collections.Generic;
-
+using Game.Actor;
+using Godot;
 namespace Game.Spell
 {
     public class Meteor : OsbSpell
     {
         private List<Character> targetList = new List<Character>();
-
         public override void Init(string worldName)
         {
             base.Init(worldName);

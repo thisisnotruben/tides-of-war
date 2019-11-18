@@ -1,13 +1,11 @@
-using Godot;
-using Game.Actor;
 using System.Collections.Generic;
-
+using Game.Actor;
+using Godot;
 namespace Game.Spell
 {
     public class Stomp : Spell
     {
         private List<Character> targetList = new List<Character>();
-
         public override float Cast()
         {
             if (loaded)
@@ -21,7 +19,7 @@ namespace Game.Spell
             {
                 foreach (Area2D characterArea2D in GetNode<Area2D>("sight").GetOverlappingAreas())
                 {
-                    Character character = characterArea2D.GetOwner() as Character;
+                    Character character = characterArea2D.GetOwner()as Character;
                     if (character != null && character != caster)
                     {
                         character.TakeDamage(10, false, caster, Game.Misc.Other.CombatText.TextType.HIT);

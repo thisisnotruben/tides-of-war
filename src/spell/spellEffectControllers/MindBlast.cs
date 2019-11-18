@@ -1,6 +1,5 @@
-using Godot;
 using Game.Misc.Missile;
-
+using Godot;
 namespace Game.Spell
 {
     public class MindBlastEffect : SpellEffect
@@ -8,8 +7,7 @@ namespace Game.Spell
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);
-
-            Bolt bolt = GetOwner() as Bolt;
+            Bolt bolt = GetOwner()as Bolt;
             if (bolt != null)
             {
                 bolt.SetGlobalPosition(bolt.GetTarget().GetNode<Node2D>("head").GetGlobalPosition());

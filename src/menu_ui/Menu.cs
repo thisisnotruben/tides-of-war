@@ -1,6 +1,5 @@
-using Godot;
 using Game.Actor;
-
+using Godot;
 namespace Game.Ui
 {
     public abstract class Menu : Control

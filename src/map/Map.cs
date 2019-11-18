@@ -1,9 +1,8 @@
-using Godot;
 using System.Collections.Generic;
 using Game.Actor;
-using Game.Misc.Loot;
 using Game.Database;
-
+using Game.Misc.Loot;
+using Godot;
 namespace Game.Map
 {
     public class Map : Node2D
@@ -19,7 +18,6 @@ namespace Game.Map
         private Vector2 mapSize;
         private Vector2 pathStartPosition;
         private Vector2 pathEndPosition;
-
         public override void _Ready()
         {
             Globals.SetMap(this); // This is used for debugging, until Godot fixies the issue
@@ -110,10 +108,10 @@ namespace Game.Map
             while (!resource.Empty())
             {
                 resource = directoryPath.PlusFile(resource);
-                if (resource.Extension().Equals(ext) && !resource.Contains("flail")
-                && !((npc.GetName().Contains("critter") && !resource.Contains(npc.GetName().Split('-')[1]))
-                || ((npc.GetName().Contains("<#>") && !resource.Contains("comm"))
-                || (!npc.GetName().Contains("<#>") && resource.Contains("comm")))))
+                if (resource.Extension().Equals(ext) && !resource.Contains("flail") &&
+                    !((npc.GetName().Contains("critter") && !resource.Contains(npc.GetName().Split('-')[1])) ||
+                        ((npc.GetName().Contains("<#>") && !resource.Contains("comm")) ||
+                            (!npc.GetName().Contains("<#>") && resource.Contains("comm")))))
                 {
                     spriteList.Add(resource);
                 }

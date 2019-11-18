@@ -1,13 +1,12 @@
-using Godot;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Game.Actor;
+using Game.Database;
 using Game.Misc.Loot;
 using Game.Misc.Other;
 using Game.Quests;
-using Game.Database;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-
+using Godot;
 namespace Game.Ui
 {
     public class InGameMenu : Menu
@@ -15,8 +14,7 @@ namespace Game.Ui
         private static readonly PackedScene questEntryScene = (PackedScene)GD.Load("res://src/menu_ui/quest_entry.tscn");
         public Control spellMenu;
         public Control hpMana;
-        public enum Bags : byte { INVENTORY, MERCHANT, SPELL };
-
+        public enum Bags : byte { INVENTORY, MERCHANT, SPELL }
         public override void _Ready()
         {
             listOfMenus = GetNode<Control>("c/game_menu/list_of_menus/m");
@@ -36,9 +34,7 @@ namespace Game.Ui
             popup = GetNode<Popup>("c/game_menu/popup");
             hpMana = GetNode<Control>("c/hp_mana");
             snd = GetNode<AudioStreamPlayer>("snd");
-
             saveLoad.GetNode("v/s/back").Connect("pressed", this, nameof(_OnBackPressed));
-
             player = (Player)GetOwner();
             foreach (Node control in new Node[] { inventoryBag, spellBook })
             {
@@ -183,8 +179,8 @@ namespace Game.Ui
             if (miniMap.GetTexture() != null)
             {
                 Globals.PlaySound("click5", this, snd);
-                if (player.GetSpell() != null
-                && player.GetSpell().GetPickableSubType() == WorldObject.WorldTypes.CHOOSE_AREA_EFFECT)
+                if (player.GetSpell() != null &&
+                    player.GetSpell().GetPickableSubType() == WorldObject.WorldTypes.CHOOSE_AREA_EFFECT)
                 {
                     player.GetSpell().UnMake();
                 }
@@ -254,8 +250,8 @@ namespace Game.Ui
                         itemInfo.GetNode<Control>("s/h/left").Show();
                         itemInfo.GetNode<Control>("s/h/right").Show();
                         sndName = SndConfigure();
-                        if (!player.GetNode("inventory").GetChildren().Contains(selectedPickable)
-                        || merchant.GetNode<Label>("s/v/label").GetText().Equals("Inventory"))
+                        if (!player.GetNode("inventory").GetChildren().Contains(selectedPickable) ||
+                            merchant.GetNode<Label>("s/v/label").GetText().Equals("Inventory"))
                         {
                             sndName = sndName.Replace("on", "off");
                             merchant.Show();
@@ -337,7 +333,6 @@ namespace Game.Ui
             else
             {
                 ItemInfoHideExcept("cast");
-
             }
             selectedPickable.Describe();
             if (selectedPickable.GetIndex() == 0)
@@ -462,8 +457,8 @@ namespace Game.Ui
                         break;
                 }
             }
-            else if ((selectedPickable.GetWorldType() == WorldObject.WorldTypes.WEAPON & player.GetWeapon() != null)
-            || (selectedPickable.GetWorldType() == WorldObject.WorldTypes.ARMOR & player.GetArmor() != null))
+            else if ((selectedPickable.GetWorldType() == WorldObject.WorldTypes.WEAPON & player.GetWeapon() != null) ||
+                (selectedPickable.GetWorldType() == WorldObject.WorldTypes.ARMOR & player.GetArmor() != null))
             {
                 popup.GetNode<Label>("m/error/label").SetText("Inventory\nFull!");
                 popup.GetNode<Control>("m/error").Show();
@@ -554,7 +549,7 @@ namespace Game.Ui
                     Globals.PlaySound("click2", this, snd);
                     break;
             }
-            Item metaItem = inventoryBag.GetItemMetaData(selectedIdx) as Item;
+            Item metaItem = inventoryBag.GetItemMetaData(selectedIdx)as Item;
             if (metaItem != null && selectedItem.GetWorldType() == WorldObject.WorldTypes.POTION)
             {
                 inventoryBag.SetSlotCoolDown(selectedIdx, metaItem.GetDuration(), 0.0f);
@@ -609,7 +604,7 @@ namespace Game.Ui
             if (Globals.GetWorldQuests().GetFocusedQuest() != null)
             {
                 dialogue.GetNode<Label>("s/s/label2").SetText(
-                        Globals.GetWorldQuests().GetFocusedQuest().GetQuestStartText());
+                    Globals.GetWorldQuests().GetFocusedQuest().GetQuestStartText());
             }
             else
             {
@@ -710,9 +705,8 @@ namespace Game.Ui
                         popup.GetNode<Label>("m/error/label").SetText("Invalid\nTarget!");
                         showPopup = true;
                     }
-
-                    else if (player.GetCenterPos().DistanceTo(player.GetTarget().GetCenterPos()) > selectedSpell.GetSpellRange()
-                    && selectedSpell.GetSpellRange() > 0 && selectedSpell.RequiresTarget())
+                    else if (player.GetCenterPos().DistanceTo(player.GetTarget().GetCenterPos()) > selectedSpell.GetSpellRange() &&
+                        selectedSpell.GetSpellRange() > 0 && selectedSpell.RequiresTarget())
                     {
                         popup.GetNode<Label>("m/error/label").SetText("Target Not\nIn Range!");
                         showPopup = true;
@@ -768,8 +762,8 @@ namespace Game.Ui
         {
             GetTree().SetPause(true);
             listOfMenus.Show();
-            if (player.GetSpell() != null
-            && player.GetSpell().GetPickableSubType() == WorldObject.WorldTypes.CHOOSE_AREA_EFFECT)
+            if (player.GetSpell() != null &&
+                player.GetSpell().GetPickableSubType() == WorldObject.WorldTypes.CHOOSE_AREA_EFFECT)
             {
                 player.GetSpell().UnMake();
             }
@@ -809,8 +803,8 @@ namespace Game.Ui
         {
             if (player.GetTarget() != null)
             {
-                if (!(player.GetWeapon() != null && player.GetArmor() != null)
-                || player.GetTarget().GetWorldType() == WorldObject.WorldTypes.TRAINER)
+                if (!(player.GetWeapon() != null && player.GetArmor() != null) ||
+                    player.GetTarget().GetWorldType() == WorldObject.WorldTypes.TRAINER)
                 {
                     merchant.GetNode<Control>("s/v2/repair").Hide();
                     return;
@@ -832,8 +826,8 @@ namespace Game.Ui
                     {
                         merchant.GetNode<Control>("s/v2/repair").Show();
                     }
-                    else if (!merchant.GetNode<Control>("s/v2/repair").IsVisible()
-                    || player.GetWeapon() == null)
+                    else if (!merchant.GetNode<Control>("s/v2/repair").IsVisible() ||
+                        player.GetWeapon() == null)
                     {
                         merchant.GetNode<Control>("s/v2/repair").Hide();
                     }
@@ -901,13 +895,13 @@ namespace Game.Ui
         public void _OnHudButtonDown(string nodePath)
         {
             ((TextureRect)GetNode(nodePath).GetParent())
-                .SetTexture((Texture)GD.Load("res://asset/img/ui/on_screen_button_pressed.res"));
+            .SetTexture((Texture)GD.Load("res://asset/img/ui/on_screen_button_pressed.res"));
             GetNode<Control>(nodePath).SetScale(new Vector2(0.8f, 0.8f));
         }
         public void _OnHudButtonUp(string nodePath)
         {
             ((TextureRect)GetNode(nodePath).GetParent())
-                .SetTexture((Texture)GD.Load("res://asset/img/ui/on_screen_button.res"));
+            .SetTexture((Texture)GD.Load("res://asset/img/ui/on_screen_button.res"));
             GetNode<Control>(nodePath).SetScale(new Vector2(1.0f, 1.0f));
         }
         public void _OnMoveHud(bool playerHud = false)
@@ -951,7 +945,7 @@ namespace Game.Ui
             if (player.GetGold() >= healerCost)
             {
                 Globals.PlaySound("sell_buy", this, snd);
-                player.SetGold((short)-healerCost);
+                player.SetGold((short) - healerCost);
                 player.SetHp(player.hpMax);
                 _OnBackPressed();
             }
@@ -1018,7 +1012,7 @@ namespace Game.Ui
                 string result = regEx.Search(pickableDescription).GetString();
                 pickableDescription = pickableDescription.Insert(
                     pickableDescription.Find(result) + result.Length,
-                        $"-Gold: {pickable.GetGold().ToString("N0")}\n");
+                    $"-Gold: {pickable.GetGold().ToString("N0")}\n");
             }
             itemInfo.GetNode<Label>("s/v/label").SetText(pickable.GetWorldName());
             itemInfo.GetNode<TextureRect>("s/v/c/v/bg/m/icon").SetTexture(pickable.GetIcon());
@@ -1046,12 +1040,12 @@ namespace Game.Ui
                 case WorldObject.WorldTypes.WEAPON:
                     Tuple<short, short> values = item.GetValues();
                     player.SetWeapon((on) ? item : null);
-                    player.minDamage += (on) ? values.Item1 : (short)-values.Item1;
-                    player.maxDamage += (on) ? values.Item2 : (short)-values.Item2;
+                    player.minDamage += (on) ? values.Item1 : (short) - values.Item1;
+                    player.maxDamage += (on) ? values.Item2 : (short) - values.Item2;
                     break;
                 case WorldObject.WorldTypes.ARMOR:
                     player.SetArmor((on) ? item : null);
-                    player.armor += (on) ? item.GetValue() : (short)-item.GetValue();
+                    player.armor += (on) ? item.GetValue() : (short) - item.GetValue();
                     break;
             }
             string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), item.GetWorldType()).ToLower()}_slot/m/icon";
@@ -1072,8 +1066,8 @@ namespace Game.Ui
                 ItemSlot itemSlot = inventoryBag.GetItemSlot(item);
                 foreach (ItemSlot otherItemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
                 {
-                    if (otherItemSlot.GetItem() == item
-                    && !itemSlot.IsConnected(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut)))
+                    if (otherItemSlot.GetItem() == item &&
+                        !itemSlot.IsConnected(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut)))
                     {
                         itemSlot.Connect(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut));
                     }
@@ -1177,14 +1171,14 @@ namespace Game.Ui
                 {
                     merchant.GetNode<Label>("s/v/label").SetText(worldName);
                 }
-                string barNodePath = (worldName.Equals(player.GetWorldName()))
-                ? $"m/h/p/c/bg/m/v/{type}_bar"
-                : $"m/h/u/c/bg/m/v/{type}_bar";
-                string lblNodePath = (worldName.Equals(player.GetWorldName()))
-                ? $"m/h/p/c/bg/m/v/{type}_bar/label"
-                : $"m/h/u/c/bg/m/v/{type}_bar/label";
+                string barNodePath = (worldName.Equals(player.GetWorldName())) ?
+                    $"m/h/p/c/bg/m/v/{type}_bar" :
+                    $"m/h/u/c/bg/m/v/{type}_bar";
+                string lblNodePath = (worldName.Equals(player.GetWorldName())) ?
+                    $"m/h/p/c/bg/m/v/{type}_bar/label" :
+                    $"m/h/u/c/bg/m/v/{type}_bar/label";
                 hpMana.GetNode<TextureProgress>(barNodePath).SetValue(
-                        100.0f * (float)value1 / (float)value2);
+                    100.0f * (float)value1 / (float)value2);
                 hpMana.GetNode<Label>(lblNodePath).SetText($"{value1} / {value2}");
             }
         }
@@ -1272,9 +1266,9 @@ namespace Game.Ui
             }
             if (pickable is Item)
             {
-                if (!player.IsDead() && !itemSlot.IsCoolingDown()
-                && (pickable.GetWorldType() == WorldObject.WorldTypes.FOOD
-                || pickable.GetWorldType() == WorldObject.WorldTypes.POTION))
+                if (!player.IsDead() && !itemSlot.IsCoolingDown() &&
+                    (pickable.GetWorldType() == WorldObject.WorldTypes.FOOD ||
+                        pickable.GetWorldType() == WorldObject.WorldTypes.POTION))
                 {
                     _OnUsePressed(true);
                 }

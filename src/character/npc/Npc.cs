@@ -1,10 +1,9 @@
-using Godot;
+using System.Collections.Generic;
+using Game.Database;
 using Game.Misc.Loot;
 using Game.Misc.Other;
 using Game.Ui;
-using Game.Database;
-using System.Collections.Generic;
-
+using Godot;
 namespace Game.Actor
 {
     public class Npc : Character
@@ -14,7 +13,6 @@ namespace Game.Actor
         private List<Vector2> patrolPath = new List<Vector2>();
         [Signal]
         public delegate void DropLoot(Npc npc, Vector2 worldPosition, int idk);
-
         public override void _Ready()
         {
             base._Ready();
@@ -68,7 +66,7 @@ namespace Game.Actor
         }
         public void _OnSightAreaEntered(Area2D area2D)
         {
-            Character character = area2D.GetOwner() as Character;
+            Character character = area2D.GetOwner()as Character;
             if (character != null && !dead && (target == null || character.IsDead()) && character != this)
             {
                 if (!enemy && character is Player)

@@ -1,5 +1,4 @@
 using Godot;
-
 namespace Game.Spell
 {
     public class HasteEffect : SpellEffect

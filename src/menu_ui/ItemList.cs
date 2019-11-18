@@ -1,17 +1,14 @@
-using Godot;
-using Game.Misc.Loot;
 using System.Collections.Generic;
-
+using Game.Misc.Loot;
+using Godot;
 namespace Game.Ui
 {
     public class ItemList : Control
     {
         public bool allowSlotsToCooldown = true;
         public byte ITEM_MAX = 25;
-
         [Signal]
         public delegate void OnItemSelected(int itemIdx, bool sifting);
-
         public override void _Ready()
         {
             for (byte i = 0; i < ITEM_MAX - GetChildCount(); i++)
@@ -60,8 +57,8 @@ namespace Game.Ui
             foreach (Node node in GetChildren())
             {
                 itemSlot = node as ItemSlot;
-                if (itemSlot != null && (itemSlot.GetItem() == null || (stackSlot && pickable.GetStackSize() > 0
-                && pickable.Equals(itemSlot.GetItem()) && itemSlot.IsStacking() && !itemSlot.IsFull())))
+                if (itemSlot != null && (itemSlot.GetItem() == null || (stackSlot && pickable.GetStackSize() > 0 &&
+                        pickable.Equals(itemSlot.GetItem()) && itemSlot.IsStacking() && !itemSlot.IsFull())))
                 {
                     itemSlot.SetItem(pickable);
                     break;
@@ -94,7 +91,7 @@ namespace Game.Ui
         }
         public void RemoveItem(int slotIdx, bool shuffle = true, bool forceClear = false, bool funnel = false)
         {
-            ItemSlot itemSlot = GetChild(slotIdx) as ItemSlot;
+            ItemSlot itemSlot = GetChild(slotIdx)as ItemSlot;
             if (itemSlot != null)
             {
                 itemSlot.SetItem(null, shuffle, forceClear, funnel);
@@ -125,7 +122,7 @@ namespace Game.Ui
         }
         public Pickable GetItemMetaData(int slotIdx)
         {
-            ItemSlot itemSlot = GetChild(slotIdx) as ItemSlot;
+            ItemSlot itemSlot = GetChild(slotIdx)as ItemSlot;
             if (itemSlot != null)
             {
                 return itemSlot.GetItem();
@@ -138,7 +135,7 @@ namespace Game.Ui
         }
         public void SetSlotCoolDown(int slotIdx, float value, float seek)
         {
-            ItemSlot itemSlot = GetChild(slotIdx) as ItemSlot;
+            ItemSlot itemSlot = GetChild(slotIdx)as ItemSlot;
             if (itemSlot != null)
             {
                 itemSlot.CoolDown(itemSlot.GetItem(), value, seek);
@@ -154,7 +151,7 @@ namespace Game.Ui
         }
         public bool IsSlotCoolingDown(int slotIdx)
         {
-            ItemSlot itemSlot = GetChild(slotIdx) as ItemSlot;
+            ItemSlot itemSlot = GetChild(slotIdx)as ItemSlot;
             if (itemSlot != null)
             {
                 return itemSlot.IsCoolingDown();

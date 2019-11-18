@@ -1,10 +1,9 @@
-using Godot;
-using Game.Actor;
-using Game.Spell;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using Game.Actor;
 using Game.Misc.Other;
-
+using Game.Spell;
+using Godot;
 namespace Game.Misc.Missile
 {
     public class Bolt : WorldObject
@@ -19,10 +18,8 @@ namespace Game.Misc.Missile
         Character target;
         Character originator;
         Spell.Spell spell;
-
         [Signal]
         public delegate void Hit(Spell.Spell spell);
-
         public override void _Ready()
         {
             SetProcess(false);
@@ -115,14 +112,12 @@ namespace Game.Misc.Missile
             SetSpell(spell);
             spawnPos = globalPosition;
             this.originator = originator;
-            
         }
         public void Fade()
         {
             GetNode<AnimationPlayer>("anim").Play("fade");
         }
         public void Attack(bool ignoreArmor = false, Dictionary<string, Dictionary<string, ushort>> attackTable = null)
-
         {
             if (attackTable == null)
             {
@@ -137,7 +132,6 @@ namespace Game.Misc.Missile
             bool PlaySound = false;
             string snd = $"{weaponTypeName.ToLower()}{sndIdx}";
             CombatText.TextType hitType;
-
             if (diceRoll <= attackTable["RANGED"]["HIT"])
             {
                 hitType = CombatText.TextType.HIT;
@@ -170,7 +164,6 @@ namespace Game.Misc.Missile
             string texturePath = "res://asset/img/missile-spell/{0}.res";
             string textureSize = "big";
             string raceName = originator.GetNode<Sprite>("img").GetTexture().GetPath().GetBaseDir().GetFile();
-
             switch (raceName)
             {
                 case "gnoll":
@@ -198,7 +191,6 @@ namespace Game.Misc.Missile
                     AddChild(spellEffect);
                     spellEffect.SetOwner(this);
                 }
-
                 switch (spell.GetWorldType())
                 {
                     case WorldTypes.FIREBALL:
@@ -233,9 +225,9 @@ namespace Game.Misc.Missile
                         texturePath = string.Format(texturePath, "arrow_{0}3");
                         break;
                     default:
-                        if (spell.GetWorldName().Contains("shot")
-                        || spell.GetWorldName().Contains("arrow")
-                        || spell.GetWorldType() == WorldTypes.VOLLEY)
+                        if (spell.GetWorldName().Contains("shot") ||
+                            spell.GetWorldName().Contains("arrow") ||
+                            spell.GetWorldType() == WorldTypes.VOLLEY)
                         {
                             texturePath = string.Format(texturePath, "arrow_{0}0");
                         }

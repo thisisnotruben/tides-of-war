@@ -1,10 +1,9 @@
-using Godot;
-using Game.Actor;
-using Game.Ui;
-using Game.Database;
 using System;
 using System.Collections.Generic;
-
+using Game.Actor;
+using Game.Database;
+using Game.Ui;
+using Godot;
 namespace Game.Misc.Loot
 {
     public class Item : Pickable
@@ -16,7 +15,6 @@ namespace Game.Misc.Loot
         private short value;
         [Signal]
         public delegate void EquipItem(Item item, bool equip);
-
         public override void Init(string worldName)
         {
             Dictionary<string, string> itemData = ItemDB.GetItemData(worldName);
@@ -75,7 +73,7 @@ namespace Game.Misc.Loot
         }
         public override void _OnTimerTimeout()
         {
-            if (GetOwner() is Character)
+            if (GetOwner()is Character)
             {
                 ConfigureBuff((Character)GetOwner(), true);
             }

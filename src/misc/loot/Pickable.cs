@@ -1,8 +1,7 @@
-using Godot;
 using Game.Actor;
 using Game.Misc.Other;
 using Game.Ui;
-
+using Godot;
 namespace Game.Misc.Loot
 {
     public abstract class Pickable : WorldObject
@@ -16,7 +15,6 @@ namespace Game.Misc.Loot
         private protected short level;
         private protected string pickableDescription;
         private protected AtlasTexture icon;
-
         [Signal]
         public delegate void DescribePickable(Pickable pickable, string PickableWorldDescription);
         [Signal]
@@ -25,7 +23,6 @@ namespace Game.Misc.Loot
         public delegate void Dropped(Pickable pickable);
         [Signal]
         public delegate void PickableExchanged(Pickable pickable, bool add);
-
         public override void _Ready()
         {
             // Connect(nameof(PickableExchanged), Globals.GetWorldQuests(),
@@ -35,7 +32,7 @@ namespace Game.Misc.Loot
         public abstract void _OnTimerTimeout();
         public virtual void _OnSightAreaEntered(Area2D area2D)
         {
-            Character character = area2D.GetOwner() as Character;
+            Character character = area2D.GetOwner()as Character;
             if (character != null && !character.IsDead() && character is Player)
             {
                 Tween tween = GetNode<Tween>("tween");
@@ -57,7 +54,7 @@ namespace Game.Misc.Loot
         }
         public virtual void _OnSightAreaExited(Area2D area2D)
         {
-            Character character = area2D.GetOwner() as Character;
+            Character character = area2D.GetOwner()as Character;
             if (character != null && !character.IsDead() && character is Player)
             {
                 GetNode<AudioStreamPlayer2D>("snd").SetStream((AudioStreamSample)Globals.sndMeta["chest_open"]);
@@ -131,7 +128,7 @@ namespace Game.Misc.Loot
             if (GetPauseMode() == PauseModeEnum.Process)
             {
                 CallDeferred(nameof(GetPickable),
-                   ((Node)(((Godot.Collections.Dictionary)GetSignalConnectionList(nameof(SetInMenu))[0])["target"])).GetOwner(), false);
+                    ((Node)(((Godot.Collections.Dictionary)GetSignalConnectionList(nameof(SetInMenu))[0])["target"])).GetOwner(), false);
                 SetPauseMode(PauseModeEnum.Inherit);
             }
         }

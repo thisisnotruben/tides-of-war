@@ -1,11 +1,9 @@
 using System;
-
 namespace Game.Spell
 {
     public class SniperShot : Spell
     {
         ushort amount;
-
         public override float Cast()
         {
             caster.weaponRange -= amount;

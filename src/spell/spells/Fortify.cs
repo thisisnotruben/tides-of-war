@@ -1,6 +1,5 @@
-using Godot;
 using System;
-
+using Godot;
 namespace Game.Spell
 {
     public class Fortify : Spell
@@ -12,7 +11,7 @@ namespace Game.Spell
             caster.armor += amount;
             SetTime(60.0f);
             caster.SetSpell(this,
-            (loaded) ? GetDuration() - GetNode<Timer>("timer").GetWaitTime() : 0.0f);
+                (loaded) ? GetDuration() - GetNode<Timer>("timer").GetWaitTime() : 0.0f);
             return base.Cast();
         }
         public override void _OnTimerTimeout()

@@ -1,14 +1,12 @@
-using Godot;
-using Game.Actor;
-using System.Collections.Generic;
 using System;
-
+using System.Collections.Generic;
+using Game.Actor;
+using Godot;
 namespace Game.Spell
 {
     public class IntimidatingShout : Spell
     {
         private Dictionary<Character, Tuple<short, short>> targetList = new Dictionary<Character, Tuple<short, short>>();
-
         public override float Cast()
         {
             if (loaded)
@@ -23,7 +21,7 @@ namespace Game.Spell
             {
                 foreach (Area2D characterArea2D in GetNode<Area2D>("sight").GetOverlappingAreas())
                 {
-                    Character character = characterArea2D.GetOwner() as Character;
+                    Character character = characterArea2D.GetOwner()as Character;
                     if (character != null && character != caster)
                     {
                         short amount1 = (short)Math.Round((float)character.minDamage * 0.20f);

@@ -1,6 +1,5 @@
-using Godot;
 using Game.Actor;
-
+using Godot;
 namespace Game.Misc.Other
 {
     public class LandMine : WorldObject, ICombustible
@@ -9,7 +8,6 @@ namespace Game.Misc.Other
         private bool exploded;
         public short minDamage;
         public short maxDamage;
-
         public void _OnTimerTimeout()
         {
             Explode();
@@ -44,7 +42,7 @@ namespace Game.Misc.Other
                     int layer = area2D.GetCollisionLayer();
                     if (layer == Globals.Collision["CHARACTERS"] && area2D != exludedUnitArea)
                     {
-                        Character character = area2D.GetOwner() as Character;
+                        Character character = area2D.GetOwner()as Character;
                         if (character != null)
                         {
                             GD.Randomize();
@@ -58,7 +56,7 @@ namespace Game.Misc.Other
                     }
                     else if (layer == Globals.Collision["COMBUSTIBLE"])
                     {
-                        ICombustible obj = area2D.GetOwner() as ICombustible;
+                        ICombustible obj = area2D.GetOwner()as ICombustible;
                         if (obj != null)
                         {
                             obj.Explode();

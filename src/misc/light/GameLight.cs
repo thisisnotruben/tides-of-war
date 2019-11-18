@@ -1,12 +1,10 @@
-using Godot;
 using System.Collections.Generic;
-
+using Godot;
 namespace Game.Misc.Light
 {
     public abstract class GameLight : Node2D
     {
         private static List<GameLight> gameLights = new List<GameLight>();
-
         public GameLight()
         {
             gameLights.Add(this);

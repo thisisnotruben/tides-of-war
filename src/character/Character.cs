@@ -1,12 +1,11 @@
-using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Spell;
-using Game.Misc.Other;
-using Game.Misc.Missile;
 using Game.Misc.Loot;
-
+using Game.Misc.Missile;
+using Game.Misc.Other;
+using Game.Spell;
+using Godot;
 namespace Game.Actor
 {
     public abstract class Character : WorldObject, ISaveable
@@ -14,8 +13,7 @@ namespace Game.Actor
         public static readonly PackedScene footStepScene = (PackedScene)GD.Load("res://src/misc/other/footstep.tscn");
         public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/misc/other/buff_anim.tscn");
         public static readonly PackedScene missileScene = (PackedScene)GD.Load("res://src/misc/missile/missile.tscn");
-
-        public enum States { ALIVE, DEAD, MOVING, IDLE, ATTACKING, RETURNING };
+        public enum States { ALIVE, DEAD, MOVING, IDLE, ATTACKING, RETURNING }
         private States state;
         private string swingType;
         private bool bumping;
@@ -49,10 +47,9 @@ namespace Game.Actor
         private protected Dictionary<Character, short> targetList = new Dictionary<Character, short>();
         private Dictionary<Character, short> attackerTable = new Dictionary<Character, short>();
         public Dictionary<string, List<Item>> buffs = new Dictionary<string, List<Item>>
-            {
-                {"active", new List<Item>()},
-                {"pending", new List<Item>()}
-            };
+        { { "active", new List<Item>() },
+            { "pending", new List<Item>() }
+        };
         [Signal]
         public delegate void Talked();
         [Signal]
@@ -61,7 +58,6 @@ namespace Game.Actor
         public delegate void UpdateHud(string type, string worldName, short amount, short maxAmount);
         [Signal]
         public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
-
         public override void _Ready()
         {
             snd = GetNode<AudioStreamPlayer2D>("snd");
@@ -120,9 +116,9 @@ namespace Game.Actor
                         damage = 0;
                         sndName = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
                     }
-                    else if (diceRoll <= attackTable["PARRY"]
-                            && target.weaponType != WorldTypes.BOW
-                            && target.GetState() == States.ATTACKING)
+                    else if (diceRoll <= attackTable["PARRY"] &&
+                        target.weaponType != WorldTypes.BOW &&
+                        target.GetState() == States.ATTACKING)
                     {
                         hitType = CombatText.TextType.PARRY;
                         damage = 0;
@@ -183,7 +179,7 @@ namespace Game.Actor
                     AddChild(combatText);
                     if (damage > 0)
                     {
-                        SetHp((short)-damage);
+                        SetHp((short) - damage);
                         combatText.SetType($"-{damage}", CombatText.TextType.HIT, GetNode<Node2D>("img").GetPosition());
                         if (!IsDead() && GetState() == States.ATTACKING || GetState() == States.IDLE)
                         {
@@ -214,9 +210,7 @@ namespace Game.Actor
             path.Clear();
             SetProcess(false);
             spell.Cast();
-
             await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
-
             GetNode<Sprite>("img").SetFrame(0);
             SetProcess(true);
         }
@@ -242,16 +236,12 @@ namespace Game.Actor
             tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), GetGlobalPosition() + direction,
                 GetGlobalPosition().DistanceTo(GetGlobalPosition() + direction) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
             tween.Start();
-
             await ToSignal(tween, "tween_completed");
-
             Vector2 gridPos = Globals.GetMap().GetGridPosition(GetGlobalPosition());
             tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), gridPos,
                 gridPos.DistanceTo(GetGlobalPosition()) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.In);
             tween.Start();
-
             await ToSignal(tween, "tween_completed");
-
             bumping = false;
             SetProcess(true);
         }
@@ -382,21 +372,17 @@ namespace Game.Actor
                 GetNode<AnimationPlayer>("anim").Play("dying");
                 SetProcessUnhandledInput(false);
                 path.Clear();
-
                 await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
-
                 Sprite img = GetNode<Sprite>("img");
                 img.SetFrame(0);
                 img.SetFlipH(false);
                 img.SetModulate(new Color("#ffffff"));
                 SetModulate(new Color(1.0f, 1.0f, 1.0f, 0.8f));
-
                 if (hp > 0)
                 {
                     SetHp((short)(-hpMax));
                 }
                 SetMana((short)(-manaMax));
-
                 foreach (Spell.Spell spell in spellQueue)
                 {
                     spell.UnMake();

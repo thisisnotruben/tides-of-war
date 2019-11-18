@@ -1,7 +1,6 @@
-using Godot;
-using System.Linq;
 using System.Collections.Generic;
-
+using System.Linq;
+using Godot;
 namespace Game.Database
 {
     public static class ItemDB
@@ -9,11 +8,10 @@ namespace Game.Database
         private static readonly string DB_PATH = "res://src/database/data/ItemDB.xml";
         private static readonly string[] typeTags = { "Weapon", "Armor", "Potion", "Food", "Misc" };
         private static readonly XMLParser xMLParser = new XMLParser();
-
         public static Dictionary<string, string> GetItemData(string worldName)
         {
-            bool potion = (worldName.ToLower().Contains("potion")
-                || worldName.ToLower().Contains("elixir"));
+            bool potion = (worldName.ToLower().Contains("potion") ||
+                worldName.ToLower().Contains("elixir"));
             Dictionary<string, string> itemData = new Dictionary<string, string>();
             xMLParser.Open(DB_PATH);
             string itemSubType = "";
@@ -29,7 +27,7 @@ namespace Game.Database
                         }
                         else
                         {
-                            itemData.Add("type", xMLParser.GetNodeName());    
+                            itemData.Add("type", xMLParser.GetNodeName());
                         }
                     }
                     else if (xMLParser.GetNodeName().Equals("itemClass"))
@@ -45,27 +43,27 @@ namespace Game.Database
                             itemData.Add("subType", itemSubType);
                         }
                     }
-                    else if (xMLParser.GetNodeName().Equals("item")
-                    && (xMLParser.GetNamedAttributeValue("name").Equals(worldName)
-                    || (potion && worldName.Contains(xMLParser.GetNamedAttributeValue("name")))))
+                    else if (xMLParser.GetNodeName().Equals("item") &&
+                        (xMLParser.GetNamedAttributeValue("name").Equals(worldName) ||
+                            (potion && worldName.Contains(xMLParser.GetNamedAttributeValue("name")))))
                     {
-                        while (xMLParser.Read() == Error.Ok
-                        && !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd
-                        && xMLParser.GetNodeName().Equals("item")))
+                        while (xMLParser.Read() == Error.Ok &&
+                            !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd &&
+                                xMLParser.GetNodeName().Equals("item")))
                         {
                             if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
                             {
                                 string key = xMLParser.GetNodeName();
                                 itemSubType = xMLParser.GetNamedAttributeValueSafe("name"); // To get the potion subType
-                                if (potion && (xMLParser.GetAttributeCount() == 0
-                                || worldName.ToLower().Contains(xMLParser.GetNamedAttributeValueSafe("name")))
-                                && xMLParser.Read() == Error.Ok && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
+                                if (potion && (xMLParser.GetAttributeCount() == 0 ||
+                                        worldName.ToLower().Contains(xMLParser.GetNamedAttributeValueSafe("name"))) &&
+                                    xMLParser.Read() == Error.Ok && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
                                 {
                                     itemData.Add(key, xMLParser.GetNodeData());
                                     itemData["subType"] = itemSubType;
                                 }
-                                else if (!potion && xMLParser.Read() == Error.Ok
-                                && xMLParser.GetNodeType() == XMLParser.NodeType.Text)
+                                else if (!potion && xMLParser.Read() == Error.Ok &&
+                                    xMLParser.GetNodeType() == XMLParser.NodeType.Text)
                                 {
                                     itemData.Add(key, xMLParser.GetNodeData());
                                 }
@@ -86,9 +84,9 @@ namespace Game.Database
             xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok)
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element
-                && xMLParser.GetNodeName().Equals("item")
-                && xMLParser.GetNamedAttributeValue("name").Equals(nameCheck))
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                    xMLParser.GetNodeName().Equals("item") &&
+                    xMLParser.GetNamedAttributeValue("name").Equals(nameCheck))
                 {
                     return true;
                 }
@@ -97,4 +95,3 @@ namespace Game.Database
         }
     }
 }
-

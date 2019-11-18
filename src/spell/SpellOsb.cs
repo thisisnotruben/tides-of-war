@@ -1,14 +1,12 @@
-using Godot;
-using Game.Actor;
 using System.Collections.Generic;
-
+using Game.Actor;
+using Godot;
 namespace Game.Spell
 {
     public abstract class OsbSpell : Spell
     {
         Player player;
         List<Character> targets = new List<Character>();
-
         public override void _Ready()
         {
             SetProcess(false);
@@ -30,16 +28,16 @@ namespace Game.Spell
         {
             SetGlobalPosition(player.GetCenterPos() + (GetGlobalMousePosition() - player.GetCenterPos()).Clamped(spellRange));
             player.GetMenu().GetNode<Control>("c/osb").
-                SetPosition((player.GetCenterPos().y > GetGlobalPosition().y)
-                ? new Vector2(0.0f, 666.0f)
-                : new Vector2(0.0f, 180.0f));
+            SetPosition((player.GetCenterPos().y > GetGlobalPosition().y) ?
+                new Vector2(0.0f, 666.0f) :
+                new Vector2(0.0f, 180.0f));
         }
         public void _OnTweenStarted(Godot.Object obj, NodePath nodePath)
         {
             base._OnTweenCompleted(obj, nodePath);
             Player player = obj as Player;
-            if (player != null && player.GetState() == Character.States.MOVING
-            && nodePath.Equals(":global_position"))
+            if (player != null && player.GetState() == Character.States.MOVING &&
+                nodePath.Equals(":global_position"))
             {
                 player.GetMenu().GetNode<Control>("c/csb").Hide();
                 UnMake();
@@ -53,7 +51,7 @@ namespace Game.Spell
             }
             else
             {
-                Character character = area2D.GetOwner() as Character;
+                Character character = area2D.GetOwner()as Character;
                 if (character != null && !character.IsDead() && !targets.Contains(character))
                 {
                     targets.Add(character);
@@ -73,7 +71,7 @@ namespace Game.Spell
             }
             else
             {
-                Character character = area2D.GetOwner() as Character;
+                Character character = area2D.GetOwner()as Character;
                 if (character != null && targets.Contains(character))
                 {
                     character.SetModulate(new Color("#ffffff"));

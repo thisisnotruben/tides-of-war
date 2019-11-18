@@ -1,10 +1,9 @@
-using Godot;
-using Game.Misc.Loot;
-using Game.Actor;
-using Game.Database;
 using System;
 using System.Collections.Generic;
-
+using Game.Actor;
+using Game.Database;
+using Game.Misc.Loot;
+using Godot;
 namespace Game.Spell
 {
     public abstract class Spell : Pickable
@@ -19,14 +18,12 @@ namespace Game.Spell
         private protected bool requiresTarget;
         private protected Dictionary<string, ushort> attackTable;
         private protected Character caster;
-
         public override void Init(string worldName)
         {
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_")));
             SetWorldName(worldName);
             SetName(worldName);
             Dictionary<string, string> spellData = SpellDB.GetSpellData(worldName);
-
             icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.res");
             level = short.Parse(spellData[nameof(level)]);
             spellRange = short.Parse(spellData[nameof(spellRange)]);
@@ -35,11 +32,9 @@ namespace Game.Spell
             ignoreArmor = bool.Parse(spellData[nameof(ignoreArmor)]);
             effectOnTarget = bool.Parse(spellData[nameof(effectOnTarget)]);
             requiresTarget = bool.Parse(spellData[nameof(requiresTarget)]);
-
             attackTable = Stats.attackTable[(spellRange > Stats.WEAPON_RANGE_MELEE) ? "RANGED" : "MELEE"];
             goldWorth = Stats.GetSpellWorthCost(level);
             manaCost = Stats.GetSpellManaCost(level);
-
             pickableDescription = $"-Mana Cost: {manaCost}\n-Range: {spellRange}\n" +
                 $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
                 $"\n\n-{spellData["description"]}";
@@ -82,7 +77,7 @@ namespace Game.Spell
         {
             if (!loaded)
             {
-                caster.SetMana((short)-manaCost);
+                caster.SetMana((short) - manaCost);
             }
             casted = true;
             return percentDamage;

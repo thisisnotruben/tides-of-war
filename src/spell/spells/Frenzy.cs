@@ -1,12 +1,10 @@
-using Godot;
 using System;
-
+using Godot;
 namespace Game.Spell
 {
     public class Frenzy : Spell
     {
         private Tuple<float, float> amounts;
-
         public override float Cast()
         {
             amounts = new Tuple<float, float>(

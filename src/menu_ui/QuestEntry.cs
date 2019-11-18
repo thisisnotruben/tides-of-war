@@ -1,12 +1,10 @@
-using Godot;
 using Game.Quests;
-
+using Godot;
 namespace Game.Ui
 {
     public class QuestEntry : Control
     {
         private Quest quest;
-
         public void AddToQuestLog(Node questLog)
         {
             questLog.GetNode(@"s/v/s/v").AddChild(this);

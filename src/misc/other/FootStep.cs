@@ -1,11 +1,9 @@
 using Godot;
-
 namespace Game.Misc.Other
 {
     public class FootStep : Node2D
     {
         private Vector2 StepPos = new Vector2();
-
         public override void _Draw()
         {
             DrawRect(new Rect2(StepPos, new Vector2(3.0f, 3.0f)), new Color(0.10f, 0.10f, 0.10f, 0.175f));

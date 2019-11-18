@@ -1,7 +1,6 @@
-using Godot;
-using Game.Actor;
 using System;
-
+using Game.Actor;
+using Godot;
 namespace Game.Spell
 {
     public abstract class SpellEffect : WorldObject
@@ -13,7 +12,6 @@ namespace Game.Spell
         private protected Character character;
         private protected Tween tween;
         private protected Timer timer;
-
         public override void _Ready()
         {
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), GetWorldName().ToUpper().Replace("", "_")));
@@ -28,7 +26,7 @@ namespace Game.Spell
             tween = GetNode<Tween>("tween");
             timer = GetNode<Timer>("timer");
             SetProcess(false);
-        }        
+        }
         public override void _Process(float delta)
         {
             Tween tween = GetNode<Tween>("tween");
@@ -50,7 +48,7 @@ namespace Game.Spell
                 tween.InterpolateProperty(light, ":modulate", light.GetModulate(),
                     new Color(1.0f, 1.0f, 1.0f, 0.0f), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.InOut);
             }
-        }   
+        }
         public virtual void _OnTimerTimeout()
         {
             EmitSignal(nameof(Unmake));

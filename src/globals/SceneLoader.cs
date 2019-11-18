@@ -1,12 +1,10 @@
 using Godot;
-
 namespace Game
 {
     public class SceneLoader : Node
     {
         private ResourceInteractiveLoader mapLoader;
         private Godot.Collections.Dictionary sceneMeta;
-
         public override void _Ready()
         {
             SetProcess(false);

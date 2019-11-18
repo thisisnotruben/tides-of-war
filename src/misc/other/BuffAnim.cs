@@ -1,14 +1,11 @@
-using Godot;
 using Game.Misc.Loot;
-
+using Godot;
 namespace Game.Misc.Other
 {
     public class BuffAnim : Particles2D
     {
-
         private bool elixir = true;
         private Item item;
-
         public override void _Ready()
         {
             Color color = new Color("#ffffff");
@@ -38,7 +35,6 @@ namespace Game.Misc.Other
                     color = new Color("808080");
                     break;
             }
-
             Particles2D effect = GetNode<Particles2D>("buff_after_effect");
             effect.SetModulate(color);
             SetModulate(color);

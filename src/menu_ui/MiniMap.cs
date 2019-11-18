@@ -1,7 +1,6 @@
-using Godot;
 using System.Collections.Generic;
 using Game.Actor;
-
+using Godot;
 namespace Game.Ui
 {
     public class MiniMap : Node2D
@@ -11,7 +10,6 @@ namespace Game.Ui
         private List<Vector2> path = new List<Vector2>();
         private Vector2 mapRatio = new Vector2();
         private Player player;
-
         public override void _Ready()
         {
             player = ((InGameMenu)GetOwner()).player;

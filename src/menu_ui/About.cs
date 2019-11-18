@@ -1,5 +1,4 @@
 using Godot;
-
 namespace Game.Ui
 {
     public class About : Control

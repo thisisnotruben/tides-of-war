@@ -1,7 +1,6 @@
-using Godot;
-using Game.Misc.Loot;
 using System.Collections.Generic;
-
+using Game.Misc.Loot;
+using Godot;
 namespace Game.Ui
 {
     public class ItemSlot : TextureButton
@@ -11,7 +10,6 @@ namespace Game.Ui
         private List<Pickable> itemStack = new List<Pickable>();
         private float time;
         private ushort stackSize;
-
         [Signal]
         public delegate void SlotSelected(int index);
         [Signal]
@@ -22,7 +20,6 @@ namespace Game.Ui
         public delegate void SyncSlot(ItemSlot itemSlot, Pickable pickable);
         [Signal]
         public delegate void ShortcutPressed(ItemSlot itemSlot, Pickable pickable);
-
         public void _OnItemSlotPressed()
         {
             if (GetItem() != null && GetTree().IsPaused())
@@ -134,7 +131,7 @@ namespace Game.Ui
             }
             else
             {
-                string texPath = "res://asset/img/ui/black_bg_icon_used" + 
+                string texPath = "res://asset/img/ui/black_bg_icon_used" +
                     $"{((IsConnected("pressed", this, nameof(_OnShortcutPressed))) ? 0 : 1)}.res";
                 if (!GetNormalTexture().GetPath().Equals(texPath))
                 {
@@ -173,12 +170,12 @@ namespace Game.Ui
         }
         public Pickable GetItem()
         {
-            return (itemStack.Count > 0)? itemStack[0]: null;
+            return (itemStack.Count > 0) ? itemStack[0] : null;
         }
         public void CoolDown(Pickable itm, float value, float seek)
         {
-            if (GetItem() != null && itm != null && GetItem().GetWorldName().Equals(itm.GetWorldName())
-            && !allowCoolDown && value > 0.0f && value != seek)
+            if (GetItem() != null && itm != null && GetItem().GetWorldName().Equals(itm.GetWorldName()) &&
+                !allowCoolDown && value > 0.0f && value != seek)
             {
                 allowCoolDown = true;
                 time = value;
@@ -187,7 +184,7 @@ namespace Game.Ui
                 GetNode<Control>("m/label").Show();
                 Tween tween = GetNode<Tween>("tween");
                 tween.InterpolateProperty(GetNode<ColorRect>("m/icon/overlay"), ":rect_scale",
-                new Vector2(1.0f, 1.0f), new Vector2(0.0f, 1.0f), time, Tween.TransitionType.Linear, Tween.EaseType.InOut);
+                    new Vector2(1.0f, 1.0f), new Vector2(0.0f, 1.0f), time, Tween.TransitionType.Linear, Tween.EaseType.InOut);
                 tween.Start();
                 if (seek > 0.0f)
                 {

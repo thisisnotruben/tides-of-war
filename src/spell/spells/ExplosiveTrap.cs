@@ -1,6 +1,5 @@
-using Godot;
 using Game.Misc.Other;
-
+using Godot;
 namespace Game.Spell
 {
     public class ExplosiveTrap : Spell

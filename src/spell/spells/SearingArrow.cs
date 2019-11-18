@@ -1,12 +1,10 @@
-using Godot;
 using Game.Actor;
-
+using Godot;
 namespace Game.Spell
 {
     public class SearingArrow : Spell
     {
         private Character target;
-
         public override float Cast()
         {
             target = caster.GetTarget();
