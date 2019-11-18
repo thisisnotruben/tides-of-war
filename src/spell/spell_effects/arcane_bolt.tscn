@@ -1,0 +1,173 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://src/spell/spell_effects/effect_template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://asset/snd/spell/arcane_bolt_hit.wav" type="AudioStream" id=2]
+[ext_resource path="res://src/spell/effects/color_ramp.shader" type="Shader" id=3]
+[ext_resource path="res://asset/img/missile-spell/arcane_bolt.res" type="Texture" id=4]
+[ext_resource path="res://asset/img/light/fire_scale.res" type="Texture" id=5]
+[ext_resource path="res://asset/img/missile-spell/ball1.png" type="Texture" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+resource_name = "color_ramp"
+shader = ExtResource( 3 )
+shader_param/color_speed = 2.0
+shader_param/scale_speed = 1.0
+shader_param/energy = 0.7
+shader_param/scale = Vector2( 0.8, 1 )
+shader_param/gradient = ExtResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 8.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_curve = ExtResource( 5 )
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+angular_velocity = 360.0
+orbit_velocity = 2.0
+orbit_velocity_random = 0.0
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 8.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = ExtResource( 5 )
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+trail_divisor = 3
+trail_size_modifier = ExtResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 18.0
+orbit_velocity = 1.0
+orbit_velocity_random = 0.0
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+trail_divisor = 2
+trail_size_modifier = ExtResource( 5 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 12.0
+orbit_velocity = 0.25
+orbit_velocity_random = 0.0
+scale = 2.0
+scale_curve = ExtResource( 5 )
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 8.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = ExtResource( 5 )
+color_ramp = ExtResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+trail_divisor = 3
+trail_size_modifier = ExtResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 32.0
+orbit_velocity = 1.0
+orbit_velocity_random = 0.0
+color_ramp = ExtResource( 4 )
+
+[node name="arcane_bolt" index="0" instance=ExtResource( 1 )]
+light_fade_delay = 2.0
+
+[node name="snd" parent="." index="2"]
+stream = ExtResource( 2 )
+
+[node name="light" parent="." index="3"]
+material = SubResource( 1 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="smoke" type="Particles2D" parent="idle" index="0"]
+modulate = Color( 1, 1, 1, 0.5 )
+amount = 24
+preprocess = 20.0
+speed_scale = 1.2
+local_coords = false
+process_material = SubResource( 2 )
+
+[node name="bolt" type="Particles2D" parent="idle" index="1"]
+amount = 1
+lifetime = 0.5
+preprocess = 20.0
+speed_scale = 1.2
+process_material = SubResource( 3 )
+texture = ExtResource( 6 )
+
+[node name="trail" type="Particles2D" parent="idle" index="2"]
+amount = 48
+preprocess = 20.0
+speed_scale = 1.2
+local_coords = false
+process_material = SubResource( 4 )
+
+[node name="lightning" type="Particles2D" parent="idle" index="3"]
+amount = 32
+preprocess = 20.0
+speed_scale = 1.2
+process_material = SubResource( 5 )
+
+[node name="smoke" type="Particles2D" parent="explode" index="0"]
+modulate = Color( 1, 1, 1, 0.5 )
+emitting = false
+amount = 24
+lifetime = 1.75
+one_shot = true
+preprocess = 1.0
+speed_scale = 1.25
+explosiveness = 0.5
+local_coords = false
+process_material = SubResource( 6 )
+
+[node name="trail" type="Particles2D" parent="explode" index="1"]
+emitting = false
+amount = 48
+lifetime = 1.75
+one_shot = true
+preprocess = 1.0
+speed_scale = 1.25
+explosiveness = 0.5
+local_coords = false
+process_material = SubResource( 7 )
+
+[node name="lightning" type="Particles2D" parent="explode" index="2"]
+emitting = false
+amount = 45
+lifetime = 1.75
+one_shot = true
+preprocess = 1.0
+speed_scale = 1.25
+explosiveness = 0.5
+process_material = SubResource( 8 )

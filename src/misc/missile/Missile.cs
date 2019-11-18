@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Actor;
+using Game.Database;
 using Game.Misc.Other;
 using Game.Spell;
 using Godot;
@@ -178,19 +179,14 @@ namespace Game.Misc.Missile
             }
             else
             {
-                string spellEffectPath = $"res://src/spell/effects/{spell.GetWorldName()}.tscn";
-                if (new File().FileExists(spellEffectPath))
+                SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(spell.GetWorldName());
+                Connect(nameof(Hit), spellEffect, nameof(SpellEffect.OnHit));
+                if (spell.GetWorldType() != WorldTypes.SLOW)
                 {
-                    PackedScene effectScene = (PackedScene)GD.Load(texturePath);
-                    SpellEffect spellEffect = (SpellEffect)effectScene.Instance();
-                    Connect(nameof(Hit), spellEffect, nameof(SpellEffect.OnHit));
-                    if (spell.GetWorldType() != WorldTypes.SLOW)
-                    {
-                        spellEffect.Connect(nameof(SpellEffect.Unmake), this, nameof(Fade));
-                    }
-                    AddChild(spellEffect);
-                    spellEffect.SetOwner(this);
+                    spellEffect.Connect(nameof(SpellEffect.Unmake), this, nameof(Fade));
                 }
+                AddChild(spellEffect);
+                spellEffect.SetOwner(this);
                 switch (spell.GetWorldType())
                 {
                     case WorldTypes.FIREBALL:

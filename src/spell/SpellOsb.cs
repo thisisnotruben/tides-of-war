@@ -16,14 +16,7 @@ namespace Game.Spell
             base.GetPickable(character, addToBag);
             player = (Player)character;
         }
-        public void _OnSpellAreaPressed()
-        {
-            SetProcess(false);
-        }
-        public void _OnSpellAreaReleased()
-        {
-            SetProcess(true);
-        }
+
         public override void _Process(float delta)
         {
             SetGlobalPosition(player.GetCenterPos() + (GetGlobalMousePosition() - player.GetCenterPos()).Clamped(spellRange));
@@ -31,17 +24,6 @@ namespace Game.Spell
             SetPosition((player.GetCenterPos().y > GetGlobalPosition().y) ?
                 new Vector2(0.0f, 666.0f) :
                 new Vector2(0.0f, 180.0f));
-        }
-        public void _OnTweenStarted(Godot.Object obj, NodePath nodePath)
-        {
-            base._OnTweenCompleted(obj, nodePath);
-            Player player = obj as Player;
-            if (player != null && player.GetState() == Character.States.MOVING &&
-                nodePath.Equals(":global_position"))
-            {
-                player.GetMenu().GetNode<Control>("c/csb").Hide();
-                UnMake();
-            }
         }
         public override void _OnSightAreaEntered(Area2D area2D)
         {
@@ -78,6 +60,44 @@ namespace Game.Spell
                     character.SetZIndex(0);
                     targets.Remove(character);
                 }
+            }
+        }
+        public override void ConfigureSpell()
+        {
+            caster.SetState(Character.States.IDLE);
+            Control osb = player.GetMenu().GetNode<Control>("c/osb");
+            osb.SetPosition(new Vector2(0.0f, 180.0f));
+            GetNode<CollisionShape2D>("sight/distance").SetDisabled(false);
+            foreach (Spell spell in GetTree().GetNodesInGroup(osb.GetInstanceId().ToString()))
+            {
+                spell.UnMake();
+            }
+            AddToGroup(osb.GetInstanceId().ToString());
+            caster.GetNode<Tween>("tween").Connect("tween_started", this, nameof(_OnTweenStarted));
+            osb.GetNode("m/cast").Connect("pressed", this, nameof(_OnSpellAreaCast));
+            osb.GetNode<Label>("m/cast/label").SetText("Cast");
+            osb.Show();
+            SetGlobalPosition(caster.GetGlobalPosition());
+            GetNode<Node2D>("spell_area").Show();
+            SetProcess(true);
+        }
+        public void _OnSpellAreaPressed()
+        {
+            SetProcess(false);
+        }
+        public void _OnSpellAreaReleased()
+        {
+            SetProcess(true);
+        }
+        public void _OnTweenStarted(Godot.Object obj, NodePath nodePath)
+        {
+            base._OnTweenCompleted(obj, nodePath);
+            Player player = obj as Player;
+            if (player != null && player.GetState() == Character.States.MOVING &&
+                nodePath.Equals(":global_position"))
+            {
+                player.GetMenu().GetNode<Control>("c/csb").Hide();
+                UnMake();
             }
         }
         public void _OnSpellAreaCast()

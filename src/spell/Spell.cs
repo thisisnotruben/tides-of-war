@@ -10,7 +10,7 @@ namespace Game.Spell
     {
         private protected float percentDamage;
         private protected short manaCost;
-        private protected short spellRange;
+        private protected ushort spellRange;
         private protected byte count;
         private protected bool casted;
         private protected bool ignoreArmor;
@@ -18,15 +18,17 @@ namespace Game.Spell
         private protected bool requiresTarget;
         private protected Dictionary<string, ushort> attackTable;
         private protected Character caster;
+        private protected Character target = null;
         public override void Init(string worldName)
         {
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_")));
             SetWorldName(worldName);
             SetName(worldName);
             Dictionary<string, string> spellData = SpellDB.GetSpellData(worldName);
+            SetPickableSubType((WorldTypes)Enum.Parse(typeof(WorldTypes), spellData["subType"].ToUpper()));
             icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.res");
             level = short.Parse(spellData[nameof(level)]);
-            spellRange = short.Parse(spellData[nameof(spellRange)]);
+            spellRange = ushort.Parse(spellData[nameof(spellRange)]);
             cooldown = short.Parse(spellData[nameof(cooldown)]);
             percentDamage = float.Parse(spellData[nameof(percentDamage)]);
             ignoreArmor = bool.Parse(spellData[nameof(ignoreArmor)]);
@@ -68,21 +70,62 @@ namespace Game.Spell
             Timer timer = GetNode<Timer>("timer");
             return (count > 0) ? GetDuration() - (count * timer.GetWaitTime() - base.GetTimeLeft()) : base.GetTimeLeft();
         }
-        public override void _OnTimerTimeout() { }
+        public override void _OnTimerTimeout()
+        {
+            UnMake();
+        }
         public virtual bool Casted()
         {
             return casted;
         }
         public virtual float Cast()
         {
+            if (casted)
+            {
+                return 1.0f;
+            }
+            casted = true;
             if (!loaded)
             {
                 caster.SetMana((short) - manaCost);
             }
-            casted = true;
+            if ((GetPickableSubType() == WorldTypes.CASTING
+            || GetPickableSubType() == WorldTypes.DAMAGE_MODIFIER)
+            && GetWorldType() != WorldTypes.EXPLOSIVE_TRAP) // this is a dirty hack, sorry
+            {
+                SpellEffect spellEffect = SetEffect();
+                if (GetWorldType() == WorldTypes.FRENZY)
+                {
+                    Connect(nameof(Unmake), spellEffect, nameof(SpellEffect._OnTimerTimeout));
+                }
+            }
+            if (GetDuration() == 0.0f && GetPickableSubType() != WorldTypes.CHOOSE_AREA_EFFECT)
+            {
+                SetName(GetInstanceId().ToString());
+                SetTime(2.5f, false);
+            }
             return percentDamage;
         }
-        public virtual void ConfigureSpell() { }
+        public virtual async void ConfigureSpell()
+        {
+
+            switch (GetPickableSubType())
+            {
+                case WorldTypes.DAMAGE_MODIFIER:
+                    caster.weaponRange = spellRange;
+                    break;
+                case WorldTypes.CASTING:
+                    PrepSight();
+                    SetGlobalPosition(caster.GetGlobalPosition());
+                    AnimationPlayer casterAnim = caster.GetNode<AnimationPlayer>("anim");
+                    if (casterAnim.GetCurrentAnimation().Equals("cast"))
+                    {
+                        await ToSignal(casterAnim, "animation_finished");
+                    }
+                    casterAnim.Play("cast", -1, caster.animSpeed);
+                    break;
+            }
+        }
         public virtual void ConfigureSnd() { }
         public Dictionary<string, ushort> GetAttackTable()
         {
@@ -92,7 +135,7 @@ namespace Game.Spell
         {
             return manaCost;
         }
-        public short GetSpellRange()
+        public ushort GetSpellRange()
         {
             return spellRange;
         }
@@ -149,6 +192,14 @@ namespace Game.Spell
             sight.Disconnect("area_exited", this, nameof(_OnSightAreaExited));
             sight.SetBlockSignals(false);
             sight.GetNode<CollisionShape2D>("distance").SetDisabled(false);
+        }
+        private protected SpellEffect SetEffect()
+        {
+            SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(GetWorldName());
+            ((effectOnTarget) ? target : caster).AddChild(spellEffect);
+            spellEffect.SetOwner((effectOnTarget) ? target : caster);
+            spellEffect.OnHit(this);
+            return spellEffect;
         }
     }
 }
