@@ -19,7 +19,7 @@ namespace Game.Misc.Loot
         {
             Dictionary<string, string> itemData = ItemDB.GetItemData(worldName);
             SetWorldName(worldName);
-            SetName(worldName);
+            SetName(GetWorldName());
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), itemData["type"].ToUpper()));
             icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData["type"].ToLower()}/{itemData[nameof(icon)]}_icon.res");
             level = short.Parse(itemData[nameof(level)]);

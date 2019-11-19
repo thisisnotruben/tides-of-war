@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class BashEffect : FortifyEffect { }
+    public class bash_effect : fortify_effect { }
 }

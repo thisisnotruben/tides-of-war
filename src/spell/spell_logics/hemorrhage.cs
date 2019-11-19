@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class Hemorrhage : Spell
+    public class hemorrhage : Spell
     {
         public override float Cast()
         {

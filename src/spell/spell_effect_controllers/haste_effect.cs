@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class HasteEffect : SpellEffect
+    public class haste_effect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

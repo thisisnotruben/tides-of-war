@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class Cleave : Spell { }
+    public class cleave : Spell { }
 }

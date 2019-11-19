@@ -3,7 +3,7 @@ using Game.Actor;
 using Godot;
 namespace Game.Ability
 {
-    public class Slow : Spell
+    public class slow : Spell
     {
         private Tuple<Character, float, float> values;
         public override float Cast()

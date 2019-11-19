@@ -7,7 +7,7 @@ namespace Game
     public static class Stats
     {
         public const float MULTIPLIER = 2.6f;
-        public const short MAX_LEVEL = 10;
+        public const byte MAX_LEVEL = 10;
         public const short XP_INTERVAL = 1_000;
         public const short MAX_XP = MAX_LEVEL * XP_INTERVAL;
         public const double HP_MANA_RESPAWN_MIN_LIMIT = 0.3f;
@@ -192,9 +192,9 @@ namespace Game
             }
             return multiplier;
         }
-        public static short CheckLevel(short xp)
+        public static byte CheckLevel(short xp)
         {
-            return (short)(xp / XP_INTERVAL);
+            return (byte)(xp / XP_INTERVAL);
         }
         public static float MapAnimMoveSpeed(float characterCurrAnimSpeed)
         {

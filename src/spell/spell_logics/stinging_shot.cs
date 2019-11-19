@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class StingingShot : Spell
+    public class stinging_shot : Spell
     {
         public override float Cast()
         {

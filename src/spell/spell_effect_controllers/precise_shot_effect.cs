@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class PreciseShotEffect : SearingArrowEffect { }
+    public class precise_shot_effect : searing_arrow_effect { }
 }

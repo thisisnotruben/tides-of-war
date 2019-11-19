@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class DivineHealEffect : FortifyEffect { }
+    public class divine_heal_effect : fortify_effect { }
 }

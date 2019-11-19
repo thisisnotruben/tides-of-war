@@ -4,7 +4,7 @@ using Game.Actor;
 using Godot;
 namespace Game.Ability
 {
-    public class Meteor : OsbSpell
+    public class meteor : OsbSpell
     {
         private List<Character> targetList = new List<Character>();
         public override void Init(string worldName)
@@ -39,11 +39,11 @@ namespace Game.Ability
                 Vector2 minPos = -ctrans.origin / ctrans.Scale;
                 Vector2 maxPos = minPos + GetViewportRect().Size / ctrans.Scale;
                 PackedScene meteorScene = (PackedScene)GD.Load("res://src/spell/spellEffects/meteor.tscn");
-                MeteorEffect meteorEffect = (MeteorEffect)meteorScene.Instance();
+                meteor_effect meteorEffect = (meteor_effect)meteorScene.Instance();
                 meteorEffect.seekPos = GetGlobalPosition();
                 float side = (meteorEffect.seekPos.x > 0.50f * (maxPos.x - minPos.x) + minPos.x) ? 0.25f : 0.75f;
                 meteorEffect.SetGlobalPosition(new Vector2(side * (maxPos.x - minPos.x) + minPos.x, minPos.y));
-                meteorEffect.Connect(nameof(MeteorEffect.Hit), this, nameof(MeteorCast));
+                meteorEffect.Connect(nameof(meteor_effect.Hit), this, nameof(MeteorCast));
                 caster.GetParent().AddChild(meteorEffect);
                 meteorEffect.SetOwner(caster.GetParent());
             }

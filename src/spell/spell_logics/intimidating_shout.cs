@@ -4,7 +4,7 @@ using Game.Actor;
 using Godot;
 namespace Game.Ability
 {
-    public class IntimidatingShout : Spell
+    public class intimidating_shout : Spell
     {
         private Dictionary<Character, Tuple<short, short>> targetList = new Dictionary<Character, Tuple<short, short>>();
         public override float Cast()

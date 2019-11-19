@@ -1,5 +1,6 @@
 using Game.Ability;
 using Game.Actor;
+using Game.Database;
 using Game.Misc.Other;
 using Game.Ui;
 using Godot;
@@ -211,9 +212,15 @@ namespace Game.Misc.Loot
         public void Buy(Player buyer)
         {
             EmitSignal(nameof(PickableExchanged), this, true);
-            PackedScene pickableScene = (PackedScene)GD.Load(GetFilename());
-            Pickable pickable = (Pickable)pickableScene.Instance();
-            pickable.Init(GetWorldName());
+            Pickable pickable;
+            if (this is Item)
+            {
+                pickable = PickableFactory.GetMakeItem(GetWorldName());
+            }
+            else
+            {
+                pickable = PickableFactory.GetMakeSpell(GetWorldName());
+            }
             pickable.GetPickable(buyer, true);
             buyer.SetGold((short)(-pickable.GetGold()));
         }
@@ -274,7 +281,7 @@ namespace Game.Misc.Loot
         }
         public void UncoupleSlot(ItemSlot itemSlot)
         {
-            itemSlot.Disconnect(nameof(Hide), this, nameof(UncoupleSlot));
+            itemSlot.Disconnect("hide", this, nameof(UncoupleSlot));
             Disconnect(nameof(Unmake), itemSlot, nameof(ItemSlot.SetItem));
         }
     }

@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class MeteorEffect : FireballEffect
+    public class meteor_effect : fireball_effect
     {
         [Signal]
         public delegate void Hit(bool hit);

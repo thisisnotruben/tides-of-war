@@ -1,6 +1,6 @@
 namespace Game.Ability
 {
-    public class SearingArrowEffect : SpellEffect
+    public class searing_arrow_effect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

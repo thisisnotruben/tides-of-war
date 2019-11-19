@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class ArcaneboltEffect : FireballEffect { }
+    public class arcane_bolt_effect : fireball_effect { }
 }

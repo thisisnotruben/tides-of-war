@@ -2,7 +2,7 @@ using Game.Misc.Other;
 using Godot;
 namespace Game.Ability
 {
-    public class ExplosiveTrap : Spell
+    public class explosive_trap : Spell
     {
         public override float Cast()
         {

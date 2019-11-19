@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class PiercingShotEffect : SearingArrowEffect { }
+    public class piercing_shot_effect : searing_arrow_effect { }
 }

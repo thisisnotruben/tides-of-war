@@ -196,10 +196,8 @@ namespace Game.Actor
                     switch (npc.GetWorldType())
                     {
                         case WorldTypes.TRAINER:
-                            npc.SetUpShop(GetMenu(), false, GetWorldType());
-                            break;
                         case WorldTypes.MERCHANT:
-                            npc.SetUpShop(GetMenu(), false, GetWorldType());
+                            npc.SetUpShop(GetMenu(), false);
                             break;
                     }
                 }
@@ -216,10 +214,8 @@ namespace Game.Actor
                     switch (npc.GetWorldType())
                     {
                         case WorldTypes.TRAINER:
-                            npc.SetUpShop(GetMenu(), true, GetWorldType());
-                            break;
                         case WorldTypes.MERCHANT:
-                            npc.SetUpShop(GetMenu(), true, GetWorldType());
+                            npc.SetUpShop(GetMenu(), true);
                             break;
                     }
                 }
@@ -243,7 +239,7 @@ namespace Game.Actor
                 AddChild(combatText);
                 combatText.SetType($"+{xp}", CombatText.TextType.XP, GetNode<Node2D>("img").GetPosition());
             }
-            short _level = Stats.CheckLevel(xp);
+            byte _level = Stats.CheckLevel(xp);
             if (GetLevel() != _level && GetLevel() < Stats.MAX_LEVEL)
             {
                 SetLevel(_level);

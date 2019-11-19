@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class Haste : Spell
+    public class haste : Spell
     {
         private float amount;
         public override float Cast()

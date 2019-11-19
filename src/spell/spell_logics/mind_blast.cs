@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class MindBlast : Spell { }
+    public class mind_blast : Spell { }
 }

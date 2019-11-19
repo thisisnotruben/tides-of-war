@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class FrenzyEffect : SpellEffect
+    public class frenzy_effect : SpellEffect
     {
         public override void OnHit(Spell spell)
         {

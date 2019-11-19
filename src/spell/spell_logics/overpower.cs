@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 namespace Game.Ability
 {
-    public class Overpower : Spell
+    public class overpower : Spell
     {
         public override void Init(string worldName)
         {

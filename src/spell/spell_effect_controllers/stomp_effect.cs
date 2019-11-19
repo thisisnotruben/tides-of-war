@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class StompEffect : SearingArrowEffect { }
+    public class stomp_effect : searing_arrow_effect { }
 }

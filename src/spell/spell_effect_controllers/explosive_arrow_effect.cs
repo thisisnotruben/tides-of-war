@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class ExplosivearrowEffect : SpellEffect
+    public class explosive_arrow_effect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

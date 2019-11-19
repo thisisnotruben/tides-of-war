@@ -327,14 +327,7 @@ namespace Game.Ui
             selected = spellBook.GetItemMetaData(idx);
             Pickable selectedPickable = (Pickable)selected;
             selectedIdx = idx;
-            if (spellBook.IsSlotCoolingDown(idx) || player.IsDead())
-            {
-                ItemInfoHideExcept();
-            }
-            else
-            {
-                ItemInfoHideExcept("cast");
-            }
+            ItemInfoHideExcept((spellBook.IsSlotCoolingDown(idx) || player.IsDead()) ? "" : "cast");
             selectedPickable.Describe();
             if (selectedPickable.GetIndex() == 0)
             {

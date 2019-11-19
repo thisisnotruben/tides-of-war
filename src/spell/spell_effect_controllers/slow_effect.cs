@@ -2,7 +2,7 @@ using Game.Misc.Missile;
 using Godot;
 namespace Game.Ability
 {
-    public class SlowEffect : SpellEffect
+    public class slow_effect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

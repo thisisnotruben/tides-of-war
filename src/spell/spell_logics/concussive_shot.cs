@@ -2,7 +2,7 @@ using System;
 using Game.Actor;
 namespace Game.Ability
 {
-    public class ConcussiveShot : Spell
+    public class concussive_shot : Spell
     {
         private Tuple<Character, float, float> values;
         public override float Cast()

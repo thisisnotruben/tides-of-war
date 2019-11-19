@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class Volley : Spell
+    public class volley : Spell
     {
         private const float animSpeed = 1.5f;
         private const string animName = "attacking";

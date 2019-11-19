@@ -1,6 +1,6 @@
 namespace Game.Ability
 {
-    public class Bash : Spell
+    public class bash : Spell
     {
         public override float Cast()
         {

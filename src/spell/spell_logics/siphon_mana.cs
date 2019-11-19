@@ -3,7 +3,7 @@ using Game.Misc.Other;
 using Godot;
 namespace Game.Ability
 {
-    public class SiphonMana : Spell
+    public class siphon_mana : Spell
     {
         public override float Cast()
         {

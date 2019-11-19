@@ -2,7 +2,7 @@ using System;
 using Godot;
 namespace Game.Ability
 {
-    public class Frenzy : Spell
+    public class frenzy : Spell
     {
         private Tuple<float, float> amounts;
         public override float Cast()

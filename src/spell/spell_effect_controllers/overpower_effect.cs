@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class OverpowerEffect : HasteEffect { }
+    public class overpower_effect : haste_effect { }
 }

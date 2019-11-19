@@ -341,9 +341,9 @@ namespace Game.Actor
                 this.text = text;
             }
         }
-        public void SetUpShop(InGameMenu inGameMenu, bool setUp, WorldTypes actorType)
+        public void SetUpShop(InGameMenu inGameMenu, bool setUp)
         {
-            Node bag = (actorType == WorldTypes.TRAINER) ? GetNode("spells") : GetNode("inventory");
+            Node bag = (GetWorldType() == WorldTypes.TRAINER) ? GetNode("spells") : GetNode("inventory");
             foreach (Pickable pickable in bag.GetChildren())
             {
                 if (setUp)
@@ -378,7 +378,7 @@ namespace Game.Actor
                         enemy = bool.Parse(data[key]);
                         break;
                     case "level":
-                        SetLevel(short.Parse(data[key]));
+                        SetLevel(byte.Parse(data[key]));
                         break;
                     case "actorType":
                         SetWorldType((WorldTypes)System.Enum.Parse(typeof(WorldTypes), data[key].ToUpper()));

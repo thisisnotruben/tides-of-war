@@ -52,7 +52,7 @@ namespace Game.Ui
             MoveChild(GetNode("count"), 2);
             allowCoolDown = false;
             GetNode<Control>("m/label").Hide();
-            GetNode<Control>("m/label/overlay").SetScale(new Vector2(1.0f, 1.0f));
+            GetNode<Control>("m/icon/overlay").SetScale(new Vector2(1.0f, 1.0f));
         }
         public void _OnTweenStep(Godot.Object obj, NodePath nodePath, float elapsed, Godot.Object value)
         {
@@ -190,7 +190,7 @@ namespace Game.Ui
                 {
                     tween.Seek(seek);
                 }
-                EmitSignal(nameof(allowCoolDown), GetItem(), value, seek);
+                EmitSignal(nameof(Cooldown), GetItem(), value, seek);
             }
         }
         public bool IsFull()

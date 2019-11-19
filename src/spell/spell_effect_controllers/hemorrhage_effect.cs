@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class HemorrhageEffect : HasteEffect { }
+    public class hemorrhage_effect : haste_effect { }
 }

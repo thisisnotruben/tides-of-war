@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class IntimidatingshoutEffect : SpellEffect
+    public class intimidating_shout_effect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

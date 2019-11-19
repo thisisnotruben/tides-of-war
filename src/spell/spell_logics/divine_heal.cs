@@ -2,7 +2,7 @@ using System;
 using Godot;
 namespace Game.Ability
 {
-    public class DivineHeal : Spell
+    public class divine_heal : Spell
     {
         public override float Cast()
         {

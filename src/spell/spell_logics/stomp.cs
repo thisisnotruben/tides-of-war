@@ -3,7 +3,7 @@ using Game.Actor;
 using Godot;
 namespace Game.Ability
 {
-    public class Stomp : Spell
+    public class stomp : Spell
     {
         private List<Character> targetList = new List<Character>();
         public override float Cast()

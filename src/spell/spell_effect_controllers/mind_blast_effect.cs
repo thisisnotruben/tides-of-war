@@ -2,7 +2,7 @@ using Game.Misc.Missile;
 using Godot;
 namespace Game.Ability
 {
-    public class MindBlastEffect : SpellEffect
+    public class mind_blast_effect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

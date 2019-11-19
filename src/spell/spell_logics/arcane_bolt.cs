@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class ArcaneBolt : Spell
+    public class arcane_bolt : Spell
     {
         public override void ConfigureSnd()
         {

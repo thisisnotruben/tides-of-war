@@ -2,7 +2,7 @@ using System;
 using Godot;
 namespace Game.Ability
 {
-    public class Fortify : Spell
+    public class fortify : Spell
     {
         private short amount;
         public override float Cast()

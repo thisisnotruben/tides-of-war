@@ -1160,6 +1160,7 @@ custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 
 [node name="main_menu" type="Container" parent="c/game_menu/list_of_menus/m"]
+editor/display_folded = true
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 688.0
@@ -1686,6 +1687,18 @@ bbcode_enabled = true
 bbcode_text = "[color=red]Health: 1000[/color]
 [color=blue]Mana: 1000[/color]
 [color=purple]Xp: 10000 / 10000[/color]
+Level:100
+Gold: 1,450,00
+Strength:	
+Intellect:
+Agility:
+Armor:
+Damage:
+Attack Speed:
+Attack Range:"
+text = "Health: 1000
+Mana: 1000
+Xp: 10000 / 10000
 Level:100
 Gold: 1,450,00
 Strength:	
@@ -2454,5 +2467,5 @@ valign = 1
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/item_info/s/h/v/drop" to="." method="_OnDropPressed"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/item_info/s/h/v/back" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/item_info/s/h/right" to="." method="_OnSiftConfigure" binds= [ true ]]
-[connection signal="OnItemSelected" from="c/game_menu/list_of_menus/m/spell_book/s/v/c/spell_list" to="." method="_OnBagIndexSelected"]
+[connection signal="OnItemSelected" from="c/game_menu/list_of_menus/m/spell_book/s/v/c/spell_list" to="." method="_OnSpellSelected"]
 [connection signal="pressed" from="c/game_menu/list_of_menus/m/spell_book/s/v2/back" to="." method="_OnBackPressed"]

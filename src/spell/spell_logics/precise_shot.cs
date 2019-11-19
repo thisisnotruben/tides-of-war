@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class PreciseShot : Spell { }
+    public class precise_shot : Spell { }
 }

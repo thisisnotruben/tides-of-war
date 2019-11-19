@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ability
 {
-    public class FortifyEffect : SpellEffect
+    public class fortify_effect : SpellEffect
     {
         public override void OnHit(Spell spell = null)
         {

@@ -2,7 +2,7 @@ using System;
 using Game.Actor;
 namespace Game.Ability
 {
-    public class SniperShot : Spell
+    public class sniper_shot : Spell
     {
         ushort amount;
         public override float Cast()

@@ -2,7 +2,7 @@ using Game.Actor;
 using Godot;
 namespace Game.Ability
 {
-    public class ExplosiveArrow : Spell
+    public class explosive_arrow : Spell
     {
         public override float Cast()
         {

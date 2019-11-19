@@ -20,7 +20,7 @@ namespace Game.Actor
         private protected bool enemy = true;
         private protected bool engaging;
         private protected bool dead;
-        private short level;
+        private byte level = Stats.MAX_LEVEL; // for debugging purposes
         public short armor;
         public short hp;
         public short hpMax;
@@ -476,7 +476,7 @@ namespace Game.Actor
         {
             return level;
         }
-        public void SetLevel(short level)
+        public void SetLevel(byte level)
         {
             Dictionary<string, double> stats = Stats.UnitMake((double)level,
                 Stats.GetMultiplier(this is Npc, GetNode<Sprite>("img").GetTexture().GetPath()));

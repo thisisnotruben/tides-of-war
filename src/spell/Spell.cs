@@ -23,7 +23,7 @@ namespace Game.Ability
         {
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_")));
             SetWorldName(worldName);
-            SetName(worldName);
+            SetName(GetWorldName());
             Dictionary<string, string> spellData = SpellDB.GetSpellData(worldName);
             SetPickableSubType((WorldTypes)Enum.Parse(typeof(WorldTypes), spellData["subType"].ToUpper()));
             icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.res");
@@ -37,7 +37,7 @@ namespace Game.Ability
             attackTable = Stats.attackTable[(spellRange > Stats.WEAPON_RANGE_MELEE) ? "RANGED" : "MELEE"];
             goldWorth = Stats.GetSpellWorthCost(level);
             manaCost = Stats.GetSpellManaCost(level);
-            pickableDescription = $"-Mana Cost: {manaCost}\n-Range: {spellRange}\n" +
+            pickableDescription = $"-Mana Cost: {manaCost}\n{((spellRange == 0) ? "" : $"-Range: {spellRange}\n")}" +
                 $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
                 $"\n\n-{spellData["description"]}";
         }
