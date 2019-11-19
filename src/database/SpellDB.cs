@@ -16,7 +16,9 @@ namespace Game.Database
                     xMLParser.GetNodeName().Equals("spell") &&
                     xMLParser.GetNamedAttributeValueSafe("name").Equals(worldName))
                 {
-                    while (xMLParser.Read() == Error.Ok)
+                    while (xMLParser.Read() == Error.Ok &&
+                        !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd &&
+                            xMLParser.GetNodeName().Equals("spell")))
                     {
                         string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element) ?
                             xMLParser.GetNodeName() :
@@ -33,17 +35,14 @@ namespace Game.Database
         }
         public static bool HasSpell(string nameCheck)
         {
+            xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok)
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element)
+                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                    xMLParser.GetNodeName().Equals("spell") &&
+                    xMLParser.GetNamedAttributeValue("name").Equals(nameCheck))
                 {
-                    string key = (xMLParser.GetNodeName().Equals("spell")) ?
-                        xMLParser.GetNamedAttributeValue("name") :
-                        "";
-                    if (key.Equals(nameCheck))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             return false;

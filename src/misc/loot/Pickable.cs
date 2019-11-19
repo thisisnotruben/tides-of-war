@@ -1,3 +1,4 @@
+using Game.Ability;
 using Game.Actor;
 using Game.Misc.Other;
 using Game.Ui;
@@ -183,7 +184,7 @@ namespace Game.Misc.Loot
                 {
                     character.GetNode("inventory").AddChild(this);
                 }
-                else if (this is Spell.Spell)
+                else if (this is Spell)
                 {
                     character.GetNode("spells").AddChild(this);
                 }

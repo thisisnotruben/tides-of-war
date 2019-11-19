@@ -1,4 +1,4 @@
-namespace Game.Spell
+namespace Game.Ability
 {
     public class ArcaneboltEffect : FireballEffect { }
 }

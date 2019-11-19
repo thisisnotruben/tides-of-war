@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Game.Actor;
 using Godot;
-namespace Game.Spell
+namespace Game.Ability
 {
     public abstract class OsbSpell : Spell
     {

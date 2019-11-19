@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-namespace Game.Spell
+namespace Game.Ability
 {
     public class Overpower : Spell
     {

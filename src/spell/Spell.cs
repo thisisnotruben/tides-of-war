@@ -4,7 +4,7 @@ using Game.Actor;
 using Game.Database;
 using Game.Misc.Loot;
 using Godot;
-namespace Game.Spell
+namespace Game.Ability
 {
     public abstract class Spell : Pickable
     {
@@ -89,9 +89,9 @@ namespace Game.Spell
             {
                 caster.SetMana((short) - manaCost);
             }
-            if ((GetPickableSubType() == WorldTypes.CASTING
-            || GetPickableSubType() == WorldTypes.DAMAGE_MODIFIER)
-            && GetWorldType() != WorldTypes.EXPLOSIVE_TRAP) // this is a dirty hack, sorry
+            if ((GetPickableSubType() == WorldTypes.CASTING ||
+                    GetPickableSubType() == WorldTypes.DAMAGE_MODIFIER) &&
+                GetWorldType() != WorldTypes.EXPLOSIVE_TRAP) // this is a dirty hack, sorry
             {
                 SpellEffect spellEffect = SetEffect();
                 if (GetWorldType() == WorldTypes.FRENZY)
@@ -108,7 +108,6 @@ namespace Game.Spell
         }
         public virtual async void ConfigureSpell()
         {
-
             switch (GetPickableSubType())
             {
                 case WorldTypes.DAMAGE_MODIFIER:

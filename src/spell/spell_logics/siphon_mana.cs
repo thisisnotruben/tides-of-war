@@ -1,7 +1,7 @@
 using System;
 using Game.Misc.Other;
 using Godot;
-namespace Game.Spell
+namespace Game.Ability
 {
     public class SiphonMana : Spell
     {

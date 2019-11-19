@@ -1,27 +1,23 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/spell/effects/fireball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/spell/spell_effects/fireball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/spell/spell_effect_controllers/searing_arrow_effect.cs" type="Script" id=2]
+[ext_resource path="res://src/spell/effects/color_ramp.shader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+resource_name = "color_ramp"
+shader = ExtResource( 3 )
 
 [node name="searing_arrow" index="0" instance=ExtResource( 1 )]
-
-_sections_unfolded = [ "Material" ]
-play_sound = true
+script = ExtResource( 2 )
 
 [node name="timer" parent="." index="0"]
-
 wait_time = 2.0
 
-[node name="idle" parent="." index="3"]
-
-_sections_unfolded = [ "Material", "Transform" ]
+[node name="light" parent="." index="3"]
+material = SubResource( 1 )
 
 [node name="bolt" parent="idle" index="1"]
-
 visible = false
 use_parent_material = true
-
-[node name="explode" parent="." index="4"]
-
-use_parent_material = true
-
-

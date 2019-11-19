@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Ability;
 using Game.Database;
 using Game.Misc.Loot;
 using Game.Misc.Other;
@@ -387,7 +388,7 @@ namespace Game.Actor
                         {
                             if (SpellDB.HasSpell(data[key]))
                             {
-                                Spell.Spell spell = PickableFactory.GetMakeSpell(data[key]);
+                                Spell spell = PickableFactory.GetMakeSpell(data[key]);
                                 spell.GetPickable(this, false);
                             }
                             else

@@ -104,10 +104,8 @@
             <dialogue>[center]Wassup Bro[/center]</dialogue>
             <level>1</level>
             <quests>
-                <quest name="plug">
-                </quest>
-                <quest name ="make_friends">
-                </quest>
+                <quest name="plug"></quest>
+                <quest name ="make_friends"></quest>
             </quests>
         </unit>
         <unit name="Dur">
@@ -159,26 +157,16 @@
             <enemy>false</enemy>
             <actorType>trainer</actorType>
             <spells>
-                <spell name="fireball">
-                </spell>
-                <spell name="shadow_bolt">
-                </spell>
-                <spell name="frost_bolt">
-                </spell>
-                <spell name="divine_heal">
-                </spell>
-                <spell name="siphon_mana">
-                </spell>
-                <spell name="haste">
-                </spell>
-                <spell name="slow">
-                </spell>
-                <spell name="arcane_bolt">
-                </spell>
-                <spell name="mind_blast">
-                </spell>
-                <spell name="meteor">
-                </spell>
+                <spell name="fireball"></spell>
+                <spell name="shadow_bolt"></spell>
+                <spell name="frost_bolt"></spell>
+                <spell name="divine_heal"></spell>
+                <spell name="siphon_mana"></spell>
+                <spell name="haste"></spell>
+                <spell name="slow"></spell>
+                <spell name="arcane_bolt"></spell>
+                <spell name="mind_blast"></spell>
+                <spell name="meteor"></spell>
             </spells>
         </unit>
         <unit name="Golag">
@@ -190,26 +178,16 @@
             <enemy>false</enemy>
             <actorType>trainer</actorType>
             <spells>
-                <spell name="fireball">
-                </spell>
-                <spell name="searing_arrow">
-                </spell>
-                <spell name="concussive_shot">
-                </spell>
-                <spell name="piercing_shot">
-                </spell>
-                <spell name="stinging_shot">
-                </spell>
-                <spell name="explosive_arrow">
-                </spell>
-                <spell name="precise_shot">
-                </spell>
-                <spell name="explosive_trap">
-                </spell>
-                <spell name="volley">
-                </spell>
-                <spell name="sniper_shot">
-                </spell>
+                <spell name="fireball"></spell>
+                <spell name="searing_arrow"></spell>
+                <spell name="concussive_shot"></spell>
+                <spell name="piercing_shot"></spell>
+                <spell name="stinging_shot"></spell>
+                <spell name="explosive_arrow"></spell>
+                <spell name="precise_shot"></spell>
+                <spell name="explosive_trap"></spell>
+                <spell name="volley"></spell>
+                <spell name="sniper_shot"></spell>
             </spells>
         </unit>
         <unit name="Bugdal">
@@ -217,22 +195,14 @@
             <enemy>false</enemy>
             <actorType>trainer</actorType>
             <spells>
-                <spell name="devastate">
-                </spell>
-                <spell name="intimidating_shout">
-                </spell>
-                <spell name="cleave">
-                </spell>
-                <spell name="fortify">
-                </spell>
-                <spell name="bash">
-                </spell>
-                <spell name="stomp">
-                </spell>
-                <spell name="overpower">
-                </spell>
-                <spell name="frenzy">
-                </spell>
+                <spell name="devastate"></spell>
+                <spell name="intimidating_shout"></spell>
+                <spell name="cleave"></spell>
+                <spell name="fortify"></spell>
+                <spell name="bash"></spell>
+                <spell name="stomp"></spell>
+                <spell name="overpower"></spell>
+                <spell name="frenzy"></spell>
             </spells>
         </unit>
         <unit name="Nogugh">

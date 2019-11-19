@@ -1,5 +1,5 @@
 using Godot;
-namespace Game.Spell
+namespace Game.Ability
 {
     public class FortifyEffect : SpellEffect
     {

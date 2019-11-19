@@ -1,6 +1,6 @@
 using System;
 using Game.Actor;
-namespace Game.Spell
+namespace Game.Ability
 {
     public class SniperShot : Spell
     {

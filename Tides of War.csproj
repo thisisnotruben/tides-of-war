@@ -119,7 +119,7 @@
     <Compile Include="src\spell\spell_effect_controllers\slow_effect.cs" />
     <Compile Include="src\spell\spell_effect_controllers\sniper_shot_effect.cs" />
     <Compile Include="src\spell\spell_effect_controllers\stinging_shot_effect.cs" />
-    <Compile Include="src\spell\spell_effect_controllers\stomp.cs" />
+    <Compile Include="src\spell\spell_effect_controllers\stomp_effect.cs" />
     <Compile Include="src\spell\spell_logics\arcane_bolt.cs" />
     <Compile Include="src\spell\spell_logics\bash.cs" />
     <Compile Include="src\spell\spell_logics\cleave.cs" />
@@ -127,6 +127,7 @@
     <Compile Include="src\spell\spell_logics\devastate.cs" />
     <Compile Include="src\spell\spell_logics\divine_heal.cs" />
     <Compile Include="src\spell\spell_logics\explosive_arrow.cs" />
+    <Compile Include="src\spell\spell_logics\explosive_trap.cs" />
     <Compile Include="src\spell\spell_logics\fireball.cs" />
     <Compile Include="src\spell\spell_logics\fortify.cs" />
     <Compile Include="src\spell\spell_logics\frenzy.cs" />
@@ -146,7 +147,7 @@
     <Compile Include="src\spell\spell_logics\sniper_shot.cs" />
     <Compile Include="src\spell\spell_logics\stinging_shot.cs" />
     <Compile Include="src\spell\spell_logics\stomp.cs" />
-
+    <Compile Include="src\spell\spell_logics\volley.cs" />
     <Compile Include="src\utils\DeleteSpeaker.cs" />
     <Compile Include="src\utils\MapImporter.cs" />
   </ItemGroup>

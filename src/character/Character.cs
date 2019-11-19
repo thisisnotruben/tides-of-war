@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Ability;
 using Game.Misc.Loot;
 using Game.Misc.Missile;
 using Game.Misc.Other;
-using Game.Spell;
 using Godot;
 namespace Game.Actor
 {
@@ -39,11 +39,11 @@ namespace Game.Actor
         private protected WorldTypes weaponType;
         private protected Item weapon = null;
         private protected Item vest = null;
-        private protected Spell.Spell spell = null;
+        private protected Spell spell = null;
         private protected Character target = null;
         private protected AudioStreamPlayer2D snd;
         private protected List<Vector2> path = new List<Vector2>();
-        private List<Spell.Spell> spellQueue = new List<Spell.Spell>();
+        private List<Spell> spellQueue = new List<Spell>();
         private protected Dictionary<Character, short> targetList = new Dictionary<Character, short>();
         private Dictionary<Character, short> attackerTable = new Dictionary<Character, short>();
         public Dictionary<string, List<Item>> buffs = new Dictionary<string, List<Item>>
@@ -383,7 +383,7 @@ namespace Game.Actor
                     SetHp((short)(-hpMax));
                 }
                 SetMana((short)(-manaMax));
-                foreach (Spell.Spell spell in spellQueue)
+                foreach (Spell spell in spellQueue)
                 {
                     spell.UnMake();
                 }
@@ -498,7 +498,7 @@ namespace Game.Actor
         {
             return target;
         }
-        public void SetSpell(Spell.Spell spell, float seek = 0.0f)
+        public void SetSpell(Spell spell, float seek = 0.0f)
         {
             if (spell == null)
             {
@@ -506,7 +506,7 @@ namespace Game.Actor
             }
             else
             {
-                foreach (Spell.Spell spll in spellQueue)
+                foreach (Spell spll in spellQueue)
                 {
                     if (spll.GetWorldName().Equals(spell.GetWorldName()))
                     {
@@ -516,12 +516,12 @@ namespace Game.Actor
                 if (spell.GetDuration() > 0.0f)
                 {
                     spellQueue.Add(spell);
-                    spell.Connect(nameof(Spell.Spell.Unmake), this, nameof(RemoveFromSpellQueue), new Godot.Collections.Array() { spell });
+                    spell.Connect(nameof(Spell.Unmake), this, nameof(RemoveFromSpellQueue), new Godot.Collections.Array() { spell });
                 }
                 EmitSignal(nameof(UpdateHudIcon), GetWorldName(), spell, seek);
             }
         }
-        public void RemoveFromSpellQueue(Spell.Spell spell)
+        public void RemoveFromSpellQueue(Spell spell)
         {
             spellQueue.Remove(spell);
         }
@@ -560,7 +560,7 @@ namespace Game.Actor
         {
             return weaponRange;
         }
-        public Spell.Spell GetSpell()
+        public Spell GetSpell()
         {
             return spell;
         }
@@ -593,7 +593,7 @@ namespace Game.Actor
             EmitSignal(nameof(UpdateHud), "HP", GetWorldName(), hp, hpMax);
             EmitSignal(nameof(UpdateHud), "MANA", GetWorldName(), mana, manaMax);
             // EmitSignal(nameof(UpdateHud), "ICON_HIDE", GetWorldName(), hp, hpMax);
-            foreach (Spell.Spell spell in spellQueue)
+            foreach (Spell spell in spellQueue)
             {
                 EmitSignal(nameof(UpdateHudIcon), spell, spell.GetTimeLeft());
             }

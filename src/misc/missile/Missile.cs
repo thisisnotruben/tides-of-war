@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Game.Ability;
 using Game.Actor;
 using Game.Database;
 using Game.Misc.Other;
-using Game.Spell;
 using Godot;
 namespace Game.Misc.Missile
 {
@@ -18,9 +18,9 @@ namespace Game.Misc.Missile
         WorldTypes swingType;
         Character target;
         Character originator;
-        Spell.Spell spell;
+        Spell spell;
         [Signal]
-        public delegate void Hit(Spell.Spell spell);
+        public delegate void Hit(Spell spell);
         public override void _Ready()
         {
             SetProcess(false);
@@ -104,11 +104,11 @@ namespace Game.Misc.Missile
         {
             return target;
         }
-        public void SetSpell(Spell.Spell spell)
+        public void SetSpell(Spell spell)
         {
             this.spell = spell;
         }
-        public virtual void SetUp(Character originator, Vector2 globalPosition, Spell.Spell spell)
+        public virtual void SetUp(Character originator, Vector2 globalPosition, Spell spell)
         {
             SetSpell(spell);
             spawnPos = globalPosition;

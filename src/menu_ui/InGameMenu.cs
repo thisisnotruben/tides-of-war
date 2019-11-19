@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Ability;
 using Game.Actor;
 using Game.Database;
 using Game.Misc.Loot;
@@ -389,7 +390,7 @@ namespace Game.Ui
                 merchant.Hide();
                 selectedPickable = merchantBag.GetItemMetaData(idx);
                 selected = selectedPickable;
-                if (selectedPickable is Spell.Spell)
+                if (selectedPickable is Spell)
                 {
                     sndName = "spell_select";
                     bool trained = false;
@@ -621,7 +622,7 @@ namespace Game.Ui
                 return;
             }
             itemInfo.Hide();
-            if (selectedPickable is Spell.Spell && player.GetLevel() < selectedPickable.GetLevel())
+            if (selectedPickable is Spell && player.GetLevel() < selectedPickable.GetLevel())
             {
                 popup.GetNode<Label>("m/error/label").SetText("Can't Learn\nThis Yet!");
                 popup.GetNode<Control>("m/error").Show();
@@ -690,7 +691,7 @@ namespace Game.Ui
         public void _OnCastPressed()
         {
             bool showPopup = false;
-            Spell.Spell selectedSpell = selected as Spell.Spell;
+            Spell selectedSpell = selected as Spell;
             if (selectedSpell == null)
             {
                 GD.Print("Unexpected selected type in method _OnCastPressed");
@@ -736,7 +737,7 @@ namespace Game.Ui
                 return;
             }
             Globals.PlaySound("click2", this, snd);
-            Spell.Spell spell = PickableFactory.GetMakeSpell(selectedSpell.GetWorldName());
+            Spell spell = PickableFactory.GetMakeSpell(selectedSpell.GetWorldName());
             spell.GetPickable(player, false);
             spell.ConfigureSpell();
             player.SetSpell(spell);
@@ -1005,7 +1006,7 @@ namespace Game.Ui
                 return;
             }
             string pickableDescription = pickable.GetPickableWorldDescription();
-            if (selectedPickable is Spell.Spell && merchantBag.HasItem(pickable))
+            if (selectedPickable is Spell && merchantBag.HasItem(pickable))
             {
                 RegEx regEx = new RegEx();
                 regEx.Compile("-Level: (\\d*)\n");

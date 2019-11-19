@@ -1,6 +1,6 @@
 using System;
 using Godot;
-namespace Game.Spell
+namespace Game.Ability
 {
     public class Fortify : Spell
     {
