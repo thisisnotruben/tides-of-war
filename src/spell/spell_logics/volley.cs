@@ -43,6 +43,7 @@ namespace Game.Ability
         }
         public override void ConfigureSpell()
         {
+            caster.SetCurrentSpell(this);
             caster.SetState(Game.Actor.Character.States.IDLE);
             caster.SetProcess(false);
             caster.GetNode<Timer>("timer").SetBlockSignals(true);

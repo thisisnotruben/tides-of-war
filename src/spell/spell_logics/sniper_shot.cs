@@ -12,6 +12,7 @@ namespace Game.Ability
         }
         public override void ConfigureSpell()
         {
+            caster.SetCurrentSpell(this);
             caster.SetState(Character.States.IDLE);
             amount = (ushort)Math.Round(caster.weaponRange * 0.25f);
             caster.weaponRange += amount;

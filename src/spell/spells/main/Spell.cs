@@ -19,6 +19,12 @@ namespace Game.Ability
         private protected Dictionary<string, ushort> attackTable;
         private protected Character caster;
         private protected Character target = null;
+        private protected AudioStreamPlayer2D snd;
+        public override void _Ready()
+        {
+            base._Ready();
+            snd = GetNode<AudioStreamPlayer2D>("snd");
+        }
         public override void Init(string worldName)
         {
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_")));
@@ -91,9 +97,10 @@ namespace Game.Ability
             }
             if ((GetPickableSubType() == WorldTypes.CASTING ||
                     GetPickableSubType() == WorldTypes.DAMAGE_MODIFIER) &&
-                GetWorldType() != WorldTypes.EXPLOSIVE_TRAP) // this is a dirty hack, sorry
+                GetWorldType() != WorldTypes.EXPLOSIVE_TRAP)
             {
                 SpellEffect spellEffect = SetEffect();
+                GD.Print("heavy price paid");
                 if (GetWorldType() == WorldTypes.FRENZY)
                 {
                     Connect(nameof(Unmake), spellEffect, nameof(SpellEffect._OnTimerTimeout));
@@ -108,6 +115,7 @@ namespace Game.Ability
         }
         public virtual async void ConfigureSpell()
         {
+            caster.SetCurrentSpell(this);
             switch (GetPickableSubType())
             {
                 case WorldTypes.DAMAGE_MODIFIER:
@@ -194,6 +202,7 @@ namespace Game.Ability
         }
         private protected SpellEffect SetEffect()
         {
+            GD.PrintT("target", target == null, effectOnTarget, caster);
             SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(GetWorldName());
             ((effectOnTarget) ? target : caster).AddChild(spellEffect);
             spellEffect.SetOwner((effectOnTarget) ? target : caster);

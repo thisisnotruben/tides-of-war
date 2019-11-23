@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/menu_ui/StartMenu.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/ui/grey2_bg.res" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://asset/img/ui/theme.res" type="Theme" id=8]
 [ext_resource path="res://src/menu_ui/about.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/menu_ui/popup.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/utils/AudioStreamPlayer.tscn" type="PackedScene" id=11]
 
 [node name="StartMenu" type="Control"]
 anchor_right = 1.0
@@ -308,7 +309,7 @@ margin_bottom = 1130.0
 
 [node name="popup" parent="." instance=ExtResource( 10 )]
 
-[node name="snd" type="AudioStreamPlayer" parent="."]
+[node name="snd" parent="." instance=ExtResource( 11 )]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/new_game" to="." method="_OnNewGamePressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/load" to="." method="_OnLoadPressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/settings" to="." method="_OnSettingsPressed"]

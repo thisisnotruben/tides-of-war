@@ -23,7 +23,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.Print("No mini-map found for map: " + mapName);
+                GD.Print($"({mapName}): no mini-map found for map");
             }
         }
         public override void _Process(float delta)

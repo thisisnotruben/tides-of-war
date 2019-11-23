@@ -25,7 +25,7 @@ namespace Game.Ability
         }
         public override void ConfigureSnd()
         {
-            Globals.PlaySound("fireball_cast", this, new AudioStreamPlayer2D());
+            Globals.PlaySound("fireball_cast", this, snd);
         }
     }
 }

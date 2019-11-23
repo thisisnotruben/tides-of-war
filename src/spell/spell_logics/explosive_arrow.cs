@@ -18,6 +18,7 @@ namespace Game.Ability
         }
         public override void ConfigureSpell()
         {
+            caster.SetCurrentSpell(this);
             caster.SetState(Character.States.IDLE);
             PrepSight();
         }

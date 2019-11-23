@@ -64,6 +64,7 @@ namespace Game.Ability
         }
         public override void ConfigureSpell()
         {
+            caster.SetCurrentSpell(this);
             caster.SetState(Character.States.IDLE);
             Control osb = player.GetMenu().GetNode<Control>("c/osb");
             osb.SetPosition(new Vector2(0.0f, 180.0f));

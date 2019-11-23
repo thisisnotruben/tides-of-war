@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/misc/missile/LandMine.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/missile-spell/land_mine.res" type="Texture" id=2]
-[ext_resource path="res://asset/snd/spell/explosion.ogg" type="AudioStream" id=3]
-[ext_resource path="res://asset/img/light/fire_scale.res" type="Texture" id=4]
-[ext_resource path="res://asset/img/light/fire_gradient.res" type="Texture" id=5]
+[ext_resource path="res://src/utils/AudioStreamPlayer2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://asset/snd/spell/explosion.ogg" type="AudioStream" id=4]
+[ext_resource path="res://asset/img/light/fire_scale.res" type="Texture" id=5]
+[ext_resource path="res://asset/img/light/fire_gradient.res" type="Texture" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -16,11 +17,11 @@ flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 16.0
-angular_velocity = 6.01853e-036
+angular_velocity = 6.01853e-36
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
-scale_curve = ExtResource( 4 )
+scale_curve = ExtResource( 5 )
 color = Color( 0.2, 0.199219, 0.199219, 0.5 )
 
 [sub_resource type="Curve" id=3]
@@ -37,12 +38,11 @@ flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 22.0
-angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
 scale_curve = SubResource( 4 )
-color_ramp = ExtResource( 5 )
+color_ramp = ExtResource( 6 )
 
 [sub_resource type="Curve" id=6]
 min_value = 0.5
@@ -58,12 +58,11 @@ flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 22.0
-angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
 scale_curve = SubResource( 7 )
-color_ramp = ExtResource( 5 )
+color_ramp = ExtResource( 6 )
 
 [sub_resource type="CircleShape2D" id=9]
 radius = 24.0
@@ -89,10 +88,8 @@ autostart = true
 position = Vector2( 0.5, -2 )
 texture = ExtResource( 2 )
 
-[node name="snd" type="AudioStreamPlayer2D" parent="img"]
-stream = ExtResource( 3 )
-max_distance = 125.0
-attenuation = 0.0
+[node name="snd" parent="img" instance=ExtResource( 3 )]
+stream = ExtResource( 4 )
 
 [node name="explode" type="Node2D" parent="img"]
 material = SubResource( 1 )

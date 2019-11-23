@@ -17,7 +17,6 @@ namespace Game.Ability
             SetTime(6.0f);
             caster.SetSpell(this,
                 (loaded) ? GetDuration() - GetNode<Timer>("timer").GetWaitTime() : 0.0f);
-            // TODO: need to connect timeout timer to effect, look at GD code
             return base.Cast();
         }
         public override void _OnTimerTimeout()

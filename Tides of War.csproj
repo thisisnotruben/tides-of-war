@@ -91,9 +91,9 @@
     <Compile Include="src\misc\other\Grave.cs" />
     <Compile Include="src\quest_system\Quest.cs" />
     <Compile Include="src\quest_system\WorldQuests.cs" />
-    <Compile Include="src\spell\Spell.cs" />
-    <Compile Include="src\spell\SpellEffect.cs" />
-    <Compile Include="src\spell\SpellOsb.cs" />
+    <Compile Include="src\spell\spells\main\Spell.cs" />
+    <Compile Include="src\spell\spells\main\SpellOsb.cs" />
+    <Compile Include="src\spell\spell_effects\main\SpellEffect.cs" />
     <Compile Include="src\spell\spell_effect_controllers\arcane_bolt_effect.cs" />
     <Compile Include="src\spell\spell_effect_controllers\bash_effect.cs" />
     <Compile Include="src\spell\spell_effect_controllers\cleave_effect.cs" />
@@ -148,8 +148,9 @@
     <Compile Include="src\spell\spell_logics\stinging_shot.cs" />
     <Compile Include="src\spell\spell_logics\stomp.cs" />
     <Compile Include="src\spell\spell_logics\volley.cs" />
-    <Compile Include="src\utils\DeleteSpeaker.cs" />
     <Compile Include="src\utils\MapImporter.cs" />
+    <Compile Include="src\utils\Speaker.cs" />
+    <Compile Include="src\utils\Speaker2D.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

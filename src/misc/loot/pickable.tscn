@@ -1,7 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/misc/loot/Pickable.cs" type="Script" id=1]
-[ext_resource path="res://asset/img/misc/treasure_chest.res" type="Texture" id=2]
+[ext_resource path="res://src/utils/AudioStreamPlayer2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://asset/img/misc/treasure_chest.res" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "close_chest"
@@ -30,18 +31,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true, false ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("snd:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=2]
 length = 0.5
@@ -68,18 +57,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("snd:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -121,20 +98,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("snd:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="AudioStreamSample" id=4]
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 32.0
@@ -168,8 +131,7 @@ anims/close_chest = SubResource( 1 )
 anims/open_chest = SubResource( 2 )
 anims/select = SubResource( 3 )
 
-[node name="snd" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource( 4 )
+[node name="snd" parent="." instance=ExtResource( 2 )]
 
 [node name="sight" type="Area2D" parent="."]
 position = Vector2( 0, -6 )
@@ -182,7 +144,7 @@ visible = false
 shape = SubResource( 5 )
 
 [node name="img" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 offset = Vector2( 0, -8 )
 hframes = 3
 

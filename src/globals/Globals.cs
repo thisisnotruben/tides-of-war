@@ -141,7 +141,6 @@ namespace Game
         }
         public static void PlaySound(string sndName, Node originator, AudioStreamPlayer sndPlayer)
         {
-            return;
             if (!sndMeta.ContainsKey(sndName))
             {
                 GD.Print($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
@@ -151,8 +150,7 @@ namespace Game
                 if (sndPlayer.GetParent() == null)
                 {
                     originator.AddChild(sndPlayer);
-                    sndPlayer.SetScript(GD.Load("res://src/utils/DeleteSpeaker.cs"));
-                    sndPlayer.Connect("finished", sndPlayer, nameof(DeleteSpeaker.Delete));
+                    sndPlayer.Connect("finished", sndPlayer, nameof(Speaker.Delete));
                 }
                 if (!sndPlayer.IsPlaying())
                 {
@@ -162,17 +160,16 @@ namespace Game
                 }
                 else
                 {
-                    AudioStreamPlayer audioStreamPlayer = new AudioStreamPlayer();
+                    PackedScene sndScene = (PackedScene)GD.Load("res://src/utils/AudioStreamPlayer.tscn");
+                    Speaker audioStreamPlayer = (Speaker)sndScene.Instance();
                     originator.AddChild(audioStreamPlayer);
-                    audioStreamPlayer.SetScript(GD.Load("res://src/utils/DeleteSpeaker.cs"));
-                    audioStreamPlayer.Connect("finished", audioStreamPlayer, nameof(DeleteSpeaker.Delete));
+                    audioStreamPlayer.Connect("finished", audioStreamPlayer, nameof(Speaker.Delete));
                     PlaySound(sndName, originator, audioStreamPlayer);
                 }
             }
         }
         public static void PlaySound(string sndName, Node originator, AudioStreamPlayer2D sndPlayer)
         {
-            return;
             if (!sndMeta.ContainsKey(sndName))
             {
                 GD.Print($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
@@ -182,8 +179,7 @@ namespace Game
                 if (sndPlayer.GetParent() == null)
                 {
                     originator.AddChild(sndPlayer);
-                    sndPlayer.SetScript(GD.Load("res://src/utils/DeleteSpeaker.cs"));
-                    sndPlayer.Connect("finished", sndPlayer, nameof(DeleteSpeaker.Delete));
+                    sndPlayer.Connect("finished", sndPlayer, nameof(Speaker2D.Delete));
                 }
                 if (!sndPlayer.IsPlaying())
                 {
@@ -193,10 +189,10 @@ namespace Game
                 }
                 else
                 {
-                    AudioStreamPlayer2D audioStreamPlayer2D = new AudioStreamPlayer2D();
+                    PackedScene sndScene = (PackedScene)GD.Load("res://src/utils/AudioStreamPlayer2D.tscn");
+                    Speaker2D audioStreamPlayer2D = (Speaker2D)sndScene.Instance();
                     originator.AddChild(audioStreamPlayer2D);
-                    audioStreamPlayer2D.SetScript(GD.Load("res://src/utils/DeleteSpeaker.cs"));
-                    audioStreamPlayer2D.Connect("finished", audioStreamPlayer2D, nameof(DeleteSpeaker.Delete));
+                    audioStreamPlayer2D.Connect("finished", audioStreamPlayer2D, nameof(Speaker2D.Delete));
                     PlaySound(sndName, originator, audioStreamPlayer2D);
                 }
             }

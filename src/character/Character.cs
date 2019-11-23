@@ -203,16 +203,15 @@ namespace Game.Actor
         }
         public async void Cast()
         {
-            if (spell == null)
+            if (spell != null)
             {
-                return;
+                path.Clear();
+                SetProcess(false);
+                spell.Cast();
+                await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
+                GetNode<Sprite>("img").SetFrame(0);
+                SetProcess(true);
             }
-            path.Clear();
-            SetProcess(false);
-            spell.Cast();
-            await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
-            GetNode<Sprite>("img").SetFrame(0);
-            SetProcess(true);
         }
         public Vector2 GetCenterPos()
         {
@@ -498,28 +497,25 @@ namespace Game.Actor
         {
             return target;
         }
+        public void SetCurrentSpell(Spell spell)
+        {
+            this.spell = spell;
+        }
         public void SetSpell(Spell spell, float seek = 0.0f)
         {
-            if (spell == null)
+            foreach (Spell otherSpell in spellQueue)
             {
-                this.spell = null;
+                if (otherSpell.Equals(spell))
+                {
+                    otherSpell.UnMake();
+                }
             }
-            else
+            if (spell.GetDuration() > 0.0f)
             {
-                foreach (Spell spll in spellQueue)
-                {
-                    if (spll.GetWorldName().Equals(spell.GetWorldName()))
-                    {
-                        spll.UnMake();
-                    }
-                }
-                if (spell.GetDuration() > 0.0f)
-                {
-                    spellQueue.Add(spell);
-                    spell.Connect(nameof(Spell.Unmake), this, nameof(RemoveFromSpellQueue), new Godot.Collections.Array() { spell });
-                }
-                EmitSignal(nameof(UpdateHudIcon), GetWorldName(), spell, seek);
+                spellQueue.Add(spell);
+                spell.Connect(nameof(Spell.Unmake), this, nameof(RemoveFromSpellQueue), new Godot.Collections.Array() { spell });
             }
+            EmitSignal(nameof(UpdateHudIcon), GetWorldName(), spell, seek);
         }
         public void RemoveFromSpellQueue(Spell spell)
         {
