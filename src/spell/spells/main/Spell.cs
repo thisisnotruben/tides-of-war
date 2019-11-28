@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game.Actor;
 using Game.Database;
 using Game.Misc.Loot;
+using Game.Utils;
 using Godot;
 namespace Game.Ability
 {
@@ -17,13 +18,13 @@ namespace Game.Ability
         private protected bool effectOnTarget;
         private protected bool requiresTarget;
         private protected Dictionary<string, ushort> attackTable;
-        private protected Character caster;
+        private protected Character caster = null;
         private protected Character target = null;
-        private protected AudioStreamPlayer2D snd;
+        private protected Speaker2D snd;
         public override void _Ready()
         {
             base._Ready();
-            snd = GetNode<AudioStreamPlayer2D>("snd");
+            snd = GetNode<Speaker2D>("snd");
         }
         public override void Init(string worldName)
         {
@@ -66,7 +67,7 @@ namespace Game.Ability
                 }
                 if (player.GetSpell() == this)
                 {
-                    player.SetSpell(null);
+                    player.SetCurrentSpell(null);
                 }
             }
             base.UnMake();
@@ -100,7 +101,6 @@ namespace Game.Ability
                 GetWorldType() != WorldTypes.EXPLOSIVE_TRAP)
             {
                 SpellEffect spellEffect = SetEffect();
-                GD.Print("heavy price paid");
                 if (GetWorldType() == WorldTypes.FRENZY)
                 {
                     Connect(nameof(Unmake), spellEffect, nameof(SpellEffect._OnTimerTimeout));
@@ -202,10 +202,10 @@ namespace Game.Ability
         }
         private protected SpellEffect SetEffect()
         {
-            GD.PrintT("target", target == null, effectOnTarget, caster);
             SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(GetWorldName());
             ((effectOnTarget) ? target : caster).AddChild(spellEffect);
             spellEffect.SetOwner((effectOnTarget) ? target : caster);
+            spellEffect.Init((effectOnTarget) ? target : caster);
             spellEffect.OnHit(this);
             return spellEffect;
         }

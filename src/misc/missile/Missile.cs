@@ -4,6 +4,7 @@ using Game.Ability;
 using Game.Actor;
 using Game.Database;
 using Game.Misc.Other;
+using Game.Utils;
 using Godot;
 namespace Game.Misc.Missile
 {
@@ -157,7 +158,7 @@ namespace Game.Misc.Missile
             target.TakeDamage(damage, ignoreArmor, this, hitType);
             if (PlaySound)
             {
-                Globals.PlaySound(snd, this, GetNode<AudioStreamPlayer2D>("snd"));
+                Globals.PlaySound(snd, this, GetNode<Speaker2D>("snd"));
             }
         }
         public void Make()

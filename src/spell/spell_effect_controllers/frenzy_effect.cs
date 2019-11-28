@@ -3,6 +3,11 @@ namespace Game.Ability
 {
     public class frenzy_effect : SpellEffect
     {
+        public override void Init(Actor.Character character)
+        {
+            base.Init(character);
+            fadeLight = false;
+        }
         public override void OnHit(Spell spell)
         {
             base.OnHit(spell);

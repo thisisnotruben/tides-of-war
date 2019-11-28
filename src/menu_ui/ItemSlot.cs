@@ -5,6 +5,8 @@ namespace Game.Ui
 {
     public class ItemSlot : TextureButton
     {
+        public enum SlotType : byte { BAG_SLOT, HUD_SLOT, SHORTCUT }
+        public SlotType slotType = SlotType.BAG_SLOT;
         private bool allowCoolDown;
         private bool stacking;
         private List<Pickable> itemStack = new List<Pickable>();
@@ -22,14 +24,15 @@ namespace Game.Ui
         public delegate void ShortcutPressed(ItemSlot itemSlot, Pickable pickable);
         public void _OnItemSlotPressed()
         {
-            if (GetItem() != null && GetTree().IsPaused())
+            if (slotType == SlotType.BAG_SLOT && GetItem() != null && GetTree().IsPaused())
             {
                 EmitSignal(nameof(SlotSelected), GetPositionInParent());
             }
         }
         public void _OnShortcutPressed()
         {
-            if (GetItem() != null)
+            GD.Print(slotType);
+            if (slotType == SlotType.SHORTCUT && GetItem() != null)
             {
                 EmitSignal(nameof(ShortcutPressed), this, GetItem());
             }
@@ -44,7 +47,7 @@ namespace Game.Ui
         }
         public void _OnTweenCompleted(Godot.Object obj, NodePath nodePath)
         {
-            if (IsDisabled())
+            if (slotType == SlotType.HUD_SLOT)
             {
                 SetItem(null, false, true);
                 Hide();
@@ -127,12 +130,16 @@ namespace Game.Ui
                     {
                         GetParent().MoveChild(this, GetParent().GetChildCount() - 1);
                     }
+                    if (slotType == SlotType.HUD_SLOT)
+                    {
+                        Hide();
+                    }
                 }
             }
             else
             {
                 string texPath = "res://asset/img/ui/black_bg_icon_used" +
-                    $"{((IsConnected("pressed", this, nameof(_OnShortcutPressed))) ? 0 : 1)}.res";
+                    $"{((slotType == SlotType.SHORTCUT) ? 0 : 1)}.res";
                 if (!GetNormalTexture().GetPath().Equals(texPath))
                 {
                     SetNormalTexture((Texture)GD.Load(texPath));

@@ -1,19 +1,11 @@
-using Godot;
 namespace Game.Ability
 {
-    public class haste_effect : SpellEffect
+    public class haste_effect : cleave_effect
     {
-        public override void OnHit(Spell spell = null)
+        public override void Init(Actor.Character character)
         {
-            base.OnHit(spell);
-            SetPosition(character.GetNode<Node2D>("img").GetPosition());
-            tween.Start();
-            timer.Start();
-        }
-        public override void _OnTimerTimeout()
-        {
-            base._OnTimerTimeout();
-            QueueFree();
+            base.Init(character);
+            lightFadeDelay = 0.8f;
         }
     }
 }

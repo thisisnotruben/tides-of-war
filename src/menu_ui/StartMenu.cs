@@ -1,3 +1,4 @@
+using Game.Utils;
 using Godot;
 namespace Game.Ui
 {
@@ -12,7 +13,7 @@ namespace Game.Ui
             menu = listOfMenus.GetNode<Control>("main_menu");
             about = listOfMenus.GetNode<Control>("about");
             popup = GetNode<Popup>("popup");
-            snd = GetNode<AudioStreamPlayer>("snd");
+            snd = GetNode<Speaker>("snd");
             saveLoad.GetNode("v/s/back").Connect("pressed", this, nameof(_OnBackPressed));
         }
         public void _OnNewGamePressed()

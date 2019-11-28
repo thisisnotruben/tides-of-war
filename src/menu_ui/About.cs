@@ -1,3 +1,4 @@
+using Game.Utils;
 using Godot;
 namespace Game.Ui
 {
@@ -5,7 +6,7 @@ namespace Game.Ui
     {
         public void _OnBackPressed()
         {
-            Globals.PlaySound("click3", this, new AudioStreamPlayer());
+            Globals.PlaySound("click3", this, new Speaker());
             Hide();
             ((Menu)GetOwner()).menu.Show();
         }

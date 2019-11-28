@@ -362,9 +362,12 @@ namespace Game.Ui
         public void _OnSlotPressed(int index)
         {
             int amounttt = -1;
-            string selectedName = ((Pickable)menu.selected).GetWorldName();
+            Pickable selectedPickable = (Pickable)menu.selected;
             ItemSlot buttonFrom = null;
             ItemSlot buttonTo = null;
+            Hide();
+            Globals.PlaySound("click1", this, menu.snd);
+            menu.GetNode<Control>("c/controls/right").Show();
             foreach (ItemSlot itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
             {
                 Tween itemSlotTween = itemSlot.GetNode<Tween>("tween");
@@ -372,7 +375,7 @@ namespace Game.Ui
                 itemSlot.GetNode<Control>("m/label").Hide();
                 itemSlotTween.SetActive(true);
                 itemSlotTween.ResumeAll();
-                if (itemSlot.GetItem() != null && itemSlot.GetItem().GetWorldName().Equals(selectedName))
+                if (itemSlot.GetItem() != null && itemSlot.GetItem().Equals(selectedPickable))
                 {
                     amounttt = itemSlot.GetItemStack().Count;
                     itemSlot.SetItem(null, false, true, false);
@@ -386,7 +389,6 @@ namespace Game.Ui
                     }
                     Item weapon = menu.player.GetWeapon();
                     Item armor = menu.player.GetArmor();
-                    Pickable selectedPickable = (Pickable)menu.selected;
                     if (weapon == menu.selected)
                     {
                         itemSlot.SetItem(weapon, false, false, false);
@@ -402,7 +404,7 @@ namespace Game.Ui
                             if (itemList.HasItem(selectedPickable))
                             {
                                 ItemSlot bagItemSlot = itemList.GetItemSlot(selectedPickable);
-                                List<Pickable> pickableStack = itemSlot.GetItemStack();
+                                List<Pickable> pickableStack = bagItemSlot.GetItemStack();
                                 buttonFrom = bagItemSlot;
                                 if (amounttt == -1)
                                 {
@@ -412,15 +414,15 @@ namespace Game.Ui
                                 {
                                     itemSlot.SetItem(pickableStack[i]);
                                 }
+                                break;
                             }
-                            break;
                         }
                     }
                 }
             }
             if (buttonFrom != null && buttonTo != null)
             {
-                foreach (Godot.Collections.Dictionary link in buttonFrom.GetSignalConnectionList(nameof(ItemSlot._OnSyncShortcut)))
+                foreach (Godot.Collections.Dictionary link in buttonFrom.GetSignalConnectionList(nameof(ItemSlot.SyncSlot)))
                 {
                     buttonFrom.Disconnect(nameof(ItemSlot.SyncSlot), (Godot.Object)link["target"], nameof(ItemSlot._OnSyncShortcut));
                 }
@@ -444,7 +446,8 @@ namespace Game.Ui
             {
                 _OnBackPressed();
             }
-            if (menu is InGameMenu && menu.itemInfo.IsConnected("s/h/v/back", menu, nameof(InGameMenu.HideMenu)))
+            if (menu is InGameMenu && menu.itemInfo.GetNode("s/h/v/back")
+            .IsConnected("pressed", menu, nameof(InGameMenu.HideMenu)))
             {
                 ((InGameMenu)menu).HideMenu();
             }

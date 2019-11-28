@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Actor;
+using Game.Utils;
 using Godot;
 namespace Game.Ability
 {
@@ -108,7 +109,7 @@ namespace Game.Ability
             player.GetMenu().GetNode<Control>("c/osb/m/cast").Disconnect("pressed", this, nameof(_OnSpellAreaCast));
             player.GetNode<Tween>("tween").Disconnect("tween_Started", this, nameof(_OnTweenStarted));
             RemoveFromGroup(player.GetMenu().GetNode("c/osb").GetInstanceId().ToString());
-            Globals.PlaySound("click2", this, new AudioStreamPlayer());
+            Globals.PlaySound("click2", this, new Speaker());
             Hide();
             Cast();
             foreach (Character character in targets)

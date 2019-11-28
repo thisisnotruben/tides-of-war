@@ -139,7 +139,7 @@ namespace Game
             GetTree().GetRoot().AddChild(worldQuests);
             Globals.worldQuests = worldQuests;
         }
-        public static void PlaySound(string sndName, Node originator, AudioStreamPlayer sndPlayer)
+        public static void PlaySound(string sndName, Node originator, Speaker sndPlayer)
         {
             if (!sndMeta.ContainsKey(sndName))
             {
@@ -168,7 +168,7 @@ namespace Game
                 }
             }
         }
-        public static void PlaySound(string sndName, Node originator, AudioStreamPlayer2D sndPlayer)
+        public static void PlaySound(string sndName, Node originator, Speaker2D sndPlayer)
         {
             if (!sndMeta.ContainsKey(sndName))
             {

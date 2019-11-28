@@ -1,5 +1,6 @@
 using System;
 using Game.Actor;
+using Game.Utils;
 using Godot;
 namespace Game.Misc.Other
 {
@@ -34,7 +35,7 @@ namespace Game.Misc.Other
         }
         public void Revive()
         {
-            Globals.PlaySound("click2", this, new AudioStreamPlayer());
+            Globals.PlaySound("click2", this, new Speaker());
             Globals.GetMap().SetVeil(false);
             deceasedPlayer.GetMenu().GetNode<CanvasItem>("c/osb").Hide();
             deceasedPlayer.GetMenu().GetNode<BaseButton>("c/osb/m/cast").Disconnect("pressed", this, nameof(Revive));

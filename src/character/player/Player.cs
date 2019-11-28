@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game.Misc.Other;
 using Game.Ui;
+using Game.Utils;
 using Godot;
 namespace Game.Actor
 {
@@ -245,7 +246,7 @@ namespace Game.Actor
                 SetLevel(_level);
                 if (!fromSaveFile)
                 {
-                    Globals.PlaySound("level_up", this, new AudioStreamPlayer());
+                    Globals.PlaySound("level_up", this, new Speaker());
                 }
                 if (GetLevel() > Stats.MAX_LEVEL)
                 {

@@ -6,8 +6,8 @@ namespace Game.Misc.Other
     {
         public Area2D exludedUnitArea;
         private bool exploded;
-        public short minDamage;
-        public short maxDamage;
+        public short minDamage = 0;
+        public short maxDamage = 10;
         public void _OnTimerTimeout()
         {
             Explode();

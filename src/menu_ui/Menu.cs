@@ -1,4 +1,5 @@
 using Game.Actor;
+using Game.Utils;
 using Godot;
 namespace Game.Ui
 {
@@ -18,7 +19,7 @@ namespace Game.Ui
         public ItemList inventoryBag;
         public ItemList merchantBag;
         public ItemList spellBook;
-        public AudioStreamPlayer snd;
+        public Speaker snd;
         public int selectedIdx;
         public Node selected;
         public Player player;

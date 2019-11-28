@@ -7,6 +7,7 @@ using Game.Database;
 using Game.Misc.Loot;
 using Game.Misc.Other;
 using Game.Quests;
+using Game.Utils;
 using Godot;
 namespace Game.Ui
 {
@@ -34,9 +35,22 @@ namespace Game.Ui
             spellBook = spellMenu.GetNode<ItemList>("s/v/c/spell_list");
             popup = GetNode<Popup>("c/game_menu/popup");
             hpMana = GetNode<Control>("c/hp_mana");
-            snd = GetNode<AudioStreamPlayer>("snd");
+            snd = GetNode<Speaker>("snd");
             saveLoad.GetNode("v/s/back").Connect("pressed", this, nameof(_OnBackPressed));
             player = (Player)GetOwner();
+            merchantBag.allowSlotsToCooldown = false;
+            spellBook.ITEM_MAX = 30;
+            foreach (Node container in new Node[] { hpMana.GetNode("m/h/p/h/g"), hpMana.GetNode("m/h/u/h/g") })
+            {
+                foreach (Node node in container.GetChildren())
+                {
+                    ItemSlot itemSlot = node as ItemSlot;
+                    if (itemSlot != null)
+                    {
+                        itemSlot.slotType = ItemSlot.SlotType.HUD_SLOT;
+                    }
+                }
+            }
             foreach (Node control in new Node[] { inventoryBag, spellBook })
             {
                 foreach (Node node in control.GetChildren())
@@ -58,8 +72,14 @@ namespace Game.Ui
                             ItemSlot hudSlot = hudNode as ItemSlot;
                             if (hudSlot != null)
                             {
+                                hudSlot.slotType = ItemSlot.SlotType.SHORTCUT;
                                 itemSlot.Connect(nameof(ItemSlot.Cooldown), hudSlot, nameof(ItemSlot.CoolDown));
                                 hudSlot.Connect(nameof(ItemSlot.Cooldown), itemSlot, nameof(ItemSlot.CoolDown));
+                                if (!hudSlot.IsConnected(nameof(ItemSlot.ShortcutPressed), this, nameof(_OnHudSlotPressed)))
+                                {
+                                    GD.Print("here xxxxx");
+                                    hudSlot.Connect(nameof(ItemSlot.ShortcutPressed), this, nameof(_OnHudSlotPressed));
+                                }
                             }
                         }
                     }
@@ -733,7 +753,7 @@ namespace Game.Ui
             Spell spell = PickableFactory.GetMakeSpell(selectedSpell.GetWorldName());
             spell.GetPickable(player, false);
             spell.ConfigureSpell();
-            player.SetSpell(spell);
+            player.SetCurrentSpell(spell);
             spellBook.SetSlotCoolDown(selectedIdx, spell.GetCoolDownTime(), 0.0f);
             itemInfo.Hide();
             HideMenu();
@@ -981,7 +1001,7 @@ namespace Game.Ui
                 label.Show();
                 if (itemSlot.GetItem() != null && itemSlot.GetItem().Equals(selectedPickable))
                 {
-                    popup.GetNode<Control>("m/add_to_slot/clear_slot");
+                    popup.GetNode<Control>("m/add_to_slot/clear_slot").Show();
                 }
                 count++;
             }
@@ -1130,8 +1150,10 @@ namespace Game.Ui
             {
                 if (itemSlot.GetItem() == null)
                 {
+                    // TODO: check these connections, hud slot doesnt dissapear after done
+                    // cooling down
                     pickable.Connect(nameof(Pickable.Unmake), itemSlot, nameof(ItemSlot.SetItem),
-                        new Godot.Collections.Array() { null, false, true });
+                        new Godot.Collections.Array() { null, false, true, false });
                     itemSlot.Connect("hide", pickable, nameof(Pickable.UncoupleSlot),
                         new Godot.Collections.Array() { itemSlot });
                     itemSlot.SetItem(pickable);

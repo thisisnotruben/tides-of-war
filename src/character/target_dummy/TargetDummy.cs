@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Game.Misc.Other;
+using Game.Utils;
 using Godot;
 namespace Game.Actor
 {
@@ -28,7 +28,7 @@ namespace Game.Actor
             }
             else
             {
-                Globals.PlaySound("click4", this, new AudioStreamPlayer());
+                Globals.PlaySound("click4", this, new Speaker());
                 Sprite img = GetNode<Sprite>("img");
                 Tween tween = GetNode<Tween>("tween");
                 tween.InterpolateProperty(img, ":scale", img.GetScale(), new Vector2(1.03f, 1.03f),

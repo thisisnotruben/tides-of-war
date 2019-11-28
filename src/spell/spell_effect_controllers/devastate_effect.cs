@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class devastate_effect : haste_effect { }
+    public class devastate_effect : cleave_effect { }
 }

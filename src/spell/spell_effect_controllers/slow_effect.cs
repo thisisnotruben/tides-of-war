@@ -4,6 +4,12 @@ namespace Game.Ability
 {
     public class slow_effect : SpellEffect
     {
+        public override void Init(Actor.Character character)
+        {
+            base.Init(character);
+            fadeLight = false;
+            lightFadeDelay = 4.0f;
+        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

@@ -1,4 +1,3 @@
-using System;
 using Game.Actor;
 using Godot;
 namespace Game.Ability
@@ -7,14 +6,17 @@ namespace Game.Ability
     {
         public Vector2 seekPos = new Vector2();
         private protected float lightFadeDelay = 0.65f;
-        private protected bool MissileplaySound = false;
+        private protected bool playSound = false;
         private protected bool fadeLight = true;
         private protected Character character;
         private protected Tween tween;
         private protected Timer timer;
+        public virtual void Init(Character character)
+        {
+            this.character = character;
+        }
         public override void _Ready()
         {
-            SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), GetWorldName().ToUpper().Replace("", "_")));
             foreach (Node2D node2D in GetNode("idle").GetChildren())
             {
                 node2D.SetUseParentMaterial(true);

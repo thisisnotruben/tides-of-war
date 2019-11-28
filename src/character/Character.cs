@@ -5,6 +5,7 @@ using Game.Ability;
 using Game.Misc.Loot;
 using Game.Misc.Missile;
 using Game.Misc.Other;
+using Game.Utils;
 using Godot;
 namespace Game.Actor
 {
@@ -41,7 +42,7 @@ namespace Game.Actor
         private protected Item vest = null;
         private protected Spell spell = null;
         private protected Character target = null;
-        private protected AudioStreamPlayer2D snd;
+        private protected Speaker2D snd;
         private protected List<Vector2> path = new List<Vector2>();
         private List<Spell> spellQueue = new List<Spell>();
         private protected Dictionary<Character, short> targetList = new Dictionary<Character, short>();
@@ -60,7 +61,7 @@ namespace Game.Actor
         public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
         public override void _Ready()
         {
-            snd = GetNode<AudioStreamPlayer2D>("snd");
+            snd = GetNode<Speaker2D>("snd");
             // Connect(nameof(Talked), Globals.GetWorldQuests(),
             //     nameof(Game.Quests.WorldQuests.UpdateQuestCharacter), new Godot.Collections.Array { this });
             // Connect(nameof(Died), Globals.GetWorldQuests(),

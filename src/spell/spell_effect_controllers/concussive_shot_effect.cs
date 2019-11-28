@@ -3,6 +3,12 @@ namespace Game.Ability
 {
     public class concussive_shot_effect : SpellEffect
     {
+        public override void Init(Actor.Character character)
+        {
+            base.Init(character);
+            lightFadeDelay = 0.75f;
+            playSound = true;
+        }
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);

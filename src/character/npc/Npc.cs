@@ -4,6 +4,7 @@ using Game.Database;
 using Game.Misc.Loot;
 using Game.Misc.Other;
 using Game.Ui;
+using Game.Utils;
 using Godot;
 namespace Game.Actor
 {
@@ -136,7 +137,7 @@ namespace Game.Actor
                             {
                                 pickable.SetUpShop(false);
                             }
-                            Globals.PlaySound(sndName, this, new AudioStreamPlayer());
+                            Globals.PlaySound(sndName, this, new Speaker());
                             tween.SetPauseMode(PauseModeEnum.Process);
                             menu.itemInfo.GetNode<TextureButton>("s/v/c/v/bg").SetDisabled(true);
                             menu.merchant.GetNode<Label>("s/v/label").SetText(GetWorldName());
@@ -149,7 +150,7 @@ namespace Game.Actor
                             EmitSignal(nameof(Talked));
                             if (!text.Empty())
                             {
-                                Globals.PlaySound("turn_page", this, new AudioStreamPlayer());
+                                Globals.PlaySound("turn_page", this, new Speaker());
                                 menu.menu.Hide();
                                 if (GetWorldType() == WorldTypes.HEALER)
                                 {
@@ -168,7 +169,7 @@ namespace Game.Actor
                 }
                 else
                 {
-                    Globals.PlaySound("click4", this, new AudioStreamPlayer());
+                    Globals.PlaySound("click4", this, new Speaker());
                 }
             }
         }

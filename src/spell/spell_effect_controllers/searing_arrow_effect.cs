@@ -1,17 +1,11 @@
 namespace Game.Ability
 {
-    public class searing_arrow_effect : SpellEffect
+    public class searing_arrow_effect : stomp_effect
     {
-        public override void OnHit(Spell spell = null)
+        public override void Init(Actor.Character character)
         {
-            base.OnHit(spell);
-            tween.Start();
-            timer.Start();
-        }
-        public override void _OnTimerTimeout()
-        {
-            base._OnTimerTimeout();
-            QueueFree();
+            base.Init(character);
+            playSound = true;
         }
     }
 }
