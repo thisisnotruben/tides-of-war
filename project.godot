@@ -16,8 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tides of War"
-run/main_scene="res://src/map/map-1.tscn"
-config/icon="res://icon.png"
+config/icon="res://asset/img/misc/ToW_icon.png"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
 

@@ -3,9 +3,10 @@
 [ext_resource path="res://src/spell/spell_effects/main/effect_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/spell/spell_effect_controllers/haste_effect.cs" type="Script" id=2]
 [ext_resource path="res://asset/snd/spell/haste.wav" type="AudioStream" id=3]
-[ext_resource path="res://src/spell/spell_effects/main/color_ramp.shader" type="Shader" id=4]
-[ext_resource path="res://asset/img/missile-spell/haste.res" type="Texture" id=5]
+[ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=4]
+[ext_resource path="res://asset/img/missile-spell/haste.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/missile-spell/ball1.png" type="Texture" id=6]
+
 
 
 

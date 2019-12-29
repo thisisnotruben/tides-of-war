@@ -5,7 +5,7 @@ namespace Game.Database
 {
     public static class UnitDB
     {
-        private static readonly string DB_PATH = "res://src/database/data/UnitDB.xml";
+        private static readonly string DB_PATH = "res://data/UnitDB.xml";
         private static readonly string[] ignoreTags = { "items", "spells" };
         private static readonly string[] namedTags = { "item", "spell" };
         private static readonly XMLParser xMLParser = new XMLParser();

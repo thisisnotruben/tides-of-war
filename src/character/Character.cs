@@ -680,7 +680,7 @@ namespace Game.Actor
             {
                 bodyName = imgPath.GetFile().BaseName().Split('-')[0];
             }
-            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/{bodyName}_body.res");
+            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/{bodyName}_body.tres");
             TouchScreenButton select = GetNode<TouchScreenButton>("select");
             Vector2 textureSize = texture.GetRegion().Size;
             Node2D sightDistance = GetNode<Node2D>("sight/distance");

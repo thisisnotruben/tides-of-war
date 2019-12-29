@@ -163,7 +163,7 @@ namespace Game.Misc.Missile
         }
         public void Make()
         {
-            string texturePath = "res://asset/img/missile-spell/{0}.res";
+            string texturePath = "res://asset/img/missile-spell/{0}.tres";
             string textureSize = "big";
             string raceName = originator.GetNode<Sprite>("img").GetTexture().GetPath().GetBaseDir().GetFile();
             switch (raceName)
@@ -196,7 +196,7 @@ namespace Game.Misc.Missile
                     case WorldTypes.MIND_BLAST:
                     case WorldTypes.SLOW:
                     case WorldTypes.SIPHON_MANA:
-                        GetNode<CollisionShape2D>("coll").SetShape((Shape2D)GD.Load("res://asset/img/missile-spell/spell_coll.res"));
+                        GetNode<CollisionShape2D>("coll").SetShape((Shape2D)GD.Load("res://asset/img/missile-spell/spell_coll.tres"));
                         switch (spell.GetWorldType())
                         {
                             case WorldTypes.MIND_BLAST:

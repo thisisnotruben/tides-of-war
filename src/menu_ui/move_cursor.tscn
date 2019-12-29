@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://asset/img/ui/arrow_move.png" type="Texture" id=1]
+[ext_resource path="res://asset/img/ui/move_arrow.tres" type="Texture" id=1]
 [ext_resource path="res://src/menu_ui/MoveCursor.cs" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.75, 0.75 ), Vector2( 1e-005, 1e-005 ) ]
+"values": [ Vector2( 0.75, 0.75 ), Vector2( 1e-05, 1e-05 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:frame")
@@ -34,8 +34,7 @@ tracks/1/keys = {
 [node name="move_cursor" type="Sprite"]
 use_parent_material = true
 texture = ExtResource( 1 )
-vframes = 2
-hframes = 2
+hframes = 4
 script = ExtResource( 2 )
 
 [node name="anim" type="AnimationPlayer" parent="."]

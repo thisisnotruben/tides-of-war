@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        Your help in this town has already shown a colossal improvement.
+        Our king demands a report on our findings down here and I dare not
+        delay him. Send the reports that you gathered down to shipmaster "___",
+        he'll send them off. There after, report back to me.
+    </start>
+    <active>
+        Go with haste to shipmaster "___" before he sends his ships out.
+    </active>
+    <completed>
+        Nice work, all we can do now is wait for a reply.
+    </completed>
+    <delivered>
+    </delivered>
+    <r_completed>
+        Our holy magistrate sent you?! I'll send these right away in our fastest ship!
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

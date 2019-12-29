@@ -5,7 +5,7 @@ namespace Game.Database
 {
     public static class QuestDB
     {
-        private static readonly string DB_PATH = "res://src/database/data/QuestDB.xml";
+        private static readonly string DB_PATH = "res://data/QuestDB.xml";
         private static readonly string[] namedTags = { "chainQuest", "pickable", "kill" };
         private static readonly string[] excludeNamedTags = { "chainQuests", "reward", "objective" };
         private static readonly XMLParser xMLParser = new XMLParser();

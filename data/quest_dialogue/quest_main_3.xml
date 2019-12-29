@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        I was informed to send you to "__(BISHOP_NAME?)__" in our cathedral
+        to hand over the scout reports. Go now to our holy magistrate, he'll be
+        giving you the orders now.
+    </start>
+    <active>
+        Our holy magistrate is waiting for you.
+    </active>
+    <completed>
+    </completed>
+    <delivered>
+        You did a great service to us son.
+    </delivered>
+    <r_completed>
+        Yes, my friend?
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

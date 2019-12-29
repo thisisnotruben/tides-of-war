@@ -4,7 +4,7 @@ namespace Game.Database
 {
     public static class SpellDB
     {
-        private static readonly string DB_PATH = "res://src/database/data/SpellDB.xml";
+        private static readonly string DB_PATH = "res://data/SpellDB.xml";
         private static readonly XMLParser xMLParser = new XMLParser();
         public static Dictionary<string, string> GetSpellData(string worldName)
         {

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/misc/other/CombatText.cs" type="Script" id=1]
-[ext_resource path="res://asset/img/font/mago1_16.res" type="DynamicFont" id=2]
+[ext_resource path="res://asset/img/font/mago1_16.tres" type="DynamicFont" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "label_fade"

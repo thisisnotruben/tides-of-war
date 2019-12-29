@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        The "__(ARMY NAME)__" has placed a bounty on "__(UNIT NAME)__" for acts of raiding. Slaughter them and
+        bring me their paws, and the "__(ARMY NAME)__" will reward you well.
+    </start>
+    <active>
+        Bring me their paws, and we'll reward you well.
+    </active>
+    <completed>
+        You have the paws? Great! Captain "__(UNIT NAME)__" was worried about the gnoll
+        situation, and I'll like to tell him that we got it under control thanks to your efforts.
+    </completed>
+    <delivered>
+        The gnoll situation has calmed down ever since you took care of them. That'll teach them
+        to leave us alone now.
+    </delivered>
+    <r_completed>
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

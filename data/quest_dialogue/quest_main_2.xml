@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        Now since our base is is now in working order, we can finally move to more
+        important matters. I've sent three scouts to go and explore the land so we can
+        report back to our king back in "__(KINGDOM_NAME)___". However, I haven't heard back
+        from them in weeks, go see what's the hold up.
+    </start>
+    <active>
+        We need those reports! Check up on them, hurry!
+    </active>
+    <completed>
+       It seems we're not alone in these lands. Thanks for delivering these reports.
+    </completed>
+    <delivered>
+    </delivered>
+    <r_completed>
+        Captain "___" sent you? Here is my report.
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

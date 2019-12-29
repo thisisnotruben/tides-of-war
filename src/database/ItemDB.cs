@@ -5,7 +5,7 @@ namespace Game.Database
 {
     public static class ItemDB
     {
-        private static readonly string DB_PATH = "res://src/database/data/ItemDB.xml";
+        private static readonly string DB_PATH = "res://data/ItemDB.xml";
         private static readonly string[] typeTags = { "Weapon", "Armor", "Potion", "Food", "Misc" };
         private static readonly XMLParser xMLParser = new XMLParser();
         public static Dictionary<string, string> GetItemData(string worldName)

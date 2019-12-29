@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/menu_ui/QuestEntry.cs" type="Script" id=1]
-[ext_resource path="res://asset/img/ui/grey_button_toggle.res" type="Texture" id=2]
-[ext_resource path="res://asset/img/ui/grey_button_toggle_pressed.res" type="Texture" id=3]
-[ext_resource path="res://asset/img/font/mago1_80.res" type="DynamicFont" id=4]
+[ext_resource path="res://asset/img/ui/grey_button_toggle.tres" type="Texture" id=2]
+[ext_resource path="res://asset/img/ui/grey_button_toggle_pressed.tres" type="Texture" id=3]
+[ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=4]
 
 [node name="quest_entry" type="HBoxContainer"]
 margin_right = 40.0

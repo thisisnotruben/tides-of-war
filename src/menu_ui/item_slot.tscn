@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://asset/img/ui/brown_bg_icon.res" type="Texture" id=1]
+[ext_resource path="res://asset/img/ui/brown_bg_icon.tres" type="Texture" id=1]
 [ext_resource path="res://src/menu_ui/ItemSlot.cs" type="Script" id=2]
-[ext_resource path="res://asset/img/font/mago1_80.res" type="DynamicFont" id=3]
+[ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=3]
 
 [node name="item_slot" type="TextureButton"]
 margin_right = 112.0

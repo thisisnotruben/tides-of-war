@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        Those damn basterd crabs took my wife from me! I'll never forgive them
+        for what they've done to her and me. One of them swallowed my sword while
+        fighting them off before they got to my beloved wife. I can't rest while
+        they're out there walking and pinching there pincers. Avenge my wife and
+        bring me tere pincers and I'll see to it you're rewarded well.
+    </start>
+    <active>
+        You must give the crabbers the stabbers! Go and avenge my wife!
+    </active>
+    <completed>
+        Well done! You have a knack for combat. The coast is made safer because of
+        you, I can rest easy now that this won't happen to someone else. Here's your
+        reward, you've earned it.
+    </completed>
+    <delivered>
+        Isn't it the crab slayer! How ya doing!?
+    </delivered>
+    <r_completed>
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

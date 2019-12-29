@@ -2,7 +2,8 @@
 
 [ext_resource path="res://src/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/target_dummy/TargetDummy.cs" type="Script" id=2]
-[ext_resource path="res://asset/img/character/target_dummy.res" type="Texture" id=3]
+[ext_resource path="res://asset/img/character/misc/target_dummy.tres" type="Texture" id=3]
+
 
 [sub_resource type="Animation" id=1]
 resource_local_to_scene = true

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        I got a real predicament on my hands. I got a contract I got to fulfill,
+        but I'm running out of time to complete the order. The forest has scared
+        my workers away and thus, left all their lumber out. I need you to go out
+        there and collect the wood left out, and then just maybe I can meet my deadline.
+    </start>
+    <active>
+        Hurry! If I don't get this order in, no one would want to contract me again.
+    </active>
+    <completed>
+        Excellent! I should be able to fulfill my order on time. To show my gratitude, here's
+        something for your troubles.
+    </completed>
+    <delivered>
+        Business is good thanks to you.
+    </delivered>
+    <r_completed>
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

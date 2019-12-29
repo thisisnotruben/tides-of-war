@@ -487,7 +487,7 @@ namespace Game.Ui
             {
                 Globals.PlaySound(SndConfigure(true), this, snd);
             }
-            Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon_used0.res");
+            Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon_used0.tres");
             string path = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), selectedPickable.GetWorldType()).ToLower()}_slot";
             inventory.GetNode<TextureButton>(path).SetNormalTexture(texture);
             statsMenu.GetNode<TextureButton>(path).SetNormalTexture(texture);
@@ -909,13 +909,13 @@ namespace Game.Ui
         public void _OnHudButtonDown(string nodePath)
         {
             ((TextureRect)GetNode(nodePath).GetParent())
-            .SetTexture((Texture)GD.Load("res://asset/img/ui/on_screen_button_pressed.res"));
+            .SetTexture((Texture)GD.Load("res://asset/img/ui/on_screen_button_pressed.tres"));
             GetNode<Control>(nodePath).SetScale(new Vector2(0.8f, 0.8f));
         }
         public void _OnHudButtonUp(string nodePath)
         {
             ((TextureRect)GetNode(nodePath).GetParent())
-            .SetTexture((Texture)GD.Load("res://asset/img/ui/on_screen_button.res"));
+            .SetTexture((Texture)GD.Load("res://asset/img/ui/on_screen_button.tres"));
             GetNode<Control>(nodePath).SetScale(new Vector2(1.0f, 1.0f));
         }
         public void _OnMoveHud(bool playerHud = false)

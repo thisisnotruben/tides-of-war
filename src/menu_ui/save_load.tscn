@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/menu_ui/SaveLoad.cs" type="Script" id=1]
-[ext_resource path="res://asset/img/font/mago1_144.res" type="DynamicFont" id=2]
-[ext_resource path="res://asset/img/ui/grey_button_toggle.res" type="Texture" id=3]
-[ext_resource path="res://asset/img/ui/grey_button_toggle_pressed.res" type="Texture" id=4]
-[ext_resource path="res://asset/img/font/mago1_96.res" type="DynamicFont" id=5]
-[ext_resource path="res://asset/img/ui/brown_button.res" type="Texture" id=6]
-[ext_resource path="res://asset/img/ui/brown_button_pressed.res" type="Texture" id=7]
+[ext_resource path="res://asset/img/font/mago1_144.tres" type="DynamicFont" id=2]
+[ext_resource path="res://asset/img/ui/grey_button_toggle.tres" type="Texture" id=3]
+[ext_resource path="res://asset/img/ui/grey_button_toggle_pressed.tres" type="Texture" id=4]
+[ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=5]
+[ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=6]
+[ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=7]
 
 [node name="save_load" type="Container"]
 visible = false

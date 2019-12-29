@@ -33,7 +33,7 @@ namespace Game.Ability
             SetName(GetWorldName());
             Dictionary<string, string> spellData = SpellDB.GetSpellData(worldName);
             SetPickableSubType((WorldTypes)Enum.Parse(typeof(WorldTypes), spellData["subType"].ToUpper()));
-            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.res");
+            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.tres");
             level = short.Parse(spellData[nameof(level)]);
             spellRange = ushort.Parse(spellData[nameof(spellRange)]);
             cooldown = short.Parse(spellData[nameof(cooldown)]);

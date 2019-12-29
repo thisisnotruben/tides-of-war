@@ -113,7 +113,7 @@ namespace Game.Ui
                 }
                 if (GetNode<TextureRect>("m/icon").GetTexture() == null)
                 {
-                    SetNormalTexture((Texture)GD.Load("res://asset/img/ui/brown_bg_icon.res"));
+                    SetNormalTexture((Texture)GD.Load("res://asset/img/ui/brown_bg_icon.tres"));
                     foreach (Godot.Collections.Dictionary link in GetSignalConnectionList(nameof(SyncSlot)))
                     {
                         Disconnect(nameof(SyncSlot), (Godot.Object)link["target"], nameof(_OnSyncShortcut));
@@ -139,7 +139,7 @@ namespace Game.Ui
             else
             {
                 string texPath = "res://asset/img/ui/black_bg_icon_used" +
-                    $"{((slotType == SlotType.SHORTCUT) ? 0 : 1)}.res";
+                    $"{((slotType == SlotType.SHORTCUT) ? 0 : 1)}.tres";
                 if (!GetNormalTexture().GetPath().Equals(texPath))
                 {
                     SetNormalTexture((Texture)GD.Load(texPath));

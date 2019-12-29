@@ -182,7 +182,7 @@ namespace Game.Ui
         {
             if (menu is StartMenu)
             {
-                Globals.SaveGameMeta("", menu.selectedIdx);
+                Globals.SaveGameData("", menu.selectedIdx);
                 menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{menu.selectedIdx}").
                 SetText($"Slot {menu.selectedIdx + 1}");
                 new Directory().Remove(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
@@ -209,7 +209,7 @@ namespace Game.Ui
                     case "Unequip?":
                         sndName = "inventory_unequip";
                         ((Item)menu.selected).Unequip();
-                        Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon.res");
+                        Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon.tres");
                         string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), ((Item)menu.selected).GetWorldType()).ToLower()}_slot";
                         menu.inventory.GetNode<TextureButton>(nodePath).SetNormalTexture(texture);
                         menu.statsMenu.GetNode<TextureButton>(nodePath).SetNormalTexture(texture);
@@ -235,7 +235,7 @@ namespace Game.Ui
                         menu.merchant.Show();
                         break;
                     case "Delete?":
-                        Globals.SaveGameMeta("", menu.selectedIdx);
+                        Globals.SaveGameData("", menu.selectedIdx);
                         ((Label)menu.selected).SetText($"Slot {menu.selectedIdx + 1}");
                         new Directory().Remove(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
                         menu.saveLoad.Show();
@@ -464,12 +464,12 @@ namespace Game.Ui
             }
             if (shown > 4)
             {
-                GetNode<TextureRect>("bg").SetTexture((Texture)GD.Load("res://asset/img/ui/grey2_bg.res"));
+                GetNode<TextureRect>("bg").SetTexture((Texture)GD.Load("res://asset/img/ui/grey2_bg.tres"));
             }
         }
         public void _OnRepairHide()
         {
-            GetNode<TextureRect>("bg").SetTexture((Texture)GD.Load("res://asset/img/ui/grey3_bg.res"));
+            GetNode<TextureRect>("bg").SetTexture((Texture)GD.Load("res://asset/img/ui/grey3_bg.tres"));
         }
         public void SaveLoadGo(int index)
         {
@@ -514,7 +514,7 @@ namespace Game.Ui
             Godot.Collections.Dictionary date = OS.GetDatetime();
             string time = $"{date["month"]}-{date["day"]} {date["hour"]}:{date["minute"]}";
             ((Label)menu.selected).SetText(time);
-            Globals.SaveGameMeta(time, menu.selectedIdx);
+            Globals.SaveGameData(time, menu.selectedIdx);
             Globals.SaveGame(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
             ((Label)menu.selected).SetText(time);
             menu.saveLoad.SetLabels();

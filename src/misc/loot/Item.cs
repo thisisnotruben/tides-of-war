@@ -21,7 +21,7 @@ namespace Game.Misc.Loot
             SetWorldName(worldName);
             SetName(GetWorldName());
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), itemData["type"].ToUpper()));
-            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData["type"].ToLower()}/{itemData[nameof(icon)]}_icon.res");
+            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData["type"].ToLower()}/{itemData[nameof(icon)]}_icon.tres");
             level = short.Parse(itemData[nameof(level)]);
             goldWorth = Stats.GetItemGoldWorth(GetLevel(), GetWorldType(), durability);
             if (GetWorldType() == WorldTypes.WEAPON || GetWorldType() == WorldTypes.POTION)

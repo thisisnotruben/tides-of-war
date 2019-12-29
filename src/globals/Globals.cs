@@ -10,15 +10,15 @@ namespace Game
     {
         public static readonly PackedScene combatText = (PackedScene)GD.Load("res://src/misc/other/combat_text.tscn");
         public static readonly Dictionary<string, string> SAVE_PATH = new Dictionary<string, string>
-        { { nameof(gameMeta), "res://meta/game_meta.json" },
-            { "SAVE_SLOT_0", "res://meta/save_slot_0.json" },
-            { "SAVE_SLOT_1", "res://meta/save_slot_1.json" },
-            { "SAVE_SLOT_2", "res://meta/save_slot_2.json" },
-            { "SAVE_SLOT_3", "res://meta/save_slot_3.json" },
-            { "SAVE_SLOT_4", "res://meta/save_slot_4.json" },
-            { "SAVE_SLOT_5", "res://meta/save_slot_5.json" },
-            { "SAVE_SLOT_6", "res://meta/save_slot_6.json" },
-            { "SAVE_SLOT_7", "res://meta/save_slot_7.json" }
+        { { nameof(saveData), "res://data/save_game/save_data.json" },
+            { "SAVE_SLOT_0", "res://data/save_game/save_slot_0.json" },
+            { "SAVE_SLOT_1", "res://data/save_game/save_slot_1.json" },
+            { "SAVE_SLOT_2", "res://data/save_game/save_slot_2.json" },
+            { "SAVE_SLOT_3", "res://data/save_game/save_slot_3.json" },
+            { "SAVE_SLOT_4", "res://data/save_game/save_slot_4.json" },
+            { "SAVE_SLOT_5", "res://data/save_game/save_slot_5.json" },
+            { "SAVE_SLOT_6", "res://data/save_game/save_slot_6.json" },
+            { "SAVE_SLOT_7", "res://data/save_game/save_slot_7.json" }
         };
         public static readonly Dictionary<string, ushort> WEAPON_TYPE = new Dictionary<string, ushort>
         { { "AXE", 5 },
@@ -46,14 +46,14 @@ namespace Game
         public const string SAVE_GROUP = "save";
         public static Player player = null;
         public static Dictionary<string, AudioStream> sndMeta = new Dictionary<string, AudioStream>();
-        public static Dictionary<string, string> gameMeta = new Dictionary<string, string>();
+        public static Dictionary<string, string> saveData = new Dictionary<string, string>();
         private static Godot.Collections.Dictionary sceneMeta = null;
         private static readonly File file = new File();
         private static WorldQuests worldQuests = null;
         private static Map.Map map = null;
         public override void _Ready()
         {
-            LoadGameMeta();
+            LoadsaveData();
             LoadSnd();
             CallDeferred(nameof(SetUpWorldQuests));
         }
@@ -64,21 +64,21 @@ namespace Game
             root.AddChild(sceneLoader);
             sceneLoader.LoadScene(scenePath, sceneMeta, currentScene);
         }
-        public static void SaveGameMeta(string gameData, int index)
+        public static void SaveGameData(string gameData, int index)
         {
-            file.Open(SAVE_PATH[nameof(gameMeta)], (int)File.ModeFlags.Write);
-            gameMeta[$"slot_{index}"] = gameData;
-            file.StoreLine(JSON.Print(gameMeta));
+            file.Open(SAVE_PATH[nameof(saveData)], (int)File.ModeFlags.Write);
+            saveData[$"slot_{index}"] = gameData;
+            file.StoreLine(JSON.Print(saveData));
             file.Close();
         }
-        public static void LoadGameMeta()
+        public static void LoadsaveData()
         {
-            file.Open(SAVE_PATH[(nameof(gameMeta))], (int)File.ModeFlags.Read);
+            file.Open(SAVE_PATH[(nameof(saveData))], (int)File.ModeFlags.Read);
             Godot.Collections.Dictionary gameData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).GetResult();
             file.Close();
             foreach (string key in gameData.Keys)
             {
-                gameMeta.Add(key, (string)gameData[key]);
+                saveData.Add(key, (string)gameData[key]);
             }
         }
         private void LoadSnd(string path = "res://asset/snd")

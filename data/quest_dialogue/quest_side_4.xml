@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        Listen, I really shouldn't be telling you this, but I'm kind
+        of a big deal. Too big in fact that I had to move down here
+        from the mainland. Now, they might tell you otherwise on why
+        I moved down here but that doesn't matter. I owe "__(NPC NAME)__"
+        a favor or two. Now, can you take this package down to the camp
+        up north and deliver it to "__(NPC NAME)__".
+    </start>
+    <active>
+        I Hope you don't plan on keeping that package for yourself any longer.
+    </active>
+    <completed>
+        They what?! Well, at least you took care of them before they took care of me.
+        Here, it's only fair I gave you some coin for your troubles. If anyone asks you
+        what happened to those men, don't mention me.
+    </completed>
+    <delivered>
+        Ayy, how's it going?
+    </delivered>
+    <r_completed>
+        Who are you?! Where is "__(NPC NAME)__"?! Nevermind we'll get him after we're done with you.
+        Men! Attack!
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/menu_ui/Popup.cs" type="Script" id=1]
-[ext_resource path="res://asset/img/ui/grey3_bg.res" type="Texture" id=2]
-[ext_resource path="res://asset/img/ui/brown_button.res" type="Texture" id=3]
-[ext_resource path="res://asset/img/ui/brown_button_pressed.res" type="Texture" id=4]
-[ext_resource path="res://asset/img/font/mago1_96.res" type="DynamicFont" id=5]
-[ext_resource path="res://asset/img/font/mago1_128.res" type="DynamicFont" id=6]
-[ext_resource path="res://asset/img/font/mago1_80.res" type="DynamicFont" id=7]
+[ext_resource path="res://asset/img/ui/grey3_bg.tres" type="Texture" id=2]
+[ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=3]
+[ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=4]
+[ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=5]
+[ext_resource path="res://asset/img/font/mago1_128.tres" type="DynamicFont" id=6]
+[ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=7]
 
 [node name="popup" type="CenterContainer"]
 visible = false

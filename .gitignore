@@ -1,9 +1,12 @@
 .import/
 .mono/
-addons/
-asset/
-dev_notes/
 meta/
 .vscode
-
+*.import
+*.tsx
+*.tmx
+*.png
+*.ttf
+*.wav
+*.ogg
 CONTRIBUTORS.md
