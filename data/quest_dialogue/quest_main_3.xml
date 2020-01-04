@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dialogue>
     <start>
-        I was informed to send you to "__(BISHOP_NAME?)__" in our cathedral
-        to hand over the scout reports. Go now to our holy magistrate, he'll be
+        Hmm... I wonder what's making these gnolls so brave to assult us.
+        However, I was informed to send you to Augustus in our cathedral
+        to hand over the reports. Go now to our holy magistrate, he'll be
         giving you the orders now.
     </start>
     <active>

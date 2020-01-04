@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        There are a great many things to attend to in the meantime. Landon
+        told me he wishes to speak to you, he's on the west side of the barracks.
+    </start>
+    <active>
+        Go seek out Landon.
+    </active>
+    <completed>
+    </completed>
+    <delivered>
+    </delivered>
+    <r_completed>
+        ...
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

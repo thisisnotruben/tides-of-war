@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dialogue>
     <start>
-        Your help in this town has already shown a colossal improvement.
-        Our king demands a report on our findings down here and I dare not
-        delay him. Send the reports that you gathered down to shipmaster "___",
-        he'll send them off. There after, report back to me.
+        Our holy church is interested into these other inhabitants that were mentioned
+        in the reports. Go seek out the tribe south of the scouting outpost, and
+        tell me how they are like.
     </start>
     <active>
-        Go with haste to shipmaster "___" before he sends his ships out.
+        Don't waste me time.
     </active>
     <completed>
-        Nice work, all we can do now is wait for a reply.
+        Hmmm... You say they mentioned a mighty city named Khozgrogal. I've
+        heard of this place... I heard it's the biggest orc city in the world
+        that's unmatched in the strength of it's people. Huge monuments built
+        from all their conquests. A force to be reckoned with for sure.
     </completed>
     <delivered>
     </delivered>
     <r_completed>
-        Our holy magistrate sent you?! I'll send these right away in our fastest ship!
+        Hello stranger, I haven't seen your kind before. My name is Nogugh, and I'm
+        a shaman from our mighty city Khozgrogal in the west. I hope you didn't come
+        to defile these lands, for we are the watchers of this heavenly paradise.
+        What brings you to me?
     </r_completed>
     <r_delivered>
     </r_delivered>

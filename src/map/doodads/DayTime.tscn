@@ -32,7 +32,7 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="DayTime" type="Timer" groups=[
+[node name="day_time" type="Timer" groups=[
 "save",
 ]]
 wait_time = 210.0

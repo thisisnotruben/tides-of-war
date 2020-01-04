@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dialogue>
     <start>
-        Hello fellow traveler! Welcome to the land of "______". We know your journy from "_____" was long and trecherous,
-        but we have great work to do since we're spread thin here. I read your papers and saw that you're a great explorer,
-        and it seems we have great use for you. Please report to "_____" down at the armory, he'll tell you what to do next.
+        Finally you guys are here. We've been waiting for supplies from the mainland for a while now.
+        We're spread thin around here and sure can use your help. We can have you sent out to go
+        lumber wood, but well honestly you're talents would be wasted. Report to Chapman who is down
+        by the barracks, he'll be able to assign you to your duties.
     </start>
     <active>
-        You're still here? "_____" is down at the "_____", please don't keep him waiting.
+        You're still here? Chapman is down by the barracks, please don't keep him waiting.
     </active>
     <completed>
     </completed>
     <delivered>
-        Greetings, nice to see you around you've made yourself at home in "_____".
+        Greetings, nice to see you around you've made yourself at home.
     </delivered>
     <r_completed>
         Yes?

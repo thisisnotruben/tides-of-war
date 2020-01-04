@@ -60,6 +60,7 @@ script = ExtResource( 1 )
 [node name="c" type="CanvasLayer" parent="."]
 
 [node name="hp_mana" type="Control" parent="c"]
+editor/display_folded = true
 margin_right = 360.0
 margin_bottom = 185.0
 
@@ -539,6 +540,7 @@ valign = 1
 
 [node name="mini_map" type="Node2D" parent="c"]
 editor/display_folded = true
+visible = false
 light_mask = 2
 z_as_relative = false
 script = ExtResource( 12 )

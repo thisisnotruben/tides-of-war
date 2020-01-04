@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialogue>
+    <start>
+        There are strong forces in these lands. Forces that I cannot describe.
+        I've recieved reports of a temple in the lands west of us. I believe
+        these forces are emanating from that temple. I want you to travel there
+        and bring me back whatever it is that's calling us.
+    </start>
+    <active>
+        There are forces at play here beyond our understanding. I need to know
+        what's in that temple.
+    </active>
+    <completed>
+    </completed>
+        TODO: "dialogue to be completed when zone-5 is completed"
+    <delivered>
+    </delivered>
+    <r_completed>
+    </r_completed>
+    <r_delivered>
+    </r_delivered>
+</dialogue>

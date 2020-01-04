@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dialogue>
     <start>
-        It's all coming back to me! I remember skipping through the woods
-        by "__(MAP_ZONE)__", and I dropped, or should I say saw a necklace
+        It's all coming back to me! I remember skipping through the woods on the
+        west side of the lake, and I dropped, or should I say saw a necklace
         exactly like the one you're talking about on the ground, and this huge
-        gnoll picked it up and ran back to his camp. I'm sure if you ask for it
-        back they'll give it back.
+        fishy looking guy picked it up and ran back to his camp.
+        I'm sure if you ask for it back they'll give it back.
     </start>
     <active>
-        Fantastic pie, but as I told you, the big scary gnoll took it. Get it and
-        take it to that old lady.
+        Fantastic pie, but as I told you, the big scary fish took it.
+        Get it and take it to that old lady.
     </active>
     <completed>
     </completed>

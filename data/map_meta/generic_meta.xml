@@ -1,0 +1,194 @@
+<generic>
+    <gnoll enemy="true">
+        <sprite imgName="bow-null-16_3_7_6-b">
+            <worldName>Gnoll Scout</worldName>
+        </sprite>
+        <sprite imgName="bow-null-16_3_7_6-g">
+            <worldName>Gnoll Scout</worldName>
+        </sprite>
+        <sprite imgName="axe-swing_medium-17_3_7_7-b">
+            <worldName>Gnoll Butcher</worldName>
+        </sprite>
+        <sprite imgName="axe-swing_medium-17_3_7_7-g">
+            <worldName>Gnoll Butcher</worldName>
+        </sprite>
+        <sprite imgName="club-swing_small-17_3_7_7-b">
+            <worldName>Gnoll Brute</worldName>
+        </sprite>
+        <sprite imgName="club-swing_small-17_3_7_7-g">
+            <worldName>Gnoll Brute</worldName>
+        </sprite>
+        <sprite imgName="hatchet-swing_medium-17_3_7_7-b">
+            <worldName>Gnoll Enforcer</worldName>
+        </sprite>
+        <sprite imgName="hatchet-swing_medium-17_3_7_7-g">
+            <worldName>Gnoll Enforcer</worldName>
+        </sprite>
+        <sprite imgName="sickle-swing_small-17_3_7_7-b">
+            <worldName>Gnoll Assassin</worldName>
+        </sprite>
+        <sprite imgName="sickle-swing_small-17_3_7_7-g">
+            <worldName>Gnoll Assassin</worldName>
+        </sprite>
+    </gnoll>
+    <warthog enemy="true">
+        <sprite imgName="axe-swing_medium-17_3_7_7-b">
+            <worldName>Warthog Brute</worldName>
+        </sprite>
+        <sprite imgName="axe-swing_medium-17_3_7_7-w">
+            <worldName>Warthog Brute</worldName>
+        </sprite>
+        <sprite imgName="mace-swing_medium-17_3_7_7-b">
+            <worldName>Warthog Savage</worldName>
+        </sprite>
+        <sprite imgName="mace-swing_medium-17_3_7_7-w">
+            <worldName>Warthog Savage</worldName>
+        </sprite>
+        <sprite imgName="rock-null-17_3_7_7-b">
+            <worldName>Warthog Thrower</worldName>
+        </sprite>
+        <sprite imgName="rock-null-17_3_7_7-w">
+            <worldName>Warthog Thrower</worldName>
+        </sprite>
+    </warthog>
+    <orc enemy="false">
+        <sprite imgName="axe-swing_medium-17_3_7_7">
+            <worldName>Grunt</worldName>
+        </sprite>
+        <sprite imgName="mace-swing_medium-17_3_7_7">
+            <worldName>Grunt</worldName>
+        </sprite>
+        <sprite imgName="magic-null-17_3_7_7">
+            <worldName>Shaman</worldName>
+        </sprite>
+        <sprite imgName="comm-0-10_3_7_0">
+            <worldName>Peon</worldName>
+        </sprite>
+        <sprite imgName="comm-1-10_3_7_0">
+            <worldName>Peon</worldName>
+        </sprite>
+        <sprite imgName="comm-2-10_3_7_0">
+            <worldName>Peon</worldName>
+        </sprite>
+        <sprite imgName="comm-3-10_3_7_0">
+            <worldName>Peon</worldName>
+        </sprite>
+        <sprite imgName="comm-4-10_3_7_0">
+            <worldName>Peon</worldName>
+        </sprite>
+        <sprite imgName="comm-5-10_3_7_0">
+            <worldName>Peon</worldName>
+        </sprite>
+        <sprite imgName="comm-6-10_3_7_0">
+            <worldName>Peon</worldName>
+        </sprite>
+    </orc>
+    <critter enemy="true">
+        <sprite imgName="club-swing_medium-16_3_6_7-crab-blue">
+            <worldName>Tide Crawler</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-16_3_6_7-crab-red">
+            <worldName>Tide Crawler</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-16_3_7_6-snake">
+            <worldName>Desert Serpant</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-14_3_6_5-wolf">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-16_3_7_6-spider-black">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-16_3_7_6-spider-blue">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-16_3_7_6-spider-green">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-16_3_7_6-spider-pink">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_small-14_2_6_6-rat">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="null-null-10_2_8_0-chicken">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-15_3_7_5-scorpion-black">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-15_3_7_5-scorpion-blue">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-15_3_7_5-scorpion-green">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="club-swing_medium-15_3_7_5-scorpion-pink">
+            <worldName>TODO</worldName>
+        </sprite>
+    </critter>
+    <finfolk enemy="true">
+        <sprite imgName="sword-swing_medium-17_3_7_7-blue">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="sword-swing_medium-17_3_7_7-green">
+            <worldName>TODO</worldName>
+        </sprite>
+    </finfolk>
+    <human enemy="false">
+        <sprite imgName="bow-null-16_3_7_6-black">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="bow-null-16_3_7_6-green">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-0-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-1-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-2-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-3-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-4-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-5-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-6-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-7-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-8-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="comm-9-10_3_7_0">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="dagger-swing_small-20_3_7_10">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="flail-swing_medium-19_3_7_9">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="magic-null-17_3_7_7">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="spear-swing_medium-17_3_7_7">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="sword-swing_medium-17_3_7_7">
+            <worldName>TODO</worldName>
+        </sprite>
+        <sprite imgName="sword-swing_medium-24_3_7_14">
+            <worldName>TODO</worldName>
+        </sprite>
+    </human>
+</generic>

@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<zone_4>
+    <unit name="Stanmore">
+        <img>human/comm-0-10_3_7_0.png</img>
+        <enemy>True</enemy>
+        <dialogue>HEY MACHO MAN!</dialogue>
+        <spells>
+            <spell name="siphon_mana" />
+            <spell name="frost_bolt" />
+        </spells>
+        <items>
+            <item name="a Something" />
+        </items>
+    </unit>
+    <unit name="Footman">
+        <img>human/sword-swing_medium-17_3_7_7.png</img>
+    </unit>
+    <unit name="Peasant">
+        <img>human/comm-1-10_3_7_0.png</img>
+    </unit>
+    <unit name="Dobbs">
+        <img>human/comm-0-10_3_7_0.png</img>
+    </unit>
+    <unit name="Armond">
+        <img>human/magic-null-17_3_7_7.png</img>
+    </unit>
+    <unit name="Sarina">
+        <img>human/comm-6-10_3_7_0.png</img>
+    </unit>
+    <unit name="Solomon">
+        <img>human/comm-0-10_3_7_0.png</img>
+    </unit>
+    <unit name="Swordsman">
+        <img>human/sword-swing_medium-24_3_7_14.png</img>
+        <enemy>True</enemy>
+    </unit>
+    <unit name="Assassin">
+        <img>human/dagger-swing_small-20_3_7_10.png</img>
+    </unit>
+    <unit name="Landon">
+        <img>human/magic-null-17_3_7_7.png</img>
+    </unit>
+    <unit name="Kassidy">
+        <img>human/comm-7-10_3_7_0.png</img>
+    </unit>
+    <unit name="Ranger">
+        <img>human/bow-null-16_3_7_6-green.png</img>
+    </unit>
+    <unit name="Amaury">
+        <img>human/sword-swing_medium-17_3_7_7.png</img>
+    </unit>
+    <unit name="Jameson">
+        <img>human/comm-4-10_3_7_0.png</img>
+    </unit>
+    <unit name="Cherrelle">
+        <img>human/comm-8-10_3_7_0.png</img>
+    </unit>
+    <unit name="Hawel">
+        <img>human/comm-3-10_3_7_0.png</img>
+    </unit>
+    <unit name="Denton">
+        <img>human/comm-1-10_3_7_0.png</img>
+    </unit>
+    <unit name="Roswald">
+        <img>human/spear-swing_medium-17_3_7_7.png</img>
+    </unit>
+    <unit name="Edvard">
+        <img>human/comm-4-10_3_7_0.png</img>
+    </unit>
+    <unit name="Farmer">
+        <img>human/comm-2-10_3_7_0.png</img>
+    </unit>
+    <unit name="Elaine">
+        <img>human/comm-9-10_3_7_0.png</img>
+    </unit>
+    <unit name="Gehrt">
+        <img>human/comm-2-10_3_7_0.png</img>
+    </unit>
+    <unit name="Harden">
+        <img>human/comm-3-10_3_7_0.png</img>
+    </unit>
+    <unit name="Marietta">
+        <img>human/comm-6-10_3_7_0.png</img>
+    </unit>
+    <unit name="Tyree">
+        <img>human/flail-swing_medium-19_3_7_9.png</img>
+    </unit>
+    <unit name="Waltkins">
+        <img>human/flail-swing_medium-19_3_7_9.png</img>
+    </unit>
+    <unit name="Thaddeus">
+        <img>human/magic-null-17_3_7_7.png</img>
+    </unit>
+    <unit name="Sambrose">
+        <img>human/comm-4-10_3_7_0.png</img>
+    </unit>
+    <unit name="Marlo">
+        <img>human/dagger-swing_small-20_3_7_10.png</img>
+    </unit>
+    <unit name="110">
+        <img>human/dagger-swing_small-20_3_7_10.png</img>
+        <dialogue>FUCK ME!!!</dialogue>
+    </unit>
+    <unit name="Crayer">
+        <img>human/comm-3-10_3_7_0.png</img>
+    </unit>
+    <unit name="Nogugh">
+        <img>orc/magic-null-17_3_7_7.png</img>
+    </unit>
+    <unit name="Peon">
+        <img>orc/comm-4-10_3_7_0.png</img>
+    </unit>
+    <unit name="Grunt">
+        <img>orc/axe-swing_medium-17_3_7_7.png</img>
+    </unit>
+    <unit name="Bruiseclaw">
+        <img>gnoll/hatchet-swing_medium-17_3_7_7-g.png</img>
+    </unit>
+    <unit name="Norwell">
+        <img>human/comm-1-10_3_7_0.png</img>
+    </unit>
+    <unit name="Arndell">
+        <img>human/comm-4-10_3_7_0.png</img>
+    </unit>
+    <unit name="Chapman">
+        <img>human/flail-swing_medium-19_3_7_9.png</img>
+    </unit>
+    <unit name="Augustus">
+        <img>human/magic-null-17_3_7_7.png</img>
+    </unit>
+</zone_4>

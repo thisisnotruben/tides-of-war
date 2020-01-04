@@ -4,9 +4,9 @@
         Listen, I really shouldn't be telling you this, but I'm kind
         of a big deal. Too big in fact that I had to move down here
         from the mainland. Now, they might tell you otherwise on why
-        I moved down here but that doesn't matter. I owe "__(NPC NAME)__"
+        I moved down here but that doesn't matter. I owe Marlo
         a favor or two. Now, can you take this package down to the camp
-        up north and deliver it to "__(NPC NAME)__".
+        up north and deliver it to Marlo".
     </start>
     <active>
         I Hope you don't plan on keeping that package for yourself any longer.
@@ -20,7 +20,7 @@
         Ayy, how's it going?
     </delivered>
     <r_completed>
-        Who are you?! Where is "__(NPC NAME)__"?! Nevermind we'll get him after we're done with you.
+        Who are you?! Where is Solomon?! Nevermind we'll get him after we're done with you.
         Men! Attack!
     </r_completed>
     <r_delivered>

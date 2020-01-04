@@ -13,7 +13,7 @@
     </active>
     <completed>
         These are perfect! Here, let me serve you one right now...Muah!
-        I present to you my dish: "__(NAME_OF_FOOD)__".
+        I present to you my dish: "__( TODO: NAME_OF_FOOD)__".
     </completed>
     <delivered>
     </delivered>
