@@ -5,21 +5,15 @@
 [ext_resource path="res://src/misc/light/fire.tscn" type="PackedScene" id=3]
 
 [node name="light" index="0" instance=ExtResource( 1 )]
-
 texture = ExtResource( 2 )
 offset = Vector2( 0, -16 )
 frame = 0
 
 [node name="light" parent="." index="2"]
-
 color = Color( 0.982422, 0.822328, 0.595837, 1 )
 
 [node name="fire" parent="." index="3"]
-
 position = Vector2( 5.5, -28 )
 
 [node name="fire2" parent="." index="4" instance=ExtResource( 3 )]
-
 position = Vector2( -5.5, -28 )
-
-

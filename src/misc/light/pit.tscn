@@ -4,13 +4,9 @@
 [ext_resource path="res://asset/img/light/fire_pit.tres" type="Texture" id=2]
 
 [node name="light" index="0" instance=ExtResource( 1 )]
-
 texture = ExtResource( 2 )
-offset = Vector2( 0, -4 )
+offset = Vector2( 0, 0 )
 
 [node name="fire" parent="." index="3"]
-
 position = Vector2( 0, -4 )
 scale = Vector2( 2, 2 )
-
-
