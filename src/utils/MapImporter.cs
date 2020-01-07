@@ -15,6 +15,7 @@ namespace Game.Utils
         public override void _Ready()
         {
             Connect(nameof(SendScenePath), GetNode(nameof(ColorRect)), "set_map_script", new Godot.Collections.Array() {scenePath});
+            EmitSignal(nameof(SendScenePath));
             PackedScene packedScene = (PackedScene)GD.Load(scenePath);
             Godot.Error code = CheckMap(packedScene);
             GD.Print("Error code: " + code.ToString());
@@ -22,7 +23,6 @@ namespace Game.Utils
             {
                 GetNode<ColorRect>(nameof(ColorRect)).SetFrameColor(new Color("#00ff00"));
             }
-            EmitSignal(nameof(SendScenePath));
         }
         private Godot.Error CheckMap(PackedScene mapToImport)
         {

@@ -16,9 +16,10 @@ namespace Game.Database
             while (xMLParser.Read() == Error.Ok && unitData.Count == 0)
             {
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
-                    xMLParser.GetNamedAttributeValueSafe("name").Equals(unitEditorName))
+                    xMLParser.GetNamedAttributeValueSafe("editorName").Equals(unitEditorName))
                 {
                     unitData.Add("img", xMLParser.GetNamedAttributeValueSafe("img"));
+                    unitData.Add("name", xMLParser.GetNamedAttributeValueSafe("name"));
                     unitData.Add("enemy", xMLParser.GetNamedAttributeValueSafe("enemy"));
                     unitData.Add("spawnPos", 
                         $"{xMLParser.GetNamedAttributeValueSafe("x")},{xMLParser.GetNamedAttributeValueSafe("y")}");
