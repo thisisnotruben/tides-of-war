@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Misc.Other;
 using Game.Utils;
 using Godot;
@@ -10,7 +11,7 @@ namespace Game.Actor
             SetProcess(false);
         }
         public override void _Process(float delta) { }
-        public override void MoveTo(Vector2 WorldPosition) { }
+        public override void MoveTo(Vector2 WorldPosition, List<Vector2> route) { }
         public override void Attack(bool ignoreArmor) { }
         public override void TakeDamage(short damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
         {

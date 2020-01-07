@@ -36,7 +36,7 @@ namespace Game.Actor
         public ushort weaponRange = Stats.WEAPON_RANGE_MELEE;
         public float weaponSpeed = 1.3f;
         public float animSpeed = 1.0f;
-        private protected Vector2 origin;
+        private protected Vector2 origin = new Vector2();
         private protected WorldTypes weaponType;
         private protected Item weapon = null;
         private protected Item vest = null;
@@ -74,6 +74,7 @@ namespace Game.Actor
             {
                 if (weaponType == WorldTypes.BOW || weaponType == WorldTypes.MAGIC)
                 {
+                    return; // TODO
                     Bolt missile = (Bolt)missileScene.Instance();
                     GetParent().AddChild(missile);
                     missile.SetUp(this, GetGlobalPosition(), spell);
@@ -342,7 +343,7 @@ namespace Game.Actor
                 Tween.TransitionType.Linear, Tween.EaseType.InOut);
             tween.Start();
         }
-        public abstract void MoveTo(Vector2 WorldPosition);
+        public abstract void MoveTo(Vector2 WorldPosition, List<Vector2> route);
         public abstract void _OnSelectPressed();
         public States GetState()
         {
@@ -563,11 +564,18 @@ namespace Game.Actor
         }
         public void SetTime(float time, bool oneShot = false)
         {
-            Timer timer = GetNode<Timer>("timer");
-            timer.Stop();
-            timer.SetWaitTime(time);
-            timer.SetOneShot(oneShot);
-            timer.Start();
+            if (time > 0.0f)
+            {
+                Timer timer = GetNode<Timer>("timer");
+                timer.Stop();
+                timer.SetWaitTime(time);
+                timer.SetOneShot(oneShot);
+                timer.Start();
+            }
+            else
+            {
+                GD.Print($"Error: {GetWorldName()} set invalid time");
+            }
         }
         public void PlaceFootStep(bool step)
         {
@@ -599,62 +607,61 @@ namespace Game.Actor
         {
             string[] splittedImgPath = imgPath.BaseName().Split('/');
             string[] parsedImg = splittedImgPath[splittedImgPath.Length - 1].Split('-');
+            string[] frames = parsedImg[2].Split("_");
             string raceName = splittedImgPath[splittedImgPath.Length - 2];
+            swingType = parsedImg[1];
             Sprite img = GetNode<Sprite>("img");
-            if (img.GetTexture() == null || !imgPath.Equals(img.GetTexture().GetPath()))
+            img.SetTexture((Texture)GD.Load(imgPath));
+            img.SetHframes(int.Parse(frames[0]));
+            AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
+            Animation animRes = anim.GetAnimation("attacking");
+            animRes.TrackSetKeyValue(0, 0, int.Parse(frames[1]) + int.Parse(frames[2]));
+            animRes.TrackSetKeyValue(0, 1, int.Parse(frames[0]) - 1);
+            animRes = anim.GetAnimation("moving");
+            animRes.TrackSetKeyValue(0, 0, 0);
+            animRes.TrackSetKeyValue(0, 1, int.Parse(frames[1]));
+            animRes = anim.GetAnimation("dying");
+            animRes.TrackSetKeyValue(0, 0, 0);
+            animRes.TrackSetKeyValue(0, 1, int.Parse(frames[2]));
+            animRes = anim.GetAnimation("casting");
+            animRes.TrackSetKeyValue(0, 0, int.Parse(frames[1]));
+            animRes.TrackSetKeyValue(0, 1, int.Parse(frames[1]) + 3);
+            if (frames[3].Equals("0"))
             {
-                img.SetTexture((Texture)GD.Load(imgPath));
+                anim.RemoveAnimation("attacking");
             }
-            if (parsedImg[0].Equals("comm"))
+            switch (parsedImg[0].ToUpper())
             {
-                img.SetHframes(int.Parse(parsedImg[2]));
-                SetWorldType(WorldTypes.COMMONER);
-            }
-            else
-            {
-                int idx = (raceName.Equals("critter")) ? 1 : 0;
-                switch (parsedImg[idx].ToUpper())
-                {
-                    case nameof(WorldTypes.MAGIC):
-                    case nameof(WorldTypes.DAGGER):
-                    case nameof(WorldTypes.CLAW):
-                    case "SICKLE":
-                        weaponType = WorldTypes.DAGGER;
-                        break;
-                    case nameof(WorldTypes.SWORD):
-                    case nameof(WorldTypes.SPEAR):
-                    case "HATCHET":
-                        weaponType = WorldTypes.SWORD;
-                        break;
-                    case nameof(WorldTypes.AXE):
-                        weaponType = WorldTypes.AXE;
-                        break;
-                    case nameof(WorldTypes.STAFF):
-                    case nameof(WorldTypes.MACE):
-                    case nameof(WorldTypes.CLUB):
-                    case "ROCK":
-                        weaponType = WorldTypes.CLUB;
-                        break;
-                    case nameof(WorldTypes.BOW):
-                        weaponType = WorldTypes.BOW;
-                        weaponRange = Stats.WEAPON_RANGE_RANGE;
-                        break;
-                    case "NULL":
-                        // This is a commoner
-                        break;
-                    default:
-                        GD.Print($"{imgPath} doesn't have a valid weaponType");
-                        break;
-                }
-                swingType = parsedImg[idx + 1];
-                img.SetHframes(int.Parse(parsedImg[idx + 2]));
-                if (img.GetHframes() != 17)
-                {
-                    AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
-                    anim.RemoveAnimation("attacking");
-                    anim.AddAnimation("attacking",
-                        (Animation)GD.Load($"res://asset/img/character/resource/attacking_{parsedImg[idx + 2]}f.tres"));
-                }
+                case nameof(WorldTypes.MAGIC):
+                case nameof(WorldTypes.DAGGER):
+                case nameof(WorldTypes.CLAW):
+                case "SICKLE":
+                    weaponType = WorldTypes.DAGGER;
+                    break;
+                case nameof(WorldTypes.SWORD):
+                case nameof(WorldTypes.SPEAR):
+                case "HATCHET":
+                    weaponType = WorldTypes.SWORD;
+                    break;
+                case nameof(WorldTypes.AXE):
+                    weaponType = WorldTypes.AXE;
+                    break;
+                case nameof(WorldTypes.STAFF):
+                case nameof(WorldTypes.MACE):
+                case nameof(WorldTypes.CLUB):
+                case "ROCK":
+                    weaponType = WorldTypes.CLUB;
+                    break;
+                case nameof(WorldTypes.BOW):
+                    weaponType = WorldTypes.BOW;
+                    weaponRange = Stats.WEAPON_RANGE_RANGE;
+                    break;
+                case "NULL":
+                    // This is a commoner
+                    break;
+                default:
+                    GD.Print($"{imgPath} doesn't have a valid weaponType");
+                    break;
             }
             if (this is Player)
             {
@@ -664,11 +671,12 @@ namespace Game.Actor
             string bodyName = raceName;
             if (raceName.Equals("human"))
             {
-                switch (img.GetHframes())
+                switch (parsedImg[0])
                 {
-                    case 20:
-                    case 16:
-                    case 10:
+                    case "bow":
+                    case "comm":
+                    case "magic":
+                    case "dagger":
                         bodyName += "_unarmored";
                         break;
                     default:
@@ -678,9 +686,9 @@ namespace Game.Actor
             }
             else if (raceName.Equals("critter"))
             {
-                bodyName = imgPath.GetFile().BaseName().Split('-')[0];
+                bodyName = parsedImg[3];
             }
-            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/{bodyName}_body.tres");
+            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{bodyName}.tres");
             TouchScreenButton select = GetNode<TouchScreenButton>("select");
             Vector2 textureSize = texture.GetRegion().Size;
             Node2D sightDistance = GetNode<Node2D>("sight/distance");
@@ -706,11 +714,11 @@ namespace Game.Actor
         }
         public virtual void SetSaveData(Godot.Collections.Dictionary saveData)
         {
-            GD.Print("Save Not Implemented");
+            GD.Print("TODO: Save Not Implemented");
         }
         public virtual Godot.Collections.Dictionary GetSaveData()
         {
-            GD.Print("Save Not Implemented");
+            GD.Print("TODO: Save Not Implemented");
             return new Godot.Collections.Dictionary();
         }
     }

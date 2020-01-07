@@ -20,7 +20,7 @@ namespace Game.Actor
             base._Ready();
             Globals.player = this;
             SetWorldName(GetName()); // for debugging purposes
-            SetImg("res://asset/img/character/orc/axe-swing_medium-17.png");
+            SetImg("res://asset/img/character/human/sword-swing_medium-17_3_7_7.png");
             Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
             Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
             UpdateHUD();
@@ -70,7 +70,7 @@ namespace Game.Actor
             if (path.Count > 0)
             {
                 SetState(States.MOVING);
-                MoveTo(path[0]);
+                MoveTo(path[0], path);
             }
             else if (target != null && target.IsEnemy() && GetCenterPos().DistanceTo(target.GetCenterPos()) <= weaponRange)
             {
@@ -96,13 +96,13 @@ namespace Game.Actor
                         break;
                 }
             }
-            else if (animName.Equals("cast"))
+            else if (animName.Equals("casting"))
             {
                 SetProcess(true);
             }
         }
         public override void _OnSelectPressed() { }
-        public override void MoveTo(Vector2 worldPosition)
+        public override void MoveTo(Vector2 worldPosition, List<Vector2> route)
         {
             Vector2 direction = GetDirection(GetGlobalPosition(), worldPosition);
             if (!direction.Equals(new Vector2()))
@@ -114,20 +114,20 @@ namespace Game.Actor
                 {
                     reservedPath.Add(worldPosition);
                     Move(worldPosition, Stats.MapAnimMoveSpeed(animSpeed));
-                    path.RemoveAt(0);
+                    route.RemoveAt(0);
                 }
                 else if (ray.IsColliding())
                 {
-                    path.Clear();
+                    route.Clear();
                 }
-                else if (path.Count > 0)
+                else if (route.Count > 0)
                 {
-                    path.RemoveAt(0);
+                    route.RemoveAt(0);
                 }
             }
-            else if (path.Count > 0)
+            else if (route.Count > 0)
             {
-                path.RemoveAt(0);
+                route.RemoveAt(0);
             }
         }
         public override void Attack(bool ignoreArmor = false)

@@ -10,9 +10,13 @@ namespace Game.Actor
 {
     public class Npc : Character
     {
-        private bool patroller;
         private string text;
-        private List<Vector2> patrolPath = new List<Vector2>();
+        private Dictionary<string, List<Vector2>> cachedPatrolPath = new Dictionary<string, List<Vector2>>()
+        {
+            {"cachedPath", new List<Vector2>()},
+            {"pathPoints", new List<Vector2>()},
+            {"patrolPath", new List<Vector2>()}
+        };
         [Signal]
         public delegate void DropLoot(Npc npc, Vector2 worldPosition, int idk);
         public override void _Ready()
@@ -27,17 +31,17 @@ namespace Game.Actor
                 if (origin.DistanceTo(target.GetCenterPos()) > Stats.FLEE_DISTANCE || target.IsDead())
                 {
                     SetState(States.RETURNING);
-                    if (patroller)
+                    if (cachedPatrolPath["cachedPath"].Count > 0)
                     {
-                        if (GetGlobalPosition() != patrolPath[patrolPath.Count - 1])
-                        {
-                            MoveTo(patrolPath[0]);
-                            return;
-                        }
+                        // if (GetGlobalPosition() != cachedPatrolPath["cachedPath"][patrolPath.Count - 1]) TODO
+                        // {
+                            // FollowPatrolPath();
+                            // return;
+                        // }
                     }
                     else if (GetGlobalPosition() != origin)
                     {
-                        MoveTo(origin);
+                        MoveTo(origin, path);
                         return;
                     }
                     SetState(States.IDLE);
@@ -49,17 +53,17 @@ namespace Game.Actor
                 else if (GetCenterPos().DistanceTo(target.GetCenterPos()) > weaponRange)
                 {
                     SetState(States.MOVING);
-                    MoveTo(target.GetGlobalPosition());
+                    MoveTo(target.GetGlobalPosition(), path);
                 }
                 else
                 {
                     SetState(States.ATTACKING);
                 }
             }
-            else if (patroller)
+            else if (cachedPatrolPath["cachedPath"].Count > 0)
             {
                 SetState(States.MOVING);
-                MoveTo(patrolPath[0]);
+                FollowPatrolPath();
             }
             else
             {
@@ -173,32 +177,46 @@ namespace Game.Actor
                 }
             }
         }
-        public override void MoveTo(Vector2 worldPosition)
+        private void FollowPatrolPath()
         {
-            if (path.Count == 0 || path[path.Count - 1].DistanceTo(worldPosition) > weaponRange)
+            if (cachedPatrolPath["patrolPath"].Count == 0)
+            {
+                cachedPatrolPath["pathPoints"].RemoveAt(0);
+                if (cachedPatrolPath["pathPoints"].Count == 0)
+                {
+                    cachedPatrolPath["cachedPath"].Reverse();
+                    cachedPatrolPath["pathPoints"] = cachedPatrolPath["cachedPath"].GetRange(0, cachedPatrolPath["cachedPath"].Count);
+                }
+                cachedPatrolPath["patrolPath"] = Globals.GetMap().getAPath(GetGlobalPosition(), cachedPatrolPath["pathPoints"][0]);
+            }
+            MoveTo(cachedPatrolPath["patrolPath"][0], cachedPatrolPath["patrolPath"]);
+        }
+        public override void MoveTo(Vector2 worldPosition, List<Vector2> route)
+        {
+            if (route == path && (route.Count == 0 || route[route.Count - 1].DistanceTo(worldPosition) > weaponRange))
             {
                 path = Globals.GetMap().getAPath(GetGlobalPosition(), worldPosition);
             }
             else
             {
-                Vector2 direction = GetDirection(GetGlobalPosition(), path[0]);
+                Vector2 direction = GetDirection(GetGlobalPosition(), route[0]);
                 if (!direction.Equals(new Vector2()))
                 {
                     worldPosition = Globals.GetMap().RequestMove(GetGlobalPosition(), direction);
                     if (!worldPosition.Equals(new Vector2()))
                     {
                         Move(worldPosition, Stats.MapAnimMoveSpeed(animSpeed));
-                        path.RemoveAt(0);
+                        route.RemoveAt(0);
                         SetProcess(false);
                     }
                     else
                     {
-                        path.Clear();
+                        route.Clear();
                     }
                 }
                 else
                 {
-                    path.RemoveAt(0);
+                    route.RemoveAt(0);
                 }
             }
         }
@@ -331,7 +349,7 @@ namespace Game.Actor
         }
         public void SetText(string text)
         {
-            // possible bug here with "{0}"
+            // TODO: possible bug here with "{0}"
             // probably get around this with Regex
             if (text.Contains("{0}") && GetWorldType() == WorldTypes.HEALER)
             {
@@ -359,23 +377,32 @@ namespace Game.Actor
                 }
             }
         }
-        public void SetEnemy(bool enemy)
+        public void SetData(Dictionary<string, string> data)
         {
-            this.enemy = enemy;
-        }
-        public void SetUniqueData(Dictionary<string, string> data)
-        {
-            string imgKey = "img";
-            if (data.ContainsKey(imgKey))
-            {
-                SetImg("res://asset/img/character/".PlusFile(data[imgKey]));
-            }
-            SetWorldName(GetName());
             foreach (string key in data.Keys)
             {
                 switch (key)
                 {
-                    case nameof(enemy):
+                    case "spawnPos":
+                        string[] spawnPos = data[key].Split(",");
+                        origin = (new Vector2(float.Parse(spawnPos[0]), float.Parse(spawnPos[1])));
+                        break;
+                    case "path":
+                        foreach (string point in data[key].Split("_"))
+                        {
+                            string[] xy = point.Split(",");
+                            cachedPatrolPath["cachedPath"].Add(new Vector2(float.Parse(xy[0]), float.Parse(xy[1])));
+                        }
+                        cachedPatrolPath["pathPoints"] = cachedPatrolPath["cachedPath"].GetRange(0, cachedPatrolPath["cachedPath"].Count);
+                        SetProcess(true);
+                        break;
+                    case "img":
+                        SetImg("res://asset/img/character/".PlusFile(data[key]));
+                        break;
+                    case "name":
+                        SetWorldName(data[key]);
+                        break;
+                    case "enemy":
                         enemy = bool.Parse(data[key]);
                         break;
                     case "level":
@@ -409,7 +436,7 @@ namespace Game.Actor
                                 GD.Print($"({GetWorldName()}) has invalid item name: ({data[key]})");
                             }
                         }
-                        else if (!key.Equals(imgKey))
+                        else
                         {
                             GD.Print($"Unknown attribute value: {key} for unit.");
                         }
