@@ -1,8 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/map/doodads/MapImporter.cs" type="Script" id=1]
-[ext_resource path="res://src/map/map-1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/utils/MapImporter.cs" type="Script" id=1]
+[ext_resource path="res://src/utils/map_importer.gd" type="Script" id=2]
 
 [node name="map_importer" type="Node"]
 script = ExtResource( 1 )
-map_to_import = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 1 )
+script = ExtResource( 2 )
