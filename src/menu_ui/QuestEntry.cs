@@ -7,8 +7,8 @@ namespace Game.Ui
         private Quest quest;
         public void AddToQuestLog(Node questLog)
         {
-            questLog.GetNode(@"s/v/s/v").AddChild(this);
-            questLog.GetNode(@"s/v/s/v").MoveChild(this, 0);
+            questLog.GetNode("s/v/s/v").AddChild(this);
+            questLog.GetNode("s/v/s/v").MoveChild(this, 0);
         }
         public void SetQuest(Quest quest)
         {

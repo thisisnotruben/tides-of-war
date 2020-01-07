@@ -69,60 +69,12 @@ namespace Game.Map
         {
             foreach (Node2D node2D in GetNode<Node>("zed/z1").GetChildren())
             {
-                Character character = node2D as Character;
-                if (character != null)
+                Npc npc = node2D as Npc;   
+                if (npc != null)
                 {
-                    Vector2 originPosition = GetGridPosition(character.GetGlobalPosition());
-                    character.SetOrigin(originPosition);
-                    OccupyOriginCell(originPosition);
-                    Npc npc = character as Npc;
-                    if (npc != null)
-                    {
-                        if (npc.GetName().Contains("<*>") || UnitDB.IsUnitUnique(npc.GetName(), GetName()))
-                        {
-                            SetDeterminedUnit(npc);
-                        }
-                        else
-                        {
-                            SetRandomizedUnit(npc);
-                        }
-                    }
+                    npc.SetData(UnitDB.GetUnitData(npc.GetName(), GetName()));
                 }
             }
-        }
-        private void SetDeterminedUnit(Npc npc)
-        {
-            string unitEditorName = (GetName().Contains("<*>")) ? npc.GetName().Split("-")[0] : npc.GetName();
-            npc.SetUniqueData(UnitDB.GetUniqueUnitData(unitEditorName, GetName()));
-        }
-        private void SetRandomizedUnit(Npc npc)
-        {
-            string raceName = npc.GetName().ToLower().Split('-')[0];
-            string directoryPath = "res://asset/img/character".PlusFile(raceName);
-            string ext = "png";
-            List<string> spriteList = new List<string>();
-            Directory dir = new Directory();
-            dir.Open(directoryPath);
-            dir.ListDirBegin(true, true);
-            string resource = dir.GetNext();
-            while (!resource.Empty())
-            {
-                resource = directoryPath.PlusFile(resource);
-                if (resource.Extension().Equals(ext) && !resource.Contains("flail") &&
-                    !((npc.GetName().Contains("critter") && !resource.Contains(npc.GetName().Split('-')[1])) ||
-                        ((npc.GetName().Contains("<#>") && !resource.Contains("comm")) ||
-                            (!npc.GetName().Contains("<#>") && resource.Contains("comm")))))
-                {
-                    spriteList.Add(resource);
-                }
-                resource = dir.GetNext();
-            }
-            dir.ListDirEnd();
-            GD.Randomize();
-            resource = spriteList[(int)(GD.Randi() % spriteList.Count)];
-            npc.SetImg(resource);
-            npc.SetWorldName(UnitDB.GetGenericUnitName(resource));
-            npc.SetEnemy(UnitDB.GetGenericUnitEnemy(resource));
         }
         private void SetObstacles()
         {

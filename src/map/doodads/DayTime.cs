@@ -9,13 +9,14 @@ namespace Game.Map.Doodads
         public void _OnTimerTimeout()
         {
             AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
+            string animName = "sun_up_down";
             if (dayTime)
             {
-                anim.Play("sun_up_down");
+                anim.Play(animName);
             }
             else
             {
-                anim.PlayBackwards("sun_up_down");
+                anim.PlayBackwards(animName);
             }
             SetDayTime(!dayTime);
         }
@@ -45,12 +46,12 @@ namespace Game.Map.Doodads
         }
         public void SetSaveData(Godot.Collections.Dictionary data)
         {
-            GD.Print("Save Not Implemented");
+            GD.Print("TODO: Save Not Implemented");
         }
         public Godot.Collections.Dictionary GetSaveData()
         {
             Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
-            GD.Print("Save Not Implemented");
+            GD.Print("TODO: Save Not Implemented");
             return saveData;
         }
     }

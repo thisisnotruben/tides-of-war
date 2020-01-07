@@ -77,7 +77,6 @@ namespace Game.Ui
                                 hudSlot.Connect(nameof(ItemSlot.Cooldown), itemSlot, nameof(ItemSlot.CoolDown));
                                 if (!hudSlot.IsConnected(nameof(ItemSlot.ShortcutPressed), this, nameof(_OnHudSlotPressed)))
                                 {
-                                    GD.Print("here xxxxx");
                                     hudSlot.Connect(nameof(ItemSlot.ShortcutPressed), this, nameof(_OnHudSlotPressed));
                                 }
                             }
@@ -1094,7 +1093,6 @@ namespace Game.Ui
             player.GetNode("inventory").RemoveChild(pickable);
             Globals.GetMap().GetNode("zed/z1").AddChild(pickable);
             pickable.SetOwner(Globals.GetMap());
-            GD.Print("hrtrtr");
             pickable.SetGlobalPosition(Globals.GetMap().SetGetPickableLoc(player.GetGlobalPosition(), true));
         }
         public string SndConfigure(bool byPass = false, bool off = false)

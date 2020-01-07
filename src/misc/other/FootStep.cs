@@ -11,7 +11,7 @@ namespace Game.Misc.Other
         public void _OnTimerTimeout()
         {
             Tween tween = GetNode<Tween>("tween");
-            tween.InterpolateProperty(this, @":modulate", GetModulate(),
+            tween.InterpolateProperty(this, ":modulate", GetModulate(),
                 new Color(0.15f, 0.15f, 0.15f, 0.0f), 2.0f, Tween.TransitionType.Linear, Tween.EaseType.InOut);
             tween.Start();
         }

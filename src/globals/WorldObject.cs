@@ -14,7 +14,6 @@ namespace Game
             TRAINER,
             MERCHANT,
             HEALER,
-            COMMONER,
             // Spell WorldTypes
             CLEAVE,
             BASH,

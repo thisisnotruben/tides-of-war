@@ -186,7 +186,7 @@ namespace Game.Misc.Loot
             {
                 durability = 1.0f;
             }
-            GD.Print("Not Implemented");
+            GD.Print("TODO: Not Implemented");
         }
         public void TakeDamage(bool byPass = false, float damageAmount = 0.1f)
         {
@@ -217,7 +217,7 @@ namespace Game.Misc.Loot
                     }
                 }
             }
-            GD.Print("Not Implemented");
+            GD.Print("TODO: Not Implemented");
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Game.Ui
         public void _OnNewGamePressed()
         {
             Globals.PlaySound("click0", this, snd);
-            Globals.SetScene("res://src/map/map-1.tscn", GetTree().GetRoot(), this);
+            Globals.SetScene("res://src/map/zone_4.tscn", GetTree().GetRoot(), this);
         }
         public void _OnLoadPressed()
         {

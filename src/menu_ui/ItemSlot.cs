@@ -31,7 +31,6 @@ namespace Game.Ui
         }
         public void _OnShortcutPressed()
         {
-            GD.Print(slotType);
             if (slotType == SlotType.SHORTCUT && GetItem() != null)
             {
                 EmitSignal(nameof(ShortcutPressed), this, GetItem());

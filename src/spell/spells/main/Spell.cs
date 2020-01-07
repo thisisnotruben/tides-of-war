@@ -125,11 +125,11 @@ namespace Game.Ability
                     PrepSight();
                     SetGlobalPosition(caster.GetGlobalPosition());
                     AnimationPlayer casterAnim = caster.GetNode<AnimationPlayer>("anim");
-                    if (casterAnim.GetCurrentAnimation().Equals("cast"))
+                    if (casterAnim.GetCurrentAnimation().Equals("casting"))
                     {
                         await ToSignal(casterAnim, "animation_finished");
                     }
-                    casterAnim.Play("cast", -1, caster.animSpeed);
+                    casterAnim.Play("casting", -1, caster.animSpeed);
                     break;
             }
         }

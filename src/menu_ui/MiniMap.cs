@@ -58,6 +58,9 @@ namespace Game.Ui
                     case Character.WorldTypes.MERCHANT:
                         rectColor = new Color("#00ff00");
                         break;
+                    case Character.WorldTypes.HEALER:
+                        GD.Print("TODO: add color for healer");
+                        break;
                 }
                 DrawRect(rect2, rectColor);
                 if (player.IsDead() && path.Count > 0)

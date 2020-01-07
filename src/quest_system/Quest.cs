@@ -213,10 +213,7 @@ namespace Game.Quests
                         }
                         break;
                     default:
-                        if (UnitDB.IsUnitGeneric(key) || UnitDB.IsUnitUnique(key, Globals.GetMap().GetName()))
-                        {
-                            objective.Add(key, data[key]);
-                        }
+                        objective.Add(key, data[key]);
                         break;
                 }
             }
