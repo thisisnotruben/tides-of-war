@@ -6,7 +6,6 @@ namespace Game.Utils
     public class MapImporter : Node
     {
         private string scenePath = "res://src/map/zone_4.tscn";
-        private int count = 0;
         private readonly Vector2 CELL_SIZE = new Vector2(16.0f, 16.0f);
         private readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
         private TileMap tileMap;
@@ -74,7 +73,7 @@ namespace Game.Utils
             {
                 PackedScene scene = (PackedScene)GD.Load("res://src/character/target_dummy/target_dummy.tscn");
                 Node2D character = (Node2D)scene.Instance();
-                character.SetName($"{GetParsedName(node.GetName())}-{count++}");
+                character.SetName(node.GetName());
                 map.GetNode("zed/z1").AddChild(character);
                 character.SetOwner(map);
                 character.SetGlobalPosition(GetCenterPos(node.GetGlobalPosition()));
@@ -99,11 +98,11 @@ namespace Game.Utils
             string resourcePath = "res://src/misc/light/{0}.tscn";
             foreach (Node2D node in map.GetNode("meta/lights").GetChildren())
             {
-                string parsedName = GetParsedName(node.GetName());
+                string parsedName = node.GetName().Split("-")[1];
                 PackedScene lightScene = (PackedScene)GD.Load(String.Format(resourcePath, parsedName));
                 Node2D light = (Node2D)lightScene.Instance();
                 Vector2 pos = node.GetGlobalPosition();
-                if (parsedName.Contains("pit"))
+                if (parsedName.Equals("pit"))
                 {
                     pos = tileMap.WorldToMap(node.GetGlobalPosition());
                     pos.y -= 1.0f;
@@ -117,7 +116,7 @@ namespace Game.Utils
                 light.SetGlobalPosition(pos);
                 map.GetNode("zed/z1").AddChild(light);
                 light.SetOwner(map);
-                light.SetName($"{parsedName}-{count++}");
+                light.SetName(node.GetName());
             }
         }
         private List<Node> TreeUseMaterial(Node root)
@@ -137,18 +136,6 @@ namespace Game.Utils
         private Vector2 GetCenterPos(Vector2 worldPosition)
         {
             return tileMap.MapToWorld(tileMap.WorldToMap(worldPosition)) + HALF_CELL_SIZE;
-        }
-        private String GetParsedName(String name)
-        {
-            string parsedName = "";
-            foreach (char letter in name)
-            {
-                if (!Char.IsDigit(letter))
-                {
-                    parsedName += letter;
-                }
-            }
-            return parsedName;
         }
     }
 }
