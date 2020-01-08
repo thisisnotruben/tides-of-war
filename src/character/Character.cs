@@ -6,6 +6,7 @@ using Game.Misc.Loot;
 using Game.Misc.Missile;
 using Game.Misc.Other;
 using Game.Utils;
+using Game.Database;
 using Godot;
 namespace Game.Actor
 {
@@ -605,32 +606,29 @@ namespace Game.Actor
         }
         public void SetImg(string imgPath, bool loaded = false)
         {
-            string[] splittedImgPath = imgPath.BaseName().Split('/');
-            string[] parsedImg = splittedImgPath[splittedImgPath.Length - 1].Split('-');
-            string[] frames = parsedImg[2].Split("_");
-            string raceName = splittedImgPath[splittedImgPath.Length - 2];
-            swingType = parsedImg[1];
+            Dictionary<string, string> imageData = ImageDB.GetImageData(imgPath.Split("/")[1]);
+            swingType = imageData["swing"];
             Sprite img = GetNode<Sprite>("img");
-            img.SetTexture((Texture)GD.Load(imgPath));
-            img.SetHframes(int.Parse(frames[0]));
+            img.SetTexture((Texture)GD.Load("res://asset/img/character/".PlusFile(imgPath)));
+            img.SetHframes(int.Parse(imageData["total"]));
             AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
             Animation animRes = anim.GetAnimation("attacking");
-            animRes.TrackSetKeyValue(0, 0, int.Parse(frames[1]) + int.Parse(frames[2]));
-            animRes.TrackSetKeyValue(0, 1, int.Parse(frames[0]) - 1);
+            animRes.TrackSetKeyValue(0, 0, int.Parse(imageData["moving"]) + int.Parse(imageData["dying"]));
+            animRes.TrackSetKeyValue(0, 1, int.Parse(imageData["attacking"]) - 1);
             animRes = anim.GetAnimation("moving");
             animRes.TrackSetKeyValue(0, 0, 0);
-            animRes.TrackSetKeyValue(0, 1, int.Parse(frames[1]));
+            animRes.TrackSetKeyValue(0, 1, int.Parse(imageData["moving"]));
             animRes = anim.GetAnimation("dying");
-            animRes.TrackSetKeyValue(0, 0, 0);
-            animRes.TrackSetKeyValue(0, 1, int.Parse(frames[2]));
+            animRes.TrackSetKeyValue(0, 0, int.Parse(imageData["moving"]));
+            animRes.TrackSetKeyValue(0, 1, int.Parse(imageData["dying"]));
             animRes = anim.GetAnimation("casting");
-            animRes.TrackSetKeyValue(0, 0, int.Parse(frames[1]));
-            animRes.TrackSetKeyValue(0, 1, int.Parse(frames[1]) + 3);
-            if (frames[3].Equals("0"))
+            animRes.TrackSetKeyValue(0, 0, int.Parse(imageData["moving"]));
+            animRes.TrackSetKeyValue(0, 1, int.Parse(imageData["moving"]) + 3);
+            if (imageData["attacking"].Equals("0"))
             {
                 anim.RemoveAnimation("attacking");
             }
-            switch (parsedImg[0].ToUpper())
+            switch (imageData["weapon"].ToUpper())
             {
                 case nameof(WorldTypes.MAGIC):
                 case nameof(WorldTypes.DAGGER):
@@ -663,32 +661,7 @@ namespace Game.Actor
                     GD.Print($"{imgPath} doesn't have a valid weaponType");
                     break;
             }
-            if (this is Player)
-            {
-                SetWorldType(WorldTypes.PLAYER);
-                enemy = false;
-            }
-            string bodyName = raceName;
-            if (raceName.Equals("human"))
-            {
-                switch (parsedImg[0])
-                {
-                    case "bow":
-                    case "comm":
-                    case "magic":
-                    case "dagger":
-                        bodyName += "_unarmored";
-                        break;
-                    default:
-                        bodyName += "_armored";
-                        break;
-                }
-            }
-            else if (raceName.Equals("critter"))
-            {
-                bodyName = parsedImg[3];
-            }
-            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{bodyName}.tres");
+            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData["body"]}.tres");
             TouchScreenButton select = GetNode<TouchScreenButton>("select");
             Vector2 textureSize = texture.GetRegion().Size;
             Node2D sightDistance = GetNode<Node2D>("sight/distance");

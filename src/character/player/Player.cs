@@ -20,11 +20,13 @@ namespace Game.Actor
             base._Ready();
             Globals.player = this;
             SetWorldName(GetName()); // for debugging purposes
-            SetImg("res://asset/img/character/human/sword-swing_medium-17_3_7_7.png");
+            SetImg("human/human-5.png");
             Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
             Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
             UpdateHUD();
             SetGold(10_000);
+            SetWorldType(WorldTypes.PLAYER);
+            enemy = false;
         }
         public override void _UnhandledInput(InputEvent @event)
         {

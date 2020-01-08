@@ -397,7 +397,7 @@ namespace Game.Actor
                         SetProcess(true);
                         break;
                     case "img":
-                        SetImg("res://asset/img/character/".PlusFile(data[key]));
+                        SetImg(data[key]);
                         break;
                     case "name":
                         SetWorldName(data[key]);

@@ -12,7 +12,7 @@ namespace Game.Database
         {
             Dictionary<string, string> unitData = new Dictionary<string, string>();
             short count = 0;
-            xMLParser.Open($"res://data/map_meta/{mapName}_meta.xml");
+            xMLParser.Open($"res://data/{mapName}DB.xml");
             while (xMLParser.Read() == Error.Ok && unitData.Count == 0)
             {
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&

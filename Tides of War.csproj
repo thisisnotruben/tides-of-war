@@ -58,6 +58,7 @@
     <Compile Include="src\database\PickableFactory.cs" />
     <Compile Include="src\database\QuestDB.cs" />
     <Compile Include="src\database\SpellDB.cs" />
+    <Compile Include="src\database\ImageDB.cs" />
     <Compile Include="src\database\UnitDB.cs" />
     <Compile Include="src\globals\GameSaver.cs" />
     <Compile Include="src\globals\Globals.cs" />
