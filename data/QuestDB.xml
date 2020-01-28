@@ -1,38 +1,104 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <QuestDB>
-    <quest name="test1">
-        <active>false</active>
-        <completed>false</completed>
-        <delivered>false</delivered>
-        <keepPickables>false</keepPickables>
-        <questGiver>map-1/zed/z1/Darfu</questGiver>
-        <chainQuests>
-            <chainQuest name="test2"></chainQuest>
-        </chainQuests>
-        <reward>
-            <pickable name="Steelforged Sword"></pickable>
-            <gold>50</gold>
-        </reward>
-        <objective>
-            <kill name="Desert Serpent">
-                <amount>0-3</amount>
-            </kill>
-        </objective>
+    <quest completer="Amaury" giver="Amaury" quest_id="quest_side_0" type="GATHER">
+        <start>We have placed a bounty on Bruiseclaw and his pack of gnolls for acts of raiding. Slaughter them. Bring me Bruiseclaw’s paw and eight of his companions paws for your reward.</start>
+        <active>Bring me their paws, and we'll reward you well.</active>
+        <completed>You have the paws? Great! Chapman was worried about the gnoll situation, and I'll like to tell him that we got it all under control thanks to your efforts.</completed>
+        <delivered>The gnoll situation has calmed down ever since you took care of them. That'll teach them to leave us alone now.</delivered>
+        <receiver_completed />
+        <receiver_delivered />
+        <objective amount="1" name="Bruiseclaw’s paw" />
+        <objective amount="8" name="Gnoll paw" />
     </quest>
-    <quest name="test2">
-        <active>false</active>
-        <completed>false</completed>
-        <delivered>false</delivered>
-        <keepPickables>false</keepPickables>
-        <questGiver>map-1/zed/z1/Darfu</questGiver>
-        <reward>
-            <pickable name="Steelforged Sword"></pickable>
-            <gold>50</gold>
-        </reward>
-        <objective>
-            <kill name="Desert Serpent">
-                <amount>0-3</amount>
-            </kill>
-        </objective>
+    <quest completer="Gehrt" giver="Gehrt" quest_id="quest_side_1" type="GATHER">
+        <start>I got a real predicament on my hands. I got a contract to fulfill, but I'm running out of time to complete the order. The forest has scared my workers away and thus, left all their lumber out. I need you to go out there and collect ten bundles of wood left out, and then just maybe I can meet my deadline.</start>
+        <active>Hurry! If I don't get this order in, no one would want to contract me again.</active>
+        <completed>Excellent! I should be able to fulfill my order on time. To show my gratitude, here's something for your troubles.</completed>
+        <delivered>Business is good thanks to you.</delivered>
+        <receiver_completed />
+        <receiver_delivered />
+        <objective amount="10" name="Bundle of wood" />
+    </quest>
+    <quest completer="Hawel" giver="Hawel" quest_id="quest_side_2" type="GATHER">
+        <start>I'm tired of eating this mundane food everyday. Back home, I was the best cook in the village. Since coming here, I noticed we just rely on the food imported from the mainland. Being the entrepreneur I am, I bet I can make a name for myself just like back home. I've made a recipe in which I believe can knock off the trousers of the king. Gather these ingredients from the land and bring them back to me so I can get to cooking. This is the recipe:
+- 4 eggs
+- 3 bushels of wheat
+- 10 mushrooms</start>
+        <active>You got my ingredients yet?</active>
+        <completed>These ingredients are perfect! Here, let me make one right now...Muah! I present to you my dish, a Pizza!</completed>
+        <delivered />
+        <receiver_completed />
+        <receiver_delivered />
+        <objective amount="4" name="Egg" />
+        <objective amount="3" name="Bushel of wheat" />
+        <objective amount="10" name="Mushroom" />
+    </quest>
+    <quest completer="Norwell" giver="Elaine" quest_id="quest_side_3_A" type="TALK">
+        <start>Hello dear sir. I'm sorry to bother you, but I lost my necklace, and I know that disgusting rat Norwell took it. He usually hangs out by the lake. Get my necklace back, and you'll warm a old woman's heart.</start>
+        <active>Have you got my necklace back yet?</active>
+        <completed />
+        <delivered>Have you got my necklace back yet?</delivered>
+        <receiver_completed>I stole a what? I'm sorry, but I ain't no thief.</receiver_completed>
+        <receiver_delivered />
+        <objective amount="1" name="Norwell" />
+    </quest>
+    <quest completer="Kassidy" giver="Norwell" quest_id="quest_side_3_B" type="GATHER">
+        <start>You say I stole a necklace, but then again I forget a lot of things. Well maybe if I got a boysenberry pie from Kassidy I can maybe remember. I'm sure if you bring her five boysenberries she can bake up a pie for me.</start>
+        <active>I'm only getting hungrier by the minute, you're lucky that my stomach isn't big enough for two pies!</active>
+        <completed>Mhmm, this sure is delicious. You didn't bring me any milk? Oh well, I can do without. Just let me finish this first.</completed>
+        <delivered />
+        <receiver_completed>That kid sure does love boysenberry pie, anything for that sweetheart. Here you go, give it to him while it's still fresh will ya.</receiver_completed>
+        <receiver_delivered />
+        <objective amount="5" name="boysenberry" />
+    </quest>
+    <quest completer="Elaine" giver="Norwell" quest_id="quest_side_3_C" type="GATHER">
+        <start>It's all coming back to me! I remember skipping through the woods on the west side of the lake, and I dropped, or should I say, saw a necklace exactly like the one you're talking about on the ground, and this huge fishy looking guy picked it up and ran back to his camp. I'm sure if you ask for it back they'll give it back.</start>
+        <active>Fantastic pie, but as I told you, the big scary fish took it. Get it and take it to that old lady.</active>
+        <completed />
+        <delivered />
+        <receiver_completed>My family necklace! I never thought I'd see it again, thank you so much!. Here, take this. It’ll serve you well.</receiver_completed>
+        <receiver_delivered>I'm forever grateful.</receiver_delivered>
+        <objective amount="1" name="Elaine’s necklace" />
+    </quest>
+    <quest completer="Marlo" giver="Solomon" quest_id="quest_side_4" type="">
+        <start>Listen, I really shouldn't be telling you this, but I'm kind of a big deal. Too big in fact that I had to move down here from the mainland. Now, they might tell you otherwise on why I moved down here but that doesn't matter. I owe Marlo a favor or two. Now, can you take this package down to the camp up north and deliver it to Marlo".</start>
+        <active>I Hope you don't plan on keeping that package for yourself any longer.</active>
+        <completed>They what?! Well, at least you took care of them before they took care of me. Here, it's only fair I gave you some coin for your troubles. If anyone asks you what happened to those men, don't mention me.</completed>
+        <delivered>Ayy, how's it going?</delivered>
+        <receiver_completed>Who are you?! Where is Solomon?! Never mind we'll get him after we're done with you. Men! Attack!</receiver_completed>
+        <receiver_delivered />
+    </quest>
+    <quest completer="Crayer" giver="Crayer" quest_id="quest_side_5" type="">
+        <start>Those damn bastard crabs took my wife from me! I'll never forgive them for what they've done to her and me. One of them swallowed my sword while fighting them off before they got to my beloved wife. I can't rest while they're out there walking and pinching there pincers. Avenge my wife and bring me tere pincers and I'll see to it you're rewarded well.</start>
+        <active>You must give the crabbers the stabbers! Go and avenge my wife!</active>
+        <completed>Well done! You have a knack for combat. The coast is made safer because of you, I can rest easy now that this won't happen to someone else. Here's your reward, you've earned it.</completed>
+        <delivered>Isn't it the crab slayer! How ya doing!?</delivered>
+        <receiver_completed />
+        <receiver_delivered />
+    </quest>
+    <quest completer="Roswald" giver="Roswald" quest_id="quest_side_6" type="">
+        <start>Greetings. The savage beasts of the land have been growing more aggressive as of lately. Our laborers here cannot work with these constant attacks from them. We could use your help out there.</start>
+        <active>Have you killed those beasts yet?</active>
+        <completed>Thanks for the help. There must be something in the land to make these vile beasts so bold. Whatever it can be, I hope it doesn't spread any further.</completed>
+        <delivered>Hail.</delivered>
+        <receiver_completed />
+        <receiver_delivered />
+    </quest>
+    <quest completer="Arndell" giver="Arndell" quest_id="quest_side_7" type="GATHER">
+        <start>Could I have a drink?...Dying is thirsty work. I'd have enough of this and it's time to go. It's time to take matters into my own hands. But my last wish is this: I would like a drink of refreshing spring water.</start>
+        <active>…</active>
+        <completed>Time to go.</completed>
+        <delivered />
+        <receiver_completed />
+        <receiver_delivered />
+        <objective amount="1" name="Spring water" />
+    </quest>
+    <quest completer="Sarina" giver="Cherrelle" quest_id="quest_side_8" type="">
+        <start>You haven't had wine until you've tasted Sarina's wine. She sells the best imported wine from the mainland. She's not far from us. Here! Take this voucher to her shop! You'll receive a complimentary of our famous "__(WINE_NAME)__". You won't regret it!</start>
+        <active>Hurry! For supplies are limited!</active>
+        <completed />
+        <delivered />
+        <receiver_completed>Ah, so sent Cherrelle sent you? Well, you're in for a treat! A bottle of "__(WINE_NAME)__" coming right up. I guarantee you'll find no equal in these lands!</receiver_completed>
+        <receiver_delivered />
     </quest>
 </QuestDB>
