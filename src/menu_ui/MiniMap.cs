@@ -12,14 +12,14 @@ namespace Game.Ui
         private Player player;
         public override void _Ready()
         {
-            player = ((InGameMenu)GetOwner()).player;
+            player = ((InGameMenu)Owner).player;
             SetProcess(false);
             return;
-            string mapName = Globals.GetMap().GetName();
+            string mapName = Globals.GetMap().Name;
             string miniMapPath = $"res://asset/img/map/{mapName}.png";
             if (new Directory().FileExists(miniMapPath))
             {
-                GetNode<Sprite>("map").SetTexture((Texture)GD.Load(miniMapPath));
+                GetNode<Sprite>("map").Texture = (Texture)GD.Load(miniMapPath);
             }
             else
             {
@@ -39,7 +39,7 @@ namespace Game.Ui
         }
         public override void _Draw()
         {
-            Vector2 playerPos = GetNode<Node2D>("player_pos").GetGlobalPosition();
+            Vector2 playerPos = GetNode<Node2D>("player_pos").GlobalPosition;
             foreach (Character character in GetTree().GetNodesInGroup("npc"))
             {
                 Rect2 rect2 = new Rect2(playerPos - ScaleToMapRatio(player.GetCenterPos() - character.GetCenterPos()) - offset, drawSize);
@@ -67,11 +67,11 @@ namespace Game.Ui
                 {
                     for (int i = 0; i < path.Count - 1; i++)
                     {
-                        DrawLine(playerPos - ScaleToMapRatio(player.GetGlobalPosition() - path[i]),
-                            playerPos - ScaleToMapRatio(player.GetGlobalPosition() - path[i + 1]),
+                        DrawLine(playerPos - ScaleToMapRatio(player.GlobalPosition - path[i]),
+                            playerPos - ScaleToMapRatio(player.GlobalPosition - path[i + 1]),
                             new Color("#ffffff"), 4.0f);
                     }
-                    DrawRect(new Rect2(playerPos - ScaleToMapRatio(player.GetGlobalPosition() - path[path.Count - 1]) - offset,
+                    DrawRect(new Rect2(playerPos - ScaleToMapRatio(player.GlobalPosition - path[path.Count - 1]) - offset,
                         drawSize), new Color("#94d0d5"));
                 }
             }
@@ -83,14 +83,14 @@ namespace Game.Ui
             {
                 TileMap tileMap = Globals.GetMap().GetNode<TileMap>("ground/g1");
                 Sprite map = GetNode<Sprite>("map");
-                mapRatio = tileMap.GetUsedRect().Size * tileMap.GetCellSize() / (map.GetTexture().GetSize() * map.GetScale());
+                mapRatio = tileMap.GetUsedRect().Size * tileMap.CellSize / (map.Texture.GetSize() * map.Scale);
                 mapRatio = new Vector2(1.0f / mapRatio.x, 1.0f / mapRatio.y);
             }
             if (player.IsDead() && !player.GetGravePos().Equals(new Vector2()) && path.Count == 0)
             {
-                path = Globals.GetMap().getAPath(player.GetGlobalPosition(), player.GetGravePos());
+                path = Globals.GetMap().getAPath(player.GlobalPosition, player.GetGravePos());
             }
-            GetNode<Node2D>("map").SetPosition(GetNode<Node2D>("player_pos").GetGlobalPosition() - ScaleToMapRatio(player.GetCenterPos()));
+            GetNode<Node2D>("map").Position = GetNode<Node2D>("player_pos").GlobalPosition - ScaleToMapRatio(player.GetCenterPos());
             SetProcess(true);
         }
         public void _OnMiniMapHide()

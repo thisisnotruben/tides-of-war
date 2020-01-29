@@ -189,7 +189,7 @@ namespace Game.Quests
                         break;
                     case nameof(questName):
                         questName = data[key];
-                        SetName(questName);
+                        Name = questName;
                         LoadText();
                         break;
                     case nameof(gold):

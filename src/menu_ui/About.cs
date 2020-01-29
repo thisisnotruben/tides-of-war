@@ -8,7 +8,7 @@ namespace Game.Ui
         {
             Globals.PlaySound("click3", this, new Speaker());
             Hide();
-            ((Menu)GetOwner()).menu.Show();
+            ((Menu)Owner).menu.Show();
         }
     }
 }

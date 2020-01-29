@@ -43,12 +43,12 @@ namespace Game.Misc.Missile
         }
         public void _OnProjectileAreaEntered(Area2D area2D)
         {
-            if (!hasHitTarget && area2D.GetOwner() == target)
+            if (!hasHitTarget && area2D.Owner == target)
             {
                 EmitSignal(nameof(Hit), spell);
-                SetZIndex(1);
+                ZIndex = 1;
                 hasHitTarget = true;
-                if (GetNode<Sprite>("img").GetTexture() != null)
+                if (GetNode<Sprite>("img").Texture != null)
                 {
                     AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
                     if (spell != null)
@@ -78,7 +78,7 @@ namespace Game.Misc.Missile
         private void Move(Character fromUnit, Character toUnit)
         {
             Tween tween = GetNode<Tween>("tween");
-            tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), toUnit.GetCenterPos(),
+            tween.InterpolateProperty(this, ":global_position", GlobalPosition, toUnit.GetCenterPos(),
                 spawnPos.DistanceTo(toUnit.GetCenterPos()) / (float)fromUnit.GetWeaponRange(),
                 Tween.TransitionType.Circ, Tween.EaseType.Out);
             tween.Start();
@@ -86,14 +86,14 @@ namespace Game.Misc.Missile
         public void SetTarget(Character character)
         {
             target = character;
-            spawnPos = originator.GetNode<Node2D>("img/missile").GetGlobalPosition();
+            spawnPos = originator.GetNode<Node2D>("img/missile").GlobalPosition;
             if (rotate)
             {
                 LookAt(target.GetCenterPos());
             }
             if (instantSpawn)
             {
-                SetGlobalPosition(target.GetCenterPos());
+                GlobalPosition = target.GetCenterPos();
             }
             else
             {
@@ -165,12 +165,12 @@ namespace Game.Misc.Missile
         {
             string texturePath = "res://asset/img/missile-spell/{0}.tres";
             string textureSize = "big";
-            string raceName = originator.GetNode<Sprite>("img").GetTexture().GetPath().GetBaseDir().GetFile();
+            string raceName = originator.GetNode<Sprite>("img").Texture.ResourcePath.GetBaseDir().GetFile();
             switch (raceName)
             {
                 case "gnoll":
                 case "goblin":
-                    GetNode<Sprite>("img").SetOffset(new Vector2(-5.5f, 0.0f));
+                    GetNode<Sprite>("img").Offset = new Vector2(-5.5f, 0.0f);
                     textureSize = "small";
                     break;
             }
@@ -187,7 +187,7 @@ namespace Game.Misc.Missile
                     spellEffect.Connect(nameof(SpellEffect.Unmake), this, nameof(Fade));
                 }
                 AddChild(spellEffect);
-                spellEffect.SetOwner(this);
+                spellEffect.Owner = this;
                 switch (spell.GetWorldType())
                 {
                     case WorldTypes.FIREBALL:
@@ -196,7 +196,7 @@ namespace Game.Misc.Missile
                     case WorldTypes.MIND_BLAST:
                     case WorldTypes.SLOW:
                     case WorldTypes.SIPHON_MANA:
-                        GetNode<CollisionShape2D>("coll").SetShape((Shape2D)GD.Load("res://asset/img/missile-spell/spell_coll.tres"));
+                        GetNode<CollisionShape2D>("coll").Shape = (Shape2D)GD.Load("res://asset/img/missile-spell/spell_coll.tres");
                         switch (spell.GetWorldType())
                         {
                             case WorldTypes.MIND_BLAST:
@@ -237,8 +237,8 @@ namespace Game.Misc.Missile
                 rotate = true;
                 weaponType = WorldTypes.ARROW_HIT_ARMOR;
                 swingType = WorldTypes.ARROW_PASS;
-                GetNode<Node2D>("coll").SetPosition(new Vector2(-6.0f, 0.0f));
-                GetNode<Sprite>("img").SetTexture((Texture)GD.Load(texturePath));
+                GetNode<Node2D>("coll").Position = new Vector2(-6.0f, 0.0f);
+                GetNode<Sprite>("img").Texture = (Texture)GD.Load(texturePath);
             }
         }
     }

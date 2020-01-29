@@ -12,9 +12,9 @@ namespace Game.Ability
             base.Init(worldName);
             float spellRadius = 24.0f;
             TouchScreenButton spellArea = GetNode<TouchScreenButton>("spell_area");
-            spellArea.SetScale(new Vector2(spellRadius, spellRadius) * 2.0f / spellArea.GetTexture().GetSize());
-            spellArea.SetPosition(spellArea.GetTexture().GetSize() * spellArea.GetScale() / -2.0f);
-            ((CircleShape2D)GetNode<CollisionShape2D>("sight/distance").GetShape()).SetRadius(spellRadius);
+            spellArea.Scale = (new Vector2(spellRadius, spellRadius) * 2.0f / spellArea.Normal.GetSize());
+            spellArea.Position = spellArea.Normal.GetSize() * spellArea.Scale / -2.0f;
+            ((CircleShape2D)GetNode<CollisionShape2D>("sight/distance").Shape).Radius = spellRadius;
         }
         public override float Cast()
         {
@@ -40,12 +40,12 @@ namespace Game.Ability
                 Vector2 maxPos = minPos + GetViewportRect().Size / ctrans.Scale;
                 PackedScene meteorScene = (PackedScene)GD.Load("res://src/spell/spellEffects/meteor.tscn");
                 meteor_effect meteorEffect = (meteor_effect)meteorScene.Instance();
-                meteorEffect.seekPos = GetGlobalPosition();
+                meteorEffect.seekPos = GlobalPosition;
                 float side = (meteorEffect.seekPos.x > 0.50f * (maxPos.x - minPos.x) + minPos.x) ? 0.25f : 0.75f;
-                meteorEffect.SetGlobalPosition(new Vector2(side * (maxPos.x - minPos.x) + minPos.x, minPos.y));
+                meteorEffect.GlobalPosition = new Vector2(side * (maxPos.x - minPos.x) + minPos.x, minPos.y);
                 meteorEffect.Connect(nameof(meteor_effect.Hit), this, nameof(MeteorCast));
                 caster.GetParent().AddChild(meteorEffect);
-                meteorEffect.SetOwner(caster.GetParent());
+                meteorEffect.Owner = caster.GetParent();
             }
         }
     }

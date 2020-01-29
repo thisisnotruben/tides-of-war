@@ -24,7 +24,7 @@ namespace Game.Ui
         public delegate void ShortcutPressed(ItemSlot itemSlot, Pickable pickable);
         public void _OnItemSlotPressed()
         {
-            if (slotType == SlotType.BAG_SLOT && GetItem() != null && GetTree().IsPaused())
+            if (slotType == SlotType.BAG_SLOT && GetItem() != null && GetTree().Paused)
             {
                 EmitSignal(nameof(SlotSelected), GetPositionInParent());
             }
@@ -38,11 +38,11 @@ namespace Game.Ui
         }
         public void _OnItemSlotButtonDown()
         {
-            GetNode<Control>("m/icon").SetScale(new Vector2(0.8f, 0.8f));
+            GetNode<Control>("m/icon").RectScale = new Vector2(0.8f, 0.8f);
         }
         public void _OnItemSlotButtonUp()
         {
-            GetNode<Control>("m/icon").SetScale(new Vector2(1.0f, 1.0f));
+            GetNode<Control>("m/icon").RectScale = new Vector2(1.0f, 1.0f);
         }
         public void _OnTweenCompleted(Godot.Object obj, NodePath nodePath)
         {
@@ -54,15 +54,15 @@ namespace Game.Ui
             MoveChild(GetNode("count"), 2);
             allowCoolDown = false;
             GetNode<Control>("m/label").Hide();
-            GetNode<Control>("m/icon/overlay").SetScale(new Vector2(1.0f, 1.0f));
+            GetNode<Control>("m/icon/overlay").RectScale = new Vector2(1.0f, 1.0f);
         }
         public void _OnTweenStep(Godot.Object obj, NodePath nodePath, float elapsed, Godot.Object value)
         {
             if (allowCoolDown)
             {
                 Label label = GetNode<Label>("m/label");
-                label.SetText(Mathf.Round(time - elapsed).ToString());
-                if (!label.IsVisible())
+                label.Text = Mathf.Round(time - elapsed).ToString();
+                if (!label.Visible)
                 {
                     label.Show();
                 }
@@ -91,28 +91,28 @@ namespace Game.Ui
                 EmitSignal(nameof(SyncSlot), this, pickable);
                 if (forceClear)
                 {
-                    GetNode<TextureRect>("m/icon").SetTexture(null);
+                    GetNode<TextureRect>("m/icon").Texture = null;
                 }
                 else
                 {
                     itemStack.RemoveAt(0);
-                    GetNode<Label>("count").SetText(itemStack.Count.ToString());
+                    GetNode<Label>("count").Text = itemStack.Count.ToString();
                     if (itemStack.Count == 1)
                     {
                         GetNode<Label>("count").Hide();
                     }
                     else if (itemStack.Count == 0)
                     {
-                        GetNode<TextureRect>("m/icon").SetTexture(null);
+                        GetNode<TextureRect>("m/icon").Texture = null;
                     }
                     else if (!funnel)
                     {
                         EmitSignal(nameof(StackSizeChanged), GetItem().GetWorldName(), itemStack.Count, this);
                     }
                 }
-                if (GetNode<TextureRect>("m/icon").GetTexture() == null)
+                if (GetNode<TextureRect>("m/icon").Texture == null)
                 {
-                    SetNormalTexture((Texture)GD.Load("res://asset/img/ui/brown_bg_icon.tres"));
+                    TextureNormal = (Texture)GD.Load("res://asset/img/ui/brown_bg_icon.tres");
                     foreach (Godot.Collections.Dictionary link in GetSignalConnectionList(nameof(SyncSlot)))
                     {
                         Disconnect(nameof(SyncSlot), (Godot.Object)link["target"], nameof(_OnSyncShortcut));
@@ -124,7 +124,7 @@ namespace Game.Ui
                     GetNode<Control>("count").Hide();
                     GetNode<Control>("m/label").Hide();
                     GetNode<Tween>("tween").StopAll();
-                    GetNode<Control>("m/icon/overlay").SetScale(new Vector2(1.0f, 1.0f));
+                    GetNode<Control>("m/icon/overlay").RectScale = new Vector2(1.0f, 1.0f);
                     if (shuffle)
                     {
                         GetParent().MoveChild(this, GetParent().GetChildCount() - 1);
@@ -139,11 +139,11 @@ namespace Game.Ui
             {
                 string texPath = "res://asset/img/ui/black_bg_icon_used" +
                     $"{((slotType == SlotType.SHORTCUT) ? 0 : 1)}.tres";
-                if (!GetNormalTexture().GetPath().Equals(texPath))
+                if (!TextureNormal.ResourcePath.Equals(texPath))
                 {
-                    SetNormalTexture((Texture)GD.Load(texPath));
+                    TextureNormal = (Texture)GD.Load(texPath);
                 }
-                GetNode<TextureRect>("m/icon").SetTexture(pickable.GetIcon());
+                GetNode<TextureRect>("m/icon").Texture = pickable.GetIcon();
                 if (pickable.GetStackSize() > 0)
                 {
                     stackSize = pickable.GetStackSize();
@@ -155,7 +155,7 @@ namespace Game.Ui
                     itemStack.Add(pickable);
                     if (itemStack.Count > 1)
                     {
-                        GetNode<Label>("count").SetText(itemStack.Count.ToString());
+                        GetNode<Label>("count").Text = itemStack.Count.ToString();
                         GetNode<Control>("count").Show();
                     }
                     else
@@ -185,7 +185,7 @@ namespace Game.Ui
             {
                 allowCoolDown = true;
                 time = value;
-                GetNode<Label>("m/label").SetText(Mathf.Round(value).ToString());
+                GetNode<Label>("m/label").Text = Mathf.Round(value).ToString();
                 MoveChild(GetNode("count"), 0);
                 GetNode<Control>("m/label").Show();
                 Tween tween = GetNode<Tween>("tween");

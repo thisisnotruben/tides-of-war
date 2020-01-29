@@ -56,7 +56,7 @@ namespace Game.Quests
                     Quest linkedQuest = (Quest)availableQuests.GetNode(questName);
                     MoveQuest(linkedQuest, rootQuest);
                 }
-                rootQuest.ChangeState((QuestState)Enum.Parse(typeof(QuestState), availableQuests.GetName()));
+                rootQuest.ChangeState((QuestState)Enum.Parse(typeof(QuestState), availableQuests.Name));
             }
         }
         public void Reset()
@@ -90,7 +90,7 @@ namespace Game.Quests
             {
                 foreach (Quest quest in questCatagory.GetChildren())
                 {
-                    quest.ChangeState((QuestState)Enum.Parse(typeof(QuestState), questCatagory.GetName()));
+                    quest.ChangeState((QuestState)Enum.Parse(typeof(QuestState), questCatagory.Name));
                 }
             }
         }
@@ -152,7 +152,7 @@ namespace Game.Quests
             quest.GetParent().RemoveChild(quest);
             to.AddChild(quest);
             QuestState state;
-            if (Enum.TryParse(to.GetName(), out state))
+            if (Enum.TryParse(to.Name, out state))
             {
                 quest.ChangeState(state);
             }

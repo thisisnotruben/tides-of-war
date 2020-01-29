@@ -6,7 +6,7 @@ namespace Game.Ability
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);
-            SetPosition(character.GetNode<Node2D>("img").GetPosition());
+            Position = character.GetNode<Node2D>("img").Position;
             tween.Start();
             timer.Start();
         }

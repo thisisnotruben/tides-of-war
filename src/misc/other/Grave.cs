@@ -9,14 +9,14 @@ namespace Game.Misc.Other
         private Player deceasedPlayer;
         public void _OnAreaEntered(Area2D area2D)
         {
-            if (area2D.GetOwner() == deceasedPlayer)
+            if (area2D.Owner == deceasedPlayer)
             {
                 deceasedPlayer.GetMenu().GetNode<CanvasItem>("c/osb").Show();
             }
         }
         public void _OnAreaExited(Area2D area2D)
         {
-            if (area2D.GetOwner() == deceasedPlayer)
+            if (area2D.Owner == deceasedPlayer)
             {
                 deceasedPlayer.GetMenu().GetNode<CanvasItem>("c/osb").Hide();
             }
@@ -28,9 +28,9 @@ namespace Game.Misc.Other
                 this.deceasedPlayer = deceasedPlayer;
                 this.deceasedPlayer.GetMenu().GetNode<BaseButton>("c/osb/m/cast").Connect("pressed", this, nameof(Revive));
                 this.deceasedPlayer.GetMenu().GetNode<Control>("c/osb/").SetPosition(new Vector2(0.0f, 180.0f));
-                this.deceasedPlayer.GetMenu().GetNode<Label>("c/osb/m/cast/label").SetText("Revive");
-                SetGlobalPosition(this.deceasedPlayer.GetGlobalPosition());
-                SetName(this.deceasedPlayer.GetWorldName());
+                this.deceasedPlayer.GetMenu().GetNode<Label>("c/osb/m/cast/label").Text = "Revive";
+                GlobalPosition = this.deceasedPlayer.GlobalPosition;
+                Name = this.deceasedPlayer.GetWorldName();
             }
         }
         public void Revive()
@@ -41,7 +41,7 @@ namespace Game.Misc.Other
             deceasedPlayer.GetMenu().GetNode<BaseButton>("c/osb/m/cast").Disconnect("pressed", this, nameof(Revive));
             deceasedPlayer.SetState(Character.States.ALIVE);
             Tween tween = GetNode<Tween>("tween");
-            tween.InterpolateProperty(this, ":modulate", GetModulate(),
+            tween.InterpolateProperty(this, ":modulate", Modulate,
                 new Color(1.0f, 1.0f, 1.0f, 0.0f), 0.75f, Tween.TransitionType.Circ, Tween.EaseType.Out);
             tween.Start();
         }

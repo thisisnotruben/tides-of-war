@@ -19,11 +19,11 @@ namespace Game.Ability
         {
             foreach (Node2D node2D in GetNode("idle").GetChildren())
             {
-                node2D.SetUseParentMaterial(true);
+                node2D.UseParentMaterial = true;
             }
             foreach (Node2D node2D in GetNode("explode").GetChildren())
             {
-                node2D.SetUseParentMaterial(true);
+                node2D.UseParentMaterial = true;
             }
             tween = GetNode<Tween>("tween");
             timer = GetNode<Timer>("timer");
@@ -32,10 +32,10 @@ namespace Game.Ability
         public override void _Process(float delta)
         {
             Tween tween = GetNode<Tween>("tween");
-            tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(),
+            tween.InterpolateProperty(this, ":global_position", GlobalPosition,
                 seekPos, 5.0f, Tween.TransitionType.Circ, Tween.EaseType.Out);
             tween.Start();
-            if (GetGlobalPosition().DistanceTo(seekPos) < 2.0f)
+            if (GlobalPosition.DistanceTo(seekPos) < 2.0f)
             {
                 SetProcess(false);
                 OnHit();
@@ -47,7 +47,7 @@ namespace Game.Ability
             {
                 Tween tween = GetNode<Tween>("tween");
                 Node2D light = GetNode<Node2D>("light");
-                tween.InterpolateProperty(light, ":modulate", light.GetModulate(),
+                tween.InterpolateProperty(light, ":modulate", light.Modulate,
                     new Color(1.0f, 1.0f, 1.0f, 0.0f), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.InOut);
             }
         }
@@ -63,11 +63,11 @@ namespace Game.Ability
             FadeLight(fadeLight);
             foreach (Particles2D particles2D in GetNode("idle").GetChildren())
             {
-                particles2D.SetEmitting(false);
+                particles2D.Emitting = false;
             }
             foreach (Particles2D particles2D in GetNode("explode").GetChildren())
             {
-                particles2D.SetEmitting(true);
+                particles2D.Emitting = true;
             }
             // Call this method first in every polymorphed method
         }

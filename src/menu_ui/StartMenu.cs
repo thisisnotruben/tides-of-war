@@ -19,12 +19,12 @@ namespace Game.Ui
         public void _OnNewGamePressed()
         {
             Globals.PlaySound("click0", this, snd);
-            Globals.SetScene("res://src/map/zone_4.tscn", GetTree().GetRoot(), this);
+            Globals.SetScene("res://src/map/zone_4.tscn", GetTree().Root, this);
         }
         public void _OnLoadPressed()
         {
             Globals.PlaySound("click1", this, snd);
-            if (menu.IsVisible())
+            if (menu.Visible)
             {
                 menu.Hide();
                 saveLoad.Show();
@@ -45,12 +45,12 @@ namespace Game.Ui
         public void _OnBackPressed()
         {
             Globals.PlaySound("click3", this, snd);
-            if (saveLoad.IsVisible())
+            if (saveLoad.Visible)
             {
                 saveLoad.Hide();
                 menu.Show();
             }
-            else if (settings.IsVisible())
+            else if (settings.Visible)
             {
                 settings.Hide();
                 menu.Show();

@@ -6,14 +6,14 @@ namespace Game.Ui
         public override void _Ready()
         {
             SetLabels();
-            if (GetOwner()is StartMenu)
+            if (Owner is StartMenu)
             {
-                GetNode<Label>("v/label").SetText("Load Game");
+                GetNode<Label>("v/label").Text = "Load Game";
             }
         }
         public void _OnSlotPressed(int index)
         {
-            ((Menu)GetOwner()).popup.SaveLoadGo(index);
+            ((Menu)Owner).popup.SaveLoadGo(index);
         }
         public void SetLabels()
         {
@@ -22,7 +22,7 @@ namespace Game.Ui
                 string slotText = $"slot_{i}";
                 if (Globals.saveData.ContainsKey(slotText) && !Globals.saveData[slotText].Empty())
                 {
-                    GetNode<Label>($"v/s/c/g/slot_label_{i}").SetText(Globals.saveData[slotText]);
+                    GetNode<Label>($"v/s/c/g/slot_label_{i}").Text = Globals.saveData[slotText];
                 }
             }
         }

@@ -19,7 +19,7 @@ namespace Game.Misc.Loot
         {
             Dictionary<string, string> itemData = ItemDB.GetItemData(worldName);
             SetWorldName(worldName);
-            SetName(GetWorldName());
+            Name = GetWorldName();
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), itemData["type"].ToUpper()));
             icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData["type"].ToLower()}/{itemData[nameof(icon)]}_icon.tres");
             level = short.Parse(itemData[nameof(level)]);
@@ -73,9 +73,9 @@ namespace Game.Misc.Loot
         }
         public override void _OnTimerTimeout()
         {
-            if (GetOwner()is Character)
+            if (Owner is Character)
             {
-                ConfigureBuff((Character)GetOwner(), true);
+                ConfigureBuff((Character)Owner, true);
             }
         }
         public void Equip()
@@ -115,7 +115,7 @@ namespace Game.Misc.Loot
             if (GetWorldType() == WorldTypes.POTION)
             {
                 ConfigureBuff(character, false);
-                if (GetTree().IsPaused())
+                if (GetTree().Paused)
                 {
                     character.buffs["pending"].Add(this);
                 }
@@ -158,7 +158,7 @@ namespace Game.Misc.Loot
                     break;
                 case WorldTypes.AGILITY:
                     short regenAmount = Stats.GetModifiedRegen(character.GetLevel(),
-                        Stats.GetMultiplier(character is Npc, character.GetNode<Sprite>("img").GetTexture().GetPath()));
+                        Stats.GetMultiplier(character is Npc, character.GetNode<Sprite>("img").Texture.ResourcePath));
                     character.regenTime = regenAmount;
                     if (character.GetState() != Character.States.ATTACKING)
                     {

@@ -78,7 +78,7 @@ namespace Game.Actor
                     return; // TODO
                     Bolt missile = (Bolt)missileScene.Instance();
                     GetParent().AddChild(missile);
-                    missile.SetUp(this, GetGlobalPosition(), spell);
+                    missile.SetUp(this, GlobalPosition, spell);
                 }
                 else
                 {
@@ -151,7 +151,7 @@ namespace Game.Actor
                 }
                 GetNode<Timer>("timer").Start();
             }
-            GetNode<Sprite>("img").SetFrame(0);
+            GetNode<Sprite>("img").Frame = 0;
         }
         public virtual void TakeDamage(short damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
         {
@@ -183,10 +183,10 @@ namespace Game.Actor
                     if (damage > 0)
                     {
                         SetHp((short) - damage);
-                        combatText.SetType($"-{damage}", CombatText.TextType.HIT, GetNode<Node2D>("img").GetPosition());
+                        combatText.SetType($"-{damage}", CombatText.TextType.HIT, GetNode<Node2D>("img").Position);
                         if (!IsDead() && GetState() == States.ATTACKING || GetState() == States.IDLE)
                         {
-                            Bump(GetDirection(GetGlobalPosition(), attacker.GetGlobalPosition()).Rotated((float)Math.PI) / 4.0f);
+                            Bump(GetDirection(GlobalPosition, attacker.GlobalPosition).Rotated((float)Math.PI) / 4.0f);
                         }
                     }
                     else
@@ -197,7 +197,7 @@ namespace Game.Actor
                             case CombatText.TextType.PARRY:
                             case CombatText.TextType.MISS:
                                 combatText.SetType(textType.ToString(),
-                                    CombatText.TextType.HIT, GetNode<Node2D>("img").GetPosition());
+                                    CombatText.TextType.HIT, GetNode<Node2D>("img").Position);
                                 break;
                         }
                     }
@@ -212,18 +212,18 @@ namespace Game.Actor
                 SetProcess(false);
                 spell.Cast();
                 await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
-                GetNode<Sprite>("img").SetFrame(0);
+                GetNode<Sprite>("img").Frame = 0;
                 SetProcess(true);
             }
         }
         public Vector2 GetCenterPos()
         {
-            return GetNode<Node2D>("img").GetGlobalPosition();
+            return GetNode<Node2D>("img").GlobalPosition;
         }
         public void SetOrigin(Vector2 origin)
         {
             this.origin = origin;
-            SetGlobalPosition(origin);
+            GlobalPosition = origin;
             path.Add(origin);
         }
         public async void Bump(Vector2 direction)
@@ -235,13 +235,13 @@ namespace Game.Actor
             bumping = true;
             SetProcess(false);
             Tween tween = GetNode<Tween>("tween");
-            tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), GetGlobalPosition() + direction,
-                GetGlobalPosition().DistanceTo(GetGlobalPosition() + direction) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
+            tween.InterpolateProperty(this, ":global_position", GlobalPosition, GlobalPosition + direction,
+                GlobalPosition.DistanceTo(GlobalPosition + direction) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
             tween.Start();
             await ToSignal(tween, "tween_completed");
-            Vector2 gridPos = Globals.GetMap().GetGridPosition(GetGlobalPosition());
-            tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), gridPos,
-                gridPos.DistanceTo(GetGlobalPosition()) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.In);
+            Vector2 gridPos = Globals.GetMap().GetGridPosition(GlobalPosition);
+            tween.InterpolateProperty(this, ":global_position", GlobalPosition, gridPos,
+                gridPos.DistanceTo(GlobalPosition) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.In);
             tween.Start();
             await ToSignal(tween, "tween_completed");
             bumping = false;
@@ -253,19 +253,19 @@ namespace Game.Actor
             if (obj is Node2D)
             {
                 Node2D node2Obj = (Node2D)obj;
-                if (!node2Obj.GetScale().Equals(new Vector2(1.0f, 1.0f)))
+                if (!node2Obj.Scale.Equals(new Vector2(1.0f, 1.0f)))
                 {
                     // Reverts to original scale when unit is clicked on
-                    tween.InterpolateProperty(node2Obj, nodePath, node2Obj.GetScale(),
+                    tween.InterpolateProperty(node2Obj, nodePath, node2Obj.Scale,
                         new Vector2(1.0f, 1.0f), 0.5f, Tween.TransitionType.Cubic, Tween.EaseType.Out);
                     tween.Start();
                 }
             }
-            if (tween.GetPauseMode() == PauseModeEnum.Process)
+            if (tween.PauseMode == PauseModeEnum.Process)
             {
                 // Condition when merchant/trainer are selected to let their
                 // animation run through it's course when game is paused
-                tween.SetPauseMode(PauseModeEnum.Inherit);
+                tween.PauseMode = PauseModeEnum.Inherit;
             }
             else if (nodePath == ":global_position")
             {
@@ -288,24 +288,24 @@ namespace Game.Actor
                 {
                     Sprite img = GetNode<Sprite>("img");
                     Node2D missile = GetNode<Node2D>("img/missile");
-                    Vector2 missilePos = missile.GetPosition();
-                    if (target.GetGlobalPosition().x - GetGlobalPosition().x > 0.0f)
+                    Vector2 missilePos = missile.Position;
+                    if (target.GlobalPosition.x - GlobalPosition.x > 0.0f)
                     {
-                        img.SetFlipH(false);
+                        img.FlipH = false;
                         missilePos.x = Math.Abs(missilePos.x);
                     }
                     else
                     {
-                        img.SetFlipH(true);
+                        img.FlipH = true;
                         missilePos.x = Math.Abs(missilePos.x) * -1.0f;
                     }
-                    missile.SetPosition(missilePos);
+                    missile.Position = missilePos;
                     GetNode<AnimationPlayer>("anim").Play("attacking", -1.0f, animSpeed);
                 }
             }
             else if (!engaging && (hp < hpMax || mana < manaMax))
             {
-                string imgPath = GetNode<Sprite>("img").GetTexture().GetPath();
+                string imgPath = GetNode<Sprite>("img").Texture.ResourcePath;
                 short regenAmount = Stats.HpManaRegenAmount(GetLevel(), Stats.GetMultiplier(this is Npc, imgPath));
                 SetHp(regenAmount);
                 SetMana(regenAmount);
@@ -339,8 +339,8 @@ namespace Game.Actor
             SetProcess(false);
             Tween tween = GetNode<Tween>("tween");
             tween.StopAll();
-            tween.InterpolateProperty(this, ":global_position", GetGlobalPosition(), targetPosition,
-                GetGlobalPosition().DistanceTo(targetPosition) / 16.0f * speedModifier,
+            tween.InterpolateProperty(this, ":global_position", GlobalPosition, targetPosition,
+                GlobalPosition.DistanceTo(targetPosition) / 16.0f * speedModifier,
                 Tween.TransitionType.Linear, Tween.EaseType.InOut);
             tween.Start();
         }
@@ -376,10 +376,10 @@ namespace Game.Actor
                 path.Clear();
                 await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
                 Sprite img = GetNode<Sprite>("img");
-                img.SetFrame(0);
-                img.SetFlipH(false);
-                img.SetModulate(new Color("#ffffff"));
-                SetModulate(new Color(1.0f, 1.0f, 1.0f, 0.8f));
+                img.Frame = 0;
+                img.FlipH = false;
+                img.Modulate = new Color("#ffffff");
+                Modulate = new Color(1.0f, 1.0f, 1.0f, 0.8f);
                 if (hp > 0)
                 {
                     SetHp((short)(-hpMax));
@@ -399,11 +399,11 @@ namespace Game.Actor
             }
             else
             {
-                SetModulate(new Color("#ffffff"));
+                Modulate = new Color("#ffffff");
                 SetTime(regenTime);
                 foreach (Area2D area2d in GetNode<Area2D>("sight").GetOverlappingAreas())
                 {
-                    Character unit = (Character)area2d.GetOwner();
+                    Character unit = (Character)area2d.Owner;
                     if (unit is Npc)
                     {
                         ((Npc)unit).CheckSight(area2D);
@@ -481,7 +481,7 @@ namespace Game.Actor
         public void SetLevel(byte level)
         {
             Dictionary<string, double> stats = Stats.UnitMake((double)level,
-                Stats.GetMultiplier(this is Npc, GetNode<Sprite>("img").GetTexture().GetPath()));
+                Stats.GetMultiplier(this is Npc, GetNode<Sprite>("img").Texture.ResourcePath));
             foreach (string attribute in stats.Keys)
             {
                 Set(attribute, (short)stats[attribute]);
@@ -569,8 +569,8 @@ namespace Game.Actor
             {
                 Timer timer = GetNode<Timer>("timer");
                 timer.Stop();
-                timer.SetWaitTime(time);
-                timer.SetOneShot(oneShot);
+                timer.WaitTime = time;
+                timer.OneShot = oneShot;
                 timer.Start();
             }
             else
@@ -583,11 +583,11 @@ namespace Game.Actor
             if (!IsDead())
             {
                 FootStep footStep = (FootStep)footStepScene.Instance();
-                Vector2 stepPos = GetGlobalPosition();
+                Vector2 stepPos = GlobalPosition;
                 stepPos.y -= 3;
                 stepPos.x += (step) ? 1.0f : -4.0f;
                 Globals.GetMap().GetNode("ground").AddChild(footStep);
-                footStep.SetGlobalPosition(stepPos);
+                footStep.GlobalPosition = stepPos;
             }
         }
         public bool IsEnemy()
@@ -609,8 +609,8 @@ namespace Game.Actor
             Dictionary<string, string> imageData = ImageDB.GetImageData(imgPath.Split("/")[1]);
             swingType = imageData["swing"];
             Sprite img = GetNode<Sprite>("img");
-            img.SetTexture((Texture)GD.Load("res://asset/img/character/".PlusFile(imgPath)));
-            img.SetHframes(int.Parse(imageData["total"]));
+            img.Texture = (Texture)GD.Load("res://asset/img/character/".PlusFile(imgPath));
+            img.Hframes = int.Parse(imageData["total"]);
             AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
             Animation animRes = anim.GetAnimation("attacking");
             animRes.TrackSetKeyValue(0, 0, int.Parse(imageData["moving"]) + int.Parse(imageData["dying"]));
@@ -663,16 +663,16 @@ namespace Game.Actor
             }
             AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData["body"]}.tres");
             TouchScreenButton select = GetNode<TouchScreenButton>("select");
-            Vector2 textureSize = texture.GetRegion().Size;
+            Vector2 textureSize = texture.Region.Size;
             Node2D sightDistance = GetNode<Node2D>("sight/distance");
             Node2D areaBody = GetNode<Node2D>("area/body");
             Node2D head = GetNode<Node2D>("head");
-            select.SetTexture(texture);
-            img.SetPosition(new Vector2(0.0f, -img.GetTexture().GetHeight() / 2.0f));
-            head.SetPosition(new Vector2(0.0f, -texture.GetHeight()));
-            select.SetPosition(new Vector2(-textureSize.x / 2.0f, -textureSize.y));
-            areaBody.SetPosition(new Vector2(-0.5f, -textureSize.y / 2.0f));
-            sightDistance.SetPosition(areaBody.GetPosition());
+            select.Normal = texture;
+            img.Position = new Vector2(0.0f, -img.Texture.GetHeight() / 2.0f);
+            head.Position = new Vector2(0.0f, -texture.GetHeight());
+            select.Position = new Vector2(-textureSize.x / 2.0f, -textureSize.y);
+            areaBody.Position = new Vector2(-0.5f, -textureSize.y / 2.0f);
+            sightDistance.Position = areaBody.Position;
             Dictionary<string, double> stats = Stats.UnitMake((double)level, Stats.GetMultiplier(this is Npc, imgPath));
             foreach (string attribute in stats.Keys)
             {

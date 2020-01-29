@@ -11,7 +11,7 @@ namespace Game.Ability
         public override void OnHit(Spell spell)
         {
             base.OnHit(spell);
-            SetPosition(character.GetNode<Node2D>("head").GetPosition());
+            Position = character.GetNode<Node2D>("head").Position;
             character.GetParent().MoveChild(this, 0);
             tween.Start();
             timer.Start();
@@ -22,7 +22,7 @@ namespace Game.Ability
             FadeLight(true);
             foreach (Particles2D particles2D in GetNode("idle").GetChildren())
             {
-                particles2D.SetEmitting(false);
+                particles2D.Emitting = false;
             }
             timer.Start();
         }

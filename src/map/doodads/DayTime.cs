@@ -22,7 +22,7 @@ namespace Game.Map.Doodads
         }
         public void _OnAnimFinished(string animName)
         {
-            SetWaitTime(LENGTH_OF_DAY);
+            WaitTime = LENGTH_OF_DAY;
             Start();
         }
         public void TriggerLights()

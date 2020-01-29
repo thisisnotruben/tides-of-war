@@ -13,12 +13,12 @@ namespace Game.Ability
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);
-            Bolt bolt = GetOwner()as Bolt;
+            Bolt bolt = Owner as  Bolt;
             if (bolt != null)
             {
                 GetParent().RemoveChild(this);
                 bolt.GetTarget().AddChild(this);
-                SetPosition(bolt.GetTarget().GetNode<Node2D>("img").GetPosition());
+                Position = bolt.GetTarget().GetNode<Node2D>("img").Position;
                 spell.Connect(nameof(Unmake), this, nameof(_OnTimerTimeout));
                 tween.Start();
                 timer.Start();
@@ -34,7 +34,7 @@ namespace Game.Ability
             FadeLight(true);
             foreach (Particles2D particles2D in GetNode("idle").GetChildren())
             {
-                particles2D.SetEmitting(false);
+                particles2D.Emitting = false;
             }
             timer.Start();
         }

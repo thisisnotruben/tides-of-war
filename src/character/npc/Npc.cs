@@ -33,13 +33,13 @@ namespace Game.Actor
                     SetState(States.RETURNING);
                     if (cachedPatrolPath["cachedPath"].Count > 0)
                     {
-                        // if (GetGlobalPosition() != cachedPatrolPath["cachedPath"][patrolPath.Count - 1]) TODO
+                        // if (GlobalPosition != cachedPatrolPath["cachedPath"][patrolPath.Count - 1]) TODO
                         // {
                             // FollowPatrolPath();
                             // return;
                         // }
                     }
-                    else if (GetGlobalPosition() != origin)
+                    else if (GlobalPosition != origin)
                     {
                         MoveTo(origin, path);
                         return;
@@ -53,7 +53,7 @@ namespace Game.Actor
                 else if (GetCenterPos().DistanceTo(target.GetCenterPos()) > weaponRange)
                 {
                     SetState(States.MOVING);
-                    MoveTo(target.GetGlobalPosition(), path);
+                    MoveTo(target.GlobalPosition, path);
                 }
                 else
                 {
@@ -72,7 +72,7 @@ namespace Game.Actor
         }
         public void _OnSightAreaEntered(Area2D area2D)
         {
-            Character character = area2D.GetOwner()as Character;
+            Character character = area2D.Owner as  Character;
             if (character != null && !dead && (target == null || character.IsDead()) && character != this)
             {
                 if (!enemy && character is Player)
@@ -116,7 +116,7 @@ namespace Game.Actor
                 player.SetTarget(this);
                 Sprite img = GetNode<Sprite>("img");
                 Tween tween = GetNode<Tween>("tween");
-                tween.InterpolateProperty(img, ":scale", img.GetScale(), new Vector2(1.03f, 1.03f),
+                tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
                     0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
                 tween.Start();
                 if (!enemy && !engaging && GetNode<Area2D>("sight").OverlapsArea(Globals.player.GetNode<Area2D>("area")))
@@ -142,10 +142,10 @@ namespace Game.Actor
                                 pickable.SetUpShop(false);
                             }
                             Globals.PlaySound(sndName, this, new Speaker());
-                            tween.SetPauseMode(PauseModeEnum.Process);
-                            menu.itemInfo.GetNode<TextureButton>("s/v/c/v/bg").SetDisabled(true);
-                            menu.merchant.GetNode<Label>("s/v/label").SetText(GetWorldName());
-                            menu.merchant.GetNode<Label>("s/v/label2").SetText($"Gold: {player.GetGold().ToString("N0")}");
+                            tween.PauseMode = PauseModeEnum.Process;
+                            menu.itemInfo.GetNode<TextureButton>("s/v/c/v/bg").Disabled = true;
+                            menu.merchant.GetNode<Label>("s/v/label").Text = GetWorldName();
+                            menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {player.GetGold().ToString("N0")}";
                             menu.menu.Hide();
                             menu.merchant.Show();
                             menu.GetNode<Control>("c/game_menu").Show();
@@ -162,9 +162,9 @@ namespace Game.Actor
                                 }
                                 else
                                 {
-                                    menu.dialogue.GetNode<Label>("s/s/label2").SetText(text);
+                                    menu.dialogue.GetNode<Label>("s/s/label2").Text = text;
                                 }
-                                menu.dialogue.GetNode<Label>("s/label").SetText(GetWorldName());
+                                menu.dialogue.GetNode<Label>("s/label").Text = GetWorldName();
                                 menu.dialogue.Show();
                                 menu.GetNode<Control>("c/game_menu").Show();
                             }
@@ -187,7 +187,7 @@ namespace Game.Actor
                     cachedPatrolPath["cachedPath"].Reverse();
                     cachedPatrolPath["pathPoints"] = cachedPatrolPath["cachedPath"].GetRange(0, cachedPatrolPath["cachedPath"].Count);
                 }
-                cachedPatrolPath["patrolPath"] = Globals.GetMap().getAPath(GetGlobalPosition(), cachedPatrolPath["pathPoints"][0]);
+                cachedPatrolPath["patrolPath"] = Globals.GetMap().getAPath(GlobalPosition, cachedPatrolPath["pathPoints"][0]);
             }
             MoveTo(cachedPatrolPath["patrolPath"][0], cachedPatrolPath["patrolPath"]);
         }
@@ -195,14 +195,14 @@ namespace Game.Actor
         {
             if (route == path && (route.Count == 0 || route[route.Count - 1].DistanceTo(worldPosition) > weaponRange))
             {
-                path = Globals.GetMap().getAPath(GetGlobalPosition(), worldPosition);
+                path = Globals.GetMap().getAPath(GlobalPosition, worldPosition);
             }
             else
             {
-                Vector2 direction = GetDirection(GetGlobalPosition(), route[0]);
+                Vector2 direction = GetDirection(GlobalPosition, route[0]);
                 if (!direction.Equals(new Vector2()))
                 {
-                    worldPosition = Globals.GetMap().RequestMove(GetGlobalPosition(), direction);
+                    worldPosition = Globals.GetMap().RequestMove(GlobalPosition, direction);
                     if (!worldPosition.Equals(new Vector2()))
                     {
                         Move(worldPosition, Stats.MapAnimMoveSpeed(animSpeed));
@@ -249,7 +249,7 @@ namespace Game.Actor
                         if (targetList[character] == mostDamage && character is Player)
                         {
                             short xp = Stats.GetXpFromUnitDeath((double)GetLevel(),
-                                Stats.GetMultiplier(true, GetNode<Sprite>("img").GetTexture().GetPath()), (double)character.GetLevel());
+                                Stats.GetMultiplier(true, GetNode<Sprite>("img").Texture.ResourcePath), (double)character.GetLevel());
                             if (xp > 0)
                             {
                                 ((Player)character).SetXP(xp);
@@ -267,10 +267,10 @@ namespace Game.Actor
             }
             base.SetDead(dead);
             await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
-            GetNode<CollisionShape2D>("sight/distance").SetDisabled(true);
+            GetNode<CollisionShape2D>("sight/distance").Disabled = true;
             if (dead)
             {
-                EmitSignal(nameof(DropLoot), this, GetGlobalPosition(), 0);
+                EmitSignal(nameof(DropLoot), this, GlobalPosition, 0);
                 Hide();
                 SetProcess(false);
                 GD.Randomize();
@@ -279,7 +279,7 @@ namespace Game.Actor
                 {
                     AddToGroup(Globals.SAVE_GROUP);
                 }
-                SetGlobalPosition(origin);
+                GlobalPosition = origin;
             }
             else
             {
@@ -293,7 +293,7 @@ namespace Game.Actor
                 Show();
                 Sprite img = GetNode<Sprite>("img");
                 Tween tween = GetNode<Tween>("tween");
-                tween.InterpolateProperty(img, ":scale", img.GetScale(), new Vector2(1.03f, 1.03f),
+                tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
                     0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
                 tween.Start();
             }
@@ -315,8 +315,8 @@ namespace Game.Actor
                         SetTarget(null);
                         SetTime(regenTime);
                         anim.Stop();
-                        img.SetFlipH(false);
-                        img.SetFrame(0);
+                        img.FlipH = false;
+                        img.Frame = 0;
                         engaging = false;
                         foreach (Area2D area2D in GetNode<Area2D>("sight").GetOverlappingAreas())
                         {
@@ -327,7 +327,7 @@ namespace Game.Actor
                         SetTime(weaponSpeed / 2.0f, true);
                         break;
                     case States.MOVING:
-                        img.SetFlipH(false);
+                        img.FlipH = false;
                         anim.Play("moving", -1, animSpeed);
                         anim.Seek(0.3f, true);
                         break;

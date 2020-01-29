@@ -12,8 +12,8 @@ namespace Game.Ui
         }
         public void SetQuest(Quest quest)
         {
-            GetNode<Label>("label").SetText(quest.GetQuestName());
-            SetName(quest.GetQuestName());
+            GetNode<Label>("label").Text = quest.GetQuestName();
+            Name = quest.GetQuestName();
             this.quest = quest;
         }
         public Quest GetQuest()

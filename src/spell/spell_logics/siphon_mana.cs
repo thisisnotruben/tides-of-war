@@ -17,7 +17,7 @@ namespace Game.Ability
             {
                 mana = (short)(caster.manaMax - caster.mana);
             }
-            combatText.SetType($"+{mana}", CombatText.TextType.MANA, caster.GetNode<Node2D>("img").GetPosition());
+            combatText.SetType($"+{mana}", CombatText.TextType.MANA, caster.GetNode<Node2D>("img").Position);
             return base.Cast();
         }
     }

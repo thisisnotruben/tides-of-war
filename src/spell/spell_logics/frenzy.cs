@@ -16,7 +16,7 @@ namespace Game.Ability
             SetCount(5);
             SetTime(6.0f);
             caster.SetSpell(this,
-                (loaded) ? GetDuration() - GetNode<Timer>("timer").GetWaitTime() : 0.0f);
+                (loaded) ? GetDuration() - GetNode<Timer>("timer").WaitTime : 0.0f);
             return base.Cast();
         }
         public override void _OnTimerTimeout()

@@ -39,7 +39,7 @@ namespace Game.Misc.Light
             if (node is Particles2D)
             {
                 Particles2D particles2D = (Particles2D)node;
-                particles2D.SetEmitting(set);
+                particles2D.Emitting = set;
             }
         }
     }

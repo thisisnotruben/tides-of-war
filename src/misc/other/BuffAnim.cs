@@ -36,9 +36,9 @@ namespace Game.Misc.Other
                     break;
             }
             Particles2D effect = GetNode<Particles2D>("buff_after_effect");
-            effect.SetModulate(color);
-            SetModulate(color);
-            SetEmitting(true);
+            effect.Modulate = color;
+            Modulate = color;
+            Emitting = true;
         }
         public void _OnTimerTimeout()
         {
@@ -47,7 +47,7 @@ namespace Game.Misc.Other
         public void SetItem(Item item)
         {
             this.item = item;
-            SetName(item.GetInstanceId().ToString());
+            Name = item.GetInstanceId().ToString();
         }
     }
 }

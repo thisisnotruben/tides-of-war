@@ -11,7 +11,7 @@ namespace Game.Ability
             SetTime(30.0f);
             caster.SetSpell(this,
                 (loaded) ?
-                GetDuration() - GetNode<Timer>("timer").GetTimeLeft() :
+                GetDuration() - GetNode<Timer>("timer").TimeLeft :
                 0.0f
             );
             return base.Cast();

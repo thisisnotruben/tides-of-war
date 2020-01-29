@@ -33,22 +33,22 @@ namespace Game.Map
         public void SetVeil(bool on)
         {
             Particles2D veil = GetNode<Particles2D>("veil_fog");
-            veil.SetEmitting(on);
+            veil.Emitting = on;
             if (on)
             {
-                SetMaterial((ParticlesMaterial)GD.Load("res://src/map/doodads/veil.tres"));
+                Material = (ParticlesMaterial)GD.Load("res://src/map/doodads/veil.tres");
                 veil.Show();
             }
             else
             {
-                SetMaterial(null);
+                Material = null;
                 veil.Hide();
             }
         }
         private void SetPlayerCameraLimits()
         {
             Rect2 mapBorders = mapGrid.GetUsedRect();
-            Vector2 mapCellSize = mapGrid.GetCellSize();
+            Vector2 mapCellSize = mapGrid.CellSize;
             Camera2D playerCamera = Globals.player.GetNode<Camera2D>("img/camera");
             playerCamera.LimitLeft = (int)(mapBorders.Position.x * mapCellSize.x);
             playerCamera.LimitRight = (int)(mapBorders.End.x * mapCellSize.x);
@@ -59,11 +59,11 @@ namespace Game.Map
         {
             Vector2 veilSize = mapSize * HALF_CELL_SIZE;
             Particles2D veil = GetNode<Particles2D>("veil_fog");
-            ParticlesMaterial veilMaterial = (ParticlesMaterial)veil.GetProcessMaterial();
-            veilMaterial.SetEmissionBoxExtents(new Vector3(veilSize.x, veilSize.y, 0.0f));
-            veil.SetAmount((int)((veilSize.x + veilSize.y) / 2.0f));
-            veil.SetVisibilityRect(new Rect2(-veilSize, veilSize * 2.0f));
-            veil.SetGlobalPosition(veilSize);
+            ParticlesMaterial veilMaterial = (ParticlesMaterial)veil.ProcessMaterial;
+            veilMaterial.EmissionBoxExtents = new Vector3(veilSize.x, veilSize.y, 0.0f);
+            veil.Amount = (int)((veilSize.x + veilSize.y) / 2.0f);
+            veil.VisibilityRect = new Rect2(-veilSize, veilSize * 2.0f);
+            veil.GlobalPosition = veilSize;
         }
         private void SetUnits()
         {
@@ -72,7 +72,7 @@ namespace Game.Map
                 Npc npc = node2D as Npc;   
                 if (npc != null)
                 {
-                    npc.SetData(UnitDB.GetUnitData(npc.GetName(), GetName()));
+                    npc.SetData(UnitDB.GetUnitData(npc.Name, Name));
                 }
             }
         }

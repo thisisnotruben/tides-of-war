@@ -19,7 +19,7 @@ namespace Game.Actor
         {
             base._Ready();
             Globals.player = this;
-            SetWorldName(GetName()); // for debugging purposes
+            SetWorldName(Name); // for debugging purposes
             SetImg("human/human-5.png");
             Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
             Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
@@ -45,7 +45,7 @@ namespace Game.Actor
                         Globals.GetMap().ResetPath(reservedPath);
                         reservedPath.Clear();
                         List<Vector2> _path = Globals.GetMap().getAPath(
-                            Globals.GetMap().GetGridPosition(GetGlobalPosition()), eventGlobalPosition);
+                            Globals.GetMap().GetGridPosition(GlobalPosition), eventGlobalPosition);
                         if (_path[0] != path[0])
                         {
                             tween.Remove(this, "global_position");
@@ -59,7 +59,7 @@ namespace Game.Actor
                     }
                     else
                     {
-                        path = Globals.GetMap().getAPath(Globals.GetMap().GetGridPosition(GetGlobalPosition()), eventGlobalPosition);
+                        path = Globals.GetMap().getAPath(Globals.GetMap().GetGridPosition(GlobalPosition), eventGlobalPosition);
                     }
                     EmitSignal(nameof(PosChanged));
                     MoveCursor cursor = (MoveCursor)moveCursorScene.Instance();
@@ -106,11 +106,11 @@ namespace Game.Actor
         public override void _OnSelectPressed() { }
         public override void MoveTo(Vector2 worldPosition, List<Vector2> route)
         {
-            Vector2 direction = GetDirection(GetGlobalPosition(), worldPosition);
+            Vector2 direction = GetDirection(GlobalPosition, worldPosition);
             if (!direction.Equals(new Vector2()))
             {
                 RayCast2D ray = GetNode<RayCast2D>("ray");
-                worldPosition = Globals.GetMap().RequestMove(GetGlobalPosition(), direction);
+                worldPosition = Globals.GetMap().RequestMove(GlobalPosition, direction);
                 ray.LookAt(worldPosition);
                 if (!worldPosition.Equals(new Vector2()))
                 {
@@ -162,13 +162,13 @@ namespace Game.Actor
                 {
                     case States.IDLE:
                         anim.Stop();
-                        img.SetFrame(0);
-                        img.SetFlipH(false);
+                        img.Frame = 0;
+                        img.FlipH = false;
                         SetTime(regenTime);
                         engaging = false;
                         break;
                     case States.MOVING:
-                        img.SetFlipH(false);
+                        img.FlipH = false;
                         anim.Play("moving", -1, animSpeed);
                         anim.Seek(0.3f, true);
                         break;
@@ -240,7 +240,7 @@ namespace Game.Actor
             {
                 CombatText combatText = (CombatText)Globals.combatText.Instance();
                 AddChild(combatText);
-                combatText.SetType($"+{xp}", CombatText.TextType.XP, GetNode<Node2D>("img").GetPosition());
+                combatText.SetType($"+{xp}", CombatText.TextType.XP, GetNode<Node2D>("img").Position);
             }
             byte _level = Stats.CheckLevel(xp);
             if (GetLevel() != _level && GetLevel() < Stats.MAX_LEVEL)
@@ -255,7 +255,7 @@ namespace Game.Actor
                     SetLevel(Stats.MAX_LEVEL);
                 }
                 Dictionary<string, double> stats = Stats.UnitMake((double)GetLevel(),
-                    Stats.GetMultiplier(false, GetNode<Sprite>("img").GetTexture().GetPath()));
+                    Stats.GetMultiplier(false, GetNode<Sprite>("img").Texture.ResourcePath));
                 foreach (string attribute in stats.Keys)
                 {
                     Set(attribute, (short)stats[attribute]);
@@ -283,15 +283,15 @@ namespace Game.Actor
                 Grave grave = (Grave)graveScene.Instance();
                 AddChild(grave);
                 grave.SetDeceasedPlayer(this);
-                gravePos = grave.GetGlobalPosition();
+                gravePos = grave.GlobalPosition;
                 Globals.GetMap().SetVeil(true);
                 path.Clear();
                 Dictionary<float, Vector2> graveSites = new Dictionary<float, Vector2>();
                 List<float> graveDist = new List<float>();
                 foreach (Node2D graveyard in GetTree().GetNodesInGroup("gravesite"))
                 {
-                    float graveDistanceToPlayer = GetGlobalPosition().DistanceTo(graveyard.GetGlobalPosition());
-                    graveSites.Add(graveDistanceToPlayer, graveyard.GetGlobalPosition());
+                    float graveDistanceToPlayer = GlobalPosition.DistanceTo(graveyard.GlobalPosition);
+                    graveSites.Add(graveDistanceToPlayer, graveyard.GlobalPosition);
                     graveDist.Add(graveDistanceToPlayer);
                 }
                 float minVal = graveDist[0];
@@ -299,7 +299,7 @@ namespace Game.Actor
                 {
                     minVal = Mathf.Min(minVal, graveDist[i]);
                 }
-                SetGlobalPosition(Globals.GetMap().GetGridPosition(graveSites[minVal]));
+                GlobalPosition = Globals.GetMap().GetGridPosition(graveSites[minVal]);
                 SetProcessUnhandledInput(true);
                 SetProcess(true);
             }

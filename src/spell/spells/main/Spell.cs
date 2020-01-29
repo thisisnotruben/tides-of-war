@@ -30,7 +30,7 @@ namespace Game.Ability
         {
             SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_")));
             SetWorldName(worldName);
-            SetName(GetWorldName());
+            Name = GetWorldName();
             Dictionary<string, string> spellData = SpellDB.GetSpellData(worldName);
             SetPickableSubType((WorldTypes)Enum.Parse(typeof(WorldTypes), spellData["subType"].ToUpper()));
             icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.tres");
@@ -75,7 +75,7 @@ namespace Game.Ability
         public override float GetTimeLeft()
         {
             Timer timer = GetNode<Timer>("timer");
-            return (count > 0) ? GetDuration() - (count * timer.GetWaitTime() - base.GetTimeLeft()) : base.GetTimeLeft();
+            return (count > 0) ? GetDuration() - (count * timer.WaitTime - base.GetTimeLeft()) : base.GetTimeLeft();
         }
         public override void _OnTimerTimeout()
         {
@@ -108,7 +108,7 @@ namespace Game.Ability
             }
             if (GetDuration() == 0.0f && GetPickableSubType() != WorldTypes.CHOOSE_AREA_EFFECT)
             {
-                SetName(GetInstanceId().ToString());
+                Name = GetInstanceId().ToString();
                 SetTime(2.5f, false);
             }
             return percentDamage;
@@ -123,9 +123,9 @@ namespace Game.Ability
                     break;
                 case WorldTypes.CASTING:
                     PrepSight();
-                    SetGlobalPosition(caster.GetGlobalPosition());
+                    GlobalPosition = caster.GlobalPosition;
                     AnimationPlayer casterAnim = caster.GetNode<AnimationPlayer>("anim");
-                    if (casterAnim.GetCurrentAnimation().Equals("casting"))
+                    if (casterAnim.CurrentAnimation.Equals("casting"))
                     {
                         await ToSignal(casterAnim, "animation_finished");
                     }
@@ -163,7 +163,7 @@ namespace Game.Ability
             Timer timer = GetNode<Timer>("timer");
             if (!loaded)
             {
-                timer.SetWaitTime(time);
+                timer.WaitTime = time;
             }
             if (setDuration)
             {
@@ -185,7 +185,7 @@ namespace Game.Ability
             {
                 character.GetNode<Timer>("timer").Stop();
                 character.GetNode<AnimationPlayer>("anim").Stop();
-                character.GetNode<Sprite>("img").SetFrame(0);
+                character.GetNode<Sprite>("img").Frame = 0;
             }
             else
             {
@@ -198,13 +198,13 @@ namespace Game.Ability
             sight.Disconnect("area_entered", this, nameof(_OnSightAreaEntered));
             sight.Disconnect("area_exited", this, nameof(_OnSightAreaExited));
             sight.SetBlockSignals(false);
-            sight.GetNode<CollisionShape2D>("distance").SetDisabled(false);
+            sight.GetNode<CollisionShape2D>("distance").Disabled = false;
         }
         private protected SpellEffect SetEffect()
         {
             SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(GetWorldName());
             ((effectOnTarget) ? target : caster).AddChild(spellEffect);
-            spellEffect.SetOwner((effectOnTarget) ? target : caster);
+            spellEffect.Owner = (effectOnTarget) ? target : caster;
             spellEffect.Init((effectOnTarget) ? target : caster);
             spellEffect.OnHit(this);
             return spellEffect;

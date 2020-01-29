@@ -19,8 +19,8 @@ namespace Game.Misc.Other
         }
         public void SetType(String text, TextType textType, Vector2 localCenterPos)
         {
-            label.SetText(text);
-            localCenterPos.x = -label.GetSize().x / 2.0f;
+            label.Text = text;
+            localCenterPos.x = -label.RectSize.x / 2.0f;
             localCenterPos.y -= 8.0f;
             Color colorBeginning = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             Color colorEnd = new Color(1.0f, 1.0f, 1.0f, 0.0f);
@@ -46,7 +46,7 @@ namespace Game.Misc.Other
                     selfColor = new Color("ffffff");
                     break;
             }
-            SetModulate(selfColor);
+            Modulate = selfColor;
             tween.InterpolateProperty(this, ":position", localCenterPos,
                 new Vector2(localCenterPos.x, localCenterPos.y - 14.0f), TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
             tween.InterpolateProperty(label, ":modulate", colorBeginning, colorEnd, TIME, Tween.TransitionType.Linear, Tween.EaseType.In);

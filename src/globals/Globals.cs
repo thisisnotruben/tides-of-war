@@ -74,7 +74,7 @@ namespace Game
         public static void LoadsaveData()
         {
             file.Open(SAVE_PATH[(nameof(saveData))], File.ModeFlags.Read);
-            Godot.Collections.Dictionary gameData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).GetResult();
+            Godot.Collections.Dictionary gameData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
             file.Close();
             foreach (string key in gameData.Keys)
             {
@@ -115,9 +115,9 @@ namespace Game
             if (file.FileExists(loadPath))
             {
                 file.Open(loadPath, File.ModeFlags.Read);
-                sceneMeta = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).GetResult();
+                sceneMeta = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
                 file.Close();
-                SetScene((string)sceneMeta["scene"], GetMap().GetTree().GetRoot(), Globals.GetMap());
+                SetScene((string)sceneMeta["scene"], GetMap().GetTree().Root, Globals.GetMap());
             }
         }
         public static void SetMap(Map.Map newMap)
@@ -136,7 +136,7 @@ namespace Game
         {
             PackedScene worldQuestsScene = (PackedScene)GD.Load("res://src/quest_system/WorldQuests.tscn");
             WorldQuests worldQuests = (WorldQuests)worldQuestsScene.Instance();
-            GetTree().GetRoot().AddChild(worldQuests);
+            GetTree().Root.AddChild(worldQuests);
             Globals.worldQuests = worldQuests;
         }
         public static void PlaySound(string sndName, Node originator, Speaker sndPlayer)
@@ -152,10 +152,10 @@ namespace Game
                     originator.AddChild(sndPlayer);
                     sndPlayer.Connect("finished", sndPlayer, nameof(Speaker.Delete));
                 }
-                if (!sndPlayer.IsPlaying())
+                if (!sndPlayer.Playing)
                 {
-                    sndPlayer.SetVolumeDb(-10.0f);
-                    sndPlayer.SetStream((AudioStream)sndMeta[sndName]);
+                    sndPlayer.VolumeDb =-10.0f;
+                    sndPlayer.Stream = (AudioStream)sndMeta[sndName];
                     sndPlayer.Play();
                 }
                 else
@@ -181,10 +181,10 @@ namespace Game
                     originator.AddChild(sndPlayer);
                     sndPlayer.Connect("finished", sndPlayer, nameof(Speaker2D.Delete));
                 }
-                if (!sndPlayer.IsPlaying())
+                if (!sndPlayer.Playing)
                 {
-                    sndPlayer.SetVolumeDb(-10.0f);
-                    sndPlayer.SetStream((AudioStream)sndMeta[sndName]);
+                    sndPlayer.VolumeDb = -10.0f;
+                    sndPlayer.Stream = (AudioStream)sndMeta[sndName];
                     sndPlayer.Play();
                 }
                 else

@@ -34,17 +34,17 @@ namespace Game.Misc.Loot
         public abstract void _OnTimerTimeout();
         public virtual void _OnSightAreaEntered(Area2D area2D)
         {
-            Character character = area2D.GetOwner()as Character;
+            Character character = area2D.Owner as  Character;
             if (character != null && !character.IsDead() && character is Player)
             {
                 Tween tween = GetNode<Tween>("tween");
-                tween.InterpolateProperty(this, ":scale", GetScale(), new Vector2(1.05f, 1.05f),
+                tween.InterpolateProperty(this, ":scale", Scale, new Vector2(1.05f, 1.05f),
                     0.5f, Tween.TransitionType.Bounce, Tween.EaseType.In);
                 tween.Start();
                 GetNode<Node2D>("select").Show();
-                GetNode<AudioStreamPlayer2D>("snd").SetStream((AudioStreamSample)Globals.sndMeta["chest_open"]);
+                GetNode<AudioStreamPlayer2D>("snd").Stream = (AudioStreamSample)Globals.sndMeta["chest_open"];
                 AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
-                if (anim.IsPlaying() && anim.GetCurrentAnimation().Equals("close_chest"))
+                if (anim.IsPlaying() && anim.CurrentAnimation.Equals("close_chest"))
                 {
                     anim.Queue("open_chest");
                 }
@@ -56,13 +56,13 @@ namespace Game.Misc.Loot
         }
         public virtual void _OnSightAreaExited(Area2D area2D)
         {
-            Character character = area2D.GetOwner()as Character;
+            Character character = area2D.Owner as  Character;
             if (character != null && !character.IsDead() && character is Player)
             {
-                GetNode<AudioStreamPlayer2D>("snd").SetStream((AudioStreamSample)Globals.sndMeta["chest_open"]);
+                GetNode<AudioStreamPlayer2D>("snd").Stream = (AudioStreamSample)Globals.sndMeta["chest_open"];
                 GetNode<Node2D>("select").Hide();
                 AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
-                if (anim.IsPlaying() && anim.GetCurrentAnimation().Equals("open_chest"))
+                if (anim.IsPlaying() && anim.CurrentAnimation.Equals("open_chest"))
                 {
                     anim.Queue("close_chest");
                 }
@@ -78,8 +78,8 @@ namespace Game.Misc.Loot
             InGameMenu igm = Globals.player.GetMenu();
             if (this is Item && igm.inventoryBag.IsFull())
             {
-                GetTree().SetPause(true);
-                igm.popup.GetNode<Label>("m/error/label").SetText("Inventory\nFull!");
+                GetTree().Paused = true;
+                igm.popup.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
                 igm.popup.GetNode<Control>("m/error").Show();
                 igm.popup.Show();
                 igm.GetNode<Control>("c/game_menu").Show();
@@ -89,7 +89,7 @@ namespace Game.Misc.Loot
                 GetNode("select").SetBlockSignals(true);
                 GetNode("sight").SetBlockSignals(true);
                 EmitSignal(nameof(PickableExchanged), this, true);
-                GetNode<AudioStreamPlayer2D>("snd").SetStream((AudioStreamSample)Globals.sndMeta["chest_collect"]);
+                GetNode<AudioStreamPlayer2D>("snd").Stream = (AudioStreamSample)Globals.sndMeta["chest_collect"];
                 anim.Play("select");
                 GetPickable(Globals.player, true);
                 if (goldDrop > 0)
@@ -97,7 +97,7 @@ namespace Game.Misc.Loot
                     CombatText combatText = (CombatText)Globals.combatText.Instance();
                     Globals.player.AddChild(combatText);
                     combatText.SetType($"+{goldDrop}", CombatText.TextType.GOLD,
-                        Globals.player.GetNode<Node2D>("img").GetPosition());
+                        Globals.player.GetNode<Node2D>("img").Position);
                     Globals.player.SetGold(goldDrop);
                     goldDrop = 0;
                 }
@@ -108,10 +108,10 @@ namespace Game.Misc.Loot
             if (obj is Node2D)
             {
                 Node2D node2dObj = (Node2D)obj;
-                if (node2dObj.GetScale() != new Vector2(1.0f, 1.0f))
+                if (node2dObj.Scale != new Vector2(1.0f, 1.0f))
                 {
                     Tween tween = GetNode<Tween>("tween");
-                    tween.InterpolateProperty(node2dObj, nodePath, node2dObj.GetScale(), new Vector2(1.0f, 1.0f),
+                    tween.InterpolateProperty(node2dObj, nodePath, node2dObj.Scale, new Vector2(1.0f, 1.0f),
                         0.5f, Tween.TransitionType.Bounce, Tween.EaseType.Out);
                     tween.Start();
                 }
@@ -122,16 +122,16 @@ namespace Game.Misc.Loot
             if (animName.Equals("select"))
             {
                 GetNode<Node2D>("img").Hide();
-                SetModulate(new Color("#ffffff"));
+                Modulate = new Color("#ffffff");
             }
         }
         public void _OnSndFinished()
         {
-            if (GetPauseMode() == PauseModeEnum.Process)
+            if (PauseMode == PauseModeEnum.Process)
             {
                 CallDeferred(nameof(GetPickable),
-                    ((Node)(((Godot.Collections.Dictionary)GetSignalConnectionList(nameof(SetInMenu))[0])["target"])).GetOwner(), false);
-                SetPauseMode(PauseModeEnum.Inherit);
+                    ((Node)(((Godot.Collections.Dictionary)GetSignalConnectionList(nameof(SetInMenu))[0])["target"])).Owner, false);
+                PauseMode = PauseModeEnum.Inherit;
             }
         }
         public void Describe()
@@ -161,18 +161,18 @@ namespace Game.Misc.Loot
                 }
             }
             InGameMenu.Bags bag = (this is Item) ? InGameMenu.Bags.INVENTORY : InGameMenu.Bags.SPELL;
-            if (GetOwner() == Globals.GetMap() && addToBag)
+            if (Owner == Globals.GetMap() && addToBag)
             {
-                SetPauseMode(PauseModeEnum.Process);
+                PauseMode = PauseModeEnum.Process;
                 EmitSignal(nameof(SetInMenu), this, stackSize > 0, bag);
             }
             else
             {
                 if (GetParent() != null)
                 {
-                    if (GetOwner() == Globals.GetMap())
+                    if (Owner == Globals.GetMap())
                     {
-                        Globals.GetMap().SetGetPickableLoc(GetGlobalPosition(), false);
+                        Globals.GetMap().SetGetPickableLoc(GlobalPosition, false);
                     }
                     GetParent().RemoveChild(this);
                 }
@@ -189,7 +189,7 @@ namespace Game.Misc.Loot
                 {
                     character.GetNode("spells").AddChild(this);
                 }
-                SetOwner(character);
+                Owner = character;
                 if (addToBag)
                 {
                     EmitSignal(nameof(SetInMenu), this, stackSize, bag);
@@ -199,11 +199,11 @@ namespace Game.Misc.Loot
         public virtual float GetTimeLeft()
         {
             Timer timer = GetNode<Timer>("timer");
-            return timer.GetWaitTime() - timer.GetTimeLeft();
+            return timer.WaitTime - timer.TimeLeft;
         }
         public float GetInitialTime()
         {
-            return GetNode<Timer>("timer").GetWaitTime();
+            return GetNode<Timer>("timer").WaitTime;
         }
         public bool Equals(Pickable pickable)
         {
@@ -248,7 +248,7 @@ namespace Game.Misc.Loot
             this.duration = duration;
             if (duration > 0.0f)
             {
-                GetNode<Timer>("timer").SetWaitTime(duration);
+                GetNode<Timer>("timer").WaitTime = duration;
             }
         }
         public float GetDuration()

@@ -20,7 +20,7 @@ namespace Game.Utils
             GD.Print("Error code: " + code.ToString());
             if (code == Godot.Error.Ok)
             {
-                GetNode<ColorRect>(nameof(ColorRect)).SetFrameColor(new Color("#00ff00"));
+                GetNode<ColorRect>(nameof(ColorRect)).Color = new Color("#00ff00");
             }
         }
         private Godot.Error CheckMap(PackedScene mapToImport)
@@ -31,17 +31,17 @@ namespace Game.Utils
             PackedScene dayTimeScene = (PackedScene)GD.Load("res://src/map/doodads/DayTime.tscn");
             Node dayTime = dayTimeScene.Instance();
             map.AddChild(dayTime);
-            dayTime.SetOwner(map);
+            dayTime.Owner = map;
 
             PackedScene veilScene = (PackedScene)GD.Load("res://src/map/doodads/veil_fog.tscn");
             Node2D veil = (Node2D)veilScene.Instance();
             map.AddChild(veil);
-            veil.SetOwner(map);
+            veil.Owner = map;
             veil.Hide();
 
             foreach (Node2D node2D in map.GetNode("meta/gravesites").GetChildren())
             {
-                node2D.SetGlobalPosition(GetCenterPos(node2D.GetGlobalPosition()));
+                node2D.GlobalPosition = GetCenterPos(node2D.GlobalPosition);
                 node2D.AddToGroup("gravesite", true);
             }
 
@@ -52,11 +52,11 @@ namespace Game.Utils
 
             foreach (String nodePath in new String[] {"zed/characters", "zed/target_dummys", "meta/paths", "meta/lights"})
             {
-             map.GetNode(nodePath).SetOwner(null);
+             map.GetNode(nodePath).Owner = null;
             }
 
-            map.GetNode<TileMap>("meta/coll_nav").SetModulate(new Color(1.0f, 1.0f, 1.0f, 0.5f));
-            map.GetNode<TileMap>("zed/z1").SetYSortMode(true);
+            map.GetNode<TileMap>("meta/coll_nav").Modulate = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            map.GetNode<TileMap>("zed/z1").CellYSort = true;
             map.GetNode<Node2D>("meta").Hide();
             map.GetNode("zed/z1").MoveChild(map.GetNode("zed/z1/player"), 0);
             map.GetNode("meta").MoveChild(map.GetNode("meta/coll_nav"), 0);
@@ -65,7 +65,7 @@ namespace Game.Utils
             map.MoveChild(map.GetNode("meta"), 2);
             PackedScene packedScene = new PackedScene();
             packedScene.Pack(map);
-            return ResourceSaver.Save(map.GetFilename(), packedScene);
+            return ResourceSaver.Save(map.Filename, packedScene);
         }
         private void SetTargetDummys(Node map)
         {
@@ -73,10 +73,10 @@ namespace Game.Utils
             {
                 PackedScene scene = (PackedScene)GD.Load("res://src/character/target_dummy/target_dummy.tscn");
                 Node2D character = (Node2D)scene.Instance();
-                character.SetName(node.GetName());
+                character.Name = node.Name;
                 map.GetNode("zed/z1").AddChild(character);
-                character.SetOwner(map);
-                character.SetGlobalPosition(GetCenterPos(node.GetGlobalPosition()));
+                character.Owner = map;
+                character.GlobalPosition = GetCenterPos(node.GlobalPosition);
             }
         }
         private void SetUnits(Node map)
@@ -85,12 +85,12 @@ namespace Game.Utils
             foreach (Node2D node in map.GetNode("zed/characters").GetChildren())
             {
                 PackedScene scene = (PackedScene)GD.Load(
-                    String.Format(scenePath, (node.GetName().Contains("player")) ? "player/Player" : "npc/Npc"));
+                    String.Format(scenePath, (node.Name.Contains("player")) ? "player/Player" : "npc/Npc"));
                 Node2D character = (Node2D)scene.Instance();
-                character.SetName(node.GetName());
+                character.Name = node.Name;
                 map.GetNode("zed/z1").AddChild(character);
-                character.SetOwner(map);
-                character.SetGlobalPosition(GetCenterPos(node.GetGlobalPosition()));
+                character.Owner = map;
+                character.GlobalPosition = GetCenterPos(node.GlobalPosition);
             }
         }
         private void SetLights(Node map)
@@ -98,13 +98,13 @@ namespace Game.Utils
             string resourcePath = "res://src/misc/light/{0}.tscn";
             foreach (Node2D node in map.GetNode("meta/lights").GetChildren())
             {
-                string parsedName = node.GetName().Split("-")[1];
+                string parsedName = node.Name.Split("-")[1];
                 PackedScene lightScene = (PackedScene)GD.Load(String.Format(resourcePath, parsedName));
                 Node2D light = (Node2D)lightScene.Instance();
-                Vector2 pos = node.GetGlobalPosition();
+                Vector2 pos = node.GlobalPosition;
                 if (parsedName.Equals("pit"))
                 {
-                    pos = tileMap.WorldToMap(node.GetGlobalPosition());
+                    pos = tileMap.WorldToMap(node.GlobalPosition);
                     pos.y -= 1.0f;
                     pos = tileMap.MapToWorld(pos) + HALF_CELL_SIZE;
                 }
@@ -113,10 +113,10 @@ namespace Game.Utils
                     // for all posts
                     pos.x += HALF_CELL_SIZE.x;
                 }
-                light.SetGlobalPosition(pos);
+                light.GlobalPosition = pos;
                 map.GetNode("zed/z1").AddChild(light);
-                light.SetOwner(map);
-                light.SetName(node.GetName());
+                light.Owner = map;
+                light.Name = node.Name;
             }
         }
         private List<Node> TreeUseMaterial(Node root)
@@ -127,7 +127,7 @@ namespace Game.Utils
                 Node2D node2D = node as Node2D;
                 if (node2D != null)
                 {
-                    node2D.SetUseParentMaterial(true);
+                    node2D.UseParentMaterial = true;
                 }
                 nodes.Add(node);
             }

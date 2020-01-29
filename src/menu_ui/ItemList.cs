@@ -77,7 +77,7 @@ namespace Game.Ui
                     }
                 }
                 // Add cooldown to current slot, if similar items don't exist in bag, but in HUD
-                foreach (Node node in ((InGameMenu)GetOwner()).hpMana.GetNode("m/h/p/h/g").GetChildren())
+                foreach (Node node in ((InGameMenu)Owner).hpMana.GetNode("m/h/p/h/g").GetChildren())
                 {
                     ItemSlot hudItemSlot = node as ItemSlot;
                     if (hudItemSlot != null && hudItemSlot.GetItem() != null && pickable.Equals(hudItemSlot.GetItem()))
@@ -98,7 +98,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.Print($"{GetName()} on method \"RemoveItem\" slotIdx out of bounds");
+                GD.Print($"{Name} on method \"RemoveItem\" slotIdx out of bounds");
             }
         }
         public void Clear()
@@ -129,7 +129,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.Print($"{GetName()} on method \"SetSlotCoolDown\" slotIdx out of bounds");
+                GD.Print($"{Name} on method \"SetSlotCoolDown\" slotIdx out of bounds");
             }
             return null;
         }
@@ -142,7 +142,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.Print($"{GetName()} on method \"SetSlotCoolDown\" slotIdx out of bounds");
+                GD.Print($"{Name} on method \"SetSlotCoolDown\" slotIdx out of bounds");
             }
         }
         public int GetItemCount()
@@ -158,7 +158,7 @@ namespace Game.Ui
             }
             else
             {
-                GD.Print($"{GetName()} on method \"IsSlotCoolingDown\" slotIdx out of bounds");
+                GD.Print($"{Name} on method \"IsSlotCoolingDown\" slotIdx out of bounds");
             }
             return false;
         }

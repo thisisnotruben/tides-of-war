@@ -10,7 +10,7 @@ namespace Game.Utils
 
         public override void _Ready()
         {
-            img = GetTexture();
+            img = Texture;
             imgSize = img.GetSize();
             Generate();
         }
@@ -22,8 +22,8 @@ namespace Game.Utils
                 for (int r = 0; r < imgSize.x && count < LIMIT; r += TILE_SIZE)
                 {
                     AtlasTexture icon = new AtlasTexture();
-                    icon.SetAtlas(img);
-                    icon.SetRegion(new Rect2(r, c, TILE_SIZE, TILE_SIZE));
+                    icon.Atlas = img;
+                    icon.Region = new Rect2(r, c, TILE_SIZE, TILE_SIZE);
                     ResourceSaver.Save($"res://asset/img/icon/raw/{count++}_icon.tres", icon);
                 }
             }

@@ -12,7 +12,7 @@ namespace Game.Ui
         {
             originator.Connect(nameof(Player.PosChanged), this, nameof(Delete));
             Globals.GetMap().GetNode("ground").AddChild(this);
-            SetGlobalPosition(globalTilePosition);
+            GlobalPosition = globalTilePosition;
         }
         public void Delete()
         {

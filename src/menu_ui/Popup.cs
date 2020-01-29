@@ -10,13 +10,13 @@ namespace Game.Ui
         public Control about;
         public override void _Ready()
         {
-            menu = GetOwner()as Menu;
+            menu = Owner as  Menu;
         }
         public void _OnDeletePressed()
         {
             Globals.PlaySound("click1", this, menu.snd);
             GetNode<Control>("m/save_load").Hide();
-            GetNode<Label>("m/yes_no/label").SetText("Delete?");
+            GetNode<Label>("m/yes_no/label").Text = "Delete?";
             GetNode<Control>("m/yes_no").Show();
             Show();
         }
@@ -24,7 +24,7 @@ namespace Game.Ui
         {
             if (menu is InGameMenu)
             {
-                menu.GetNode<ColorRect>("c/game_menu/bg").SetFrameColor(new Color("#6e6e6e"));
+                menu.GetNode<ColorRect>("c/game_menu/bg").Color = new Color("#6e6e6e");
             }
             ((Control)menu.listOfMenus.GetParent()).Show();
             foreach (Control control in GetNode("m").GetChildren())
@@ -36,7 +36,7 @@ namespace Game.Ui
         {
             if (menu is InGameMenu)
             {
-                menu.GetNode<ColorRect>("c/game_menu/bg").SetFrameColor(new Color(0.0f, 0.0f, 0.0f, 0.25f));
+                menu.GetNode<ColorRect>("c/game_menu/bg").Color = new Color(0.0f, 0.0f, 0.0f, 0.25f);
                 ((Control)menu.listOfMenus.GetParent()).Hide();
             }
         }
@@ -46,7 +46,7 @@ namespace Game.Ui
         }
         public void _OnMResized()
         {
-            GetNode<Control>("bg").SetCustomMinimumSize(GetNode<Control>("m").GetSize());
+            GetNode<Control>("bg").RectMinSize = GetNode<Control>("m").RectSize;
         }
         public void _OnAllPressed()
         {
@@ -100,15 +100,15 @@ namespace Game.Ui
                 ((Control)menu.listOfMenus.GetParent()).Show();
                 menu.saveLoad.Show();
             }
-            else if (GetNode<Control>("m/exit").IsVisible())
+            else if (GetNode<Control>("m/exit").Visible)
             {
                 menu.menu.Show();
             }
-            else if (GetNode<Control>("m/filter_options").IsVisible())
+            else if (GetNode<Control>("m/filter_options").Visible)
             {
                 menu.questLog.Show();
             }
-            else if (GetNode<Control>("m/add_to_slot").IsVisible())
+            else if (GetNode<Control>("m/add_to_slot").Visible)
             {
                 menu.itemInfo.Show();
                 menu.GetNode<Control>("c/controls/right").Show();
@@ -116,7 +116,7 @@ namespace Game.Ui
                 {
                     playSnd = true;
                 }
-                else if (GetNode<Control>("m/add_to_slot/clear_slot").IsVisible())
+                else if (GetNode<Control>("m/add_to_slot/clear_slot").Visible)
                 {
                     Globals.PlaySound("click1", this, menu.snd);
                     playSnd = true;
@@ -126,11 +126,11 @@ namespace Game.Ui
                     Tween tween = itemSlot.GetNode<Tween>("tween");
                     tween.SetActive(true);
                     tween.ResumeAll();
-                    itemSlot.GetNode<ColorRect>("m/icon/overlay").SetFrameColor(new Color(0.0f, 0.0f, 0.0f, 0.75f));
+                    itemSlot.GetNode<ColorRect>("m/icon/overlay").Color = new Color(0.0f, 0.0f, 0.0f, 0.75f);
                     itemSlot.GetNode<Control>("m/label").Hide();
                 }
             }
-            else if (!GetNode<Control>("m/repair").IsVisible())
+            else if (!GetNode<Control>("m/repair").Visible)
             {
                 menu.saveLoad.Show();
             }
@@ -147,15 +147,15 @@ namespace Game.Ui
         public void _OnExitMenuPressed()
         {
             Globals.PlaySound("click0", this, menu.snd);
-            GetTree().SetPause(false);
-            Globals.SetScene("res://src/menu_ui/StartMenu.tscn", GetTree().GetRoot(), Globals.GetMap());
+            GetTree().Paused = false;
+            Globals.SetScene("res://src/menu_ui/StartMenu.tscn", GetTree().Root, Globals.GetMap());
             Globals.GetWorldQuests().Reset();
         }
         public void _OnOkayPressed()
         {
             Globals.PlaySound("click1", this, menu.snd);
             if (menu.player.GetTarget() != null && menu.player.GetTarget().GetWorldType() == WorldObject.WorldTypes.MERCHANT &&
-                menu.selected == null && GetNode<Label>("m/error/label").GetText().Equals("Not Enough\nGold!"))
+                menu.selected == null && GetNode<Label>("m/error/label").Text.Equals("Not Enough\nGold!"))
             {
                 GetNode<Label>("m/error").Hide();
                 GetNode<Control>("m/repair").Show();
@@ -183,8 +183,7 @@ namespace Game.Ui
             if (menu is StartMenu)
             {
                 Globals.SaveGameData("", menu.selectedIdx);
-                menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{menu.selectedIdx}").
-                SetText($"Slot {menu.selectedIdx + 1}");
+                menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{menu.selectedIdx}").Text = $"Slot {menu.selectedIdx + 1}";
                 new Directory().Remove(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
                 _OnNoPressed();
             }
@@ -192,12 +191,12 @@ namespace Game.Ui
             {
                 string sndName = "click1";
                 Hide();
-                switch (GetNode<Label>("m/yes_no/label").GetText())
+                switch (GetNode<Label>("m/yes_no/label").Text)
                 {
                     case "Drop?":
                         sndName = "inventory_drop";
                         ((Pickable)menu.selected).Drop();
-                        if (menu.itemInfo.GetNode<Control>("s/h/left").IsVisible())
+                        if (menu.itemInfo.GetNode<Control>("s/h/left").Visible)
                         {
                             menu.inventory.Show();
                         }
@@ -211,8 +210,8 @@ namespace Game.Ui
                         ((Item)menu.selected).Unequip();
                         Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon.tres");
                         string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), ((Item)menu.selected).GetWorldType()).ToLower()}_slot";
-                        menu.inventory.GetNode<TextureButton>(nodePath).SetNormalTexture(texture);
-                        menu.statsMenu.GetNode<TextureButton>(nodePath).SetNormalTexture(texture);
+                        menu.inventory.GetNode<TextureButton>(nodePath).TextureNormal = texture;
+                        menu.statsMenu.GetNode<TextureButton>(nodePath).TextureNormal = texture;
                         if (menu is InGameMenu && menu.itemInfo.GetNode("s/h/v/back").IsConnected("pressed", menu, nameof(InGameMenu.HideMenu)))
                         {
                             ((InGameMenu)menu).HideMenu();
@@ -224,19 +223,19 @@ namespace Game.Ui
                         break;
                     case "Buy?":
                     case "Learn?":
-                        if (GetNode<Label>("m/yes_no/label").GetText().Equals("Learn?"))
+                        if (GetNode<Label>("m/yes_no/label").Text.Equals("Learn?"))
                         {
                             sndName = "learn_spell";
                         }
                         Globals.PlaySound("sell_buy", this, menu.snd);
                         ((Pickable)menu.selected).Buy(menu.player);
-                        menu.merchant.GetNode<Label>("s/v/label2").SetText(
-                            $"Gold: {menu.player.GetGold().ToString("N0")}");
+                        menu.merchant.GetNode<Label>("s/v/label2").Text = 
+                            $"Gold: {menu.player.GetGold().ToString("N0")}";
                         menu.merchant.Show();
                         break;
                     case "Delete?":
                         Globals.SaveGameData("", menu.selectedIdx);
-                        ((Label)menu.selected).SetText($"Slot {menu.selectedIdx + 1}");
+                        ((Label)menu.selected).Text = $"Slot {menu.selectedIdx + 1}";
                         new Directory().Remove(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
                         menu.saveLoad.Show();
                         break;
@@ -245,8 +244,7 @@ namespace Game.Ui
                         menu.merchantBag.RemoveItem(menu.selectedIdx, true, false, false);
                         menu.inventoryBag.RemoveItem(menu.selectedIdx, true, false, false);
                         ((Pickable)menu.selected).Sell(menu.player);
-                        menu.merchant.GetNode<Label>("s/v/label2").SetText(
-                            $"Gold: {menu.player.GetGold().ToString("N0")}");
+                        menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {menu.player.GetGold().ToString("N0")}";
                         menu.merchant.Show();
                         break;
                     case "Overwrite?":
@@ -270,7 +268,7 @@ namespace Game.Ui
             }
             else
             {
-                switch (GetNode<Label>("m/yes_no/label").GetText())
+                switch (GetNode<Label>("m/yes_no/label").Text)
                 {
                     case "Delete?":
                         menu.selectedIdx = 1;
@@ -289,7 +287,7 @@ namespace Game.Ui
         public void _OnSavePressed()
         {
             Globals.PlaySound("click1", this, menu.snd);
-            if (((Label)menu.selected).GetText().Contains("Slot"))
+            if (((Label)menu.selected).Text.Contains("Slot"))
             {
                 Hide();
                 SaveGame();
@@ -299,7 +297,7 @@ namespace Game.Ui
             }
             else
             {
-                GetNode<Label>("m/yes_no/label").SetText("Overwrite?");
+                GetNode<Label>("m/yes_no/label").Text = "Overwrite?";
                 GetNode<Control>("m/save_load").Hide();
                 GetNode<Control>("m/yes_no").Show();
             }
@@ -323,7 +321,7 @@ namespace Game.Ui
             }
             if (cost > menu.player.GetGold())
             {
-                GetNode<Label>("m/error/label").SetText("Not Enough\nGold!");
+                GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
                 GetNode<Control>("m/repair").Hide();
                 GetNode<Control>("m/error").Show();
             }
@@ -346,7 +344,7 @@ namespace Game.Ui
                         break;
                 }
                 Hide();
-                menu.merchant.GetNode<Label>("s/v/label2").SetText($"Gold: {menu.player.GetGold().ToString("N0")}");
+                menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {menu.player.GetGold().ToString("N0")}";
                 menu.merchant.Show();
             }
         }
@@ -371,7 +369,7 @@ namespace Game.Ui
             foreach (ItemSlot itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
             {
                 Tween itemSlotTween = itemSlot.GetNode<Tween>("tween");
-                itemSlot.GetNode<ColorRect>("m/icon/overlay").SetFrameColor(new Color(0.0f, 0.0f, 0.0f, 0.75f));
+                itemSlot.GetNode<ColorRect>("m/icon/overlay").Color = new Color(0.0f, 0.0f, 0.0f, 0.75f);
                 itemSlot.GetNode<Control>("m/label").Hide();
                 itemSlotTween.SetActive(true);
                 itemSlotTween.ResumeAll();
@@ -380,7 +378,7 @@ namespace Game.Ui
                     amounttt = itemSlot.GetItemStack().Count;
                     itemSlot.SetItem(null, false, true, false);
                 }
-                if (itemSlot.GetName().Equals(index.ToString()))
+                if (itemSlot.Name.Equals(index.ToString()))
                 {
                     buttonTo = itemSlot;
                     if (itemSlot.GetItem() != null)
@@ -442,7 +440,7 @@ namespace Game.Ui
                     itemSlot.SetItem(null, false, true, false);
                 }
             }
-            if (GetTree().IsPaused())
+            if (GetTree().Paused)
             {
                 _OnBackPressed();
             }
@@ -457,25 +455,25 @@ namespace Game.Ui
             short shown = 0;
             foreach (Control node in GetNode("m/repair").GetChildren())
             {
-                if (node.IsVisible())
+                if (node.Visible)
                 {
                     shown++;
                 }
             }
             if (shown > 4)
             {
-                GetNode<TextureRect>("bg").SetTexture((Texture)GD.Load("res://asset/img/ui/grey2_bg.tres"));
+                GetNode<TextureRect>("bg").Texture = (Texture)GD.Load("res://asset/img/ui/grey2_bg.tres");
             }
         }
         public void _OnRepairHide()
         {
-            GetNode<TextureRect>("bg").SetTexture((Texture)GD.Load("res://asset/img/ui/grey3_bg.tres"));
+            GetNode<TextureRect>("bg").Texture = (Texture)GD.Load("res://asset/img/ui/grey3_bg.tres");
         }
         public void SaveLoadGo(int index)
         {
             if (menu is StartMenu)
             {
-                if (!menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{index}").GetText().Equals($"Slot {index + 1}"))
+                if (!menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{index}").Text.Equals($"Slot {index + 1}"))
                 {
                     Globals.PlaySound("click2", this, menu.snd);
                     ((Control)menu.listOfMenus.GetParent()).Hide();
@@ -494,7 +492,7 @@ namespace Game.Ui
                 menu.selected = menu.saveLoad.GetNode<Label>($"v/s/c/g/slot_label_{index}");
                 Control load = GetNode<Control>("m/save_load/load");
                 Control delete = GetNode<Control>("m/save_load/delete");
-                if (((Label)menu.selected).GetText().Equals($"Slot {index + 1}"))
+                if (((Label)menu.selected).Text.Equals($"Slot {index + 1}"))
                 {
                     load.Hide();
                     delete.Hide();
@@ -513,10 +511,10 @@ namespace Game.Ui
         {
             Godot.Collections.Dictionary date = OS.GetDatetime();
             string time = $"{date["month"]}-{date["day"]} {date["hour"]}:{date["minute"]}";
-            ((Label)menu.selected).SetText(time);
+            ((Label)menu.selected).Text = time;
             Globals.SaveGameData(time, menu.selectedIdx);
             Globals.SaveGame(Globals.SAVE_PATH[$"SAVE_SLOT_{menu.selectedIdx}"]);
-            ((Label)menu.selected).SetText(time);
+            ((Label)menu.selected).Text = time;
             menu.saveLoad.SetLabels();
         }
     }

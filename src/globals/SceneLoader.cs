@@ -14,12 +14,12 @@ namespace Game
             switch (mapLoader.Poll())
             {
                 case Error.Ok:
-                    GetNode<TextureProgress>("progress_bar/m/v/bar").SetValue(100.0f * mapLoader.GetStage() / mapLoader.GetStageCount());
+                    GetNode<TextureProgress>("progress_bar/m/v/bar").Value = 100.0f * mapLoader.GetStage() / mapLoader.GetStageCount();
                     break;
                 case Error.FileEof:
                     PackedScene packedScene = ((PackedScene)mapLoader.GetResource());
                     Node scene = packedScene.Instance();
-                    GetTree().GetRoot().AddChild(scene);
+                    GetTree().Root.AddChild(scene);
                     if (scene is Map.Map)
                     {
                         Globals.SetMap(scene as Map.Map);

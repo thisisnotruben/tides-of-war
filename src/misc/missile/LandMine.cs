@@ -14,7 +14,7 @@ namespace Game.Misc.Other
         }
         public void _OnAffectedAreaEntered(Area2D area2d)
         {
-            if (area2d != exludedUnitArea && area2d.GetCollisionLayer() == Globals.Collision["CHARACTERS"])
+            if (area2d != exludedUnitArea && area2d.CollisionLayer == Globals.Collision["CHARACTERS"])
             {
                 Explode();
             }
@@ -34,15 +34,15 @@ namespace Game.Misc.Other
                     Particles2D particles2D = node as Particles2D;
                     if (particles2D != null)
                     {
-                        particles2D.SetEmitting(true);
+                        particles2D.Emitting = true;
                     }
                 }
                 foreach (Area2D area2D in GetNode("img/affected_area").GetChildren())
                 {
-                    uint layer = area2D.GetCollisionLayer();
+                    uint layer = area2D.CollisionLayer;
                     if (layer == Globals.Collision["CHARACTERS"] && area2D != exludedUnitArea)
                     {
-                        Character character = area2D.GetOwner()as Character;
+                        Character character = area2D.Owner as Character;
                         if (character != null)
                         {
                             GD.Randomize();
@@ -56,7 +56,7 @@ namespace Game.Misc.Other
                     }
                     else if (layer == Globals.Collision["COMBUSTIBLE"])
                     {
-                        ICombustible obj = area2D.GetOwner()as ICombustible;
+                        ICombustible obj = area2D.Owner as  ICombustible;
                         if (obj != null)
                         {
                             obj.Explode();

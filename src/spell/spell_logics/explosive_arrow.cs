@@ -8,7 +8,7 @@ namespace Game.Ability
         {
             foreach (Area2D characterArea2D in GetNode<Area2D>("sight").GetOverlappingAreas())
             {
-                Character character = characterArea2D.GetOwner()as Character;
+                Character character = characterArea2D.Owner as  Character;
                 if (character != null && character != caster)
                 {
                     character.TakeDamage(10, false, caster, Game.Misc.Other.CombatText.TextType.HIT);

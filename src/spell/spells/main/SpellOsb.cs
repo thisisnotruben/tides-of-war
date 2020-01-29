@@ -20,45 +20,45 @@ namespace Game.Ability
 
         public override void _Process(float delta)
         {
-            SetGlobalPosition(player.GetCenterPos() + (GetGlobalMousePosition() - player.GetCenterPos()).Clamped(spellRange));
+            GlobalPosition = player.GetCenterPos() + (GetGlobalMousePosition() - player.GetCenterPos()).Clamped(spellRange);
             player.GetMenu().GetNode<Control>("c/osb").
-            SetPosition((player.GetCenterPos().y > GetGlobalPosition().y) ?
+            SetPosition((player.GetCenterPos().y > GlobalPosition.y) ?
                 new Vector2(0.0f, 666.0f) :
                 new Vector2(0.0f, 180.0f));
         }
         public override void _OnSightAreaEntered(Area2D area2D)
         {
-            if (GetNode<Node2D>("img").IsVisible())
+            if (GetNode<Node2D>("img").Visible)
             {
                 base._OnSightAreaEntered(area2D);
             }
             else
             {
-                Character character = area2D.GetOwner()as Character;
+                Character character = area2D.Owner as  Character;
                 if (character != null && !character.IsDead() && !targets.Contains(character))
                 {
                     targets.Add(character);
-                    if (IsVisible())
+                    if (Visible)
                     {
-                        character.SetModulate(new Color("#00ff00"));
-                        character.SetZIndex(1);
+                        character.Modulate = new Color("#00ff00");
+                        character.ZIndex = 1;
                     }
                 }
             }
         }
         public override void _OnSightAreaExited(Area2D area2D)
         {
-            if (GetNode<Node2D>("img").IsVisible())
+            if (GetNode<Node2D>("img").Visible)
             {
                 base._OnSightAreaExited(area2D);
             }
             else
             {
-                Character character = area2D.GetOwner()as Character;
+                Character character = area2D.Owner as  Character;
                 if (character != null && targets.Contains(character))
                 {
-                    character.SetModulate(new Color("#ffffff"));
-                    character.SetZIndex(0);
+                    character.Modulate = new Color("#ffffff");
+                    character.ZIndex = 0;
                     targets.Remove(character);
                 }
             }
@@ -69,7 +69,7 @@ namespace Game.Ability
             caster.SetState(Character.States.IDLE);
             Control osb = player.GetMenu().GetNode<Control>("c/osb");
             osb.SetPosition(new Vector2(0.0f, 180.0f));
-            GetNode<CollisionShape2D>("sight/distance").SetDisabled(false);
+            GetNode<CollisionShape2D>("sight/distance").Disabled = false;
             foreach (Spell spell in GetTree().GetNodesInGroup(osb.GetInstanceId().ToString()))
             {
                 spell.UnMake();
@@ -77,9 +77,9 @@ namespace Game.Ability
             AddToGroup(osb.GetInstanceId().ToString());
             caster.GetNode<Tween>("tween").Connect("tween_started", this, nameof(_OnTweenStarted));
             osb.GetNode("m/cast").Connect("pressed", this, nameof(_OnSpellAreaCast));
-            osb.GetNode<Label>("m/cast/label").SetText("Cast");
+            osb.GetNode<Label>("m/cast/label").Text = "Cast";
             osb.Show();
-            SetGlobalPosition(caster.GetGlobalPosition());
+            GlobalPosition = caster.GlobalPosition;
             GetNode<Node2D>("spell_area").Show();
             SetProcess(true);
         }
@@ -114,8 +114,8 @@ namespace Game.Ability
             Cast();
             foreach (Character character in targets)
             {
-                character.SetModulate(new Color("#ffffff"));
-                character.SetZIndex(0);
+                character.Modulate = new Color("#ffffff");
+                character.ZIndex = 0;
             }
         }
     }
