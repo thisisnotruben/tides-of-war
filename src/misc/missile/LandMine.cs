@@ -39,7 +39,7 @@ namespace Game.Misc.Other
                 }
                 foreach (Area2D area2D in GetNode("img/affected_area").GetChildren())
                 {
-                    int layer = area2D.GetCollisionLayer();
+                    uint layer = area2D.GetCollisionLayer();
                     if (layer == Globals.Collision["CHARACTERS"] && area2D != exludedUnitArea)
                     {
                         Character character = area2D.GetOwner()as Character;

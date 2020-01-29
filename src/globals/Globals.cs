@@ -55,7 +55,7 @@ namespace Game
         {
             LoadsaveData();
             LoadSnd();
-            CallDeferred(nameof(SetUpWorldQuests));
+            // CallDeferred(nameof(SetUpWorldQuests));
         }
         public static void SetScene(string scenePath, Node root, CanvasItem currentScene)
         {
@@ -66,14 +66,14 @@ namespace Game
         }
         public static void SaveGameData(string gameData, int index)
         {
-            file.Open(SAVE_PATH[nameof(saveData)], (int)File.ModeFlags.Write);
+            file.Open(SAVE_PATH[nameof(saveData)], File.ModeFlags.Write);
             saveData[$"slot_{index}"] = gameData;
             file.StoreLine(JSON.Print(saveData));
             file.Close();
         }
         public static void LoadsaveData()
         {
-            file.Open(SAVE_PATH[(nameof(saveData))], (int)File.ModeFlags.Read);
+            file.Open(SAVE_PATH[(nameof(saveData))], File.ModeFlags.Read);
             Godot.Collections.Dictionary gameData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).GetResult();
             file.Close();
             foreach (string key in gameData.Keys)
@@ -114,7 +114,7 @@ namespace Game
         {
             if (file.FileExists(loadPath))
             {
-                file.Open(loadPath, (int)File.ModeFlags.Read);
+                file.Open(loadPath, File.ModeFlags.Read);
                 sceneMeta = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).GetResult();
                 file.Close();
                 SetScene((string)sceneMeta["scene"], GetMap().GetTree().GetRoot(), Globals.GetMap());

@@ -7,7 +7,7 @@ namespace Game
         public void SaveGame(string savePath)
         {
             File file = new File();
-            file.Open(savePath, (int)File.ModeFlags.Write);
+            file.Open(savePath, File.ModeFlags.Write);
             Dictionary<string, string> saveDict = new Dictionary<string, string>();
             saveDict.Add("scene", Globals.GetMap().GetFilename());
             foreach (ISaveable node in GetTree().GetNodesInGroup(Globals.SAVE_GROUP))
