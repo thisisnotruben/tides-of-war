@@ -1,12 +1,24 @@
-.import/
-.mono/
+# dirs
 meta/
-.vscode
+
+# hidden dirs
+.import/
+.vscode/
+.mono/
+
+# godot ext
 *.import
+# tiled ext
 *.tsx
 *.tmx
+# asset ext
 *.png
 *.ttf
 *.wav
 *.ogg
+# data ext
 *.xml
+
+# include these
+!icon.png
+!screenshots/*.png
