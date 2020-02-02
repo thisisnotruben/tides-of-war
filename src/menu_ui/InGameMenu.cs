@@ -637,14 +637,7 @@ namespace Game.Ui
             }
             else if (selectedPickable.GetGold() < player.GetGold())
             {
-                if (selectedPickable is Item)
-                {
-                    popup.GetNode<Label>("m/yes_no/label").Text = "Buy?";
-                }
-                else
-                {
-                    popup.GetNode<Label>("m/yes_no/label").Text = "Learn?";
-                }
+                popup.GetNode<Label>("m/yes_no/label").Text = (selectedPickable is Item) ? "Buy?" : "Learn?";
                 popup.GetNode<Control>("m/yes_no").Show();
             }
             else

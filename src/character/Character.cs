@@ -606,7 +606,7 @@ namespace Game.Actor
         }
         public void SetImg(string imgPath, bool loaded = false)
         {
-            Dictionary<string, string> imageData = ImageDB.GetImageData(imgPath.Split("/")[1]);
+            Dictionary<string, string> imageData = ImageDB.GetImageData(imgPath.Split("/")[1].BaseName());
             swingType = imageData["swing"];
             Sprite img = GetNode<Sprite>("img");
             img.Texture = (Texture)GD.Load("res://asset/img/character/".PlusFile(imgPath));

@@ -20,7 +20,7 @@ namespace Game.Actor
             base._Ready();
             Globals.player = this;
             SetWorldName(Name); // for debugging purposes
-            SetImg("human/human-5.png");
+            SetImg("human/human-6.png");
             Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
             Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
             UpdateHUD();
