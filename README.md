@@ -16,11 +16,11 @@ A pixel art role-playing-game (RPG) for Android.
 * 5+ maps
 
 #### Programs used:
-* [**Godot Game Engine**](https://godotengine.org/)
-* [**Tiled Map Editor**](https://www.mapeditor.org/)
-* [**ToW-tools**](https://github.com/thisisnotruben/ToW-tools)
-* [**Aseprite**](https://www.aseprite.org/)
-* [**GIMP**](https://www.gimp.org/)
+* [Godot Game Engine](https://godotengine.org/)
+* [Tiled Map Editor](https://www.mapeditor.org/)
+* [ToW-tools](https://github.com/thisisnotruben/ToW-tools)
+* [Aseprite](https://www.aseprite.org/)
+* [GIMP](https://www.gimp.org/)
 
 #### Screenshots:
 ![screenshot](screenshots/city.png)
