@@ -22,13 +22,9 @@ A pixel art role-playing-game (RPG) for Android.
 * [**Aseprite**](https://www.aseprite.org/)
 * [**GIMP**](https://www.gimp.org/)
 
-#### Screenshots
+#### Screenshots:
 ![screenshot](screenshots/city.png)
-
 ![screenshot](screenshots/bandits.png)
-
 ![screenshot](screenshots/finfolk_camp.png)
-
 ![screenshot](screenshots/orc_camp.png)
-
 ![screenshot](screenshots/orc_camp2.png)
