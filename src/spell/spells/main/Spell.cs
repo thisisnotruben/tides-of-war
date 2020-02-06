@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Game.Actor;
 using Game.Database;
-using Game.Misc.Loot;
+using Game.Loot;
 using Game.Utils;
 using Godot;
 namespace Game.Ability

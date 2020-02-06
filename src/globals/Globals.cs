@@ -8,7 +8,7 @@ namespace Game
 {
     public class Globals : Node
     {
-        public static readonly PackedScene combatText = (PackedScene)GD.Load("res://src/misc/other/combat_text.tscn");
+        public static readonly PackedScene combatText = (PackedScene)GD.Load("res://src/character/doodads/combat_text.tscn");
         public static readonly Dictionary<string, string> SAVE_PATH = new Dictionary<string, string>
         { { nameof(saveData), "res://data/save_game/save_data.json" },
             { "SAVE_SLOT_0", "res://data/save_game/save_slot_0.json" },

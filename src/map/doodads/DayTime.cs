@@ -1,4 +1,4 @@
-using Game.Misc.Light;
+using Game.Light;
 using Godot;
 namespace Game.Map.Doodads
 {

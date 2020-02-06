@@ -1,4 +1,4 @@
-using Game.Misc.Missile;
+using Game.Missile;
 using Godot;
 namespace Game.Ability
 {

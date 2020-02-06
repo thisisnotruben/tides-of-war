@@ -1,5 +1,5 @@
 using Game.Ability;
-using Game.Misc.Loot;
+using Game.Loot;
 using Godot;
 namespace Game.Database
 {
@@ -14,7 +14,7 @@ namespace Game.Database
         }
         public static Item GetMakeItem(string worldName)
         {
-            PackedScene itemScene = (PackedScene)GD.Load("res://src/misc/loot/item.tscn");
+            PackedScene itemScene = (PackedScene)GD.Load("res://src/loot/item.tscn");
             Item item = (Item)itemScene.Instance();
             item.Init(worldName);
             return item;

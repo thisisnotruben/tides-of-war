@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Game.Misc.Loot;
+using Game.Loot;
 using Godot;
 namespace Game.Ui
 {

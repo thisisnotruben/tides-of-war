@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Game.Ability;
 using Game.Actor;
 using Game.Database;
-using Game.Misc.Loot;
+using Game.Loot;
 using Godot;
 namespace Game.Quests
 {

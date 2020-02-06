@@ -78,7 +78,7 @@ namespace Game.Utils
         {
             foreach (Node2D node in map.GetNode("zed/target_dummys").GetChildren())
             {
-                PackedScene scene = (PackedScene)GD.Load("res://src/character/target_dummy/target_dummy.tscn");
+                PackedScene scene = (PackedScene)GD.Load("res://src/character/npc/target_dummy/target_dummy.tscn");
                 Node2D character = (Node2D)scene.Instance();
                 character.Name = node.Name;
                 map.GetNode("zed/z1").AddChild(character);
@@ -102,7 +102,7 @@ namespace Game.Utils
         }
         private void SetLights(Node map)
         {
-            string resourcePath = "res://src/misc/light/{0}.tscn";
+            string resourcePath = "res://src/light/{0}.tscn";
             foreach (Node2D node in map.GetNode("meta/lights").GetChildren())
             {
                 string parsedName = node.Name.Split("-")[1];
@@ -119,6 +119,7 @@ namespace Game.Utils
                 {
                     // for all posts
                     pos.x += HALF_CELL_SIZE.x;
+                    pos.y -= CELL_SIZE.y;
                 }
                 light.GlobalPosition = pos;
                 map.GetNode("zed/z1").AddChild(light);

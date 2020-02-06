@@ -21,7 +21,7 @@ namespace Game.Ability
         }
         public override void _OnTimerTimeout()
         {
-            caster.TakeDamage(5, false, caster, Game.Misc.Other.CombatText.TextType.HIT);
+            caster.TakeDamage(5, false, caster, Game.Actor.Doodads.CombatText.TextType.HIT);
             count--;
             if (count > 0)
             {

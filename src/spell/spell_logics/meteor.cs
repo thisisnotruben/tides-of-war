@@ -29,7 +29,7 @@ namespace Game.Ability
                 short damage = (short)(Math.Round(GD.RandRange(caster.minDamage, caster.maxDamage) * 1.2f));
                 foreach (Character character in targetList)
                 {
-                    character.TakeDamage(damage, false, caster, Game.Misc.Other.CombatText.TextType.HIT);
+                    character.TakeDamage(damage, false, caster, Game.Actor.Doodads.CombatText.TextType.HIT);
                 }
                 UnMake();
             }

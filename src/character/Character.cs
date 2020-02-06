@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Ability;
 using Game.Database;
-using Game.Misc.Loot;
-using Game.Misc.Missile;
-using Game.Misc.Other;
+using Game.Loot;
+using Game.Missile;
+using Game.Actor.Doodads;
 using Game.Utils;
 using Godot;
 namespace Game.Actor
 {
     public abstract class Character : WorldObject, ISaveable
     {
-        public static readonly PackedScene footStepScene = (PackedScene)GD.Load("res://src/misc/other/footstep.tscn");
-        public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/misc/other/buff_anim.tscn");
-        public static readonly PackedScene missileScene = (PackedScene)GD.Load("res://src/misc/missile/missile.tscn");
+        public static readonly PackedScene footStepScene = (PackedScene)GD.Load("res://src/character/doodads/footstep.tscn");
+        public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/character/doodads/buff_anim.tscn");
+        public static readonly PackedScene missileScene = (PackedScene)GD.Load("res://src/missile/missile.tscn");
         public enum States { ALIVE, DEAD, MOVING, IDLE, ATTACKING, RETURNING }
         public virtual States state { get; private set; }
         private string swingType;

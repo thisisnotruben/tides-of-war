@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Game.Misc.Other;
+using Game.Actor.Doodads;
 using Game.Ui;
 using Game.Utils;
 using Godot;
@@ -8,7 +8,7 @@ namespace Game.Actor
     public class Player : Character
     {
         private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/move_cursor.tscn");
-        private static readonly PackedScene graveScene = (PackedScene)GD.Load("res://src/misc/other/grave.tscn");
+        private static readonly PackedScene graveScene = (PackedScene)GD.Load("res://src/character/doodads/grave.tscn");
         private List<Vector2> reservedPath = new List<Vector2>();
         public Vector2 gravePos { get; private set; }
         public short xp { get; private set; }

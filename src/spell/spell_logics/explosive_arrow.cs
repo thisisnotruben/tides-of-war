@@ -11,7 +11,7 @@ namespace Game.Ability
                 Character character = characterArea2D.Owner as Character;
                 if (character != null && character != caster)
                 {
-                    character.TakeDamage(10, false, caster, Game.Misc.Other.CombatText.TextType.HIT);
+                    character.TakeDamage(10, false, caster, Game.Actor.Doodads.CombatText.TextType.HIT);
                 }
             }
             return base.Cast();

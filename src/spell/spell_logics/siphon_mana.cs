@@ -1,5 +1,5 @@
 using System;
-using Game.Misc.Other;
+using Game.Actor.Doodads;
 using Godot;
 namespace Game.Ability
 {
@@ -10,7 +10,7 @@ namespace Game.Ability
             short mana = (short)Math.Round((float)caster.target.mana * 0.2f);
             caster.target.mana = (short) - mana;
             caster.mana = mana;
-            PackedScene CombatTextScene = (PackedScene)GD.Load("res://src/misc/other/combat_text.tscn");
+            PackedScene CombatTextScene = (PackedScene)GD.Load("res://src/character/doodads/combat_text.tscn");
             CombatText combatText = (CombatText)CombatTextScene.Instance();
             caster.AddChild(combatText);
             if (mana + caster.mana > caster.manaMax)

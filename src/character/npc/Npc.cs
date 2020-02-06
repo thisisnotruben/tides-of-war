@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Game.Ability;
 using Game.Database;
-using Game.Misc.Loot;
-using Game.Misc.Other;
+using Game.Loot;
+using Game.Actor.Doodads;
 using Game.Ui;
 using Game.Utils;
 using Godot;

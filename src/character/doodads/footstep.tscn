@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/character/doodads/FootStep.cs" type="Script" id=1]
+
+[node name="footstep" type="Node2D"]
+use_parent_material = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="tween" type="Tween" parent="."]
+[connection signal="timeout" from="timer" to="." method="_OnTimerTimeout"]
+[connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]

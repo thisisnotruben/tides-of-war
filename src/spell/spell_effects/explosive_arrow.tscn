@@ -5,8 +5,9 @@
 [ext_resource path="res://asset/snd/spell/explosion.ogg" type="AudioStream" id=3]
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=4]
 [ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=5]
-[ext_resource path="res://src/misc/light/fire.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/light/fire.tscn" type="PackedScene" id=6]
 [ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=7]
+
 
 
 
