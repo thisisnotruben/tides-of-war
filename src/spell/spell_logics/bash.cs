@@ -4,7 +4,7 @@ namespace Game.Ability
     {
         public override float Cast()
         {
-            target = caster.GetTarget();
+            target = caster.target;
             StunUnit(target, true);
             SetTime(5.0f);
             return base.Cast();

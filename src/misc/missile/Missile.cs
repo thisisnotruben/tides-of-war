@@ -17,9 +17,35 @@ namespace Game.Misc.Missile
         bool instantSpawn;
         WorldTypes weaponType;
         WorldTypes swingType;
-        Character target;
+        private Character _target;
+        public Character target
+        {
+            get
+            {
+                return _target;
+            }
+            set
+            {
+                _target = value;
+                spawnPos = originator.GetNode<Node2D>("img/missile").GlobalPosition;
+                if (rotate)
+                {
+                    LookAt(target.GetCenterPos());
+                }
+                if (instantSpawn)
+                {
+                    GlobalPosition = target.GetCenterPos();
+                }
+                else
+                {
+                    SetProcess(true);
+                }
+                Show();
+            }
+        }
         Character originator;
-        Spell spell;
+        public Spell spell { get; private set; }
+
         [Signal]
         public delegate void Hit(Spell spell);
         public override void _Ready()
@@ -60,7 +86,7 @@ namespace Game.Misc.Missile
                         anim.Play("fade");
                     }
                 }
-                if (!target.IsDead())
+                if (!target.dead)
                 {
                     Attack();
                 }
@@ -79,39 +105,13 @@ namespace Game.Misc.Missile
         {
             Tween tween = GetNode<Tween>("tween");
             tween.InterpolateProperty(this, ":global_position", GlobalPosition, toUnit.GetCenterPos(),
-                spawnPos.DistanceTo(toUnit.GetCenterPos()) / (float)fromUnit.GetWeaponRange(),
+                spawnPos.DistanceTo(toUnit.GetCenterPos()) / (float)fromUnit.weaponRange,
                 Tween.TransitionType.Circ, Tween.EaseType.Out);
             tween.Start();
         }
-        public void SetTarget(Character character)
-        {
-            target = character;
-            spawnPos = originator.GetNode<Node2D>("img/missile").GlobalPosition;
-            if (rotate)
-            {
-                LookAt(target.GetCenterPos());
-            }
-            if (instantSpawn)
-            {
-                GlobalPosition = target.GetCenterPos();
-            }
-            else
-            {
-                SetProcess(true);
-            }
-            Show();
-        }
-        public Character GetTarget()
-        {
-            return target;
-        }
-        public void SetSpell(Spell spell)
-        {
-            this.spell = spell;
-        }
         public virtual void SetUp(Character originator, Vector2 globalPosition, Spell spell)
         {
-            SetSpell(spell);
+            this.spell = spell;
             spawnPos = globalPosition;
             this.originator = originator;
         }
@@ -180,15 +180,15 @@ namespace Game.Misc.Missile
             }
             else
             {
-                SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(spell.GetWorldName());
+                SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(spell.worldName);
                 Connect(nameof(Hit), spellEffect, nameof(SpellEffect.OnHit));
-                if (spell.GetWorldType() != WorldTypes.SLOW)
+                if (spell.worldType != WorldTypes.SLOW)
                 {
                     spellEffect.Connect(nameof(SpellEffect.Unmake), this, nameof(Fade));
                 }
                 AddChild(spellEffect);
                 spellEffect.Owner = this;
-                switch (spell.GetWorldType())
+                switch (spell.worldType)
                 {
                     case WorldTypes.FIREBALL:
                     case WorldTypes.SHADOW_BOLT:
@@ -197,7 +197,7 @@ namespace Game.Misc.Missile
                     case WorldTypes.SLOW:
                     case WorldTypes.SIPHON_MANA:
                         GetNode<CollisionShape2D>("coll").Shape = (Shape2D)GD.Load("res://asset/img/missile-spell/spell_coll.tres");
-                        switch (spell.GetWorldType())
+                        switch (spell.worldType)
                         {
                             case WorldTypes.MIND_BLAST:
                             case WorldTypes.SLOW:
@@ -222,9 +222,9 @@ namespace Game.Misc.Missile
                         texturePath = string.Format(texturePath, "arrow_{0}3");
                         break;
                     default:
-                        if (spell.GetWorldName().Contains("shot") ||
-                            spell.GetWorldName().Contains("arrow") ||
-                            spell.GetWorldType() == WorldTypes.VOLLEY)
+                        if (spell.worldName.Contains("shot") ||
+                            spell.worldName.Contains("arrow") ||
+                            spell.worldType == WorldTypes.VOLLEY)
                         {
                             texturePath = string.Format(texturePath, "arrow_{0}0");
                         }

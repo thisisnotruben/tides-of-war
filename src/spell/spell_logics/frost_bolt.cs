@@ -9,7 +9,7 @@ namespace Game.Ability
         public override float Cast()
         {
             values = new Tuple<Character, float, float>(
-                caster.GetTarget(),
+                caster.target,
                 caster.animSpeed * 0.3f,
                 caster.weaponSpeed * 0.3f
             );

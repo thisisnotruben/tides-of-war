@@ -5,8 +5,8 @@ namespace Game.Ability
     {
         public override float Cast()
         {
-            target = caster.GetTarget();
-            SetCount(15);
+            target = caster.target;
+            count = 15;
             SetTime(2.0f);
             return base.Cast();
         }

@@ -10,22 +10,84 @@ namespace Game.Actor
         private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/move_cursor.tscn");
         private static readonly PackedScene graveScene = (PackedScene)GD.Load("res://src/misc/other/grave.tscn");
         private List<Vector2> reservedPath = new List<Vector2>();
-        private Vector2 gravePos;
-        public short xp;
-        private short gold;
+        public Vector2 gravePos { get; private set; }
+        public short xp { get; private set; }
+        private Character _target;
+        public override Character target
+        {
+            get
+            {
+                return _target;
+            }
+            set
+            {
+                if (target != null)
+                {
+                    target.Disconnect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                    target.Disconnect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
+                    Npc npc = target as Npc;
+                    if (npc != null)
+                    {
+                        switch (npc.worldType)
+                        {
+                            case WorldTypes.TRAINER:
+                            case WorldTypes.MERCHANT:
+                                npc.SetUpShop(GetMenu(), false);
+                                break;
+                        }
+                    }
+                }
+                if (value != null)
+                {
+                    value.Connect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                    value.Connect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
+                    value.UpdateHUD();
+                    GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
+                    Npc npc = value as Npc;
+                    if (npc != null)
+                    {
+                        switch (npc.worldType)
+                        {
+                            case WorldTypes.TRAINER:
+                            case WorldTypes.MERCHANT:
+                                npc.SetUpShop(GetMenu(), true);
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    GetMenu().hpMana.GetNode<Control>("m/h/u").Hide();
+                }
+                base.target = value;
+            }
+        }
+        private short _gold;
+        public short gold
+        {
+            get
+            {
+                return _gold;
+            }
+            set
+            {
+                _gold += value;
+            }
+        }
+
         [Signal]
         public delegate void PosChanged();
         public override void _Ready()
         {
             base._Ready();
             Globals.player = this;
-            SetWorldName(Name); // for debugging purposes
-            SetImg("human/human-6.png");
+            worldName = Name;
+            SetImg("human-6");
             Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
             Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
             UpdateHUD();
-            SetGold(10_000);
-            SetWorldType(WorldTypes.PLAYER);
+            gold = 10_000;
+            worldType = WorldTypes.PLAYER;
             enemy = false;
         }
         public override void _UnhandledInput(InputEvent @event)
@@ -36,16 +98,16 @@ namespace Game.Actor
                 {
                     return;
                 }
-                Vector2 eventGlobalPosition = Globals.GetMap().GetGridPosition(GetGlobalMousePosition());
-                if (Globals.GetMap().IsValidMove(eventGlobalPosition))
+                Vector2 eventGlobalPosition = Globals.map.GetGridPosition(GetGlobalMousePosition());
+                if (Globals.map.IsValidMove(eventGlobalPosition))
                 {
                     Tween tween = GetNode<Tween>("tween");
-                    if (GetState() == States.MOVING && path.Count > 0 && tween.IsActive())
+                    if (state == States.MOVING && path.Count > 0 && tween.IsActive())
                     {
-                        Globals.GetMap().ResetPath(reservedPath);
+                        Globals.map.ResetPath(reservedPath);
                         reservedPath.Clear();
-                        List<Vector2> _path = Globals.GetMap().getAPath(
-                            Globals.GetMap().GetGridPosition(GlobalPosition), eventGlobalPosition);
+                        List<Vector2> _path = Globals.map.getAPath(
+                            Globals.map.GetGridPosition(GlobalPosition), eventGlobalPosition);
                         if (_path[0] != path[0])
                         {
                             tween.Remove(this, "global_position");
@@ -59,7 +121,7 @@ namespace Game.Actor
                     }
                     else
                     {
-                        path = Globals.GetMap().getAPath(Globals.GetMap().GetGridPosition(GlobalPosition), eventGlobalPosition);
+                        path = Globals.map.getAPath(Globals.map.GetGridPosition(GlobalPosition), eventGlobalPosition);
                     }
                     EmitSignal(nameof(PosChanged));
                     MoveCursor cursor = (MoveCursor)moveCursorScene.Instance();
@@ -74,7 +136,7 @@ namespace Game.Actor
                 SetState(States.MOVING);
                 MoveTo(path[0], path);
             }
-            else if (target != null && target.IsEnemy() && GetCenterPos().DistanceTo(target.GetCenterPos()) <= weaponRange)
+            else if (target != null && target.enemy && GetCenterPos().DistanceTo(target.GetCenterPos()) <= weaponRange)
             {
                 SetState(States.ATTACKING);
             }
@@ -110,7 +172,7 @@ namespace Game.Actor
             if (!direction.Equals(new Vector2()))
             {
                 RayCast2D ray = GetNode<RayCast2D>("ray");
-                worldPosition = Globals.GetMap().RequestMove(GlobalPosition, direction);
+                worldPosition = Globals.map.RequestMove(GlobalPosition, direction);
                 ray.LookAt(worldPosition);
                 if (!worldPosition.Equals(new Vector2()))
                 {
@@ -154,7 +216,7 @@ namespace Game.Actor
         }
         public override void SetState(States state, bool overrule = false)
         {
-            if (GetState() != state || overrule)
+            if (this.state != state || overrule)
             {
                 AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
                 Sprite img = GetNode<Sprite>("img");
@@ -187,48 +249,6 @@ namespace Game.Actor
                 base.SetState(state);
             }
         }
-        public override void SetTarget(Character character)
-        {
-            if (target != null)
-            {
-                target.Disconnect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-                target.Disconnect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
-                Npc npc = target as Npc;
-                if (npc != null)
-                {
-                    switch (npc.GetWorldType())
-                    {
-                        case WorldTypes.TRAINER:
-                        case WorldTypes.MERCHANT:
-                            npc.SetUpShop(GetMenu(), false);
-                            break;
-                    }
-                }
-            }
-            if (character != null)
-            {
-                character.Connect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-                character.Connect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
-                character.UpdateHUD();
-                GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
-                Npc npc = character as Npc;
-                if (npc != null)
-                {
-                    switch (npc.GetWorldType())
-                    {
-                        case WorldTypes.TRAINER:
-                        case WorldTypes.MERCHANT:
-                            npc.SetUpShop(GetMenu(), true);
-                            break;
-                    }
-                }
-            }
-            else
-            {
-                GetMenu().hpMana.GetNode<Control>("m/h/u").Hide();
-            }
-            base.SetTarget(character);
-        }
         public void SetXP(short addedXP, bool showLabel = true, bool fromSaveFile = false)
         {
             xp += addedXP;
@@ -243,32 +263,24 @@ namespace Game.Actor
                 combatText.SetType($"+{xp}", CombatText.TextType.XP, GetNode<Node2D>("img").Position);
             }
             byte _level = Stats.CheckLevel(xp);
-            if (GetLevel() != _level && GetLevel() < Stats.MAX_LEVEL)
+            if (level != _level && level < Stats.MAX_LEVEL)
             {
-                SetLevel(_level);
+                level = _level;
                 if (!fromSaveFile)
                 {
                     Globals.PlaySound("level_up", this, new Speaker());
                 }
-                if (GetLevel() > Stats.MAX_LEVEL)
+                if (level > Stats.MAX_LEVEL)
                 {
-                    SetLevel(Stats.MAX_LEVEL);
+                    level = Stats.MAX_LEVEL;
                 }
-                Dictionary<string, double> stats = Stats.UnitMake((double)GetLevel(),
+                Dictionary<string, double> stats = Stats.UnitMake((double)level,
                     Stats.GetMultiplier(false, GetNode<Sprite>("img").Texture.ResourcePath));
                 foreach (string attribute in stats.Keys)
                 {
                     Set(attribute, (short)stats[attribute]);
                 }
             }
-        }
-        public void SetGold(short gold)
-        {
-            this.gold += gold;
-        }
-        public short GetGold()
-        {
-            return gold;
         }
         public override async void SetDead(bool dead)
         {
@@ -284,7 +296,7 @@ namespace Game.Actor
                 AddChild(grave);
                 grave.SetDeceasedPlayer(this);
                 gravePos = grave.GlobalPosition;
-                Globals.GetMap().SetVeil(true);
+                Globals.map.SetVeil(true);
                 path.Clear();
                 Dictionary<float, Vector2> graveSites = new Dictionary<float, Vector2>();
                 List<float> graveDist = new List<float>();
@@ -299,25 +311,21 @@ namespace Game.Actor
                 {
                     minVal = Mathf.Min(minVal, graveDist[i]);
                 }
-                GlobalPosition = Globals.GetMap().GetGridPosition(graveSites[minVal]);
+                GlobalPosition = Globals.map.GetGridPosition(graveSites[minVal]);
                 SetProcessUnhandledInput(true);
                 SetProcess(true);
             }
             else
             {
                 GD.Randomize();
-                SetHp((short)(hpMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0)));
-                SetMana((short)(manaMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0)));
+                hp = (short)(hpMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
+                mana = (short)(manaMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
                 gravePos = new Vector2();
             }
         }
         public InGameMenu GetMenu()
         {
             return GetNode<InGameMenu>("in_game_menu");
-        }
-        public Vector2 GetGravePos()
-        {
-            return gravePos;
         }
     }
 }

@@ -12,10 +12,7 @@ namespace Game.Actor
     {
         private string text;
         private Dictionary<string, List<Vector2>> cachedPatrolPath = new Dictionary<string, List<Vector2>>()
-        {
-            {"cachedPath", new List<Vector2>()},
-            {"pathPoints", new List<Vector2>()},
-            {"patrolPath", new List<Vector2>()}
+        { { "cachedPath", new List<Vector2>() }, { "pathPoints", new List<Vector2>() }, { "patrolPath", new List<Vector2>() }
         };
         [Signal]
         public delegate void DropLoot(Npc npc, Vector2 worldPosition, int idk);
@@ -28,15 +25,15 @@ namespace Game.Actor
         {
             if (engaging && target != null)
             {
-                if (origin.DistanceTo(target.GetCenterPos()) > Stats.FLEE_DISTANCE || target.IsDead())
+                if (origin.DistanceTo(target.GetCenterPos()) > Stats.FLEE_DISTANCE || target.dead)
                 {
                     SetState(States.RETURNING);
                     if (cachedPatrolPath["cachedPath"].Count > 0)
                     {
                         // if (GlobalPosition != cachedPatrolPath["cachedPath"][patrolPath.Count - 1]) TODO
                         // {
-                            // FollowPatrolPath();
-                            // return;
+                        // FollowPatrolPath();
+                        // return;
                         // }
                     }
                     else if (GlobalPosition != origin)
@@ -72,18 +69,18 @@ namespace Game.Actor
         }
         public void _OnSightAreaEntered(Area2D area2D)
         {
-            Character character = area2D.Owner as  Character;
-            if (character != null && !dead && (target == null || character.IsDead()) && character != this)
+            Character character = area2D.Owner as Character;
+            if (character != null && !dead && (target == null || character.dead) && character != this)
             {
                 if (!enemy && character is Player)
                 {
                     // friendly npcs' don't attack player
                     return;
                 }
-                else if (!engaging && enemy != character.IsEnemy())
+                else if (!engaging && enemy != character.enemy)
                 {
                     engaging = true;
-                    SetTarget(character);
+                    target = character;
                     SetProcess(true);
                 }
             }
@@ -92,7 +89,7 @@ namespace Game.Actor
         {
             if (!engaging)
             {
-                SetTarget(null);
+                target = null;
             }
         }
         public void _OnAreaMouseEntered()
@@ -107,13 +104,13 @@ namespace Game.Actor
         {
             Player player = Globals.player;
             InGameMenu menu = player.GetMenu();
-            if (player.GetTarget() == this)
+            if (player.target == this)
             {
-                player.SetTarget(null);
+                player.target = null;
             }
-            else if (!player.IsDead())
+            else if (!player.dead)
             {
-                player.SetTarget(this);
+                player.target = this;
                 Sprite img = GetNode<Sprite>("img");
                 Tween tween = GetNode<Tween>("tween");
                 tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
@@ -121,13 +118,13 @@ namespace Game.Actor
                 tween.Start();
                 if (!enemy && !engaging && GetNode<Area2D>("sight").OverlapsArea(Globals.player.GetNode<Area2D>("area")))
                 {
-                    switch (GetWorldType())
+                    switch (worldType)
                     {
                         case WorldTypes.MERCHANT:
                         case WorldTypes.TRAINER:
                             string sndName = "merchant_open";
                             string nodeName = "inventory";
-                            if (GetWorldType() == WorldTypes.MERCHANT)
+                            if (worldType == WorldTypes.MERCHANT)
                             {
                                 menu.merchant.GetNode<Control>("s/v2/inventory").Show();
                             }
@@ -144,8 +141,8 @@ namespace Game.Actor
                             Globals.PlaySound(sndName, this, new Speaker());
                             tween.PauseMode = PauseModeEnum.Process;
                             menu.itemInfo.GetNode<TextureButton>("s/v/c/v/bg").Disabled = true;
-                            menu.merchant.GetNode<Label>("s/v/label").Text = GetWorldName();
-                            menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {player.GetGold().ToString("N0")}";
+                            menu.merchant.GetNode<Label>("s/v/label").Text = worldName;
+                            menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {player.gold.ToString("N0")}";
                             menu.menu.Hide();
                             menu.merchant.Show();
                             menu.GetNode<Control>("c/game_menu").Show();
@@ -156,7 +153,7 @@ namespace Game.Actor
                             {
                                 Globals.PlaySound("turn_page", this, new Speaker());
                                 menu.menu.Hide();
-                                if (GetWorldType() == WorldTypes.HEALER)
+                                if (worldType == WorldTypes.HEALER)
                                 {
                                     menu.dialogue.GetNode<Control>("s/s/v/heal").Show();
                                 }
@@ -164,7 +161,7 @@ namespace Game.Actor
                                 {
                                     menu.dialogue.GetNode<Label>("s/s/label2").Text = text;
                                 }
-                                menu.dialogue.GetNode<Label>("s/label").Text = GetWorldName();
+                                menu.dialogue.GetNode<Label>("s/label").Text = worldName;
                                 menu.dialogue.Show();
                                 menu.GetNode<Control>("c/game_menu").Show();
                             }
@@ -187,7 +184,7 @@ namespace Game.Actor
                     cachedPatrolPath["cachedPath"].Reverse();
                     cachedPatrolPath["pathPoints"] = cachedPatrolPath["cachedPath"].GetRange(0, cachedPatrolPath["cachedPath"].Count);
                 }
-                cachedPatrolPath["patrolPath"] = Globals.GetMap().getAPath(GlobalPosition, cachedPatrolPath["pathPoints"][0]);
+                cachedPatrolPath["patrolPath"] = Globals.map.getAPath(GlobalPosition, cachedPatrolPath["pathPoints"][0]);
             }
             MoveTo(cachedPatrolPath["patrolPath"][0], cachedPatrolPath["patrolPath"]);
         }
@@ -195,14 +192,14 @@ namespace Game.Actor
         {
             if (route == path && (route.Count == 0 || route[route.Count - 1].DistanceTo(worldPosition) > weaponRange))
             {
-                path = Globals.GetMap().getAPath(GlobalPosition, worldPosition);
+                path = Globals.map.getAPath(GlobalPosition, worldPosition);
             }
             else
             {
                 Vector2 direction = GetDirection(GlobalPosition, route[0]);
                 if (!direction.Equals(new Vector2()))
                 {
-                    worldPosition = Globals.GetMap().RequestMove(GlobalPosition, direction);
+                    worldPosition = Globals.map.RequestMove(GlobalPosition, direction);
                     if (!worldPosition.Equals(new Vector2()))
                     {
                         Move(worldPosition, Stats.MapAnimMoveSpeed(animSpeed));
@@ -224,7 +221,7 @@ namespace Game.Actor
         {
             if (target == null && worldObject is Character)
             {
-                SetTarget((Character)worldObject);
+                target = (Character)worldObject;
             }
             base.TakeDamage(damage, ignoreArmor, worldObject, textType);
             if (dead && targetList.Count > 0)
@@ -248,8 +245,8 @@ namespace Game.Actor
                     {
                         if (targetList[character] == mostDamage && character is Player)
                         {
-                            short xp = Stats.GetXpFromUnitDeath((double)GetLevel(),
-                                Stats.GetMultiplier(true, GetNode<Sprite>("img").Texture.ResourcePath), (double)character.GetLevel());
+                            short xp = Stats.GetXpFromUnitDeath((double)level,
+                                Stats.GetMultiplier(true, GetNode<Sprite>("img").Texture.ResourcePath), (double)character.level);
                             if (xp > 0)
                             {
                                 ((Player)character).SetXP(xp);
@@ -283,8 +280,8 @@ namespace Game.Actor
             }
             else
             {
-                SetHp(hpMax);
-                SetMana(manaMax);
+                hp = hpMax;
+                mana = manaMax;
                 SetProcess(true);
                 if (IsInGroup(Globals.SAVE_GROUP))
                 {
@@ -304,7 +301,7 @@ namespace Game.Actor
         }
         public override void SetState(States state, bool overrule = false)
         {
-            if (GetState() != state || overrule)
+            if (this.state != state || overrule)
             {
                 AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
                 Sprite img = GetNode<Sprite>("img");
@@ -312,7 +309,7 @@ namespace Game.Actor
                 {
                     case States.IDLE:
                         SetProcess(false);
-                        SetTarget(null);
+                        target = null;
                         SetTime(regenTime);
                         anim.Stop();
                         img.FlipH = false;
@@ -338,7 +335,7 @@ namespace Game.Actor
                     case States.DEAD:
                         if (target != null && target is Player)
                         {
-                            target.SetTarget(null);
+                            target.target = null;
                         }
                         SetState(States.IDLE);
                         SetDead(true);
@@ -351,9 +348,9 @@ namespace Game.Actor
         {
             // TODO: possible bug here with "{0}"
             // probably get around this with Regex
-            if (text.Contains("{0}") && GetWorldType() == WorldTypes.HEALER)
+            if (text.Contains("{0}") && worldType == WorldTypes.HEALER)
             {
-                this.text = string.Format(text, Stats.HealerCost(Globals.player.GetLevel()));
+                this.text = string.Format(text, Stats.HealerCost(Globals.player.level));
             }
             else
             {
@@ -362,7 +359,7 @@ namespace Game.Actor
         }
         public void SetUpShop(InGameMenu inGameMenu, bool setUp)
         {
-            Node bag = (GetWorldType() == WorldTypes.TRAINER) ? GetNode("spells") : GetNode("inventory");
+            Node bag = (worldType == WorldTypes.TRAINER) ? GetNode("spells") : GetNode("inventory");
             foreach (Pickable pickable in bag.GetChildren())
             {
                 if (setUp)
@@ -400,16 +397,16 @@ namespace Game.Actor
                         SetImg(data[key]);
                         break;
                     case "name":
-                        SetWorldName(data[key]);
+                        worldName = data[key];
                         break;
                     case "enemy":
                         enemy = bool.Parse(data[key]);
                         break;
                     case "level":
-                        SetLevel(byte.Parse(data[key]));
+                        level = byte.Parse(data[key]);
                         break;
                     case "actorType":
-                        SetWorldType((WorldTypes)System.Enum.Parse(typeof(WorldTypes), data[key].ToUpper()));
+                        worldType = (WorldTypes)System.Enum.Parse(typeof(WorldTypes), data[key].ToUpper());
                         break;
                     default:
                         if (key.Contains("spell"))
@@ -421,7 +418,7 @@ namespace Game.Actor
                             }
                             else
                             {
-                                GD.Print($"({GetWorldName()}) has invalid spell name: ({data[key]})");
+                                GD.Print($"({worldName}) has invalid spell name: ({data[key]})");
                             }
                         }
                         else if (key.Contains("item"))
@@ -433,7 +430,7 @@ namespace Game.Actor
                             }
                             else
                             {
-                                GD.Print($"({GetWorldName()}) has invalid item name: ({data[key]})");
+                                GD.Print($"({worldName}) has invalid item name: ({data[key]})");
                             }
                         }
                         else

@@ -5,11 +5,23 @@ namespace Game.Misc.Other
     public class BuffAnim : Particles2D
     {
         private bool elixir = true;
-        private Item item;
+        private Item _item;
+        public Item item
+        {
+            get
+            {
+                return _item;
+            }
+            set
+            {
+                _item = value;
+                Name = item.GetInstanceId().ToString();
+            }
+        }
         public override void _Ready()
         {
             Color color = new Color("#ffffff");
-            switch (item.GetPickableSubType())
+            switch (item.subType)
             {
                 case Item.WorldTypes.HEALING:
                     color = new Color("ff0000");
@@ -43,11 +55,6 @@ namespace Game.Misc.Other
         public void _OnTimerTimeout()
         {
             QueueFree();
-        }
-        public void SetItem(Item item)
-        {
-            this.item = item;
-            Name = item.GetInstanceId().ToString();
         }
     }
 }

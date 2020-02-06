@@ -10,7 +10,7 @@ namespace Game.Ui
         public Control about;
         public override void _Ready()
         {
-            menu = Owner as  Menu;
+            menu = Owner as Menu;
         }
         public void _OnDeletePressed()
         {
@@ -63,7 +63,7 @@ namespace Game.Ui
             Globals.PlaySound("click1", this, menu.snd);
             foreach (QuestEntry questSlot in menu.questLog.GetNode("s/v/s/v").GetChildren())
             {
-                if (questSlot.GetQuest().GetState() != Game.Quests.WorldQuests.QuestState.ACTIVE)
+                if (questSlot.quest.state != Game.Quests.WorldQuests.QuestState.ACTIVE)
                 {
                     questSlot.Hide();
                 }
@@ -80,7 +80,7 @@ namespace Game.Ui
             Globals.PlaySound("click1", this, menu.snd);
             foreach (QuestEntry questSlot in menu.questLog.GetNode("s/v/s/v").GetChildren())
             {
-                if (questSlot.GetQuest().GetState() != Game.Quests.WorldQuests.QuestState.DELIVERED)
+                if (questSlot.quest.state != Game.Quests.WorldQuests.QuestState.DELIVERED)
                 {
                     questSlot.Hide();
                 }
@@ -148,13 +148,13 @@ namespace Game.Ui
         {
             Globals.PlaySound("click0", this, menu.snd);
             GetTree().Paused = false;
-            Globals.SetScene("res://src/menu_ui/StartMenu.tscn", GetTree().Root, Globals.GetMap());
-            Globals.GetWorldQuests().Reset();
+            Globals.SetScene("res://src/menu_ui/start_menu.tscn", GetTree().Root, Globals.map);
+            Globals.worldQuests.Reset();
         }
         public void _OnOkayPressed()
         {
             Globals.PlaySound("click1", this, menu.snd);
-            if (menu.player.GetTarget() != null && menu.player.GetTarget().GetWorldType() == WorldObject.WorldTypes.MERCHANT &&
+            if (menu.player.target != null && menu.player.target.worldType == WorldObject.WorldTypes.MERCHANT &&
                 menu.selected == null && GetNode<Label>("m/error/label").Text.Equals("Not Enough\nGold!"))
             {
                 GetNode<Label>("m/error").Hide();
@@ -209,7 +209,7 @@ namespace Game.Ui
                         sndName = "inventory_unequip";
                         ((Item)menu.selected).Unequip();
                         Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon.tres");
-                        string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), ((Item)menu.selected).GetWorldType()).ToLower()}_slot";
+                        string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), ((Item)menu.selected).worldType).ToLower()}_slot";
                         menu.inventory.GetNode<TextureButton>(nodePath).TextureNormal = texture;
                         menu.statsMenu.GetNode<TextureButton>(nodePath).TextureNormal = texture;
                         if (menu is InGameMenu && menu.itemInfo.GetNode("s/h/v/back").IsConnected("pressed", menu, nameof(InGameMenu.HideMenu)))
@@ -229,8 +229,8 @@ namespace Game.Ui
                         }
                         Globals.PlaySound("sell_buy", this, menu.snd);
                         ((Pickable)menu.selected).Buy(menu.player);
-                        menu.merchant.GetNode<Label>("s/v/label2").Text = 
-                            $"Gold: {menu.player.GetGold().ToString("N0")}";
+                        menu.merchant.GetNode<Label>("s/v/label2").Text =
+                            $"Gold: {menu.player.gold.ToString("N0")}";
                         menu.merchant.Show();
                         break;
                     case "Delete?":
@@ -244,7 +244,7 @@ namespace Game.Ui
                         menu.merchantBag.RemoveItem(menu.selectedIdx, true, false, false);
                         menu.inventoryBag.RemoveItem(menu.selectedIdx, true, false, false);
                         ((Pickable)menu.selected).Sell(menu.player);
-                        menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {menu.player.GetGold().ToString("N0")}";
+                        menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {menu.player.gold.ToString("N0")}";
                         menu.merchant.Show();
                         break;
                     case "Overwrite?":
@@ -304,22 +304,22 @@ namespace Game.Ui
         }
         public void _OnRepairPressed(string what)
         {
-            Item weapon = menu.player.GetWeapon();
-            Item armor = menu.player.GetArmor();
+            Item weapon = menu.player.weapon;
+            Item armor = menu.player.vest;
             int cost = 0;
             switch (what)
             {
                 case "all":
-                    cost = Stats.ItemRepairCost(weapon.GetLevel()) + Stats.ItemRepairCost(armor.GetLevel());
+                    cost = Stats.ItemRepairCost(weapon.level) + Stats.ItemRepairCost(armor.level);
                     break;
                 case "weapon":
-                    cost = Stats.ItemRepairCost(weapon.GetLevel());
+                    cost = Stats.ItemRepairCost(weapon.level);
                     break;
                 case "armor":
-                    cost = Stats.ItemRepairCost(armor.GetLevel());
+                    cost = Stats.ItemRepairCost(armor.level);
                     break;
             }
-            if (cost > menu.player.GetGold())
+            if (cost > menu.player.gold)
             {
                 GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
                 GetNode<Control>("m/repair").Hide();
@@ -329,7 +329,7 @@ namespace Game.Ui
             {
                 Globals.PlaySound("sell_buy", this, menu.snd);
                 Globals.PlaySound("anvil", this, menu.snd);
-                menu.player.SetGold((short) - cost);
+                menu.player.gold = (short) - cost;
                 switch (what)
                 {
                     case "all":
@@ -344,7 +344,7 @@ namespace Game.Ui
                         break;
                 }
                 Hide();
-                menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {menu.player.GetGold().ToString("N0")}";
+                menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {menu.player.gold.ToString("N0")}";
                 menu.merchant.Show();
             }
         }
@@ -385,8 +385,8 @@ namespace Game.Ui
                     {
                         itemSlot.SetItem(null, false, true, false);
                     }
-                    Item weapon = menu.player.GetWeapon();
-                    Item armor = menu.player.GetArmor();
+                    Item weapon = menu.player.weapon;
+                    Item armor = menu.player.vest;
                     if (weapon == menu.selected)
                     {
                         itemSlot.SetItem(weapon, false, false, false);
@@ -445,7 +445,7 @@ namespace Game.Ui
                 _OnBackPressed();
             }
             if (menu is InGameMenu && menu.itemInfo.GetNode("s/h/v/back")
-            .IsConnected("pressed", menu, nameof(InGameMenu.HideMenu)))
+                .IsConnected("pressed", menu, nameof(InGameMenu.HideMenu)))
             {
                 ((InGameMenu)menu).HideMenu();
             }

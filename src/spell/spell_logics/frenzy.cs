@@ -13,10 +13,10 @@ namespace Game.Ability
             );
             caster.animSpeed += amounts.Item1;
             caster.weaponSpeed += amounts.Item2;
-            SetCount(5);
+            count = 5;
             SetTime(6.0f);
             caster.SetSpell(this,
-                (loaded) ? GetDuration() - GetNode<Timer>("timer").WaitTime : 0.0f);
+                (loaded) ? duration - GetNode<Timer>("timer").WaitTime : 0.0f);
             return base.Cast();
         }
         public override void _OnTimerTimeout()

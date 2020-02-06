@@ -49,8 +49,8 @@ namespace Game
         public static Dictionary<string, string> saveData = new Dictionary<string, string>();
         private static Godot.Collections.Dictionary sceneMeta = null;
         private static readonly File file = new File();
-        private static WorldQuests worldQuests = null;
-        private static Map.Map map = null;
+        public static WorldQuests worldQuests { get; private set; }
+        public static Map.Map map { get; set; }
         public override void _Ready()
         {
             LoadsaveData();
@@ -59,7 +59,7 @@ namespace Game
         }
         public static void SetScene(string scenePath, Node root, CanvasItem currentScene)
         {
-            PackedScene sceneLoaderScene = (PackedScene)GD.Load("res://src/globals/SceneLoader.tscn");
+            PackedScene sceneLoaderScene = (PackedScene)GD.Load("res://src/globals/scene_loader.tscn");
             SceneLoader sceneLoader = (SceneLoader)sceneLoaderScene.Instance();
             root.AddChild(sceneLoader);
             sceneLoader.LoadScene(scenePath, sceneMeta, currentScene);
@@ -117,24 +117,12 @@ namespace Game
                 file.Open(loadPath, File.ModeFlags.Read);
                 sceneMeta = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
                 file.Close();
-                SetScene((string)sceneMeta["scene"], GetMap().GetTree().Root, Globals.GetMap());
+                SetScene((string)sceneMeta["scene"], map.GetTree().Root, Globals.map);
             }
-        }
-        public static void SetMap(Map.Map newMap)
-        {
-            map = newMap;
-        }
-        public static Map.Map GetMap()
-        {
-            return map;
-        }
-        public static Quests.WorldQuests GetWorldQuests()
-        {
-            return worldQuests;
         }
         private void SetUpWorldQuests()
         {
-            PackedScene worldQuestsScene = (PackedScene)GD.Load("res://src/quest_system/WorldQuests.tscn");
+            PackedScene worldQuestsScene = (PackedScene)GD.Load("res://src/quest_system/world_quests.tscn");
             WorldQuests worldQuests = (WorldQuests)worldQuestsScene.Instance();
             GetTree().Root.AddChild(worldQuests);
             Globals.worldQuests = worldQuests;
@@ -154,13 +142,13 @@ namespace Game
                 }
                 if (!sndPlayer.Playing)
                 {
-                    sndPlayer.VolumeDb =-10.0f;
+                    sndPlayer.VolumeDb = -10.0f;
                     sndPlayer.Stream = (AudioStream)sndMeta[sndName];
                     sndPlayer.Play();
                 }
                 else
                 {
-                    PackedScene sndScene = (PackedScene)GD.Load("res://src/utils/AudioStreamPlayer.tscn");
+                    PackedScene sndScene = (PackedScene)GD.Load("res://src/utils/audio_stream_player.tscn");
                     Speaker audioStreamPlayer = (Speaker)sndScene.Instance();
                     originator.AddChild(audioStreamPlayer);
                     audioStreamPlayer.Connect("finished", audioStreamPlayer, nameof(Speaker.Delete));
@@ -189,7 +177,7 @@ namespace Game
                 }
                 else
                 {
-                    PackedScene sndScene = (PackedScene)GD.Load("res://src/utils/AudioStreamPlayer2D.tscn");
+                    PackedScene sndScene = (PackedScene)GD.Load("res://src/utils/audio_stream_player_2D.tscn");
                     Speaker2D audioStreamPlayer2D = (Speaker2D)sndScene.Instance();
                     originator.AddChild(audioStreamPlayer2D);
                     audioStreamPlayer2D.Connect("finished", audioStreamPlayer2D, nameof(Speaker2D.Delete));

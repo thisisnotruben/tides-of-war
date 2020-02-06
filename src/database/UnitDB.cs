@@ -6,7 +6,7 @@ namespace Game.Database
     public static class UnitDB
     {
         private static readonly string[] ignoreTags = { "items", "spells", "path" };
-        private static readonly string[] namedTags = { "item", "spell"};
+        private static readonly string[] namedTags = { "item", "spell" };
         private static readonly XMLParser xMLParser = new XMLParser();
         public static Dictionary<string, string> GetUnitData(string unitEditorName, string mapName)
         {
@@ -21,12 +21,12 @@ namespace Game.Database
                     unitData.Add("img", xMLParser.GetNamedAttributeValueSafe("img"));
                     unitData.Add("name", xMLParser.GetNamedAttributeValueSafe("name"));
                     unitData.Add("enemy", xMLParser.GetNamedAttributeValueSafe("enemy"));
-                    unitData.Add("spawnPos", 
+                    unitData.Add("spawnPos",
                         $"{xMLParser.GetNamedAttributeValueSafe("x")},{xMLParser.GetNamedAttributeValueSafe("y")}");
-                        string path = "";
+                    string path = "";
                     while (xMLParser.Read() == Error.Ok &&
-                    !(xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
-                    xMLParser.GetNodeName().Equals("unit")))
+                        !(xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
+                            xMLParser.GetNodeName().Equals("unit")))
                     {
                         string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element) ?
                             keyName = xMLParser.GetNodeName() :

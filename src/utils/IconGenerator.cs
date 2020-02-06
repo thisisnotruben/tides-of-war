@@ -24,7 +24,7 @@ namespace Game.Utils
                     AtlasTexture icon = new AtlasTexture();
                     icon.Atlas = img;
                     icon.Region = new Rect2(r, c, TILE_SIZE, TILE_SIZE);
-                    ResourceSaver.Save($"res://asset/img/icon/raw/{count++}_icon.tres", icon);
+                    ResourceSaver.Save($"res://asset/img/icon/{count++}_icon.tres", icon);
                 }
             }
             GD.Print("DONE");

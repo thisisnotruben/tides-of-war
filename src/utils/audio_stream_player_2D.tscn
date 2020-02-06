@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/utils/Speaker2D.cs" type="Script" id=1]
+
+[node name="Speaker2D" type="AudioStreamPlayer2D"]
+max_distance = 125.0
+script = ExtResource( 1 )

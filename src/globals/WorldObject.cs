@@ -76,26 +76,10 @@ namespace Game
             ARROW_HIT_ARMOR,
             ARROW_PASS
         }
-        private WorldTypes worldType;
-        private String worldName;
+        public WorldTypes worldType { get; private protected set; }
+        public String worldName { get; private protected set; }
         public bool loaded = false;
         [Signal]
         public delegate void Unmake();
-        public void SetWorldName(String worldName)
-        {
-            this.worldName = worldName;
-        }
-        public String GetWorldName()
-        {
-            return worldName;
-        }
-        public void SetWorldType(WorldTypes worldType)
-        {
-            this.worldType = worldType;
-        }
-        public WorldTypes GetWorldType()
-        {
-            return worldType;
-        }
     }
 }

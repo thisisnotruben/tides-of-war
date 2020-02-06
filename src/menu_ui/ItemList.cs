@@ -57,7 +57,7 @@ namespace Game.Ui
             foreach (Node node in GetChildren())
             {
                 itemSlot = node as ItemSlot;
-                if (itemSlot != null && (itemSlot.GetItem() == null || (stackSlot && pickable.GetStackSize() > 0 &&
+                if (itemSlot != null && (itemSlot.GetItem() == null || (stackSlot && pickable.stackSize > 0 &&
                         pickable.Equals(itemSlot.GetItem()) && itemSlot.IsStacking() && !itemSlot.IsFull())))
                 {
                     itemSlot.SetItem(pickable);

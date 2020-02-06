@@ -167,7 +167,7 @@ namespace Game
         {
             float multiplier = MULTIPLIER;
             string[] splittedImgPath = imgPath.Split('/');
-            string raceName = splittedImgPath[splittedImgPath.Length - 2];
+            string raceName = imgPath.GetFile().BaseName().Split("-")[0];
             if (npc)
             {
                 switch (raceName)

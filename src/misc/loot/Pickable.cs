@@ -8,15 +8,31 @@ namespace Game.Misc.Loot
 {
     public abstract class Pickable : WorldObject
     {
-        private WorldTypes subType;
+        public WorldTypes subType;
         private short goldDrop;
-        private float duration;
-        private protected float cooldown;
-        private protected byte stackSize;
-        private protected short goldWorth;
-        private protected short level;
-        private protected string pickableDescription;
-        private protected AtlasTexture icon;
+        private float _duration;
+        public float duration
+        {
+            get
+            {
+                return _duration;
+            }
+            set
+            {
+                _duration = value;
+                if (duration > 0.0f)
+                {
+                    GetNode<Timer>("timer").WaitTime = duration;
+                }
+            }
+        }
+        public float cooldown { get; private protected set; }
+        public byte stackSize { get; private protected set; }
+        public short goldWorth { get; private protected set; }
+        public short level { get; private protected set; }
+        public string menuDescription { get; private protected set; }
+        public AtlasTexture icon { get; private protected set; }
+
         [Signal]
         public delegate void DescribePickable(Pickable pickable, string PickableWorldDescription);
         [Signal]
@@ -27,15 +43,15 @@ namespace Game.Misc.Loot
         public delegate void PickableExchanged(Pickable pickable, bool add);
         public override void _Ready()
         {
-            // Connect(nameof(PickableExchanged), Globals.GetWorldQuests(),
+            // Connect(nameof(PickableExchanged), Globals.worldQuests,
             // nameof(Game.Quests.WorldQuests.UpdateQuestPickable));
         }
         public abstract void Init(string worldName);
         public abstract void _OnTimerTimeout();
         public virtual void _OnSightAreaEntered(Area2D area2D)
         {
-            Character character = area2D.Owner as  Character;
-            if (character != null && !character.IsDead() && character is Player)
+            Character character = area2D.Owner as Character;
+            if (character != null && !character.dead && character is Player)
             {
                 Tween tween = GetNode<Tween>("tween");
                 tween.InterpolateProperty(this, ":scale", Scale, new Vector2(1.05f, 1.05f),
@@ -56,8 +72,8 @@ namespace Game.Misc.Loot
         }
         public virtual void _OnSightAreaExited(Area2D area2D)
         {
-            Character character = area2D.Owner as  Character;
-            if (character != null && !character.IsDead() && character is Player)
+            Character character = area2D.Owner as Character;
+            if (character != null && !character.dead && character is Player)
             {
                 GetNode<AudioStreamPlayer2D>("snd").Stream = (AudioStreamSample)Globals.sndMeta["chest_open"];
                 GetNode<Node2D>("select").Hide();
@@ -98,7 +114,7 @@ namespace Game.Misc.Loot
                     Globals.player.AddChild(combatText);
                     combatText.SetType($"+{goldDrop}", CombatText.TextType.GOLD,
                         Globals.player.GetNode<Node2D>("img").Position);
-                    Globals.player.SetGold(goldDrop);
+                    Globals.player.gold = goldDrop;
                     goldDrop = 0;
                 }
             }
@@ -138,10 +154,6 @@ namespace Game.Misc.Loot
         {
             EmitSignal(nameof(DescribePickable), this);
         }
-        public string GetPickableWorldDescription()
-        {
-            return pickableDescription;
-        }
         public void SetUpShop(bool stack)
         {
             EmitSignal(nameof(SetInMenu), this, stack, InGameMenu.Bags.MERCHANT);
@@ -161,7 +173,7 @@ namespace Game.Misc.Loot
                 }
             }
             InGameMenu.Bags bag = (this is Item) ? InGameMenu.Bags.INVENTORY : InGameMenu.Bags.SPELL;
-            if (Owner == Globals.GetMap() && addToBag)
+            if (Owner == Globals.map && addToBag)
             {
                 PauseMode = PauseModeEnum.Process;
                 EmitSignal(nameof(SetInMenu), this, stackSize > 0, bag);
@@ -170,9 +182,9 @@ namespace Game.Misc.Loot
             {
                 if (GetParent() != null)
                 {
-                    if (Owner == Globals.GetMap())
+                    if (Owner == Globals.map)
                     {
-                        Globals.GetMap().SetGetPickableLoc(GlobalPosition, false);
+                        Globals.map.SetGetPickableLoc(GlobalPosition, false);
                     }
                     GetParent().RemoveChild(this);
                 }
@@ -198,8 +210,7 @@ namespace Game.Misc.Loot
         }
         public virtual float GetTimeLeft()
         {
-            Timer timer = GetNode<Timer>("timer");
-            return timer.WaitTime - timer.TimeLeft;
+            return GetInitialTime() - GetNode<Timer>("timer").TimeLeft;
         }
         public float GetInitialTime()
         {
@@ -207,7 +218,7 @@ namespace Game.Misc.Loot
         }
         public bool Equals(Pickable pickable)
         {
-            return GetWorldName().Equals(pickable.GetWorldName());
+            return worldName.Equals(pickable.worldName);
         }
         public void Buy(Player buyer)
         {
@@ -215,19 +226,19 @@ namespace Game.Misc.Loot
             Pickable pickable;
             if (this is Item)
             {
-                pickable = PickableFactory.GetMakeItem(GetWorldName());
+                pickable = PickableFactory.GetMakeItem(worldName);
             }
             else
             {
-                pickable = PickableFactory.GetMakeSpell(GetWorldName());
+                pickable = PickableFactory.GetMakeSpell(worldName);
             }
             pickable.GetPickable(buyer, true);
-            buyer.SetGold((short)(-pickable.GetGold()));
+            buyer.gold = (short)(-pickable.GetGold());
         }
         public void Sell(Player seller)
         {
             EmitSignal(nameof(PickableExchanged), this, false);
-            seller.SetGold(GetGold());
+            seller.gold = GetGold();
             UnMake();
         }
         public void Drop()
@@ -243,41 +254,9 @@ namespace Game.Misc.Loot
             EmitSignal(nameof(Unmake));
             QueueFree();
         }
-        public void SetDuration(float duration)
-        {
-            this.duration = duration;
-            if (duration > 0.0f)
-            {
-                GetNode<Timer>("timer").WaitTime = duration;
-            }
-        }
-        public float GetDuration()
-        {
-            return duration;
-        }
-        public void SetPickableSubType(WorldTypes subType)
-        {
-            this.subType = subType;
-        }
-        public WorldTypes GetPickableSubType()
-        {
-            return subType;
-        }
-        public short GetLevel()
-        {
-            return level;
-        }
         public short GetGold()
         {
             return goldWorth;
-        }
-        public ushort GetStackSize()
-        {
-            return stackSize;
-        }
-        public AtlasTexture GetIcon()
-        {
-            return icon;
         }
         public void UncoupleSlot(ItemSlot itemSlot)
         {

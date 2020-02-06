@@ -9,14 +9,28 @@ namespace Game.Ability
 {
     public abstract class Spell : Pickable
     {
-        private protected float percentDamage;
-        private protected short manaCost;
-        private protected ushort spellRange;
-        private protected byte count;
-        private protected bool casted;
-        private protected bool ignoreArmor;
-        private protected bool effectOnTarget;
-        private protected bool requiresTarget;
+        public float percentDamage { get; private protected set; }
+        public short manaCost { get; private protected set; }
+        public ushort spellRange { get; private protected set; }
+        private byte _count;
+        public byte count
+        {
+            get
+            {
+                return _count;
+            }
+            private protected set
+            {
+                if (!loaded)
+                {
+                    _count = value;
+                }
+            }
+        }
+        public bool casted { get; private protected set; }
+        public bool ignoreArmor { get; private protected set; }
+        public bool effectOnTarget { get; private protected set; }
+        public bool requiresTarget { get; private protected set; }
         private protected Dictionary<string, ushort> attackTable;
         private protected Character caster = null;
         private protected Character target = null;
@@ -28,12 +42,12 @@ namespace Game.Ability
         }
         public override void Init(string worldName)
         {
-            SetWorldType((WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_")));
-            SetWorldName(worldName);
-            Name = GetWorldName();
+            worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_"));
+            this.worldName = worldName;
+            Name = worldName;
             Dictionary<string, string> spellData = SpellDB.GetSpellData(worldName);
-            SetPickableSubType((WorldTypes)Enum.Parse(typeof(WorldTypes), spellData["subType"].ToUpper()));
-            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/spell/{spellData[nameof(icon)]}_icon.tres");
+            subType = (WorldTypes)Enum.Parse(typeof(WorldTypes), spellData["subType"].ToUpper());
+            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{spellData[nameof(icon)]}_icon.tres");
             level = short.Parse(spellData[nameof(level)]);
             spellRange = ushort.Parse(spellData[nameof(spellRange)]);
             cooldown = short.Parse(spellData[nameof(cooldown)]);
@@ -44,7 +58,7 @@ namespace Game.Ability
             attackTable = Stats.attackTable[(spellRange > Stats.WEAPON_RANGE_MELEE) ? "RANGED" : "MELEE"];
             goldWorth = Stats.GetSpellWorthCost(level);
             manaCost = Stats.GetSpellManaCost(level);
-            pickableDescription = $"-Mana Cost: {manaCost}\n{((spellRange == 0) ? "" : $"-Range: {spellRange}\n")}" +
+            menuDescription = $"-Mana Cost: {manaCost}\n{((spellRange == 0) ? "" : $"-Range: {spellRange}\n")}" +
                 $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
                 $"\n\n-{spellData["description"]}";
         }
@@ -65,7 +79,7 @@ namespace Game.Ability
                 {
                     RemoveFromGroup(osb.GetInstanceId().ToString());
                 }
-                if (player.GetSpell() == this)
+                if (player.spell == this)
                 {
                     player.SetCurrentSpell(null);
                 }
@@ -75,15 +89,11 @@ namespace Game.Ability
         public override float GetTimeLeft()
         {
             Timer timer = GetNode<Timer>("timer");
-            return (count > 0) ? GetDuration() - (count * timer.WaitTime - base.GetTimeLeft()) : base.GetTimeLeft();
+            return (count > 0) ? duration - (count * timer.WaitTime - base.GetTimeLeft()) : base.GetTimeLeft();
         }
         public override void _OnTimerTimeout()
         {
             UnMake();
-        }
-        public virtual bool Casted()
-        {
-            return casted;
         }
         public virtual float Cast()
         {
@@ -94,19 +104,19 @@ namespace Game.Ability
             casted = true;
             if (!loaded)
             {
-                caster.SetMana((short) - manaCost);
+                caster.mana = (short) - manaCost;
             }
-            if ((GetPickableSubType() == WorldTypes.CASTING ||
-                    GetPickableSubType() == WorldTypes.DAMAGE_MODIFIER) &&
-                GetWorldType() != WorldTypes.EXPLOSIVE_TRAP)
+            if ((subType == WorldTypes.CASTING ||
+                    subType == WorldTypes.DAMAGE_MODIFIER) &&
+                worldType != WorldTypes.EXPLOSIVE_TRAP)
             {
                 SpellEffect spellEffect = SetEffect();
-                if (GetWorldType() == WorldTypes.FRENZY)
+                if (worldType == WorldTypes.FRENZY)
                 {
                     Connect(nameof(Unmake), spellEffect, nameof(SpellEffect._OnTimerTimeout));
                 }
             }
-            if (GetDuration() == 0.0f && GetPickableSubType() != WorldTypes.CHOOSE_AREA_EFFECT)
+            if (duration == 0.0f && subType != WorldTypes.CHOOSE_AREA_EFFECT)
             {
                 Name = GetInstanceId().ToString();
                 SetTime(2.5f, false);
@@ -116,7 +126,7 @@ namespace Game.Ability
         public virtual async void ConfigureSpell()
         {
             caster.SetCurrentSpell(this);
-            switch (GetPickableSubType())
+            switch (subType)
             {
                 case WorldTypes.DAMAGE_MODIFIER:
                     caster.weaponRange = spellRange;
@@ -138,26 +148,6 @@ namespace Game.Ability
         {
             return attackTable;
         }
-        public short GetManaCost()
-        {
-            return manaCost;
-        }
-        public ushort GetSpellRange()
-        {
-            return spellRange;
-        }
-        public bool RequiresTarget()
-        {
-            return requiresTarget;
-        }
-        public bool IsIgnoreArmor()
-        {
-            return ignoreArmor;
-        }
-        public float GetCoolDownTime()
-        {
-            return cooldown;
-        }
         public void SetTime(float time, bool setDuration = true)
         {
             Timer timer = GetNode<Timer>("timer");
@@ -167,16 +157,9 @@ namespace Game.Ability
             }
             if (setDuration)
             {
-                SetDuration((count > 0) ? time * count : time);
+                duration = (count > 0) ? time * count : time;
             }
             timer.Start();
-        }
-        public void SetCount(byte count)
-        {
-            if (!loaded)
-            {
-                this.count = count;
-            }
         }
         private protected void StunUnit(Character character, bool stun)
         {
@@ -189,7 +172,7 @@ namespace Game.Ability
             }
             else
             {
-                character.SetState(character.GetState(), true);
+                character.SetState(character.state, true);
             }
         }
         private protected void PrepSight()
@@ -202,7 +185,7 @@ namespace Game.Ability
         }
         private protected SpellEffect SetEffect()
         {
-            SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(GetWorldName());
+            SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(worldName);
             ((effectOnTarget) ? target : caster).AddChild(spellEffect);
             spellEffect.Owner = (effectOnTarget) ? target : caster;
             spellEffect.Init((effectOnTarget) ? target : caster);

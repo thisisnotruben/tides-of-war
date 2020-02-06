@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Ability;
+using Game.Database;
 using Game.Misc.Loot;
 using Game.Misc.Missile;
 using Game.Misc.Other;
 using Game.Utils;
-using Game.Database;
 using Godot;
 namespace Game.Actor
 {
@@ -16,33 +16,115 @@ namespace Game.Actor
         public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/misc/other/buff_anim.tscn");
         public static readonly PackedScene missileScene = (PackedScene)GD.Load("res://src/misc/missile/missile.tscn");
         public enum States { ALIVE, DEAD, MOVING, IDLE, ATTACKING, RETURNING }
-        private States state;
+        public virtual States state { get; private set; }
         private string swingType;
         private bool bumping;
-        private protected bool enemy = true;
+        public bool enemy { get; private protected set; }
         private protected bool engaging;
-        private protected bool dead;
-        private byte level = Stats.MAX_LEVEL; // for debugging purposes
+        public bool dead { get; private set; }
+        private byte _level;
+        public byte level
+        {
+            get
+            {
+                return _level;
+            }
+            set
+            {
+                _level = value;
+                Dictionary<string, double> stats = Stats.UnitMake((double)level,
+                    Stats.GetMultiplier(this is Npc, GetNode<Sprite>("img").Texture.ResourcePath));
+                foreach (string attribute in stats.Keys)
+                {
+                    Set(attribute, (short)stats[attribute]);
+                }
+                if (level > Stats.MAX_LEVEL)
+                {
+                    _level = Stats.MAX_LEVEL;
+                }
+            }
+        }
         public short armor;
-        public short hp;
+        private short _hp;
+        public short hp
+        {
+            get
+            {
+                return _hp;
+            }
+            set
+            {
+                _hp += value;
+                if (hp >= hpMax)
+                {
+                    _hp = hpMax;
+                    if (this is Npc && !spellQueue.Any() && IsInGroup(Globals.SAVE_GROUP))
+                    {
+                        RemoveFromGroup(Globals.SAVE_GROUP);
+                    }
+                }
+                else if (hp <= 0)
+                {
+                    _hp = 0;
+                    SetState(States.DEAD);
+                }
+                else if (this is Npc && !IsInGroup(Globals.SAVE_GROUP))
+                {
+                    AddToGroup(Globals.SAVE_GROUP);
+                }
+                if (hp > 0 && dead)
+                {
+                    SetState((short)States.ALIVE);
+                }
+                EmitSignal(nameof(UpdateHud), nameof(hp), worldName, hp, hpMax);
+            }
+        }
         public short hpMax;
-        public short mana;
+        private short _mana;
+        public short mana
+        {
+            get
+            {
+                return _mana;
+            }
+            set
+            {
+                _mana += value;
+                if (mana >= manaMax)
+                {
+                    _mana = manaMax;
+                    if (this is Npc && !spellQueue.Any() && IsInGroup(Globals.SAVE_GROUP))
+                    {
+                        RemoveFromGroup(Globals.SAVE_GROUP);
+                    }
+                }
+                else if (this is Npc && !IsInGroup(Globals.SAVE_GROUP))
+                {
+                    AddToGroup(Globals.SAVE_GROUP);
+                }
+                if (mana < 0)
+                {
+                    _mana = 0;
+                }
+                EmitSignal(nameof(UpdateHud), nameof(mana), worldName, mana, manaMax);
+            }
+        }
         public short manaMax;
         public short regenTime;
         public short minDamage;
         public short maxDamage;
-        public short stamina;
-        public short intellect;
-        public short agility;
+        public short stamina { get; private set; }
+        public short intellect { get; private set; }
+        public short agility { get; private set; }
         public ushort weaponRange = Stats.WEAPON_RANGE_MELEE;
         public float weaponSpeed = 1.3f;
         public float animSpeed = 1.0f;
         private protected Vector2 origin = new Vector2();
         private protected WorldTypes weaponType;
-        private protected Item weapon = null;
-        private protected Item vest = null;
-        private protected Spell spell = null;
-        private protected Character target = null;
+        public Item weapon = null;
+        public Item vest = null;
+        public Spell spell { get; private protected set; }
+        public virtual Character target { get; set; }
         private protected Speaker2D snd;
         private protected List<Vector2> path = new List<Vector2>();
         private List<Spell> spellQueue = new List<Spell>();
@@ -63,15 +145,15 @@ namespace Game.Actor
         public override void _Ready()
         {
             snd = GetNode<Speaker2D>("snd");
-            // Connect(nameof(Talked), Globals.GetWorldQuests(),
+            // Connect(nameof(Talked), Globals.worldQuests,
             //     nameof(Game.Quests.WorldQuests.UpdateQuestCharacter), new Godot.Collections.Array { this });
-            // Connect(nameof(Died), Globals.GetWorldQuests(),
+            // Connect(nameof(Died), Globals.worldQuests,
             //     nameof(Game.Quests.WorldQuests.UpdateQuestCharacter), new Godot.Collections.Array { this });
             GetNode<RayCast2D>("ray").AddException(GetNode<Area2D>("area"));
         }
         public virtual void Attack(bool ignoreArmor = false)
         {
-            if (target != null && !target.IsDead() && !IsDead())
+            if (target != null && !target.dead && !dead)
             {
                 if (weaponType == WorldTypes.BOW || weaponType == WorldTypes.MAGIC)
                 {
@@ -90,18 +172,18 @@ namespace Game.Actor
                     string sndName = weaponType.ToString().ToLower() + sndIdx.ToString();
                     CombatText.TextType hitType;
                     Dictionary<string, ushort> attackTable = Stats.attackTable["MELEE"];
-                    if (spell != null && !spell.Casted())
+                    if (spell != null && !spell.casted)
                     {
                         attackTable = spell.GetAttackTable();
                         if (diceRoll <= attackTable["CRITICAL"])
                         {
-                            ignoreArmor = spell.IsIgnoreArmor();
+                            ignoreArmor = spell.ignoreArmor;
                             damage = (short)Math.Round((float)damage * spell.Cast());
                             target.SetSpell(spell);
                         }
                         else
                         {
-                            SetMana(spell.GetManaCost());
+                            mana = spell.manaCost;
                         }
                     }
                     if (diceRoll <= attackTable["HIT"])
@@ -121,7 +203,7 @@ namespace Game.Actor
                     }
                     else if (diceRoll <= attackTable["PARRY"] &&
                         target.weaponType != WorldTypes.BOW &&
-                        target.GetState() == States.ATTACKING)
+                        target.state == States.ATTACKING)
                     {
                         hitType = CombatText.TextType.PARRY;
                         damage = 0;
@@ -159,7 +241,7 @@ namespace Game.Actor
             {
                 damage -= armor;
             }
-            if (GetState() != States.ATTACKING)
+            if (state != States.ATTACKING)
             {
                 // Stops regen timer
                 GetNode<Timer>("timer").Stop();
@@ -182,9 +264,9 @@ namespace Game.Actor
                     AddChild(combatText);
                     if (damage > 0)
                     {
-                        SetHp((short) - damage);
+                        hp = (short) - damage;
                         combatText.SetType($"-{damage}", CombatText.TextType.HIT, GetNode<Node2D>("img").Position);
-                        if (!IsDead() && GetState() == States.ATTACKING || GetState() == States.IDLE)
+                        if (!dead && state == States.ATTACKING || state == States.IDLE)
                         {
                             Bump(GetDirection(GlobalPosition, attacker.GlobalPosition).Rotated((float)Math.PI) / 4.0f);
                         }
@@ -220,12 +302,6 @@ namespace Game.Actor
         {
             return GetNode<Node2D>("img").GlobalPosition;
         }
-        public void SetOrigin(Vector2 origin)
-        {
-            this.origin = origin;
-            GlobalPosition = origin;
-            path.Add(origin);
-        }
         public async void Bump(Vector2 direction)
         {
             if (bumping || direction.Equals(new Vector2()))
@@ -239,7 +315,7 @@ namespace Game.Actor
                 GlobalPosition.DistanceTo(GlobalPosition + direction) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
             tween.Start();
             await ToSignal(tween, "tween_completed");
-            Vector2 gridPos = Globals.GetMap().GetGridPosition(GlobalPosition);
+            Vector2 gridPos = Globals.map.GetGridPosition(GlobalPosition);
             tween.InterpolateProperty(this, ":global_position", GlobalPosition, gridPos,
                 gridPos.DistanceTo(GlobalPosition) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.In);
             tween.Start();
@@ -275,16 +351,16 @@ namespace Game.Actor
         }
         public void _OnTimerTimeout()
         {
-            if (IsDead())
+            if (dead)
             {
                 if (this is Npc)
                 {
                     SetState(States.ALIVE);
                 }
             }
-            else if (GetState() == States.ATTACKING)
+            else if (state == States.ATTACKING)
             {
-                if (target != null && !IsDead() && !target.IsDead())
+                if (target != null && !dead && !target.dead)
                 {
                     Sprite img = GetNode<Sprite>("img");
                     Node2D missile = GetNode<Node2D>("img/missile");
@@ -306,15 +382,15 @@ namespace Game.Actor
             else if (!engaging && (hp < hpMax || mana < manaMax))
             {
                 string imgPath = GetNode<Sprite>("img").Texture.ResourcePath;
-                short regenAmount = Stats.HpManaRegenAmount(GetLevel(), Stats.GetMultiplier(this is Npc, imgPath));
-                SetHp(regenAmount);
-                SetMana(regenAmount);
+                short regenAmount = Stats.HpManaRegenAmount(level, Stats.GetMultiplier(this is Npc, imgPath));
+                hp = regenAmount;
+                mana = regenAmount;
             }
         }
         private protected static Vector2 GetDirection(Vector2 currentPos, Vector2 targetPos)
         {
-            Vector2 myPos = Globals.GetMap().GetGridPosition(currentPos);
-            targetPos = Globals.GetMap().GetGridPosition(targetPos);
+            Vector2 myPos = Globals.map.GetGridPosition(currentPos);
+            targetPos = Globals.map.GetGridPosition(targetPos);
             Vector2 direction = new Vector2();
             if (myPos.x > targetPos.x)
             {
@@ -346,17 +422,9 @@ namespace Game.Actor
         }
         public abstract void MoveTo(Vector2 WorldPosition, List<Vector2> route);
         public abstract void _OnSelectPressed();
-        public States GetState()
-        {
-            return state;
-        }
         public virtual void SetState(States state, bool overrule = false)
         {
             this.state = state;
-        }
-        public bool IsDead()
-        {
-            return dead;
         }
         public virtual async void SetDead(bool dead)
         {
@@ -368,7 +436,7 @@ namespace Game.Actor
             {
                 EmitSignal(nameof(Died));
                 SetProcess(false);
-                SetTarget(null);
+                target = null;
                 GetNode<Tween>("tween").RemoveAll();
                 GetNode<Timer>("timer").Stop();
                 GetNode<AnimationPlayer>("anim").Play("dying");
@@ -382,9 +450,9 @@ namespace Game.Actor
                 Modulate = new Color(1.0f, 1.0f, 1.0f, 0.8f);
                 if (hp > 0)
                 {
-                    SetHp((short)(-hpMax));
+                    hp = (short)(-hpMax);
                 }
-                SetMana((short)(-manaMax));
+                mana = (short)(-manaMax);
                 foreach (Spell spell in spellQueue)
                 {
                     spell.UnMake();
@@ -411,95 +479,6 @@ namespace Game.Actor
                 }
             }
         }
-        public void SetHp(short addedHp)
-        {
-            hp += addedHp;
-            if (hp >= hpMax)
-            {
-                hp = hpMax;
-                if (this is Npc && !spellQueue.Any() && IsInGroup(Globals.SAVE_GROUP))
-                {
-                    RemoveFromGroup(Globals.SAVE_GROUP);
-                }
-            }
-            else if (hp <= 0)
-            {
-                hp = 0;
-                SetState(States.DEAD);
-            }
-            else if (this is Npc && !IsInGroup(Globals.SAVE_GROUP))
-            {
-                AddToGroup(Globals.SAVE_GROUP);
-            }
-            if (hp > 0 && IsDead())
-            {
-                SetState((short)States.ALIVE);
-            }
-            EmitSignal(nameof(UpdateHud), nameof(hp), GetWorldName(), hp, hpMax);
-        }
-        public void SetMana(short addedMana)
-        {
-            mana += addedMana;
-            if (mana >= manaMax)
-            {
-                mana = manaMax;
-                if (this is Npc && !spellQueue.Any() && IsInGroup(Globals.SAVE_GROUP))
-                {
-                    RemoveFromGroup(Globals.SAVE_GROUP);
-                }
-            }
-            else if (this is Npc && !IsInGroup(Globals.SAVE_GROUP))
-            {
-                AddToGroup(Globals.SAVE_GROUP);
-            }
-            if (mana < 0)
-            {
-                mana = 0;
-            }
-            EmitSignal(nameof(UpdateHud), nameof(mana), GetWorldName(), mana, manaMax);
-        }
-        public Item GetWeapon()
-        {
-            return weapon;
-        }
-        public void SetWeapon(Item item)
-        {
-            weapon = item;
-        }
-        public Item GetArmor()
-        {
-            return vest;
-        }
-        public void SetArmor(Item item)
-        {
-            vest = item;
-        }
-        public short GetLevel()
-        {
-            return level;
-        }
-        public void SetLevel(byte level)
-        {
-            Dictionary<string, double> stats = Stats.UnitMake((double)level,
-                Stats.GetMultiplier(this is Npc, GetNode<Sprite>("img").Texture.ResourcePath));
-            foreach (string attribute in stats.Keys)
-            {
-                Set(attribute, (short)stats[attribute]);
-            }
-            this.level = level;
-            if (this.level > Stats.MAX_LEVEL)
-            {
-                this.level = Stats.MAX_LEVEL;
-            }
-        }
-        public virtual void SetTarget(Character target)
-        {
-            this.target = target;
-        }
-        public Character GetTarget()
-        {
-            return target;
-        }
         public void SetCurrentSpell(Spell spell)
         {
             this.spell = spell;
@@ -513,12 +492,12 @@ namespace Game.Actor
                     otherSpell.UnMake();
                 }
             }
-            if (spell.GetDuration() > 0.0f)
+            if (spell.duration > 0.0f)
             {
                 spellQueue.Add(spell);
                 spell.Connect(nameof(Spell.Unmake), this, nameof(RemoveFromSpellQueue), new Godot.Collections.Array() { spell });
             }
-            EmitSignal(nameof(UpdateHudIcon), GetWorldName(), spell, seek);
+            EmitSignal(nameof(UpdateHudIcon), worldName, spell, seek);
         }
         public void RemoveFromSpellQueue(Spell spell)
         {
@@ -536,32 +515,24 @@ namespace Game.Actor
                 {
                     BuffAnim buffAnim = (BuffAnim)buffAnimScene.Instance();
                     GetNode("img").AddChild(buffAnim);
-                    buffAnim.SetItem(buff);
+                    buffAnim.item = buff;
                     buff.Connect(nameof(Item.UnMake), buffAnim, nameof(QueueFree));
                 }
                 buff.GetNode<Timer>("timer").Start();
                 foreach (Item currentBuff in buffs["active"])
                 {
-                    if (currentBuff.GetPickableSubType() == buff.GetPickableSubType() && !buff.GetWorldName().ToLower().Contains("potion"))
+                    if (currentBuff.subType == buff.subType && !buff.worldName.ToLower().Contains("potion"))
                     {
                         currentBuff.ConfigureBuff(this, true);
                     }
                 }
-                if (buff.GetPickableSubType() != Item.WorldTypes.HEALING && buff.GetPickableSubType() != Item.WorldTypes.MANA)
+                if (buff.subType != Item.WorldTypes.HEALING && buff.subType != Item.WorldTypes.MANA)
                 {
-                    EmitSignal(nameof(UpdateHudIcon), GetWorldName(), buff, seek);
+                    EmitSignal(nameof(UpdateHudIcon), worldName, buff, seek);
                 }
                 buffs["active"].Remove(buff);
                 buffPool.Remove(buff);
             }
-        }
-        public ushort GetWeaponRange()
-        {
-            return weaponRange;
-        }
-        public Spell GetSpell()
-        {
-            return spell;
         }
         public void SetTime(float time, bool oneShot = false)
         {
@@ -575,41 +546,37 @@ namespace Game.Actor
             }
             else
             {
-                GD.Print($"Error: {GetWorldName()} set invalid time");
+                GD.Print($"Error: {worldName} set invalid time");
             }
         }
         public void PlaceFootStep(bool step)
         {
-            if (!IsDead())
+            if (!dead)
             {
                 FootStep footStep = (FootStep)footStepScene.Instance();
                 Vector2 stepPos = GlobalPosition;
                 stepPos.y -= 3;
                 stepPos.x += (step) ? 1.0f : -4.0f;
-                Globals.GetMap().GetNode("ground").AddChild(footStep);
+                Globals.map.GetNode("ground").AddChild(footStep);
                 footStep.GlobalPosition = stepPos;
             }
         }
-        public bool IsEnemy()
-        {
-            return enemy;
-        }
         public void UpdateHUD()
         {
-            EmitSignal(nameof(UpdateHud), "HP", GetWorldName(), hp, hpMax);
-            EmitSignal(nameof(UpdateHud), "MANA", GetWorldName(), mana, manaMax);
-            // EmitSignal(nameof(UpdateHud), "ICON_HIDE", GetWorldName(), hp, hpMax);
+            EmitSignal(nameof(UpdateHud), "HP", worldName, hp, hpMax);
+            EmitSignal(nameof(UpdateHud), "MANA", worldName, mana, manaMax);
+            // EmitSignal(nameof(UpdateHud), "ICON_HIDE", worldName, hp, hpMax);
             foreach (Spell spell in spellQueue)
             {
                 EmitSignal(nameof(UpdateHudIcon), spell, spell.GetTimeLeft());
             }
         }
-        public void SetImg(string imgPath, bool loaded = false)
+        public void SetImg(string imgName, bool loaded = false)
         {
-            Dictionary<string, string> imageData = ImageDB.GetImageData(imgPath.Split("/")[1].BaseName());
+            Dictionary<string, string> imageData = ImageDB.GetImageData(imgName);
             swingType = imageData["swing"];
             Sprite img = GetNode<Sprite>("img");
-            img.Texture = (Texture)GD.Load("res://asset/img/character/".PlusFile(imgPath));
+            img.Texture = (Texture)GD.Load($"res://asset/img/character/{imgName}.png");
             img.Hframes = int.Parse(imageData["total"]);
             AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
             Animation animRes = anim.GetAnimation("attacking");
@@ -658,7 +625,7 @@ namespace Game.Actor
                     // This is a commoner
                     break;
                 default:
-                    GD.Print($"{imgPath} doesn't have a valid weaponType");
+                    GD.Print($"{imgName} doesn't have a valid weaponType");
                     break;
             }
             AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData["body"]}.tres");
@@ -673,7 +640,7 @@ namespace Game.Actor
             select.Position = new Vector2(-textureSize.x / 2.0f, -textureSize.y);
             areaBody.Position = new Vector2(-0.5f, -textureSize.y / 2.0f);
             sightDistance.Position = areaBody.Position;
-            Dictionary<string, double> stats = Stats.UnitMake((double)level, Stats.GetMultiplier(this is Npc, imgPath));
+            Dictionary<string, double> stats = Stats.UnitMake((double)level, Stats.GetMultiplier(this is Npc, imgName));
             foreach (string attribute in stats.Keys)
             {
                 Set(attribute, (short)stats[attribute]);
@@ -681,8 +648,8 @@ namespace Game.Actor
             SetTime(regenTime);
             if (!loaded)
             {
-                SetHp(hpMax);
-                SetMana(manaMax);
+                hp = hpMax;
+                mana = manaMax;
             }
         }
         public virtual void SetSaveData(Godot.Collections.Dictionary saveData)

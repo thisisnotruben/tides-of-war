@@ -15,7 +15,7 @@ namespace Game.Ui
             player = ((InGameMenu)Owner).player;
             SetProcess(false);
             return;
-            string mapName = Globals.GetMap().Name;
+            string mapName = Globals.map.Name;
             string miniMapPath = $"res://asset/img/map/{mapName}.png";
             if (new Directory().FileExists(miniMapPath))
             {
@@ -28,7 +28,7 @@ namespace Game.Ui
         }
         public override void _Process(float delta)
         {
-            if (player.GetState() == Character.States.MOVING)
+            if (player.state == Character.States.MOVING)
             {
                 Hide();
             }
@@ -44,7 +44,7 @@ namespace Game.Ui
             {
                 Rect2 rect2 = new Rect2(playerPos - ScaleToMapRatio(player.GetCenterPos() - character.GetCenterPos()) - offset, drawSize);
                 Color rectColor = new Color("#ffffff");
-                switch (character.GetWorldType())
+                switch (character.worldType)
                 {
                     case Character.WorldTypes.PLAYER:
                         rectColor = new Color("#ff0000");
@@ -63,7 +63,7 @@ namespace Game.Ui
                         break;
                 }
                 DrawRect(rect2, rectColor);
-                if (player.IsDead() && path.Count > 0)
+                if (player.dead && path.Count > 0)
                 {
                     for (int i = 0; i < path.Count - 1; i++)
                     {
@@ -81,14 +81,14 @@ namespace Game.Ui
         {
             if (mapRatio.Equals(new Vector2()))
             {
-                TileMap tileMap = Globals.GetMap().GetNode<TileMap>("ground/g1");
+                TileMap tileMap = Globals.map.GetNode<TileMap>("ground/g1");
                 Sprite map = GetNode<Sprite>("map");
                 mapRatio = tileMap.GetUsedRect().Size * tileMap.CellSize / (map.Texture.GetSize() * map.Scale);
                 mapRatio = new Vector2(1.0f / mapRatio.x, 1.0f / mapRatio.y);
             }
-            if (player.IsDead() && !player.GetGravePos().Equals(new Vector2()) && path.Count == 0)
+            if (player.dead && !player.gravePos.Equals(new Vector2()) && path.Count == 0)
             {
-                path = Globals.GetMap().getAPath(player.GlobalPosition, player.GetGravePos());
+                path = Globals.map.getAPath(player.GlobalPosition, player.gravePos);
             }
             GetNode<Node2D>("map").Position = GetNode<Node2D>("player_pos").GlobalPosition - ScaleToMapRatio(player.GetCenterPos());
             SetProcess(true);

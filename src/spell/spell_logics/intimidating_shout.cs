@@ -21,7 +21,7 @@ namespace Game.Ability
             {
                 foreach (Area2D characterArea2D in GetNode<Area2D>("sight").GetOverlappingAreas())
                 {
-                    Character character = characterArea2D.Owner as  Character;
+                    Character character = characterArea2D.Owner as Character;
                     if (character != null && character != caster)
                     {
                         short amount1 = (short)Math.Round((float)character.minDamage * 0.20f);

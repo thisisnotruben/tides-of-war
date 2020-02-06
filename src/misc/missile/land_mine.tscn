@@ -2,10 +2,12 @@
 
 [ext_resource path="res://src/misc/missile/LandMine.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/missile-spell/land_mine.tres" type="Texture" id=2]
-[ext_resource path="res://src/utils/AudioStreamPlayer2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/utils/audio_stream_player_2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://asset/snd/spell/explosion.ogg" type="AudioStream" id=4]
 [ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=6]
+
+
 
 
 

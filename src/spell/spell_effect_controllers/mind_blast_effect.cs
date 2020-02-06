@@ -7,10 +7,10 @@ namespace Game.Ability
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);
-            Bolt bolt = Owner as  Bolt;
+            Bolt bolt = Owner as Bolt;
             if (bolt != null)
             {
-                bolt.GlobalPosition = bolt.GetTarget().GetNode<Node2D>("head").GlobalPosition;
+                bolt.GlobalPosition = bolt.target.GetNode<Node2D>("head").GlobalPosition;
                 tween.Start();
                 timer.Start();
             }

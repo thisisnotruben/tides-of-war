@@ -19,8 +19,8 @@ namespace Game.Ability
                 {
                     caster.mana -= manaCost;
                 }
-                SetCount(3);
-                target = caster.GetTarget();
+                count = 3;
+                target = caster.target;
                 casterAnim.Play(animName, -1, animSpeed);
             }
             else

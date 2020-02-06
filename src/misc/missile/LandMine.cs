@@ -56,7 +56,7 @@ namespace Game.Misc.Other
                     }
                     else if (layer == Globals.Collision["COMBUSTIBLE"])
                     {
-                        ICombustible obj = area2D.Owner as  ICombustible;
+                        ICombustible obj = area2D.Owner as ICombustible;
                         if (obj != null)
                         {
                             obj.Explode();

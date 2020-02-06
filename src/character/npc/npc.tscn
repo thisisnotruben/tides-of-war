@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/character/character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/character/npc/Npc.cs" type="Script" id=2]
+
+
+[node name="npc" groups=[
+"npc",
+] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+[connection signal="mouse_entered" from="area" to="." method="_OnAreaMouseEntered"]
+[connection signal="mouse_exited" from="area" to="." method="_OnAreaMouseExited"]
+[connection signal="area_entered" from="sight" to="." method="_OnSightAreaEntered"]
+[connection signal="area_exited" from="sight" to="." method="_OnSightAreaExited"]

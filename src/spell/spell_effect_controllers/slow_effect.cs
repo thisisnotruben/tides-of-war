@@ -13,12 +13,12 @@ namespace Game.Ability
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);
-            Bolt bolt = Owner as  Bolt;
+            Bolt bolt = Owner as Bolt;
             if (bolt != null)
             {
                 GetParent().RemoveChild(this);
-                bolt.GetTarget().AddChild(this);
-                Position = bolt.GetTarget().GetNode<Node2D>("img").Position;
+                bolt.target.AddChild(this);
+                Position = bolt.target.GetNode<Node2D>("img").Position;
                 spell.Connect(nameof(Unmake), this, nameof(_OnTimerTimeout));
                 tween.Start();
                 timer.Start();

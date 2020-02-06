@@ -8,7 +8,6 @@ namespace Game.Ui
         public enum SlotType : byte { BAG_SLOT, HUD_SLOT, SHORTCUT }
         public SlotType slotType = SlotType.BAG_SLOT;
         private bool allowCoolDown;
-        private bool stacking;
         private List<Pickable> itemStack = new List<Pickable>();
         private float time;
         private ushort stackSize;
@@ -107,7 +106,7 @@ namespace Game.Ui
                     }
                     else if (!funnel)
                     {
-                        EmitSignal(nameof(StackSizeChanged), GetItem().GetWorldName(), itemStack.Count, this);
+                        EmitSignal(nameof(StackSizeChanged), GetItem().worldName, itemStack.Count, this);
                     }
                 }
                 if (GetNode<TextureRect>("m/icon").Texture == null)
@@ -118,7 +117,6 @@ namespace Game.Ui
                         Disconnect(nameof(SyncSlot), (Godot.Object)link["target"], nameof(_OnSyncShortcut));
                     }
                     allowCoolDown = false;
-                    stacking = false;
                     itemStack.Clear();
                     stackSize = 0;
                     GetNode<Control>("count").Hide();
@@ -143,12 +141,11 @@ namespace Game.Ui
                 {
                     TextureNormal = (Texture)GD.Load(texPath);
                 }
-                GetNode<TextureRect>("m/icon").Texture = pickable.GetIcon();
-                if (pickable.GetStackSize() > 0)
+                GetNode<TextureRect>("m/icon").Texture = pickable.icon;
+                if (pickable.stackSize > 0)
                 {
-                    stackSize = pickable.GetStackSize();
-                    stacking = true;
-                    if (itemStack.Count > 0 && !pickable.GetWorldName().Equals(itemStack[0].GetWorldName()))
+                    stackSize = pickable.stackSize;
+                    if (itemStack.Count > 0 && !pickable.worldName.Equals(itemStack[0].worldName))
                     {
                         itemStack.Clear();
                     }
@@ -167,7 +164,6 @@ namespace Game.Ui
                 {
                     GetNode<Tween>("tween").StopAll();
                     GetNode<Control>("count").Hide();
-                    stacking = false;
                     stackSize = 0;
                     itemStack.Clear();
                     itemStack.Add(pickable);
@@ -180,7 +176,7 @@ namespace Game.Ui
         }
         public void CoolDown(Pickable itm, float value, float seek)
         {
-            if (GetItem() != null && itm != null && GetItem().GetWorldName().Equals(itm.GetWorldName()) &&
+            if (GetItem() != null && itm != null && GetItem().worldName.Equals(itm.worldName) &&
                 !allowCoolDown && value > 0.0f && value != seek)
             {
                 allowCoolDown = true;
@@ -213,7 +209,7 @@ namespace Game.Ui
         }
         public bool IsStacking()
         {
-            return stacking;
+            return stackSize > 0;
         }
         public bool IsCoolingDown()
         {

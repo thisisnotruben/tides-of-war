@@ -10,7 +10,7 @@ namespace Game.Ability
         public override void OnHit(Spell spell = null)
         {
             base.OnHit(spell);
-            GlobalPosition = character.GetTarget().GetCenterPos();
+            GlobalPosition = character.target.GetCenterPos();
         }
     }
 }

@@ -22,10 +22,10 @@ namespace Game.Actor
         public override void SetDead(bool dead) { }
         public override void _OnSelectPressed()
         {
-            if (Globals.player.GetTarget() == this)
+            if (Globals.player.target == this)
             {
-                Globals.player.SetTarget(null);
-                SetTarget(null);
+                Globals.player.target = null;
+                target = null;
             }
             else
             {
@@ -35,8 +35,8 @@ namespace Game.Actor
                 tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
                     0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
                 tween.Start();
-                SetTarget(Globals.player);
-                Globals.player.SetTarget(this);
+                target = Globals.player;
+                Globals.player.target = this;
             }
         }
     }

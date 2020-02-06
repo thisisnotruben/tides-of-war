@@ -22,7 +22,7 @@ namespace Game
                     GetTree().Root.AddChild(scene);
                     if (scene is Map.Map)
                     {
-                        Globals.SetMap(scene as Map.Map);
+                        Globals.map = scene as Map.Map;
                     }
                     if (sceneMeta != null && sceneMeta.Count > 0)
                     {
@@ -34,7 +34,7 @@ namespace Game
                             }
                         }
                     }
-                    Globals.GetWorldQuests().Update();
+                    Globals.worldQuests.Update();
                     SetProcess(false);
                     QueueFree();
                     break;

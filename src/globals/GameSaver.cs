@@ -9,7 +9,7 @@ namespace Game
             File file = new File();
             file.Open(savePath, File.ModeFlags.Write);
             Dictionary<string, string> saveDict = new Dictionary<string, string>();
-            saveDict.Add("scene", Globals.GetMap().Filename);
+            saveDict.Add("scene", Globals.map.Filename);
             foreach (ISaveable node in GetTree().GetNodesInGroup(Globals.SAVE_GROUP))
             {
                 saveDict[((Node)node).GetPath()] = JSON.Print(node.GetSaveData());

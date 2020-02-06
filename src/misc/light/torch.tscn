@@ -13,7 +13,6 @@ use_parent_material = true
 texture = ExtResource( 1 )
 offset = Vector2( -0.5, -7 )
 hframes = 2
-frame = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -33,7 +32,7 @@ visible = false
 use_parent_material = true
 position = Vector2( 0, -7 )
 texture = ExtResource( 4 )
-color = Color( 0.961111, 0.807778, 0.665556, 1 )
+color = Color( 0.982422, 0.822327, 0.595837, 1 )
 mode = 2
 
 [node name="fire" parent="." instance=ExtResource( 5 )]

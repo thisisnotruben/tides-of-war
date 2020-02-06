@@ -1,6 +1,6 @@
-using Godot;
 using System;
 using System.Collections.Generic;
+using Godot;
 namespace Game.Utils
 {
     public class MapImporter : Node
@@ -13,7 +13,7 @@ namespace Game.Utils
         public delegate void SendScenePath(string scenePath);
         public override void _Ready()
         {
-            Connect(nameof(SendScenePath), GetNode(nameof(ColorRect)), "set_map_script", new Godot.Collections.Array() {scenePath});
+            Connect(nameof(SendScenePath), GetNode(nameof(ColorRect)), "set_map_script", new Godot.Collections.Array() { scenePath });
             EmitSignal(nameof(SendScenePath));
             PackedScene packedScene = (PackedScene)GD.Load(scenePath);
             Godot.Error code = CheckMap(packedScene);
@@ -27,8 +27,8 @@ namespace Game.Utils
         {
             Node map = mapToImport.Instance();
             tileMap = map.GetNode<TileMap>("zed/z1");
- 
-            PackedScene dayTimeScene = (PackedScene)GD.Load("res://src/map/doodads/DayTime.tscn");
+
+            PackedScene dayTimeScene = (PackedScene)GD.Load("res://src/map/doodads/day_time.tscn");
             Node dayTime = dayTimeScene.Instance();
             map.AddChild(dayTime);
             dayTime.Owner = map;
@@ -50,15 +50,22 @@ namespace Game.Utils
             SetLights(map);
             TreeUseMaterial(map);
 
-            foreach (String nodePath in new String[] {"zed/characters", "zed/target_dummys", "meta/paths", "meta/lights"})
+            foreach (String nodePath in new String[] { "zed/characters", "zed/target_dummys", "meta/paths", "meta/lights" })
             {
-             map.GetNode(nodePath).Owner = null;
+                map.GetNode(nodePath).Owner = null;
             }
 
             map.GetNode<TileMap>("meta/coll_nav").Modulate = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             map.GetNode<TileMap>("zed/z1").CellYSort = true;
             map.GetNode<Node2D>("meta").Hide();
-            map.GetNode("zed/z1").MoveChild(map.GetNode("zed/z1/player"), 0);
+            foreach (Node node in map.GetNode("zed/z1").GetChildren())
+            {
+                if (node.Name.Contains("player"))
+                {
+                    map.GetNode("zed/z1").MoveChild(node, 0);
+                    break;
+                }
+            }
             map.GetNode("meta").MoveChild(map.GetNode("meta/coll_nav"), 0);
             map.MoveChild(map.GetNode("day_time"), 0);
             map.MoveChild(map.GetNode("veil_fog"), 1);
@@ -85,7 +92,7 @@ namespace Game.Utils
             foreach (Node2D node in map.GetNode("zed/characters").GetChildren())
             {
                 PackedScene scene = (PackedScene)GD.Load(
-                    String.Format(scenePath, (node.Name.Contains("player")) ? "player/Player" : "npc/Npc"));
+                    String.Format(scenePath, (node.Name.Contains("player")) ? "player/player" : "npc/npc"));
                 Node2D character = (Node2D)scene.Instance();
                 character.Name = node.Name;
                 map.GetNode("zed/z1").AddChild(character);

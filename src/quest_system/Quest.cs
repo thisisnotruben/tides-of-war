@@ -9,9 +9,9 @@ namespace Game.Quests
 {
     public class Quest : Node
     {
-        private string questGiver;
-        private string questName;
-        private string questStart;
+        public string questGiver { get; private set; }
+        public string questName { get; private set; }
+        public string questStart { get; private set; }
         private string questActive;
         private string questCompleted;
         private string questDelivered;
@@ -19,32 +19,13 @@ namespace Game.Quests
         private string questRecieverDelivered;
         private bool keepPickables;
         private short gold;
-        private Pickable reward;
+        public Pickable reward { get; private set; }
         private Dictionary<string, string> objective = new Dictionary<string, string>();
-        private WorldQuests.QuestState state;
-        public string GetQuestGiverPath()
-        {
-            return questGiver;
-        }
-        public string GetQuestName()
-        {
-            return questName;
-        }
+        public WorldQuests.QuestState state { get; private set; }
+
         public short GetGold()
         {
             return gold;
-        }
-        public string GetQuestStartText()
-        {
-            return questStart;
-        }
-        public Pickable GetReward()
-        {
-            return reward;
-        }
-        public WorldQuests.QuestState GetState()
-        {
-            return state;
         }
         public void ChangeState(WorldQuests.QuestState state)
         {
@@ -74,7 +55,7 @@ namespace Game.Quests
         }
         public bool IsPartOf(WorldObject worldObject)
         {
-            return objective.ContainsKey(worldObject.GetWorldName());
+            return objective.ContainsKey(worldObject.worldName);
         }
         private void LoadText()
         {
@@ -137,7 +118,7 @@ namespace Game.Quests
         {
             foreach (string key in objective.Keys)
             {
-                if (key.Equals(worldObject.GetWorldName()))
+                if (key.Equals(worldObject.worldName))
                 {
                     string[] objectiveValues = objective[key].Split("-");
                     byte tracker = byte.Parse(objectiveValues[1]);

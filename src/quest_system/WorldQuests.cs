@@ -26,7 +26,7 @@ namespace Game.Quests
         {
             Dictionary<string, Dictionary<string, string>> allQuestData = QuestDB.GetAllQuestData();
             Dictionary<string, List<string>> chainQuestQueue = new Dictionary<string, List<string>>();
-            PackedScene questScene = (PackedScene)GD.Load("res://src/quest_system/Quest.tscn");
+            PackedScene questScene = (PackedScene)GD.Load("res://src/quest_system/quest.tscn");
             foreach (string questName in allQuestData.Keys)
             {
                 foreach (string key in allQuestData[questName].Keys)
@@ -131,7 +131,7 @@ namespace Game.Quests
             {
                 foreach (Quest quest in questCatagory.GetChildren())
                 {
-                    if (character.GetPath().Equals(quest.GetQuestGiverPath()))
+                    if (character.GetPath().Equals(quest.questGiver))
                     {
                         focusedQuest = quest;
                         if (questCatagory == availableQuests)

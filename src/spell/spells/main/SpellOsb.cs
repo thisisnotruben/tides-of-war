@@ -34,8 +34,8 @@ namespace Game.Ability
             }
             else
             {
-                Character character = area2D.Owner as  Character;
-                if (character != null && !character.IsDead() && !targets.Contains(character))
+                Character character = area2D.Owner as Character;
+                if (character != null && !character.dead && !targets.Contains(character))
                 {
                     targets.Add(character);
                     if (Visible)
@@ -54,7 +54,7 @@ namespace Game.Ability
             }
             else
             {
-                Character character = area2D.Owner as  Character;
+                Character character = area2D.Owner as Character;
                 if (character != null && targets.Contains(character))
                 {
                     character.Modulate = new Color("#ffffff");
@@ -95,7 +95,7 @@ namespace Game.Ability
         {
             base._OnTweenCompleted(obj, nodePath);
             Player player = obj as Player;
-            if (player != null && player.GetState() == Character.States.MOVING &&
+            if (player != null && player.state == Character.States.MOVING &&
                 nodePath.Equals(":global_position"))
             {
                 player.GetMenu().GetNode<Control>("c/csb").Hide();

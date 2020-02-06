@@ -20,7 +20,7 @@ namespace Game.Map
         private Vector2 pathEndPosition;
         public override void _Ready()
         {
-            Globals.SetMap(this); // This is used for debugging, until Godot fixies the issue
+            Globals.map = this; // This is used for debugging, until Godot fixies the issue
             mapGrid = GetNode<TileMap>("meta/coll_nav");
             mapSize = mapGrid.GetUsedRect().Size;
             SetObstacles();
@@ -69,7 +69,7 @@ namespace Game.Map
         {
             foreach (Node2D node2D in GetNode<Node>("zed/z1").GetChildren())
             {
-                Npc npc = node2D as Npc;   
+                Npc npc = node2D as Npc;
                 if (npc != null)
                 {
                     npc.SetData(UnitDB.GetUnitData(npc.Name, Name));

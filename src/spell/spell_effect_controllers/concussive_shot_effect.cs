@@ -15,8 +15,8 @@ namespace Game.Ability
             GetNode<Node2D>("light").Show();
             PackedScene bashScene = (PackedScene)GD.Load("res://src/spell/effects/bash.tscn");
             bash_effect bash = (bash_effect)bashScene.Instance();
-            character.GetTarget().AddChild(bash);
-            bash.Owner = character.GetTarget();
+            character.target.AddChild(bash);
+            bash.Owner = character.target;
             spell.Connect(nameof(Unmake), bash, nameof(bash_effect._OnTimerTimeout));
             bash.GetNode<AudioStreamPlayer2D>("snd").Stream = null;
             bash.OnHit();

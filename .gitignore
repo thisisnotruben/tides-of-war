@@ -19,6 +19,6 @@ meta/
 # data ext
 *.xml
 
-# include these
+# include these for the README
 !icon.png
 !screenshots/*.png

@@ -7,9 +7,9 @@ namespace Game.Ability
     {
         public override float Cast()
         {
-            short mana = (short)Math.Round((float)caster.GetTarget().mana * 0.2f);
-            caster.GetTarget().SetMana((short) - mana);
-            caster.SetMana(mana);
+            short mana = (short)Math.Round((float)caster.target.mana * 0.2f);
+            caster.target.mana = (short) - mana;
+            caster.mana = mana;
             PackedScene CombatTextScene = (PackedScene)GD.Load("res://src/misc/other/combat_text.tscn");
             CombatText combatText = (CombatText)CombatTextScene.Instance();
             caster.AddChild(combatText);
