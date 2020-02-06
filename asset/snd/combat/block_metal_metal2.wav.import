@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/block_metal_metal2.wav-70752c0459cff907163a028f2529d82f.sample"
+
+[deps]
+
+source_file="res://asset/snd/combat/block_metal_metal2.wav"
+dest_files=[ "res://.import/block_metal_metal2.wav-70752c0459cff907163a028f2529d82f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

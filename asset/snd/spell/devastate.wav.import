@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/devastate.wav-1e9ed5af3c3aa6c3402e1ec55f22cfed.sample"
+
+[deps]
+
+source_file="res://asset/snd/spell/devastate.wav"
+dest_files=[ "res://.import/devastate.wav-1e9ed5af3c3aa6c3402e1ec55f22cfed.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

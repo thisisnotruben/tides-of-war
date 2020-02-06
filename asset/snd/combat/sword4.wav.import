@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sword4.wav-1bd133ec33c9f5dba84b930b6dc0cd97.sample"
+
+[deps]
+
+source_file="res://asset/snd/combat/sword4.wav"
+dest_files=[ "res://.import/sword4.wav-1bd133ec33c9f5dba84b930b6dc0cd97.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

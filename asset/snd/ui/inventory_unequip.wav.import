@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/inventory_unequip.wav-b54701b03e3044b0a46a4bb14702cacb.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/inventory_unequip.wav"
+dest_files=[ "res://.import/inventory_unequip.wav-b54701b03e3044b0a46a4bb14702cacb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

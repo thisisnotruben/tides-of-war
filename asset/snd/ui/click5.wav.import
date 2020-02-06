@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/click5.wav-7dfdee236757fbe1be54c23f15bcc70a.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/click5.wav"
+dest_files=[ "res://.import/click5.wav-7dfdee236757fbe1be54c23f15bcc70a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cloth_on.wav-326f8041b2eef0e2c52b03e2712d1f5a.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/cloth_on.wav"
+dest_files=[ "res://.import/cloth_on.wav-326f8041b2eef0e2c52b03e2712d1f5a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

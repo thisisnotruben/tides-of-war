@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/misc_off.wav-26ab2a7209a5da8a658f29f0b4c54ca0.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/misc_off.wav"
+dest_files=[ "res://.import/misc_off.wav-26ab2a7209a5da8a658f29f0b4c54ca0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

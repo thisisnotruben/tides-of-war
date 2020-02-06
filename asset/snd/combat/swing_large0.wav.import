@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/swing_large0.wav-54ceb333fadd059114b04f832fe04277.sample"
+
+[deps]
+
+source_file="res://asset/snd/combat/swing_large0.wav"
+dest_files=[ "res://.import/swing_large0.wav-54ceb333fadd059114b04f832fe04277.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

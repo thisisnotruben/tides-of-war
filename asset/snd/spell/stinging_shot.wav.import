@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/stinging_shot.wav-c74004bca4eda99b072c49bec876cedc.sample"
+
+[deps]
+
+source_file="res://asset/snd/spell/stinging_shot.wav"
+dest_files=[ "res://.import/stinging_shot.wav-c74004bca4eda99b072c49bec876cedc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

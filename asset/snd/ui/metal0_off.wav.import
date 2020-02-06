@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/metal0_off.wav-69b51e631bb4d742027728876a163443.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/metal0_off.wav"
+dest_files=[ "res://.import/metal0_off.wav-69b51e631bb4d742027728876a163443.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

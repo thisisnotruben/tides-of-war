@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/club0.wav-eda06dc3ff18af74ae371db5b1179746.sample"
+
+[deps]
+
+source_file="res://asset/snd/combat/club0.wav"
+dest_files=[ "res://.import/club0.wav-eda06dc3ff18af74ae371db5b1179746.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/axe3.wav-b97746b2e906c43e828f0a4d9382ac0b.sample"
+
+[deps]
+
+source_file="res://asset/snd/combat/axe3.wav"
+dest_files=[ "res://.import/axe3.wav-b97746b2e906c43e828f0a4d9382ac0b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

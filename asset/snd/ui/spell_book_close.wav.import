@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/spell_book_close.wav-e9f34bf92abbd2c36668fe52d9c1e209.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/spell_book_close.wav"
+dest_files=[ "res://.import/spell_book_close.wav-e9f34bf92abbd2c36668fe52d9c1e209.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

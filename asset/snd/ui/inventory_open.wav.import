@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/inventory_open.wav-570e541d661d07a58c8b7e06f7a47f72.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/inventory_open.wav"
+dest_files=[ "res://.import/inventory_open.wav-570e541d661d07a58c8b7e06f7a47f72.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/spell_select.wav-1d574daf833d1a49576b9e737e60b20d.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/spell_select.wav"
+dest_files=[ "res://.import/spell_select.wav-1d574daf833d1a49576b9e737e60b20d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

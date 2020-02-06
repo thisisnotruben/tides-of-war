@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hemorrhage.wav-d8f8d00ef34d060bb44009bf70e12f18.sample"
+
+[deps]
+
+source_file="res://asset/snd/spell/hemorrhage.wav"
+dest_files=[ "res://.import/hemorrhage.wav-d8f8d00ef34d060bb44009bf70e12f18.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/arcane_bolt_cast.wav-12dbe35c67502eb974f23079ee0784f8.sample"
+
+[deps]
+
+source_file="res://asset/snd/spell/arcane_bolt_cast.wav"
+dest_files=[ "res://.import/arcane_bolt_cast.wav-12dbe35c67502eb974f23079ee0784f8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

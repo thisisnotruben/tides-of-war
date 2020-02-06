@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/quest_finish.wav-e457b81fcb074b5b8ff58adf658b44d1.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/quest_finish.wav"
+dest_files=[ "res://.import/quest_finish.wav-e457b81fcb074b5b8ff58adf658b44d1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

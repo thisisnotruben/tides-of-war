@@ -6,8 +6,6 @@ meta/
 .vscode/
 .mono/
 
-# godot ext
-*.import
 # tiled ext
 *.tsx
 *.tmx

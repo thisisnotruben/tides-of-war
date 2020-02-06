@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/arrow_pass2.wav-dee388bd3c4fc2d385b7c9188f77bd05.sample"
+
+[deps]
+
+source_file="res://asset/snd/combat/arrow_pass2.wav"
+dest_files=[ "res://.import/arrow_pass2.wav-dee388bd3c4fc2d385b7c9188f77bd05.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

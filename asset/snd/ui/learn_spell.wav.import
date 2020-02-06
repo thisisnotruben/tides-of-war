@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/learn_spell.wav-0836636b046587bb43ec3482c4e28ae6.sample"
+
+[deps]
+
+source_file="res://asset/snd/ui/learn_spell.wav"
+dest_files=[ "res://.import/learn_spell.wav-0836636b046587bb43ec3482c4e28ae6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

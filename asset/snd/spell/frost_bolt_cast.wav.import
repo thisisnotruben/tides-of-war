@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/frost_bolt_cast.wav-1a1b795697f8e1e87ead3175bda1ba59.sample"
+
+[deps]
+
+source_file="res://asset/snd/spell/frost_bolt_cast.wav"
+dest_files=[ "res://.import/frost_bolt_cast.wav-1a1b795697f8e1e87ead3175bda1ba59.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

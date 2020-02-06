@@ -1,0 +1,20 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/warthog.tsx-55e39ca0228e92c5d342fa76e6951552.res"
+
+[deps]
+
+source_file="res://asset/img/character/warthog.tsx"
+dest_files=[ "res://.import/warthog.tsx-55e39ca0228e92c5d342fa76e6951552.res" ]
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+apply_offset=false
+post_import_script=""

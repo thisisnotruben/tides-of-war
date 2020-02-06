@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cleave.wav-135e317b5ae289312d3a606fa51487fb.sample"
+
+[deps]
+
+source_file="res://asset/snd/spell/cleave.wav"
+dest_files=[ "res://.import/cleave.wav-135e317b5ae289312d3a606fa51487fb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

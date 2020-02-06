@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bash.wav-26f947cdda697ed4e939bf49f9ef7c2b.sample"
+
+[deps]
+
+source_file="res://asset/snd/spell/bash.wav"
+dest_files=[ "res://.import/bash.wav-26f947cdda697ed4e939bf49f9ef7c2b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
