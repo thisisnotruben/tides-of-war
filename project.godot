@@ -16,8 +16,9 @@ _global_script_class_icons={
 [application]
 
 config/name="Tides of War"
-run/main_scene="res://src/map/zone_4.tscn"
-config/icon="res://asset/img/misc/ToW_icon.png"
+run/main_scene="res://src/menu_ui/start_menu.tscn"
+boot_splash/use_filter=false
+config/icon="res://icon.png"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
 
@@ -33,7 +34,6 @@ gdscript/warnings/enable=false
 
 window/size/width=720
 window/size/height=1280
-window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
@@ -117,15 +117,16 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_3="Dead Characters"
 2d_physics/layer_4="Combustible"
 
-[logging]
+[node]
 
-file_logging/log_path=""
+name_num_separator=2
+name_casing=2
 
 [rendering]
 
 quality/2d/use_pixel_snap=true
+threads/thread_model=0
 environment/default_environment="res://default_env.tres"
-quality/dynamic_fonts/use_oversampling=false
 
 [tiled_importer]
 

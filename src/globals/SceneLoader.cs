@@ -34,7 +34,7 @@ namespace Game
                             }
                         }
                     }
-                    Globals.worldQuests.Update();
+                    // Globals.worldQuests.Update(); // TODO: DEBUGGING
                     SetProcess(false);
                     QueueFree();
                     break;

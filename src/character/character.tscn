@@ -7,8 +7,6 @@
 [ext_resource path="res://asset/img/character/resource/animations/dying.tres" type="Animation" id=5]
 [ext_resource path="res://asset/img/character/resource/animations/moving.tres" type="Animation" id=6]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -53,7 +51,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="img" type="Sprite" parent="."]
-editor/display_folded = true
 use_parent_material = true
 
 [node name="missile" type="Position2D" parent="img"]
@@ -67,13 +64,16 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="sight" type="Area2D" parent="."]
-editor/display_folded = true
 monitorable = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="distance" type="CollisionShape2D" parent="sight"]
 shape = SubResource( 2 )
+
+[node name="visible" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -80, -80, 160, 160 )
+process_parent = true
 [connection signal="timeout" from="timer" to="." method="_OnTimerTimeout"]
 [connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
 [connection signal="pressed" from="select" to="." method="_OnSelectPressed"]

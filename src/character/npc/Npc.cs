@@ -21,6 +21,10 @@ namespace Game.Actor
             base._Ready();
             SetProcess(false);
         }
+        public new void SetProcess(bool mode)
+        {
+            base.SetProcess((GetNode<VisibilityNotifier2D>("visible").IsOnScreen()) ? mode : false);
+        }
         public override void _Process(float delta)
         {
             if (engaging && target != null)
@@ -67,38 +71,38 @@ namespace Game.Actor
                 SetState(States.IDLE);
             }
         }
-        public void _OnSightAreaEntered(Area2D area2D)
+        public void _OnSightAreaEnteredExited(Area2D area2D, bool entered)
         {
-            Character character = area2D.Owner as Character;
-            if (character != null && !dead && (target == null || character.dead) && character != this)
+            if (entered)
             {
-                if (!enemy && character is Player)
+                Character character = area2D.Owner as Character;
+                if (character != null && !dead && (target == null || character.dead) && character != this)
                 {
-                    // friendly npcs' don't attack player
-                    return;
-                }
-                else if (!engaging && enemy != character.enemy)
-                {
-                    engaging = true;
-                    target = character;
-                    SetProcess(true);
+                    if (!enemy && character is Player)
+                    {
+                        // friendly npcs' don't attack player
+                        return;
+                    }
+                    else if (!engaging && enemy != character.enemy)
+                    {
+                        engaging = true;
+                        target = character;
+                        SetProcess(true);
+                    }
                 }
             }
-        }
-        public void _OnSightAreaExited(Area2D area2D)
-        {
-            if (!engaging)
+            else if (!engaging)
             {
                 target = null;
             }
         }
-        public void _OnAreaMouseEntered()
+        public void _OnAreaMouseEnteredExited(bool entered)
         {
-            Globals.player.SetProcessUnhandledInput(false);
+            Globals.player.SetProcessUnhandledInput(!entered);
         }
-        public void _OnAreaMouseExited()
+        public void _OnScreenEnteredExited(bool entered)
         {
-            Globals.player.SetProcessUnhandledInput(true);
+            SetProcess(entered);
         }
         public override void _OnSelectPressed()
         {
@@ -297,7 +301,7 @@ namespace Game.Actor
         }
         public void CheckSight(Area2D area2D)
         {
-            _OnSightAreaEntered(area2D);
+            _OnSightAreaEnteredExited(area2D, true);
         }
         public override void SetState(States state, bool overrule = false)
         {
