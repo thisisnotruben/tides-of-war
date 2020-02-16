@@ -283,8 +283,9 @@ namespace Game.Actor
             {
                 await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
                 Grave grave = (Grave)graveScene.Instance();
-                AddChild(grave);
+                Globals.map.AddZChild(grave);
                 grave.SetDeceasedPlayer(this);
+                grave.GlobalPosition = GlobalPosition;
                 gravePos = grave.GlobalPosition;
                 Globals.map.SetVeil(true);
                 path.Clear();
