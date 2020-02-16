@@ -116,16 +116,18 @@ namespace Game.Actor
         public short stamina { get; private set; }
         public short intellect { get; private set; }
         public short agility { get; private set; }
+        public bool ranged  { get; private protected set; }
+        public float animSpeed = 1.0f;
         public ushort weaponRange = Stats.WEAPON_RANGE_MELEE;
         public float weaponSpeed = 1.3f;
-        public float animSpeed = 1.0f;
-        private protected Vector2 origin = new Vector2();
-        private protected WorldTypes weaponType;
+        private string weaponMaterial;
+        private string weaponSnd;
         public Item weapon = null;
         public Item vest = null;
         public Spell spell { get; private protected set; }
         public virtual Character target { get; set; }
         private protected Speaker2D snd;
+        private protected Vector2 origin = new Vector2();
         private protected List<Vector2> path = new List<Vector2>();
         private List<Spell> spellQueue = new List<Spell>();
         private protected Dictionary<Character, short> targetList = new Dictionary<Character, short>();
@@ -155,7 +157,7 @@ namespace Game.Actor
         {
             if (target != null && !target.dead && !dead)
             {
-                if (weaponType == WorldTypes.BOW || weaponType == WorldTypes.MAGIC)
+                if (ranged)
                 {
                     return; // TODO
                     Bolt missile = (Bolt)missileScene.Instance();
@@ -168,8 +170,8 @@ namespace Game.Actor
                     ushort diceRoll = (ushort)(GD.Randi() % 100 + 1);
                     short damage = (short)Math.Round(GD.RandRange(
                         (double)minDamage, (double)maxDamage));
-                    ushort sndIdx = Globals.WEAPON_TYPE[weaponType.ToString()];
-                    string sndName = weaponType.ToString().ToLower() + sndIdx.ToString();
+                    ushort sndIdx = Globals.WEAPON_TYPE[weaponSnd.ToString()];
+                    string sndName = weaponSnd.ToString().ToLower() + sndIdx.ToString();
                     CombatText.TextType hitType;
                     Dictionary<string, ushort> attackTable = Stats.attackTable["MELEE"];
                     if (spell != null && !spell.casted)
@@ -201,26 +203,12 @@ namespace Game.Actor
                         damage = 0;
                         sndName = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
                     }
-                    else if (diceRoll <= attackTable["PARRY"] &&
-                        target.weaponType != WorldTypes.BOW &&
-                        target.state == States.ATTACKING)
+                    else if (diceRoll <= attackTable["PARRY"] && !ranged && !target.ranged)
                     {
                         hitType = CombatText.TextType.PARRY;
                         damage = 0;
-                        WorldTypes[] metal = { WorldTypes.SWORD, WorldTypes.AXE, WorldTypes.DAGGER };
-                        WorldTypes[] wood = { WorldTypes.CLUB, WorldTypes.STAFF, WorldTypes.CLAW };
-                        if (metal.Contains(weaponType) && metal.Contains(target.weaponType))
-                        {
-                            sndName = "block_metal_metal" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_METAL_METAL"];
-                        }
-                        else if (wood.Contains(weaponType) && wood.Contains(target.weaponType))
-                        {
-                            sndName = "block_wood_wood" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_WOOD_WOOD"];
-                        }
-                        else
-                        {
-                            sndName = "block_metal_wood" + GD.Randi() % Globals.WEAPON_TYPE["BLOCK_METAL_WOOD"];
-                        }
+                        sndName = (weaponMaterial.Equals(target.weaponMaterial)) ? $"block_{weaponMaterial}_{weaponMaterial}" : "block_metal_wood";
+                        sndName += GD.Randi() % Globals.WEAPON_TYPE[sndName.ToUpper()];
                     }
                     else
                     {
@@ -595,37 +583,23 @@ namespace Game.Actor
             {
                 anim.RemoveAnimation("attacking");
             }
-            switch (imageData["weapon"].ToUpper())
+            weaponRange = (bool.Parse(imageData["melee"])) ? Stats.WEAPON_RANGE_MELEE : Stats.WEAPON_RANGE_RANGE;
+            weaponSnd = imageData["weapon"].ToLower();
+            switch (weaponSnd)
             {
-                case nameof(WorldTypes.MAGIC):
-                case nameof(WorldTypes.DAGGER):
-                case nameof(WorldTypes.CLAW):
-                case "SICKLE":
-                    weaponType = WorldTypes.DAGGER;
+                case "magic":
+                case "claw":
+                case "sickle":
+                    weaponSnd = "dagger";
                     break;
-                case nameof(WorldTypes.SWORD):
-                case nameof(WorldTypes.SPEAR):
-                case "HATCHET":
-                    weaponType = WorldTypes.SWORD;
+                case "spear":
+                case "hatchet":
+                    weaponSnd = "sword";
                     break;
-                case nameof(WorldTypes.AXE):
-                    weaponType = WorldTypes.AXE;
-                    break;
-                case nameof(WorldTypes.STAFF):
-                case nameof(WorldTypes.MACE):
-                case nameof(WorldTypes.CLUB):
-                case "ROCK":
-                    weaponType = WorldTypes.CLUB;
-                    break;
-                case nameof(WorldTypes.BOW):
-                    weaponType = WorldTypes.BOW;
-                    weaponRange = Stats.WEAPON_RANGE_RANGE;
-                    break;
-                case "NULL":
-                    // This is a commoner
-                    break;
-                default:
-                    GD.Print($"{imgName} doesn't have a valid weaponType");
+                case "staff":
+                case "mace":
+                case "rock":
+                    weaponSnd = "club";
                     break;
             }
             AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData["body"]}.tres");

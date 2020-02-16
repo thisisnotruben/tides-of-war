@@ -12,12 +12,11 @@ namespace Game.Actor
         private List<Vector2> reservedPath = new List<Vector2>();
         public Vector2 gravePos { get; private set; }
         public short xp { get; private set; }
-        private Character _target;
         public override Character target
         {
             get
             {
-                return _target;
+                return base.target;
             }
             set
             {
@@ -149,16 +148,7 @@ namespace Game.Actor
         {
             if (animName.Equals("attacking") && spell != null)
             {
-                switch (weaponType)
-                {
-                    case WorldTypes.BOW:
-                    case WorldTypes.MAGIC:
-                        weaponRange = Stats.WEAPON_RANGE_RANGE;
-                        break;
-                    default:
-                        weaponRange = Stats.WEAPON_RANGE_MELEE;
-                        break;
-                }
+                weaponRange = (ranged) ? Stats.WEAPON_RANGE_RANGE : Stats.WEAPON_RANGE_MELEE;
             }
             else if (animName.Equals("casting"))
             {
