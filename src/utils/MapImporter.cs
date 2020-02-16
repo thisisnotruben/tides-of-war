@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Godot;
 namespace Game.Utils
 {
@@ -53,6 +52,7 @@ namespace Game.Utils
             foreach (String nodePath in new String[] { "zed/characters", "zed/target_dummys", "meta/paths", "meta/lights" })
             {
                 map.GetNode(nodePath).Owner = null;
+                map.GetNode(nodePath).QueueFree();
             }
 
             map.GetNode<TileMap>("meta/coll_nav").Modulate = new Color(1.0f, 1.0f, 1.0f, 0.5f);
@@ -127,19 +127,17 @@ namespace Game.Utils
                 light.Name = node.Name;
             }
         }
-        private List<Node> TreeUseMaterial(Node root)
+        private void TreeUseMaterial(Node root)
         {
-            List<Node> nodes = new List<Node>();
             foreach (Node node in root.GetChildren())
             {
                 Node2D node2D = node as Node2D;
                 if (node2D != null)
                 {
                     node2D.UseParentMaterial = true;
+                    TreeUseMaterial(node);
                 }
-                nodes.Add(node);
             }
-            return nodes;
         }
         private Vector2 GetCenterPos(Vector2 worldPosition)
         {
