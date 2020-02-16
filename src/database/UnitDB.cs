@@ -18,9 +18,13 @@ namespace Game.Database
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
                     xMLParser.GetNamedAttributeValueSafe("editorName").Equals(unitEditorName))
                 {
-                    unitData.Add("img", xMLParser.GetNamedAttributeValueSafe("img"));
-                    unitData.Add("name", xMLParser.GetNamedAttributeValueSafe("name"));
-                    unitData.Add("enemy", xMLParser.GetNamedAttributeValueSafe("enemy"));
+                    for (int i = 0; i < xMLParser.GetAttributeCount(); i++)
+                    {
+                        if (!(xMLParser.GetAttributeName(i).Equals("x") || xMLParser.GetAttributeName(i).Equals("y")) && !xMLParser.GetAttributeName(i).Equals("editorName"))
+                        {
+                            unitData.Add(xMLParser.GetAttributeName(i), xMLParser.GetAttributeValue(i));
+                        }
+                    }
                     unitData.Add("spawnPos",
                         $"{xMLParser.GetNamedAttributeValueSafe("x")},{xMLParser.GetNamedAttributeValueSafe("y")}");
                     string path = "";

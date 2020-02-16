@@ -75,7 +75,7 @@ namespace Game.Database
             }
             return itemData;
         }
-        public static string GetItemArmorMaterial(string worldName)
+        public static string GetItemMaterial(string worldName)
         {
             return GetItemData(worldName)["material"];
         }
