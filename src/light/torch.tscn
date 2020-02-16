@@ -23,16 +23,18 @@ __meta__ = {
 autoplay = "torch"
 anims/torch = ExtResource( 4 )
 
-[node name="visibility" type="VisibilityNotifier2D" parent="."]
-visible = false
+[node name="tween" type="Tween" parent="."]
+
+[node name="visibility" type="VisibilityEnabler2D" parent="."]
 position = Vector2( 0, -6 )
+rect = Rect2( -72, -72, 144, 144 )
 
 [node name="light" type="Light2D" parent="."]
-visible = false
 use_parent_material = true
 position = Vector2( 0, -7 )
 texture = ExtResource( 2 )
-color = Color( 0.982422, 0.822327, 0.595837, 1 )
+color = Color( 0.984314, 0.823529, 0.596078, 1 )
+energy = 0.8
 mode = 2
 
 [node name="fire" parent="." instance=ExtResource( 5 )]

@@ -15,5 +15,6 @@ namespace Game.Light
         }
         public abstract void Start();
         public abstract void Stop();
+        public abstract void SetIntensity(bool full, float min=0.5f, float max=1.0f);
     }
 }

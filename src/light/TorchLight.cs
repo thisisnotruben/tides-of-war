@@ -3,11 +3,36 @@ namespace Game.Light
 {
     public class TorchLight : GameLight
     {
+        private Light2D light;
+        private VisibilityNotifier2D visibility;
+
+        public override void _Ready()
+        {
+            light = GetNode<Light2D>("light");
+            visibility = GetNode<VisibilityNotifier2D>("visibility");
+        }
+
+        public override void SetIntensity(bool full, float min=0.8f, float max=1.0f)
+        {
+            float choice = (full) ? max : min;
+            if (visibility.IsOnScreen())
+            {
+                Tween tween = GetNode<Tween>("tween");
+                tween.InterpolateProperty(light, "energy", light.Energy,
+                    choice, 1.0f, Tween.TransitionType.Linear, Tween.EaseType.In);
+                tween.Start();
+            }
+            else
+            {
+                light.Energy = choice;
+            }
+        }
         public override void Start()
         {
-            if (GetNode<VisibilityNotifier2D>("visibility").IsOnScreen())
+            if (visibility.IsOnScreen())
             {
                 GetNode<AnimationPlayer>("anim").Play("torch");
+                light.Enabled = true;
                 foreach (Node node in GetChildren())
                 {
                     Emit(node, true);
@@ -20,10 +45,10 @@ namespace Game.Light
         }
         public override void Stop()
         {
-            GetNode<AnimationPlayer>("anim").Stop();
-            GetNode<Node2D>("light").Hide();
-            if (!GetNode<VisibilityNotifier2D>("visibility").IsOnScreen())
+            if (!visibility.IsOnScreen())
             {
+                GetNode<AnimationPlayer>("anim").Stop();
+                light.Enabled = false;
                 foreach (Node node in GetChildren())
                 {
                     Emit(node, false);
@@ -36,9 +61,9 @@ namespace Game.Light
         }
         public void Emit(Node node, bool set)
         {
-            if (node is Particles2D)
+            Particles2D particles2D = node as Particles2D;
+            if (particles2D != null)
             {
-                Particles2D particles2D = (Particles2D)node;
                 particles2D.Emitting = set;
             }
         }

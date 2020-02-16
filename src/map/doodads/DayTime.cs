@@ -5,12 +5,13 @@ namespace Game.Map.Doodads
     public class DayTime : Timer, ISaveable
     {
         private const float LENGTH_OF_DAY = 210.0f;
-        private bool dayTime = true;
+        private bool dayLight = true;
+
         public void _OnTimerTimeout()
         {
             AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
             string animName = "sun_up_down";
-            if (dayTime)
+            if (dayLight)
             {
                 anim.Play(animName);
             }
@@ -18,7 +19,7 @@ namespace Game.Map.Doodads
             {
                 anim.PlayBackwards(animName);
             }
-            SetDayTime(!dayTime);
+            dayLight = !dayLight;
         }
         public void _OnAnimFinished(string animName)
         {
@@ -28,21 +29,9 @@ namespace Game.Map.Doodads
         public void TriggerLights()
         {
             foreach (GameLight light in GameLight.GetLights())
-            {
-                if (dayTime)
-                {
-                    light.Stop();
-                }
-                else
-                {
-                    light.Start();
-                }
+            {   
+                light.SetIntensity(!dayLight);
             }
-        }
-        public void SetDayTime(bool dayTime)
-        {
-            this.dayTime = dayTime;
-            TriggerLights();
         }
         public void SetSaveData(Godot.Collections.Dictionary data)
         {
