@@ -5,7 +5,6 @@ namespace Game.Database
     public static class ImageDB
     {
         private static readonly string DB_PATH = "res://data/ImageDB.xml";
-        private static readonly string[] attributes = new string[] { "attacking", "dying", "moving", "swing", "total", "weapon", "body" };
         private static readonly XMLParser xMLParser = new XMLParser();
 
         public static Dictionary<string, string> GetImageData(string imageName)
@@ -17,10 +16,10 @@ namespace Game.Database
                 if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
                     xMLParser.GetNamedAttributeValueSafe("name").Equals(imageName))
                 {
-                    foreach (string attribute in attributes)
+                    for (int i = 0; i < xMLParser.GetAttributeCount(); i++)
                     {
-                        imageData.Add(attribute, xMLParser.GetNamedAttributeValueSafe(attribute));
-                    }
+                        imageData.Add(xMLParser.GetAttributeName(i), xMLParser.GetAttributeValue(i));
+                    }   
                 }
             }
             return imageData;
