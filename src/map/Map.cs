@@ -30,13 +30,17 @@ namespace Game.Map
             SetPlayerCameraLimits();
             SetUnits();
         }
+        public void AddZChild(Node node)
+        {
+            GetNode("zed/z1").AddChild(node);
+        }
         public void SetVeil(bool on)
         {
             Particles2D veil = GetNode<Particles2D>("veil_fog");
             veil.Emitting = on;
             if (on)
             {
-                Material = (ParticlesMaterial)GD.Load("res://src/map/doodads/veil.tres");
+                Material = (ShaderMaterial)GD.Load("res://asset/img/map/veil.tres");
                 veil.Show();
             }
             else
