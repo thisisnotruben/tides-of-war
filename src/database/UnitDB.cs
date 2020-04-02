@@ -1,64 +1,60 @@
 using System.Collections.Generic;
-using System.Linq;
+using System;
 using Godot;
 namespace Game.Database
 {
     public static class UnitDB
     {
-        private static readonly string[] ignoreTags = { "items", "spells", "path" };
-        private static readonly string[] namedTags = { "item", "spell" };
-        private static readonly XMLParser xMLParser = new XMLParser();
-        public static Dictionary<string, string> GetUnitData(string unitEditorName, string mapName)
+        public struct UnitNode
         {
-            Dictionary<string, string> unitData = new Dictionary<string, string>();
-            short count = 0;
-            xMLParser.Open($"res://data/{mapName}DB.xml");
-            while (xMLParser.Read() == Error.Ok && unitData.Count == 0)
+            public string name;
+            public string img;
+            public bool enemy;
+            public Vector2 spawnPos;
+            public List<Vector2> path;
+        }
+
+        private static Dictionary<string, UnitNode> unitData = new Dictionary<string, UnitNode>();
+        private static readonly string DB_PATH = "res://data/zone_4.json";
+
+        static UnitDB()
+        {
+            LoadUnitData();
+        }
+
+        public static void LoadUnitData()
+        {
+            File file = new File();
+            file.Open(DB_PATH, File.ModeFlags.Read);
+            JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
+            file.Close();
+            Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+            foreach (string itemName in rawDict.Keys)
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
-                    xMLParser.GetNamedAttributeValueSafe("editorName").Equals(unitEditorName))
+                Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary) rawDict[itemName];
+                UnitNode unitNode;
+                unitNode.name = (string) itemDict[nameof(UnitNode.name)];
+                unitNode.img = (string) itemDict[nameof(UnitNode.img)];
+                unitNode.enemy = (bool) itemDict[nameof(UnitNode.enemy)];
+                Godot.Collections.Array spawnPos = (Godot.Collections.Array) itemDict[nameof(UnitNode.spawnPos)];
+                unitNode.spawnPos = new Vector2((float)((Single) spawnPos[0]), (float) ((Single) spawnPos[1]));
+                unitNode.path = new List<Vector2>();
+                foreach (Godot.Collections.Array vectorNode in (Godot.Collections.Array) (itemDict[nameof(UnitNode.path)]))
                 {
-                    for (int i = 0; i < xMLParser.GetAttributeCount(); i++)
-                    {
-                        if (!(xMLParser.GetAttributeName(i).Equals("x") || xMLParser.GetAttributeName(i).Equals("y")) && !xMLParser.GetAttributeName(i).Equals("editorName"))
-                        {
-                            unitData.Add(xMLParser.GetAttributeName(i), xMLParser.GetAttributeValue(i));
-                        }
-                    }
-                    unitData.Add("spawnPos",
-                        $"{xMLParser.GetNamedAttributeValueSafe("x")},{xMLParser.GetNamedAttributeValueSafe("y")}");
-                    string path = "";
-                    while (xMLParser.Read() == Error.Ok &&
-                        !(xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
-                            xMLParser.GetNodeName().Equals("unit")))
-                    {
-                        string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element) ?
-                            keyName = xMLParser.GetNodeName() :
-                            "";
-                        if (!ignoreTags.Contains(keyName))
-                        {
-                            if (keyName.Equals("point"))
-                            {
-                                path += $"{xMLParser.GetNamedAttributeValueSafe("x")},{xMLParser.GetNamedAttributeValueSafe("y")}_";
-                            }
-                            else if (namedTags.Contains(keyName))
-                            {
-                                unitData.Add(keyName + count++.ToString(), xMLParser.GetNamedAttributeValue("name"));
-                            }
-                            else if (!keyName.Empty() && xMLParser.Read() == Error.Ok &&
-                                xMLParser.GetNodeType() == XMLParser.NodeType.Text)
-                            {
-                                unitData.Add(keyName, xMLParser.GetNodeData());
-                            }
-                        }
-                    }
-                    if (!path.Empty())
-                    {
-                        unitData.Add("path", path);
-                    }
+                    unitNode.path.Add(new Vector2((float)((Single) vectorNode[0]), (float) ((Single) vectorNode[1])));
                 }
+                unitData.Add(itemName, unitNode);
             }
-            return unitData;
+        }
+
+        public static UnitNode GetUnitData(string unitEditorName)
+        {
+            return unitData[unitEditorName];
+        }
+        
+        public static bool HasUnitData(string nameCheck)
+        {
+            return unitData.ContainsKey(nameCheck);
         }
     }
 }

@@ -61,17 +61,6 @@ namespace Game
             AGILITY,
             STRENGTH,
             DEFENSE,
-            // Weapon WorldTypes 
-            AXE,
-            BOW,
-            CLUB,
-            DAGGER,
-            SWORD,
-            STAFF,
-            CLAW,
-            MAGIC,
-            SPEAR,
-            MACE,
             // Swing WorldTypes
             ARROW_HIT_ARMOR,
             ARROW_PASS

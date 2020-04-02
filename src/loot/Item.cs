@@ -10,27 +10,27 @@ namespace Game.Loot
     {
         public const float MAX_DURABILITY = 1.0f;
         public float durability { get; private set; }
-        private short minValue;
-        private short maxValue;
-        public short value { get; private set; }
+        private int minValue;
+        private int maxValue;
+        public int value { get; private set; }
 
         [Signal]
         public delegate void EquipItem(Item item, bool equip);
         public override void Init(string worldName)
         {
             durability = MAX_DURABILITY;
-            Dictionary<string, string> itemData = ItemDB.GetItemData(worldName);
+            ItemDB.ItemNode itemData = ItemDB.GetItemData(worldName);
             this.worldName = worldName;
             Name = worldName;
-            worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData["type"].ToUpper());
-            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData[nameof(icon)]}_icon.tres");
-            level = short.Parse(itemData[nameof(level)]);
+            worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData.type.ToUpper());
+            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData.icon}_icon.tres");
+            level = itemData.level;
             goldWorth = Stats.GetItemGoldWorth(level, worldType, durability);
             if (worldType == WorldTypes.WEAPON || worldType == WorldTypes.POTION)
             {
-                subType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData["subType"].ToUpper());
+                subType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData.subType.ToUpper());
             }
-            Tuple<short, short> itemStats = Stats.GetItemStats(level, worldType, subType);
+            Tuple<int, int> itemStats = Stats.GetItemStats(level, worldType, subType);
             string durabilitytext = $"\n-Durability: {(durability * 100.0f).ToString("00")}%";
             switch (worldType)
             {
@@ -88,15 +88,15 @@ namespace Game.Loot
         {
             EmitSignal(nameof(EquipItem), this, false);
         }
-        public Tuple<short, short> GetValues()
+        public Tuple<int, int> GetValues()
         {
-            return new Tuple<short, short>(minValue, maxValue);
+            return new Tuple<int, int>(minValue, maxValue);
         }
         public void Consume(Character character, float seek)
         {
             EmitSignal(nameof(PickableExchanged), this, false);
             GD.Randomize();
-            short amount = (short)Math.Round(GD.RandRange((double)minValue, (double)maxValue));
+            int amount = (int)Math.Round(GD.RandRange((double)minValue, (double)maxValue));
             switch (subType)
             {
                 case WorldTypes.HEALING:
@@ -143,15 +143,15 @@ namespace Game.Loot
                 case WorldTypes.STAMINA:
                     percent = (double)character.hp / (double)character.hpMax;
                     character.hpMax += value;
-                    character.hp = (short)Math.Round(percent * (double)character.hpMax);
+                    character.hp = (int)Math.Round(percent * (double)character.hpMax);
                     break;
                 case WorldTypes.INTELLECT:
                     percent = (double)character.mana / (double)character.manaMax;
                     character.manaMax += value;
-                    character.mana = (short)Math.Round(percent * (double)character.manaMax);
+                    character.mana = (int)Math.Round(percent * (double)character.manaMax);
                     break;
                 case WorldTypes.AGILITY:
-                    short regenAmount = Stats.GetModifiedRegen(character.level,
+                    int regenAmount = Stats.GetModifiedRegen(character.level,
                         Stats.GetMultiplier(character is Npc, character.GetNode<Sprite>("img").Texture.ResourcePath));
                     character.regenTime = regenAmount;
                     if (character.state != Character.States.ATTACKING)

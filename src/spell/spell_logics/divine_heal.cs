@@ -7,7 +7,7 @@ namespace Game.Ability
         public override float Cast()
         {
             GD.Randomize();
-            caster.hp = (short)Math.Round((float)caster.hpMax * GD.RandRange(0.1f, 0.3f));
+            caster.hp = (int)Math.Round((float)caster.hpMax * GD.RandRange(0.1f, 0.3f));
             return base.Cast();
         }
     }

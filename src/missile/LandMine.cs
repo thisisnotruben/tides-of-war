@@ -7,8 +7,8 @@ namespace Game.Missile
     {
         public Area2D exludedUnitArea;
         private bool exploded;
-        public short minDamage = 0;
-        public short maxDamage = 10;
+        public int minDamage = 0;
+        public int maxDamage = 10;
         public void _OnTimerTimeout()
         {
             Explode();
@@ -47,7 +47,7 @@ namespace Game.Missile
                         if (character != null)
                         {
                             GD.Randomize();
-                            character.TakeDamage((short)GD.RandRange((double)minDamage, (double)maxDamage),
+                            character.TakeDamage((int)GD.RandRange((double)minDamage, (double)maxDamage),
                                 false, this, CombatText.TextType.HIT);
                         }
                         else

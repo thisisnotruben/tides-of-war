@@ -6,7 +6,7 @@ namespace Game.Ability
         public override void Init(string worldName)
         {
             base.Init(worldName);
-            attackTable = new Dictionary<string, ushort>()
+            attackTable = new Dictionary<string, int>()
             { { "hit", 90 }, { "critical", 100 }, { "dodge", 100 }, { "parry", 100 },
             };
         }

@@ -10,16 +10,63 @@ namespace Game.Actor
 {
     public class Npc : Character
     {
-        private string text;
-        private Dictionary<string, List<Vector2>> cachedPatrolPath = new Dictionary<string, List<Vector2>>()
-        { { "cachedPath", new List<Vector2>() }, { "pathPoints", new List<Vector2>() }, { "patrolPath", new List<Vector2>() }
-        };
+        private Dictionary<string, List<Vector2>> cachedPatrolPath;
+        public List<string> drops;
+        public List<string> spells;
+        public List<string> merchandise;
+        private string dialogue;
+        public bool healer;
+        public int healerCost;
+        
         [Signal]
         public delegate void DropLoot(Npc npc, Vector2 worldPosition, int idk);
+
+        public override void init()
+        {
+            cachedPatrolPath = new Dictionary<string, List<Vector2>>();
+            cachedPatrolPath.Add("cachedPath", new List<Vector2>());
+            cachedPatrolPath.Add("pathPoints", new List<Vector2>());
+            cachedPatrolPath.Add("patrolPath", new List<Vector2>());
+            healer = false;
+            healerCost = 0;
+            dialogue = "";
+            drops = new List<string>();
+            spells = new List<string>();
+            merchandise = new List<string>();
+            UnitDB.UnitNode unitNode = UnitDB.GetUnitData(Name);
+            worldName = unitNode.name;
+            SetImg(unitNode.img);
+            enemy = unitNode.enemy;
+            origin = unitNode.spawnPos;
+            if (unitNode.path.Count > 0)
+            {
+                cachedPatrolPath["cachedPath"] = unitNode.path;    
+                cachedPatrolPath["pathPoints"] = cachedPatrolPath["cachedPath"].GetRange(0, cachedPatrolPath["cachedPath"].Count);
+                SetProcess(true);
+            }
+            if (ContentDB.HasContent(Name))
+            {
+                ContentDB.ContentNode contentNode = ContentDB.GetContentData(Name);
+                level = contentNode.level;
+                enemy = contentNode.enemy;
+                healer = contentNode.healer;
+                healerCost = contentNode.healerCost;
+                dialogue = contentNode.dialogue;
+                drops = contentNode.drops;
+                spells = contentNode.spells;
+                merchandise = contentNode.merchandise;
+            }
+            SetAttributes();
+            hp = hpMax;
+            mana = manaMax;
+        }
         public override void _Ready()
         {
-            base._Ready();
             SetProcess(false);
+            base.init();
+            base._Ready();
+            init();
+            SetTime(regenTime);
         }
         public new void SetProcess(bool mode)
         {
@@ -126,11 +173,13 @@ namespace Game.Actor
                     {
                         case WorldTypes.MERCHANT:
                         case WorldTypes.TRAINER:
-                            string sndName = "merchant_open";
-                            string nodeName = "inventory";
+                            string sndName;
+                            string nodeName;
                             if (worldType == WorldTypes.MERCHANT)
                             {
                                 menu.merchant.GetNode<Control>("s/v2/inventory").Show();
+                                sndName = "merchant_open";
+                                nodeName = "inventory";
                             }
                             else
                             {
@@ -146,14 +195,14 @@ namespace Game.Actor
                             tween.PauseMode = PauseModeEnum.Process;
                             menu.itemInfo.GetNode<TextureButton>("s/v/c/v/bg").Disabled = true;
                             menu.merchant.GetNode<Label>("s/v/label").Text = worldName;
-                            menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {player.gold.ToString("N0")}";
+                            menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {player.gold.ToString()}";
                             menu.menu.Hide();
                             menu.merchant.Show();
                             menu.GetNode<Control>("c/game_menu").Show();
                             break;
                         default:
                             EmitSignal(nameof(Talked));
-                            if (!text.Empty())
+                            if (!dialogue.Empty())
                             {
                                 Globals.PlaySound("turn_page", this, new Speaker());
                                 menu.menu.Hide();
@@ -161,13 +210,14 @@ namespace Game.Actor
                                 {
                                     menu.dialogue.GetNode<Control>("s/s/v/heal").Show();
                                 }
-                                else
-                                {
-                                    menu.dialogue.GetNode<Label>("s/s/label2").Text = text;
-                                }
                                 menu.dialogue.GetNode<Label>("s/label").Text = worldName;
+                                menu.dialogue.GetNode<Label>("s/s/label2").Text = dialogue;
                                 menu.dialogue.Show();
                                 menu.GetNode<Control>("c/game_menu").Show();
+                            }
+                            else
+                            {
+                                Globals.PlaySound("click4", this, new Speaker());            
                             }
                             break;
                     }
@@ -221,7 +271,7 @@ namespace Game.Actor
                 }
             }
         }
-        public override void TakeDamage(short damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
+        public override void TakeDamage(int damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
         {
             if (target == null && worldObject is Character)
             {
@@ -230,15 +280,15 @@ namespace Game.Actor
             base.TakeDamage(damage, ignoreArmor, worldObject, textType);
             if (dead && targetList.Count > 0)
             {
-                List<short> damageList = new List<short>();
-                foreach (short dam in targetList.Values)
+                List<int> damageList = new List<int>();
+                foreach (int dam in targetList.Values)
                 {
                     damageList.Add(dam);
                 }
                 if (damageList.Count > 0)
                 {
-                    short mostDamage = damageList[0];
-                    foreach (short dam in damageList)
+                    int mostDamage = damageList[0];
+                    foreach (int dam in damageList)
                     {
                         if (dam > mostDamage)
                         {
@@ -249,7 +299,7 @@ namespace Game.Actor
                     {
                         if (targetList[character] == mostDamage && character is Player)
                         {
-                            short xp = Stats.GetXpFromUnitDeath((double)level,
+                            int xp = Stats.GetXpFromUnitDeath((double)level,
                                 Stats.GetMultiplier(true, GetNode<Sprite>("img").Texture.ResourcePath), (double)character.level);
                             if (xp > 0)
                             {
@@ -354,11 +404,11 @@ namespace Game.Actor
             // probably get around this with Regex
             if (text.Contains("{0}") && worldType == WorldTypes.HEALER)
             {
-                this.text = string.Format(text, Stats.HealerCost(Globals.player.level));
+                this.dialogue = string.Format(text, Stats.HealerCost(Globals.player.level));
             }
             else
             {
-                this.text = text;
+                this.dialogue = text;
             }
         }
         public void SetUpShop(InGameMenu inGameMenu, bool setUp)
@@ -375,73 +425,6 @@ namespace Game.Actor
                 {
                     pickable.Disconnect(nameof(Pickable.SetInMenu), inGameMenu, nameof(InGameMenu._OnSetPickableInMenu));
                     pickable.Disconnect(nameof(Pickable.DescribePickable), inGameMenu, nameof(InGameMenu._OnDescribePickable));
-                }
-            }
-        }
-        public void SetData(Dictionary<string, string> data)
-        {
-            foreach (string key in data.Keys)
-            {
-                switch (key)
-                {
-                    case "spawnPos":
-                        string[] spawnPos = data[key].Split(",");
-                        origin = (new Vector2(float.Parse(spawnPos[0]), float.Parse(spawnPos[1])));
-                        break;
-                    case "path":
-                        foreach (string point in data[key].Split("_"))
-                        {
-                            string[] xy = point.Split(",");
-                            cachedPatrolPath["cachedPath"].Add(new Vector2(float.Parse(xy[0]), float.Parse(xy[1])));
-                        }
-                        cachedPatrolPath["pathPoints"] = cachedPatrolPath["cachedPath"].GetRange(0, cachedPatrolPath["cachedPath"].Count);
-                        SetProcess(true);
-                        break;
-                    case "img":
-                        SetImg(data[key]);
-                        break;
-                    case "name":
-                        worldName = data[key];
-                        break;
-                    case "enemy":
-                        enemy = bool.Parse(data[key]);
-                        break;
-                    case "level":
-                        level = byte.Parse(data[key]);
-                        break;
-                    case "actorType":
-                        worldType = (WorldTypes)System.Enum.Parse(typeof(WorldTypes), data[key].ToUpper());
-                        break;
-                    default:
-                        if (key.Contains("spell"))
-                        {
-                            if (SpellDB.HasSpell(data[key]))
-                            {
-                                Spell spell = PickableFactory.GetMakeSpell(data[key]);
-                                spell.GetPickable(this, false);
-                            }
-                            else
-                            {
-                                GD.Print($"({worldName}) has invalid spell name: ({data[key]})");
-                            }
-                        }
-                        else if (key.Contains("item"))
-                        {
-                            if (ItemDB.HasItem(data[key]))
-                            {
-                                Item item = PickableFactory.GetMakeItem(data[key]);
-                                item.GetPickable(this, false);
-                            }
-                            else
-                            {
-                                GD.Print($"({worldName}) has invalid item name: ({data[key]})");
-                            }
-                        }
-                        else
-                        {
-                            GD.Print($"Unknown attribute value: {key} for unit.");
-                        }
-                        break;
                 }
             }
         }

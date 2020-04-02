@@ -10,8 +10,8 @@ namespace Game.Ability
     public abstract class Spell : Pickable
     {
         public float percentDamage { get; private protected set; }
-        public short manaCost { get; private protected set; }
-        public ushort spellRange { get; private protected set; }
+        public int manaCost { get; private protected set; }
+        public int spellRange { get; private protected set; }
         private byte _count;
         public byte count
         {
@@ -31,7 +31,7 @@ namespace Game.Ability
         public bool ignoreArmor { get; private protected set; }
         public bool effectOnTarget { get; private protected set; }
         public bool requiresTarget { get; private protected set; }
-        private protected Dictionary<string, ushort> attackTable;
+        private protected Dictionary<string, int> attackTable;
         private protected Character caster = null;
         private protected Character target = null;
         private protected Speaker2D snd;
@@ -45,22 +45,21 @@ namespace Game.Ability
             worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_"));
             this.worldName = worldName;
             Name = worldName;
-            Dictionary<string, string> spellData = SpellDB.GetSpellData(worldName);
-            subType = (WorldTypes)Enum.Parse(typeof(WorldTypes), spellData["subType"].ToUpper());
-            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{spellData[nameof(icon)]}_icon.tres");
-            level = short.Parse(spellData[nameof(level)]);
-            spellRange = ushort.Parse(spellData[nameof(spellRange)]);
-            cooldown = short.Parse(spellData[nameof(cooldown)]);
-            percentDamage = float.Parse(spellData[nameof(percentDamage)]);
-            ignoreArmor = bool.Parse(spellData[nameof(ignoreArmor)]);
-            effectOnTarget = bool.Parse(spellData[nameof(effectOnTarget)]);
-            requiresTarget = bool.Parse(spellData[nameof(requiresTarget)]);
+            SpellDB.SpellNode spellData = SpellDB.GetSpellData(worldName);
+            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{spellData.icon}_icon.tres");
+            level = spellData.level;
+            spellRange = spellData.spellRange;
+            cooldown = spellData.coolDown;
+            percentDamage = spellData.percentDamage;
+            ignoreArmor = spellData.ignoreArmor;
+            effectOnTarget = spellData.effectOnTarget;
+            requiresTarget = spellData.requiresTarget;
             attackTable = Stats.attackTable[(spellRange > Stats.WEAPON_RANGE_MELEE) ? "RANGED" : "MELEE"];
             goldWorth = Stats.GetSpellWorthCost(level);
             manaCost = Stats.GetSpellManaCost(level);
             menuDescription = $"-Mana Cost: {manaCost}\n{((spellRange == 0) ? "" : $"-Range: {spellRange}\n")}" +
                 $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
-                $"\n\n-{spellData["description"]}";
+                $"\n\n-{spellData.description}";
         }
         public override void GetPickable(Character character, bool addToBag)
         {
@@ -104,7 +103,7 @@ namespace Game.Ability
             casted = true;
             if (!loaded)
             {
-                caster.mana = (short) - manaCost;
+                caster.mana = -manaCost;
             }
             if ((subType == WorldTypes.CASTING ||
                     subType == WorldTypes.DAMAGE_MODIFIER) &&
@@ -144,7 +143,7 @@ namespace Game.Ability
             }
         }
         public virtual void ConfigureSnd() { }
-        public Dictionary<string, ushort> GetAttackTable()
+        public Dictionary<string, int> GetAttackTable()
         {
             return attackTable;
         }

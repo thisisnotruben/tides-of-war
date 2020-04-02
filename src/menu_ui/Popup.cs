@@ -329,7 +329,7 @@ namespace Game.Ui
             {
                 Globals.PlaySound("sell_buy", this, menu.snd);
                 Globals.PlaySound("anvil", this, menu.snd);
-                menu.player.gold = (short) - cost;
+                menu.player.gold = -cost;
                 switch (what)
                 {
                     case "all":
@@ -408,7 +408,7 @@ namespace Game.Ui
                                 {
                                     amounttt = pickableStack.Count;
                                 }
-                                for (short i = 0; i < amounttt; i++)
+                                for (int i = 0; i < amounttt; i++)
                                 {
                                     itemSlot.SetItem(pickableStack[i]);
                                 }
@@ -452,7 +452,7 @@ namespace Game.Ui
         }
         public void _OnRepairDraw()
         {
-            short shown = 0;
+            int shown = 0;
             foreach (Control node in GetNode("m/repair").GetChildren())
             {
                 if (node.Visible)

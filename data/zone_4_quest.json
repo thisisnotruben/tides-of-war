@@ -1,0 +1,40 @@
+{
+    "2-Stanmore": {
+        "quest_name": "TEST",
+        "next_quest": [],
+        "reward": [
+            "Steelforged Sword"
+        ],
+        "keep_reward_items": false,
+        "gold_reward": 0,
+        "quest_completer": "2-Stanmore",
+        "giver_dialogue": {
+            "start": "asd",
+            "active": "asd",
+            "completed": "hdfgh",
+            "delivered": "dfgh"
+        },
+        "objectives": {
+            "2-Stanmore": {
+                "keep_world_object": false,
+                "quest_type": "talk",
+                "amount": 1,
+                "extra_content": {
+                    "dialogue": "",
+                    "reward": "Bash",
+                    "gold": 0
+                }
+            },
+            "Backstabber's Knife": {
+                "keep_world_object": false,
+                "quest_type": "collect",
+                "amount": 1,
+                "extra_content": {
+                    "dialogue": "",
+                    "reward": "",
+                    "gold": 0
+                }
+            }
+        }
+    }
+}

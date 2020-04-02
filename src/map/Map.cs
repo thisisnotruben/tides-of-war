@@ -28,7 +28,6 @@ namespace Game.Map
             AstarConnectWalkableCellsDiagonal(walkableCells);
             SetVeilSize();
             SetPlayerCameraLimits();
-            SetUnits();
         }
         public void AddZChild(Node node)
         {
@@ -68,17 +67,6 @@ namespace Game.Map
             veil.Amount = (int)((veilSize.x + veilSize.y) / 2.0f);
             veil.VisibilityRect = new Rect2(-veilSize, veilSize * 2.0f);
             veil.GlobalPosition = veilSize;
-        }
-        private void SetUnits()
-        {
-            foreach (Node2D node2D in GetNode<Node>("zed/z1").GetChildren())
-            {
-                Npc npc = node2D as Npc;
-                if (npc != null)
-                {
-                    npc.SetData(UnitDB.GetUnitData(npc.Name, Name));
-                }
-            }
         }
         private void SetObstacles()
         {

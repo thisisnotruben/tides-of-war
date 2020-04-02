@@ -18,12 +18,12 @@ namespace Game.Quests
         private string questRecieverCompleted;
         private string questRecieverDelivered;
         private bool keepPickables;
-        private short gold;
+        private int gold;
         public Pickable reward { get; private set; }
         private Dictionary<string, string> objective = new Dictionary<string, string>();
         public WorldQuests.QuestState state { get; private set; }
 
-        public short GetGold()
+        public int GetGold()
         {
             return gold;
         }
@@ -134,7 +134,7 @@ namespace Game.Quests
         }
         public bool IsCompleted()
         {
-            short questCompletionTracker = 0;
+            int questCompletionTracker = 0;
             foreach (string key in objective.Keys)
             {
                 string[] objectiveValues = objective[key].Split("-");
@@ -174,7 +174,7 @@ namespace Game.Quests
                         LoadText();
                         break;
                     case nameof(gold):
-                        gold = short.Parse(data[key]);
+                        gold = int.Parse(data[key]);
                         break;
                     case nameof(keepPickables):
                         keepPickables = bool.Parse(data[key]);

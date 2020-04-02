@@ -9,7 +9,7 @@ namespace Game.Loot
     public abstract class Pickable : WorldObject
     {
         public WorldTypes subType;
-        private short goldDrop;
+        private int goldDrop;
         private float _duration;
         public float duration
         {
@@ -28,8 +28,8 @@ namespace Game.Loot
         }
         public float cooldown { get; private protected set; }
         public byte stackSize { get; private protected set; }
-        public short goldWorth { get; private protected set; }
-        public short level { get; private protected set; }
+        public int goldWorth { get; private protected set; }
+        public int level { get; private protected set; }
         public string menuDescription { get; private protected set; }
         public AtlasTexture icon { get; private protected set; }
 
@@ -233,7 +233,7 @@ namespace Game.Loot
                 pickable = PickableFactory.GetMakeSpell(worldName);
             }
             pickable.GetPickable(buyer, true);
-            buyer.gold = (short)(-pickable.GetGold());
+            buyer.gold = -pickable.GetGold();
         }
         public void Sell(Player seller)
         {
@@ -254,7 +254,7 @@ namespace Game.Loot
             EmitSignal(nameof(Unmake));
             QueueFree();
         }
-        public short GetGold()
+        public int GetGold()
         {
             return goldWorth;
         }

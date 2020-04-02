@@ -17,13 +17,13 @@ namespace Game.Actor
         public static readonly PackedScene missileScene = (PackedScene)GD.Load("res://src/missile/missile.tscn");
         public enum States { ALIVE, DEAD, MOVING, IDLE, ATTACKING, RETURNING }
         public virtual States state { get; private set; }
-        private string swingType;
         private bool bumping;
         public bool enemy { get; private protected set; }
         private protected bool engaging;
         public bool dead { get; private set; }
-        private byte _level;
-        public byte level
+        public bool ranged  { get; private protected set; }
+        private int _level;
+        public int level
         {
             get
             {
@@ -32,21 +32,16 @@ namespace Game.Actor
             set
             {
                 _level = value;
-                Dictionary<string, double> stats = Stats.UnitMake((double)level,
-                    Stats.GetMultiplier(this is Npc, GetNode<Sprite>("img").Texture.ResourcePath));
-                foreach (string attribute in stats.Keys)
-                {
-                    Set(attribute, (short)stats[attribute]);
-                }
+                SetAttributes();
                 if (level > Stats.MAX_LEVEL)
                 {
                     _level = Stats.MAX_LEVEL;
                 }
             }
         }
-        public short armor;
-        private short _hp;
-        public short hp
+        public int armor;
+        private int _hp;
+        public int hp
         {
             get
             {
@@ -74,14 +69,14 @@ namespace Game.Actor
                 }
                 if (hp > 0 && dead)
                 {
-                    SetState((short)States.ALIVE);
+                    SetState(States.ALIVE);
                 }
                 EmitSignal(nameof(UpdateHud), nameof(hp), worldName, hp, hpMax);
             }
         }
-        public short hpMax;
-        private short _mana;
-        public short mana
+        public int hpMax;
+        private int _mana;
+        public int mana
         {
             get
             {
@@ -109,49 +104,155 @@ namespace Game.Actor
                 EmitSignal(nameof(UpdateHud), nameof(mana), worldName, mana, manaMax);
             }
         }
-        public short manaMax;
-        public short regenTime;
-        public short minDamage;
-        public short maxDamage;
-        public short stamina { get; private set; }
-        public short intellect { get; private set; }
-        public short agility { get; private set; }
-        public bool ranged  { get; private protected set; }
-        public float animSpeed = 1.0f;
-        public ushort weaponRange = Stats.WEAPON_RANGE_MELEE;
-        public float weaponSpeed = 1.3f;
+        public int manaMax;
+        public int regenTime;
+        public int minDamage;
+        public int maxDamage;
+        public int stamina { get; private set; }
+        public int intellect { get; private set; }
+        public int agility { get; private set; }
+        public int weaponRange = Stats.WEAPON_RANGE_MELEE;
+        public float animSpeed;
+        public float weaponSpeed;
         private string weaponMaterial;
         private string weaponSnd;
+        private string swingType;
         public Item weapon = null;
         public Item vest = null;
         public Spell spell { get; private protected set; }
         public virtual Character target { get; set; }
         private protected Speaker2D snd;
-        private protected Vector2 origin = new Vector2();
-        private protected List<Vector2> path = new List<Vector2>();
-        private List<Spell> spellQueue = new List<Spell>();
-        private protected Dictionary<Character, short> targetList = new Dictionary<Character, short>();
-        private Dictionary<Character, short> attackerTable = new Dictionary<Character, short>();
-        public Dictionary<string, List<Item>> buffs = new Dictionary<string, List<Item>>
-        { { "active", new List<Item>() },
-            { "pending", new List<Item>() }
-        };
+        private protected Vector2 origin;
+        private protected List<Vector2> path;
+        private List<Spell> spellQueue;
+        private protected Dictionary<Character, int> targetList;
+        private Dictionary<Character, int> attackerTable;
+        public Dictionary<string, List<Item>> buffs;
+
         [Signal]
         public delegate void Talked();
         [Signal]
         public delegate void Died();
         [Signal]
-        public delegate void UpdateHud(string type, string worldName, short amount, short maxAmount);
+        public delegate void UpdateHud(string type, string worldName, int amount, int maxAmount);
         [Signal]
         public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
+
+        public virtual void init()
+        {
+            origin = new Vector2();
+            path = new List<Vector2>();
+            spellQueue = new List<Spell>();
+            targetList = new Dictionary<Character, int>();
+            attackerTable = new Dictionary<Character, int>();
+            buffs = new Dictionary<string, List<Item>>();
+            buffs.Add("active", new List<Item>());
+            buffs.Add("pending", new List<Item>());
+            worldName = Name;
+            state = States.IDLE;
+            bumping = false;
+            enemy = false;
+            engaging = false;
+            dead = false;
+            ranged = false;
+            _level = 0;
+            armor = 0;
+            hp = 0;
+            hpMax = 0;
+            mana = 0;
+            manaMax = 0;
+            regenTime = 0;
+            minDamage = 0;
+            maxDamage = 0;
+            stamina = 0;
+            intellect = 0;
+            agility = 0;
+            weaponRange = Stats.WEAPON_RANGE_MELEE;
+            animSpeed = 1.0f;
+            weaponSpeed = 1.3f;
+            weaponMaterial = "";
+            weaponSnd = "";
+            swingType = "";
+            weapon = null;
+            vest = null;
+            spell = null;
+            target = null;
+        }
+        private protected void SetImg(string imgName)
+        {
+            ImageDB.ImageNode imageData = ImageDB.GetImageData(imgName);
+            swingType = imageData.swing;
+            Sprite img = GetNode<Sprite>("img");
+            img.Texture = (Texture)GD.Load($"res://asset/img/character/{imgName}.png");
+            img.Hframes = imageData.total;
+            AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
+            Animation animRes = anim.GetAnimation("attacking");
+            animRes.TrackSetKeyValue(0, 0, imageData.moving + imageData.dying);
+            animRes.TrackSetKeyValue(0, 1, imageData.total - 1);
+            animRes = anim.GetAnimation("moving");
+            animRes.TrackSetKeyValue(0, 0, 0);
+            animRes.TrackSetKeyValue(0, 1, imageData.moving);
+            animRes = anim.GetAnimation("dying");
+            animRes.TrackSetKeyValue(0, 0, imageData.moving);
+            animRes.TrackSetKeyValue(0, 1, imageData.dying);
+            animRes = anim.GetAnimation("casting");
+            animRes.TrackSetKeyValue(0, 0, imageData.moving);
+            animRes.TrackSetKeyValue(0, 1, imageData.moving + 3);
+            if (imageData.attacking == 0)
+            {
+                anim.RemoveAnimation("attacking");
+            }
+            weaponMaterial = imageData.weaponMaterial;
+            weaponRange = (imageData.melee) ? Stats.WEAPON_RANGE_MELEE : Stats.WEAPON_RANGE_RANGE;
+            weaponSnd = imageData.weapon.ToLower();
+            switch (weaponSnd)
+            {
+                case "magic":
+                case "claw":
+                case "sickle":
+                    weaponSnd = "dagger";
+                    break;
+                case "spear":
+                case "hatchet":
+                    weaponSnd = "sword";
+                    break;
+                case "staff":
+                case "mace":
+                case "rock":
+                case "":
+                    weaponSnd = "club";
+                    break;
+            }
+            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData.body}.tres");
+            TouchScreenButton select = GetNode<TouchScreenButton>("select");
+            Vector2 textureSize = texture.Region.Size;
+            Node2D sightDistance = GetNode<Node2D>("sight/distance");
+            Node2D areaBody = GetNode<Node2D>("area/body");
+            Node2D head = GetNode<Node2D>("head");
+            select.Normal = texture;
+            img.Position = new Vector2(0.0f, -img.Texture.GetHeight() / 2.0f);
+            head.Position = new Vector2(0.0f, -texture.GetHeight());
+            select.Position = new Vector2(-textureSize.x / 2.0f, -textureSize.y);
+            areaBody.Position = new Vector2(-0.5f, -textureSize.y / 2.0f);
+            sightDistance.Position = areaBody.Position;
+        }
+        private protected void SetAttributes()
+        {
+            Stats.CharacterStatsNode characterStatsNode = Stats.UnitMake(level,
+                Stats.GetMultiplier(this is Npc, GetNode<Sprite>("img").Texture.ResourcePath));
+            stamina = characterStatsNode.stamina;
+            intellect = characterStatsNode.intellect;
+            hpMax = characterStatsNode.hpMax;
+            manaMax = characterStatsNode.manaMax;
+            maxDamage = characterStatsNode.maxDamage;
+            minDamage = characterStatsNode.minDamage;
+            regenTime = characterStatsNode.regenTime;
+            armor = characterStatsNode.armor;
+        }
         public override void _Ready()
         {
             snd = GetNode<Speaker2D>("snd");
-            // Connect(nameof(Talked), Globals.worldQuests,
-            //     nameof(Game.Quests.WorldQuests.UpdateQuestCharacter), new Godot.Collections.Array { this });
-            // Connect(nameof(Died), Globals.worldQuests,
-            //     nameof(Game.Quests.WorldQuests.UpdateQuestCharacter), new Godot.Collections.Array { this });
-            GetNode<RayCast2D>("ray").AddException(GetNode<Area2D>("area"));
+            GetNode<RayCast2D>("ray").AddException(GetNode<Area2D>("area"));            
         }
         public virtual void Attack(bool ignoreArmor = false)
         {
@@ -159,28 +260,23 @@ namespace Game.Actor
             {
                 if (ranged)
                 {
-                    return; // TODO
-                    Bolt missile = (Bolt)missileScene.Instance();
-                    GetParent().AddChild(missile);
-                    missile.SetUp(this, GlobalPosition, spell);
+                    // TODO
                 }
                 else
                 {
                     GD.Randomize();
-                    ushort diceRoll = (ushort)(GD.Randi() % 100 + 1);
-                    short damage = (short)Math.Round(GD.RandRange(
-                        (double)minDamage, (double)maxDamage));
-                    ushort sndIdx = Globals.WEAPON_TYPE[weaponSnd.ToString()];
-                    string sndName = weaponSnd.ToString().ToLower() + sndIdx.ToString();
+                    uint diceRoll = GD.Randi() % 100 + 1;
+                    int damage = (int)Math.Round(GD.RandRange((double)minDamage, (double)maxDamage));
+                    string sndName = weaponSnd.ToString().ToLower();// + Globals.WEAPON_TYPE[weaponSnd.ToString()].ToString();
                     CombatText.TextType hitType;
-                    Dictionary<string, ushort> attackTable = Stats.attackTable["MELEE"];
+                    Dictionary<string, int> attackTable = Stats.attackTable["MELEE"];
                     if (spell != null && !spell.casted)
                     {
                         attackTable = spell.GetAttackTable();
                         if (diceRoll <= attackTable["CRITICAL"])
                         {
                             ignoreArmor = spell.ignoreArmor;
-                            damage = (short)Math.Round((float)damage * spell.Cast());
+                            damage = (int)Math.Round((float)damage * spell.Cast());
                             target.SetSpell(spell);
                         }
                         else
@@ -217,13 +313,13 @@ namespace Game.Actor
                         sndName = swingType + GD.Randi() % Globals.WEAPON_TYPE[swingType.ToUpper()];
                     }
                     target.TakeDamage(damage, ignoreArmor, this, hitType);
-                    Globals.PlaySound(sndName, this, snd);
+                    // Globals.PlaySound(sndName, this, snd);
                 }
                 GetNode<Timer>("timer").Start();
             }
             GetNode<Sprite>("img").Frame = 0;
         }
-        public virtual void TakeDamage(short damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
+        public virtual void TakeDamage(int damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
         {
             if (!ignoreArmor)
             {
@@ -252,7 +348,7 @@ namespace Game.Actor
                     AddChild(combatText);
                     if (damage > 0)
                     {
-                        hp = (short) - damage;
+                        hp = -damage;
                         combatText.SetType($"-{damage}", CombatText.TextType.HIT, GetNode<Node2D>("img").Position);
                         if (!dead && state == States.ATTACKING || state == States.IDLE)
                         {
@@ -370,7 +466,7 @@ namespace Game.Actor
             else if (!engaging && (hp < hpMax || mana < manaMax))
             {
                 string imgPath = GetNode<Sprite>("img").Texture.ResourcePath;
-                short regenAmount = Stats.HpManaRegenAmount(level, Stats.GetMultiplier(this is Npc, imgPath));
+                int regenAmount = Stats.HpManaRegenAmount(level, Stats.GetMultiplier(this is Npc, imgPath));
                 hp = regenAmount;
                 mana = regenAmount;
             }
@@ -438,9 +534,9 @@ namespace Game.Actor
                 Modulate = new Color(1.0f, 1.0f, 1.0f, 0.8f);
                 if (hp > 0)
                 {
-                    hp = (short)(-hpMax);
+                    hp = -hpMax;
                 }
-                mana = (short)(-manaMax);
+                mana = -manaMax;
                 foreach (Spell spell in spellQueue)
                 {
                     spell.UnMake();
@@ -557,73 +653,6 @@ namespace Game.Actor
             foreach (Spell spell in spellQueue)
             {
                 EmitSignal(nameof(UpdateHudIcon), spell, spell.GetTimeLeft());
-            }
-        }
-        public void SetImg(string imgName, bool loaded = false)
-        {
-            Dictionary<string, string> imageData = ImageDB.GetImageData(imgName);
-            swingType = imageData["swing"];
-            Sprite img = GetNode<Sprite>("img");
-            img.Texture = (Texture)GD.Load($"res://asset/img/character/{imgName}.png");
-            img.Hframes = int.Parse(imageData["total"]);
-            AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
-            Animation animRes = anim.GetAnimation("attacking");
-            animRes.TrackSetKeyValue(0, 0, int.Parse(imageData["moving"]) + int.Parse(imageData["dying"]));
-            animRes.TrackSetKeyValue(0, 1, int.Parse(imageData["attacking"]) - 1);
-            animRes = anim.GetAnimation("moving");
-            animRes.TrackSetKeyValue(0, 0, 0);
-            animRes.TrackSetKeyValue(0, 1, int.Parse(imageData["moving"]));
-            animRes = anim.GetAnimation("dying");
-            animRes.TrackSetKeyValue(0, 0, int.Parse(imageData["moving"]));
-            animRes.TrackSetKeyValue(0, 1, int.Parse(imageData["dying"]));
-            animRes = anim.GetAnimation("casting");
-            animRes.TrackSetKeyValue(0, 0, int.Parse(imageData["moving"]));
-            animRes.TrackSetKeyValue(0, 1, int.Parse(imageData["moving"]) + 3);
-            if (imageData["attacking"].Equals("0"))
-            {
-                anim.RemoveAnimation("attacking");
-            }
-            weaponRange = (bool.Parse(imageData["melee"])) ? Stats.WEAPON_RANGE_MELEE : Stats.WEAPON_RANGE_RANGE;
-            weaponSnd = imageData["weapon"].ToLower();
-            switch (weaponSnd)
-            {
-                case "magic":
-                case "claw":
-                case "sickle":
-                    weaponSnd = "dagger";
-                    break;
-                case "spear":
-                case "hatchet":
-                    weaponSnd = "sword";
-                    break;
-                case "staff":
-                case "mace":
-                case "rock":
-                    weaponSnd = "club";
-                    break;
-            }
-            AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData["body"]}.tres");
-            TouchScreenButton select = GetNode<TouchScreenButton>("select");
-            Vector2 textureSize = texture.Region.Size;
-            Node2D sightDistance = GetNode<Node2D>("sight/distance");
-            Node2D areaBody = GetNode<Node2D>("area/body");
-            Node2D head = GetNode<Node2D>("head");
-            select.Normal = texture;
-            img.Position = new Vector2(0.0f, -img.Texture.GetHeight() / 2.0f);
-            head.Position = new Vector2(0.0f, -texture.GetHeight());
-            select.Position = new Vector2(-textureSize.x / 2.0f, -textureSize.y);
-            areaBody.Position = new Vector2(-0.5f, -textureSize.y / 2.0f);
-            sightDistance.Position = areaBody.Position;
-            Dictionary<string, double> stats = Stats.UnitMake((double)level, Stats.GetMultiplier(this is Npc, imgName));
-            foreach (string attribute in stats.Keys)
-            {
-                Set(attribute, (short)stats[attribute]);
-            }
-            SetTime(regenTime);
-            if (!loaded)
-            {
-                hp = hpMax;
-                mana = manaMax;
             }
         }
         public virtual void SetSaveData(Godot.Collections.Dictionary saveData)

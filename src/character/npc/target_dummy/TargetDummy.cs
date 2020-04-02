@@ -13,7 +13,7 @@ namespace Game.Actor
         public override void _Process(float delta) { }
         public override void MoveTo(Vector2 WorldPosition, List<Vector2> route) { }
         public override void Attack(bool ignoreArmor) { }
-        public override void TakeDamage(short damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
+        public override void TakeDamage(int damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
         {
             base.TakeDamage(damage, ignoreArmor, worldObject, textType);
             hp = hpMax;

@@ -607,7 +607,7 @@ namespace Game.Ui
             Pickable questReward = quest.reward;
             if (questReward != null)
             {
-                Globals.map.GetNode("zed/z1").AddChild(questReward);
+                Globals.map.AddZChild(questReward);
                 questReward.GlobalPosition = Globals.map.GetGridPosition(player.GlobalPosition);
             }
             Globals.worldQuests.FinishFocusedQuest();
@@ -678,7 +678,7 @@ namespace Game.Ui
             else
             {
                 popup.GetNode<Control>("m/repair/repair_armor").Show();
-                short armorCost = Stats.ItemRepairCost(player.vest.level);
+                int armorCost = Stats.ItemRepairCost(player.vest.level);
                 text += (player.weapon == null) ? $"Armor: {armorCost}" : $"\nArmor: {armorCost}";
             }
             if (player.weapon != null && player.vest != null)
@@ -941,11 +941,11 @@ namespace Game.Ui
         }
         public void _OnHealPressed()
         {
-            short healerCost = Stats.HealerCost(player.level);
+            int healerCost = Stats.HealerCost(player.level);
             if (player.gold >= healerCost)
             {
                 Globals.PlaySound("sell_buy", this, snd);
-                player.gold = (short) - healerCost;
+                player.gold = -healerCost;
                 player.hp = player.hpMax;
                 _OnBackPressed();
             }
@@ -970,7 +970,7 @@ namespace Game.Ui
                 GD.Print("Unexpected selected type in method _OnAddToHudPressed");
                 return;
             }
-            short count = 1;
+            int count = 1;
             popup.GetNode<Control>("m/add_to_slot/clear_slot").Hide();
             foreach (ItemSlot itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
             {
@@ -1038,14 +1038,14 @@ namespace Game.Ui
             switch (item.worldType)
             {
                 case WorldObject.WorldTypes.WEAPON:
-                    Tuple<short, short> values = item.GetValues();
+                    Tuple<int, int> values = item.GetValues();
                     player.weapon = (on) ? item : null;
-                    player.minDamage += (on) ? values.Item1 : (short) - values.Item1;
-                    player.maxDamage += (on) ? values.Item2 : (short) - values.Item2;
+                    player.minDamage += (on) ? values.Item1 : -values.Item1;
+                    player.maxDamage += (on) ? values.Item2 : -values.Item2;
                     break;
                 case WorldObject.WorldTypes.ARMOR:
                     player.vest = (on) ? item : null;
-                    player.armor += (on) ? item.value : (short) - item.value;
+                    player.armor += (on) ? item.value : -item.value;
                     break;
             }
             string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), item.worldType).ToLower()}_slot/m/icon";
@@ -1078,7 +1078,7 @@ namespace Game.Ui
         {
             inventoryBag.RemoveItem(inventoryBag.GetItemSlot(pickable).GetIndex());
             player.GetNode("inventory").RemoveChild(pickable);
-            Globals.map.GetNode("zed/z1").AddChild(pickable);
+            Globals.map.AddZChild(pickable);
             pickable.Owner = Globals.map;
             pickable.GlobalPosition = Globals.map.SetGetPickableLoc(player.GlobalPosition, true);
         }
@@ -1097,34 +1097,7 @@ namespace Game.Ui
             }
             else
             {
-                switch (selectedPickable.worldType)
-                {
-                    case WorldObject.WorldTypes.ARMOR:
-                        sndName = $"{ItemDB.GetItemArmorMaterial(selectedPickable.worldName)}_on";
-                        break;
-                    case WorldObject.WorldTypes.WEAPON:
-                        switch (selectedPickable.subType)
-                        {
-                            case WorldObject.WorldTypes.STAFF:
-                            case WorldObject.WorldTypes.BOW:
-                                sndName = "wood_on";
-                                break;
-                            default:
-                                sndName = "metal1_on";
-                                break;
-                        }
-                        break;
-                    case WorldObject.WorldTypes.POTION:
-                        sndName = "glass_on";
-                        break;
-                    default:
-                        sndName = "misc_on";
-                        break;
-                }
-            }
-            if (off)
-            {
-                sndName = sndName.Replace("on", "off");
+                sndName = $"{ItemDB.GetItemMaterial(selectedPickable.worldName)}_{((off) ? "off" : "on")}";
             }
             return sndName;
         }
@@ -1148,7 +1121,7 @@ namespace Game.Ui
                 }
             }
         }
-        public void UpdateHud(string type, string worldName, short value1, short value2)
+        public void UpdateHud(string type, string worldName, int value1, int value2)
         {
             if (type.ToUpper().Equals("ICON_HIDE"))
             {
@@ -1167,6 +1140,7 @@ namespace Game.Ui
             {
                 type = type.ToLower();
                 string nameLblPath = $"m/h/{(worldName.Equals(player.worldName) ? 'p' : 'u')}/c/bg/m/v/label";
+                GD.Print("igm   ", worldName);
                 hpMana.GetNode<Label>(nameLblPath).Text = worldName;
                 if (!worldName.Equals(player.worldName))
                 {

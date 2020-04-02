@@ -119,18 +119,18 @@ namespace Game.Missile
         {
             GetNode<AnimationPlayer>("anim").Play("fade");
         }
-        public void Attack(bool ignoreArmor = false, Dictionary<string, Dictionary<string, ushort>> attackTable = null)
+        public void Attack(bool ignoreArmor = false, Dictionary<string, Dictionary<string, int>> attackTable = null)
         {
             if (attackTable == null)
             {
                 attackTable = Stats.attackTable;
             }
             GD.Randomize();
-            short damage = (short)Math.Round(GD.RandRange((double)originator.minDamage, (double)originator.maxDamage));
-            ushort diceRoll = (ushort)(GD.Randi() % 100 + 1);
+            int damage = (int)Math.Round(GD.RandRange((double)originator.minDamage, (double)originator.maxDamage));
+            uint diceRoll = GD.Randi() % 100 + 1;
             string weaponTypeName = Enum.GetName(typeof(WorldTypes), weaponType);
             string swingTypeName = Enum.GetName(typeof(WorldTypes), swingType).ToLower();
-            uint sndIdx = GD.Randi() % Globals.WEAPON_TYPE[weaponTypeName];
+            long sndIdx = GD.Randi() % Globals.WEAPON_TYPE[weaponTypeName];
             bool PlaySound = false;
             string snd = $"{weaponTypeName.ToLower()}{sndIdx}";
             CombatText.TextType hitType;

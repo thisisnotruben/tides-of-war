@@ -20,7 +20,7 @@ namespace Game
             { "SAVE_SLOT_6", "res://data/save_game/save_slot_6.json" },
             { "SAVE_SLOT_7", "res://data/save_game/save_slot_7.json" }
         };
-        public static readonly Dictionary<string, ushort> WEAPON_TYPE = new Dictionary<string, ushort>
+        public static readonly Dictionary<string, int> WEAPON_TYPE = new Dictionary<string, int>
         { { "AXE", 5 },
             { "CLUB", 3 },
             { "DAGGER", 3 },

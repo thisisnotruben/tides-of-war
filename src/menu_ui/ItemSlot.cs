@@ -10,11 +10,11 @@ namespace Game.Ui
         private bool allowCoolDown;
         private List<Pickable> itemStack = new List<Pickable>();
         private float time;
-        private ushort stackSize;
+        private int stackSize;
         [Signal]
         public delegate void SlotSelected(int index);
         [Signal]
-        public delegate void StackSizeChanged(ItemSlot itemSlot, string worldName, ushort itemStackSize);
+        public delegate void StackSizeChanged(ItemSlot itemSlot, string worldName, int itemStackSize);
         [Signal]
         public delegate void Cooldown(float time, float seek);
         [Signal]

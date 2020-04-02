@@ -9,9 +9,9 @@ namespace Game.Actor
     {
         private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/move_cursor.tscn");
         private static readonly PackedScene graveScene = (PackedScene)GD.Load("res://src/character/doodads/grave.tscn");
-        private List<Vector2> reservedPath = new List<Vector2>();
+        private List<Vector2> reservedPath;
         public Vector2 gravePos { get; private set; }
-        public short xp { get; private set; }
+        public int xp { get; private set; }
         public override Character target
         {
             get
@@ -61,8 +61,8 @@ namespace Game.Actor
                 base.target = value;
             }
         }
-        private short _gold;
-        public short gold
+        private int _gold;
+        public int gold
         {
             get
             {
@@ -76,18 +76,28 @@ namespace Game.Actor
 
         [Signal]
         public delegate void PosChanged();
-        public override void _Ready()
+
+        public override void init()
         {
-            base._Ready();
+            worldType = WorldTypes.PLAYER;
             Globals.player = this;
-            worldName = Name;
+            reservedPath = new List<Vector2>();
+            gravePos = new Vector2();
+            xp = 0;
+            gold = 0;
             SetImg("human-6");
+            SetAttributes();
+            hp = hpMax;
+            mana = manaMax;
             Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
             Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
             UpdateHUD();
-            gold = 10_000;
-            worldType = WorldTypes.PLAYER;
-            enemy = false;
+        }
+        public override void _Ready()
+        {
+            base.init();
+            base._Ready();
+            init();
         }
         public override void _UnhandledInput(InputEvent @event)
         {
@@ -192,7 +202,7 @@ namespace Game.Actor
                 weapon.TakeDamage(dead);
             }
         }
-        public override void TakeDamage(short damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
+        public override void TakeDamage(int damage, bool ignoreArmor, WorldObject worldObject, CombatText.TextType textType)
         {
             base.TakeDamage(damage, ignoreArmor, worldObject, textType);
             if (vest != null)
@@ -239,7 +249,7 @@ namespace Game.Actor
                 base.SetState(state);
             }
         }
-        public void SetXP(short addedXP, bool showLabel = true, bool fromSaveFile = false)
+        public void SetXP(int addedXP, bool showLabel = true, bool fromSaveFile = false)
         {
             xp += addedXP;
             if (xp > Stats.MAX_XP)
@@ -252,7 +262,7 @@ namespace Game.Actor
                 AddChild(combatText);
                 combatText.SetType($"+{xp}", CombatText.TextType.XP, GetNode<Node2D>("img").Position);
             }
-            byte _level = Stats.CheckLevel(xp);
+            int _level = Stats.CheckLevel(xp);
             if (level != _level && level < Stats.MAX_LEVEL)
             {
                 level = _level;
@@ -264,12 +274,7 @@ namespace Game.Actor
                 {
                     level = Stats.MAX_LEVEL;
                 }
-                Dictionary<string, double> stats = Stats.UnitMake((double)level,
-                    Stats.GetMultiplier(false, GetNode<Sprite>("img").Texture.ResourcePath));
-                foreach (string attribute in stats.Keys)
-                {
-                    Set(attribute, (short)stats[attribute]);
-                }
+                SetAttributes();
             }
         }
         public override async void SetDead(bool dead)
@@ -309,8 +314,8 @@ namespace Game.Actor
             else
             {
                 GD.Randomize();
-                hp = (short)(hpMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
-                mana = (short)(manaMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
+                hp = (int)(hpMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
+                mana = (int)(manaMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
                 gravePos = new Vector2();
             }
         }

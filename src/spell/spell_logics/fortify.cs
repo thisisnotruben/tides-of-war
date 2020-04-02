@@ -4,10 +4,10 @@ namespace Game.Ability
 {
     public class fortify : Spell
     {
-        private short amount;
+        private int amount;
         public override float Cast()
         {
-            amount = (short)Math.Round((float)caster.armor * 0.25);
+            amount = (int)Math.Round((float)caster.armor * 0.25);
             caster.armor += amount;
             SetTime(60.0f);
             caster.SetSpell(this,

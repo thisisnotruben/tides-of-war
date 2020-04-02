@@ -1,51 +1,64 @@
 using System.Collections.Generic;
+using System;
 using Godot;
 namespace Game.Database
 {
     public static class SpellDB
     {
-        private static readonly string DB_PATH = "res://data/SpellDB.xml";
-        private static readonly XMLParser xMLParser = new XMLParser();
-        public static Dictionary<string, string> GetSpellData(string worldName)
+        public struct SpellNode
         {
-            Dictionary<string, string> spellData = new Dictionary<string, string>();
-            xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok)
+            public string type;
+            public int icon;
+            public int level;
+            public int spellRange;
+            public int coolDown;
+            public float percentDamage;
+            public bool ignoreArmor;
+            public bool effectOnTarget;
+            public bool requiresTarget;
+            public string description;
+        }
+        
+        private static Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
+        private static readonly string DB_PATH = "res://data/spell.json";
+
+        static SpellDB()
+        {
+            LoadSpellData();
+        }
+
+        public static void LoadSpellData()
+        {
+            File file = new File();
+            file.Open(DB_PATH, File.ModeFlags.Read);
+            JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
+            file.Close();
+            Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+            foreach (string spellName in rawDict.Keys)
             {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
-                    xMLParser.GetNodeName().Equals("spell") &&
-                    xMLParser.GetNamedAttributeValueSafe("name").Equals(worldName))
-                {
-                    while (xMLParser.Read() == Error.Ok &&
-                        !(xMLParser.GetNodeType() == XMLParser.NodeType.ElementEnd &&
-                            xMLParser.GetNodeName().Equals("spell")))
-                    {
-                        string keyName = (xMLParser.GetNodeType() == XMLParser.NodeType.Element) ?
-                            xMLParser.GetNodeName() :
-                            "";
-                        if (!keyName.Empty() && xMLParser.Read() == Error.Ok &&
-                            xMLParser.GetNodeType() == XMLParser.NodeType.Text)
-                        {
-                            spellData.Add(keyName, xMLParser.GetNodeData());
-                        }
-                    }
-                }
+                Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary) rawDict[spellName];
+                SpellNode spellNode;
+                spellNode.type = (string) itemDict[nameof(SpellNode.type)];
+                spellNode.icon = (int) ((Single) itemDict[nameof(SpellNode.icon)]);
+                spellNode.level = (int) ((Single) itemDict[nameof(SpellNode.level)]);
+                spellNode.spellRange = (int) ((Single) itemDict[nameof(SpellNode.spellRange)]);
+                spellNode.coolDown = (int) ((Single) itemDict[nameof(SpellNode.coolDown)]);
+                spellNode.percentDamage = (float) ((Single) itemDict[nameof(SpellNode.percentDamage)]);
+                spellNode.ignoreArmor = (bool) itemDict[nameof(SpellNode.ignoreArmor)];
+                spellNode.effectOnTarget = (bool) itemDict[nameof(SpellNode.effectOnTarget)];
+                spellNode.requiresTarget = (bool) itemDict[nameof(SpellNode.requiresTarget)];
+                spellNode.description = (string) itemDict[nameof(SpellNode.description)];
+                spellData.Add(spellName, spellNode);
             }
-            return spellData;
+        }
+
+        public static SpellNode GetSpellData(string worldName)
+        {
+            return spellData[worldName];
         }
         public static bool HasSpell(string nameCheck)
         {
-            xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok)
-            {
-                if (xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
-                    xMLParser.GetNodeName().Equals("spell") &&
-                    xMLParser.GetNamedAttributeValue("name").Equals(nameCheck))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return spellData.ContainsKey(nameCheck);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Game.Ability
 {
     public class intimidating_shout : Spell
     {
-        private Dictionary<Character, Tuple<short, short>> targetList = new Dictionary<Character, Tuple<short, short>>();
+        private Dictionary<Character, Tuple<int, int>> targetList = new Dictionary<Character, Tuple<int, int>>();
         public override float Cast()
         {
             if (loaded)
@@ -24,9 +24,9 @@ namespace Game.Ability
                     Character character = characterArea2D.Owner as Character;
                     if (character != null && character != caster)
                     {
-                        short amount1 = (short)Math.Round((float)character.minDamage * 0.20f);
-                        short amount2 = (short)Math.Round((float)character.maxDamage * 0.20f);
-                        targetList.Add(character, new Tuple<short, short>(amount1, amount2));
+                        int amount1 = (int)Math.Round((float)character.minDamage * 0.20f);
+                        int amount2 = (int)Math.Round((float)character.maxDamage * 0.20f);
+                        targetList.Add(character, new Tuple<int, int>(amount1, amount2));
                     }
                 }
             }

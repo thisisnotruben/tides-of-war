@@ -26,7 +26,7 @@ namespace Game.Ability
             if (hit)
             {
                 GD.Randomize();
-                short damage = (short)(Math.Round(GD.RandRange(caster.minDamage, caster.maxDamage) * 1.2f));
+                int damage = (int)(Math.Round(GD.RandRange(caster.minDamage, caster.maxDamage) * 1.2f));
                 foreach (Character character in targetList)
                 {
                     character.TakeDamage(damage, false, caster, Game.Actor.Doodads.CombatText.TextType.HIT);

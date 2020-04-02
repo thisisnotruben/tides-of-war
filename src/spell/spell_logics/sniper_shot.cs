@@ -4,7 +4,7 @@ namespace Game.Ability
 {
     public class sniper_shot : Spell
     {
-        ushort amount;
+        int amount;
         public override float Cast()
         {
             caster.weaponRange -= amount;
@@ -14,7 +14,7 @@ namespace Game.Ability
         {
             caster.SetCurrentSpell(this);
             caster.SetState(Character.States.IDLE);
-            amount = (ushort)Math.Round(caster.weaponRange * 0.25f);
+            amount = (int)Math.Round(caster.weaponRange * 0.25f);
             caster.weaponRange += amount;
         }
     }

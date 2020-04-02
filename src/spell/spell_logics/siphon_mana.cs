@@ -7,15 +7,15 @@ namespace Game.Ability
     {
         public override float Cast()
         {
-            short mana = (short)Math.Round((float)caster.target.mana * 0.2f);
-            caster.target.mana = (short) - mana;
+            int mana = (int)Math.Round((float)caster.target.mana * 0.2f);
+            caster.target.mana = -mana;
             caster.mana = mana;
             PackedScene CombatTextScene = (PackedScene)GD.Load("res://src/character/doodads/combat_text.tscn");
             CombatText combatText = (CombatText)CombatTextScene.Instance();
             caster.AddChild(combatText);
             if (mana + caster.mana > caster.manaMax)
             {
-                mana = (short)(caster.manaMax - caster.mana);
+                mana = caster.manaMax - caster.mana;
             }
             combatText.SetType($"+{mana}", CombatText.TextType.MANA, caster.GetNode<Node2D>("img").Position);
             return base.Cast();

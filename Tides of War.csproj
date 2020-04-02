@@ -60,6 +60,7 @@
     <Compile Include="src\character\doodads\CombatText.cs" />
     <Compile Include="src\character\doodads\FootStep.cs" />
     <Compile Include="src\character\doodads\Grave.cs" />
+    <Compile Include="src\database\ContentDB.cs" />
     <Compile Include="src\database\ItemDB.cs" />
     <Compile Include="src\database\PickableFactory.cs" />
     <Compile Include="src\database\QuestDB.cs" />

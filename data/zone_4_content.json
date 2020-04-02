@@ -1,0 +1,22 @@
+{
+    "2-Stanmore": {
+        "level": 6,
+        "enemy": true,
+        "healer": true,
+        "healerCost": 7,
+        "dialogue": "thidsfdsafnaskjfnaslkijfbnasjkfb asjhbgfsdhfbadskjfb",
+        "drops": [
+            "Heart Stopper",
+            "Apocalypse"
+        ],
+        "spells": [
+            "Stomp",
+            "Stinging shot",
+            "Precise shot"
+        ],
+        "merchandise": [
+            "Corn on the Cob",
+            "Queenfish"
+        ]
+    }
+}

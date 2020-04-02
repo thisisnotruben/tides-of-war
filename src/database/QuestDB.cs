@@ -12,7 +12,7 @@ namespace Game.Database
         public static Dictionary<string, Dictionary<string, string>> GetAllQuestData()
         {
             Dictionary<string, Dictionary<string, string>> allQuestData = new Dictionary<string, Dictionary<string, string>>();
-            short count = 0;
+            int count = 0;
             xMLParser.Open(DB_PATH);
             while (xMLParser.Read() == Error.Ok)
             {

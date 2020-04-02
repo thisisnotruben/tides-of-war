@@ -1,27 +1,58 @@
 using System.Collections.Generic;
+using System;
 using Godot;
 namespace Game.Database
 {
     public static class ImageDB
     {
-        private static readonly string DB_PATH = "res://data/ImageDB.xml";
-        private static readonly XMLParser xMLParser = new XMLParser();
-
-        public static Dictionary<string, string> GetImageData(string imageName)
+        public struct ImageNode
         {
-            Dictionary<string, string> imageData = new Dictionary<string, string>();
-            int i;
-            xMLParser.Open(DB_PATH);
-            while (xMLParser.Read() == Error.Ok && imageData.Count == 0)
+            public int total;
+            public int moving;
+            public int dying;
+            public int attacking;
+            public string weapon;
+            public string swing;
+            public string body;
+            public string weaponMaterial;
+            public bool melee;
+        }
+
+        private static Dictionary<string, ImageNode> imageData = new Dictionary<string, ImageNode>();
+        private static readonly string DB_PATH = "res://data/image.json";
+        
+        static ImageDB()
+        {
+            LoadImageData();
+        }
+
+        private static void LoadImageData()
+        {
+            File file = new File();
+            file.Open(DB_PATH, File.ModeFlags.Read);
+            JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
+            file.Close();
+            Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+            foreach (string imgName in rawDict.Keys)
             {
-                for (i = 0; xMLParser.GetNodeType() == XMLParser.NodeType.Element &&
-                    xMLParser.GetNamedAttributeValueSafe("name").Equals(imageName) &&
-                    i < xMLParser.GetAttributeCount(); i++)
-                {
-                    imageData.Add(xMLParser.GetAttributeName(i), xMLParser.GetAttributeValue(i));
-                }
+                Godot.Collections.Dictionary imgDict = (Godot.Collections.Dictionary) rawDict[imgName];
+                ImageNode imageNode;
+                imageNode.total = (int) ((Single) imgDict[nameof(ImageNode.total)]);
+                imageNode.moving = (int) ((Single) imgDict[nameof(ImageNode.moving)]);
+                imageNode.dying = (int) ((Single) imgDict[nameof(ImageNode.dying)]);
+                imageNode.attacking = (int) ((Single) imgDict[nameof(ImageNode.attacking)]);
+                imageNode.weapon = (string) imgDict[nameof(ImageNode.weapon)];
+                imageNode.swing = (string) imgDict[nameof(ImageNode.swing)];
+                imageNode.body = (string) imgDict[nameof(ImageNode.body)];
+                imageNode.weaponMaterial = (string) imgDict[nameof(ImageNode.weaponMaterial)];
+                imageNode.melee = (bool) imgDict[nameof(ImageNode.melee)];
+                imageData.Add(imgName, imageNode);
             }
-            return imageData;
+        }
+
+        public static ImageNode GetImageData(string imageName)
+        {
+            return imageData[imageName];
         }
     }
 }
