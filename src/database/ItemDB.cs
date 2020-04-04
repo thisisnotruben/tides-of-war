@@ -9,9 +9,10 @@ namespace Game.Database
         {
             public string type;
             public string subType;
-            public int icon;
+            public AtlasTexture icon;
             public int level;
             public string material;
+            public string description;
         }
 
         private static Dictionary<string, ItemNode> itemData = new Dictionary<string, ItemNode>();
@@ -35,9 +36,11 @@ namespace Game.Database
                 ItemNode itemNode;
                 itemNode.type = (string) itemDict[nameof(ItemNode.type)];
                 itemNode.subType = (string) itemDict[nameof(ItemNode.subType)];
-                itemNode.icon = (int) ((Single) itemDict[nameof(ItemNode.icon)]);
+                itemNode.icon = IconDB.GetIcon((int) ((Single) itemDict[nameof(ItemNode.icon)]));
                 itemNode.level = (int) ((Single) itemDict[nameof(ItemNode.level)]);
                 itemNode.material = (string) itemDict[nameof(ItemNode.material)];
+                // TODO
+                itemNode.description = "TODO";
                 itemData.Add(itemName, itemNode);
             }
         }

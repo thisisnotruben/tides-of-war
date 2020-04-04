@@ -12,7 +12,7 @@ namespace Game.Ui
         private Player player;
         public override void _Ready()
         {
-            player = ((InGameMenu)Owner).player;
+            // player = ((InGameMenu)Owner).player;
             SetProcess(false);
             return;
             string mapName = Globals.map.Name;

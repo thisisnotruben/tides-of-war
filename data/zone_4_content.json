@@ -1,7 +1,7 @@
 {
     "2-Stanmore": {
         "level": 6,
-        "enemy": true,
+        "enemy": false,
         "healer": true,
         "healerCost": 7,
         "dialogue": "thidsfdsafnaskjfnaslkijfbnasjkfb asjhbgfsdhfbadskjfb",

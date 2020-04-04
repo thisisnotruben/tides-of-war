@@ -7,7 +7,7 @@ namespace Game.Ui
     {
         public Control listOfMenus;
         public Control itemInfo;
-        public Control about;
+        public AboutNode about;
         public Control merchant;
         public Control inventory;
         public Control dialogue;
@@ -15,7 +15,7 @@ namespace Game.Ui
         public Control questLog;
         public Control statsMenu;
         public Popup popup;
-        public SaveLoad saveLoad;
+        public SaveLoadNode saveLoad;
         public ItemList inventoryBag;
         public ItemList merchantBag;
         public ItemList spellBook;

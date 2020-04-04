@@ -1,0 +1,204 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/menu_ui/StartMenu.cs" type="Script" id=1]
+[ext_resource path="res://src/menu_ui/views/popup_view.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/menu_ui/views/about_view.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/utils/audio_stream_player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://asset/img/ui/grey2_bg.tres" type="Texture" id=5]
+[ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=6]
+[ext_resource path="res://asset/img/font/mago1_144.tres" type="DynamicFont" id=7]
+[ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=8]
+[ext_resource path="res://src/menu_ui/views/save_load_view.tscn" type="PackedScene" id=9]
+
+[node name="start_menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.264706 )
+
+[node name="list_of_menus" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 50
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 50
+
+[node name="bg" type="TextureRect" parent="list_of_menus"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 670.0
+margin_bottom = 1230.0
+texture = ExtResource( 5 )
+expand = true
+
+[node name="m" type="MarginContainer" parent="list_of_menus"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 670.0
+margin_bottom = 1230.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 50
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 50
+
+[node name="main_menu" type="Control" parent="list_of_menus/m"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 570.0
+margin_bottom = 1130.0
+
+[node name="v" type="VBoxContainer" parent="list_of_menus/m/main_menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="label" type="Label" parent="list_of_menus/m/main_menu/v"]
+margin_right = 520.0
+margin_bottom = 231.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+text = "Tides of
+War"
+align = 1
+valign = 1
+
+[node name="new_game" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+margin_top = 235.0
+margin_right = 520.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+expand = true
+
+[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/new_game"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+text = "New Game"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="load" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+margin_top = 404.0
+margin_right = 520.0
+margin_bottom = 569.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+expand = true
+
+[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/load"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+text = "Load"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+margin_top = 573.0
+margin_right = 520.0
+margin_bottom = 738.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+expand = true
+
+[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+text = "Settings"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="about" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+margin_top = 742.0
+margin_right = 520.0
+margin_bottom = 907.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+expand = true
+
+[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/about"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+text = "About"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+margin_top = 911.0
+margin_right = 520.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+expand = true
+
+[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/exit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+text = "Exit"
+align = 1
+valign = 1
+
+[node name="save_load" parent="list_of_menus/m" instance=ExtResource( 9 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 570.0
+margin_bottom = 1130.0
+
+[node name="about" parent="list_of_menus/m" instance=ExtResource( 3 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 570.0
+margin_bottom = 1130.0
+
+[node name="popup" parent="." instance=ExtResource( 2 )]
+
+[node name="snd" parent="." instance=ExtResource( 4 )]
+[connection signal="pressed" from="list_of_menus/m/main_menu/v/new_game" to="." method="_OnNewGamePressed"]
+[connection signal="pressed" from="list_of_menus/m/main_menu/v/load" to="." method="_OnLoadPressed"]
+[connection signal="pressed" from="list_of_menus/m/main_menu/v/settings" to="." method="_OnSettingsPressed"]
+[connection signal="pressed" from="list_of_menus/m/main_menu/v/about" to="." method="_OnAboutPressed"]
+[connection signal="pressed" from="list_of_menus/m/main_menu/v/exit" to="." method="_OnExitPressed"]

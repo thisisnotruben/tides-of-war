@@ -628,10 +628,6 @@ namespace Game.Actor
                 timer.OneShot = oneShot;
                 timer.Start();
             }
-            else
-            {
-                GD.Print($"Error: {worldName} set invalid time");
-            }
         }
         public void PlaceFootStep(bool step)
         {
@@ -649,6 +645,7 @@ namespace Game.Actor
         {
             EmitSignal(nameof(UpdateHud), "HP", worldName, hp, hpMax);
             EmitSignal(nameof(UpdateHud), "MANA", worldName, mana, manaMax);
+            // TODO
             // EmitSignal(nameof(UpdateHud), "ICON_HIDE", worldName, hp, hpMax);
             foreach (Spell spell in spellQueue)
             {
@@ -657,11 +654,11 @@ namespace Game.Actor
         }
         public virtual void SetSaveData(Godot.Collections.Dictionary saveData)
         {
-            GD.Print("TODO: Save Not Implemented");
+            // TODO
         }
         public virtual Godot.Collections.Dictionary GetSaveData()
         {
-            GD.Print("TODO: Save Not Implemented");
+            // TODO
             return new Godot.Collections.Dictionary();
         }
     }

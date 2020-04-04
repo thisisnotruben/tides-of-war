@@ -96,11 +96,12 @@ namespace Game.Ui
             {
                 itemSlot.SetItem(null, shuffle, forceClear, funnel);
             }
-            else
-            {
-                GD.Print($"{Name} on method \"RemoveItem\" slotIdx out of bounds");
-            }
         }
+        public void RemoveItem(Pickable pickable, bool shuffle = true, bool forceClear = false, bool funnel = false)
+        {
+            RemoveItem(GetItemSlot(pickable).GetIndex(), shuffle, forceClear, funnel);
+        }
+
         public void Clear()
         {
             foreach (ItemSlot itemSlot in GetUsedSlots())
@@ -140,10 +141,10 @@ namespace Game.Ui
             {
                 itemSlot.CoolDown(itemSlot.GetItem(), value, seek);
             }
-            else
-            {
-                GD.Print($"{Name} on method \"SetSlotCoolDown\" slotIdx out of bounds");
-            }
+        }
+        public void SetSlotCoolDown(Pickable pickable, float value, float seek)
+        {
+            SetSlotCoolDown(GetItemSlot(pickable).GetIndex(), value, seek);
         }
         public int GetItemCount()
         {
@@ -156,11 +157,11 @@ namespace Game.Ui
             {
                 return itemSlot.IsCoolingDown();
             }
-            else
-            {
-                GD.Print($"{Name} on method \"IsSlotCoolingDown\" slotIdx out of bounds");
-            }
             return false;
+        }
+        public bool IsSlotCoolingDown(Pickable pickable)
+        {
+            return IsSlotCoolingDown(GetItemSlot(pickable).GetIndex());
         }
         public ItemSlot GetItemSlot(Pickable pickable)
         {

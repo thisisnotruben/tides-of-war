@@ -211,7 +211,7 @@ namespace Game.Actor
                                     menu.dialogue.GetNode<Control>("s/s/v/heal").Show();
                                 }
                                 menu.dialogue.GetNode<Label>("s/label").Text = worldName;
-                                menu.dialogue.GetNode<Label>("s/s/label2").Text = dialogue;
+                                menu.dialogue.GetNode<RichTextLabel>("s/s/label2").Text = dialogue;
                                 menu.dialogue.Show();
                                 menu.GetNode<Control>("c/game_menu").Show();
                             }

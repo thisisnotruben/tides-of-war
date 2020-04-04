@@ -25,11 +25,11 @@ namespace Game.Ui
             merchant = listOfMenus.GetNode<Control>("merchant");
             statsMenu = listOfMenus.GetNode<Control>("stats");
             questLog = listOfMenus.GetNode<Control>("quest_log");
-            saveLoad = listOfMenus.GetNode<SaveLoad>("save_load");
+            saveLoad = listOfMenus.GetNode<SaveLoadNode>("save_load");
             itemInfo = listOfMenus.GetNode<Control>("item_info");
             dialogue = listOfMenus.GetNode<Control>("dialogue");
             spellMenu = listOfMenus.GetNode<Control>("spell_book");
-            about = listOfMenus.GetNode<Control>("about");
+            about = listOfMenus.GetNode<AboutNode>("about");
             inventoryBag = inventory.GetNode<ItemList>("s/v/c/item_list");
             merchantBag = merchant.GetNode<ItemList>("s/v/c/merchant_list");
             spellBook = spellMenu.GetNode<ItemList>("s/v/c/spell_list");

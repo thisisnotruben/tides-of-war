@@ -1,0 +1,309 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://asset/img/ui/black_bg_icon_used0.tres" type="Texture" id=1]
+[ext_resource path="res://asset/img/ui/arrow_left.tres" type="Texture" id=2]
+[ext_resource path="res://asset/img/ui/arrow_left_pressed.tres" type="Texture" id=3]
+[ext_resource path="res://asset/img/ui/arrow_left_disabled.tres" type="Texture" id=4]
+[ext_resource path="res://asset/img/ui/arrow_right.tres" type="Texture" id=5]
+[ext_resource path="res://asset/img/ui/arrow_right_pressed.tres" type="Texture" id=6]
+[ext_resource path="res://asset/img/ui/arrow_right_disabled.tres" type="Texture" id=7]
+[ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=8]
+[ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=9]
+[ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=10]
+[ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=11]
+[ext_resource path="res://asset/img/font/mago1_112.tres" type="DynamicFont" id=12]
+[ext_resource path="res://src/menu_ui/ItemInfoNode.cs" type="Script" id=13]
+[ext_resource path="res://src/menu_ui/views/popup_view.tscn" type="PackedScene" id=14]
+
+[node name="item_info" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="s" type="VSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+collapsed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v" type="VBoxContainer" parent="s"]
+margin_right = 720.0
+margin_bottom = 1156.0
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="header" type="Label" parent="s/v"]
+margin_right = 720.0
+margin_bottom = 89.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 12 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Fortify"
+align = 1
+autowrap = true
+
+[node name="c" type="HBoxContainer" parent="s/v"]
+margin_top = 113.0
+margin_right = 720.0
+margin_bottom = 1156.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+alignment = 1
+
+[node name="v" type="VBoxContainer" parent="s/v/c"]
+margin_left = 60.0
+margin_right = 660.0
+margin_bottom = 1043.0
+rect_min_size = Vector2( 600, 0 )
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="add_to_hud" type="TextureButton" parent="s/v/c/v"]
+margin_left = 150.0
+margin_right = 450.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 300 )
+mouse_filter = 1
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = ExtResource( 1 )
+expand = true
+
+[node name="m" type="MarginContainer" parent="s/v/c/v/add_to_hud"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="TextureRect" parent="s/v/c/v/add_to_hud/m"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 284.0
+margin_bottom = 284.0
+rect_pivot_offset = Vector2( 134, 134 )
+expand = true
+
+[node name="m" type="Control" parent="s/v/c/v"]
+margin_top = 324.0
+margin_right = 600.0
+margin_bottom = 1043.0
+size_flags_vertical = 7
+
+[node name="info_text" type="RichTextLabel" parent="s/v/c/v/m"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/normal_font = ExtResource( 11 )
+custom_colors/default_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+custom_constants/table_vseparation = 0
+custom_constants/table_hseparation = 0
+custom_constants/line_separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="h" type="HBoxContainer" parent="s"]
+margin_top = 1168.0
+margin_right = 720.0
+margin_bottom = 1280.0
+alignment = 1
+
+[node name="left" type="TextureButton" parent="s/h"]
+margin_left = 54.0
+margin_right = 166.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 112, 112 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_disabled = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="buttons" type="VBoxContainer" parent="s/h"]
+margin_left = 170.0
+margin_right = 550.0
+margin_bottom = 112.0
+alignment = 2
+
+[node name="cast" type="TextureButton" parent="s/h/buttons"]
+visible = false
+margin_right = 380.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 100 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="label" type="Label" parent="s/h/buttons/cast"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Cast"
+align = 1
+valign = 1
+
+[node name="use" type="TextureButton" parent="s/h/buttons"]
+visible = false
+margin_right = 380.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 100 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="label" type="Label" parent="s/h/buttons/use"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Use"
+align = 1
+valign = 1
+
+[node name="buy" type="TextureButton" parent="s/h/buttons"]
+visible = false
+margin_right = 380.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 100 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="label" type="Label" parent="s/h/buttons/buy"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Buy"
+align = 1
+valign = 1
+
+[node name="sell" type="TextureButton" parent="s/h/buttons"]
+visible = false
+margin_right = 380.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 100 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="label" type="Label" parent="s/h/buttons/sell"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Sell"
+align = 1
+valign = 1
+
+[node name="equip" type="TextureButton" parent="s/h/buttons"]
+visible = false
+margin_right = 380.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 100 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="label" type="Label" parent="s/h/buttons/equip"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Equip"
+align = 1
+valign = 1
+
+[node name="unequip" type="TextureButton" parent="s/h/buttons"]
+visible = false
+margin_right = 380.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 100 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="label" type="Label" parent="s/h/buttons/unequip"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Unequip"
+align = 1
+valign = 1
+
+[node name="drop" type="TextureButton" parent="s/h/buttons"]
+visible = false
+margin_right = 380.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 380, 100 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="label" type="Label" parent="s/h/buttons/drop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Drop"
+align = 1
+valign = 1
+
+[node name="back" type="TextureButton" parent="s/h/buttons"]
+margin_top = 12.0
+margin_right = 380.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 380, 100 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="label" type="Label" parent="s/h/buttons/back"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+text = "Back"
+align = 1
+valign = 1
+
+[node name="right" type="TextureButton" parent="s/h"]
+margin_left = 554.0
+margin_right = 666.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 112, 112 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_disabled = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="popup" parent="." instance=ExtResource( 14 )]
+[connection signal="hide" from="." to="." method="_OnItemInfoNodeHide"]
+[connection signal="button_down" from="s/v/c/v/add_to_hud" to="." method="_OnSlotMoved" binds= [ "s/v/c/v/add_to_hud", true ]]
+[connection signal="button_up" from="s/v/c/v/add_to_hud" to="." method="_OnSlotMoved" binds= [ "s/v/c/v/add_to_hud", false ]]
+[connection signal="pressed" from="s/v/c/v/add_to_hud" to="." method="_OnAddToHudPressed"]
+[connection signal="draw" from="s/v/c/v/m/info_text" to="." method="_OnInfoTextDraw"]
+[connection signal="pressed" from="s/h/left" to="." method="_OnSiftConfigure" binds= [ false ]]
+[connection signal="pressed" from="s/h/buttons/back" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="s/h/right" to="." method="_OnSiftConfigure" binds= [ true ]]

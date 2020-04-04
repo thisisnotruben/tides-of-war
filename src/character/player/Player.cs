@@ -7,7 +7,7 @@ namespace Game.Actor
 {
     public class Player : Character
     {
-        private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/move_cursor.tscn");
+        private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/views/move_cursor.tscn");
         private static readonly PackedScene graveScene = (PackedScene)GD.Load("res://src/character/doodads/grave.tscn");
         private List<Vector2> reservedPath;
         public Vector2 gravePos { get; private set; }
@@ -22,8 +22,9 @@ namespace Game.Actor
             {
                 if (target != null)
                 {
-                    target.Disconnect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-                    target.Disconnect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
+                    // TODO
+                    // target.Disconnect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                    // target.Disconnect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
                     Npc npc = target as Npc;
                     if (npc != null)
                     {
@@ -31,17 +32,18 @@ namespace Game.Actor
                         {
                             case WorldTypes.TRAINER:
                             case WorldTypes.MERCHANT:
-                                npc.SetUpShop(GetMenu(), false);
+                                // npc.SetUpShop(GetMenu(), false);
                                 break;
                         }
                     }
                 }
                 if (value != null)
                 {
-                    value.Connect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-                    value.Connect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
+                    // TODO
+                    // value.Connect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+                    // value.Connect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
                     value.UpdateHUD();
-                    GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
+                    // GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
                     Npc npc = value as Npc;
                     if (npc != null)
                     {
@@ -49,14 +51,15 @@ namespace Game.Actor
                         {
                             case WorldTypes.TRAINER:
                             case WorldTypes.MERCHANT:
-                                npc.SetUpShop(GetMenu(), true);
+                    //             npc.SetUpShop(GetMenu(), true);
                                 break;
                         }
                     }
                 }
                 else
                 {
-                    GetMenu().hpMana.GetNode<Control>("m/h/u").Hide();
+                    // TODO
+                    // GetMenu().hpMana.GetNode<Control>("m/h/u").Hide();
                 }
                 base.target = value;
             }
@@ -89,8 +92,9 @@ namespace Game.Actor
             SetAttributes();
             hp = hpMax;
             mana = manaMax;
-            Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-            Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
+            // TODO
+            // Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
+            // Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
             UpdateHUD();
         }
         public override void _Ready()
@@ -98,6 +102,7 @@ namespace Game.Actor
             base.init();
             base._Ready();
             init();
+            GetNode<MenuHandler>("in_game_menu").player = this;
         }
         public override void _UnhandledInput(InputEvent @event)
         {
@@ -321,7 +326,9 @@ namespace Game.Actor
         }
         public InGameMenu GetMenu()
         {
-            return GetNode<InGameMenu>("in_game_menu");
+            return null;
+            // TODO
+            // return GetNode<InGameMenu>("in_game_menu");
         }
     }
 }

@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tides of War"
-run/main_scene="res://src/menu_ui/start_menu.tscn"
+run/main_scene="res://src/menu_ui/views/start_menu_view.tscn"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 config/auto_accept_quit=false
