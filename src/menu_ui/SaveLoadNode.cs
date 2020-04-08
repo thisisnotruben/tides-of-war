@@ -1,22 +1,8 @@
 using Godot;
-using Game.Utils;
 namespace Game.Ui
 {
-    public class SaveLoadNode : Control
+    public class SaveLoadNode : GameMenu
     {
-        private Speaker _speaker;
-        public Speaker speaker
-        {
-            set
-            {
-                _speaker = value;
-                popup.speaker = value;
-            }
-            get
-            {
-                return _speaker;
-            }
-        }
         private Popup popup;
         private int index;
 
@@ -122,11 +108,6 @@ namespace Game.Ui
         {
             Globals.PlaySound("click0", this, speaker);
             Globals.LoadGame(Globals.SAVE_PATH[$"SAVE_SLOT_{index}"]);
-            Hide();
-        }
-        public void _OnBackPressed()
-        {
-            Globals.PlaySound("click3", this, speaker);
             Hide();
         }
     }

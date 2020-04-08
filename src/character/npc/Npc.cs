@@ -154,79 +154,29 @@ namespace Game.Actor
         public override void _OnSelectPressed()
         {
             Player player = Globals.player;
-            InGameMenu menu = player.GetMenu();
-            if (player.target == this)
-            {
-                player.target = null;
-            }
-            else if (!player.dead)
-            {
-                player.target = this;
-                Sprite img = GetNode<Sprite>("img");
-                Tween tween = GetNode<Tween>("tween");
-                tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
-                    0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
-                tween.Start();
-                if (!enemy && !engaging && GetNode<Area2D>("sight").OverlapsArea(Globals.player.GetNode<Area2D>("area")))
-                {
-                    switch (worldType)
-                    {
-                        case WorldTypes.MERCHANT:
-                        case WorldTypes.TRAINER:
-                            string sndName;
-                            string nodeName;
-                            if (worldType == WorldTypes.MERCHANT)
-                            {
-                                menu.merchant.GetNode<Control>("s/v2/inventory").Show();
-                                sndName = "merchant_open";
-                                nodeName = "inventory";
-                            }
-                            else
-                            {
-                                menu.merchant.GetNode<Control>("s/v2/inventory").Hide();
-                                sndName = "turn_page";
-                                nodeName = "spells";
-                            }
-                            foreach (Pickable pickable in GetNode(nodeName).GetChildren())
-                            {
-                                pickable.SetUpShop(false);
-                            }
-                            Globals.PlaySound(sndName, this, new Speaker());
-                            tween.PauseMode = PauseModeEnum.Process;
-                            menu.itemInfo.GetNode<TextureButton>("s/v/c/v/bg").Disabled = true;
-                            menu.merchant.GetNode<Label>("s/v/label").Text = worldName;
-                            menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {player.gold.ToString()}";
-                            menu.menu.Hide();
-                            menu.merchant.Show();
-                            menu.GetNode<Control>("c/game_menu").Show();
-                            break;
-                        default:
-                            EmitSignal(nameof(Talked));
-                            if (!dialogue.Empty())
-                            {
-                                Globals.PlaySound("turn_page", this, new Speaker());
-                                menu.menu.Hide();
-                                if (worldType == WorldTypes.HEALER)
-                                {
-                                    menu.dialogue.GetNode<Control>("s/s/v/heal").Show();
-                                }
-                                menu.dialogue.GetNode<Label>("s/label").Text = worldName;
-                                menu.dialogue.GetNode<RichTextLabel>("s/s/label2").Text = dialogue;
-                                menu.dialogue.Show();
-                                menu.GetNode<Control>("c/game_menu").Show();
-                            }
-                            else
-                            {
-                                Globals.PlaySound("click4", this, new Speaker());            
-                            }
-                            break;
-                    }
-                }
-                else
-                {
-                    Globals.PlaySound("click4", this, new Speaker());
-                }
-            }
+            player.GetNode<MenuHandler>("in_game_menu")._OnNpcInteract(this);
+            // if (player.target == this)
+            // {
+            //     player.target = null;
+            // }
+            // else if (!player.dead)
+            // {
+            //     player.target = this;
+            //     Sprite img = GetNode<Sprite>("img");
+            //     Tween tween = GetNode<Tween>("tween");
+            //     tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
+            //         0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
+            //     tween.Start();
+            //     if (!enemy && !engaging && GetNode<Area2D>("sight").OverlapsArea(Globals.player.GetNode<Area2D>("area")))
+            //     {
+
+            //         player.GetNode<MenuHandler>("in_game_menu")._OnNpcInteract(this);
+            //     }
+            //     else
+            //     {
+            //         Globals.PlaySound("click4", this, new Speaker());
+            //     }
+            // }
         }
         private void FollowPatrolPath()
         {

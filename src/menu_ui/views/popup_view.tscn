@@ -578,8 +578,6 @@ valign = 1
 [connection signal="pressed" from="m/yes_no/no" to="." method="_OnBackPressed"]
 [connection signal="draw" from="m/error" to="." method="_OnErrorDraw"]
 [connection signal="pressed" from="m/error/okay" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="m/exit/exit_game" to="." method="_OnExitGamePressed"]
-[connection signal="pressed" from="m/exit/exit_menu" to="." method="_OnExitMenuPressed"]
 [connection signal="pressed" from="m/exit/back" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="m/filter_options/back" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="m/add_to_slot/back" to="." method="_OnBackPressed"]

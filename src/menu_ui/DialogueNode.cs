@@ -1,16 +1,57 @@
 using Godot;
-using System;
-using Game.Utils;
+using Game.Actor;
+using Game.Database;
 namespace Game.Ui
 {
-    public class DialogueNode : Control
+    public class DialogueNode : GameMenu
     {
-        public Speaker speaker;
+        private Popup popup;
+        private MerchantNode merchantNode;
+        private Npc npc;
 
-        public void Display(string header, string body)
+        public override void _Ready()
         {
-            GetNode<Label>("s/header").Text = header;
-            GetNode<RichTextLabel>("s/s/text").BbcodeText = body;
+            popup = GetNode<Popup>("popup");
+            popup.Connect("hide", this, nameof(_OnDialogueHide));
+            merchantNode = GetNode<MerchantNode>("merchant");
+            merchantNode.Connect("hide", this, nameof(_OnDialogueHide));
+        }
+        public void Display(Npc npc)
+        {
+            this.npc = npc;
+            ContentDB.ContentNode contentNode = ContentDB.GetContentData(npc.Name);
+            GetNode<Label>("s/control/header").Text = npc.worldName;
+            GetNode<Label>("s/control/sub_header").Visible = contentNode.healer;
+            GetNode<Label>("s/control/sub_header").Text = "Healer cost: " + contentNode.healerCost;
+            GetNode<RichTextLabel>("s/s/text").BbcodeText = contentNode.dialogue;
+            GetNode<Control>("s/s/v/heal").Visible = contentNode.healer;
+            GetNode<Control>("s/s/v/buy").Visible = contentNode.merchandise.Count > 0;
+        }
+        public void InitMerchantView(ItemList inventoryItemList, ItemList spellBookItemList)
+        {
+            merchantNode.inventoryItemList = inventoryItemList;
+            merchantNode.spellBookItemList = spellBookItemList;
+        }
+        public void _OnDialogueDraw()
+        {
+            Globals.PlaySound("turn_page", this, speaker);
+        }
+        public void _OnDialogueHide()
+        {
+            popup.Hide();
+            merchantNode.Hide();
+            GetNode<Control>("s").Show();
+        }
+        public void _OnHealPressed()
+        {
+
+        }
+        public void _OnBuyPressed()
+        {
+            merchantNode.DisplayItems(npc.worldName,
+                ContentDB.GetContentData(npc.Name).merchandise.ToArray());
+            GetNode<Control>("s").Hide();
+            merchantNode.Show();
         }
         public void _OnAcceptPressed()
         {
@@ -52,11 +93,6 @@ namespace Game.Ui
             // {
             //     _OnBackPressed();
             // }
-        }
-        public void _OnBackPressed()
-        {
-            Globals.PlaySound("click3", this, speaker);
-            Hide();
         }
     }
 }

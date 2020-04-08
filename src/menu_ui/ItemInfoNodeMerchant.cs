@@ -1,11 +1,14 @@
 using Godot;
-using Game.Ability;
-using Game.Loot;
 using Game.Database;
 namespace Game.Ui
 {
     public class ItemInfoNodeMerchant : ItemInfoNode
     {
+        public ItemList spellBookItemList;
+
+        [Signal]
+        public delegate void OnTransaction(string pickableWorldName, int goldAmount, bool bought);
+
         public override void _Ready()
         {
             base._Ready();
@@ -13,11 +16,23 @@ namespace Game.Ui
                 .Connect("pressed", this, nameof(_OnBuyPressed));
             GetNode<BaseButton>("s/h/buttons/sell")
                 .Connect("pressed", this, nameof(_OnSellPressed));
+            BaseButton addToHudBttn = GetNode<BaseButton>("s/v/c/v/add_to_hud");
+            addToHudBttn.Disconnect("button_down", this, nameof(_OnSlotMoved));
+            addToHudBttn.Disconnect("button_up", this, nameof(_OnSlotMoved));
+            addToHudBttn.Disconnect("pressed", this, nameof(_OnAddToHudPressed));
         }
-        public void Display(Loot.Pickable pickable, bool allowMove, bool buy, bool alreadyHave)
+        public override void _OnMovePressed(int by)
         {
-            Display(pickable, allowMove);
-            GetNode<Label>("s/h/buttons/buy").Text = (pickable is Spell) ? "Train": "Buy";
+            Globals.PlaySound("click2", this, speaker);
+            bool alreadyHave = SpellDB.HasSpell(pickableWorldName)  
+                && spellBookItemList.HasItem(pickableWorldName, false);
+            Display(itemList.GetItemMetaData(
+                itemList.GetItemSlot(pickableWorldName).GetIndex() + by), true, true, alreadyHave);
+        }
+        public void Display(string pickableWorldName, bool allowMove, bool buy, bool alreadyHave)
+        {
+            Display(pickableWorldName, allowMove);
+            GetNode<Label>("s/h/buttons/buy/label").Text = SpellDB.HasSpell(pickableWorldName) ? "Train": "Buy";
             string[] nodesToShow = {(buy) ? "buy" : "sell"};
             if (alreadyHave)
             {
@@ -30,14 +45,16 @@ namespace Game.Ui
             RouteConnections(nameof(_OnBuyConfirm));
             Globals.PlaySound("click2", this, speaker);
             GetNode<Control>("s").Hide();
-            if (pickable is Spell && player.level < pickable.level)
+            if (SpellDB.HasSpell(pickableWorldName)
+            && player.level < SpellDB.GetSpellData(pickableWorldName).level)
             {
                 popup.GetNode<Label>("m/error/label").Text = "Can't Learn\nThis Yet!";
                 popup.GetNode<Control>("m/error").Show();
+                
             }
-            else if (pickable.GetGold() < player.gold)
+            else if (PickableDB.GetGoldCost(pickableWorldName) < player.gold)
             {
-                popup.GetNode<Label>("m/yes_no/label").Text = (pickable is Item) ? "Buy?" : "Learn?";
+                popup.GetNode<Label>("m/yes_no/label").Text = (SpellDB.HasSpell(pickableWorldName)) ? "Learn?" : "Buy?";
                 popup.GetNode<Control>("m/yes_no").Show();
             }
             else
@@ -50,22 +67,12 @@ namespace Game.Ui
         public void _OnBuyConfirm()
         {
             Globals.PlaySound("sell_buy", this, speaker);
-            if (GetNode<Label>("m/yes_no/label").Text.Equals("Learn?"))
+            if (popup.GetNode<Label>("m/yes_no/label").Text.Equals("Learn?"))
             {
                 Globals.PlaySound("learn_spell", this, speaker);
             }
-            if (pickable is Item)
-            {
-                pickable = PickableFactory.GetMakeItem(pickable.worldName);
-            }
-            else
-            {
-                pickable = PickableFactory.GetMakeSpell(pickable.worldName);
-            }
-            pickable.GetPickable(player, true);
-            player.gold = -pickable.GetGold();
-            // TODO
-            // menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {menu.player.gold.ToString("N0")}";
+            EmitSignal(nameof(OnTransaction),
+                pickableWorldName, -PickableDB.GetGoldCost(pickableWorldName), true);
             Hide();
         }
         public void _OnSellPressed()
@@ -80,11 +87,8 @@ namespace Game.Ui
         public void _OnSellConfirm()
         {
             Globals.PlaySound("sell_buy", this, speaker);
-            itemList.RemoveItem(pickable, true, false, false);
-            player.gold = pickable.GetGold();
-            pickable.UnMake();
-            // TODO
-            // menu.merchant.GetNode<Label>("s/v/label2").Text = $"Gold: {menu.player.gold.ToString("N0")}";
+            EmitSignal(nameof(OnTransaction),
+                pickableWorldName, PickableDB.GetGoldCost(pickableWorldName), false);
             Hide();
         }
     }

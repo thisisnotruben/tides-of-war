@@ -23,43 +23,40 @@ namespace Game.Loot
             this.worldName = worldName;
             Name = worldName;
             worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData.type.ToUpper());
-            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{itemData.icon}_icon.tres");
-            level = itemData.level;
-            goldWorth = Stats.GetItemGoldWorth(level, worldType, durability);
             if (worldType == WorldTypes.WEAPON || worldType == WorldTypes.POTION)
             {
                 subType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData.subType.ToUpper());
             }
-            Tuple<int, int> itemStats = Stats.GetItemStats(level, worldType, subType);
+            Tuple<int, int> itemStats = Stats.GetItemStats(itemData.level, worldType, subType);
             string durabilitytext = $"\n-Durability: {(durability * 100.0f).ToString("00")}%";
             switch (worldType)
             {
                 case WorldTypes.WEAPON:
                     minValue = itemStats.Item1;
                     maxValue = itemStats.Item2;
-                    menuDescription = $"-Damage: {minValue} - {maxValue}" + durabilitytext;
+                    // TODO: taking this
+                    // menuDescription = $"-Damage: {minValue} - {maxValue}" + durabilitytext;
                     break;
                 case WorldTypes.ARMOR:
                     value = itemStats.Item1;
-                    menuDescription = $"-Armor: {value}" + durabilitytext;
+                    // menuDescription = $"-Armor: {value}" + durabilitytext;
                     break;
                 case WorldTypes.FOOD:
                     minValue = itemStats.Item1;
                     maxValue = itemStats.Item2;
-                    stackSize = 5;
-                    menuDescription = $"-Restores {minValue} - {maxValue} health";
+                    // menuDescription = $"-Restores {minValue} - {maxValue} health";
                     break;
                 case WorldTypes.POTION:
                     duration = 120.0f;
                     switch (subType)
                     {
                         case WorldTypes.HEALING:
-                            menuDescription = $"-Restores {minValue} - {maxValue} health";
+                            // menuDescription = $"-Restores {minValue} - {maxValue} health";
                             minValue = itemStats.Item1;
                             maxValue = itemStats.Item2;
                             break;
                         case WorldTypes.MANA:
-                            menuDescription = $"-Restores {minValue} - {maxValue} mana";
+                            // menuDescription = $"-Restores {minValue} - {maxValue} mana";
                             minValue = itemStats.Item1;
                             maxValue = itemStats.Item2;
                             break;
@@ -67,11 +64,10 @@ namespace Game.Loot
                             value = itemStats.Item1;
                             break;
                     }
-                    stackSize = 5;
-                    menuDescription = $"-Grants {value} {subType.ToString().ToLower()}\nfor {duration.ToString("0.00")} seconds.";
+                    // menuDescription = $"-Grants {value} {subType.ToString().ToLower()}\nfor {duration.ToString("0.00")} seconds.";
                     break;
             }
-            menuDescription += $"\n-Gold: {goldWorth}";
+            // menuDescription += $"\n-Gold: {goldWorth}";
         }
         public override void _OnTimerTimeout()
         {
@@ -94,7 +90,6 @@ namespace Game.Loot
         }
         public void Consume(Character character, float seek)
         {
-            EmitSignal(nameof(PickableExchanged), this, false);
             GD.Randomize();
             int amount = (int)Math.Round(GD.RandRange((double)minValue, (double)maxValue));
             switch (subType)
@@ -201,7 +196,7 @@ namespace Game.Loot
                 // if anything, this whole function needs rewriting
                 if (durability >= 0.5f)
                 {
-                    goldWorth = Stats.GetItemGoldWorth(level, worldType, durability);
+                    // goldWorth = Stats.GetItemGoldWorth(ItemDB.GetItemData(worldName).level, worldType, durability);
                     switch (worldType)
                     {
                         case WorldTypes.WEAPON:

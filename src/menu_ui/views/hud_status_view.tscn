@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/menu_ui/views/HudStatus.cs" type="Script" id=1]
+[ext_resource path="res://src/menu_ui/views/unit_hud_slot_view.tscn" type="PackedScene" id=4]
+
+[node name="hud_status" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 6.10352e-05
+margin_bottom = -1110.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="m" type="MarginContainer" parent="."]
+margin_right = 720.0
+margin_bottom = 185.0
+mouse_filter = 2
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="h" type="HBoxContainer" parent="m"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 710.0
+margin_bottom = 175.0
+mouse_filter = 2
+custom_constants/separation = 10
+
+[node name="player_status" parent="m/h" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 345.0
+margin_bottom = 165.0
+
+[node name="npc_status" parent="m/h" instance=ExtResource( 4 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 355.0
+margin_right = 700.0
+margin_bottom = 165.0

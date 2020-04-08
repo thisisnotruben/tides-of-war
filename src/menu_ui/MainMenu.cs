@@ -1,48 +1,18 @@
 using Godot;
 using Game.Actor;
-using Game.Utils;
+using Game.Database;
 namespace Game.Ui
 {
-    public class MainMenu : Control
+    public class MainMenu : GameMenu
     {
-        private Player _player;
-        public Player player
-        {
-            set
-            {
-                _player = value;
-                inventory.player = value;
-                statsMenu.player = value;
-            }
-            get
-            {
-                return _player;
-            }
-        }
-        private Speaker _speaker;
-        public Speaker speaker
-        {
-            set
-            {
-                _speaker = value;
-                inventory.speaker = value;
-                statsMenu.speaker = value;
-                questLog.speaker = value;
-                about.speaker = value;
-                saveLoad.speaker = value;
-                popup.speaker = value;
-            }
-            get
-            {
-                return _speaker;
-            }
-        }
         private Control main;
         private InventoryNode inventory;
         private StatsNode statsMenu;
         private QuestLogNode questLog;
         private AboutNode about;
         private SaveLoadNode saveLoad;
+        private SpellBookNode spellBook;
+        private DialogueNode dialogue;
         private Popup popup;
 
         public override void _Ready()
@@ -55,6 +25,16 @@ namespace Game.Ui
             saveLoad = GetNode<SaveLoadNode>("background/margin/save_load");
             popup = GetNode<Popup>("background/margin/popup");
             Popup.mainMenu = this;
+            popup.GetNode<BaseButton>("m/exit/exit_game")
+                .Connect("pressed", this, nameof(_OnExitGamePressed));
+            popup.GetNode<BaseButton>("m/exit/exit_menu")
+                .Connect("pressed", this, nameof(_OnExitMenuPressed));
+            spellBook = GetNode<SpellBookNode>("background/margin/spell_book");
+            dialogue = GetNode<DialogueNode>("background/margin/dialogue");
+            dialogue.Connect("hide", this, nameof(_OnMainMenuHide));
+            dialogue.InitMerchantView(
+                inventory.GetNode<ItemList>("s/v/c/inventory"),
+                spellBook.GetNode<ItemList>("s/v/c/spell_list"));
             foreach (Control node in new Control[] {inventory, statsMenu, questLog, about, saveLoad, popup})
             {
                 node.Connect("hide", this, nameof(_OnWindowClosed));
@@ -76,14 +56,27 @@ namespace Game.Ui
         }
         public void _OnMainMenuHide()
         {
+            Hide();
             GetTree().Paused = false;
             main.Show();
             popup.Hide();
         }
         public void ShowBackground(bool show)
         {
+            Color transparent = new Color("00ffffff");
             GetNode<Control>("background").SelfModulate =
-                new Color((show) ? "ffffff" : "00ffffff");
+                (show) ? new Color("ffffff") : transparent;
+            GetNode<ColorRect>("overlay").Color = (show) ? new Color("6e6e6e") : transparent;
+        }
+        public void _OnNpcInteract(Npc npc)
+        {
+            if (ContentDB.HasContent(npc.Name))
+            {
+                main.Hide();
+                dialogue.Show();
+                dialogue.Display(npc);
+                Show();
+            }
         }
         public void _OnResumePressed()
         {
@@ -116,6 +109,16 @@ namespace Game.Ui
         {
             popup.GetNode<Control>("m/exit").Show();
             Transition(popup);
+        }
+        public void _OnExitGamePressed()
+        {
+            GetTree().Quit();
+        }
+        public void _OnExitMenuPressed()
+        {
+            Globals.PlaySound("click0", this, speaker);
+            GetTree().Paused = false;
+            Globals.SetScene("res://src/menu_ui/start_menu.tscn", GetTree().Root, Globals.map);
         }
         private void Transition(Control scene)
         {

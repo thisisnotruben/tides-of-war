@@ -9,10 +9,13 @@ namespace Game.Database
         {
             public string type;
             public string subType;
-            public AtlasTexture icon;
+            public Texture icon;
             public int level;
             public string material;
             public string description;
+            public int stackSize;
+            public int goldCost;
+            public int coolDown;
         }
 
         private static Dictionary<string, ItemNode> itemData = new Dictionary<string, ItemNode>();
@@ -41,6 +44,9 @@ namespace Game.Database
                 itemNode.material = (string) itemDict[nameof(ItemNode.material)];
                 // TODO
                 itemNode.description = "TODO";
+                itemNode.stackSize = (int) ((Single) itemDict[nameof(ItemNode.stackSize)]);
+                itemNode.goldCost = (int) ((Single) itemDict[nameof(ItemNode.goldCost)]);
+                itemNode.coolDown = (int) ((Single) itemDict[nameof(ItemNode.coolDown)]);
                 itemData.Add(itemName, itemNode);
             }
         }

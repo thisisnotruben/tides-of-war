@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Game.Loot;
+using Game.Database;
 using Godot;
 namespace Game.Ui
 {
@@ -8,7 +8,7 @@ namespace Game.Ui
         public enum SlotType : byte { BAG_SLOT, HUD_SLOT, SHORTCUT }
         public SlotType slotType = SlotType.BAG_SLOT;
         private bool allowCoolDown;
-        private List<Pickable> itemStack = new List<Pickable>();
+        private List<string> itemStack = new List<string>();
         private float time;
         private int stackSize;
         [Signal]
@@ -18,19 +18,19 @@ namespace Game.Ui
         [Signal]
         public delegate void Cooldown(float time, float seek);
         [Signal]
-        public delegate void SyncSlot(ItemSlot itemSlot, Pickable pickable);
+        public delegate void SyncSlot(ItemSlot itemSlot, string pickableWorldName);
         [Signal]
-        public delegate void ShortcutPressed(ItemSlot itemSlot, Pickable pickable);
+        public delegate void ShortcutPressed(ItemSlot itemSlot, string pickableWorldName);
         public void _OnItemSlotPressed()
         {
-            if (slotType == SlotType.BAG_SLOT && GetItem() != null && GetTree().Paused)
+            if (slotType == SlotType.BAG_SLOT && !GetItem().Empty() && GetTree().Paused)
             {
                 EmitSignal(nameof(SlotSelected), GetPositionInParent());
             }
         }
         public void _OnShortcutPressed()
         {
-            if (slotType == SlotType.SHORTCUT && GetItem() != null)
+            if (slotType == SlotType.SHORTCUT && !GetItem().Empty())
             {
                 EmitSignal(nameof(ShortcutPressed), this, GetItem());
             }
@@ -47,7 +47,7 @@ namespace Game.Ui
         {
             if (slotType == SlotType.HUD_SLOT)
             {
-                SetItem(null, false, true);
+                SetItem("", false, true);
                 Hide();
             }
             MoveChild(GetNode("count"), 2);
@@ -75,19 +75,19 @@ namespace Game.Ui
         {
             GetNode<Control>("m/icon/overlay").Hide();
         }
-        public void _OnSyncShortcut(ItemSlot slot, Pickable pickable)
+        public void _OnSyncShortcut(ItemSlot slot, string pickableWorldName)
         {
-            SetItem(pickable, false);
-            if (pickable == null)
+            SetItem(pickableWorldName, false);
+            if (pickableWorldName.Empty())
             {
                 slot.Disconnect(nameof(SyncSlot), this, nameof(_OnSyncShortcut));
             }
         }
-        public void SetItem(Pickable pickable, bool shuffle = true, bool forceClear = false, bool funnel = false)
+        public void SetItem(string pickableWorldName, bool shuffle = true, bool forceClear = false, bool funnel = false)
         {
-            if (pickable == null)
+            if (pickableWorldName.Empty())
             {
-                EmitSignal(nameof(SyncSlot), this, pickable);
+                EmitSignal(nameof(SyncSlot), this, pickableWorldName);
                 if (forceClear)
                 {
                     GetNode<TextureRect>("m/icon").Texture = null;
@@ -106,7 +106,7 @@ namespace Game.Ui
                     }
                     else if (!funnel)
                     {
-                        EmitSignal(nameof(StackSizeChanged), GetItem().worldName, itemStack.Count, this);
+                        EmitSignal(nameof(StackSizeChanged), GetItem(), itemStack.Count, this);
                     }
                 }
                 if (GetNode<TextureRect>("m/icon").Texture == null)
@@ -141,15 +141,16 @@ namespace Game.Ui
                 {
                     TextureNormal = (Texture)GD.Load(texPath);
                 }
-                GetNode<TextureRect>("m/icon").Texture = pickable.icon;
-                if (pickable.stackSize > 0)
+                GetNode<TextureRect>("m/icon").Texture = PickableDB.GetIcon(pickableWorldName);
+                int pickableStackSize = PickableDB.GetStackSize(pickableWorldName);
+                if (pickableStackSize > 0)
                 {
-                    stackSize = pickable.stackSize;
-                    if (itemStack.Count > 0 && !pickable.worldName.Equals(itemStack[0].worldName))
+                    stackSize = pickableStackSize;
+                    if (itemStack.Count > 0 && !pickableWorldName.Equals(GetItem()))
                     {
                         itemStack.Clear();
                     }
-                    itemStack.Add(pickable);
+                    itemStack.Add(pickableWorldName);
                     if (itemStack.Count > 1)
                     {
                         GetNode<Label>("count").Text = itemStack.Count.ToString();
@@ -166,18 +167,18 @@ namespace Game.Ui
                     GetNode<Control>("count").Hide();
                     stackSize = 0;
                     itemStack.Clear();
-                    itemStack.Add(pickable);
+                    itemStack.Add(pickableWorldName);
                 }
             }
         }
-        public Pickable GetItem()
+        public string GetItem()
         {
-            return (itemStack.Count > 0) ? itemStack[0] : null;
+            return (itemStack.Count > 0) ? itemStack[0] : "";
         }
-        public void CoolDown(Pickable itm, float value, float seek)
+        public void CoolDown(string pickableWorldName, float value, float seek)
         {
-            if (GetItem() != null && itm != null && GetItem().worldName.Equals(itm.worldName) &&
-                !allowCoolDown && value > 0.0f && value != seek)
+            if (!GetItem().Empty() && !pickableWorldName.Empty() && GetItem().Equals(pickableWorldName) &&
+            !allowCoolDown && value > 0.0f && value != seek)
             {
                 allowCoolDown = true;
                 time = value;
@@ -215,7 +216,7 @@ namespace Game.Ui
         {
             return GetCoolDownTimeLeft() > 0.0f;
         }
-        public List<Pickable> GetItemStack()
+        public List<string> GetItemStack()
         {
             return itemStack;
         }

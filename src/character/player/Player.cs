@@ -12,70 +12,7 @@ namespace Game.Actor
         private List<Vector2> reservedPath;
         public Vector2 gravePos { get; private set; }
         public int xp { get; private set; }
-        public override Character target
-        {
-            get
-            {
-                return base.target;
-            }
-            set
-            {
-                if (target != null)
-                {
-                    // TODO
-                    // target.Disconnect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-                    // target.Disconnect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
-                    Npc npc = target as Npc;
-                    if (npc != null)
-                    {
-                        switch (npc.worldType)
-                        {
-                            case WorldTypes.TRAINER:
-                            case WorldTypes.MERCHANT:
-                                // npc.SetUpShop(GetMenu(), false);
-                                break;
-                        }
-                    }
-                }
-                if (value != null)
-                {
-                    // TODO
-                    // value.Connect(nameof(Character.UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-                    // value.Connect(nameof(Character.UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
-                    value.UpdateHUD();
-                    // GetMenu().hpMana.GetNode<Control>("m/h/u").Show();
-                    Npc npc = value as Npc;
-                    if (npc != null)
-                    {
-                        switch (npc.worldType)
-                        {
-                            case WorldTypes.TRAINER:
-                            case WorldTypes.MERCHANT:
-                    //             npc.SetUpShop(GetMenu(), true);
-                                break;
-                        }
-                    }
-                }
-                else
-                {
-                    // TODO
-                    // GetMenu().hpMana.GetNode<Control>("m/h/u").Hide();
-                }
-                base.target = value;
-            }
-        }
-        private int _gold;
-        public int gold
-        {
-            get
-            {
-                return _gold;
-            }
-            set
-            {
-                _gold += value;
-            }
-        }
+        public int gold;
 
         [Signal]
         public delegate void PosChanged();
@@ -92,17 +29,13 @@ namespace Game.Actor
             SetAttributes();
             hp = hpMax;
             mana = manaMax;
-            // TODO
-            // Connect(nameof(UpdateHud), GetMenu(), nameof(InGameMenu.UpdateHud));
-            // Connect(nameof(UpdateHudIcon), GetMenu(), nameof(InGameMenu.UpdateHudIcons));
-            UpdateHUD();
         }
         public override void _Ready()
         {
+            GameMenu.player = this;
             base.init();
             base._Ready();
             init();
-            GetNode<MenuHandler>("in_game_menu").player = this;
         }
         public override void _UnhandledInput(InputEvent @event)
         {
@@ -327,8 +260,6 @@ namespace Game.Actor
         public InGameMenu GetMenu()
         {
             return null;
-            // TODO
-            // return GetNode<InGameMenu>("in_game_menu");
         }
     }
 }

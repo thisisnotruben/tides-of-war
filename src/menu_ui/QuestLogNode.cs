@@ -1,22 +1,8 @@
 using Godot;
-using Game.Utils;
 namespace Game.Ui
 {
-    public class QuestLogNode : Control
+    public class QuestLogNode : GameMenu
     {
-        private Speaker _speaker;
-        public Speaker speaker
-        {
-            set
-            {
-                _speaker = value;
-                popup.speaker = value;
-            }
-            get
-            {
-                return _speaker;
-            }
-        }
         private Popup popup;
 
         public override void _Ready()
@@ -83,11 +69,6 @@ namespace Game.Ui
                 }
             }
             _OnQuestLogNodeHide();
-        }
-        public void _OnBackPressed()
-        {
-            Globals.PlaySound("click3", this, speaker);
-            Hide();
         }
     }
 }

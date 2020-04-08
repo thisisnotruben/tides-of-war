@@ -1,39 +1,42 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using Game.Actor;
-using Game.Utils;
 using Game.Loot;
-using Game.Ability;
+using Game.Database;
 namespace Game.Ui
 {
-    public class MerchantNode : Control
+    public class MerchantNode : GameMenu
     {
-        public Player player;
-        private Speaker _speaker;
-        public Speaker speaker
+        public Npc merchant;
+        private Popup popup;
+        private ItemList itemList;
+        private ItemInfoNodeMerchant itemInfoNodeMerchant;
+        private ItemList _spellBookItemList;
+        public ItemList spellBookItemList
         {
             set
             {
-                _speaker = value;
-                popup.speaker = value;
+                _spellBookItemList = value;
+                itemInfoNodeMerchant.spellBookItemList = value;
             }
             get
             {
-                return _speaker;
+                return _spellBookItemList;
             }
-        }        private Popup popup;
-        private ItemList itemList;
-        private ItemInfoNodeMerchant itemInfoNodeMerchant;
-        // TODO set these:
-        public ItemList spellBookItemList;
+        }
         public ItemList inventoryItemList;
+        public List<string> npcPickables;
 
         public override void _Ready()
         {
             popup = GetNode<Popup>("popup");
+            popup.Connect("hide", this, nameof(_OnMerchantNodeHide));
             itemList = GetNode<ItemList>("s/v/c/merchant_list");
-            itemInfoNodeMerchant = GetNode<ItemInfoNodeMerchant>("item_info_node");
+            itemInfoNodeMerchant = GetNode<ItemInfoNodeMerchant>("item_info");
+            itemInfoNodeMerchant.itemList = itemList;
+            itemInfoNodeMerchant.Connect("hide", this, nameof(_OnMerchantNodeHide));
+            itemInfoNodeMerchant.Connect(
+                nameof(ItemInfoNodeMerchant.OnTransaction), this, nameof(_OnTransaction));
             foreach (string nodePath in new string[] {"m/error/okay", "m/repair/back"})
             {
                 popup.GetNode<BaseButton>(nodePath)
@@ -48,66 +51,116 @@ namespace Game.Ui
             popup.GetNode<BaseButton>("m/repair/repair_armor")
                 .Connect("pressed", this, nameof(_OnRepairConfirm),
                 new Godot.Collections.Array() {"armor"});
+            npcPickables = new List<string>();
+        }
+        public void _OnTransaction(string pickableWorldName, int goldAmount, bool bought)
+        {
+            if (bought)
+            {
+                if (SpellDB.HasSpell(pickableWorldName))
+                {
+                    spellBookItemList.AddItem(pickableWorldName, true);
+                }
+                else
+                {
+                    inventoryItemList.AddItem(pickableWorldName, true);
+                }
+            }
+            else
+            {
+                if (SpellDB.HasSpell(pickableWorldName))
+                {
+                    spellBookItemList.RemoveItem(pickableWorldName);
+                }
+                else
+                {
+                    inventoryItemList.RemoveItem(pickableWorldName);
+                }
+            }
+            player.gold += goldAmount;
+            GetNode<Label>("s/v/sub_header").Text = "Gold: " + player.gold;
+        }
+        public void DisplayItems(string header, params string[] pickableWorldNames)
+        {
+            GetNode<Label>("s/v/header").Text = header;
+            Pickable pickable;
+            foreach (string worldName in pickableWorldNames)
+            {
+                if (SpellDB.HasSpell(worldName))
+                {
+                    pickable = PickableFactory.GetMakeSpell(worldName);
+                }
+                else
+                {
+                    pickable = PickableFactory.GetMakeItem(worldName);
+                }
+                itemList.AddItem(pickable.worldName, true);
+            }
+        }
+        public void _OnMerchantNodeDraw()
+        {
+            string sndName = "merchant_open";
+            if (npcPickables.Count > 0 &&  SpellDB.HasSpell(npcPickables[0]))
+            {
+                sndName = "turn_page";
+            }
+            Globals.PlaySound(sndName, this, speaker);
+            GetNode<Label>("s/v/sub_header").Text = "Gold: " + player.gold;
         }
         public void _OnMerchantNodeHide()
         {
+            Globals.PlaySound("merchant_close", this, speaker);
             popup.Hide();
             GetNode<Control>("s").Show();
         }
         public void _OnMerchantIndexSelected(int itemIndex)
         {
-            Pickable pickable = itemList.GetItemMetaData(itemIndex);
-            bool isSpell = pickable is Spell;
+            string pickableWorldName = itemList.GetItemMetaData(itemIndex);
+            bool isSpell = SpellDB.HasSpell(pickableWorldName);
             bool trained = false;
             Globals.PlaySound((isSpell) ? "spell_select"
                 : Database.ItemDB.GetItemData(
-                pickable.worldName).material + "_on", this, speaker);
+                pickableWorldName).material + "_on", this, speaker);
             if (isSpell)
             {
                 Globals.PlaySound("click1", this, speaker);
-                List<Pickable> spells = spellBookItemList.GetItems(false);
+                List<string> spells = spellBookItemList.GetItems(false);
                 for (int i = 0; i < spells.Count && !trained; i++)
                 {
-                    trained = pickable.Equals(spells[i]);
+                    trained = pickableWorldName.Equals(spells[i]);
                 }
             }
-            itemInfoNodeMerchant.Display(pickable, true,
+            GetNode<Control>("s").Hide();
+            itemInfoNodeMerchant.Display(pickableWorldName, true,
                 !GetNode<Label>("s/v/header").Text.Equals("Inventory"), trained);
         }
         public void _OnMerchantPressed()
         {
             Globals.PlaySound("click1", this, speaker);
             itemList.Clear();
-            GetNode<Label>("s/v/header").Text = player.target.worldName;
             GetNode<Control>("s/buttons/inventory").Show();
             GetNode<Control>("s/buttons/merchant").Hide();
-            foreach (Node node in player.target.GetNode("inventory").GetChildren())
-            {
-                Pickable pickable = node as Pickable;
-                if (pickable != null)
-                {
-                    pickable.SetUpShop(false);
-                }
-            }
+            DisplayItems(merchant.worldName,
+                ContentDB.GetContentData(merchant.Name).merchandise.ToArray());
         }
         public void _OnInventoryPressed()
         {
             Globals.PlaySound("click1", this, speaker);
             itemList.Clear();
-            GetNode<Label>("s/v/header").Text = "Inventory";
             GetNode<Control>("s/buttons/inventory").Hide();
             GetNode<Control>("s/buttons/merchant").Show();
-            foreach (Pickable pickable in inventoryItemList.GetItems(true))
-            {
-                pickable.SetUpShop(true);
-            }
+            DisplayItems("Inventory", inventoryItemList.GetItems(false).ToArray());
         }
         public void _OnRepairPressed()
         {
             Globals.PlaySound("click1", this, speaker);
             popup.GetNode<Control>("m/repair").Show();
             string text = "";
-            if (player.weapon == null)
+            Item playerWeapon = player.weapon;
+            Item playerArmor = player.vest;
+            int weaponLevel = (playerWeapon == null) ? 0 : PickableDB.GetLevel(playerWeapon.worldName);
+            int armorLevel = (playerArmor == null) ? 0 : PickableDB.GetLevel(playerArmor.worldName);
+            if (playerWeapon == null)
             {
                 popup.GetNode<Control>("m/repair/repair_weapon").Hide();
                 popup.GetNode<Control>("m/repair/repair_all").Hide();
@@ -115,9 +168,9 @@ namespace Game.Ui
             else
             {
                 popup.GetNode<Control>("m/repair/repair_weapon").Show();
-                text = $"Weapon: {Stats.ItemRepairCost(player.weapon.level)}";
+                text = $"Weapon: {Stats.ItemRepairCost(weaponLevel)}";
             }
-            if (player.vest == null)
+            if (playerArmor == null)
             {
                 popup.GetNode<Control>("m/repair/repair_armor").Hide();
                 popup.GetNode<Control>("m/repair/repair_all").Hide();
@@ -125,12 +178,12 @@ namespace Game.Ui
             else
             {
                 popup.GetNode<Control>("m/repair/repair_armor").Show();
-                int armorCost = Stats.ItemRepairCost(player.vest.level);
-                text += (player.weapon == null) ? $"Armor: {armorCost}" : $"\nArmor: {armorCost}";
+                int armorCost = Stats.ItemRepairCost(armorLevel);
+                text += (playerWeapon == null) ? $"Armor: {armorCost}" : $"\nArmor: {armorCost}";
             }
-            if (player.weapon != null && player.vest != null)
+            if (playerWeapon!= null && playerArmor != null)
             {
-                int total = Stats.ItemRepairCost(player.vest.level) + Stats.ItemRepairCost(player.weapon.level);
+                int total = Stats.ItemRepairCost(armorLevel) + Stats.ItemRepairCost(weaponLevel);
                 text += $"\nAll: {total}";
             }
             popup.GetNode<Label>("m/repair/label").Text = text;
@@ -140,17 +193,19 @@ namespace Game.Ui
         {
             Item weapon = player.weapon;
             Item armor = player.vest;
+            int weaponLevel = ItemDB.GetItemData(weapon.worldName).level;
+            int armorLevel = ItemDB.GetItemData(armor.worldName).level;
             int cost = 0;
             switch (what)
             {
                 case "all":
-                    cost = Stats.ItemRepairCost(weapon.level) + Stats.ItemRepairCost(armor.level);
+                    cost = Stats.ItemRepairCost(weaponLevel) + Stats.ItemRepairCost(armorLevel);
                     break;
                 case "weapon":
-                    cost = Stats.ItemRepairCost(weapon.level);
+                    cost = Stats.ItemRepairCost(weaponLevel);
                     break;
                 case "armor":
-                    cost = Stats.ItemRepairCost(armor.level);
+                    cost = Stats.ItemRepairCost(armorLevel);
                     break;
             }
             if (cost > player.gold)
@@ -183,10 +238,9 @@ namespace Game.Ui
                 _OnMerchantNodeHide();
             }
         }
-        public void _OnBackPressed()
+        public override void _OnBackPressed()
         {
-            Globals.PlaySound("click3", this, speaker);
-            Hide();
+            base._OnBackPressed();
             itemList.Clear();
         }
     }

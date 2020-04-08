@@ -1,55 +1,45 @@
 using Godot;
-using Game.Actor;
 using Game.Loot;
-using Game.Utils;
-
+using Game.Database;
 namespace Game.Ui
 {
-    public class InventoryNode : Control
+    public class InventoryNode : GameMenu
     {
-        private Player _player;
-        public Player player
-        {
-            set
-            {
-                _player = value;
-                itemInfoNodeInventory.player = value;
-            }
-            get
-            {
-                return _player;
-            }
-        }
-        private Speaker _speaker;
-        public Speaker speaker
-        {
-            set
-            {
-                _speaker = value;
-                itemInfoNodeInventory.speaker = speaker;
-            }
-            get
-            {
-                return _speaker;
-            }
-        }
-        private ItemList inventory = null;
-        private ItemInfoNodeInventory itemInfoNodeInventory = null;
+        private ItemList inventory;
+        private ItemInfoNodeInventory itemInfoNodeInventory;
 
         public override void _Ready()
         {
+            inventory = GetNode<ItemList>("s/v/c/inventory");
             itemInfoNodeInventory = GetNode<ItemInfoNodeInventory>("item_info");
             itemInfoNodeInventory.itemList = inventory;
-            itemInfoNodeInventory.Connect("hide", this, nameof(Show));
-            inventory = GetNode<ItemList>("s/v/c/inventory");
+            itemInfoNodeInventory.Connect("hide", this, nameof(_OnInventoryNodeHide));
+            itemInfoNodeInventory.Connect(
+                nameof(ItemInfoNodeInventory.ItemEquipped), this, nameof(_OnItemEquipped));
+        }
+        public void _OnInventoryNodeHide()
+        {
+            // TODO: new sound please
+            // Globals.PlaySound("merchant_close", this, speaker);
+            itemInfoNodeInventory.Hide();
+            GetNode<Control>("s").Show();
+        }
+        public void _OnItemEquipped(Item item, bool on)
+        {
+            string nodePath = "s/v/slots/weapon/m/icon";
+            if (item.worldType == WorldObject.WorldTypes.ARMOR)
+            {
+                nodePath = "s/v/slots/armor/m/icon";
+            }
+            GetNode<TextureRect>(nodePath).Texture =
+                (on) ? ItemDB.GetItemData(item.worldName).icon : null;
         }
         public void _OnInventoryIndexSelected(int index)
         {
             Globals.PlaySound("inventory_open", this, speaker);
-            Pickable pickable = inventory.GetItemMetaData(index);
-            Hide();
-            itemInfoNodeInventory.Display(pickable, true);
-            itemInfoNodeInventory.Show();
+            string pickableWorldName = inventory.GetItemMetaData(index);
+            GetNode<Control>("s").Hide();
+            itemInfoNodeInventory.Display(pickableWorldName, true);
         }
         public void _OnEquippedSlotMoved(string nodePath, bool down)
         {
@@ -60,13 +50,8 @@ namespace Game.Ui
         {
             if ((weapon && player.weapon != null) || (!weapon && player.vest != null))
             {
-                itemInfoNodeInventory.Display((weapon) ? player.weapon : player.vest, false);
+                itemInfoNodeInventory.Display((weapon) ? player.weapon.worldName : player.vest.worldName, false);
             }
-        }
-        public void _OnBackPressed()
-        {
-            Globals.PlaySound("click3", this, speaker);
-            Hide();
         }
     }
 }

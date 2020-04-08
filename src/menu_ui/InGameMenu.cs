@@ -111,10 +111,10 @@ namespace Game.Ui
                 merchant.GetNode<Label>("s/v/label").Text = "Inventory";
                 merchant.GetNode<Control>("s/v2/inventory").Hide();
                 merchant.GetNode<Control>("s/v2/merchant").Show();
-                foreach (Pickable pickable in inventoryBag.GetItems(true))
-                {
-                    pickable.SetUpShop(true);
-                }
+                // foreach (Pickable pickable in inventoryBag.GetItems(true))
+                // {
+                //     pickable.SetUpShop(true);
+                // }
             }
             else
             {
@@ -224,118 +224,118 @@ namespace Game.Ui
         }
         public void _OnBackPressed()
         {
-            string sndName = "click3";
-            if (inventory.Visible)
-            {
-                inventory.Hide();
-                menu.Show();
-            }
-            else if (statsMenu.Visible)
-            {
-                statsMenu.Hide();
-                menu.Show();
-            }
-            else if (questLog.Visible)
-            {
-                foreach (Control control in questLog.GetNode("s/v/s/v").GetChildren())
-                {
-                    control.Show();
-                }
-                questLog.Hide();
-                menu.Show();
-            }
-            else if (saveLoad.Visible)
-            {
-                saveLoad.Hide();
-                menu.Show();
-            }
-            else if (spellMenu.Visible)
-            {
-                sndName = "spell_book_close";
-                spellMenu.Hide();
-                HideMenu();
-            }
-            else if (itemInfo.Visible)
-            {
-                itemInfo.Hide();
-                Pickable selectedPickable = selected as Pickable;
-                if (selectedPickable != null)
-                {
-                    if (spellBook.HasItem(selectedPickable))
-                    {
-                        spellMenu.Show();
-                    }
-                    else
-                    {
-                        itemInfo.GetNode<Control>("s/h/left").Show();
-                        itemInfo.GetNode<Control>("s/h/right").Show();
-                        sndName = SndConfigure();
-                        if (!player.GetNode("inventory").GetChildren().Contains(selectedPickable) ||
-                            merchant.GetNode<Label>("s/v/label").Text.Equals("Inventory"))
-                        {
-                            sndName = sndName.Replace("on", "off");
-                            merchant.Show();
-                        }
-                        else if (selectedIdx == -2)
-                        {
-                            statsMenu.Show();
-                        }
-                        else
-                        {
-                            inventory.Show();
-                        }
-                    }
-                }
-                else
-                {
-                    GD.Print("Unexpected type in method _OnBackPressed on condition itemInfo.Visible");
-                }
-                selected = null;
-                selectedIdx = -1;
-            }
-            else if (dialogue.Visible)
-            {
-                dialogue.Hide();
-                if (selected == questLog)
-                {
-                    questLog.Show();
-                    selected = null;
-                }
-                else
-                {
-                    dialogue.GetNode<Control>("s/s/v/accept").Hide();
-                    dialogue.GetNode<Control>("s/s/v/finish").Hide();
-                    hpMana.GetNode<Control>("m/h/u").Hide();
-                    player.target = null;
-                    HideMenu();
-                }
-            }
-            else if (merchant.Visible)
-            {
-                if (player.target != null)
-                {
-                    if (player.target.worldType == WorldObject.WorldTypes.TRAINER)
-                    {
-                        itemInfo.GetNode<Label>("s/h/v/buy/label").Text = "Buy";
-                        popup.GetNode<Label>("m/yes_no/label").Text = "Buy?";
-                        sndName = "spell_book_close";
-                    }
-                    else
-                    {
-                        sndName = "merchant_close";
-                    }
-                }
-                itemInfo.GetNode<TextureButton>("s/v/c/v/bg").Disabled = false;
-                merchant.GetNode<Label>("s/v/label").Text = "";
-                merchant.GetNode<Control>("s/v2/merchant").Hide();
-                merchant.GetNode<Control>("s/v2/repair").Hide();
-                merchant.GetNode<Control>("s/v2/inventory").Show();
-                merchant.Hide();
-                merchantBag.Clear();
-                player.target = null;
-                HideMenu();
-            }
-            Globals.PlaySound(sndName, this, snd);
+            // string sndName = "click3";
+            // if (inventory.Visible)
+            // {
+            //     inventory.Hide();
+            //     menu.Show();
+            // }
+            // else if (statsMenu.Visible)
+            // {
+            //     statsMenu.Hide();
+            //     menu.Show();
+            // }
+            // else if (questLog.Visible)
+            // {
+            //     foreach (Control control in questLog.GetNode("s/v/s/v").GetChildren())
+            //     {
+            //         control.Show();
+            //     }
+            //     questLog.Hide();
+            //     menu.Show();
+            // }
+            // else if (saveLoad.Visible)
+            // {
+            //     saveLoad.Hide();
+            //     menu.Show();
+            // }
+            // else if (spellMenu.Visible)
+            // {
+            //     sndName = "spell_book_close";
+            //     spellMenu.Hide();
+            //     HideMenu();
+            // }
+            // else if (itemInfo.Visible)
+            // {
+            //     itemInfo.Hide();
+            //     Pickable selectedPickable = selected as Pickable;
+            //     if (selectedPickable != null)
+            //     {
+            //         if (spellBook.HasItem(selectedPickable))
+            //         {
+            //             spellMenu.Show();
+            //         }
+            //         else
+            //         {
+            //             itemInfo.GetNode<Control>("s/h/left").Show();
+            //             itemInfo.GetNode<Control>("s/h/right").Show();
+            //             sndName = SndConfigure();
+            //             if (!player.GetNode("inventory").GetChildren().Contains(selectedPickable) ||
+            //                 merchant.GetNode<Label>("s/v/label").Text.Equals("Inventory"))
+            //             {
+            //                 sndName = sndName.Replace("on", "off");
+            //                 merchant.Show();
+            //             }
+            //             else if (selectedIdx == -2)
+            //             {
+            //                 statsMenu.Show();
+            //             }
+            //             else
+            //             {
+            //                 inventory.Show();
+            //             }
+            //         }
+            //     }
+            //     else
+            //     {
+            //         GD.Print("Unexpected type in method _OnBackPressed on condition itemInfo.Visible");
+            //     }
+            //     selected = null;
+            //     selectedIdx = -1;
+            // }
+            // else if (dialogue.Visible)
+            // {
+            //     dialogue.Hide();
+            //     if (selected == questLog)
+            //     {
+            //         questLog.Show();
+            //         selected = null;
+            //     }
+            //     else
+            //     {
+            //         dialogue.GetNode<Control>("s/s/v/accept").Hide();
+            //         dialogue.GetNode<Control>("s/s/v/finish").Hide();
+            //         hpMana.GetNode<Control>("m/h/u").Hide();
+            //         player.target = null;
+            //         HideMenu();
+            //     }
+            // }
+            // else if (merchant.Visible)
+            // {
+            //     if (player.target != null)
+            //     {
+            //         if (player.target.worldType == WorldObject.WorldTypes.TRAINER)
+            //         {
+            //             itemInfo.GetNode<Label>("s/h/v/buy/label").Text = "Buy";
+            //             popup.GetNode<Label>("m/yes_no/label").Text = "Buy?";
+            //             sndName = "spell_book_close";
+            //         }
+            //         else
+            //         {
+            //             sndName = "merchant_close";
+            //         }
+            //     }
+            //     itemInfo.GetNode<TextureButton>("s/v/c/v/bg").Disabled = false;
+            //     merchant.GetNode<Label>("s/v/label").Text = "";
+            //     merchant.GetNode<Control>("s/v2/merchant").Hide();
+            //     merchant.GetNode<Control>("s/v2/repair").Hide();
+            //     merchant.GetNode<Control>("s/v2/inventory").Show();
+            //     merchant.Hide();
+            //     merchantBag.Clear();
+            //     player.target = null;
+            //     HideMenu();
+            // }
+            // Globals.PlaySound(sndName, this, snd);
         }
         public void _OnSpellSelected(int idx, bool sift)
         {
@@ -343,7 +343,7 @@ namespace Game.Ui
             {
                 Globals.PlaySound("spell_select", this, snd);
             }
-            selected = spellBook.GetItemMetaData(idx);
+            // selected = spellBook.GetItemMetaData(idx);
             Pickable selectedPickable = (Pickable)selected;
             selectedIdx = idx;
             ItemInfoHideExcept((spellBook.IsSlotCoolingDown(idx) || player.dead) ? "" : "cast");
@@ -361,77 +361,77 @@ namespace Game.Ui
         }
         public void _OnBagIndexSelected(int idx, bool sift = false)
         {
-            ItemInfoHideExcept();
-            selectedIdx = idx;
-            ItemList bag = inventoryBag;
-            Pickable selectedPickable;
-            string sndName;
-            if (merchantBag.GetItemCount() == 0)
-            {
-                sndName = "inventory_open";
-                inventory.Hide();
-                selectedPickable = inventoryBag.GetItemMetaData(idx);
-                selected = selectedPickable;
-                switch (selectedPickable.worldType)
-                {
-                    case WorldObject.WorldTypes.WEAPON:
-                    case WorldObject.WorldTypes.ARMOR:
-                        if (!player.dead)
-                        {
-                            itemInfo.GetNode<Control>("s/h/v/equip").Show();
-                        }
-                        break;
-                    case WorldObject.WorldTypes.FOOD:
-                    case WorldObject.WorldTypes.POTION:
-                        if (!inventoryBag.IsSlotCoolingDown(idx) && !player.dead)
-                        {
-                            itemInfo.GetNode<Label>("s/h/v/use/label").Text =
-                                (selectedPickable.worldType == WorldObject.WorldTypes.FOOD) ? "Eat" : "Drink";
-                            itemInfo.GetNode<Control>("s/h/v/use").Show();
-                        }
-                        break;
-                }
-                if (!player.dead)
-                {
-                    itemInfo.GetNode<Control>("s/h/v/drop").Show();
-                }
-            }
-            else
-            {
-                bag = merchantBag;
-                merchant.Hide();
-                selectedPickable = merchantBag.GetItemMetaData(idx);
-                selected = selectedPickable;
-                if (selectedPickable is Spell)
-                {
-                    sndName = "spell_select";
-                    bool trained = false;
-                    List<Pickable> spells = spellBook.GetItems(false);
-                    for (int i = 0; i < spells.Count && !trained; i++)
-                    {
-                        trained = selectedPickable.Equals(spells[i]);
-                    }
-                    if (!trained)
-                    {
-                        itemInfo.GetNode<Label>("s/h/v/buy/label").Text = "Train";
-                        ItemInfoHideExcept("buy");
-                    }
-                }
-                else
-                {
-                    sndName = SndConfigure();
-                    ItemInfoHideExcept(
-                        (merchant.GetNode<Label>("s/v/label").Text.Equals("Inventory")) ? "sell" : "buy");
-                }
-            }
-            if (!sift)
-            {
-                Globals.PlaySound(sndName, this, snd);
-                itemInfo.GetNode<TextureButton>("s/h/left").Disabled = bag.GetItemSlot(selectedPickable).GetIndex() == 0;
-                itemInfo.GetNode<TextureButton>("s/h/right").Disabled = bag.GetItemSlot(selectedPickable).GetIndex() == bag.GetItemCount() - 1;
-                selectedPickable.Describe();
-                itemInfo.Show();
-            }
+            // ItemInfoHideExcept();
+            // selectedIdx = idx;
+            // ItemList bag = inventoryBag;
+            // Pickable selectedPickable;
+            // string sndName;
+            // if (merchantBag.GetItemCount() == 0)
+            // {
+            //     sndName = "inventory_open";
+            //     inventory.Hide();
+            //     selectedPickable = inventoryBag.GetItemMetaData(idx);
+            //     selected = selectedPickable;
+            //     switch (selectedPickable.worldType)
+            //     {
+            //         case WorldObject.WorldTypes.WEAPON:
+            //         case WorldObject.WorldTypes.ARMOR:
+            //             if (!player.dead)
+            //             {
+            //                 itemInfo.GetNode<Control>("s/h/v/equip").Show();
+            //             }
+            //             break;
+            //         case WorldObject.WorldTypes.FOOD:
+            //         case WorldObject.WorldTypes.POTION:
+            //             if (!inventoryBag.IsSlotCoolingDown(idx) && !player.dead)
+            //             {
+            //                 itemInfo.GetNode<Label>("s/h/v/use/label").Text =
+            //                     (selectedPickable.worldType == WorldObject.WorldTypes.FOOD) ? "Eat" : "Drink";
+            //                 itemInfo.GetNode<Control>("s/h/v/use").Show();
+            //             }
+            //             break;
+            //     }
+            //     if (!player.dead)
+            //     {
+            //         itemInfo.GetNode<Control>("s/h/v/drop").Show();
+            //     }
+            // }
+            // else
+            // {
+            //     bag = merchantBag;
+            //     merchant.Hide();
+            //     selectedPickable = merchantBag.GetItemMetaData(idx);
+            //     selected = selectedPickable;
+            //     if (selectedPickable is Spell)
+            //     {
+            //         sndName = "spell_select";
+            //         bool trained = false;
+            //         List<Pickable> spells = spellBook.GetItems(false);
+            //         for (int i = 0; i < spells.Count && !trained; i++)
+            //         {
+            //             trained = selectedPickable.Equals(spells[i]);
+            //         }
+            //         if (!trained)
+            //         {
+            //             itemInfo.GetNode<Label>("s/h/v/buy/label").Text = "Train";
+            //             ItemInfoHideExcept("buy");
+            //         }
+            //     }
+            //     else
+            //     {
+            //         sndName = SndConfigure();
+            //         ItemInfoHideExcept(
+            //             (merchant.GetNode<Label>("s/v/label").Text.Equals("Inventory")) ? "sell" : "buy");
+            //     }
+            // }
+            // if (!sift)
+            // {
+            //     Globals.PlaySound(sndName, this, snd);
+            //     itemInfo.GetNode<TextureButton>("s/h/left").Disabled = bag.GetItemSlot(selectedPickable).GetIndex() == 0;
+            //     itemInfo.GetNode<TextureButton>("s/h/right").Disabled = bag.GetItemSlot(selectedPickable).GetIndex() == bag.GetItemCount() - 1;
+            //     selectedPickable.Describe();
+            //     itemInfo.Show();
+            // }
         }
         public void _OnWeaponSlotPressed()
         {
@@ -476,28 +476,28 @@ namespace Game.Ui
                 popup.Show();
                 return;
             }
-            ItemSlot itemSlot = inventoryBag.GetItemSlot(selectedPickable);
-            itemSlot.SetBlockSignals(true);
-            selectedPickable.Equip();
-            itemSlot.SetBlockSignals(false);
-            if (!selectedPickable.loaded)
-            {
-                Globals.PlaySound(SndConfigure(true), this, snd);
-            }
-            Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon_used0.tres");
-            string path = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), selectedPickable.worldType).ToLower()}_slot";
-            inventory.GetNode<TextureButton>(path).TextureNormal = texture;
-            statsMenu.GetNode<TextureButton>(path).TextureNormal = texture;
-            selectedIdx = -1;
-            selected = null;
-            if (itemInfo.GetNode<Control>("s/h/left").Visible)
-            {
-                inventory.Show();
-            }
-            else
-            {
-                HideMenu();
-            }
+            // ItemSlot itemSlot = inventoryBag.GetItemSlot(selectedPickable);
+            // itemSlot.SetBlockSignals(true);
+            // selectedPickable.Equip();
+            // itemSlot.SetBlockSignals(false);
+            // if (!selectedPickable.loaded)
+            // {
+            //     Globals.PlaySound(SndConfigure(true), this, snd);
+            // }
+            // Texture texture = (Texture)GD.Load("res://asset/img/ui/black_bg_icon_used0.tres");
+            // string path = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), selectedPickable.worldType).ToLower()}_slot";
+            // inventory.GetNode<TextureButton>(path).TextureNormal = texture;
+            // statsMenu.GetNode<TextureButton>(path).TextureNormal = texture;
+            // selectedIdx = -1;
+            // selected = null;
+            // if (itemInfo.GetNode<Control>("s/h/left").Visible)
+            // {
+            //     inventory.Show();
+            // }
+            // else
+            // {
+            //     HideMenu();
+            // }
         }
         public void _OnUnequipPressed()
         {
@@ -560,24 +560,24 @@ namespace Game.Ui
                     Globals.PlaySound("click2", this, snd);
                     break;
             }
-            Item metaItem = inventoryBag.GetItemMetaData(selectedIdx)as Item;
-            if (metaItem != null && selectedItem.worldType == WorldObject.WorldTypes.POTION)
-            {
-                inventoryBag.SetSlotCoolDown(selectedIdx, metaItem.duration, 0.0f);
-            }
-            inventoryBag.RemoveItem(selectedIdx, true, false, false);
-            selectedItem.Consume(player, 0.0f);
-            selectedIdx = -1;
-            selected = null;
-            if (itemInfo.GetNode("s/h/v/back").IsConnected("pressed", this, nameof(HideMenu)))
-            {
-                HideMenu();
-            }
-            else if (!slotSelect)
-            {
-                itemInfo.Hide();
-                inventory.Show();
-            }
+            // Item metaItem = inventoryBag.GetItemMetaData(selectedIdx)as Item;
+            // if (metaItem != null && selectedItem.worldType == WorldObject.WorldTypes.POTION)
+            // {
+            //     inventoryBag.SetSlotCoolDown(selectedIdx, metaItem.duration, 0.0f);
+            // }
+            // inventoryBag.RemoveItem(selectedIdx, true, false, false);
+            // selectedItem.Consume(player, 0.0f);
+            // selectedIdx = -1;
+            // selected = null;
+            // if (itemInfo.GetNode("s/h/v/back").IsConnected("pressed", this, nameof(HideMenu)))
+            // {
+            //     HideMenu();
+            // }
+            // else if (!slotSelect)
+            // {
+            //     itemInfo.Hide();
+            //     inventory.Show();
+            // }
         }
         public void _OnAcceptPressed()
         {
@@ -622,30 +622,33 @@ namespace Game.Ui
         }
         public void _OnBuyPressed()
         {
-            Globals.PlaySound("click2", this, snd);
-            Pickable selectedPickable = selected as Pickable;
-            if (selectedPickable == null)
-            {
-                GD.Print("Unexpected selected type in method _OnBuyPressed");
-                return;
-            }
-            itemInfo.Hide();
-            if (selectedPickable is Spell && player.level < selectedPickable.level)
-            {
-                popup.GetNode<Label>("m/error/label").Text = "Can't Learn\nThis Yet!";
-                popup.GetNode<Control>("m/error").Show();
-            }
-            else if (selectedPickable.GetGold() < player.gold)
-            {
-                popup.GetNode<Label>("m/yes_no/label").Text = (selectedPickable is Item) ? "Buy?" : "Learn?";
-                popup.GetNode<Control>("m/yes_no").Show();
-            }
-            else
-            {
-                popup.GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
-                popup.GetNode<Control>("m/error").Show();
-            }
-            popup.Show();
+            // TODO: removing this
+            // Globals.PlaySound("click2", this, snd);
+            // Pickable selectedPickable = selected as Pickable;
+            // if (selectedPickable == null)
+            // {
+            //     GD.Print("Unexpected selected type in method _OnBuyPressed");
+            //     return;
+            // }
+            // itemInfo.Hide();
+            
+            // if (selectedPickable is Spell && player.level
+            // < SpellDB.GetSpellData(selectedPickable.worldName).level)
+            // {
+            //     popup.GetNode<Label>("m/error/label").Text = "Can't Learn\nThis Yet!";
+            //     popup.GetNode<Control>("m/error").Show();
+            // }
+            // else if (selectedPickable.GetGold() < player.gold)
+            // {
+            //     popup.GetNode<Label>("m/yes_no/label").Text = (selectedPickable is Item) ? "Buy?" : "Learn?";
+            //     popup.GetNode<Control>("m/yes_no").Show();
+            // }
+            // else
+            // {
+            //     popup.GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
+            //     popup.GetNode<Control>("m/error").Show();
+            // }
+            // popup.Show();
         }
         public void _OnSellPressed()
         {
@@ -657,94 +660,95 @@ namespace Game.Ui
         }
         public void _OnRepairPressed()
         {
-            Globals.PlaySound("click1", this, snd);
-            popup.GetNode<Control>("m/repair").Show();
-            string text = "";
-            if (player.weapon == null)
-            {
-                popup.GetNode<Control>("m/repair/repair_weapon").Hide();
-                popup.GetNode<Control>("m/repair/repair_all").Hide();
-            }
-            else
-            {
-                popup.GetNode<Control>("m/repair/repair_weapon").Show();
-                text = $"Weapon: {Stats.ItemRepairCost(player.weapon.level)}";
-            }
-            if (player.vest == null)
-            {
-                popup.GetNode<Control>("m/repair/repair_armor").Hide();
-                popup.GetNode<Control>("m/repair/repair_all").Hide();
-            }
-            else
-            {
-                popup.GetNode<Control>("m/repair/repair_armor").Show();
-                int armorCost = Stats.ItemRepairCost(player.vest.level);
-                text += (player.weapon == null) ? $"Armor: {armorCost}" : $"\nArmor: {armorCost}";
-            }
-            if (player.weapon != null && player.vest != null)
-            {
-                int total = Stats.ItemRepairCost(player.vest.level) + Stats.ItemRepairCost(player.weapon.level);
-                text += $"\nAll: {total}";
-            }
-            popup.GetNode<Label>("m/repair/label").Text = text;
-            popup.Show();
+            // Globals.PlaySound("click1", this, snd);
+            // popup.GetNode<Control>("m/repair").Show();
+            // string text = "";
+            // if (player.weapon == null)
+            // {
+            //     popup.GetNode<Control>("m/repair/repair_weapon").Hide();
+            //     popup.GetNode<Control>("m/repair/repair_all").Hide();
+            // }
+            // else
+            // {
+            //     popup.GetNode<Control>("m/repair/repair_weapon").Show();
+            //     text = $"Weapon: {Stats.ItemRepairCost(player.weapon.level)}";
+            // }
+            // if (player.vest == null)
+            // {
+            //     popup.GetNode<Control>("m/repair/repair_armor").Hide();
+            //     popup.GetNode<Control>("m/repair/repair_all").Hide();
+            // }
+            // else
+            // {
+            //     popup.GetNode<Control>("m/repair/repair_armor").Show();
+            //     int armorCost = Stats.ItemRepairCost(player.vest.level);
+            //     text += (player.weapon == null) ? $"Armor: {armorCost}" : $"\nArmor: {armorCost}";
+            // }
+            // if (player.weapon != null && player.vest != null)
+            // {
+            //     int total = Stats.ItemRepairCost(player.vest.level) + Stats.ItemRepairCost(player.weapon.level);
+            //     text += $"\nAll: {total}";
+            // }
+            // popup.GetNode<Label>("m/repair/label").Text = text;
+            // popup.Show();
         }
         public void _OnCastPressed()
         {
-            bool showPopup = false;
-            Spell selectedSpell = selected as Spell;
-            if (selectedSpell == null)
-            {
-                GD.Print("Unexpected selected type in method _OnCastPressed");
-                return;
-            }
-            if (player.mana >= selectedSpell.manaCost)
-            {
-                if (player.target != null)
-                {
-                    if (selectedSpell.requiresTarget && !player.target.enemy)
-                    {
-                        popup.GetNode<Label>("m/error/label").Text = "Invalid\nTarget!";
-                        showPopup = true;
-                    }
-                    else if (player.GetCenterPos().DistanceTo(player.target.GetCenterPos()) > selectedSpell.spellRange &&
-                        selectedSpell.spellRange > 0 && selectedSpell.requiresTarget)
-                    {
-                        popup.GetNode<Label>("m/error/label").Text = "Target Not\nIn Range!";
-                        showPopup = true;
-                    }
-                }
-                else if (player.target == null && selectedSpell.requiresTarget)
-                {
-                    popup.GetNode<Label>("m/error/label").Text = "Target\nRequired!";
-                    showPopup = true;
-                }
-            }
-            else
-            {
-                popup.GetNode<Label>("m/error/label").Text = "Not Enough\nMana!";
-                showPopup = true;
-            }
-            if (showPopup)
-            {
-                if (!GetTree().Paused)
-                {
-                    GetNode<Control>("c/game_menu").Show();
-                    selectedIdx = -1;
-                    selected = null;
-                }
-                popup.GetNode<Control>("m/error").Show();
-                popup.Show();
-                return;
-            }
-            Globals.PlaySound("click2", this, snd);
-            Spell spell = PickableFactory.GetMakeSpell(selectedSpell.worldName);
-            spell.GetPickable(player, false);
-            spell.ConfigureSpell();
-            player.SetCurrentSpell(spell);
-            spellBook.SetSlotCoolDown(selectedIdx, spell.cooldown, 0.0f);
-            itemInfo.Hide();
-            HideMenu();
+            // TODO: not doing this anymore
+            // bool showPopup = false;
+            // Spell selectedSpell = selected as Spell;
+            // if (selectedSpell == null)
+            // {
+            //     GD.Print("Unexpected selected type in method _OnCastPressed");
+            //     return;
+            // }
+            // if (player.mana >= selectedSpell.manaCost)
+            // {
+            //     if (player.target != null)
+            //     {
+            //         if (selectedSpell.requiresTarget && !player.target.enemy)
+            //         {
+            //             popup.GetNode<Label>("m/error/label").Text = "Invalid\nTarget!";
+            //             showPopup = true;
+            //         }
+            //         else if (player.GetCenterPos().DistanceTo(player.target.GetCenterPos()) > selectedSpell.spellRange &&
+            //             selectedSpell.spellRange > 0 && selectedSpell.requiresTarget)
+            //         {
+            //             popup.GetNode<Label>("m/error/label").Text = "Target Not\nIn Range!";
+            //             showPopup = true;
+            //         }
+            //     }
+            //     else if (player.target == null && selectedSpell.requiresTarget)
+            //     {
+            //         popup.GetNode<Label>("m/error/label").Text = "Target\nRequired!";
+            //         showPopup = true;
+            //     }
+            // }
+            // else
+            // {
+            //     popup.GetNode<Label>("m/error/label").Text = "Not Enough\nMana!";
+            //     showPopup = true;
+            // }
+            // if (showPopup)
+            // {
+            //     if (!GetTree().Paused)
+            //     {
+            //         GetNode<Control>("c/game_menu").Show();
+            //         selectedIdx = -1;
+            //         selected = null;
+            //     }
+            //     popup.GetNode<Control>("m/error").Show();
+            //     popup.Show();
+            //     return;
+            // }
+            // Globals.PlaySound("click2", this, snd);
+            // Spell spell = PickableFactory.GetMakeSpell(selectedSpell.worldName);
+            // spell.GetPickable(player, false);
+            // spell.ConfigureSpell();
+            // player.SetCurrentSpell(spell);
+            // spellBook.SetSlotCoolDown(selectedIdx, spell.cooldown, 0.0f);
+            // itemInfo.Hide();
+            // HideMenu();
         }
         public void _OnFilterPressed()
         {
@@ -838,45 +842,45 @@ namespace Game.Ui
         }
         public void _OnSiftConfigure(bool right = true)
         {
-            Globals.PlaySound("click2", this, snd);
-            Pickable selectedPickable = selected as Pickable;
-            if (selectedPickable == null)
-            {
-                GD.Print("Unexpected selected type in method _OnCastPressed");
-                return;
-            }
-            ItemList bag = (merchantBag.HasItem(selectedPickable)) ? merchantBag : inventoryBag;
-            if (spellBook.HasItem(selectedPickable))
-            {
-                bag = spellBook;
-            }
-            int index = bag.GetItemSlot(selectedPickable).GetIndex() + 1;
-            string leftNodePath = "s/h/left";
-            string rightNodePath = "s/h/right";
-            if (!right)
-            {
-                index -= 2;
-            }
-            if (index >= 0 && index <= bag.GetItemCount() - 1)
-            {
-                selectedPickable = bag.GetItemMetaData(index);
-                selectedIdx = index;
-                selectedPickable.Describe();
-                if (bag == inventoryBag || bag == merchantBag)
-                {
-                    _OnBagIndexSelected(index, true);
-                }
-                else if (bag.IsSlotCoolingDown(index))
-                {
-                    itemInfo.GetNode<Control>("s/h/v/cast").Hide();
-                }
-                else if (!player.dead)
-                {
-                    itemInfo.GetNode<Control>("s/h/v/cast").Show();
-                }
-            }
-            itemInfo.GetNode<TextureButton>(leftNodePath).Disabled = index <= 0;
-            itemInfo.GetNode<TextureButton>(rightNodePath).Disabled = index >= bag.GetItemCount() - 1;
+            // Globals.PlaySound("click2", this, snd);
+            // Pickable selectedPickable = selected as Pickable;
+            // if (selectedPickable == null)
+            // {
+            //     GD.Print("Unexpected selected type in method _OnCastPressed");
+            //     return;
+            // }
+            // ItemList bag = (merchantBag.HasItem(selectedPickable)) ? merchantBag : inventoryBag;
+            // if (spellBook.HasItem(selectedPickable))
+            // {
+            //     bag = spellBook;
+            // }
+            // int index = bag.GetItemSlot(selectedPickable).GetIndex() + 1;
+            // string leftNodePath = "s/h/left";
+            // string rightNodePath = "s/h/right";
+            // if (!right)
+            // {
+            //     index -= 2;
+            // }
+            // if (index >= 0 && index <= bag.GetItemCount() - 1)
+            // {
+            //     selectedPickable = bag.GetItemMetaData(index);
+            //     selectedIdx = index;
+            //     selectedPickable.Describe();
+            //     if (bag == inventoryBag || bag == merchantBag)
+            //     {
+            //         _OnBagIndexSelected(index, true);
+            //     }
+            //     else if (bag.IsSlotCoolingDown(index))
+            //     {
+            //         itemInfo.GetNode<Control>("s/h/v/cast").Hide();
+            //     }
+            //     else if (!player.dead)
+            //     {
+            //         itemInfo.GetNode<Control>("s/h/v/cast").Show();
+            //     }
+            // }
+            // itemInfo.GetNode<TextureButton>(leftNodePath).Disabled = index <= 0;
+            // itemInfo.GetNode<TextureButton>(rightNodePath).Disabled = index >= bag.GetItemCount() - 1;
         }
         public void _OnUnitHudDraw()
         {
@@ -998,40 +1002,42 @@ namespace Game.Ui
         }
         public void _OnDescribePickable(Pickable pickable)
         {
-            Pickable selectedPickable = selected as Pickable;
-            if (selectedPickable == null)
-            {
-                GD.Print("Unexpected selected type in method _OnAddToHudPressed");
-                return;
-            }
-            string menuDescription = pickable.menuDescription;
-            if (selectedPickable is Spell && merchantBag.HasItem(pickable))
-            {
-                RegEx regEx = new RegEx();
-                regEx.Compile("-Level: (\\d*)\n");
-                string result = regEx.Search(menuDescription).GetString();
-                menuDescription = menuDescription.Insert(
-                    menuDescription.Find(result) + result.Length,
-                    $"-Gold: {pickable.GetGold().ToString("N0")}\n");
-            }
-            itemInfo.GetNode<Label>("s/v/label").Text = pickable.worldName;
-            itemInfo.GetNode<TextureRect>("s/v/c/v/bg/m/icon").Texture = pickable.icon;
-            itemInfo.GetNode<RichTextLabel>("s/v/c/v/c/label").Text = menuDescription;
+            // TODO: taking out
+            // Pickable selectedPickable = selected as Pickable;
+            // if (selectedPickable == null)
+            // {
+            //     GD.Print("Unexpected selected type in method _OnAddToHudPressed");
+            //     return;
+            // }
+            // string menuDescription = pickable.menuDescription;
+            // if (selectedPickable is Spell && merchantBag.HasItem(pickable))
+            // {
+            //     RegEx regEx = new RegEx();
+            //     regEx.Compile("-Level: (\\d*)\n");
+            //     string result = regEx.Search(menuDescription).GetString();
+            //     menuDescription = menuDescription.Insert(
+            //         menuDescription.Find(result) + result.Length,
+            //         $"-Gold: {pickable.GetGold().ToString("N0")}\n");
+            // }
+            // itemInfo.GetNode<Label>("s/v/label").Text = pickable.worldName;
+            
+            // itemInfo.GetNode<TextureRect>("s/v/c/v/bg/m/icon").Texture = pickable.icon;
+            // itemInfo.GetNode<RichTextLabel>("s/v/c/v/c/label").Text = menuDescription;
         }
         public void _OnSetPickableInMenu(Pickable pickable, bool stack, Bags bagType)
         {
-            switch (bagType)
-            {
-                case Bags.MERCHANT:
-                    merchantBag.AddItem(pickable, stack);
-                    break;
-                case Bags.INVENTORY:
-                    inventoryBag.AddItem(pickable, stack);
-                    break;
-                case Bags.SPELL:
-                    spellBook.AddItem(pickable, stack);
-                    break;
-            }
+            // switch (bagType)
+            // {
+            //     case Bags.MERCHANT:
+            //         merchantBag.AddItem(pickable, stack);
+            //         break;
+            //     case Bags.INVENTORY:
+            //         inventoryBag.AddItem(pickable, stack);
+            //         break;
+            //     case Bags.SPELL:
+            //         spellBook.AddItem(pickable, stack);
+            //         break;
+            // }
         }
         public void _OnEquipItem(Item item, bool on)
         {
@@ -1049,34 +1055,34 @@ namespace Game.Ui
                     break;
             }
             string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), item.worldType).ToLower()}_slot/m/icon";
-            inventory.GetNode<TextureRect>(nodePath).Texture = (on) ? item.icon : null;
-            statsMenu.GetNode<TextureRect>(nodePath).Texture = (on) ? item.icon : null;
-            if (on)
-            {
-                if (selectedIdx == -1)
-                {
-                    // this is for if the item is loaded from a save game
-                    selectedIdx = inventoryBag.GetItemSlot(selected as Pickable).GetIndex();
-                }
-                inventoryBag.RemoveItem(selectedIdx);
-            }
-            else
-            {
-                inventoryBag.AddItem(item, false);
-                ItemSlot itemSlot = inventoryBag.GetItemSlot(item);
-                foreach (ItemSlot otherItemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-                {
-                    if (otherItemSlot.GetItem() == item &&
-                        !itemSlot.IsConnected(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut)))
-                    {
-                        itemSlot.Connect(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut));
-                    }
-                }
-            }
+            // inventory.GetNode<TextureRect>(nodePath).Texture = (on) ? item.icon : null;
+            // statsMenu.GetNode<TextureRect>(nodePath).Texture = (on) ? item.icon : null;
+            // if (on)
+            // {
+            //     if (selectedIdx == -1)
+            //     {
+            //         // this is for if the item is loaded from a save game
+            //         selectedIdx = inventoryBag.GetItemSlot(selected as Pickable).GetIndex();
+            //     }
+            //     inventoryBag.RemoveItem(selectedIdx);
+            // }
+            // else
+            // {
+            //     inventoryBag.AddItem(item, false);
+            //     ItemSlot itemSlot = inventoryBag.GetItemSlot(item);
+            //     foreach (ItemSlot otherItemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
+            //     {
+            //         if (otherItemSlot.GetItem() == item &&
+            //             !itemSlot.IsConnected(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut)))
+            //         {
+            //             itemSlot.Connect(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut));
+            //         }
+            //     }
+            // }
         }
         public void _OnDropPickable(Pickable pickable)
         {
-            inventoryBag.RemoveItem(inventoryBag.GetItemSlot(pickable).GetIndex());
+            // inventoryBag.RemoveItem(inventoryBag.GetItemSlot(pickable).GetIndex());
             player.GetNode("inventory").RemoveChild(pickable);
             Globals.map.AddZChild(pickable);
             pickable.Owner = Globals.map;
@@ -1114,8 +1120,8 @@ namespace Game.Ui
                         new Godot.Collections.Array() { null, false, true, false });
                     itemSlot.Connect("hide", pickable, nameof(Pickable.UncoupleSlot),
                         new Godot.Collections.Array() { itemSlot });
-                    itemSlot.SetItem(pickable);
-                    itemSlot.CoolDown(pickable, pickable.duration, seek);
+                    // itemSlot.SetItem(pickable);
+                    // itemSlot.CoolDown(pickable, pickable.duration, seek);
                     itemSlot.Show();
                     break;
                 }
@@ -1195,14 +1201,14 @@ namespace Game.Ui
                 }
                 if (itemInfo.Visible)
                 {
-                    if (spellBook.HasItem(selectedPickable))
-                    {
-                        Globals.PlaySound("spell_book_close", this, snd);
-                    }
-                    else
-                    {
-                        Globals.PlaySound(SndConfigure(true, true), this, snd);
-                    }
+                    // if (spellBook.HasItem(selectedPickable))
+                    // {
+                    //     Globals.PlaySound("spell_book_close", this, snd);
+                    // }
+                    // else
+                    // {
+                    //     Globals.PlaySound(SndConfigure(true, true), this, snd);
+                    // }
                 }
                 Node backButton = itemInfo.GetNode("s/h/v/back");
                 backButton.Disconnect("pressed", this, nameof(HideMenu));
@@ -1229,53 +1235,53 @@ namespace Game.Ui
         }
         public void _OnHudSlotPressed(ItemSlot itemSlot, Pickable pickable)
         {
-            selected = pickable;
-            if (spellBook.HasItem(pickable))
-            {
-                selectedIdx = spellBook.GetItemSlot(pickable).GetIndex();
-            }
-            else if (inventoryBag.HasItem(pickable))
-            {
-                selectedIdx = inventoryBag.GetItemSlot(pickable).GetIndex();
-            }
-            if (pickable is Item)
-            {
-                if (!player.dead && !itemSlot.IsCoolingDown() &&
-                    (pickable.worldType == WorldObject.WorldTypes.FOOD ||
-                        pickable.worldType == WorldObject.WorldTypes.POTION))
-                {
-                    _OnUsePressed(true);
-                }
-                else if (player.weapon == pickable || player.vest == pickable)
-                {
-                    Node backButton = itemInfo.GetNode("s/h/v/back");
-                    backButton.Disconnect("pressed", this, nameof(_OnBackPressed));
-                    backButton.Connect("pressed", this, nameof(HideMenu));
-                    ItemInfoGo(pickable);
-                    ItemInfoHideExcept("unequip");
-                    menu.Hide();
-                    GetNode<Control>("c/game_menu").Show();
-                }
-                else
-                {
-                    PrepItemInfo();
-                    Globals.PlaySound(SndConfigure(true, false), this, snd);
-                    _OnBagIndexSelected(selectedIdx, true);
-                    pickable.Describe();
-                    itemInfo.Show();
-                }
-            }
-            else if (itemSlot.IsCoolingDown() || player.dead)
-            {
-                PrepItemInfo();
-                Globals.PlaySound("turn_page", this, snd);
-                _OnSpellSelected(selectedIdx, true);
-            }
-            else
-            {
-                _OnCastPressed();
-            }
-            selectedIdx = -1;
+            // selected = pickable;
+            // if (spellBook.HasItem(pickable))
+            // {
+            //     selectedIdx = spellBook.GetItemSlot(pickable).GetIndex();
+            // }
+            // else if (inventoryBag.HasItem(pickable))
+            // {
+            //     selectedIdx = inventoryBag.GetItemSlot(pickable).GetIndex();
+            // }
+            // if (pickable is Item)
+            // {
+            //     if (!player.dead && !itemSlot.IsCoolingDown() &&
+            //         (pickable.worldType == WorldObject.WorldTypes.FOOD ||
+            //             pickable.worldType == WorldObject.WorldTypes.POTION))
+            //     {
+            //         _OnUsePressed(true);
+            //     }
+            //     else if (player.weapon == pickable || player.vest == pickable)
+            //     {
+            //         Node backButton = itemInfo.GetNode("s/h/v/back");
+            //         backButton.Disconnect("pressed", this, nameof(_OnBackPressed));
+            //         backButton.Connect("pressed", this, nameof(HideMenu));
+            //         ItemInfoGo(pickable);
+            //         ItemInfoHideExcept("unequip");
+            //         menu.Hide();
+            //         GetNode<Control>("c/game_menu").Show();
+            //     }
+            //     else
+            //     {
+            //         PrepItemInfo();
+            //         Globals.PlaySound(SndConfigure(true, false), this, snd);
+            //         _OnBagIndexSelected(selectedIdx, true);
+            //         pickable.Describe();
+            //         itemInfo.Show();
+            //     }
+            // }
+            // else if (itemSlot.IsCoolingDown() || player.dead)
+            // {
+            //     PrepItemInfo();
+            //     Globals.PlaySound("turn_page", this, snd);
+            //     _OnSpellSelected(selectedIdx, true);
+            // }
+            // else
+            // {
+            //     _OnCastPressed();
+            // }
+            // selectedIdx = -1;
         }
         public void ShowQuestText(Quest quest)
         {

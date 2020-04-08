@@ -18,6 +18,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="speaker" parent="." instance=ExtResource( 4 )]
+
 [node name="bg" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,6 +32,9 @@ custom_constants/margin_right = 50
 custom_constants/margin_top = 50
 custom_constants/margin_left = 50
 custom_constants/margin_bottom = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="bg" type="TextureRect" parent="list_of_menus"]
 margin_left = 50.0
@@ -185,6 +190,9 @@ margin_top = 50.0
 margin_right = 570.0
 margin_bottom = 1130.0
 
+[node name="header" parent="list_of_menus/m/save_load/v" index="0"]
+text = "Load Game"
+
 [node name="about" parent="list_of_menus/m" instance=ExtResource( 3 )]
 visible = false
 anchor_right = 0.0
@@ -195,10 +203,9 @@ margin_right = 570.0
 margin_bottom = 1130.0
 
 [node name="popup" parent="." instance=ExtResource( 2 )]
-
-[node name="snd" parent="." instance=ExtResource( 4 )]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/new_game" to="." method="_OnNewGamePressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/load" to="." method="_OnLoadPressed"]
-[connection signal="pressed" from="list_of_menus/m/main_menu/v/settings" to="." method="_OnSettingsPressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/about" to="." method="_OnAboutPressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/exit" to="." method="_OnExitPressed"]
+
+[editable path="list_of_menus/m/save_load"]

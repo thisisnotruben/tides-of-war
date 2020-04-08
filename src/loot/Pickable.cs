@@ -1,7 +1,6 @@
 using Game.Ability;
 using Game.Actor;
 using Game.Database;
-using Game.Actor.Doodads;
 using Game.Ui;
 using Godot;
 namespace Game.Loot
@@ -9,7 +8,6 @@ namespace Game.Loot
     public abstract class Pickable : WorldObject
     {
         public WorldTypes subType;
-        private int goldDrop;
         private float _duration;
         public float duration
         {
@@ -20,18 +18,12 @@ namespace Game.Loot
             set
             {
                 _duration = value;
-                if (duration > 0.0f)
+                if (value > 0.0f)
                 {
-                    GetNode<Timer>("timer").WaitTime = duration;
+                    GetNode<Timer>("timer").WaitTime = value;
                 }
             }
         }
-        public float cooldown { get; private protected set; }
-        public byte stackSize { get; private protected set; }
-        public int goldWorth { get; private protected set; }
-        public int level { get; private protected set; }
-        public string menuDescription { get; private protected set; }
-        public AtlasTexture icon { get; private protected set; }
 
         [Signal]
         public delegate void DescribePickable(Pickable pickable, string PickableWorldDescription);
@@ -39,8 +31,6 @@ namespace Game.Loot
         public delegate void SetInMenu(Pickable pickable, bool stack);
         [Signal]
         public delegate void Dropped(Pickable pickable);
-        [Signal]
-        public delegate void PickableExchanged(Pickable pickable, bool add);
         public override void _Ready()
         {
             // Connect(nameof(PickableExchanged), Globals.worldQuests,
@@ -104,19 +94,9 @@ namespace Game.Loot
             {
                 GetNode("select").SetBlockSignals(true);
                 GetNode("sight").SetBlockSignals(true);
-                EmitSignal(nameof(PickableExchanged), this, true);
                 GetNode<AudioStreamPlayer2D>("snd").Stream = (AudioStreamSample)Globals.sndMeta["chest_collect"];
                 anim.Play("select");
                 GetPickable(Globals.player, true);
-                if (goldDrop > 0)
-                {
-                    CombatText combatText = (CombatText)Globals.combatText.Instance();
-                    Globals.player.AddChild(combatText);
-                    combatText.SetType($"+{goldDrop}", CombatText.TextType.GOLD,
-                        Globals.player.GetNode<Node2D>("img").Position);
-                    Globals.player.gold = goldDrop;
-                    goldDrop = 0;
-                }
             }
         }
         public void _OnTweenCompleted(Godot.Object obj, NodePath nodePath)
@@ -176,7 +156,7 @@ namespace Game.Loot
             if (Owner == Globals.map && addToBag)
             {
                 PauseMode = PauseModeEnum.Process;
-                EmitSignal(nameof(SetInMenu), this, stackSize > 0, bag);
+                EmitSignal(nameof(SetInMenu), this, PickableDB.GetStackSize(worldName) > 0, bag);
             }
             else
             {
@@ -204,7 +184,7 @@ namespace Game.Loot
                 Owner = character;
                 if (addToBag)
                 {
-                    EmitSignal(nameof(SetInMenu), this, stackSize, bag);
+                    EmitSignal(nameof(SetInMenu), this, PickableDB.GetStackSize(worldName), bag);
                 }
             }
         }
@@ -222,7 +202,6 @@ namespace Game.Loot
         }
         public void Buy(Player buyer)
         {
-            EmitSignal(nameof(PickableExchanged), this, true);
             Pickable pickable;
             if (this is Item)
             {
@@ -232,18 +211,9 @@ namespace Game.Loot
             {
                 pickable = PickableFactory.GetMakeSpell(worldName);
             }
-            pickable.GetPickable(buyer, true);
-            buyer.gold = -pickable.GetGold();
-        }
-        public void Sell(Player seller)
-        {
-            EmitSignal(nameof(PickableExchanged), this, false);
-            seller.gold = GetGold();
-            UnMake();
         }
         public void Drop()
         {
-            EmitSignal(nameof(PickableExchanged), this, false);
             EmitSignal(nameof(Dropped), this);
             GetNode("sight").SetBlockSignals(false);
             GetNode("select").SetBlockSignals(false);
@@ -253,10 +223,6 @@ namespace Game.Loot
         {
             EmitSignal(nameof(Unmake));
             QueueFree();
-        }
-        public int GetGold()
-        {
-            return goldWorth;
         }
         public void UncoupleSlot(ItemSlot itemSlot)
         {

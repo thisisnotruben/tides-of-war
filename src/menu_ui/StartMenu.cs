@@ -2,28 +2,31 @@ using Game.Utils;
 using Godot;
 namespace Game.Ui
 {
-    public class StartMenu : Menu
+    public class StartMenu : Control
     {
-        Speaker speaker;
+        private Speaker speaker;
+        private SaveLoadNode saveLoad;
+        private AboutNode about;
+        private Popup popup;
+        private Control main;
+
         public override void _Ready()
         {
-            speaker = GetNode<Speaker>("snd");
-            listOfMenus = GetNode<Control>("list_of_menus/m");
-            saveLoad = listOfMenus.GetNode<SaveLoadNode>("save_load");
-            saveLoad.GetNode("v/s/back").Connect("pressed", this, nameof(_OnBackPressed));
-            menu = listOfMenus.GetNode<Control>("main_menu");
-            about = listOfMenus.GetNode<AboutNode>("about");
-            about.speaker = speaker;
+            speaker = GetNode<Speaker>("speaker");
+            GameMenu.player = null;
+            GameMenu.speaker = speaker;
+            main = GetNode<Control>("list_of_menus/m/main_menu");
+            saveLoad = GetNode<SaveLoadNode>("list_of_menus/m/save_load");
+            about = GetNode<AboutNode>("list_of_menus/m/about");
             popup = GetNode<Popup>("popup");
-            popup.speaker = speaker;
-            foreach (Control control in new Control[] {about, popup})
+            foreach (Control control in new Control[] {saveLoad, about, popup})
             {
                 control.Connect("hide", this, nameof(_OnWindowClosed));
             }
         }
         public void _OnWindowClosed()
         {
-            menu.Show();
+            main.Show();
         }
         public void _OnNewGamePressed()
         {
@@ -32,29 +35,21 @@ namespace Game.Ui
         }
         public void _OnLoadPressed()
         {
-            Globals.PlaySound("click1", this, speaker);
-            menu.Hide();
-            saveLoad.Show();
-        }
-        public void _OnSettingsPressed()
-        {
-            Globals.PlaySound("click1", this, speaker);
+            Transition(saveLoad);
         }
         public void _OnAboutPressed()
         {
-            Globals.PlaySound("click1", this, speaker);
-            menu.Hide();
-            about.Show();
-        }
-        public void _OnBackPressed()
-        {
-            Globals.PlaySound("click3", this, speaker);
-            saveLoad.Hide();
-            menu.Show();
+            Transition(about);
         }
         public void _OnExitPressed()
         {
             GetTree().Quit();
+        }
+        private void Transition(Control scene)
+        {
+            Globals.PlaySound("click1", this, speaker);
+            main.Hide();
+            scene.Show();
         }
     }
 }

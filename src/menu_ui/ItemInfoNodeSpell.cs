@@ -12,32 +12,32 @@ namespace Game.Ui
                 .Connect("pressed", this, nameof(_OnCastPressed));
         }
 
-        public override void Display(Loot.Pickable pickable, bool allowMove)
+        public override void Display(string pickableWorldName, bool allowMove)
         {
-            base.Display(pickable, allowMove);
-            HideExcept((itemList.IsSlotCoolingDown(pickable) || player.dead) ? "" : "cast");
+            base.Display(pickableWorldName, allowMove);
+            HideExcept((itemList.IsSlotCoolingDown(pickableWorldName) || player.dead) ? "" : "cast");
         }
         public void _OnCastPressed()
         {
             bool showPopup = false;
-            Spell spell = pickable as Spell;
-            if (player.mana >= spell.manaCost)
+            SpellDB.SpellNode spellNode = SpellDB.GetSpellData(pickableWorldName);
+            if (player.mana >= spellNode.manaCost)
             {
                 if (player.target != null)
                 {
-                    if (spell.requiresTarget && !player.target.enemy)
+                    if (spellNode.requiresTarget && !player.target.enemy)
                     {
                         popup.GetNode<Label>("m/error/label").Text = "Invalid\nTarget!";
                         showPopup = true;
                     }
-                    else if (player.GetCenterPos().DistanceTo(player.target.GetCenterPos()) > spell.spellRange
-                    && spell.spellRange > 0 && spell.requiresTarget)
+                    else if (player.GetCenterPos().DistanceTo(player.target.GetCenterPos()) > spellNode.spellRange
+                    && spellNode.spellRange > 0 && spellNode.requiresTarget)
                     {
                         popup.GetNode<Label>("m/error/label").Text = "Target Not\nIn Range!";
                         showPopup = true;
                     }
                 }
-                else if (player.target == null && spell.requiresTarget)
+                else if (player.target == null && spellNode.requiresTarget)
                 {
                     popup.GetNode<Label>("m/error/label").Text = "Target\nRequired!";
                     showPopup = true;
@@ -57,11 +57,11 @@ namespace Game.Ui
             else
             {
                 Globals.PlaySound("click2", this, speaker);
-                spell = PickableFactory.GetMakeSpell(spell.worldName);
+                Spell spell = PickableFactory.GetMakeSpell(pickableWorldName);
                 spell.GetPickable(player, false);
                 spell.ConfigureSpell();
                 player.SetCurrentSpell(spell);
-                itemList.SetSlotCoolDown(spell, spell.cooldown, 0.0f);
+                itemList.SetSlotCoolDown(pickableWorldName, spellNode.coolDown, 0.0f);
                 Hide();
             }
         }

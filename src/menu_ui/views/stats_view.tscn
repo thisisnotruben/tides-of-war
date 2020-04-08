@@ -145,7 +145,7 @@ __meta__ = {
 [node name="item_info" parent="." instance=ExtResource( 8 )]
 visible = false
 [connection signal="draw" from="." to="." method="_OnStatsNodeDraw"]
-[connection signal="button_down" from="s/v/slots/weapon" to="." method="_OnEquippedSlotPressed" binds= [ "s/v/slots/weapon/m/icon", true ]]
+[connection signal="button_down" from="s/v/slots/weapon" to="." method="_OnEquippedSlotMoved" binds= [ "s/v/slots/weapon/m/icon", true ]]
 [connection signal="button_up" from="s/v/slots/weapon" to="." method="_OnEquippedSlotMoved" binds= [ "s/v/slots/weapon/m/icon", false ]]
 [connection signal="pressed" from="s/v/slots/weapon" to="." method="_OnEquippedSlotPressed" binds= [ true ]]
 [connection signal="button_down" from="s/v/slots/armor" to="." method="_OnEquippedSlotMoved" binds= [ "s/v/slots/armor/m/icon", true ]]

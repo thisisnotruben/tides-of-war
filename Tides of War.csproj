@@ -64,6 +64,7 @@
     <Compile Include="src\database\IconDB.cs" />
     <Compile Include="src\database\ItemDB.cs" />
     <Compile Include="src\database\PickableFactory.cs" />
+    <Compile Include="src\database\PickableDB.cs" />
     <Compile Include="src\database\QuestDB.cs" />
     <Compile Include="src\database\SpellDB.cs" />
     <Compile Include="src\database\ImageDB.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="src\map\Map.cs" />
     <Compile Include="src\menu_ui\AboutNode.cs" />
     <Compile Include="src\menu_ui\DialogueNode.cs" />
+    <Compile Include="src\menu_ui\Hud.cs" />
     <Compile Include="src\menu_ui\InGameMenu.cs" />
     <Compile Include="src\menu_ui\InventoryNode.cs" />
     <Compile Include="src\menu_ui\ItemInfoNode.cs" />
@@ -87,7 +89,9 @@
     <Compile Include="src\menu_ui\ItemList.cs" />
     <Compile Include="src\menu_ui\ItemSlot.cs" />
     <Compile Include="src\menu_ui\MainMenu.cs" />
+    <Compile Include="src\menu_ui\GameMenu.cs" />
     <Compile Include="src\menu_ui\Menu.cs" />
+    <Compile Include="src\menu_ui\MenuHandler.cs" />
     <Compile Include="src\menu_ui\MerchantNode.cs" />
     <Compile Include="src\menu_ui\MiniMap.cs" />
     <Compile Include="src\menu_ui\MoveCursor.cs" />
@@ -102,7 +106,7 @@
     <Compile Include="src\loot\Item.cs" />
     <Compile Include="src\loot\Pickable.cs" />
     <Compile Include="src\menu_ui\StatsNode.cs" />
-    <Compile Include="src\menu_ui\views\MenuHandler.cs" />
+    <Compile Include="src\menu_ui\views\HudStatus.cs" />
     <Compile Include="src\missile\ICombustible.cs" />
     <Compile Include="src\missile\LandMine.cs" />
     <Compile Include="src\missile\Missile.cs" />

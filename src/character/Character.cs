@@ -71,7 +71,7 @@ namespace Game.Actor
                 {
                     SetState(States.ALIVE);
                 }
-                EmitSignal(nameof(UpdateHud), nameof(hp), worldName, hp, hpMax);
+                EmitSignal(nameof(UpdateHudStatus), this, true, hp, hpMax);
             }
         }
         public int hpMax;
@@ -101,7 +101,7 @@ namespace Game.Actor
                 {
                     _mana = 0;
                 }
-                EmitSignal(nameof(UpdateHud), nameof(mana), worldName, mana, manaMax);
+                EmitSignal(nameof(UpdateHudStatus), this, false, mana, manaMax);
             }
         }
         public int manaMax;
@@ -134,7 +134,7 @@ namespace Game.Actor
         [Signal]
         public delegate void Died();
         [Signal]
-        public delegate void UpdateHud(string type, string worldName, int amount, int maxAmount);
+        public delegate void UpdateHudStatus(Character character, bool hp, int currentValue, int maxValue);
         [Signal]
         public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
 
@@ -639,17 +639,6 @@ namespace Game.Actor
                 stepPos.x += (step) ? 1.0f : -4.0f;
                 Globals.map.GetNode("ground").AddChild(footStep);
                 footStep.GlobalPosition = stepPos;
-            }
-        }
-        public void UpdateHUD()
-        {
-            EmitSignal(nameof(UpdateHud), "HP", worldName, hp, hpMax);
-            EmitSignal(nameof(UpdateHud), "MANA", worldName, mana, manaMax);
-            // TODO
-            // EmitSignal(nameof(UpdateHud), "ICON_HIDE", worldName, hp, hpMax);
-            foreach (Spell spell in spellQueue)
-            {
-                EmitSignal(nameof(UpdateHudIcon), spell, spell.GetTimeLeft());
             }
         }
         public virtual void SetSaveData(Godot.Collections.Dictionary saveData)

@@ -8,7 +8,7 @@ namespace Game.Database
         public struct SpellNode
         {
             public string type;
-            public int icon;
+            public Texture icon;
             public int level;
             public int spellRange;
             public int coolDown;
@@ -17,6 +17,9 @@ namespace Game.Database
             public bool effectOnTarget;
             public bool requiresTarget;
             public string description;
+            public int stackSize;
+            public int goldCost;
+            public int manaCost;
         }
         
         private static Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
@@ -39,7 +42,7 @@ namespace Game.Database
                 Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary) rawDict[spellName];
                 SpellNode spellNode;
                 spellNode.type = (string) itemDict[nameof(SpellNode.type)];
-                spellNode.icon = (int) ((Single) itemDict[nameof(SpellNode.icon)]);
+                spellNode.icon = IconDB.GetIcon((int) ((Single) itemDict[nameof(SpellNode.icon)]));
                 spellNode.level = (int) ((Single) itemDict[nameof(SpellNode.level)]);
                 spellNode.spellRange = (int) ((Single) itemDict[nameof(SpellNode.spellRange)]);
                 spellNode.coolDown = (int) ((Single) itemDict[nameof(SpellNode.coolDown)]);
@@ -48,6 +51,10 @@ namespace Game.Database
                 spellNode.effectOnTarget = (bool) itemDict[nameof(SpellNode.effectOnTarget)];
                 spellNode.requiresTarget = (bool) itemDict[nameof(SpellNode.requiresTarget)];
                 spellNode.description = (string) itemDict[nameof(SpellNode.description)];
+                spellNode.stackSize = 1;
+                spellNode.goldCost = (int) ((Single) itemDict[nameof(SpellNode.goldCost)]);
+                // TODO
+                spellNode.manaCost = -1;
                 spellData.Add(spellName, spellNode);
             }
         }

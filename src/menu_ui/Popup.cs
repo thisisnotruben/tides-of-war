@@ -1,11 +1,9 @@
 using Godot;
-using Game.Utils;
 namespace Game.Ui
 {
-    public class Popup : Control
+    public class Popup : GameMenu
     {
         public static MainMenu mainMenu;
-        public Speaker speaker= null;
 
         public void _OnPopupDraw()
         {
@@ -18,6 +16,14 @@ namespace Game.Ui
             {
                 control.Hide();
             }
+        }
+        public void _OnErrorDraw()
+        {
+            Globals.PlaySound("click6", this, speaker);
+        }
+        public void _OnMResized()
+        {
+            GetNode<Control>("bg").RectMinSize = GetNode<Control>("m").RectSize;
         }
         public void _OnRepairDraw()
         {
@@ -37,30 +43,6 @@ namespace Game.Ui
         public void _OnRepairHide()
         {
             GetNode<TextureRect>("bg").Texture = (Texture)GD.Load("res://asset/img/ui/grey3_bg.tres");
-        }
-        public void _OnErrorDraw()
-        {
-            Globals.PlaySound("click6", this, speaker);
-        }
-        public void _OnMResized()
-        {
-            GetNode<Control>("bg").RectMinSize = GetNode<Control>("m").RectSize;
-        }
-        public void _OnExitGamePressed()
-        {
-            GetTree().Quit();
-        }
-        public void _OnExitMenuPressed()
-        {
-            Globals.PlaySound("click0", this, speaker);
-            GetTree().Paused = false;
-            Globals.SetScene("res://src/menu_ui/start_menu.tscn", GetTree().Root, Globals.map);
-            Globals.worldQuests.Reset();
-        }
-        public void _OnBackPressed()
-        {
-            Globals.PlaySound("click3", this, speaker);
-            Hide();
         }
     }
 }

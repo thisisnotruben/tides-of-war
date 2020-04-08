@@ -1,31 +1,15 @@
 using Godot;
 using System.Linq;
 using System.Collections.Generic;
-using Game.Actor;
 using Game.Loot;
-using Game.Utils;
 using Game.Database;
 namespace Game.Ui
 {
-    public class ItemInfoNode : Control
+    public class ItemInfoNode : GameMenu
     {
-        public Player player;
-        private Speaker _speaker;
-        public Speaker speaker
-        {
-            set
-            {
-                _speaker = value;
-                popup.speaker = value;
-            }
-            get
-            {
-                return _speaker;
-            }
-        }
         public ItemList itemList;
         private protected Popup popup;
-        private protected Pickable pickable;
+        private protected string pickableWorldName;
         
         public override void _Ready()
         {
@@ -34,20 +18,21 @@ namespace Game.Ui
                 .Connect("pressed", this, nameof(_OnClearSlotPressed));
             popup.GetNode<BaseButton>("m/add_to_slot/back")
                 .Connect("pressed", this, nameof(_OnAddToHudBack));
+            popup.Connect("hide", this, nameof(_OnItemInfoNodeHide));
             for (int i = 1; i <= 4; i++)
             {
                 popup.GetNode($"m/add_to_slot/slot_{i}").Connect("pressed",
                     this, nameof(_OnAddToHudConfirm), new Godot.Collections.Array() {i});
             }
         }
-        public virtual void Display(Pickable pickable, bool allowMove)
+        public virtual void Display(string pickableWorldName, bool allowMove)
         {
-            this.pickable = pickable;
+            this.pickableWorldName = pickableWorldName;
             TextureButton left = GetNode<TextureButton>("s/h/left");
             TextureButton right = GetNode<TextureButton>("s/h/right");
             if (allowMove && itemList != null)
             {
-                int currentIdx = itemList.GetItemSlot(pickable).GetIndex();
+                int currentIdx = itemList.GetItemSlot(pickableWorldName).GetIndex();
                 left.Disabled = currentIdx == 0;
                 right.Disabled = currentIdx == itemList.GetItemCount() - 1;
                 left.Show();
@@ -59,31 +44,31 @@ namespace Game.Ui
                 right.Hide();
             }
             string[] showBttns = {};
-            if (!player.dead && itemList != null)
+            if (!player.dead && itemList != null && ItemDB.HasItem(pickableWorldName))
             {
                 showBttns = new string[] {"drop", ""};
-                switch (pickable.worldType)
+                string itemType = ItemDB.GetItemData(pickableWorldName).type;
+                switch (itemType)
                 {
-                    case WorldObject.WorldTypes.FOOD:
-                    case WorldObject.WorldTypes.POTION:
-                        if (!itemList.IsSlotCoolingDown(itemList.GetItemSlot(pickable).GetIndex()))
+                    case "FOOD":
+                    case "POTION":
+                        if (!itemList.IsSlotCoolingDown(itemList.GetItemSlot(pickableWorldName).GetIndex()))
                         {
                             showBttns[1] = "use";
-                            GetNode<Label>("s/h/v/use/label").Text = 
-                                (pickable.worldType == WorldObject.WorldTypes.FOOD) ? "Eat" : "Drink";
+                            GetNode<Label>("s/h/buttons/use/label").Text = 
+                                (itemType.Equals("FOOD")) ? "Eat" : "Drink";
                         }
                         break;
-                    case WorldObject.WorldTypes.ARMOR:
-                    case WorldObject.WorldTypes.WEAPON:
+                    case "ARMOR":
+                    case "WEAPON":
                         showBttns[1] = "equip";
                         break;
                 }
             }
             HideExcept(showBttns);
-            ItemDB.ItemNode itemNode = ItemDB.GetItemData(pickable.worldName);
-            GetNode<Label>("s/v/header").Text = pickable.worldName;
-            GetNode<TextureRect>("s/v/c/v/add_to_hud/m/icon").Texture = itemNode.icon;
-            GetNode<RichTextLabel>("s/v/c/v/m/info_text").BbcodeText = itemNode.description;
+            GetNode<Label>("s/v/header").Text = pickableWorldName;
+            GetNode<TextureRect>("s/v/c/v/add_to_hud/m/icon").Texture = PickableDB.GetIcon(pickableWorldName);
+            GetNode<RichTextLabel>("s/v/c/v/m/info_text").BbcodeText = PickableDB.GetDescription(pickableWorldName);
             Show();
         }
         private protected void HideExcept(params string[] nodesToShow)
@@ -102,8 +87,13 @@ namespace Game.Ui
         }
         public void RouteConnections(string toMethod)
         {
-            // TODO: need to clear pervious signal list before connecting
-            popup.GetNode("m/yes_no/yes").Connect("pressed", this, toMethod);
+            BaseButton yesBttn = popup.GetNode<BaseButton>("m/yes_no/yes");
+            string signal = "pressed";
+            foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
+            {
+                yesBttn.Disconnect(signal, this, (string)connectionPacket["method"]);
+            }
+            yesBttn.Connect(signal, this, toMethod);
         }
         public void _OnItemInfoNodeHide()
         {
@@ -118,6 +108,7 @@ namespace Game.Ui
         public void _OnAddToHudPressed()
         {
             Globals.PlaySound("click2", this, speaker);
+            GetNode<Control>("s").Hide();
             int count = 1;
             popup.GetNode<Control>("m/add_to_slot/clear_slot").Hide();
             foreach (ItemSlot itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
@@ -133,7 +124,7 @@ namespace Game.Ui
                 colorRect.Color = new Color(1.0f, 1.0f, 0.0f, 0.75f);
                 label.Text = count.ToString();
                 label.Show();
-                if (itemSlot.GetItem() != null && itemSlot.GetItem().Equals(pickable))
+                if (!itemSlot.GetItem().Empty() && itemSlot.GetItem().Equals(pickableWorldName))
                 {
                     popup.GetNode<Control>("m/add_to_slot/clear_slot").Show();
                 }
@@ -156,7 +147,7 @@ namespace Game.Ui
                 shortcut.GetNode<Control>("m/label").Hide();
                 itemSlotTween.SetActive(true);
                 itemSlotTween.ResumeAll();
-                if (shortcut.GetItem() != null && shortcut.GetItem().Equals(pickable))
+                if (!shortcut.GetItem().Empty() && shortcut.GetItem().Equals(pickableWorldName))
                 {
                     amounttt = shortcut.GetItemStack().Count;
                     shortcut.SetItem(null, false, true, false);
@@ -170,18 +161,20 @@ namespace Game.Ui
                     }
                     Item weapon = player.weapon;
                     Item armor = player.vest;
-                    if (weapon == pickable)
+                    string weaponWorldName = (weapon == null) ? "" : player.weapon.worldName;
+                    string armorWorldName = (armor == null) ? "" : player.vest.worldName;
+                    if (weaponWorldName.Equals(pickableWorldName))
                     {
-                        shortcut.SetItem(weapon, false, false, false);
+                        shortcut.SetItem(weaponWorldName, false, false, false);
                     }
-                    else if (armor == pickable)
+                    else if (armorWorldName.Equals(pickableWorldName))
                     {
-                        shortcut.SetItem(armor, false, false, false);
+                        shortcut.SetItem(armorWorldName, false, false, false);
                     }
                     else
                     {
-                        ItemSlot itemSlot = itemList.GetItemSlot(pickable);
-                        List<Pickable> pickableStack = itemSlot.GetItemStack();
+                        ItemSlot itemSlot = itemList.GetItemSlot(pickableWorldName);
+                        List<string> pickableStack = itemSlot.GetItemStack();
                         buttonFrom = itemSlot;
                         if (amounttt == -1)
                         {
@@ -222,23 +215,23 @@ namespace Game.Ui
         {
             foreach (ItemSlot itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
             {
-                if (itemSlot.GetItem() != null && itemSlot.GetItem().Equals(pickable))
+                if (itemSlot.GetItem() != null && itemSlot.GetItem().Equals(pickableWorldName))
                 {
                     itemSlot.SetItem(null, false, true, false);
                 }
             }
-            _OnItemInfoNodeHide();
+            popup.Hide();
         }
         public void _OnInfoTextDraw()
         {
             Vector2 correctSize = GetNode<Control>("s/v/c/v/m").GetRect().Size;
             GetNode<RichTextLabel>("s/v/c/v/m/info_text").RectMinSize = correctSize;
         }
-        public void _OnBackPressed()
+        public virtual void _OnMovePressed(int by)
         {
-            Globals.PlaySound("click3", this, speaker);
-            Hide();
+            Globals.PlaySound("click2", this, speaker);
+            Display(itemList.GetItemMetaData(
+                itemList.GetItemSlot(pickableWorldName).GetIndex() + by), true);
         }
-        // TODO: need to sift
     }
 }

@@ -55,7 +55,7 @@ namespace Game.Database
                 contentNode.merchandise = new List<string>();
                 GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.drops)], contentNode.drops);
                 GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.spells)], contentNode.spells);
-                GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.merchandise)], contentNode.merchandise);   
+                GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.merchandise)], contentNode.merchandise);
                 contentData.Add(characterName, contentNode);
             }
         }

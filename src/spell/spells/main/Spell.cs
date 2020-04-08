@@ -46,20 +46,17 @@ namespace Game.Ability
             this.worldName = worldName;
             Name = worldName;
             SpellDB.SpellNode spellData = SpellDB.GetSpellData(worldName);
-            icon = (AtlasTexture)GD.Load($"res://asset/img/icon/{spellData.icon}_icon.tres");
-            level = spellData.level;
             spellRange = spellData.spellRange;
-            cooldown = spellData.coolDown;
             percentDamage = spellData.percentDamage;
             ignoreArmor = spellData.ignoreArmor;
             effectOnTarget = spellData.effectOnTarget;
             requiresTarget = spellData.requiresTarget;
             attackTable = Stats.attackTable[(spellRange > Stats.WEAPON_RANGE_MELEE) ? "RANGED" : "MELEE"];
-            goldWorth = Stats.GetSpellWorthCost(level);
-            manaCost = Stats.GetSpellManaCost(level);
-            menuDescription = $"-Mana Cost: {manaCost}\n{((spellRange == 0) ? "" : $"-Range: {spellRange}\n")}" +
-                $"-Cooldown: {cooldown} sec.\n-Level: {level}" +
-                $"\n\n-{spellData.description}";
+            manaCost = Stats.GetSpellManaCost(spellData.level);
+            // TODO: taking this out
+            // menuDescription = $"-Mana Cost: {manaCost}\n{((spellRange == 0) ? "" : $"-Range: {spellRange}\n")}" +
+            //     $"-Cooldown: {cooldown} sec.\n-Level: {spellData.level}" +
+            //     $"\n\n-{spellData.description}";
         }
         public override void GetPickable(Character character, bool addToBag)
         {

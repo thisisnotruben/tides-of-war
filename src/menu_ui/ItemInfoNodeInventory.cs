@@ -7,6 +7,9 @@ namespace Game.Ui
 {
     public class ItemInfoNodeInventory : ItemInfoNode 
     {
+        [Signal]
+        public delegate void ItemEquipped(Item item, bool on);
+
         public override void _Ready()
         {
             base._Ready();
@@ -19,45 +22,49 @@ namespace Game.Ui
             GetNode<BaseButton>("s/h/buttons/drop")
                 .Connect("pressed", this, nameof(_OnDropPressed));
         }
-        public void EquipItem(Item item, bool on)
+        public void EquipItem(bool on)
         {
-            switch (item.worldType)
+            ItemDB.ItemNode itemNode = ItemDB.GetItemData(pickableWorldName);
+            Item item = PickableFactory.GetMakeItem(pickableWorldName);
+            switch (itemNode.type)
             {
-                case WorldObject.WorldTypes.WEAPON:
+                case "WEAPON":
                     Tuple<int, int> values = item.GetValues();
                     player.weapon = (on) ? item : null;
                     player.minDamage += (on) ? values.Item1 : -values.Item1;
                     player.maxDamage += (on) ? values.Item2 : -values.Item2;
                     break;
-                case WorldObject.WorldTypes.ARMOR:
+                case "ARMOR":
                     player.vest = (on) ? item : null;
                     player.armor += (on) ? item.value : -item.value;
                     break;
             }
             if (on)
             {
-                itemList.RemoveItem(item, true, false, false);
+                itemList.RemoveItem(pickableWorldName, true, false, false);
             }
             else
             {
-                itemList.AddItem(item, false);
-                ItemSlot itemSlot = itemList.GetItemSlot(item);
+                itemList.AddItem(pickableWorldName, false);
+                ItemSlot itemSlot = itemList.GetItemSlot(pickableWorldName);
                 foreach (ItemSlot otherItemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
                 {
-                    if (otherItemSlot.GetItem() == item
+                    if (otherItemSlot.GetItem().Equals(pickableWorldName)
                     && !itemSlot.IsConnected(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut)))
                     {
                         itemSlot.Connect(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut));
                     }
                 }
             }
+            EmitSignal(nameof(ItemEquipped), item, on);
         }
         public void _OnUsePressed()
         {
+            string itemType = ItemDB.GetItemData(pickableWorldName).type;
             string sndName = "click2";
-            switch (pickable.worldType)
+            switch (itemType)
             {
-                case WorldObject.WorldTypes.FOOD:
+                case "FOOD":
                     sndName = "eat";
                     if (player.state == Character.States.ATTACKING)
                     {
@@ -68,33 +75,34 @@ namespace Game.Ui
                         return;
                     }
                     break;
-                case WorldObject.WorldTypes.POTION:
+                case "POTION":
                     sndName = "drink";
                     break;
             }
             Globals.PlaySound(sndName, this, speaker);
-            Item item = pickable as Item;
-            if (pickable.worldType == WorldObject.WorldTypes.POTION)
-            {
-                itemList.SetSlotCoolDown(item, item.duration, 0.0f);
-            }
-            itemList.RemoveItem(item, true, false, false);
-            item.Consume(player, 0.0f);
+            // TODO: going to need to get slot from inventory/spell bag
+            // if (itemType.Equals("POTION"))
+            // {
+            //     itemList.SetSlotCoolDown(item.worldName, item.duration, 0.0f);
+            // }
+            // itemList.RemoveItem(pickableWorldName, true, false, false);
+            // item.Consume(player, 0.0f);
             Hide();
         }
         public void _OnEquipPressed()
         {
+            string itemType = ItemDB.GetItemData(pickableWorldName).type;
             if (!itemList.IsFull())
             {
-                switch (pickable.worldType)
+                switch (itemType)
                 {
-                    case WorldObject.WorldTypes.WEAPON:
+                    case "WEAPON":
                         if (player.weapon != null)
                         {
                             player.weapon.Unequip();
                         }
                         break;
-                    case WorldObject.WorldTypes.ARMOR:
+                    case "ARMOR":
                         if (player.vest != null)
                         {
                             player.vest.Unequip();
@@ -102,8 +110,8 @@ namespace Game.Ui
                         break;
                 }
             }
-            else if ((pickable.worldType == WorldObject.WorldTypes.WEAPON & player.weapon != null)
-            || (pickable.worldType == WorldObject.WorldTypes.ARMOR & player.vest != null))
+            else if ((itemType.Equals("WEAPON") & player.weapon != null)
+            || (itemType.Equals("ARMOR") & player.vest != null))
             {
                 GetNode<Control>("s").Hide();
                 popup.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
@@ -112,11 +120,11 @@ namespace Game.Ui
             }
             else
             {
-                ItemSlot itemSlot = itemList.GetItemSlot(pickable);
+                ItemSlot itemSlot = itemList.GetItemSlot(pickableWorldName);
                 itemSlot.SetBlockSignals(true);
-                EquipItem(pickable as Item, true);
+                EquipItem(true);
                 itemSlot.SetBlockSignals(false);
-                Globals.PlaySound(ItemDB.GetItemData(pickable.worldName).material + "_off", this, speaker);
+                Globals.PlaySound(ItemDB.GetItemData(pickableWorldName).material + "_off", this, speaker);
                 Hide();    
             }
         }
@@ -132,7 +140,7 @@ namespace Game.Ui
             else
             {
                 Globals.PlaySound("inventory_unequip", this, speaker);
-                EquipItem(pickable as Item, false);
+                EquipItem(false);
             }
         }
         public void _OnDropPressed()
@@ -147,13 +155,12 @@ namespace Game.Ui
         public void _OnDropConfirm()
         {
             Globals.PlaySound("click2", this, speaker);
-            pickable.Drop();
-            itemList.RemoveItem(pickable);
+            itemList.RemoveItem(pickableWorldName);
             // TODO: hmmm...
-            player.GetNode("inventory").RemoveChild(pickable);
-            Globals.map.AddZChild(pickable);
-            pickable.Owner = Globals.map;
-            pickable.GlobalPosition = Globals.map.SetGetPickableLoc(player.GlobalPosition, true);
+            // player.GetNode("inventory").RemoveChild(pickable);
+            // Globals.map.AddZChild(pickable);
+            // pickable.Owner = Globals.map;
+            // pickable.GlobalPosition = Globals.map.SetGetPickableLoc(player.GlobalPosition, true);
             // end
             GetNode<Control>("s").Show();
         }
