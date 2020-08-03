@@ -68,6 +68,7 @@ namespace Game.Ui
             }
             else
             {
+                itemList.RemoveItem(pickableWorldName);
                 if (SpellDB.HasSpell(pickableWorldName))
                 {
                     spellBookItemList.RemoveItem(pickableWorldName);
@@ -83,6 +84,7 @@ namespace Game.Ui
         public void DisplayItems(string header, params string[] pickableWorldNames)
         {
             GetNode<Label>("s/v/header").Text = header;
+            itemInfoNodeMerchant.isBuying = !header.Equals("Inventory");
             Pickable pickable;
             foreach (string worldName in pickableWorldNames)
             {
@@ -99,17 +101,17 @@ namespace Game.Ui
         }
         public void _OnMerchantNodeDraw()
         {
-            string sndName = "merchant_open";
-            if (npcPickables.Count > 0 &&  SpellDB.HasSpell(npcPickables[0]))
-            {
-                sndName = "turn_page";
-            }
-            Globals.PlaySound(sndName, this, speaker);
+            Globals.PlaySound(
+                (npcPickables.Count > 0 &&  SpellDB.HasSpell(npcPickables[0]))
+                ? "turn_page" : "merchant_open", this, speaker);
             GetNode<Label>("s/v/sub_header").Text = "Gold: " + player.gold;
         }
         public void _OnMerchantNodeHide()
         {
-            Globals.PlaySound("merchant_close", this, speaker);
+            if (!Visible)
+            {
+                Globals.PlaySound("merchant_close", this, speaker);    
+            }
             popup.Hide();
             GetNode<Control>("s").Show();
         }
@@ -117,38 +119,35 @@ namespace Game.Ui
         {
             string pickableWorldName = itemList.GetItemMetaData(itemIndex);
             bool isSpell = SpellDB.HasSpell(pickableWorldName);
-            bool trained = false;
+            bool alreadyHave = false;
             Globals.PlaySound((isSpell) ? "spell_select"
                 : Database.ItemDB.GetItemData(
                 pickableWorldName).material + "_on", this, speaker);
             if (isSpell)
             {
                 Globals.PlaySound("click1", this, speaker);
-                List<string> spells = spellBookItemList.GetItems(false);
-                for (int i = 0; i < spells.Count && !trained; i++)
-                {
-                    trained = pickableWorldName.Equals(spells[i]);
-                }
+                alreadyHave = spellBookItemList.HasItem(pickableWorldName, false);
             }
             GetNode<Control>("s").Hide();
             itemInfoNodeMerchant.Display(pickableWorldName, true,
-                !GetNode<Label>("s/v/header").Text.Equals("Inventory"), trained);
+                !GetNode<Label>("s/v/header").Text.Equals("Inventory"), alreadyHave);
         }
         public void _OnMerchantPressed()
         {
+            
             Globals.PlaySound("click1", this, speaker);
-            itemList.Clear();
             GetNode<Control>("s/buttons/inventory").Show();
             GetNode<Control>("s/buttons/merchant").Hide();
+            itemList.Clear();
             DisplayItems(merchant.worldName,
                 ContentDB.GetContentData(merchant.Name).merchandise.ToArray());
         }
         public void _OnInventoryPressed()
         {
             Globals.PlaySound("click1", this, speaker);
-            itemList.Clear();
             GetNode<Control>("s/buttons/inventory").Hide();
             GetNode<Control>("s/buttons/merchant").Show();
+            itemList.Clear();
             DisplayItems("Inventory", inventoryItemList.GetItems(false).ToArray());
         }
         public void _OnRepairPressed()

@@ -12,6 +12,7 @@ namespace Game.Database
             public bool enemy;
             public Vector2 spawnPos;
             public List<Vector2> path;
+            public int level;
         }
 
         private static Dictionary<string, UnitNode> unitData = new Dictionary<string, UnitNode>();
@@ -43,6 +44,8 @@ namespace Game.Database
                 {
                     unitNode.path.Add(new Vector2((float)((Single) vectorNode[0]), (float) ((Single) vectorNode[1])));
                 }
+                // TODO
+                unitNode.level = 1;
                 unitData.Add(itemName, unitNode);
             }
         }

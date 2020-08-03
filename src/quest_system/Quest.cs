@@ -35,16 +35,16 @@ namespace Game.Quests
                 switch (state)
                 {
                     case WorldQuests.QuestState.AVAILABLE:
-                        npc.SetText(questStart);
+                        // npc.SetText(questStart);
                         break;
                     case WorldQuests.QuestState.ACTIVE:
-                        npc.SetText(questActive);
+                        // npc.SetText(questActive);
                         break;
                     case WorldQuests.QuestState.COMPLETED:
-                        npc.SetText(questCompleted);
+                        // npc.SetText(questCompleted);
                         break;
                     case WorldQuests.QuestState.DELIVERED:
-                        npc.SetText(questDelivered);
+                        // npc.SetText(questDelivered);
                         break;
                 }
             }

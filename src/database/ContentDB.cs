@@ -60,9 +60,9 @@ namespace Game.Database
             }
         }
 
-        public static ContentNode GetContentData(string worldName)
+        public static ContentNode GetContentData(string editorName)
         {
-            return contentData[worldName];
+            return contentData[editorName];
         }
 
         public static bool HasContent(string nameCheck)

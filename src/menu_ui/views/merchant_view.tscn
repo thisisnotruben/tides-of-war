@@ -67,9 +67,9 @@ alignment = 2
 
 [node name="merchant" type="TextureButton" parent="s/buttons"]
 visible = false
-margin_top = 165.0
-margin_right = 656.0
-margin_bottom = 265.0
+margin_top = 125.0
+margin_right = 720.0
+margin_bottom = 225.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 4 )
@@ -86,10 +86,9 @@ align = 1
 valign = 1
 
 [node name="inventory" type="TextureButton" parent="s/buttons"]
-visible = false
-margin_top = 165.0
-margin_right = 656.0
-margin_bottom = 265.0
+margin_top = 229.0
+margin_right = 720.0
+margin_bottom = 329.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 4 )
@@ -104,12 +103,15 @@ custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
 text = "Sell"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="repair" type="TextureButton" parent="s/buttons"]
 visible = false
-margin_top = 152.0
-margin_right = 656.0
-margin_bottom = 252.0
+margin_top = 229.0
+margin_right = 720.0
+margin_bottom = 329.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 4 )

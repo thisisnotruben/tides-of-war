@@ -26,41 +26,27 @@ namespace Game.Ability
                 new Vector2(0.0f, 666.0f) :
                 new Vector2(0.0f, 180.0f));
         }
-        public override void _OnSightAreaEntered(Area2D area2D)
+        public void _OnSightAreaEntered(Area2D area2D)
         {
-            if (GetNode<Node2D>("img").Visible)
+            Character character = area2D.Owner as Character;
+            if (character != null && !character.dead && !targets.Contains(character))
             {
-                base._OnSightAreaEntered(area2D);
-            }
-            else
-            {
-                Character character = area2D.Owner as Character;
-                if (character != null && !character.dead && !targets.Contains(character))
+                targets.Add(character);
+                if (Visible)
                 {
-                    targets.Add(character);
-                    if (Visible)
-                    {
-                        character.Modulate = new Color("#00ff00");
-                        character.ZIndex = 1;
-                    }
+                    character.Modulate = new Color("#00ff00");
+                    character.ZIndex = 1;
                 }
             }
         }
-        public override void _OnSightAreaExited(Area2D area2D)
+        public void _OnSightAreaExited(Area2D area2D)
         {
-            if (GetNode<Node2D>("img").Visible)
+            Character character = area2D.Owner as Character;
+            if (character != null && targets.Contains(character))
             {
-                base._OnSightAreaExited(area2D);
-            }
-            else
-            {
-                Character character = area2D.Owner as Character;
-                if (character != null && targets.Contains(character))
-                {
-                    character.Modulate = new Color("#ffffff");
-                    character.ZIndex = 0;
-                    targets.Remove(character);
-                }
+                character.Modulate = new Color("#ffffff");
+                character.ZIndex = 0;
+                targets.Remove(character);
             }
         }
         public override void ConfigureSpell()

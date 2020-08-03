@@ -134,7 +134,7 @@ namespace Game.Ui
                 Pickable pickable = node as Pickable;
                 if (pickable != null)
                 {
-                    pickable.SetUpShop(false);
+                    // pickable.SetUpShop(false);
                 }
             }
         }
@@ -347,7 +347,7 @@ namespace Game.Ui
             Pickable selectedPickable = (Pickable)selected;
             selectedIdx = idx;
             ItemInfoHideExcept((spellBook.IsSlotCoolingDown(idx) || player.dead) ? "" : "cast");
-            selectedPickable.Describe();
+            // selectedPickable.Describe();
             if (selectedPickable.GetIndex() == 0)
             {
                 itemInfo.GetNode<TextureButton>("s/h/left").Disabled = true;
@@ -457,13 +457,13 @@ namespace Game.Ui
                     case WorldObject.WorldTypes.WEAPON:
                         if (player.weapon != null)
                         {
-                            player.weapon.Unequip();
+                            // player.weapon.Unequip();
                         }
                         break;
                     case WorldObject.WorldTypes.ARMOR:
                         if (player.vest != null)
                         {
-                            player.vest.Unequip();
+                            // player.vest.Unequip();
                         }
                         break;
                 }
@@ -1171,7 +1171,7 @@ namespace Game.Ui
                 itemInfo.GetNode<Control>("s/h/left").Hide();
                 itemInfo.GetNode<Control>("s/h/right").Hide();
                 Globals.PlaySound(SndConfigure(false, true), this, snd);
-                pickable.Describe();
+                // pickable.Describe();
                 if (statsMenu.Visible)
                 {
                     statsMenu.Hide();

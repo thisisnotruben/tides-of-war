@@ -19,6 +19,9 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="overlay" type="ColorRect" parent="."]
 show_behind_parent = true
@@ -240,6 +243,13 @@ margin_right = 688.0
 margin_bottom = 1248.0
 
 [node name="spell_book" parent="background/margin" instance=ExtResource( 11 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 688.0
+margin_bottom = 1248.0
 
 [node name="dialogue" parent="background/margin" instance=ExtResource( 13 )]
 visible = false

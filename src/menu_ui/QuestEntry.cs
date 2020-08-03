@@ -25,7 +25,7 @@ namespace Game.Ui
         }
         public void _OnQuestSlotPressed()
         {
-            Globals.player.GetMenu().ShowQuestText(quest);
+            // Globals.player.GetMenu().ShowQuestText(quest);
         }
     }
 }

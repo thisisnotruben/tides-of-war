@@ -1,4 +1,23 @@
 {
+    "7-Footman": {
+        "level": 4,
+        "enemy": false,
+        "healer": false,
+        "healerCost": 0,
+        "dialogue": "Eyy, wassup boy",
+        "drops": [],
+        "spells": [],
+        "merchandise": [
+            "Frenzy",
+            "Fireball",
+            "Fortify",
+            "Hemorrhage",
+            "Volley",
+            "Slow",
+            "Precise shot",
+            "Haste"
+        ]
+    },
     "2-Stanmore": {
         "level": 6,
         "enemy": false,

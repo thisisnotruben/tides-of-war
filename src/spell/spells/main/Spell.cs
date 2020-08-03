@@ -53,10 +53,6 @@ namespace Game.Ability
             requiresTarget = spellData.requiresTarget;
             attackTable = Stats.attackTable[(spellRange > Stats.WEAPON_RANGE_MELEE) ? "RANGED" : "MELEE"];
             manaCost = Stats.GetSpellManaCost(spellData.level);
-            // TODO: taking this out
-            // menuDescription = $"-Mana Cost: {manaCost}\n{((spellRange == 0) ? "" : $"-Range: {spellRange}\n")}" +
-            //     $"-Cooldown: {cooldown} sec.\n-Level: {spellData.level}" +
-            //     $"\n\n-{spellData.description}";
         }
         public override void GetPickable(Character character, bool addToBag)
         {
@@ -174,8 +170,6 @@ namespace Game.Ability
         private protected void PrepSight()
         {
             Node sight = GetNode("sight");
-            sight.Disconnect("area_entered", this, nameof(_OnSightAreaEntered));
-            sight.Disconnect("area_exited", this, nameof(_OnSightAreaExited));
             sight.SetBlockSignals(false);
             sight.GetNode<CollisionShape2D>("distance").Disabled = false;
         }

@@ -19,12 +19,15 @@ namespace Game.Ui
         public void Display(Npc npc)
         {
             this.npc = npc;
+            merchantNode.merchant = npc;
+            bool notFullHealth = player.hp < player.hpMax;
             ContentDB.ContentNode contentNode = ContentDB.GetContentData(npc.Name);
             GetNode<Label>("s/control/header").Text = npc.worldName;
-            GetNode<Label>("s/control/sub_header").Visible = contentNode.healer;
-            GetNode<Label>("s/control/sub_header").Text = "Healer cost: " + contentNode.healerCost;
+            Label subHeader = GetNode<Label>("s/control/sub_header");
+            subHeader.Visible = contentNode.healer && notFullHealth;
+            subHeader.Text = "Healer cost: " + contentNode.healerCost;
             GetNode<RichTextLabel>("s/s/text").BbcodeText = contentNode.dialogue;
-            GetNode<Control>("s/s/v/heal").Visible = contentNode.healer;
+            GetNode<Control>("s/s/v/heal").Visible = contentNode.healer && notFullHealth;
             GetNode<Control>("s/s/v/buy").Visible = contentNode.merchandise.Count > 0;
         }
         public void InitMerchantView(ItemList inventoryItemList, ItemList spellBookItemList)
@@ -44,7 +47,23 @@ namespace Game.Ui
         }
         public void _OnHealPressed()
         {
-
+            int healerCost = ContentDB.GetContentData(npc.Name).healerCost;
+            if (healerCost > player.gold)
+            {   
+                GetNode<Control>("s").Hide();
+                popup.GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
+                popup.GetNode<Control>("m/error").Show();
+                popup.Show();
+            }
+            else
+            {
+                Globals.PlaySound("sell_buy", this, speaker);
+                player.gold -= healerCost;
+                player.hp = player.hpMax;
+                bool notFullHealth = player.hp < player.hpMax;
+                GetNode<Label>("s/control/sub_header").Visible = notFullHealth;
+                GetNode<Control>("s/s/v/heal").Visible = notFullHealth;
+            }
         }
         public void _OnBuyPressed()
         {

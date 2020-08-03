@@ -154,8 +154,9 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 editor_draw_drag_margin = true
 
-[node name="area" parent="." index="10"]
+[node name="area" parent="." index="8"]
+collision_layer = 18
 collision_mask = 2
 
-[node name="in_game_menu" parent="." index="12" instance=ExtResource( 3 )]
+[node name="in_game_menu" parent="." index="11" instance=ExtResource( 3 )]
 [connection signal="animation_finished" from="anim" to="." method="_OnAnimFinished"]

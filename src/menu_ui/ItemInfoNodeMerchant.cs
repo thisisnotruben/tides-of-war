@@ -5,6 +5,7 @@ namespace Game.Ui
     public class ItemInfoNodeMerchant : ItemInfoNode
     {
         public ItemList spellBookItemList;
+        public bool isBuying;
 
         [Signal]
         public delegate void OnTransaction(string pickableWorldName, int goldAmount, bool bought);
@@ -20,14 +21,16 @@ namespace Game.Ui
             addToHudBttn.Disconnect("button_down", this, nameof(_OnSlotMoved));
             addToHudBttn.Disconnect("button_up", this, nameof(_OnSlotMoved));
             addToHudBttn.Disconnect("pressed", this, nameof(_OnAddToHudPressed));
+            isBuying = false;
         }
         public override void _OnMovePressed(int by)
         {
             Globals.PlaySound("click2", this, speaker);
-            bool alreadyHave = SpellDB.HasSpell(pickableWorldName)  
-                && spellBookItemList.HasItem(pickableWorldName, false);
-            Display(itemList.GetItemMetaData(
-                itemList.GetItemSlot(pickableWorldName).GetIndex() + by), true, true, alreadyHave);
+            string nextPickableWorldName = itemList.GetItemMetaData(
+                itemList.GetItemSlot(pickableWorldName).GetIndex() + by);
+            bool alreadyHave = SpellDB.HasSpell(nextPickableWorldName)  
+                && spellBookItemList.HasItem(nextPickableWorldName, false);
+            Display(nextPickableWorldName, true, isBuying, alreadyHave);
         }
         public void Display(string pickableWorldName, bool allowMove, bool buy, bool alreadyHave)
         {
@@ -70,10 +73,11 @@ namespace Game.Ui
             if (popup.GetNode<Label>("m/yes_no/label").Text.Equals("Learn?"))
             {
                 Globals.PlaySound("learn_spell", this, speaker);
+                GetNode<Control>("s/h/buttons/buy").Hide();
             }
             EmitSignal(nameof(OnTransaction),
                 pickableWorldName, -PickableDB.GetGoldCost(pickableWorldName), true);
-            Hide();
+            popup.Hide();
         }
         public void _OnSellPressed()
         {

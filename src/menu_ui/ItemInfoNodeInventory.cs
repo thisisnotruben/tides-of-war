@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using Game.Loot;
 using Game.Database;
 using Game.Actor;
@@ -29,14 +28,10 @@ namespace Game.Ui
             switch (itemNode.type)
             {
                 case "WEAPON":
-                    Tuple<int, int> values = item.GetValues();
                     player.weapon = (on) ? item : null;
-                    player.minDamage += (on) ? values.Item1 : -values.Item1;
-                    player.maxDamage += (on) ? values.Item2 : -values.Item2;
                     break;
                 case "ARMOR":
                     player.vest = (on) ? item : null;
-                    player.armor += (on) ? item.value : -item.value;
                     break;
             }
             if (on)
@@ -45,7 +40,7 @@ namespace Game.Ui
             }
             else
             {
-                itemList.AddItem(pickableWorldName, false);
+                itemList.AddItem(pickableWorldName, true);
                 ItemSlot itemSlot = itemList.GetItemSlot(pickableWorldName);
                 foreach (ItemSlot otherItemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
                 {
@@ -92,26 +87,34 @@ namespace Game.Ui
         public void _OnEquipPressed()
         {
             string itemType = ItemDB.GetItemData(pickableWorldName).type;
+            string currentPickableWorldName = pickableWorldName;
+            Item playerWeapon = player.weapon;
+            Item playerArmor = player.vest;
             if (!itemList.IsFull())
             {
                 switch (itemType)
                 {
                     case "WEAPON":
-                        if (player.weapon != null)
+                    
+                        if (playerWeapon != null)
                         {
-                            player.weapon.Unequip();
+                            pickableWorldName = playerWeapon.worldName;
+                            EquipItem(false);
+                            pickableWorldName = currentPickableWorldName;
                         }
                         break;
                     case "ARMOR":
-                        if (player.vest != null)
+                        if (playerArmor != null)
                         {
-                            player.vest.Unequip();
+                            pickableWorldName = playerArmor.worldName;
+                            EquipItem(false);
+                            pickableWorldName = currentPickableWorldName;
                         }
                         break;
                 }
             }
-            else if ((itemType.Equals("WEAPON") & player.weapon != null)
-            || (itemType.Equals("ARMOR") & player.vest != null))
+            else if ((itemType.Equals("WEAPON") & playerWeapon != null)
+            || (itemType.Equals("ARMOR") & playerArmor != null))
             {
                 GetNode<Control>("s").Hide();
                 popup.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
@@ -154,15 +157,19 @@ namespace Game.Ui
         }
         public void _OnDropConfirm()
         {
-            Globals.PlaySound("click2", this, speaker);
+            foreach (string sndName in new string[] {"click2", "inventory_drop"})
+            {
+                Globals.PlaySound(sndName, this, speaker);
+            }
             itemList.RemoveItem(pickableWorldName);
-            // TODO: hmmm...
-            // player.GetNode("inventory").RemoveChild(pickable);
-            // Globals.map.AddZChild(pickable);
-            // pickable.Owner = Globals.map;
-            // pickable.GlobalPosition = Globals.map.SetGetPickableLoc(player.GlobalPosition, true);
-            // end
-            GetNode<Control>("s").Show();
+            PackedScene lootScene = (PackedScene)GD.Load("res://src/loot/loot_chest.tscn");
+            LootChest loot = (LootChest)lootScene.Instance();
+            loot.pickableWorldName = pickableWorldName;
+            Map.Map map = Globals.map;
+            map.AddZChild(loot);
+            loot.Owner = map;
+            loot.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
+            Hide();
         }
     }
 }

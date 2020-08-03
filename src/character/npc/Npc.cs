@@ -1,25 +1,12 @@
 using System.Collections.Generic;
-using Game.Ability;
 using Game.Database;
-using Game.Loot;
 using Game.Actor.Doodads;
-using Game.Ui;
-using Game.Utils;
 using Godot;
 namespace Game.Actor
 {
     public class Npc : Character
     {
         private Dictionary<string, List<Vector2>> cachedPatrolPath;
-        public List<string> drops;
-        public List<string> spells;
-        public List<string> merchandise;
-        private string dialogue;
-        public bool healer;
-        public int healerCost;
-        
-        [Signal]
-        public delegate void DropLoot(Npc npc, Vector2 worldPosition, int idk);
 
         public override void init()
         {
@@ -27,17 +14,10 @@ namespace Game.Actor
             cachedPatrolPath.Add("cachedPath", new List<Vector2>());
             cachedPatrolPath.Add("pathPoints", new List<Vector2>());
             cachedPatrolPath.Add("patrolPath", new List<Vector2>());
-            healer = false;
-            healerCost = 0;
-            dialogue = "";
-            drops = new List<string>();
-            spells = new List<string>();
-            merchandise = new List<string>();
             UnitDB.UnitNode unitNode = UnitDB.GetUnitData(Name);
             worldName = unitNode.name;
             SetImg(unitNode.img);
             enemy = unitNode.enemy;
-            origin = unitNode.spawnPos;
             if (unitNode.path.Count > 0)
             {
                 cachedPatrolPath["cachedPath"] = unitNode.path;    
@@ -46,15 +26,7 @@ namespace Game.Actor
             }
             if (ContentDB.HasContent(Name))
             {
-                ContentDB.ContentNode contentNode = ContentDB.GetContentData(Name);
-                level = contentNode.level;
-                enemy = contentNode.enemy;
-                healer = contentNode.healer;
-                healerCost = contentNode.healerCost;
-                dialogue = contentNode.dialogue;
-                drops = contentNode.drops;
-                spells = contentNode.spells;
-                merchandise = contentNode.merchandise;
+                enemy = ContentDB.GetContentData(Name).enemy;
             }
             SetAttributes();
             hp = hpMax;
@@ -76,7 +48,8 @@ namespace Game.Actor
         {
             if (engaging && target != null)
             {
-                if (origin.DistanceTo(target.GetCenterPos()) > Stats.FLEE_DISTANCE || target.dead)
+                Vector2 spawnPos = UnitDB.GetUnitData(Name).spawnPos;
+                if (spawnPos.DistanceTo(target.GetCenterPos()) > Stats.FLEE_DISTANCE || target.dead)
                 {
                     SetState(States.RETURNING);
                     if (cachedPatrolPath["cachedPath"].Count > 0)
@@ -87,9 +60,9 @@ namespace Game.Actor
                         // return;
                         // }
                     }
-                    else if (GlobalPosition != origin)
+                    else if (GlobalPosition != spawnPos)
                     {
-                        MoveTo(origin, path);
+                        MoveTo(spawnPos, path);
                         return;
                     }
                     SetState(States.IDLE);
@@ -153,30 +126,7 @@ namespace Game.Actor
         }
         public override void _OnSelectPressed()
         {
-            Player player = Globals.player;
-            player.GetNode<MenuHandler>("in_game_menu")._OnNpcInteract(this);
-            // if (player.target == this)
-            // {
-            //     player.target = null;
-            // }
-            // else if (!player.dead)
-            // {
-            //     player.target = this;
-            //     Sprite img = GetNode<Sprite>("img");
-            //     Tween tween = GetNode<Tween>("tween");
-            //     tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
-            //         0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
-            //     tween.Start();
-            //     if (!enemy && !engaging && GetNode<Area2D>("sight").OverlapsArea(Globals.player.GetNode<Area2D>("area")))
-            //     {
-
-            //         player.GetNode<MenuHandler>("in_game_menu")._OnNpcInteract(this);
-            //     }
-            //     else
-            //     {
-            //         Globals.PlaySound("click4", this, new Speaker());
-            //     }
-            // }
+            Globals.player.GetMenu().NpcInteract(this);
         }
         private void FollowPatrolPath()
         {
@@ -249,7 +199,7 @@ namespace Game.Actor
                     {
                         if (targetList[character] == mostDamage && character is Player)
                         {
-                            int xp = Stats.GetXpFromUnitDeath((double)level,
+                            int xp = Stats.GetXpFromUnitDeath((double)UnitDB.GetUnitData(Name).level,
                                 Stats.GetMultiplier(true, GetNode<Sprite>("img").Texture.ResourcePath), (double)character.level);
                             if (xp > 0)
                             {
@@ -271,7 +221,6 @@ namespace Game.Actor
             GetNode<CollisionShape2D>("sight/distance").Disabled = true;
             if (dead)
             {
-                EmitSignal(nameof(DropLoot), this, GlobalPosition, 0);
                 Hide();
                 SetProcess(false);
                 GD.Randomize();
@@ -280,7 +229,7 @@ namespace Game.Actor
                 {
                     AddToGroup(Globals.SAVE_GROUP);
                 }
-                GlobalPosition = origin;
+                GlobalPosition = UnitDB.GetUnitData(Name).spawnPos;
             }
             else
             {
@@ -346,36 +295,6 @@ namespace Game.Actor
                         break;
                 }
                 base.SetState(state);
-            }
-        }
-        public void SetText(string text)
-        {
-            // TODO: possible bug here with "{0}"
-            // probably get around this with Regex
-            if (text.Contains("{0}") && worldType == WorldTypes.HEALER)
-            {
-                this.dialogue = string.Format(text, Stats.HealerCost(Globals.player.level));
-            }
-            else
-            {
-                this.dialogue = text;
-            }
-        }
-        public void SetUpShop(InGameMenu inGameMenu, bool setUp)
-        {
-            Node bag = (worldType == WorldTypes.TRAINER) ? GetNode("spells") : GetNode("inventory");
-            foreach (Pickable pickable in bag.GetChildren())
-            {
-                if (setUp)
-                {
-                    pickable.Connect(nameof(Pickable.SetInMenu), inGameMenu, nameof(InGameMenu._OnSetPickableInMenu));
-                    pickable.Connect(nameof(Pickable.DescribePickable), inGameMenu, nameof(InGameMenu._OnDescribePickable));
-                }
-                else
-                {
-                    pickable.Disconnect(nameof(Pickable.SetInMenu), inGameMenu, nameof(InGameMenu._OnSetPickableInMenu));
-                    pickable.Disconnect(nameof(Pickable.DescribePickable), inGameMenu, nameof(InGameMenu._OnDescribePickable));
-                }
             }
         }
     }

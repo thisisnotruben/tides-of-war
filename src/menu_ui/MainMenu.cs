@@ -1,5 +1,6 @@
 using Godot;
 using Game.Actor;
+using Game.Loot;
 using Game.Database;
 namespace Game.Ui
 {
@@ -14,11 +15,14 @@ namespace Game.Ui
         private SpellBookNode spellBook;
         private DialogueNode dialogue;
         private Popup popup;
+        private ItemList inventoryItemList;
+        private ItemList spellItemList;
 
         public override void _Ready()
         {
             main = GetNode<Control>("background/margin/main");
             inventory = GetNode<InventoryNode>("background/margin/inventory");
+            inventoryItemList =  inventory.GetNode<ItemList>("s/v/c/inventory");
             statsMenu = GetNode<StatsNode>("background/margin/stats");
             questLog = GetNode<QuestLogNode>("background/margin/quest_log");
             about = GetNode<AboutNode>("background/margin/about");
@@ -30,11 +34,11 @@ namespace Game.Ui
             popup.GetNode<BaseButton>("m/exit/exit_menu")
                 .Connect("pressed", this, nameof(_OnExitMenuPressed));
             spellBook = GetNode<SpellBookNode>("background/margin/spell_book");
+            spellBook.Connect("hide", this, nameof(_OnMainMenuHide));
+            spellItemList = spellBook.itemList;
             dialogue = GetNode<DialogueNode>("background/margin/dialogue");
             dialogue.Connect("hide", this, nameof(_OnMainMenuHide));
-            dialogue.InitMerchantView(
-                inventory.GetNode<ItemList>("s/v/c/inventory"),
-                spellBook.GetNode<ItemList>("s/v/c/spell_list"));
+            dialogue.InitMerchantView(inventoryItemList, spellItemList);
             foreach (Control node in new Control[] {inventory, statsMenu, questLog, about, saveLoad, popup})
             {
                 node.Connect("hide", this, nameof(_OnWindowClosed));
@@ -61,6 +65,12 @@ namespace Game.Ui
             main.Show();
             popup.Hide();
         }
+        public void ShowSpellBook()
+        {
+            main.Hide();
+            spellBook.Show();
+            Show();
+        }
         public void ShowBackground(bool show)
         {
             Color transparent = new Color("00ffffff");
@@ -68,15 +78,44 @@ namespace Game.Ui
                 (show) ? new Color("ffffff") : transparent;
             GetNode<ColorRect>("overlay").Color = (show) ? new Color("6e6e6e") : transparent;
         }
-        public void _OnNpcInteract(Npc npc)
+        public void NpcInteract(Npc npc)
         {
-            if (ContentDB.HasContent(npc.Name))
+            main.Hide();
+            dialogue.Show();
+            dialogue.Display(npc);
+            Show();
+        }
+        public void LootInteract(LootChest lootChest)
+        {
+            if (SpellDB.HasSpell(lootChest.pickableWorldName))
             {
-                main.Hide();
-                dialogue.Show();
-                dialogue.Display(npc);
-                Show();
+                if (spellItemList.IsFull())
+                {
+                    popup.GetNode<Label>("m/error/label").Text = "Spell Book\nFull!";
+                    popup.GetNode<Control>("m/error").Show();
+                    popup.Show();
+                }
+                else
+                {
+                    spellItemList.AddItem(lootChest.pickableWorldName, false);
+                    lootChest.Collect();
+                }
             }
+            else
+            {
+                if (inventoryItemList.IsFull())
+                {
+                    popup.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
+                    popup.GetNode<Control>("m/error").Show();
+                    popup.Show();
+                }
+                else
+                {
+                    inventoryItemList.AddItem(lootChest.pickableWorldName, true);
+                    lootChest.Collect();
+                }
+            }
+
         }
         public void _OnResumePressed()
         {

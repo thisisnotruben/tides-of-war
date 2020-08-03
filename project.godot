@@ -116,6 +116,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_2="Characters"
 2d_physics/layer_3="Dead Characters"
 2d_physics/layer_4="Combustible"
+2d_physics/layer_5="Player"
 
 [node]
 

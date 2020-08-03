@@ -7,11 +7,17 @@ namespace Game.Ui
 
         public void _OnPopupDraw()
         {
-            mainMenu.ShowBackground(false);
+            if (mainMenu != null)
+            {
+                mainMenu.ShowBackground(false);    
+            }
         }
         public void _OnPopupHide()
         {
-            mainMenu.ShowBackground(true);
+            if (mainMenu != null)
+            {
+                mainMenu.ShowBackground(true);
+            }
             foreach (Control control in GetNode("m").GetChildren())
             {
                 control.Hide();

@@ -75,6 +75,7 @@
     <Compile Include="src\globals\SceneLoader.cs" />
     <Compile Include="src\globals\Stats.cs" />
     <Compile Include="src\globals\WorldObject.cs" />
+    <Compile Include="src\loot\LootChest.cs" />
     <Compile Include="src\map\doodads\DayTime.cs" />
     <Compile Include="src\map\Map.cs" />
     <Compile Include="src\menu_ui\AboutNode.cs" />
@@ -106,7 +107,7 @@
     <Compile Include="src\loot\Item.cs" />
     <Compile Include="src\loot\Pickable.cs" />
     <Compile Include="src\menu_ui\StatsNode.cs" />
-    <Compile Include="src\menu_ui\views\HudStatus.cs" />
+    <Compile Include="src\menu_ui\HudStatus.cs" />
     <Compile Include="src\missile\ICombustible.cs" />
     <Compile Include="src\missile\LandMine.cs" />
     <Compile Include="src\missile\Missile.cs" />

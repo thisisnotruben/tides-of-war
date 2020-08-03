@@ -117,8 +117,6 @@ namespace Game.Actor
         private string weaponMaterial;
         private string weaponSnd;
         private string swingType;
-        public Item weapon = null;
-        public Item vest = null;
         public Spell spell { get; private protected set; }
         public virtual Character target { get; set; }
         private protected Speaker2D snd;
@@ -173,8 +171,6 @@ namespace Game.Actor
             weaponMaterial = "";
             weaponSnd = "";
             swingType = "";
-            weapon = null;
-            vest = null;
             spell = null;
             target = null;
         }

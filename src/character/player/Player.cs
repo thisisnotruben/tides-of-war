@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System;
 using Game.Actor.Doodads;
 using Game.Ui;
 using Game.Utils;
+using Game.Loot;
 using Godot;
 namespace Game.Actor
 {
@@ -13,6 +15,50 @@ namespace Game.Actor
         public Vector2 gravePos { get; private set; }
         public int xp { get; private set; }
         public int gold;
+        private Item _weapon;
+        public Item weapon
+        {
+            set
+            {
+                if (value == null && weapon != null)
+                {
+                    Tuple<int, int> values = weapon.GetValues();
+                    minDamage -= values.Item1;
+                    maxDamage -= values.Item2;
+                } 
+                if (value != null)
+                {
+                    Tuple<int, int> values = value.GetValues();
+                    minDamage += values.Item1;
+                    maxDamage += values.Item2;
+                }
+                _weapon = value;
+            }
+            get
+            {
+                return _weapon;
+            }
+        }
+        private Item _vest;
+        public Item vest
+        {
+            set
+            {
+                if (value == null && vest != null)
+                {
+                    armor -= vest.value;
+                } 
+                if (value != null)
+                {
+                    armor += vest.value;
+                }
+                _vest = value;
+            }
+            get
+            {
+                return _vest;
+            }
+        }
 
         [Signal]
         public delegate void PosChanged();
@@ -29,6 +75,10 @@ namespace Game.Actor
             SetAttributes();
             hp = hpMax;
             mana = manaMax;
+            weapon = null;
+            vest = null;
+            gold = 10000;
+            level = 10;
         }
         public override void _Ready()
         {
@@ -257,9 +307,9 @@ namespace Game.Actor
                 gravePos = new Vector2();
             }
         }
-        public InGameMenu GetMenu()
+        public MenuHandler GetMenu()
         {
-            return null;
+            return GetNode<MenuHandler>("in_game_menu");
         }
     }
 }

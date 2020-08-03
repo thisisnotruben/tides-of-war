@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/menu_ui/views/HudStatus.cs" type="Script" id=1]
+[ext_resource path="res://src/menu_ui/HudStatus.cs" type="Script" id=1]
 [ext_resource path="res://src/menu_ui/views/unit_hud_slot_view.tscn" type="PackedScene" id=4]
 
 [node name="hud_status" type="Control"]

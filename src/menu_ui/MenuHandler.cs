@@ -1,5 +1,7 @@
 using Game.Utils;
 using Game.Actor;
+using Game.Loot;
+using Game.Database;
 namespace Game.Ui
 {
     public class MenuHandler : GameMenu
@@ -10,13 +12,13 @@ namespace Game.Ui
         public override void _Ready()
         {
             GameMenu.speaker = GetNode<Speaker>("speaker");
-            hudStatus = GetNode<HudStatus>("c/hud_status");
-            hud = GetNode<Hud>("c/hud");
-            hud.ConnectButtons(this, nameof(_OnHudPausePressed),
-                nameof(_OnHudPausePressed), nameof(_OnHudPausePressed));
             mainMenu = GetNode<MainMenu>("c/game_menu");
             mainMenu.Connect("draw", this, nameof(_OnMainMenuDraw));
             mainMenu.Connect("hide", this, nameof(_OnMainMenuHide));
+            hudStatus = GetNode<HudStatus>("c/hud_status");
+            hud = GetNode<Hud>("c/hud");
+            hud.ConnectButtons(this, nameof(_OnHudPausePressed),
+                nameof(_OnHudSpellBookPressed), nameof(_OnHudPausePressed));
         }
         public void _OnMainMenuDraw()
         {
@@ -33,15 +35,29 @@ namespace Game.Ui
             Globals.PlaySound("click5", this, speaker);
             mainMenu.Show();
         }
-        public void _OnNpcInteract(Npc npc)
+        public void _OnHudSpellBookPressed()
+        {
+            Globals.PlaySound("click5", this, speaker);
+            mainMenu.ShowSpellBook();
+        }
+        public void NpcInteract(Npc npc)
         {
             string signal = nameof(Character.UpdateHudStatus);
             string method = nameof(HudStatus._OnUpdateStatus);
+            bool interactable = ContentDB.HasContent(npc.Name)
+                && 3 >= Globals.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
             if (npc.IsConnected(signal, hudStatus, method))
             {
-                npc.Disconnect(signal, hudStatus, method);
-                hudStatus.npcStatus.Hide();
-                player.target = null;
+                if (interactable)
+                {
+                    mainMenu.NpcInteract(npc);
+                }
+                else
+                {
+                    npc.Disconnect(signal, hudStatus, method);
+                    hudStatus.npcStatus.Hide();
+                    player.target = null;                    
+                }
             }
             else
             {
@@ -52,13 +68,20 @@ namespace Game.Ui
                     {
                         otherNpc.Disconnect(signal, hudStatus, method);    
                     }
-                }  
+                }
                 npc.Connect(signal, hudStatus, method);
                 hudStatus.UpdateName(false, npc.worldName);
                 hudStatus._OnUpdateStatus(npc, true, npc.hp, npc.hpMax);
                 hudStatus._OnUpdateStatus(npc, false, npc.mana, npc.manaMax);
-                mainMenu._OnNpcInteract(npc);
+                if (interactable)
+                {
+                    mainMenu.NpcInteract(npc);
+                }
             }
+        }
+        public void LootInteract(LootChest lootChest)
+        {
+            mainMenu.LootInteract(lootChest);
         }
     }
 }

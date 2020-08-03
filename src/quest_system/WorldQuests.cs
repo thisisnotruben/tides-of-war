@@ -134,14 +134,14 @@ namespace Game.Quests
                     if (character.GetPath().Equals(quest.questGiver))
                     {
                         focusedQuest = quest;
-                        if (questCatagory == availableQuests)
-                        {
-                            Globals.player.GetMenu().dialogue.GetNode<Control>("s/s/v/accept").Show();
-                        }
-                        else
-                        {
-                            Globals.player.GetMenu().dialogue.GetNode<Control>("s/s/v/finish").Show();
-                        }
+                        // if (questCatagory == availableQuests)
+                        // {
+                        //     Globals.player.GetMenu().dialogue.GetNode<Control>("s/s/v/accept").Show();
+                        // }
+                        // else
+                        // {
+                        //     Globals.player.GetMenu().dialogue.GetNode<Control>("s/s/v/finish").Show();
+                        // }
                         return;
                     }
                 }

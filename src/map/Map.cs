@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using Game.Actor;
-using Game.Database;
-using Game.Loot;
 using Godot;
 namespace Game.Map
 {

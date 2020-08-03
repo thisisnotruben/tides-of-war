@@ -14,8 +14,6 @@ namespace Game.Loot
         private int maxValue;
         public int value { get; private set; }
 
-        [Signal]
-        public delegate void EquipItem(Item item, bool equip);
         public override void Init(string worldName)
         {
             durability = MAX_DURABILITY;
@@ -75,14 +73,6 @@ namespace Game.Loot
             {
                 ConfigureBuff((Character)Owner, true);
             }
-        }
-        public void Equip()
-        {
-            EmitSignal(nameof(EquipItem), this, true);
-        }
-        public void Unequip()
-        {
-            EmitSignal(nameof(EquipItem), this, false);
         }
         public Tuple<int, int> GetValues()
         {
