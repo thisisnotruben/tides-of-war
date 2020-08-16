@@ -10,6 +10,8 @@ meta/
 *.tsx
 *.tmx
 # asset ext
+*.import
+*.wav.import
 *.png
 *.ttf
 *.wav

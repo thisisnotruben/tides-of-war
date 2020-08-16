@@ -1,2092 +1,2092 @@
 {
     "Shortsword": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1713,
         "level": 1,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Champion's Greatsword": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1717,
         "level": 2,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Steelforged Sword": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1719,
         "level": 3,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Corrupted Sword": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1720,
         "level": 4,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Crusader's Warblade": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1721,
         "level": 5,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Bloodforged Sword": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1722,
         "level": 6,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Crystalforged Sword": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1723,
         "level": 7,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Heart Stopper": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1724,
         "level": 8,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Blade of Angels": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1725,
         "level": 9,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Apocalypse": {
         "type": "WEAPON",
-        "subType": "SWORD",
         "icon": 1732,
         "level": 10,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SWORD",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Carving Knife": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1551,
         "level": 1,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Fine Shanker": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1555,
         "level": 2,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Backstabber's Knife": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1557,
         "level": 3,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Blackfire Dagger": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1558,
         "level": 4,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Divine Toothpick": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1559,
         "level": 5,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Gut Ripper": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1560,
         "level": 6,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Enchanted Dagger": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1561,
         "level": 7,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Devil's Mercy": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1562,
         "level": 8,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Skull Carver": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1563,
         "level": 9,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Skin Shredder": {
         "type": "WEAPON",
-        "subType": "DAGGER",
         "icon": 1564,
         "level": 10,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "DAGGER",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Farmer's Pike": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1643,
         "level": 1,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Jagged Pike": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1647,
         "level": 2,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Piercing Spear": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1649,
         "level": 3,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Shadowstrike": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1650,
         "level": 4,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Peacemaker": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1651,
         "level": 5,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Bloodpike": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1652,
         "level": 6,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Hope Killer": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1653,
         "level": 7,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Dreaded Stick": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1654,
         "level": 8,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Warlord's Glaive": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1655,
         "level": 9,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Bloodfall": {
         "type": "WEAPON",
-        "subType": "SPEAR",
         "icon": 1656,
         "level": 10,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "SPEAR",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Primal Axe": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1461,
         "level": 1,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Chef's Cleaver": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1465,
         "level": 2,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Battle Axe": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1467,
         "level": 3,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Soul Hacker": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1468,
         "level": 4,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Head Chopper": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1469,
         "level": 5,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Decapitator": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1470,
         "level": 6,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Bone Chiller": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1471,
         "level": 7,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Howling Reaper": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1472,
         "level": 8,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Butcher's Friend": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1473,
         "level": 9,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Executioner's Final Word": {
         "type": "WEAPON",
-        "subType": "AXE",
         "icon": 1476,
         "level": 10,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "AXE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Pincers": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1521,
         "level": 1,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Wolf's Paw": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1525,
         "level": 2,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Spiked Knuckles": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1527,
         "level": 3,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Death's Grip": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1528,
         "level": 5,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Holy Fist": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1529,
         "level": 6,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Tenderizer": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1530,
         "level": 7,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Cold Hands": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1531,
         "level": 8,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Bone Shredder": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1532,
         "level": 9,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Claws of Agony": {
         "type": "WEAPON",
-        "subType": "CLAW",
         "icon": 1533,
         "level": 10,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "CLAW",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Large Club": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1607,
         "level": 1,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Warmaul": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1611,
         "level": 2,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Warhammer": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1613,
         "level": 3,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Grave Maker": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1614,
         "level": 4,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Oath Keeper": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1615,
         "level": 5,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Pain Bringer": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1616,
         "level": 6,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Celestial Rod": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1617,
         "level": 7,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Sorrow's End": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1618,
         "level": 8,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Breath Taker": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1619,
         "level": 9,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Annihilation": {
         "type": "WEAPON",
-        "subType": "MACE",
         "icon": 1621,
         "level": 10,
-        "material": "metal1",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "MACE",
+        "material": "metal1",
+        "stackSize": 1
     },
     "Walking Cane": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1663,
         "level": 1,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "Fighting Stick": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1667,
         "level": 2,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "War Staff": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1669,
         "level": 3,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "Scept of the Dead": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1670,
         "level": 4,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "Light Bringer": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1671,
         "level": 5,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "Tormented Scepter": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1672,
         "level": 6,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "Spire of Hope": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1673,
         "level": 7,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "Scept of the Ancients": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1674,
         "level": 8,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "Staff of Damnation": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1675,
         "level": 9,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "The Reckoning": {
         "type": "WEAPON",
-        "subType": "STAFF",
         "icon": 1683,
         "level": 10,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "STAFF",
+        "material": "wood",
+        "stackSize": 1
     },
     "Needle Threader": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1491,
         "level": 1,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Hunter's Bow": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1495,
         "level": 2,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Repeating Longbow": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1497,
         "level": 3,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Widowmaker": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1498,
         "level": 4,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Angel's Harp": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1499,
         "level": 5,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Bloodseeker": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1500,
         "level": 6,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Chord of Justice": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1501,
         "level": 7,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Last Kiss": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1502,
         "level": 8,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "High Strung": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1506,
         "level": 9,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Throat Needler": {
         "type": "WEAPON",
-        "subType": "BOW",
         "icon": 1508,
         "level": 10,
-        "material": "wood",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "BOW",
+        "material": "wood",
+        "stackSize": 1
     },
     "Linen Robe": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 56,
         "level": 1,
-        "material": "cloth",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "cloth",
+        "stackSize": 1
     },
     "Scout's Cloak": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 88,
         "level": 1,
-        "material": "cloth",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "cloth",
+        "stackSize": 1
     },
     "Chainvest": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 91,
         "level": 2,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Leather Vest": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 59,
         "level": 2,
-        "material": "cloth",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "cloth",
+        "stackSize": 1
     },
     "Leather Breastplate": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 60,
         "level": 3,
-        "material": "cloth",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "cloth",
+        "stackSize": 1
     },
     "Studded Leather Tunic": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 72,
         "level": 3,
-        "material": "cloth",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "cloth",
+        "stackSize": 1
     },
     "Tarnished Plate Vest": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 61,
         "level": 4,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Embroidered Leather Armor": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 161,
         "level": 4,
-        "material": "cloth",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "cloth",
+        "stackSize": 1
     },
     "Platemail Armor": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 73,
         "level": 5,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Metal Tunic": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 68,
         "level": 5,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Vanguard Breastplate": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 62,
         "level": 6,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Steelforged Chestguard": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 124,
         "level": 6,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Warlord's Cuirass": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 64,
         "level": 7,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Embroidered Armor": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 148,
         "level": 7,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Ceremonial Breastplate": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 63,
         "level": 8,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Heavy Plated Armor": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 76,
         "level": 8,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Ancient Oriental Breastplate": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 75,
         "level": 9,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Polished Chestplate": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 151,
         "level": 9,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Immortal's Armor": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 78,
         "level": 10,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Juggernaut Breastplate": {
         "type": "ARMOR",
-        "subType": "",
         "icon": 67,
         "level": 10,
-        "material": "metal0",
-        "stackSize": 1,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "metal0",
+        "stackSize": 1
     },
     "Macho Banana": {
         "type": "FOOD",
-        "subType": "",
         "icon": 262,
         "level": 1,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Roasted Carrot": {
         "type": "FOOD",
-        "subType": "",
         "icon": 305,
         "level": 1,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Angel Peach": {
         "type": "FOOD",
-        "subType": "",
         "icon": 260,
         "level": 2,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Juicy Apple": {
         "type": "FOOD",
-        "subType": "",
         "icon": 257,
         "level": 2,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Moonberry": {
         "type": "FOOD",
-        "subType": "",
         "icon": 263,
         "level": 3,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Grizzly Grapes": {
         "type": "FOOD",
-        "subType": "",
         "icon": 308,
         "level": 3,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Ripe Watermelon": {
         "type": "FOOD",
-        "subType": "",
         "icon": 264,
         "level": 4,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Sweet Pineapple": {
         "type": "FOOD",
-        "subType": "",
         "icon": 261,
         "level": 4,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Corn on the Cob": {
         "type": "FOOD",
-        "subType": "",
         "icon": 313,
         "level": 5,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Nutty Acorn": {
         "type": "FOOD",
-        "subType": "",
         "icon": 321,
         "level": 5,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Sun Dried Mushroom": {
         "type": "FOOD",
-        "subType": "",
         "icon": 310,
         "level": 6,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Herb Baked Egg": {
         "type": "FOOD",
-        "subType": "",
         "icon": 291,
         "level": 6,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Hard Cheese": {
         "type": "FOOD",
-        "subType": "",
         "icon": 289,
         "level": 7,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Spice Bread": {
         "type": "FOOD",
-        "subType": "",
         "icon": 297,
         "level": 7,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Oatmeal Muffin": {
         "type": "FOOD",
-        "subType": "",
         "icon": 327,
         "level": 8,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Chocolate Chip Cookie": {
         "type": "FOOD",
-        "subType": "",
         "icon": 273,
         "level": 8,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Queenfish": {
         "type": "FOOD",
-        "subType": "",
         "icon": 292,
         "level": 9,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Massive Chicken Leg": {
         "type": "FOOD",
-        "subType": "",
         "icon": 293,
         "level": 9,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Marinated Steak": {
         "type": "FOOD",
-        "subType": "",
         "icon": 304,
         "level": 10,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Bowl of Honey": {
         "type": "FOOD",
-        "subType": "",
         "icon": 280,
         "level": 10,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 30
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Spider Fang": {
         "type": "MISC",
-        "subType": "",
         "icon": 217,
         "level": 1,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Light Feather": {
         "type": "MISC",
-        "subType": "",
         "icon": 213,
         "level": 1,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Brown Button": {
         "type": "MISC",
-        "subType": "",
         "icon": 230,
         "level": 2,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Petrified Bone": {
         "type": "MISC",
-        "subType": "",
         "icon": 201,
         "level": 2,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Seashell": {
         "type": "MISC",
-        "subType": "",
         "icon": 214,
         "level": 3,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Bat Ear": {
         "type": "MISC",
-        "subType": "",
         "icon": 204,
         "level": 3,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Crab Pincer": {
         "type": "MISC",
-        "subType": "",
         "icon": 205,
         "level": 4,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Cat Eye": {
         "type": "MISC",
-        "subType": "",
         "icon": 218,
         "level": 4,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Blue Feather": {
         "type": "MISC",
-        "subType": "",
         "icon": 197,
         "level": 5,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Candle": {
         "type": "MISC",
-        "subType": "",
         "icon": 240,
         "level": 5,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Rugged Leather": {
         "type": "MISC",
-        "subType": "",
         "icon": 195,
         "level": 6,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Course Leather": {
         "type": "MISC",
-        "subType": "",
         "icon": 210,
         "level": 6,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Wolf Tail": {
         "type": "MISC",
-        "subType": "",
         "icon": 222,
         "level": 7,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Shattered Mirror": {
         "type": "MISC",
-        "subType": "",
         "icon": 243,
         "level": 7,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Cat Claw": {
         "type": "MISC",
-        "subType": "",
         "icon": 196,
         "level": 8,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Metal Plate": {
         "type": "MISC",
-        "subType": "",
         "icon": 225,
         "level": 8,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Canine": {
         "type": "MISC",
-        "subType": "",
         "icon": 193,
         "level": 9,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Ruined Pelt": {
         "type": "MISC",
-        "subType": "",
         "icon": 194,
         "level": 9,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Red Yarn": {
         "type": "MISC",
-        "subType": "",
         "icon": 229,
         "level": 10,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Broken Glass": {
         "type": "MISC",
-        "subType": "",
         "icon": 813,
         "level": 10,
-        "material": "misc",
-        "stackSize": 10,
         "goldCost": 1,
-        "coolDown": 0
+        "blurb": "",
+        "subType": "",
+        "material": "misc",
+        "stackSize": 10
     },
     "Minor Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 800,
         "level": 1,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Minor Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 805,
         "level": 1,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Minor Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 801,
         "level": 1,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Minor Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 806,
         "level": 1,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Minor Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 803,
         "level": 1,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Minor Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 802,
         "level": 1,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Minor Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 809,
         "level": 1,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Lesser Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 786,
         "level": 2,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Lesser Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 791,
         "level": 2,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Lesser Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 787,
         "level": 2,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Lesser Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 792,
         "level": 2,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Lesser Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 789,
         "level": 2,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Lesser Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 788,
         "level": 2,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Lesser Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 795,
         "level": 2,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 604,
         "level": 3,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 609,
         "level": 3,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 605,
         "level": 3,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 610,
         "level": 3,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 607,
         "level": 3,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 606,
         "level": 3,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 613,
         "level": 3,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Greater Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 646,
         "level": 4,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Greater Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 651,
         "level": 4,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Greater Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 647,
         "level": 4,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Greater Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 652,
         "level": 4,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Greater Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 649,
         "level": 4,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Greater Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 648,
         "level": 4,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Greater Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 655,
         "level": 4,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Superior Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 618,
         "level": 5,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Superior Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 623,
         "level": 5,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Superior Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 619,
         "level": 5,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Superior Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 624,
         "level": 5,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Superior Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 621,
         "level": 5,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Superior Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 620,
         "level": 5,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Superior Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 627,
         "level": 5,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Major Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 744,
         "level": 6,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Major Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 749,
         "level": 6,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Major Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 745,
         "level": 6,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Major Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 750,
         "level": 6,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Major Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 747,
         "level": 6,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Major Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 746,
         "level": 6,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Major Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 753,
         "level": 6,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Master Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 772,
         "level": 7,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Master Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 777,
         "level": 7,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Master Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 773,
         "level": 7,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Master Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 778,
         "level": 7,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Master Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 775,
         "level": 7,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Master Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 774,
         "level": 7,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Master Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 781,
         "level": 7,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Legendary Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 590,
         "level": 8,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Legendary Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 595,
         "level": 8,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Legendary Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 591,
         "level": 8,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Legendary Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 596,
         "level": 8,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Legendary Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 593,
         "level": 8,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Legendary Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 592,
         "level": 8,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Legendary Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 599,
         "level": 8,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Mythical Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 688,
         "level": 9,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Mythical Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 693,
         "level": 9,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Mythical Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 689,
         "level": 9,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Mythical Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 694,
         "level": 9,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Mythical Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 691,
         "level": 9,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Mythical Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 690,
         "level": 9,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Mythical Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 697,
         "level": 9,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     },
     "Ancient Healing Potion": {
         "type": "POTION",
-        "subType": "HEALING",
         "icon": 758,
         "level": 10,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "HEALING",
+        "material": "glass",
+        "stackSize": 5
     },
     "Ancient Mana Potion": {
         "type": "POTION",
-        "subType": "MANA",
         "icon": 763,
         "level": 10,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "MANA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Ancient Stamina": {
         "type": "POTION",
-        "subType": "STAMINA",
         "icon": 759,
         "level": 10,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STAMINA",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Ancient Intellect": {
         "type": "POTION",
-        "subType": "INTELLECT",
         "icon": 764,
         "level": 10,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "INTELLECT",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Ancient Agility": {
         "type": "POTION",
-        "subType": "AGILITY",
         "icon": 761,
         "level": 10,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "AGILITY",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Ancient Strength": {
         "type": "POTION",
-        "subType": "STRENGTH",
         "icon": 760,
         "level": 10,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "STRENGTH",
+        "material": "glass",
+        "stackSize": 5
     },
     "Elixir of Ancient Defense": {
         "type": "POTION",
-        "subType": "DEFENSE",
         "icon": 767,
         "level": 10,
-        "material": "glass",
-        "stackSize": 5,
         "goldCost": 1,
-        "coolDown": 60
+        "blurb": "",
+        "subType": "DEFENSE",
+        "material": "glass",
+        "stackSize": 5
     }
 }

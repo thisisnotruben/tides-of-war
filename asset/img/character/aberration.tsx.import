@@ -2,11 +2,13 @@
 
 importer="vnen.tiled_tileset_importer"
 type="TileSet"
-valid=false
+path="res://.import/aberration.tsx-e794a5743ef593ed98359e8860b32766.res"
 
 [deps]
 
 source_file="res://asset/img/character/aberration.tsx"
+dest_files=[ "res://.import/aberration.tsx-e794a5743ef593ed98359e8860b32766.res" ]
+
 [params]
 
 custom_properties=true

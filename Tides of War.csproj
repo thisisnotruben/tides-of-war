@@ -170,7 +170,6 @@
     <Compile Include="src\spell\spell_logics\stinging_shot.cs" />
     <Compile Include="src\spell\spell_logics\stomp.cs" />
     <Compile Include="src\spell\spell_logics\volley.cs" />
-    <Compile Include="src\utils\IconGenerator.cs" />
     <Compile Include="src\utils\MapImporter.cs" />
     <Compile Include="src\utils\Speaker.cs" />
     <Compile Include="src\utils\Speaker2D.cs" />
