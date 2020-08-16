@@ -46,8 +46,8 @@ namespace Game.Ability
             this.worldName = worldName;
             Name = worldName;
             SpellDB.SpellNode spellData = SpellDB.GetSpellData(worldName);
-            spellRange = spellData.spellRange;
-            percentDamage = spellData.percentDamage;
+            spellRange = spellData.range;
+            percentDamage = spellData.pctDamage;
             ignoreArmor = spellData.ignoreArmor;
             effectOnTarget = spellData.effectOnTarget;
             requiresTarget = spellData.requiresTarget;

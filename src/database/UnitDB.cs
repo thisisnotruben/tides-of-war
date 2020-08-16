@@ -14,19 +14,15 @@ namespace Game.Database
             public List<Vector2> path;
             public int level;
         }
-
         private static Dictionary<string, UnitNode> unitData = new Dictionary<string, UnitNode>();
-        private static readonly string DB_PATH = "res://data/zone_4.json";
 
-        static UnitDB()
+        public static void LoadUnitData(string dbPath)
         {
-            LoadUnitData();
-        }
-
-        public static void LoadUnitData()
-        {
+            // clear out cached database for switching between maps
+            unitData.Clear();
+            // load & parse data
             File file = new File();
-            file.Open(DB_PATH, File.ModeFlags.Read);
+            file.Open(dbPath, File.ModeFlags.Read);
             JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
             file.Close();
             Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
@@ -44,17 +40,14 @@ namespace Game.Database
                 {
                     unitNode.path.Add(new Vector2((float)((Single) vectorNode[0]), (float) ((Single) vectorNode[1])));
                 }
-                // TODO
-                unitNode.level = 1;
+                unitNode.level = 1; // TODO
                 unitData.Add(itemName, unitNode);
             }
         }
-
         public static UnitNode GetUnitData(string unitEditorName)
         {
             return unitData[unitEditorName];
         }
-        
         public static bool HasUnitData(string nameCheck)
         {
             return unitData.ContainsKey(nameCheck);

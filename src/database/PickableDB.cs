@@ -18,8 +18,8 @@ namespace Game.Database
         public static string GetDescription(string worldName)
         {
             return (SpellDB.HasSpell(worldName))
-                ? SpellDB.GetSpellData(worldName).description
-                : ItemDB.GetItemData(worldName).description;
+                ? SpellDB.GetSpellData(worldName).blurb
+                : ItemDB.GetItemData(worldName).blurb;
         }
         public static Texture GetIcon(string worldName)
         {

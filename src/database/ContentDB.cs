@@ -17,14 +17,7 @@ namespace Game.Database
             public List<string> merchandise;
             
         }
-
         private static Dictionary<string, ContentNode> contentData = new Dictionary<string, ContentNode>();
-        private static readonly string DB_PATH = "res://data/zone_4_content.json";
-
-        static ContentDB()
-        {
-            LoadContentData();
-        }
 
         private static void GetWorldNames(Godot.Collections.Array inArray, List<string> outArray)
         {
@@ -33,11 +26,13 @@ namespace Game.Database
                 outArray.Add(worldObjectName);
             }
         }
-
-        public static void LoadContentData()
+        public static void LoadContentData(string dbPath)
         {
+            // clear out cached database for switching between maps
+            contentData.Clear();
+            // load & parse data
             File file = new File();
-            file.Open(DB_PATH, File.ModeFlags.Read);
+            file.Open(dbPath, File.ModeFlags.Read);
             JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
             file.Close();
             Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
@@ -59,12 +54,10 @@ namespace Game.Database
                 contentData.Add(characterName, contentNode);
             }
         }
-
         public static ContentNode GetContentData(string editorName)
         {
             return contentData[editorName];
         }
-
         public static bool HasContent(string nameCheck)
         {
             return contentData.ContainsKey(nameCheck);

@@ -1,2172 +1,2172 @@
 {
     "human-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "human-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 9,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 9,
         "weapon": "flail",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-7": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "spear",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-8": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-10": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-11": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-12": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-13": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-14": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "human-15": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "magic",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "human-16": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-17": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "human_unarmored",
-        "melee": 1
+        "melee": true
     },
     "human-18": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-19": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "human-20": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "human-21": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "gun",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "human-22": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "spear",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-23": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "mace",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-24": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "magic",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "oliphant-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "staff",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "orc-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-7": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-8": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "magic",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-10": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
-        "body": "swing_medium",
-        "melee": 1
+        "body": "orc",
+        "melee": true
     },
     "orc-11": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-12": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-13": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-14": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-15": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-16": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-17": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-18": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-19": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-20": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-21": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-22": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-23": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "finfolk-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "finfolk-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "minotaur-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "mace",
         "weaponMaterial": "wood",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "mace",
         "weaponMaterial": "wood",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "mace",
         "weaponMaterial": "wood",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-7": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "magic",
         "weaponMaterial": "",
         "swing": "",
         "body": "minotaur",
-        "melee": 0
+        "melee": false
     },
     "minotaur-8": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-10": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-11": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "mace",
         "weaponMaterial": "wood",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-12": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-13": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-14": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-15": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-16": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-17": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-18": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-19": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "minotaur-20": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_large",
         "body": "minotaur",
-        "melee": 1
+        "melee": true
     },
     "gnoll-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_small",
         "body": "gnoll",
-        "melee": 1
+        "melee": true
     },
     "gnoll-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "gnoll",
-        "melee": 0
+        "melee": false
     },
     "gnoll-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_small",
         "body": "gnoll",
-        "melee": 1
+        "melee": true
     },
     "gnoll-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "gnoll",
-        "melee": 1
+        "melee": true
     },
     "gnoll-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "gnoll",
-        "melee": 1
+        "melee": true
     },
     "gnoll-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sickle",
         "weaponMaterial": "metal",
         "swing": "swing_small",
         "body": "gnoll",
-        "melee": 1
+        "melee": true
     },
     "gnoll-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sickle",
         "weaponMaterial": "metal",
         "swing": "swing_small",
         "body": "gnoll",
-        "melee": 1
+        "melee": true
     },
     "gnoll-7": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "hatchet",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "gnoll",
-        "melee": 1
+        "melee": true
     },
     "gnoll-8": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "hatchet",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "gnoll",
-        "melee": 1
+        "melee": true
     },
     "gnoll-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "gnoll",
-        "melee": 0
+        "melee": false
     },
     "goblin-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "dagger",
         "weaponMaterial": "metal",
         "swing": "swing_small",
         "body": "goblin",
-        "melee": 1
+        "melee": true
     },
     "goblin-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "goblin",
-        "melee": 0
+        "melee": false
     },
     "aberration-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
-        "body": "",
-        "melee": 1
+        "body": "aberration",
+        "melee": true
     },
     "aberration-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
-        "body": "",
-        "melee": 1
+        "body": "aberration",
+        "melee": true
     },
     "warthog-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "mace",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 1
+        "melee": true
     },
     "warthog-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "spear",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 0
+        "melee": false
     },
     "warthog-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "spear",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 0
+        "melee": false
     },
     "warthog-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 1
+        "melee": true
     },
     "warthog-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 1
+        "melee": true
     },
     "warthog-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "mace",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 1
+        "melee": true
     },
     "warthog-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 1
+        "melee": true
     },
     "warthog-7": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 1
+        "melee": true
     },
     "warthog-8": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 1
+        "melee": true
     },
     "warthog-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "warthog",
-        "melee": 1
+        "melee": true
     },
     "critter-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "spider",
-        "melee": 1
+        "melee": true
     },
     "critter-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 5,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 5,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "scorpion",
-        "melee": 1
+        "melee": true
     },
     "critter-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 5,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 5,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "scorpion",
-        "melee": 1
+        "melee": true
     },
     "critter-3": {
-        "movingFrames": 3,
-        "dyingFrames": 6,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 6,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "crab",
-        "melee": 1
+        "melee": true
     },
     "critter-4": {
-        "movingFrames": 2,
-        "dyingFrames": 8,
-        "attackingFrames": 0,
+        "moving": 2,
+        "dying": 8,
+        "attacking": 0,
         "weapon": "",
         "weaponMaterial": "",
         "swing": "swing_small",
         "body": "chicken",
-        "melee": 1
+        "melee": true
     },
     "critter-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "spider",
-        "melee": 1
+        "melee": true
     },
     "critter-6": {
-        "movingFrames": 3,
-        "dyingFrames": 6,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 6,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "crab",
-        "melee": 1
+        "melee": true
     },
     "critter-7": {
-        "movingFrames": 2,
-        "dyingFrames": 6,
-        "attackingFrames": 6,
+        "moving": 2,
+        "dying": 6,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_small",
         "body": "rat",
-        "melee": 1
+        "melee": true
     },
     "critter-8": {
-        "movingFrames": 3,
-        "dyingFrames": 6,
-        "attackingFrames": 5,
+        "moving": 3,
+        "dying": 6,
+        "attacking": 5,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "wolf",
-        "melee": 1
+        "melee": true
     },
     "critter-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "spider",
-        "melee": 1
+        "melee": true
     },
     "critter-10": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "snake",
-        "melee": 1
+        "melee": true
     },
     "critter-11": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 5,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 5,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "scorpion",
-        "melee": 1
+        "melee": true
     },
     "critter-12": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "spider",
-        "melee": 1
+        "melee": true
     },
     "critter-13": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 5,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 5,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "scorpion",
-        "melee": 1
+        "melee": true
     },
     "critter-14": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "wasp",
-        "melee": 1
+        "melee": true
     },
     "critter-15": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "wasp",
-        "melee": 1
+        "melee": true
     },
     "critter-16": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "spider",
-        "melee": 1
+        "melee": true
     },
     "critter-17": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "spider",
-        "melee": 1
+        "melee": true
     },
     "critter-18": {
-        "movingFrames": 3,
-        "dyingFrames": 6,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 6,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "crab",
-        "melee": 1
+        "melee": true
     },
     "critter-19": {
-        "movingFrames": 3,
-        "dyingFrames": 6,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 6,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "crab",
-        "melee": 1
+        "melee": true
     },
     "critter-20": {
-        "movingFrames": 3,
-        "dyingFrames": 6,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 6,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "crab",
-        "melee": 1
+        "melee": true
     },
     "critter-21": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "wasp",
-        "melee": 1
+        "melee": true
     },
     "critter-22": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "wasp",
-        "melee": 1
+        "melee": true
     },
     "critter-23": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "wasp",
-        "melee": 1
+        "melee": true
     },
     "critter-24": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "snake",
-        "melee": 1
+        "melee": true
     },
     "critter-25": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "snake",
-        "melee": 1
+        "melee": true
     },
     "critter-26": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "snake",
-        "melee": 1
+        "melee": true
     },
     "bog-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-7": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-8": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-10": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-11": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-12": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-13": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "bog-14": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "bog",
-        "melee": 1
+        "melee": true
     },
     "robot-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 8,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 8,
         "weapon": "rocket",
         "weaponMaterial": "",
         "swing": "rocket_miss",
-        "body": "",
-        "melee": 0
+        "body": "robot",
+        "melee": false
     },
     "robot-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
-        "body": "",
-        "melee": 1
+        "body": "robot",
+        "melee": true
     },
     "robot-2": {
-        "movingFrames": 3,
-        "dyingFrames": 6,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 6,
+        "attacking": 7,
         "weapon": "rocket",
         "weaponMaterial": "",
         "swing": "swing_medium",
-        "body": "",
-        "melee": 0
+        "body": "robot",
+        "melee": false
     },
     "robot-3": {
-        "movingFrames": 3,
-        "dyingFrames": 6,
-        "attackingFrames": 8,
+        "moving": 3,
+        "dying": 6,
+        "attacking": 8,
         "weapon": "club",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
-        "body": "",
-        "melee": 1
+        "body": "robot",
+        "melee": true
     },
     "oliphant-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-7": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-8": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-10": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-11": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-12": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "staff",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-13": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-14": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-15": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-16": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-17": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "staff",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-18": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-19": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "staff",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-20": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_large",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-21": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-22": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "oliphant-23": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "oliphant",
-        "melee": 1
+        "melee": true
     },
     "finfolk-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "finfolk-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "finfolk-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "finfolk-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "finfolk-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "finfolk",
-        "melee": 0
+        "melee": false
     },
     "finfolk-7": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "finfolk",
-        "melee": 0
+        "melee": false
     },
     "finfolk-8": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "finfolk",
-        "melee": 0
+        "melee": false
     },
     "finfolk-9": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "finfolk",
-        "melee": 0
+        "melee": false
     },
     "finfolk-10": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "finfolk-11": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "finfolk-12": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "finfolk-13": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "finfolk",
-        "melee": 0
+        "melee": false
     },
     "finfolk-14": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "finfolk",
-        "melee": 1
+        "melee": true
     },
     "human-25": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-26": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "gun",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "human-27": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "mace",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "human_armored",
-        "melee": 1
+        "melee": true
     },
     "human-28": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "human-29": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "magic",
         "weaponMaterial": "",
         "swing": "",
         "body": "human_unarmored",
-        "melee": 0
+        "melee": false
     },
     "treant-0": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "treant",
-        "melee": 1
+        "melee": true
     },
     "treant-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "treant",
-        "melee": 1
+        "melee": true
     },
     "treant-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "treant",
-        "melee": 1
+        "melee": true
     },
     "treant-3": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "treant",
-        "melee": 1
+        "melee": true
     },
     "treant-4": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "treant",
-        "melee": 1
+        "melee": true
     },
     "treant-5": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "treant",
-        "melee": 1
+        "melee": true
     },
     "treant-6": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
         "body": "treant",
-        "melee": 1
+        "melee": true
     },
     "aberration-1": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
-        "body": "",
-        "melee": 1
+        "body": "aberration",
+        "melee": true
     },
     "aberration-2": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "club",
         "weaponMaterial": "wood",
         "swing": "swing_medium",
-        "body": "",
-        "melee": 1
+        "body": "aberration",
+        "melee": true
     },
     "orc-24": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-25": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-26": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-27": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-28": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-29": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-30": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-31": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-32": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-33": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-34": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-35": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-36": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-37": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-38": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-39": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-40": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-41": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-42": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-43": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "sword",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     },
     "orc-44": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-45": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-46": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 6,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 6,
         "weapon": "bow",
         "weaponMaterial": "",
         "swing": "",
         "body": "orc",
-        "melee": 0
+        "melee": false
     },
     "orc-47": {
-        "movingFrames": 3,
-        "dyingFrames": 7,
-        "attackingFrames": 7,
+        "moving": 3,
+        "dying": 7,
+        "attacking": 7,
         "weapon": "axe",
         "weaponMaterial": "metal",
         "swing": "swing_medium",
         "body": "orc",
-        "melee": 1
+        "melee": true
     }
 }

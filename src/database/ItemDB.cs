@@ -8,16 +8,15 @@ namespace Game.Database
         public struct ItemNode
         {
             public string type;
-            public string subType;
             public Texture icon;
             public int level;
-            public string material;
-            public string description;
-            public int stackSize;
             public int goldCost;
+            public string blurb;
+            public string subType;            
+            public string material;
+            public int stackSize;
             public int coolDown;
         }
-
         private static Dictionary<string, ItemNode> itemData = new Dictionary<string, ItemNode>();
         private static readonly string DB_PATH = "res://data/item.json";
 
@@ -25,7 +24,6 @@ namespace Game.Database
         {
             LoadItemData();
         }
-
         private static void LoadItemData()
         {
             File file = new File();
@@ -38,24 +36,21 @@ namespace Game.Database
                 Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary) rawDict[itemName];
                 ItemNode itemNode;
                 itemNode.type = (string) itemDict[nameof(ItemNode.type)];
-                itemNode.subType = (string) itemDict[nameof(ItemNode.subType)];
                 itemNode.icon = IconDB.GetIcon((int) ((Single) itemDict[nameof(ItemNode.icon)]));
                 itemNode.level = (int) ((Single) itemDict[nameof(ItemNode.level)]);
-                itemNode.material = (string) itemDict[nameof(ItemNode.material)];
-                // TODO
-                itemNode.description = "TODO";
-                itemNode.stackSize = (int) ((Single) itemDict[nameof(ItemNode.stackSize)]);
                 itemNode.goldCost = (int) ((Single) itemDict[nameof(ItemNode.goldCost)]);
-                itemNode.coolDown = (int) ((Single) itemDict[nameof(ItemNode.coolDown)]);
+                itemNode.blurb = (string) itemDict[nameof(ItemNode.blurb)];
+                itemNode.subType = (string) itemDict[nameof(ItemNode.subType)];
+                itemNode.material = (string) itemDict[nameof(ItemNode.material)];
+                itemNode.stackSize = (int) ((Single) itemDict[nameof(ItemNode.stackSize)]);
+                itemNode.coolDown = 1; // TODO
                 itemData.Add(itemName, itemNode);
             }
         }
-        
         public static ItemNode GetItemData(string worldName)
         {
             return itemData[worldName];
         }
-        
         public static string GetItemMaterial(string worldName)
         {
             return itemData[worldName].material;

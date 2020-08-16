@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using Godot;
 namespace Game.Database
@@ -10,18 +11,17 @@ namespace Game.Database
             public string type;
             public Texture icon;
             public int level;
-            public int spellRange;
+            public int goldCost;
+            public string blurb;
+            public int range;
             public int coolDown;
-            public float percentDamage;
+            public float pctDamage;
             public bool ignoreArmor;
             public bool effectOnTarget;
             public bool requiresTarget;
-            public string description;
             public int stackSize;
-            public int goldCost;
             public int manaCost;
         }
-        
         private static Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
         private static readonly string DB_PATH = "res://data/spell.json";
 
@@ -29,8 +29,7 @@ namespace Game.Database
         {
             LoadSpellData();
         }
-
-        public static void LoadSpellData()
+        private static void LoadSpellData()
         {
             File file = new File();
             file.Open(DB_PATH, File.ModeFlags.Read);
@@ -44,21 +43,19 @@ namespace Game.Database
                 spellNode.type = (string) itemDict[nameof(SpellNode.type)];
                 spellNode.icon = IconDB.GetIcon((int) ((Single) itemDict[nameof(SpellNode.icon)]));
                 spellNode.level = (int) ((Single) itemDict[nameof(SpellNode.level)]);
-                spellNode.spellRange = (int) ((Single) itemDict[nameof(SpellNode.spellRange)]);
+                spellNode.goldCost = (int) ((Single) itemDict[nameof(SpellNode.goldCost)]);
+                spellNode.blurb = (string) itemDict[nameof(SpellNode.blurb)];
+                spellNode.range = (int) ((Single) itemDict[nameof(SpellNode.range)]);
                 spellNode.coolDown = (int) ((Single) itemDict[nameof(SpellNode.coolDown)]);
-                spellNode.percentDamage = (float) ((Single) itemDict[nameof(SpellNode.percentDamage)]);
+                spellNode.pctDamage = (float) ((Single) itemDict[nameof(SpellNode.pctDamage)]);
                 spellNode.ignoreArmor = (bool) itemDict[nameof(SpellNode.ignoreArmor)];
                 spellNode.effectOnTarget = (bool) itemDict[nameof(SpellNode.effectOnTarget)];
                 spellNode.requiresTarget = (bool) itemDict[nameof(SpellNode.requiresTarget)];
-                spellNode.description = (string) itemDict[nameof(SpellNode.description)];
                 spellNode.stackSize = 1;
-                spellNode.goldCost = (int) ((Single) itemDict[nameof(SpellNode.goldCost)]);
-                // TODO
-                spellNode.manaCost = -1;
+                spellNode.manaCost = -1; // TODO
                 spellData.Add(spellName, spellNode);
             }
         }
-
         public static SpellNode GetSpellData(string worldName)
         {
             return spellData[worldName];
@@ -66,6 +63,10 @@ namespace Game.Database
         public static bool HasSpell(string nameCheck)
         {
             return spellData.ContainsKey(nameCheck);
+        }
+        public static string[] GetSpellNames()
+        {
+            return spellData.Keys.ToArray();
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Game.Ui
             GetNode<BaseButton>("s/h/buttons/cast")
                 .Connect("pressed", this, nameof(_OnCastPressed));
         }
-
         public override void Display(string pickableWorldName, bool allowMove)
         {
             base.Display(pickableWorldName, allowMove);
@@ -30,8 +29,8 @@ namespace Game.Ui
                         popup.GetNode<Label>("m/error/label").Text = "Invalid\nTarget!";
                         showPopup = true;
                     }
-                    else if (player.GetCenterPos().DistanceTo(player.target.GetCenterPos()) > spellNode.spellRange
-                    && spellNode.spellRange > 0 && spellNode.requiresTarget)
+                    else if (player.GetCenterPos().DistanceTo(player.target.GetCenterPos()) > spellNode.range
+                    && spellNode.range > 0 && spellNode.requiresTarget)
                     {
                         popup.GetNode<Label>("m/error/label").Text = "Target Not\nIn Range!";
                         showPopup = true;

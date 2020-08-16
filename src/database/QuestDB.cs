@@ -9,6 +9,7 @@ namespace Game.Database
         private static readonly string[] namedTags = { "chainQuest", "pickable", "kill" };
         private static readonly string[] excludeNamedTags = { "chainQuests", "reward", "objective" };
         private static readonly XMLParser xMLParser = new XMLParser();
+        
         public static Dictionary<string, Dictionary<string, string>> GetAllQuestData()
         {
             Dictionary<string, Dictionary<string, string>> allQuestData = new Dictionary<string, Dictionary<string, string>>();

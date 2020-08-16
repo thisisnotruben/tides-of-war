@@ -8,9 +8,9 @@
         "range": 32,
         "coolDown": 5,
         "pctDamage": 1.1,
-        "ignoreArmor": 0,
-        "effectOnTarget": 1,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": true,
+        "requiresTarget": true
     },
     "Intimidating Shout": {
         "type": "CASTING",
@@ -21,9 +21,9 @@
         "range": 0,
         "coolDown": 45,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 0
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": false
     },
     "Cleave": {
         "type": "DAMAGE_MODIFIER",
@@ -34,9 +34,9 @@
         "range": 32,
         "coolDown": 15,
         "pctDamage": 1.175,
-        "ignoreArmor": 0,
-        "effectOnTarget": 1,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": true,
+        "requiresTarget": true
     },
     "Fortify": {
         "type": "CASTING",
@@ -47,9 +47,9 @@
         "range": 0,
         "coolDown": 120,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 0
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": false
     },
     "Bash": {
         "type": "DAMAGE_MODIFIER",
@@ -60,9 +60,9 @@
         "range": 32,
         "coolDown": 15,
         "pctDamage": 1.1,
-        "ignoreArmor": 0,
-        "effectOnTarget": 1,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": true,
+        "requiresTarget": true
     },
     "Hemorrhage": {
         "type": "DAMAGE_MODIFIER",
@@ -73,9 +73,9 @@
         "range": 32,
         "coolDown": 110,
         "pctDamage": 1.05,
-        "ignoreArmor": 0,
-        "effectOnTarget": 1,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": true,
+        "requiresTarget": true
     },
     "Stomp": {
         "type": "CASTING",
@@ -86,9 +86,9 @@
         "range": 0,
         "coolDown": 30,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 0
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": false
     },
     "Overpower": {
         "type": "DAMAGE_MODIFIER",
@@ -99,9 +99,9 @@
         "range": 32,
         "coolDown": 25,
         "pctDamage": 1.15,
-        "ignoreArmor": 0,
-        "effectOnTarget": 1,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": true,
+        "requiresTarget": true
     },
     "Frenzy": {
         "type": "CASTING",
@@ -112,9 +112,9 @@
         "range": 0,
         "coolDown": 180,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 0
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": false
     },
     "Searing arrow": {
         "type": "DAMAGE_MODIFIER",
@@ -125,9 +125,9 @@
         "range": 64,
         "coolDown": 5,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Concussive shot": {
         "type": "DAMAGE_MODIFIER",
@@ -138,9 +138,9 @@
         "range": 64,
         "coolDown": 10,
         "pctDamage": 1.1,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Piercing shot": {
         "type": "DAMAGE_MODIFIER",
@@ -151,9 +151,9 @@
         "range": 64,
         "coolDown": 20,
         "pctDamage": 1.1,
-        "ignoreArmor": 1,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": true,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Stinging shot": {
         "type": "DAMAGE_MODIFIER",
@@ -164,9 +164,9 @@
         "range": 64,
         "coolDown": 10,
         "pctDamage": 1.2,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Explosive arrow": {
         "type": "CASTING",
@@ -177,9 +177,9 @@
         "range": 64,
         "coolDown": 15,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Precise shot": {
         "type": "DAMAGE_MODIFIER",
@@ -190,9 +190,9 @@
         "range": 64,
         "coolDown": 45,
         "pctDamage": 1.5,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Sniper shot": {
         "type": "DAMAGE_MODIFIER",
@@ -203,9 +203,9 @@
         "range": 80,
         "coolDown": 110,
         "pctDamage": 1.15,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Explosive trap": {
         "type": "DAMAGE_MODIFIER",
@@ -216,9 +216,9 @@
         "range": 0,
         "coolDown": 30,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 0
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": false
     },
     "Volley": {
         "type": "DAMAGE_MODIFIER",
@@ -229,9 +229,9 @@
         "range": 64,
         "coolDown": 120,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Fireball": {
         "type": "DAMAGE_MODIFIER",
@@ -242,9 +242,9 @@
         "range": 64,
         "coolDown": 5,
         "pctDamage": 1.05,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Shadow bolt": {
         "type": "DAMAGE_MODIFIER",
@@ -255,9 +255,9 @@
         "range": 64,
         "coolDown": 10,
         "pctDamage": 1.12,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Frost bolt": {
         "type": "DAMAGE_MODIFIER",
@@ -268,9 +268,9 @@
         "range": 64,
         "coolDown": 15,
         "pctDamage": 1.1,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Divine heal": {
         "type": "CASTING",
@@ -281,9 +281,9 @@
         "range": 0,
         "coolDown": 30,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 0
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": false
     },
     "Siphon mana": {
         "type": "DAMAGE_MODIFIER",
@@ -294,9 +294,9 @@
         "range": 40,
         "coolDown": 20,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Haste": {
         "type": "CASTING",
@@ -307,9 +307,9 @@
         "range": 0,
         "coolDown": 60,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 0
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": false
     },
     "Slow": {
         "type": "DAMAGE_MODIFIER",
@@ -320,9 +320,9 @@
         "range": 32,
         "coolDown": 30,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Arcane bolt": {
         "type": "DAMAGE_MODIFIER",
@@ -333,9 +333,9 @@
         "range": 64,
         "coolDown": 20,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Mind blast": {
         "type": "DAMAGE_MODIFIER",
@@ -346,9 +346,9 @@
         "range": 40,
         "coolDown": 110,
         "pctDamage": 1.2,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 1
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": true
     },
     "Meteor": {
         "type": "CHOOSE_AREA_EFFECT",
@@ -359,8 +359,8 @@
         "range": 64,
         "coolDown": 180,
         "pctDamage": 1.0,
-        "ignoreArmor": 0,
-        "effectOnTarget": 0,
-        "requiresTarget": 0
+        "ignoreArmor": false,
+        "effectOnTarget": false,
+        "requiresTarget": false
     }
 }

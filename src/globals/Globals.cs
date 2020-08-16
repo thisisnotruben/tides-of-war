@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Game.Actor;
-using Game.Map;
+using Game.Database;
 using Game.Quests;
 using Game.Utils;
 using Godot;
@@ -51,6 +51,7 @@ namespace Game
         private static readonly File file = new File();
         public static WorldQuests worldQuests { get; private set; }
         public static Map.Map map { get; set; }
+        
         public override void _Ready()
         {
             LoadsaveData();
@@ -59,6 +60,24 @@ namespace Game
         }
         public static void SetScene(string scenePath, Node root, CanvasItem currentScene)
         {
+            // load map specific data
+            string mapName = scenePath.GetFile().BaseName();
+            string dataPath = $"res://data/{mapName}.json";
+            string contentPath = $"res://data/{mapName}_content.json";
+            string questPath = $"res://data/{mapName}_quest.json";
+            if (file.FileExists(dataPath))
+            {
+                UnitDB.LoadUnitData(dataPath);
+            }
+            if (file.FileExists(contentPath))
+            {
+                ContentDB.LoadContentData(contentPath);
+            }
+            if (file.FileExists(questPath))
+            {
+                // TODO: load quest data
+            }
+            // load map & progress bar scene
             PackedScene sceneLoaderScene = (PackedScene)GD.Load("res://src/globals/scene_loader.tscn");
             SceneLoader sceneLoader = (SceneLoader)sceneLoaderScene.Instance();
             root.AddChild(sceneLoader);

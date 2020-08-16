@@ -5,8 +5,11 @@ namespace Game
     {
         private ResourceInteractiveLoader mapLoader;
         private Godot.Collections.Dictionary sceneMeta;
+        private Range progressBar;
+        
         public override void _Ready()
         {
+            progressBar = GetNode<Range>("progress_bar/m/v/bar");
             SetProcess(false);
         }
         public override void _Process(float delta)
@@ -14,7 +17,7 @@ namespace Game
             switch (mapLoader.Poll())
             {
                 case Error.Ok:
-                    GetNode<TextureProgress>("progress_bar/m/v/bar").Value = 100.0f * mapLoader.GetStage() / mapLoader.GetStageCount();
+                    progressBar.Value = 100.0f * mapLoader.GetStage() / mapLoader.GetStageCount();
                     break;
                 case Error.FileEof:
                     PackedScene packedScene = ((PackedScene)mapLoader.GetResource());
