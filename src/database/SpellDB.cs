@@ -23,7 +23,7 @@ namespace Game.Database
             public int manaCost;
         }
         private static Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
-        private static readonly string DB_PATH = "res://data/spell.json";
+        private const string DB_PATH = "res://data/spell.json";
 
         static SpellDB()
         {

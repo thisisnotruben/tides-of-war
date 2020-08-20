@@ -1,28 +1,13 @@
 using System.Collections.Generic;
+using System;
+using Game.Database;
 using Godot;
 namespace Game.Map
 {
     public class Map : Node2D
     {
-        private enum collNav : int {
-            // in reference to 'terrain.png'
-            PASS = 1231,
-            BLOCK = 1167,
-            NW_OUTER = 1421,
-            N_OUTER = 1422,
-            NE_OUTER = 1423,
-            W_OUTER = 1485,
-            E_OUTER = 1487,
-            SW_OUTER = 1549,
-            S_OUTER = 1550,
-            SE_OUTER = 1551,
-            NW_INNER = 1484,
-            NE_INNER = 1483,
-            SW_INNER = 1420,
-            SE_INNER = 1419
-        }
         private TileMap mapGrid;
-        private readonly AStar aStar = new AStar();
+        private readonly AStar2D aStar = new AStar2D();
         private readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
         private const float ASTAR_OCCUPIED_WEIGHT = 50.0f;
         private const float ASTAR_ITEM_WEIGHT = 25.0f;
@@ -41,11 +26,9 @@ namespace Game.Map
         {
             mapGrid = GetNode<TileMap>("meta/coll_nav");
             mapSize = mapGrid.GetUsedRect().Size;
-            SetObstacles();
-            List<Vector2> walkableCells = AstarAddWalkableCells(mapObstacles);
-            AstarConnectWalkableCellsDiagonal(walkableCells);
+            MakeNav();
             SetVeilSize();
-            SetPlayerCameraLimits();
+            // SetPlayerCameraLimits();
         }
         public void AddZChild(Node node)
         {
@@ -87,52 +70,102 @@ namespace Game.Map
             veil.VisibilityRect = new Rect2(-veilSize, veilSize * 2.0f);
             veil.GlobalPosition = veilSize;
         }
-        private void SetObstacles()
-        {
-            mapObstacles.Clear();
-            foreach (Vector2 cell in mapGrid.GetUsedCells())
-            {
-                if (mapGrid.GetCellv(cell) == (int) collNav.BLOCK)
-                {
-                    mapObstacles.Add(cell);
-                }
-            }
-        }
-        private List<Vector2> AstarAddWalkableCells(List<Vector2> obstacles)
+        private void MakeNav()
         {
             aStar.Clear();
-            List<Vector2> pointsArray = new List<Vector2>();
-            for (int y = 0; y < (int)mapSize.y; y++)
+
+            int y;
+            int x;
+            int tileId;
+            Vector2 point;
+            int pointIndex;
+
+            byte adjY;
+            byte adjX;
+            Vector2 pointAdj;
+            int pointAdjIndex;
+            int adjTileId;
+
+            CollNavDB.collNavTile from;
+            CollNavDB.Ordinal ordinal;
+            Vector2 direction;
+
+            // for each tile in map
+            for (y = 0; y < (int)mapSize.y; y++)
             {
-                for (int x = 0; x < (int)mapSize.x; x++)
+                for (x = 0; x < (int)mapSize.x; x++)
                 {
-                    Vector2 point = new Vector2(x, y);
-                    if (!obstacles.Contains(point))
+                    tileId = mapGrid.GetCell(x, y);
+                    if (Enum.IsDefined(typeof(CollNavDB.collNavTile), tileId) && tileId != (int)CollNavDB.collNavTile.BLOCK)
                     {
-                        pointsArray.Add(point);
-                        int pointIndex = CalculatePointIndex(point);
-                        aStar.AddPoint(pointIndex, new Vector3(point.x, point.y, 0.0f));
-                    }
-                }
-            }
-            return pointsArray;
-        }
-        private void AstarConnectWalkableCellsDiagonal(List<Vector2> pointsArray)
-        {
-            foreach (Vector2 point in pointsArray)
-            {
-                int pointIndex = CalculatePointIndex(point);
-                for (byte localY = 0; localY < 3; localY++)
-                {
-                    for (byte localX = 0; localX < 3; localX++)
-                    {
-                        Vector2 pointLocal = new Vector2(point.x + localX - 1, point.y + localY - 1);
-                        int pointLocalIndex = CalculatePointIndex(pointLocal);
-                        if (pointLocal.Equals(point) || IsOutsideMapBounds(pointLocal) || !aStar.HasPoint(pointLocalIndex))
+                        from = (CollNavDB.collNavTile)tileId;
+                        point = new Vector2(x, y);
+                        pointIndex = CalculatePointIndex(point);
+
+                        // Add node
+                        aStar.AddPoint(pointIndex, point);
+
+                        // add edges from neighbors
+                        for (adjY = 0; adjY < 3; adjY++)
                         {
-                            continue;
+                            for (adjX = 0; adjX < 3; adjX++)
+                            {
+                                pointAdj = new Vector2(point.x + adjX - 1, point.y + adjY - 1);
+                                pointAdjIndex = CalculatePointIndex(pointAdj);
+
+                                if (pointIndex == pointAdjIndex || IsOutsideMapBounds(pointAdj) || !aStar.HasPoint(pointAdjIndex))
+                                {
+                                    continue;
+                                }
+
+                                adjTileId = mapGrid.GetCellv(pointAdj);
+                                if (Enum.IsDefined(typeof(CollNavDB.collNavTile), adjTileId) && adjTileId != (int)CollNavDB.collNavTile.BLOCK)
+                                {
+                                    direction = pointAdj - point;
+                                    if (direction.x == -1 && direction.y == -1)
+                                    {
+                                        ordinal = CollNavDB.Ordinal.NW;
+                                    }
+                                    else if (direction.x == 0 && direction.y == -1)
+                                    {
+                                        ordinal = CollNavDB.Ordinal.N;
+                                    }
+                                    else if (direction.x == 1 && direction.y == -1)
+                                    {
+                                        ordinal = CollNavDB.Ordinal.NE;
+                                    }
+                                    else if (direction.x == -1 && direction.y == 0)
+                                    {
+                                        ordinal = CollNavDB.Ordinal.W;
+                                    }
+                                    else if (direction.x == 1 && direction.y == 0)
+                                    {
+                                        ordinal = CollNavDB.Ordinal.E;
+                                    }
+                                    else if (direction.x == -1 && direction.y == 1)
+                                    {
+                                        ordinal = CollNavDB.Ordinal.SW;
+                                    }
+                                    else if (direction.x == 0 && direction.y == 1)
+                                    {
+                                        ordinal = CollNavDB.Ordinal.S;
+                                    }
+                                    else if (direction.x == 1 && direction.y == 1)
+                                    {
+                                        ordinal = CollNavDB.Ordinal.SE;
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+                                    if (CollNavDB.CanConnect(from, (CollNavDB.collNavTile)adjTileId, ordinal))
+                                    {
+                                        aStar.AddPoint(pointAdjIndex, pointAdj);
+                                        aStar.ConnectPoints(pointIndex, pointAdjIndex);
+                                    }
+                                }
+                            }
                         }
-                        aStar.ConnectPoints(pointIndex, pointLocalIndex, false);
                     }
                 }
             }
@@ -145,7 +178,7 @@ namespace Game.Map
         {
             return (int)(point.x + mapSize.x * point.y);
         }
-        private Vector3[] GetRecalulatedPath()
+        private Vector2[] GetRecalulatedPath()
         {
             int startPointIndex = CalculatePointIndex(pathStartPosition);
             int endPointIndex = CalculatePointIndex(pathEndPosition);
@@ -181,9 +214,9 @@ namespace Game.Map
             List<Vector2> worldPath = new List<Vector2>();
             if (SetStartPosition(worldStart) && SetEndPosition(worldEnd))
             {
-                foreach (Vector3 point in GetRecalulatedPath())
+                foreach (Vector2 point in GetRecalulatedPath())
                 {
-                    worldPath.Add(mapGrid.MapToWorld(new Vector2(point.x, point.y)) + HALF_CELL_SIZE);
+                    worldPath.Add(mapGrid.MapToWorld(point) + HALF_CELL_SIZE);
                 }
             }
             return worldPath;
@@ -212,11 +245,7 @@ namespace Game.Map
         public bool IsValidMove(Vector2 worldPosition)
         {
             int pointIndex = CalculatePointIndex(mapGrid.WorldToMap(worldPosition));
-            if (aStar.HasPoint(pointIndex) && aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT)
-            {
-                return true;
-            }
-            return false;
+            return aStar.HasPoint(pointIndex) && aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT;
         }
         public void ResetPath(List<Vector2> pointList)
         {

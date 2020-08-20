@@ -18,7 +18,7 @@ namespace Game.Database
             public bool melee;
         }
         private static Dictionary<string, ImageNode> imageData = new Dictionary<string, ImageNode>();
-        private static readonly string DB_PATH = "res://data/image.json";
+        private const string DB_PATH = "res://data/image.json";
         
         static ImageDB()
         {

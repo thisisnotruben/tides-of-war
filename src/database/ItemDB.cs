@@ -18,7 +18,7 @@ namespace Game.Database
             public int coolDown;
         }
         private static Dictionary<string, ItemNode> itemData = new Dictionary<string, ItemNode>();
-        private static readonly string DB_PATH = "res://data/item.json";
+        private const string DB_PATH = "res://data/item.json";
 
         static ItemDB()
         {
