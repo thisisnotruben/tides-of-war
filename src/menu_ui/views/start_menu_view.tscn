@@ -191,6 +191,7 @@ margin_right = 570.0
 margin_bottom = 1130.0
 
 [node name="header" parent="list_of_menus/m/save_load/v" index="0"]
+visible = false
 text = "Load Game"
 
 [node name="about" parent="list_of_menus/m" instance=ExtResource( 3 )]

@@ -24,6 +24,8 @@ namespace Game.Quests
         }
         private void LoadQuests()
         {
+            // TODO
+            /*
             Dictionary<string, Dictionary<string, string>> allQuestData = QuestDB.GetAllQuestData();
             Dictionary<string, List<string>> chainQuestQueue = new Dictionary<string, List<string>>();
             PackedScene questScene = (PackedScene)GD.Load("res://src/quest_system/quest.tscn");
@@ -58,6 +60,7 @@ namespace Game.Quests
                 }
                 rootQuest.ChangeState((QuestState)Enum.Parse(typeof(QuestState), availableQuests.Name));
             }
+            */
         }
         public void Reset()
         {

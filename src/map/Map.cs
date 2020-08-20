@@ -4,20 +4,41 @@ namespace Game.Map
 {
     public class Map : Node2D
     {
+        private enum collNav : int {
+            // in reference to 'terrain.png'
+            PASS = 1231,
+            BLOCK = 1167,
+            NW_OUTER = 1421,
+            N_OUTER = 1422,
+            NE_OUTER = 1423,
+            W_OUTER = 1485,
+            E_OUTER = 1487,
+            SW_OUTER = 1549,
+            S_OUTER = 1550,
+            SE_OUTER = 1551,
+            NW_INNER = 1484,
+            NE_INNER = 1483,
+            SW_INNER = 1420,
+            SE_INNER = 1419
+        }
         private TileMap mapGrid;
         private readonly AStar aStar = new AStar();
         private readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
         private const float ASTAR_OCCUPIED_WEIGHT = 50.0f;
         private const float ASTAR_ITEM_WEIGHT = 25.0f;
         private const float ASTAR_NORMAL_WEIGHT = 1.0f;
-        private const int OBSTACLE_TILE = 4577;
         private List<Vector2> mapObstacles = new List<Vector2>();
         private Vector2 mapSize;
         private Vector2 pathStartPosition;
         private Vector2 pathEndPosition;
+        public static Map map;
+
+        public Map()
+        {
+            map = this;
+        }
         public override void _Ready()
         {
-            Globals.map = this; // This is used for debugging, until Godot fixies the issue
             mapGrid = GetNode<TileMap>("meta/coll_nav");
             mapSize = mapGrid.GetUsedRect().Size;
             SetObstacles();
@@ -48,12 +69,13 @@ namespace Game.Map
         private void SetPlayerCameraLimits()
         {
             Rect2 mapBorders = mapGrid.GetUsedRect();
+            float yOffset = HALF_CELL_SIZE.y * -2.0f;
             Vector2 mapCellSize = mapGrid.CellSize;
-            Camera2D playerCamera = Globals.player.GetNode<Camera2D>("img/camera");
+            Camera2D playerCamera = Actor.Player.player.GetNode<Camera2D>("img/camera");
             playerCamera.LimitLeft = (int)(mapBorders.Position.x * mapCellSize.x);
             playerCamera.LimitRight = (int)(mapBorders.End.x * mapCellSize.x);
-            playerCamera.LimitTop = (int)(mapBorders.Position.y * mapCellSize.y);
-            playerCamera.LimitBottom = (int)(mapBorders.End.y * mapCellSize.y);
+            playerCamera.LimitTop = (int)(mapBorders.Position.y * mapCellSize.y + yOffset);
+            playerCamera.LimitBottom = (int)(mapBorders.End.y * mapCellSize.y + yOffset);
         }
         private void SetVeilSize()
         {
@@ -70,7 +92,7 @@ namespace Game.Map
             mapObstacles.Clear();
             foreach (Vector2 cell in mapGrid.GetUsedCells())
             {
-                if (mapGrid.GetCellv(cell) == OBSTACLE_TILE)
+                if (mapGrid.GetCellv(cell) == (int) collNav.BLOCK)
                 {
                     mapObstacles.Add(cell);
                 }

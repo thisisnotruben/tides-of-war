@@ -118,7 +118,7 @@ namespace Game.Actor
         }
         public void _OnAreaMouseEnteredExited(bool entered)
         {
-            Globals.player.SetProcessUnhandledInput(!entered);
+            Player.player.SetProcessUnhandledInput(!entered);
         }
         public void _OnScreenEnteredExited(bool entered)
         {
@@ -126,7 +126,7 @@ namespace Game.Actor
         }
         public override void _OnSelectPressed()
         {
-            Globals.player.GetMenu().NpcInteract(this);
+            Player.player.GetMenu().NpcInteract(this);
         }
         private void FollowPatrolPath()
         {
@@ -138,7 +138,7 @@ namespace Game.Actor
                     cachedPatrolPath["cachedPath"].Reverse();
                     cachedPatrolPath["pathPoints"] = cachedPatrolPath["cachedPath"].GetRange(0, cachedPatrolPath["cachedPath"].Count);
                 }
-                cachedPatrolPath["patrolPath"] = Globals.map.getAPath(GlobalPosition, cachedPatrolPath["pathPoints"][0]);
+                cachedPatrolPath["patrolPath"] = Map.Map.map.getAPath(GlobalPosition, cachedPatrolPath["pathPoints"][0]);
             }
             MoveTo(cachedPatrolPath["patrolPath"][0], cachedPatrolPath["patrolPath"]);
         }
@@ -146,14 +146,14 @@ namespace Game.Actor
         {
             if (route == path && (route.Count == 0 || route[route.Count - 1].DistanceTo(worldPosition) > weaponRange))
             {
-                path = Globals.map.getAPath(GlobalPosition, worldPosition);
+                path = Map.Map.map.getAPath(GlobalPosition, worldPosition);
             }
             else
             {
                 Vector2 direction = GetDirection(GlobalPosition, route[0]);
                 if (!direction.Equals(new Vector2()))
                 {
-                    worldPosition = Globals.map.RequestMove(GlobalPosition, direction);
+                    worldPosition = Map.Map.map.RequestMove(GlobalPosition, direction);
                     if (!worldPosition.Equals(new Vector2()))
                     {
                         Move(worldPosition, Stats.MapAnimMoveSpeed(animSpeed));

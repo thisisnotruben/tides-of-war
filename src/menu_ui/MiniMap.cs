@@ -15,7 +15,7 @@ namespace Game.Ui
             // player = ((InGameMenu)Owner).player;
             SetProcess(false);
             return;
-            string mapName = Globals.map.Name;
+            string mapName = Map.Map.map.Name;
             string miniMapPath = $"res://asset/img/map/{mapName}.png";
             if (new Directory().FileExists(miniMapPath))
             {
@@ -81,14 +81,14 @@ namespace Game.Ui
         {
             if (mapRatio.Equals(new Vector2()))
             {
-                TileMap tileMap = Globals.map.GetNode<TileMap>("ground/g1");
+                TileMap tileMap = Map.Map.map.GetNode<TileMap>("ground/g1");
                 Sprite map = GetNode<Sprite>("map");
                 mapRatio = tileMap.GetUsedRect().Size * tileMap.CellSize / (map.Texture.GetSize() * map.Scale);
                 mapRatio = new Vector2(1.0f / mapRatio.x, 1.0f / mapRatio.y);
             }
             if (player.dead && !player.gravePos.Equals(new Vector2()) && path.Count == 0)
             {
-                path = Globals.map.getAPath(player.GlobalPosition, player.gravePos);
+                path = Map.Map.map.getAPath(player.GlobalPosition, player.gravePos);
             }
             GetNode<Node2D>("map").Position = GetNode<Node2D>("player_pos").GlobalPosition - ScaleToMapRatio(player.GetCenterPos());
             SetProcess(true);

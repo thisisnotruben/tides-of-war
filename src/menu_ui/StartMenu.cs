@@ -31,7 +31,8 @@ namespace Game.Ui
         public void _OnNewGamePressed()
         {
             Globals.PlaySound("click0", this, speaker);
-            Globals.SetScene("res://src/map/zone_4.tscn", GetTree().Root, this);
+            SceneLoader.rootNode = GetTree().Root;
+            SceneLoader.Init().SetScene("res://src/map/zone_3.tscn", this);
         }
         public void _OnLoadPressed()
         {

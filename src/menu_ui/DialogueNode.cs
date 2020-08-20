@@ -100,8 +100,8 @@ namespace Game.Ui
             // Pickable questReward = quest.reward;
             // if (questReward != null)
             // {
-            //     Globals.map.AddZChild(questReward);
-            //     questReward.GlobalPosition = Globals.map.GetGridPosition(player.GlobalPosition);
+            //     Map.Map.map.AddZChild(questReward);
+            //     questReward.GlobalPosition = Map.Map.map.GetGridPosition(player.GlobalPosition);
             // }
             // Globals.worldQuests.FinishFocusedQuest();
             // if (Globals.worldQuests.GetFocusedQuest() != null)

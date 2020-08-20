@@ -45,7 +45,7 @@ namespace Game.Ui
             string signal = nameof(Character.UpdateHudStatus);
             string method = nameof(HudStatus._OnUpdateStatus);
             bool interactable = ContentDB.HasContent(npc.Name)
-                && 3 >= Globals.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
+                && 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
             if (npc.IsConnected(signal, hudStatus, method))
             {
                 if (interactable)

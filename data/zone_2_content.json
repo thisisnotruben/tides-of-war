@@ -1,0 +1,17 @@
+{
+    "217-critter": {
+        "level": 0,
+        "enemy": false,
+        "healer": false,
+        "healerCost": 0,
+        "dialogue": "",
+        "drops": [
+            "Blade of Angels",
+            "Fine Shanker"
+        ],
+        "spells": [],
+        "merchandise": [
+            "Devil's Mercy"
+        ]
+    }
+}

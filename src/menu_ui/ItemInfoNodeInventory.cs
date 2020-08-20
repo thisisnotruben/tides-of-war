@@ -165,7 +165,7 @@ namespace Game.Ui
             PackedScene lootScene = (PackedScene)GD.Load("res://src/loot/loot_chest.tscn");
             LootChest loot = (LootChest)lootScene.Instance();
             loot.pickableWorldName = pickableWorldName;
-            Map.Map map = Globals.map;
+            Map.Map map = Map.Map.map;
             map.AddZChild(loot);
             loot.Owner = map;
             loot.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);

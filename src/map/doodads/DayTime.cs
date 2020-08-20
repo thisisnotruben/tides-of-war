@@ -2,7 +2,7 @@ using Game.Light;
 using Godot;
 namespace Game.Map.Doodads
 {
-    public class DayTime : Timer, ISaveable
+    public class DayTime : Timer, ISerializable
     {
         private const float LENGTH_OF_DAY = 210.0f;
         private bool dayLight = true;
@@ -33,15 +33,14 @@ namespace Game.Map.Doodads
                 light.SetIntensity(!dayLight);
             }
         }
-        public void SetSaveData(Godot.Collections.Dictionary data)
+        public void Deserialize(Godot.Collections.Dictionary payload)
         {
-            GD.Print("TODO: Save Not Implemented");
+            // TODO
         }
-        public Godot.Collections.Dictionary GetSaveData()
+        public Godot.Collections.Dictionary Serialize()
         {
-            Godot.Collections.Dictionary saveData = new Godot.Collections.Dictionary();
-            GD.Print("TODO: Save Not Implemented");
-            return saveData;
+            // TODO
+            return new Godot.Collections.Dictionary();
         }
     }
 }

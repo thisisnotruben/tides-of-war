@@ -1,0 +1,13 @@
+{
+	"map": "res://src/map/zone_3.tscn",
+	"saveTime": "2020-8-18 12:25:2",
+	"/root/zone_3/day_time": {
+
+	},
+	"/root/zone_3/zed/z1/737-player": {
+		"GlobalPosition": [
+			1416,
+			1912
+		]
+	}
+}

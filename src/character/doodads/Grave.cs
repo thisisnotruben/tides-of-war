@@ -36,7 +36,7 @@ namespace Game.Actor.Doodads
         public void Revive()
         {
             Globals.PlaySound("click2", this, new Speaker());
-            Globals.map.SetVeil(false);
+            Map.Map.map.SetVeil(false);
             deceasedPlayer.GetMenu().GetNode<CanvasItem>("c/osb").Hide();
             deceasedPlayer.GetMenu().GetNode<BaseButton>("c/osb/m/cast").Disconnect("pressed", this, nameof(Revive));
             deceasedPlayer.SetState(Character.States.ALIVE);

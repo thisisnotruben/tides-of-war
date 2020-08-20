@@ -19,13 +19,6 @@ namespace Game.Database
         }
         private static Dictionary<string, ContentNode> contentData = new Dictionary<string, ContentNode>();
 
-        private static void GetWorldNames(Godot.Collections.Array inArray, List<string> outArray)
-        {
-            foreach (string worldObjectName in inArray)
-            {
-                outArray.Add(worldObjectName);
-            }
-        }
         public static void LoadContentData(string dbPath)
         {
             // clear out cached database for switching between maps
@@ -52,6 +45,13 @@ namespace Game.Database
                 GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.spells)], contentNode.spells);
                 GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.merchandise)], contentNode.merchandise);
                 contentData.Add(characterName, contentNode);
+            }
+        }
+        public static void GetWorldNames(Godot.Collections.Array inArray, List<string> outArray)
+        {
+            foreach (string worldObjectName in inArray)
+            {
+                outArray.Add(worldObjectName);
             }
         }
         public static ContentNode GetContentData(string editorName)

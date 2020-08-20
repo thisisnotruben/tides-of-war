@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Game.Ability;
 using Game.Actor;
 using Game.Database;
 using Game.Loot;
@@ -607,8 +605,8 @@ namespace Game.Ui
             Pickable questReward = quest.reward;
             if (questReward != null)
             {
-                Globals.map.AddZChild(questReward);
-                questReward.GlobalPosition = Globals.map.GetGridPosition(player.GlobalPosition);
+                Map.Map.map.AddZChild(questReward);
+                questReward.GlobalPosition = Map.Map.map.GetGridPosition(player.GlobalPosition);
             }
             Globals.worldQuests.FinishFocusedQuest();
             if (Globals.worldQuests.GetFocusedQuest() != null)
@@ -1084,9 +1082,10 @@ namespace Game.Ui
         {
             // inventoryBag.RemoveItem(inventoryBag.GetItemSlot(pickable).GetIndex());
             player.GetNode("inventory").RemoveChild(pickable);
-            Globals.map.AddZChild(pickable);
-            pickable.Owner = Globals.map;
-            pickable.GlobalPosition = Globals.map.SetGetPickableLoc(player.GlobalPosition, true);
+            Map.Map map = Map.Map.map;
+            map.AddZChild(pickable);
+            pickable.Owner = map;
+            pickable.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
         }
         public string SndConfigure(bool byPass = false, bool off = false)
         {

@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Game.Actor;
-using Game.Database;
 using Game.Quests;
 using Game.Utils;
 using Godot;
@@ -9,17 +7,6 @@ namespace Game
     public class Globals : Node
     {
         public static readonly PackedScene combatText = (PackedScene)GD.Load("res://src/character/doodads/combat_text.tscn");
-        public static readonly Dictionary<string, string> SAVE_PATH = new Dictionary<string, string>
-        { { nameof(saveData), "res://data/save_game/save_data.json" },
-            { "SAVE_SLOT_0", "res://data/save_game/save_slot_0.json" },
-            { "SAVE_SLOT_1", "res://data/save_game/save_slot_1.json" },
-            { "SAVE_SLOT_2", "res://data/save_game/save_slot_2.json" },
-            { "SAVE_SLOT_3", "res://data/save_game/save_slot_3.json" },
-            { "SAVE_SLOT_4", "res://data/save_game/save_slot_4.json" },
-            { "SAVE_SLOT_5", "res://data/save_game/save_slot_5.json" },
-            { "SAVE_SLOT_6", "res://data/save_game/save_slot_6.json" },
-            { "SAVE_SLOT_7", "res://data/save_game/save_slot_7.json" }
-        };
         public static readonly Dictionary<string, int> WEAPON_TYPE = new Dictionary<string, int>
         { { "AXE", 5 },
             { "CLUB", 3 },
@@ -44,65 +31,16 @@ namespace Game
         };
         public const string HUD_SHORTCUT_GROUP = "HUD-shortcut";
         public const string SAVE_GROUP = "save";
-        public static Player player = null;
-        public static Dictionary<string, AudioStream> sndMeta = new Dictionary<string, AudioStream>();
-        public static Dictionary<string, string> saveData = new Dictionary<string, string>();
-        private static Godot.Collections.Dictionary sceneMeta = null;
-        private static readonly File file = new File();
+        public static Dictionary<string, AudioStream> sndData = new Dictionary<string, AudioStream>();
         public static WorldQuests worldQuests { get; private set; }
-        public static Map.Map map { get; set; }
         
         public override void _Ready()
         {
-            LoadsaveData();
             LoadSnd();
-            // CallDeferred(nameof(SetUpWorldQuests));
-        }
-        public static void SetScene(string scenePath, Node root, CanvasItem currentScene)
-        {
-            // load map specific data
-            string mapName = scenePath.GetFile().BaseName();
-            string dataPath = $"res://data/{mapName}.json";
-            string contentPath = $"res://data/{mapName}_content.json";
-            string questPath = $"res://data/{mapName}_quest.json";
-            if (file.FileExists(dataPath))
-            {
-                UnitDB.LoadUnitData(dataPath);
-            }
-            if (file.FileExists(contentPath))
-            {
-                ContentDB.LoadContentData(contentPath);
-            }
-            if (file.FileExists(questPath))
-            {
-                // TODO: load quest data
-            }
-            // load map & progress bar scene
-            PackedScene sceneLoaderScene = (PackedScene)GD.Load("res://src/globals/scene_loader.tscn");
-            SceneLoader sceneLoader = (SceneLoader)sceneLoaderScene.Instance();
-            root.AddChild(sceneLoader);
-            sceneLoader.LoadScene(scenePath, sceneMeta, currentScene);
-        }
-        public static void SaveGameData(string gameData, int index)
-        {
-            file.Open(SAVE_PATH[nameof(saveData)], File.ModeFlags.Write);
-            saveData[$"slot_{index}"] = gameData;
-            file.StoreLine(JSON.Print(saveData));
-            file.Close();
-        }
-        public static void LoadsaveData()
-        {
-            file.Open(SAVE_PATH[(nameof(saveData))], File.ModeFlags.Read);
-            Godot.Collections.Dictionary gameData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
-            file.Close();
-            foreach (string key in gameData.Keys)
-            {
-                saveData.Add(key, (string)gameData[key]);
-            }
         }
         private void LoadSnd(string path = "res://asset/snd")
         {
-            sndMeta.Clear();
+            sndData.Clear();
             string importExt = ".import";
             Directory directory = new Directory();
             directory.Open(path);
@@ -118,39 +56,17 @@ namespace Game
                 }
                 else if (directory.FileExists(resourcePath) && !resourcePath.Contains(importExt))
                 {
-                    sndMeta.Add(resourceName.BaseName(), (AudioStream)GD.Load(resourcePath));
+                    sndData.Add(resourceName.BaseName(), (AudioStream)GD.Load(resourcePath));
                 }
                 resourceName = directory.GetNext();
             }
             directory.ListDirEnd();
         }
-        public static void SaveGame(string savePath)
-        {
-            GameSaver gameSaver = new GameSaver();
-            gameSaver.SaveGame(savePath);
-        }
-        public static void LoadGame(string loadPath)
-        {
-            if (file.FileExists(loadPath))
-            {
-                file.Open(loadPath, File.ModeFlags.Read);
-                sceneMeta = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
-                file.Close();
-                SetScene((string)sceneMeta["scene"], map.GetTree().Root, Globals.map);
-            }
-        }
-        private void SetUpWorldQuests()
-        {
-            PackedScene worldQuestsScene = (PackedScene)GD.Load("res://src/quest_system/world_quests.tscn");
-            WorldQuests worldQuests = (WorldQuests)worldQuestsScene.Instance();
-            GetTree().Root.AddChild(worldQuests);
-            Globals.worldQuests = worldQuests;
-        }
         public static void PlaySound(string sndName, Node originator, Speaker sndPlayer)
         {
-            if (!sndMeta.ContainsKey(sndName))
+            if (!sndData.ContainsKey(sndName))
             {
-                GD.Print($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
+                GD.Print($"{nameof(sndData)} doesn't contain sound: {sndName}");
             }
             else
             {
@@ -162,7 +78,7 @@ namespace Game
                 if (!sndPlayer.Playing)
                 {
                     sndPlayer.VolumeDb = -10.0f;
-                    sndPlayer.Stream = (AudioStream)sndMeta[sndName];
+                    sndPlayer.Stream = (AudioStream)sndData[sndName];
                     sndPlayer.Play();
                 }
                 else
@@ -177,9 +93,9 @@ namespace Game
         }
         public static void PlaySound(string sndName, Node originator, Speaker2D sndPlayer)
         {
-            if (!sndMeta.ContainsKey(sndName))
+            if (!sndData.ContainsKey(sndName))
             {
-                GD.Print($"{nameof(sndMeta)} doesn't contain sound: {sndName}");
+                GD.Print($"{nameof(sndData)} doesn't contain sound: {sndName}");
             }
             else
             {
@@ -191,7 +107,7 @@ namespace Game
                 if (!sndPlayer.Playing)
                 {
                     sndPlayer.VolumeDb = -10.0f;
-                    sndPlayer.Stream = (AudioStream)sndMeta[sndName];
+                    sndPlayer.Stream = (AudioStream)sndData[sndName];
                     sndPlayer.Play();
                 }
                 else

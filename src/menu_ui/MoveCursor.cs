@@ -11,7 +11,7 @@ namespace Game.Ui
         public void AddToMap(Player originator, Vector2 globalTilePosition)
         {
             originator.Connect(nameof(Player.PosChanged), this, nameof(Delete));
-            Globals.map.GetNode("ground").AddChild(this);
+            Map.Map.map.GetNode("ground").AddChild(this);
             GlobalPosition = globalTilePosition;
         }
         public void Delete()

@@ -69,14 +69,15 @@
     <Compile Include="src\database\SpellDB.cs" />
     <Compile Include="src\database\ImageDB.cs" />
     <Compile Include="src\database\UnitDB.cs" />
-    <Compile Include="src\globals\GameSaver.cs" />
+    <Compile Include="src\globals\Archiver.cs" />
     <Compile Include="src\globals\Globals.cs" />
-    <Compile Include="src\globals\ISaveable.cs" />
+    <Compile Include="src\globals\ISerializable.cs" />
     <Compile Include="src\globals\SceneLoader.cs" />
     <Compile Include="src\globals\Stats.cs" />
     <Compile Include="src\globals\WorldObject.cs" />
     <Compile Include="src\loot\LootChest.cs" />
     <Compile Include="src\map\doodads\DayTime.cs" />
+    <Compile Include="src\map\doodads\TransitionZone.cs" />
     <Compile Include="src\map\Map.cs" />
     <Compile Include="src\menu_ui\AboutNode.cs" />
     <Compile Include="src\menu_ui\DialogueNode.cs" />

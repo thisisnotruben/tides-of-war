@@ -9,6 +9,7 @@ namespace Game.Actor
 {
     public class Player : Character
     {
+        public static Player player;
         private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/views/move_cursor.tscn");
         private static readonly PackedScene graveScene = (PackedScene)GD.Load("res://src/character/doodads/grave.tscn");
         private List<Vector2> reservedPath;
@@ -66,7 +67,6 @@ namespace Game.Actor
         public override void init()
         {
             worldType = WorldTypes.PLAYER;
-            Globals.player = this;
             reservedPath = new List<Vector2>();
             gravePos = new Vector2();
             xp = 0;
@@ -79,6 +79,10 @@ namespace Game.Actor
             vest = null;
             gold = 10000;
             level = 10;
+        }
+        public Player()
+        {
+            player = this;
         }
         public override void _Ready()
         {
@@ -95,16 +99,16 @@ namespace Game.Actor
                 {
                     return;
                 }
-                Vector2 eventGlobalPosition = Globals.map.GetGridPosition(GetGlobalMousePosition());
-                if (Globals.map.IsValidMove(eventGlobalPosition))
+                Vector2 eventGlobalPosition = Map.Map.map.GetGridPosition(GetGlobalMousePosition());
+                if (Map.Map.map.IsValidMove(eventGlobalPosition))
                 {
                     Tween tween = GetNode<Tween>("tween");
                     if (state == States.MOVING && path.Count > 0 && tween.IsActive())
                     {
-                        Globals.map.ResetPath(reservedPath);
+                        Map.Map.map.ResetPath(reservedPath);
                         reservedPath.Clear();
-                        List<Vector2> _path = Globals.map.getAPath(
-                            Globals.map.GetGridPosition(GlobalPosition), eventGlobalPosition);
+                        List<Vector2> _path = Map.Map.map.getAPath(
+                            Map.Map.map.GetGridPosition(GlobalPosition), eventGlobalPosition);
                         if (_path[0] != path[0])
                         {
                             tween.Remove(this, "global_position");
@@ -118,7 +122,7 @@ namespace Game.Actor
                     }
                     else
                     {
-                        path = Globals.map.getAPath(Globals.map.GetGridPosition(GlobalPosition), eventGlobalPosition);
+                        path = Map.Map.map.getAPath(Map.Map.map.GetGridPosition(GlobalPosition), eventGlobalPosition);
                     }
                     EmitSignal(nameof(PosChanged));
                     MoveCursor cursor = (MoveCursor)moveCursorScene.Instance();
@@ -160,7 +164,7 @@ namespace Game.Actor
             if (!direction.Equals(new Vector2()))
             {
                 RayCast2D ray = GetNode<RayCast2D>("ray");
-                worldPosition = Globals.map.RequestMove(GlobalPosition, direction);
+                worldPosition = Map.Map.map.RequestMove(GlobalPosition, direction);
                 ray.LookAt(worldPosition);
                 if (!worldPosition.Equals(new Vector2()))
                 {
@@ -276,11 +280,11 @@ namespace Game.Actor
             {
                 await ToSignal(GetNode<AnimationPlayer>("anim"), "animation_finished");
                 Grave grave = (Grave)graveScene.Instance();
-                Globals.map.AddZChild(grave);
+                Map.Map.map.AddZChild(grave);
                 grave.SetDeceasedPlayer(this);
                 grave.GlobalPosition = GlobalPosition;
                 gravePos = grave.GlobalPosition;
-                Globals.map.SetVeil(true);
+                Map.Map.map.SetVeil(true);
                 path.Clear();
                 Dictionary<float, Vector2> graveSites = new Dictionary<float, Vector2>();
                 List<float> graveDist = new List<float>();
@@ -295,7 +299,7 @@ namespace Game.Actor
                 {
                     minVal = Mathf.Min(minVal, graveDist[i]);
                 }
-                GlobalPosition = Globals.map.GetGridPosition(graveSites[minVal]);
+                GlobalPosition = Map.Map.map.GetGridPosition(graveSites[minVal]);
                 SetProcessUnhandledInput(true);
                 SetProcess(true);
             }

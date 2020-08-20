@@ -56,7 +56,7 @@ namespace Game.Loot
                 Item item = this as Item;
             }
             InGameMenu.Bags bag = (this is Item) ? InGameMenu.Bags.INVENTORY : InGameMenu.Bags.SPELL;
-            if (Owner == Globals.map && addToBag)
+            if (Owner == Map.Map.map && addToBag)
             {
                 PauseMode = PauseModeEnum.Process;
                 EmitSignal(nameof(SetInMenu), this, PickableDB.GetStackSize(worldName) > 0, bag);
@@ -65,9 +65,9 @@ namespace Game.Loot
             {
                 if (GetParent() != null)
                 {
-                    if (Owner == Globals.map)
+                    if (Owner == Map.Map.map)
                     {
-                        Globals.map.SetGetPickableLoc(GlobalPosition, false);
+                        Map.Map.map.SetGetPickableLoc(GlobalPosition, false);
                     }
                     GetParent().RemoveChild(this);
                 }

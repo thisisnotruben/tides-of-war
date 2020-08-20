@@ -157,7 +157,7 @@ namespace Game.Ui
         {
             Globals.PlaySound("click0", this, speaker);
             GetTree().Paused = false;
-            Globals.SetScene("res://src/menu_ui/start_menu.tscn", GetTree().Root, Globals.map);
+            SceneLoader.Init().SetScene("res://src/menu_ui/start_menu.tscn", Map.Map.map);
         }
         private void Transition(Control scene)
         {

@@ -3,22 +3,22 @@ namespace Game.Ui
 {
     public class SaveLoadNode : GameMenu
     {
+        private readonly Archiver archiver = new Archiver();
         private Popup popup;
         private int index;
 
         public override void _Ready()
         {
+            AddChild(archiver);
             popup = GetNode<Popup>("popup");
             popup.Connect("hide", this, nameof(_OnSaveLoadNodeHide));
+            popup.GetNode<BaseButton>("m/save_load/save").Connect("pressed", this, nameof(_OnSavePressed));
             SetLabels();
         }
         private void SaveGame()
         {
-            Godot.Collections.Dictionary date = OS.GetDatetime();
-            string time = $"{date["month"]}-{date["day"]} {date["hour"]}:{date["minute"]}";
-            Globals.SaveGameData(time, index);
-            Globals.SaveGame(Globals.SAVE_PATH[$"SAVE_SLOT_{index}"]);
-            GetLabel(index).Text = time;
+            archiver.SaveGame(index);
+            GetLabel(index - 1).Text = Archiver.GetSaveFileName(index);
         }
         private Label GetLabel(int index)
         {
@@ -26,17 +26,15 @@ namespace Game.Ui
         }
         private void SetLabels()
         {
-            int labelIdx = 0;
+
+            int labelIdx = 1;
             foreach (Node node in GetNode<Node>("v/s/c/g").GetChildren())
             {
                 Label label = node as Label;
                 if (label != null)
                 {
-                    string slotText = $"slot_{labelIdx}";
-                    if (Globals.saveData.ContainsKey(slotText) && !Globals.saveData[slotText].Empty())
-                    {
-                        GetLabel(labelIdx++).Text = Globals.saveData[slotText];
-                    }
+                    GetLabel(labelIdx - 1).Text = Archiver.GetSaveFileName(labelIdx);
+                    labelIdx++;
                 }
             }
         }
@@ -58,7 +56,7 @@ namespace Game.Ui
         }
         public void _OnSlotPressed(int index)
         {
-            this.index = index;
+            this.index = index + 1;
             Globals.PlaySound("click2", this, speaker);
             GetNode<Control>("v").Hide();
             popup.GetNode<Control>("m/save_load/save").Show();
@@ -80,9 +78,8 @@ namespace Game.Ui
         }
         public void _OnDeleteConfirm()
         {
-            Globals.SaveGameData("", index);
-            GetLabel(index).Text = $"Slot {index + 1}";
-            new Directory().Remove(Globals.SAVE_PATH[$"SAVE_SLOT_{index}"]);
+            Archiver.DeleteSaveFile(index);
+            GetLabel(index).Text = Archiver.GetSaveFileName(index);
             _OnSaveLoadNodeHide();
         }
         public void _OnSavePressed()
@@ -107,7 +104,7 @@ namespace Game.Ui
         public void _OnLoadPressed()
         {
             Globals.PlaySound("click0", this, speaker);
-            Globals.LoadGame(Globals.SAVE_PATH[$"SAVE_SLOT_{index}"]);
+            archiver.LoadGame(index);
             Hide();
         }
     }

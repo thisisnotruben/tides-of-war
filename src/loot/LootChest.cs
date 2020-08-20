@@ -47,7 +47,7 @@ namespace Game.Loot
         {
             // TODO: what if already inside? it wouldn't activate
             // maybe a signal to check if player moved, hmmm...
-            // if (collectDistance >= Globals.map.getAPath(Globals.player.GlobalPosition, GlobalPosition).Count)
+            // if (collectDistance >= Map.Map.map.getAPath(Globals.player.GlobalPosition, GlobalPosition).Count)
             // {
             tween.InterpolateProperty(this, ":scale", Scale, new Vector2(1.05f, 1.05f),
                 0.5f, Tween.TransitionType.Bounce, Tween.EaseType.In);
@@ -65,7 +65,7 @@ namespace Game.Loot
         }
         public void _OnSelectPressed()
         {
-            Globals.player.GetMenu().LootInteract(this);
+            Actor.Player.player.GetMenu().LootInteract(this);
         }
         public void _OnTweenCompleted(Godot.Object obj, NodePath nodePath)
         {

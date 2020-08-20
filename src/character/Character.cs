@@ -10,7 +10,7 @@ using Game.Utils;
 using Godot;
 namespace Game.Actor
 {
-    public abstract class Character : WorldObject, ISaveable
+    public abstract class Character : WorldObject, ISerializable
     {
         public static readonly PackedScene footStepScene = (PackedScene)GD.Load("res://src/character/doodads/footstep.tscn");
         public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/character/doodads/buff_anim.tscn");
@@ -300,7 +300,8 @@ namespace Game.Actor
                         hitType = CombatText.TextType.PARRY;
                         damage = 0;
                         sndName = (weaponMaterial.Equals(target.weaponMaterial)) ? $"block_{weaponMaterial}_{weaponMaterial}" : "block_metal_wood";
-                        sndName += GD.Randi() % Globals.WEAPON_TYPE[sndName.ToUpper()];
+                        // TODO
+                        // sndName += GD.Randi() % Globals.WEAPON_TYPE[sndName.ToUpper()];
                     }
                     else
                     {
@@ -395,7 +396,7 @@ namespace Game.Actor
                 GlobalPosition.DistanceTo(GlobalPosition + direction) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
             tween.Start();
             await ToSignal(tween, "tween_completed");
-            Vector2 gridPos = Globals.map.GetGridPosition(GlobalPosition);
+            Vector2 gridPos = Map.Map.map.GetGridPosition(GlobalPosition);
             tween.InterpolateProperty(this, ":global_position", GlobalPosition, gridPos,
                 gridPos.DistanceTo(GlobalPosition) / 10.0f, Tween.TransitionType.Elastic, Tween.EaseType.In);
             tween.Start();
@@ -469,8 +470,8 @@ namespace Game.Actor
         }
         private protected static Vector2 GetDirection(Vector2 currentPos, Vector2 targetPos)
         {
-            Vector2 myPos = Globals.map.GetGridPosition(currentPos);
-            targetPos = Globals.map.GetGridPosition(targetPos);
+            Vector2 myPos = Map.Map.map.GetGridPosition(currentPos);
+            targetPos = Map.Map.map.GetGridPosition(targetPos);
             Vector2 direction = new Vector2();
             if (myPos.x > targetPos.x)
             {
@@ -633,18 +634,24 @@ namespace Game.Actor
                 Vector2 stepPos = GlobalPosition;
                 stepPos.y -= 3;
                 stepPos.x += (step) ? 1.0f : -4.0f;
-                Globals.map.GetNode("ground").AddChild(footStep);
+                Map.Map.map.GetNode("ground").AddChild(footStep);
                 footStep.GlobalPosition = stepPos;
             }
         }
-        public virtual void SetSaveData(Godot.Collections.Dictionary saveData)
+        public virtual void Deserialize(Godot.Collections.Dictionary payload)
         {
-            // TODO
+            // set global position
+            Godot.Collections.Array globalPositionArray = (Godot.Collections.Array) payload[nameof(GlobalPosition)];
+            Vector2 globalPosition = new Vector2((float) globalPositionArray[0], (float) globalPositionArray[1]);
+            GlobalPosition = Map.Map.map.GetGridPosition(globalPosition);
         }
-        public virtual Godot.Collections.Dictionary GetSaveData()
+        public virtual Godot.Collections.Dictionary Serialize()
         {
-            // TODO
-            return new Godot.Collections.Dictionary();
+            Godot.Collections.Dictionary payload = new Godot.Collections.Dictionary()
+            {
+                {"GlobalPosition", new Godot.Collections.Array(){GlobalPosition.x, GlobalPosition.y}}
+            };
+            return payload;
         }
     }
 }
