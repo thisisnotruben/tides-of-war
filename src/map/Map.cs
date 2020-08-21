@@ -6,16 +6,13 @@ namespace Game.Map
 {
     public class Map : Node2D
     {
-        private TileMap mapGrid;
+        private TileMap collNav;
         private readonly AStar2D aStar = new AStar2D();
-        private readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
+        private static readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
         private const float ASTAR_OCCUPIED_WEIGHT = 50.0f;
         private const float ASTAR_ITEM_WEIGHT = 25.0f;
         private const float ASTAR_NORMAL_WEIGHT = 1.0f;
-        private List<Vector2> mapObstacles = new List<Vector2>();
         private Vector2 mapSize;
-        private Vector2 pathStartPosition;
-        private Vector2 pathEndPosition;
         public static Map map;
 
         public Map()
@@ -24,11 +21,11 @@ namespace Game.Map
         }
         public override void _Ready()
         {
-            mapGrid = GetNode<TileMap>("meta/coll_nav");
-            mapSize = mapGrid.GetUsedRect().Size;
+            collNav = GetNode<TileMap>("meta/coll_nav");
+            mapSize = collNav.GetUsedRect().Size;
             MakeNav();
             SetVeilSize();
-            // SetPlayerCameraLimits();
+            SetPlayerCameraLimits();
         }
         public void AddZChild(Node node)
         {
@@ -51,9 +48,9 @@ namespace Game.Map
         }
         private void SetPlayerCameraLimits()
         {
-            Rect2 mapBorders = mapGrid.GetUsedRect();
+            Rect2 mapBorders = collNav.GetUsedRect();
             float yOffset = HALF_CELL_SIZE.y * -2.0f;
-            Vector2 mapCellSize = mapGrid.CellSize;
+            Vector2 mapCellSize = collNav.CellSize;
             Camera2D playerCamera = Actor.Player.player.GetNode<Camera2D>("img/camera");
             playerCamera.LimitLeft = (int)(mapBorders.Position.x * mapCellSize.x);
             playerCamera.LimitRight = (int)(mapBorders.End.x * mapCellSize.x);
@@ -77,16 +74,16 @@ namespace Game.Map
             int y;
             int x;
             int tileId;
-            Vector2 point;
-            int pointIndex;
+            Vector2 from;
+            int fromIdx;
 
-            byte adjY;
-            byte adjX;
-            Vector2 pointAdj;
-            int pointAdjIndex;
-            int adjTileId;
+            byte toY;
+            byte toX;
+            Vector2 to;
+            int toIdx;
+            int toTileId;
 
-            CollNavDB.collNavTile from;
+            CollNavDB.collNavTile fromTile;
             CollNavDB.Ordinal ordinal;
             Vector2 direction;
 
@@ -95,75 +92,82 @@ namespace Game.Map
             {
                 for (x = 0; x < (int)mapSize.x; x++)
                 {
-                    tileId = mapGrid.GetCell(x, y);
-                    if (Enum.IsDefined(typeof(CollNavDB.collNavTile), tileId) && tileId != (int)CollNavDB.collNavTile.BLOCK)
+                    tileId = collNav.GetCell(x, y);
+                    if (!Enum.IsDefined(typeof(CollNavDB.collNavTile), tileId) || tileId == (int)CollNavDB.collNavTile.BLOCK)
                     {
-                        from = (CollNavDB.collNavTile)tileId;
-                        point = new Vector2(x, y);
-                        pointIndex = CalculatePointIndex(point);
+                        continue;
+                    }
 
-                        // Add node
-                        aStar.AddPoint(pointIndex, point);
+                    fromTile = (CollNavDB.collNavTile)tileId;
+                    from = new Vector2(x, y);
+                    fromIdx = GetPointIndex(from);
 
-                        // add edges from neighbors
-                        for (adjY = 0; adjY < 3; adjY++)
+                    // Add node
+                    aStar.AddPoint(fromIdx, collNav.MapToWorld(from) + HALF_CELL_SIZE, ASTAR_NORMAL_WEIGHT);
+
+                    // add edges from neighbors
+                    for (toY = 0; toY < 3; toY++)
+                    {
+                        for (toX = 0; toX < 3; toX++)
                         {
-                            for (adjX = 0; adjX < 3; adjX++)
+                            to = new Vector2(from.x + toX - 1, from.y + toY - 1);
+                            toIdx = GetPointIndex(to);
+
+                            if (fromIdx == toIdx || IsOutsideMapBounds(to))
                             {
-                                pointAdj = new Vector2(point.x + adjX - 1, point.y + adjY - 1);
-                                pointAdjIndex = CalculatePointIndex(pointAdj);
+                                continue;
+                            }
 
-                                if (pointIndex == pointAdjIndex || IsOutsideMapBounds(pointAdj) || !aStar.HasPoint(pointAdjIndex))
-                                {
-                                    continue;
-                                }
+                            toTileId = collNav.GetCellv(to);
+                            if (!Enum.IsDefined(typeof(CollNavDB.collNavTile), toTileId) || toTileId == (int)CollNavDB.collNavTile.BLOCK)
+                            {
+                                continue;
+                            }
 
-                                adjTileId = mapGrid.GetCellv(pointAdj);
-                                if (Enum.IsDefined(typeof(CollNavDB.collNavTile), adjTileId) && adjTileId != (int)CollNavDB.collNavTile.BLOCK)
-                                {
-                                    direction = pointAdj - point;
-                                    if (direction.x == -1 && direction.y == -1)
-                                    {
-                                        ordinal = CollNavDB.Ordinal.NW;
-                                    }
-                                    else if (direction.x == 0 && direction.y == -1)
-                                    {
-                                        ordinal = CollNavDB.Ordinal.N;
-                                    }
-                                    else if (direction.x == 1 && direction.y == -1)
-                                    {
-                                        ordinal = CollNavDB.Ordinal.NE;
-                                    }
-                                    else if (direction.x == -1 && direction.y == 0)
-                                    {
-                                        ordinal = CollNavDB.Ordinal.W;
-                                    }
-                                    else if (direction.x == 1 && direction.y == 0)
-                                    {
-                                        ordinal = CollNavDB.Ordinal.E;
-                                    }
-                                    else if (direction.x == -1 && direction.y == 1)
-                                    {
-                                        ordinal = CollNavDB.Ordinal.SW;
-                                    }
-                                    else if (direction.x == 0 && direction.y == 1)
-                                    {
-                                        ordinal = CollNavDB.Ordinal.S;
-                                    }
-                                    else if (direction.x == 1 && direction.y == 1)
-                                    {
-                                        ordinal = CollNavDB.Ordinal.SE;
-                                    }
-                                    else
-                                    {
-                                        continue;
-                                    }
-                                    if (CollNavDB.CanConnect(from, (CollNavDB.collNavTile)adjTileId, ordinal))
-                                    {
-                                        aStar.AddPoint(pointAdjIndex, pointAdj);
-                                        aStar.ConnectPoints(pointIndex, pointAdjIndex);
-                                    }
-                                }
+                            // get ordinal from direction
+                            direction = to - from;
+                            if (direction.x == -1 && direction.y == -1)
+                            {
+                                ordinal = CollNavDB.Ordinal.NW;
+                            }
+                            else if (direction.x == 0 && direction.y == -1)
+                            {
+                                ordinal = CollNavDB.Ordinal.N;
+                            }
+                            else if (direction.x == 1 && direction.y == -1)
+                            {
+                                ordinal = CollNavDB.Ordinal.NE;
+                            }
+                            else if (direction.x == -1 && direction.y == 0)
+                            {
+                                ordinal = CollNavDB.Ordinal.W;
+                            }
+                            else if (direction.x == 1 && direction.y == 0)
+                            {
+                                ordinal = CollNavDB.Ordinal.E;
+                            }
+                            else if (direction.x == -1 && direction.y == 1)
+                            {
+                                ordinal = CollNavDB.Ordinal.SW;
+                            }
+                            else if (direction.x == 0 && direction.y == 1)
+                            {
+                                ordinal = CollNavDB.Ordinal.S;
+                            }
+                            else if (direction.x == 1 && direction.y == 1)
+                            {
+                                ordinal = CollNavDB.Ordinal.SE;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+
+                            // connect by the rules in 'coll_nav.json'
+                            if (CollNavDB.CanConnect(fromTile, (CollNavDB.collNavTile)toTileId, ordinal))
+                            {
+                                aStar.AddPoint(toIdx, collNav.MapToWorld(to) + HALF_CELL_SIZE, ASTAR_NORMAL_WEIGHT);
+                                aStar.ConnectPoints(fromIdx, toIdx);
                             }
                         }
                     }
@@ -174,77 +178,55 @@ namespace Game.Map
         {
             return point.x < 0.0f || point.y < 0.0f || point.x >= mapSize.x || point.y >= mapSize.y;
         }
-        private int CalculatePointIndex(Vector2 point)
+        private int GetPointIndex(Vector2 point)
         {
-            return (int)(point.x + mapSize.x * point.y);
-        }
-        private Vector2[] GetRecalulatedPath()
-        {
-            int startPointIndex = CalculatePointIndex(pathStartPosition);
-            int endPointIndex = CalculatePointIndex(pathEndPosition);
-            return aStar.GetPointPath(startPointIndex, endPointIndex);
-        }
-        private bool SetStartPosition(Vector2 point)
-        {
-            point = mapGrid.WorldToMap(point);
-            if (!mapObstacles.Contains(point) && !IsOutsideMapBounds(point))
-            {
-                pathStartPosition = point;
-                return true;
-            }
-            return false;
-        }
-        private bool SetEndPosition(Vector2 point)
-        {
-            point = mapGrid.WorldToMap(point);
-            if (!mapObstacles.Contains(point) && !IsOutsideMapBounds(point))
-            {
-                pathEndPosition = point;
-                return true;
-            }
-            return false;
+            int x = (int)point.x;
+            int y = (int)point.y;
+            // Cantor pairing function
+            return ((x + y + 1) * (x + y)) / 2 * y;
         }
         private void SetPointWeight(Vector2 worldPosition, float weight)
         {
-            int pointIndex = CalculatePointIndex(mapGrid.WorldToMap(worldPosition));
-            aStar.SetPointWeightScale(pointIndex, weight);
+            aStar.SetPointWeightScale(GetPointIndex(collNav.WorldToMap(worldPosition)), weight);
         }
         public List<Vector2> getAPath(Vector2 worldStart, Vector2 worldEnd)
         {
             List<Vector2> worldPath = new List<Vector2>();
-            if (SetStartPosition(worldStart) && SetEndPosition(worldEnd))
+            int worldStartPointIdx = GetPointIndex(collNav.WorldToMap(worldStart));
+            int worldEndPointIdx = GetPointIndex(collNav.WorldToMap(worldEnd));
+            if (aStar.HasPoint(worldStartPointIdx) && aStar.HasPoint(worldEndPointIdx))
             {
-                foreach (Vector2 point in GetRecalulatedPath())
+                foreach (Vector2 point in aStar.GetPointPath(worldStartPointIdx, worldEndPointIdx))
                 {
-                    worldPath.Add(mapGrid.MapToWorld(point) + HALF_CELL_SIZE);
+                    worldPath.Add(point);
                 }
             }
             return worldPath;
         }
         public Vector2 GetGridPosition(Vector2 worldPosition)
         {
-            return mapGrid.MapToWorld(mapGrid.WorldToMap(worldPosition)) + HALF_CELL_SIZE;
+            return collNav.MapToWorld(collNav.WorldToMap(worldPosition)) + HALF_CELL_SIZE;
         }
         public Vector2 RequestMove(Vector2 currentWorldPosition, Vector2 direction)
         {
-            Vector2 cellStart = mapGrid.WorldToMap(currentWorldPosition);
+            Vector2 cellStart = collNav.WorldToMap(currentWorldPosition);
             Vector2 cellTarget = cellStart + direction;
-            int targetPointIndex = CalculatePointIndex(cellTarget);
+            int targetPointIndex = GetPointIndex(cellTarget);
             if (aStar.HasPoint(targetPointIndex) && aStar.GetPointWeightScale(targetPointIndex) == ASTAR_NORMAL_WEIGHT)
             {
-                int currentPointIndex = CalculatePointIndex(cellStart);
+                int currentPointIndex = GetPointIndex(cellStart);
                 if (aStar.GetPointWeightScale(currentPointIndex) != ASTAR_ITEM_WEIGHT)
                 {
                     aStar.SetPointWeightScale(currentPointIndex, ASTAR_NORMAL_WEIGHT);
                 }
                 aStar.SetPointWeightScale(targetPointIndex, ASTAR_OCCUPIED_WEIGHT);
-                return mapGrid.MapToWorld(cellTarget) + HALF_CELL_SIZE;
+                return collNav.MapToWorld(cellTarget) + HALF_CELL_SIZE;
             }
             return new Vector2();
         }
         public bool IsValidMove(Vector2 worldPosition)
         {
-            int pointIndex = CalculatePointIndex(mapGrid.WorldToMap(worldPosition));
+            int pointIndex = GetPointIndex(collNav.WorldToMap(worldPosition));
             return aStar.HasPoint(pointIndex) && aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT;
         }
         public void ResetPath(List<Vector2> pointList)
@@ -256,14 +238,14 @@ namespace Game.Map
         }
         public List<Vector2> GetAttackSlot(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
         {
-            Vector2 targetCell = mapGrid.WorldToMap(targetWorldPosition);
+            Vector2 targetCell = collNav.WorldToMap(targetWorldPosition);
             List<Vector2> pointList = new List<Vector2>();
             for (int localY = 0; localY < 3; localY++)
             {
                 for (int localX = 0; localX < 3; localX++)
                 {
                     Vector2 pointLocal = new Vector2(targetCell.x + localX - 1, targetCell.y + localY - 1);
-                    int pointLocalIndex = CalculatePointIndex(pointLocal);
+                    int pointLocalIndex = GetPointIndex(pointLocal);
                     if (aStar.HasPoint(pointLocalIndex) && aStar.GetPointWeightScale(pointLocalIndex) != ASTAR_OCCUPIED_WEIGHT)
                     {
                         pointList.Add(pointLocal);
@@ -271,7 +253,7 @@ namespace Game.Map
                 }
             }
             GD.Randomize();
-            Vector2 randomizedSlot = mapGrid.MapToWorld(pointList[(int)GD.Randi() % pointList.Count]) + HALF_CELL_SIZE;
+            Vector2 randomizedSlot = collNav.MapToWorld(pointList[(int)GD.Randi() % pointList.Count]) + HALF_CELL_SIZE;
             return getAPath(currentWorldPosition, randomizedSlot);
         }
         public Vector2 SetGetPickableLoc(Vector2 worldPosition, bool setWeight)
@@ -282,16 +264,18 @@ namespace Game.Map
         private void OccupyOriginCell(Vector2 worldPosition)
         {
             // Used in SetUnits method; used for placing units in they're origin cell
-            Vector2 point = mapGrid.WorldToMap(worldPosition);
-            if (!mapObstacles.Contains(point) && !IsOutsideMapBounds(point))
-            {
-                int pointIndex = CalculatePointIndex(point);
-                aStar.SetPointWeightScale(pointIndex, ASTAR_OCCUPIED_WEIGHT);
-            }
-            else
-            {
-                GD.Print($"Object incorrectly placed at\ngrid position: {point}\nglobal position: {mapGrid.MapToWorld(point)}\n");
-            }
+
+            // TODO
+            // Vector2 point = collNav.WorldToMap(worldPosition);
+            // if (!mapObstacles.Contains(point) && !IsOutsideMapBounds(point))
+            // {
+            //     int pointIndex = GetPointIndex(point);
+            //     aStar.SetPointWeightScale(pointIndex, ASTAR_OCCUPIED_WEIGHT);
+            // }
+            // else
+            // {
+            //     GD.Print($"Object incorrectly placed at\ngrid position: {point}\nglobal position: {collNav.MapToWorld(point)}\n");
+            // }
         }
     }
 }

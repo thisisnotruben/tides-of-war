@@ -118,6 +118,11 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_4="Combustible"
 2d_physics/layer_5="Player"
 
+[mono]
+
+debugger_agent/wait_for_debugger=true
+debugger_agent/wait_timeout=10000
+
 [node]
 
 name_num_separator=2

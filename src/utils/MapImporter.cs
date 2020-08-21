@@ -34,8 +34,9 @@ namespace Game.Utils
         }
         private Godot.Error CheckMap(PackedScene mapToImport)
         {
-            Node map = mapToImport.Instance();
+            Node2D map = (Node2D)mapToImport.Instance();
             tileMap = map.GetNode<TileMap>("zed/z1");
+            map.GlobalPosition = new Vector2(0.0f, CELL_SIZE.y);
 
             // add dayTime scene
             PackedScene dayTimeScene = (PackedScene)GD.Load("res://src/map/doodads/day_time.tscn");
@@ -74,7 +75,7 @@ namespace Game.Utils
             map.GetNode<TileMap>("meta/coll_nav").Modulate = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             tileMap.CellYSort = true;
             tileMap.CellTileOrigin = TileMap.TileOrigin.TopLeft;
-            
+
             // shuffle scene tree
             map.GetNode<Node2D>("meta").Hide();
             map.GetNode("meta").MoveChild(map.GetNode("meta/coll_nav"), 0);
@@ -175,12 +176,12 @@ namespace Game.Utils
         private void SetTransitions(Node map)
         {
             string resourcePath = "res://src/map/doodads/transition_zone.tscn";
-            Node2D transitions = (Node2D) map.GetNode("meta/transitionZones");
+            Node2D transitions = (Node2D)map.GetNode("meta/transitionZones");
             foreach (Node2D node2D in transitions.GetChildren())
             {
                 // load and set transition scene
-                PackedScene transitionScene = (PackedScene) GD.Load(resourcePath);
-                Node2D transitionNode = (Node2D) transitionScene.Instance();
+                PackedScene transitionScene = (PackedScene)GD.Load(resourcePath);
+                Node2D transitionNode = (Node2D)transitionScene.Instance();
                 transitions.AddChild(transitionNode);
                 transitionNode.Owner = map;
                 string transitionName = node2D.Name;
