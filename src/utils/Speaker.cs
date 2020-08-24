@@ -1,11 +1,11 @@
 using Godot;
 namespace Game.Utils
 {
-    public class Speaker : AudioStreamPlayer
-    {
-        public void Delete()
-        {
-            QueueFree();
-        }
-    }
+	public class Speaker : AudioStreamPlayer
+	{
+		public void Delete()
+		{
+			QueueFree();
+		}
+	}
 }

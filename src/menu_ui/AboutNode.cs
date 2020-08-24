@@ -1,4 +1,4 @@
 namespace Game.Ui
 {
-    public class AboutNode : GameMenu { }
+	public class AboutNode : GameMenu { }
 }
