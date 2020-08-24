@@ -36,14 +36,6 @@ namespace Game.Ui
 				EmitSignal(nameof(ShortcutPressed), this, GetItem());
 			}
 		}
-		public void _OnItemSlotButtonDown()
-		{
-			GetNode<Control>("m/icon").RectScale = new Vector2(0.8f, 0.8f);
-		}
-		public void _OnItemSlotButtonUp()
-		{
-			GetNode<Control>("m/icon").RectScale = new Vector2(1.0f, 1.0f);
-		}
 		public void _OnTweenCompleted(Godot.Object obj, NodePath nodePath)
 		{
 			if (slotType == SlotType.HUD_SLOT)
@@ -67,14 +59,6 @@ namespace Game.Ui
 					label.Show();
 				}
 			}
-		}
-		public void _OnLabelDraw()
-		{
-			GetNode<Control>("m/icon/overlay").Show();
-		}
-		public void _OnLabelHide()
-		{
-			GetNode<Control>("m/icon/overlay").Hide();
 		}
 		public void _OnSyncShortcut(ItemSlot slot, string pickableWorldName)
 		{
@@ -172,10 +156,6 @@ namespace Game.Ui
 				}
 			}
 		}
-		public string GetItem()
-		{
-			return (itemStack.Count > 0) ? itemStack[0] : "";
-		}
 		public void CoolDown(string pickableWorldName, float value, float seek)
 		{
 			if (!GetItem().Empty() && !pickableWorldName.Empty() && GetItem().Equals(pickableWorldName) &&
@@ -197,29 +177,16 @@ namespace Game.Ui
 				EmitSignal(nameof(Cooldown), GetItem(), value, seek);
 			}
 		}
-		public bool IsFull()
-		{
-			return itemStack.Count == stackSize;
-		}
-		public float GetCoolDownTimeLeft()
-		{
-			return GetNode<Tween>("tween").Tell();
-		}
-		public float GetCoolDownInitialTime()
-		{
-			return time;
-		}
-		public bool IsStacking()
-		{
-			return stackSize > 0;
-		}
-		public bool IsCoolingDown()
-		{
-			return GetCoolDownTimeLeft() > 0.0f;
-		}
-		public List<string> GetItemStack()
-		{
-			return itemStack;
-		}
+		public void _OnLabelDraw() { GetNode<Control>("m/icon/overlay").Show(); }
+		public void _OnLabelHide() { GetNode<Control>("m/icon/overlay").Hide(); }
+		public void _OnItemSlotButtonDown() { GetNode<Control>("m/icon").RectScale = new Vector2(0.8f, 0.8f); }
+		public void _OnItemSlotButtonUp() { GetNode<Control>("m/icon").RectScale = new Vector2(1.0f, 1.0f); }
+		public string GetItem() { return (itemStack.Count > 0) ? itemStack[0] : ""; }
+		public bool IsFull() { return itemStack.Count == stackSize; }
+		public float GetCoolDownTimeLeft() { return GetNode<Tween>("tween").Tell(); }
+		public float GetCoolDownInitialTime() { return time; }
+		public bool IsStacking() { return stackSize > 0; }
+		public bool IsCoolingDown() { return GetCoolDownTimeLeft() > 0.0f; }
+		public List<string> GetItemStack() { return itemStack; }
 	}
 }

@@ -6,7 +6,6 @@ namespace Game.Ui
 	{
 		public ItemList spellBookItemList;
 		public bool isBuying;
-
 		[Signal]
 		public delegate void OnTransaction(string pickableWorldName, int goldAmount, bool bought);
 

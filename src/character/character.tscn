@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/utils/audio_stream_player_2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/Character.cs" type="Script" id=2]
@@ -6,20 +6,23 @@
 [ext_resource path="res://asset/img/character/resource/animations/casting.tres" type="Animation" id=4]
 [ext_resource path="res://asset/img/character/resource/animations/dying.tres" type="Animation" id=5]
 [ext_resource path="res://asset/img/character/resource/animations/moving.tres" type="Animation" id=6]
+[ext_resource path="res://src/character/state/fsm.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
 
-[node name="character" type="Node2D"]
+[node name="character" type="Node2D" groups=[
+"character",
+]]
 use_parent_material = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 
-[node name="timer" type="Timer" parent="."]
+[node name="regenTimer" type="Timer" parent="."]
 
 [node name="anim" type="AnimationPlayer" parent="."]
 anims/attacking = ExtResource( 3 )
@@ -68,6 +71,8 @@ shape = SubResource( 2 )
 [node name="visible" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -80, -80, 160, 160 )
 process_parent = true
-[connection signal="timeout" from="timer" to="." method="_OnTimerTimeout"]
+
+[node name="fsm" parent="." instance=ExtResource( 7 )]
+[connection signal="timeout" from="regenTimer" to="." method="_OnRegenTimerTimeout"]
 [connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
 [connection signal="pressed" from="select" to="." method="_OnSelectPressed"]

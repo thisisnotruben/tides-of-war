@@ -9,6 +9,7 @@ namespace Game.Ui
 		public byte ITEM_MAX = 25;
 		[Signal]
 		public delegate void OnItemSelected(int itemIdx);
+
 		public override void _Ready()
 		{
 			for (byte i = 0; i < ITEM_MAX - GetChildCount(); i++)
@@ -199,9 +200,6 @@ namespace Game.Ui
 			}
 			return false;
 		}
-		public bool IsFull()
-		{
-			return GetItemCount() >= ITEM_MAX;
-		}
+		public bool IsFull() { return GetItemCount() >= ITEM_MAX; }
 	}
 }

@@ -20,10 +20,7 @@ namespace Game.Ui
 			archiver.SaveGame(index);
 			GetLabel(index - 1).Text = Archiver.GetSaveFileName(index);
 		}
-		private Label GetLabel(int index)
-		{
-			return GetNode<Label>($"v/s/c/g/slot_label_{index}");
-		}
+		private Label GetLabel(int index) { return GetNode<Label>($"v/s/c/g/slot_label_{index}"); }
 		private void SetLabels()
 		{
 

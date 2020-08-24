@@ -15,7 +15,7 @@ namespace Game.Database
 			public List<string> drops;
 			public List<string> spells;
 			public List<string> merchandise;
-			
+
 		}
 		private static Dictionary<string, ContentNode> contentData = new Dictionary<string, ContentNode>();
 
@@ -31,19 +31,19 @@ namespace Game.Database
 			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			foreach (string characterName in rawDict.Keys)
 			{
-				Godot.Collections.Dictionary contentDict = (Godot.Collections.Dictionary) rawDict[characterName];
+				Godot.Collections.Dictionary contentDict = (Godot.Collections.Dictionary)rawDict[characterName];
 				ContentNode contentNode;
-				contentNode.level = (int) ((Single) contentDict[nameof(ContentNode.level)]);
-				contentNode.enemy = (bool) contentDict[nameof(ContentNode.enemy)];
-				contentNode.healer = (bool) contentDict[nameof(ContentNode.healer)];
-				contentNode.healerCost = (int) ((Single) contentDict[nameof(ContentNode.healerCost)]);
-				contentNode.dialogue = (string) contentDict[nameof(ContentNode.dialogue)];
+				contentNode.level = (int)((Single)contentDict[nameof(ContentNode.level)]);
+				contentNode.enemy = (bool)contentDict[nameof(ContentNode.enemy)];
+				contentNode.healer = (bool)contentDict[nameof(ContentNode.healer)];
+				contentNode.healerCost = (int)((Single)contentDict[nameof(ContentNode.healerCost)]);
+				contentNode.dialogue = (string)contentDict[nameof(ContentNode.dialogue)];
 				contentNode.drops = new List<string>();
 				contentNode.spells = new List<string>();
 				contentNode.merchandise = new List<string>();
-				GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.drops)], contentNode.drops);
-				GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.spells)], contentNode.spells);
-				GetWorldNames((Godot.Collections.Array) contentDict[nameof(ContentNode.merchandise)], contentNode.merchandise);
+				GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentNode.drops)], contentNode.drops);
+				GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentNode.spells)], contentNode.spells);
+				GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentNode.merchandise)], contentNode.merchandise);
 				contentData.Add(characterName, contentNode);
 			}
 		}
@@ -54,13 +54,7 @@ namespace Game.Database
 				outArray.Add(worldObjectName);
 			}
 		}
-		public static ContentNode GetContentData(string editorName)
-		{
-			return contentData[editorName];
-		}
-		public static bool HasContent(string nameCheck)
-		{
-			return contentData.ContainsKey(nameCheck);
-		}
+		public static ContentNode GetContentData(string editorName) { return contentData[editorName]; }
+		public static bool HasContent(string nameCheck) { return contentData.ContainsKey(nameCheck); }
 	}
 }

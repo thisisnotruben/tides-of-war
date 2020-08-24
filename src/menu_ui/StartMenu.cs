@@ -24,28 +24,16 @@ namespace Game.Ui
 				control.Connect("hide", this, nameof(_OnWindowClosed));
 			}
 		}
-		public void _OnWindowClosed()
-		{
-			main.Show();
-		}
+		public void _OnWindowClosed() { main.Show(); }
 		public void _OnNewGamePressed()
 		{
 			Globals.PlaySound("click0", this, speaker);
 			SceneLoader.rootNode = GetTree().Root;
-			SceneLoader.Init().SetScene("res://src/map/zone_3.tscn", this);
+			SceneLoader.Init().SetScene("res://src/map/zone_1.tscn", this);
 		}
-		public void _OnLoadPressed()
-		{
-			Transition(saveLoad);
-		}
-		public void _OnAboutPressed()
-		{
-			Transition(about);
-		}
-		public void _OnExitPressed()
-		{
-			GetTree().Quit();
-		}
+		public void _OnLoadPressed() { Transition(saveLoad); }
+		public void _OnAboutPressed() { Transition(about); }
+		public void _OnExitPressed() { GetTree().Quit(); }
 		private void Transition(Control scene)
 		{
 			Globals.PlaySound("click1", this, speaker);

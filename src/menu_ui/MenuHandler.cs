@@ -79,9 +79,6 @@ namespace Game.Ui
 				}
 			}
 		}
-		public void LootInteract(LootChest lootChest)
-		{
-			mainMenu.LootInteract(lootChest);
-		}
+		public void LootInteract(LootChest lootChest) { mainMenu.LootInteract(lootChest); }
 	}
 }

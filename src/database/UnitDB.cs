@@ -28,29 +28,23 @@ namespace Game.Database
 			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			foreach (string itemName in rawDict.Keys)
 			{
-				Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary) rawDict[itemName];
+				Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary)rawDict[itemName];
 				UnitNode unitNode;
-				unitNode.name = (string) itemDict[nameof(UnitNode.name)];
-				unitNode.img = (string) itemDict[nameof(UnitNode.img)];
-				unitNode.enemy = (bool) itemDict[nameof(UnitNode.enemy)];
-				Godot.Collections.Array spawnPos = (Godot.Collections.Array) itemDict[nameof(UnitNode.spawnPos)];
-				unitNode.spawnPos = new Vector2((float)((Single) spawnPos[0]), (float) ((Single) spawnPos[1]));
+				unitNode.name = (string)itemDict[nameof(UnitNode.name)];
+				unitNode.img = (string)itemDict[nameof(UnitNode.img)];
+				unitNode.enemy = (bool)itemDict[nameof(UnitNode.enemy)];
+				Godot.Collections.Array spawnPos = (Godot.Collections.Array)itemDict[nameof(UnitNode.spawnPos)];
+				unitNode.spawnPos = new Vector2((float)((Single)spawnPos[0]), (float)((Single)spawnPos[1]));
 				unitNode.path = new List<Vector2>();
-				foreach (Godot.Collections.Array vectorNode in (Godot.Collections.Array) (itemDict[nameof(UnitNode.path)]))
+				foreach (Godot.Collections.Array vectorNode in (Godot.Collections.Array)(itemDict[nameof(UnitNode.path)]))
 				{
-					unitNode.path.Add(new Vector2((float)((Single) vectorNode[0]), (float) ((Single) vectorNode[1])));
+					unitNode.path.Add(new Vector2((float)((Single)vectorNode[0]), (float)((Single)vectorNode[1])));
 				}
 				unitNode.level = 1; // TODO
 				unitData.Add(itemName, unitNode);
 			}
 		}
-		public static UnitNode GetUnitData(string unitEditorName)
-		{
-			return unitData[unitEditorName];
-		}
-		public static bool HasUnitData(string nameCheck)
-		{
-			return unitData.ContainsKey(nameCheck);
-		}
+		public static UnitNode GetUnitData(string unitEditorName) { return unitData[unitEditorName]; }
+		public static bool HasUnitData(string nameCheck) { return unitData.ContainsKey(nameCheck); }
 	}
 }

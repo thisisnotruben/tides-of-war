@@ -37,7 +37,7 @@ namespace Game.Database
 			{
 				PackedScene spellScene = (PackedScene)GD.Load($"res://src/spell/spells/{GetFileFormat(worldName)}.tscn");
 				spell = (Spell)spellScene.Instance();
-				spell.Init(worldName);                
+				spell.Init(worldName);
 			}
 			return spell;
 		}
@@ -58,13 +58,10 @@ namespace Game.Database
 			else
 			{
 				PackedScene spellEffectScene = (PackedScene)GD.Load($"res://src/spell/spell_effects/{GetFileFormat(worldName)}.tscn");
-				spellEffect = (SpellEffect)spellEffectScene.Instance();                
+				spellEffect = (SpellEffect)spellEffectScene.Instance();
 			}
 			return spellEffect;
 		}
-		private static string GetFileFormat(string worldName)
-		{
-			return worldName.Replace(" ", "_").ToLower();
-		}
+		private static string GetFileFormat(string worldName) { return worldName.Replace(" ", "_").ToLower(); }
 	}
 }

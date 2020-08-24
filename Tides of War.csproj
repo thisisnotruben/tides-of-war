@@ -59,7 +59,22 @@
     <Compile Include="src\character\doodads\BuffAnim.cs" />
     <Compile Include="src\character\doodads\CombatText.cs" />
     <Compile Include="src\character\doodads\FootStep.cs" />
-    <Compile Include="src\character\doodads\Grave.cs" />
+    <Compile Include="src\character\doodads\Tomb.cs" />
+    <Compile Include="src\character\player\PlayerCamera.cs" />
+    <Compile Include="src\character\state\FSM.cs" />
+    <Compile Include="src\character\state\StateBehavior.cs" />
+    <Compile Include="src\character\state\Move.cs" />
+    <Compile Include="src\character\state\MovePlayer.cs" />
+    <Compile Include="src\character\state\MovePlayerDead.cs" />
+    <Compile Include="src\character\state\MoveNpcRoam.cs" />
+    <Compile Include="src\character\state\MoveNpcAttack.cs" />
+    <Compile Include="src\character\state\MoveNpcReturn.cs" />
+    <Compile Include="src\character\state\Idle.cs" />
+    <Compile Include="src\character\state\IdleDead.cs" />
+    <Compile Include="src\character\state\Alive.cs" />
+    <Compile Include="src\character\state\Dead.cs" />
+    <Compile Include="src\character\state\Attack.cs" />
+    <Compile Include="src\character\state\TakeDamage.cs" />
     <Compile Include="src\database\CollNavDB.cs" />
     <Compile Include="src\database\ContentDB.cs" />
     <Compile Include="src\database\IconDB.cs" />
@@ -173,6 +188,7 @@
     <Compile Include="src\spell\spell_logics\stomp.cs" />
     <Compile Include="src\spell\spell_logics\volley.cs" />
     <Compile Include="src\utils\MapImporter.cs" />
+    <Compile Include="src\utils\SoundPlayer.cs" />
     <Compile Include="src\utils\Speaker.cs" />
     <Compile Include="src\utils\Speaker2D.cs" />
   </ItemGroup>

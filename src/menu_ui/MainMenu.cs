@@ -44,10 +44,7 @@ namespace Game.Ui
 				node.Connect("hide", this, nameof(_OnWindowClosed));
 			}
 		}
-		public void _OnWindowClosed()
-		{
-			main.Show();
-		}
+		public void _OnWindowClosed() { main.Show(); }
 		public void _OnMainMenuDraw()
 		{
 			GetTree().Paused = true;
@@ -124,35 +121,17 @@ namespace Game.Ui
 			// player.SetBuff();
 			Hide();
 		}
-		public void _OnInventoryPressed()
-		{
-			Transition(inventory);
-		}
-		public void _OnStatsPressed()
-		{
-			Transition(statsMenu);
-		}
-		public void _OnQuestLogPressed()
-		{
-			Transition(questLog);
-		}
-		public void _OnAboutPressed()
-		{
-			Transition(about);
-		}
-		public void _OnSaveLoadPressed()
-		{
-			Transition(saveLoad);
-		}
+		public void _OnInventoryPressed() { Transition(inventory); }
+		public void _OnStatsPressed() { Transition(statsMenu); }
+		public void _OnQuestLogPressed() { Transition(questLog); }
+		public void _OnAboutPressed() { Transition(about); }
+		public void _OnSaveLoadPressed() { Transition(saveLoad); }
 		public void _OnExitPressed()
 		{
 			popup.GetNode<Control>("m/exit").Show();
 			Transition(popup);
 		}
-		public void _OnExitGamePressed()
-		{
-			GetTree().Quit();
-		}
+		public void _OnExitGamePressed() { GetTree().Quit(); }
 		public void _OnExitMenuPressed()
 		{
 			Globals.PlaySound("click0", this, speaker);

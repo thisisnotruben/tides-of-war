@@ -25,10 +25,7 @@ namespace Game.Database
 		private static Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
 		private const string DB_PATH = "res://data/spell.json";
 
-		static SpellDB()
-		{
-			LoadSpellData();
-		}
+		static SpellDB() { LoadSpellData(); }
 		private static void LoadSpellData()
 		{
 			File file = new File();
@@ -38,35 +35,26 @@ namespace Game.Database
 			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			foreach (string spellName in rawDict.Keys)
 			{
-				Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary) rawDict[spellName];
+				Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary)rawDict[spellName];
 				SpellNode spellNode;
-				spellNode.type = (string) itemDict[nameof(SpellNode.type)];
-				spellNode.icon = IconDB.GetIcon((int) ((Single) itemDict[nameof(SpellNode.icon)]));
-				spellNode.level = (int) ((Single) itemDict[nameof(SpellNode.level)]);
-				spellNode.goldCost = (int) ((Single) itemDict[nameof(SpellNode.goldCost)]);
-				spellNode.blurb = (string) itemDict[nameof(SpellNode.blurb)];
-				spellNode.range = (int) ((Single) itemDict[nameof(SpellNode.range)]);
-				spellNode.coolDown = (int) ((Single) itemDict[nameof(SpellNode.coolDown)]);
-				spellNode.pctDamage = (float) ((Single) itemDict[nameof(SpellNode.pctDamage)]);
-				spellNode.ignoreArmor = (bool) itemDict[nameof(SpellNode.ignoreArmor)];
-				spellNode.effectOnTarget = (bool) itemDict[nameof(SpellNode.effectOnTarget)];
-				spellNode.requiresTarget = (bool) itemDict[nameof(SpellNode.requiresTarget)];
+				spellNode.type = (string)itemDict[nameof(SpellNode.type)];
+				spellNode.icon = IconDB.GetIcon((int)((Single)itemDict[nameof(SpellNode.icon)]));
+				spellNode.level = (int)((Single)itemDict[nameof(SpellNode.level)]);
+				spellNode.goldCost = (int)((Single)itemDict[nameof(SpellNode.goldCost)]);
+				spellNode.blurb = (string)itemDict[nameof(SpellNode.blurb)];
+				spellNode.range = (int)((Single)itemDict[nameof(SpellNode.range)]);
+				spellNode.coolDown = (int)((Single)itemDict[nameof(SpellNode.coolDown)]);
+				spellNode.pctDamage = (float)((Single)itemDict[nameof(SpellNode.pctDamage)]);
+				spellNode.ignoreArmor = (bool)itemDict[nameof(SpellNode.ignoreArmor)];
+				spellNode.effectOnTarget = (bool)itemDict[nameof(SpellNode.effectOnTarget)];
+				spellNode.requiresTarget = (bool)itemDict[nameof(SpellNode.requiresTarget)];
 				spellNode.stackSize = 1;
 				spellNode.manaCost = -1; // TODO
 				spellData.Add(spellName, spellNode);
 			}
 		}
-		public static SpellNode GetSpellData(string worldName)
-		{
-			return spellData[worldName];
-		}
-		public static bool HasSpell(string nameCheck)
-		{
-			return spellData.ContainsKey(nameCheck);
-		}
-		public static string[] GetSpellNames()
-		{
-			return spellData.Keys.ToArray();
-		}
+		public static SpellNode GetSpellData(string worldName) { return spellData[worldName]; }
+		public static bool HasSpell(string nameCheck) { return spellData.ContainsKey(nameCheck); }
+		public static string[] GetSpellNames() { return spellData.Keys.ToArray(); }
 	}
 }

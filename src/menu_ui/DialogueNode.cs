@@ -35,10 +35,7 @@ namespace Game.Ui
 			merchantNode.inventoryItemList = inventoryItemList;
 			merchantNode.spellBookItemList = spellBookItemList;
 		}
-		public void _OnDialogueDraw()
-		{
-			Globals.PlaySound("turn_page", this, speaker);
-		}
+		public void _OnDialogueDraw() { Globals.PlaySound("turn_page", this, speaker); }
 		public void _OnDialogueHide()
 		{
 			popup.Hide();

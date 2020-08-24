@@ -23,14 +23,8 @@ namespace Game.Ui
 				control.Hide();
 			}
 		}
-		public void _OnErrorDraw()
-		{
-			Globals.PlaySound("click6", this, speaker);
-		}
-		public void _OnMResized()
-		{
-			GetNode<Control>("bg").RectMinSize = GetNode<Control>("m").RectSize;
-		}
+		public void _OnErrorDraw() { Globals.PlaySound("click6", this, speaker); }
+		public void _OnMResized() { GetNode<Control>("bg").RectMinSize = GetNode<Control>("m").RectSize; }
 		public void _OnRepairDraw()
 		{
 			int shown = 0;
@@ -46,9 +40,6 @@ namespace Game.Ui
 				GetNode<TextureRect>("bg").Texture = (Texture)GD.Load("res://asset/img/ui/grey2_bg.tres");
 			}
 		}
-		public void _OnRepairHide()
-		{
-			GetNode<TextureRect>("bg").Texture = (Texture)GD.Load("res://asset/img/ui/grey3_bg.tres");
-		}
+		public void _OnRepairHide() { GetNode<TextureRect>("bg").Texture = (Texture)GD.Load("res://asset/img/ui/grey3_bg.tres"); }
 	}
 }

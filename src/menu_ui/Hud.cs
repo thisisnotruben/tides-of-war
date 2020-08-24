@@ -5,6 +5,7 @@ namespace Game.Ui
 	{
 		private Texture pressed;
 		private Texture normal;
+		
 		public override void _Ready()
 		{
 			pressed = (Texture)GD.Load("res://asset/img/ui/on_screen_button_pressed.tres");

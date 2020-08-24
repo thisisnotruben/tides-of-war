@@ -805,38 +805,38 @@ namespace Game.Ui
         }
         public void _OnMerchantDraw()
         {
-            if (player.target != null)
-            {
-                if (!(player.weapon != null && player.vest != null) ||
-                    player.target.worldType == WorldObject.WorldTypes.TRAINER)
-                {
-                    merchant.GetNode<Control>("s/v2/repair").Hide();
-                    return;
-                }
-                if (player.weapon != null)
-                {
-                    if (player.weapon.durability < Item.MAX_DURABILITY)
-                    {
-                        merchant.GetNode<Control>("s/v2/repair").Show();
-                    }
-                    else
-                    {
-                        merchant.GetNode<Control>("s/v2/repair").Hide();
-                    }
-                }
-                if (player.vest != null)
-                {
-                    if (player.vest.durability < Item.MAX_DURABILITY)
-                    {
-                        merchant.GetNode<Control>("s/v2/repair").Show();
-                    }
-                    else if (!merchant.GetNode<Control>("s/v2/repair").Visible ||
-                        player.weapon == null)
-                    {
-                        merchant.GetNode<Control>("s/v2/repair").Hide();
-                    }
-                }
-            }
+            // if (player.target != null)
+            // {
+            //     if (!(player.weapon != null && player.vest != null) ||
+            //         player.target.worldType == WorldObject.WorldTypes.TRAINER)
+            //     {
+            //         merchant.GetNode<Control>("s/v2/repair").Hide();
+            //         return;
+            //     }
+            //     if (player.weapon != null)
+            //     {
+            //         if (player.weapon.durability < Item.MAX_DURABILITY)
+            //         {
+            //             merchant.GetNode<Control>("s/v2/repair").Show();
+            //         }
+            //         else
+            //         {
+            //             merchant.GetNode<Control>("s/v2/repair").Hide();
+            //         }
+            //     }
+            //     if (player.vest != null)
+            //     {
+            //         if (player.vest.durability < Item.MAX_DURABILITY)
+            //         {
+            //             merchant.GetNode<Control>("s/v2/repair").Show();
+            //         }
+            //         else if (!merchant.GetNode<Control>("s/v2/repair").Visible ||
+            //             player.weapon == null)
+            //         {
+            //             merchant.GetNode<Control>("s/v2/repair").Hide();
+            //         }
+            //     }
+            // }
         }
         public void _OnSiftConfigure(bool right = true)
         {
