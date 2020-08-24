@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class piercing_shot : Spell { }
+	public class piercing_shot : Spell { }
 }

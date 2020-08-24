@@ -29,7 +29,7 @@ namespace Game.Map.Doodads
 		public void TriggerLights()
 		{
 			foreach (GameLight light in GameLight.GetLights())
-			{   
+			{
 				light.SetIntensity(!dayLight);
 			}
 		}

@@ -21,7 +21,7 @@ namespace Game.Ui
 		public delegate void SyncSlot(ItemSlot itemSlot, string pickableWorldName);
 		[Signal]
 		public delegate void ShortcutPressed(ItemSlot itemSlot, string pickableWorldName);
-		
+
 		public void _OnItemSlotPressed()
 		{
 			if (slotType == SlotType.BAG_SLOT && !GetItem().Empty() && GetTree().Paused)

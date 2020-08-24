@@ -1,4 +1,4 @@
 namespace Game.Ability
 {
-    public class devastate : Spell { }
+	public class devastate : Spell { }
 }
