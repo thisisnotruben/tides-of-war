@@ -7,8 +7,8 @@ namespace Game.Ability
 		private int amount;
 		public override float Cast()
 		{
-			amount = (int)Math.Round((float)caster.armor * 0.25);
-			caster.armor += amount;
+			amount = (int)Math.Round(caster.stats.armor.valueI * 0.25);
+			// caster.armor += amount;TODO
 			SetTime(60.0f);
 			caster.SetSpell(this,
 				(loaded) ? duration - GetNode<Timer>("timer").WaitTime : 0.0f);
@@ -16,7 +16,7 @@ namespace Game.Ability
 		}
 		public override void _OnTimerTimeout()
 		{
-			caster.armor -= amount;
+			// caster.armor -= amount;TODO
 			UnMake();
 		}
 	}

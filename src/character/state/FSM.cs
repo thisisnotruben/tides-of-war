@@ -5,6 +5,7 @@ namespace Game.Actor.State
 {
 	public class FSM : Node
 	{
+		private const int MAX_HISTORY = 10;
 		public enum State
 		{
 			IDLE, MOVE, ATTACK, ALIVE, DEAD,
@@ -13,7 +14,6 @@ namespace Game.Actor.State
 		}
 		private Dictionary<State, StateBehavior> stateMap = new Dictionary<State, StateBehavior>();
 		private Stack<State> stateHistory = new Stack<State>();
-		private State state;
 
 		public override void _Ready()
 		{
@@ -42,28 +42,48 @@ namespace Game.Actor.State
 		}
 		public void ChangeState(State state)
 		{
-			stateHistory.Pop();
-			stateMap[this.state].Exit();
+			stateMap[GetState()].Exit();
 			SetState(state);
 		}
-		private void SetState(State state)
+		public void SetState(State state)
 		{
-			this.state = state;
 			stateHistory.Push(state);
 			stateMap[state].Start();
 		}
-		public State GetState() { return state; }
-
+		public State GetState() { return (stateHistory.Count == 0) ? State.IDLE : stateHistory.Peek(); }
+		public State GetLastState()
+		{
+			if (stateHistory.Count == 1)
+			{
+				return stateHistory.Peek();
+			}
+			State currentState = stateHistory.Pop();
+			State lastState = stateHistory.Peek();
+			stateHistory.Push(currentState);
+			return lastState;
+		}
+		public bool IsDead()
+		{
+			switch (GetState())
+			{
+				case State.DEAD:
+				case State.PLAYER_DEAD_IDLE:
+				case State.PLAYER_DEAD_MOVE:
+					return true;
+				default:
+					return false;
+			}
+		}
 		// * Delegated functions for state
-		public void Process(float delta) { stateMap[state].Process(delta); }
+		public void Process(float delta) { stateMap[GetState()].Process(delta); }
 		public void Harm(int damage)
 		{
-			TakeDamage takeDamageState = stateMap[state] as TakeDamage;
+			TakeDamage takeDamageState = stateMap[GetState()] as TakeDamage;
 			if (takeDamageState != null)
 			{
 				takeDamageState.Harm(damage);
 			}
 		}
-		public void UnhandledInput(InputEvent @event) { stateMap[state].UnhandledInput(@event); }
+		public void UnhandledInput(InputEvent @event) { stateMap[GetState()].UnhandledInput(@event); }
 	}
 }

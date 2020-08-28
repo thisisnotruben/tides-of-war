@@ -19,18 +19,18 @@ namespace Game.Ui
 		{
 			GetNode<RichTextLabel>("s/v/c/label").BbcodeText =
 				$"Name: {player.worldName}\n" +
-				$"Health: {player.hp} / {player.hpMax}\n" +
-				$"Mana: {player.mana} / {player.manaMax}\n" +
+				$"Health: {player.hp} / {player.stats.hpMax.valueI}\n" +
+				$"Mana: {player.mana} / {player.stats.manaMax.valueI}\n" +
 				$"XP: {player.xp}\n" +
 				$"Level: {player.level}\n" +
 				$"Gold: {player.gold}\n" +
-				$"Stamina: {player.stamina}\n" +
-				$"Intellect: {player.intellect}\n" +
-				$"Agility: {player.agility}\n" +
-				$"Armor: {player.armor}\n" +
-				$"Damage: {player.minDamage} - {player.maxDamage}\n" +
-				$"Attack Speed: {player.weaponSpeed.ToString("0.00")}\n" +
-				$"Attack Range: {player.weaponRange}";
+				$"Stamina: {player.stats.stamina.valueI}\n" +
+				$"Intellect: {player.stats.intellect.valueI}\n" +
+				$"Agility: {player.stats.agility.valueI}\n" +
+				$"Armor: {player.stats.armor.valueI}\n" +
+				$"Damage: {player.stats.minDamage.valueI} - {player.stats.maxDamage.valueI}\n" +
+				$"Attack Speed: {player.stats.weaponSpeed.value.ToString("0.00")}\n" +
+				$"Attack Range: {player.stats.weaponRange.value}";
 		}
 		public void _OnEquippedSlotMoved(string nodePath, bool down)
 		{

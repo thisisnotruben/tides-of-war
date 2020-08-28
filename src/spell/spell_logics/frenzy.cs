@@ -11,11 +11,11 @@ namespace Game.Ability
 		public override float Cast()
 		{
 			amounts = new Tuple<float, float>(
-				caster.animSpeed * 0.25f,
-				caster.weaponSpeed * 0.25f
+				caster.stats.animSpeed.value * 0.25f,
+				caster.stats.weaponSpeed.value * 0.25f
 			);
-			caster.animSpeed += amounts.Item1;
-			caster.weaponSpeed += amounts.Item2;
+			// caster.animSpeed += amounts.Item1;TODO
+			// caster.weaponSpeed += amounts.Item2;TODO
 			count = 5;
 			SetTime(6.0f);
 			caster.SetSpell(this,
@@ -33,8 +33,8 @@ namespace Game.Ability
 			}
 			else
 			{
-				caster.animSpeed -= amounts.Item1;
-				caster.weaponSpeed -= amounts.Item2;
+				// caster.animSpeed -= amounts.Item1;TODO
+				// caster.weaponSpeed -= amounts.Item2;TODO
 				UnMake();
 			}
 		}

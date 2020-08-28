@@ -118,17 +118,17 @@ namespace Game.Ability
 			switch (subType)
 			{
 				case WorldTypes.DAMAGE_MODIFIER:
-					caster.weaponRange = spellRange;
+					// caster.weaponRange = spellRange;TODO
 					break;
 				case WorldTypes.CASTING:
 					PrepSight();
 					GlobalPosition = caster.GlobalPosition;
-					AnimationPlayer casterAnim = caster.GetNode<AnimationPlayer>("anim");
+					AnimationPlayer casterAnim = caster.anim;
 					if (casterAnim.CurrentAnimation.Equals("casting"))
 					{
 						await ToSignal(casterAnim, "animation_finished");
 					}
-					casterAnim.Play("casting", -1, caster.animSpeed);
+					casterAnim.Play("casting", -1, caster.stats.animSpeed.value);
 					break;
 			}
 		}
@@ -153,12 +153,13 @@ namespace Game.Ability
 			if (stun)
 			{
 				character.GetNode<Timer>("timer").Stop();
-				character.GetNode<AnimationPlayer>("anim").Stop();
-				character.GetNode<Sprite>("img").Frame = 0;
+				character.anim.Stop();
+				character.img.Frame = 0;
 			}
 			else
 			{
-				character.SetState(character.state, true);
+				// TODO: spell code
+				// character.SetState(character.state, true);
 			}
 		}
 		private protected void PrepSight()

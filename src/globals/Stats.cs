@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Loot;
+using Game.Database;
 using Godot;
 namespace Game
 {
@@ -8,15 +9,15 @@ namespace Game
 	{
 		public struct CharacterStatsNode
 		{
-			public int stamina;
-			public int intellect;
-			public int agility;
-			public int hpMax;
-			public int manaMax;
-			public int maxDamage;
-			public int minDamage;
-			public int regenTime;
-			public int armor;
+			public float stamina;
+			public float intellect;
+			public float agility;
+			public float hpMax;
+			public float manaMax;
+			public float maxDamage;
+			public float minDamage;
+			public float regenTime;
+			public float armor;
 		}
 		public static readonly Dictionary<AttackTableType, AttackTableNode> ATTACK_TABLE;
 		public enum AttackTableType { MELEE, RANGED }
@@ -31,13 +32,14 @@ namespace Game
 
 		public const float MULTIPLIER = 2.6f;
 		public const byte MAX_LEVEL = 10;
+		public const byte MIN_LEVEL = 1;
 		public const int XP_INTERVAL = 1_000;
 		public const int MAX_XP = MAX_LEVEL * XP_INTERVAL;
 		public const double HP_MANA_RESPAWN_MIN_LIMIT = 0.3f;
 		public const int FLEE_DISTANCE = 128;
 		public const float SPEED = 0.5f;
-		public const int WEAPON_RANGE_MELEE = 32 + 4;
-		public const int WEAPON_RANGE_RANGE = 64 + 4;
+		public const float WEAPON_RANGE_MELEE = 32 + 4;
+		public const float WEAPON_RANGE_RANGE = 64 + 4;
 		public static readonly Dictionary<string, int> dropTable = new Dictionary<string, int>()
 		{ { "drop", 60 }, { "questItem", 50 }, { "misc", 50 }, { "foodPotion", 70 }, { "weapon", 60 }, { "armor", 100 }};
 
@@ -59,29 +61,31 @@ namespace Game
 			range.miss = 100;
 			ATTACK_TABLE.Add(AttackTableType.RANGED, range);
 		}
-		public static CharacterStatsNode UnitMake(int level, double unitMultiplier)
+		public static CharacterStatsNode UnitMake(float level, float unitMultiplier)
 		{
-			double stamina = (3.0 + level) * unitMultiplier;
-			double intellect = (2 + level) * unitMultiplier;
-			double agility = (1.0 + level) * unitMultiplier;
-			double hpMax = (6.0 * level + 24 + stamina) * unitMultiplier;
-			double manaMax = (6.0 * level + 16 + intellect) * unitMultiplier;
-			double maxDamage = ((hpMax * 0.225) - (hpMax * 0.225 / 2.0)) / 2.0;
-			double minDamage = maxDamage / 2.0;
-			double regenTime = 60 - 60 * agility * 0.01;
-			double armor = ((stamina + agility) / 2.0) * ((minDamage + maxDamage) / 2.0) * 0.01;
+			float stamina = (3.0f + level) * unitMultiplier;
+			float intellect = (2.0f + level) * unitMultiplier;
+			float agility = (1.0f + level) * unitMultiplier;
 
-			CharacterStatsNode characterStatsNode;
-			characterStatsNode.stamina = (int)stamina;
-			characterStatsNode.intellect = (int)intellect;
-			characterStatsNode.agility = (int)agility;
-			characterStatsNode.hpMax = (int)hpMax;
-			characterStatsNode.manaMax = (int)manaMax;
-			characterStatsNode.maxDamage = (int)maxDamage;
-			characterStatsNode.minDamage = (int)minDamage;
-			characterStatsNode.regenTime = (int)regenTime;
-			characterStatsNode.armor = (int)armor;
-			return characterStatsNode;
+			// derived base values
+			float hpMax = (6.0f * level + 24.0f + stamina) * unitMultiplier;
+			float manaMax = (6.0f * level + 16.0f + intellect) * unitMultiplier;
+			float maxDamage = ((hpMax * 0.225f) - (hpMax * 0.225f / 2.0f)) / 2.0f;
+			float minDamage = maxDamage / 2.0f;
+			float regenTime = 60.0f - 60.0f * agility * 0.01f;
+			float armor = ((stamina + agility) / 2.0f) * ((minDamage + maxDamage) / 2.0f) * 0.01f;
+
+			CharacterStatsNode stats;
+			stats.stamina = stamina;
+			stats.intellect = intellect;
+			stats.agility = agility;
+			stats.hpMax = hpMax;
+			stats.manaMax = manaMax;
+			stats.maxDamage = maxDamage;
+			stats.minDamage = minDamage;
+			stats.regenTime = regenTime;
+			stats.armor = armor;
+			return stats;
 		}
 		public static int HpManaRegenAmount(float level, float unitMultiplier)
 		{
@@ -191,6 +195,36 @@ namespace Game
 			minValue = Math.Round(minValue);
 			maxValue = Math.Round(maxValue);
 			return new Tuple<int, int>((int)minValue, (int)maxValue);
+		}
+		public static float GetMultiplier(string race)
+		{
+			float multiplier;
+			switch (race)
+			{
+				case "player":
+					multiplier = 2.6f;
+					break;
+				case "minotaur":
+				case "oliphant":
+					multiplier = 2.4f;
+					break;
+				case "human":
+				case "orc":
+					multiplier = 2.2f;
+					break;
+				case "gnoll":
+				case "goblin":
+				case "warthog":
+					multiplier = 2.0f;
+					break;
+				case "critter":
+					multiplier = 1.8f;
+					break;
+				default:
+					multiplier = 1.0f;
+					break;
+			}
+			return multiplier;
 		}
 		public static float GetMultiplier(bool npc, string imgPath)
 		{

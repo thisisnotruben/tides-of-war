@@ -20,7 +20,7 @@ namespace Game.Ui
 		{
 			this.npc = npc;
 			merchantNode.merchant = npc;
-			bool notFullHealth = player.hp < player.hpMax;
+			bool notFullHealth = player.hp < player.stats.hpMax.valueI;
 			ContentDB.ContentNode contentNode = ContentDB.GetContentData(npc.Name);
 			GetNode<Label>("s/control/header").Text = npc.worldName;
 			Label subHeader = GetNode<Label>("s/control/sub_header");
@@ -56,8 +56,8 @@ namespace Game.Ui
 			{
 				Globals.PlaySound("sell_buy", this, speaker);
 				player.gold -= healerCost;
-				player.hp = player.hpMax;
-				bool notFullHealth = player.hp < player.hpMax;
+				player.hp = player.stats.hpMax.valueI;
+				bool notFullHealth = player.hp < player.stats.hpMax.valueI;
 				GetNode<Label>("s/control/sub_header").Visible = notFullHealth;
 				GetNode<Control>("s/s/v/heal").Visible = notFullHealth;
 			}

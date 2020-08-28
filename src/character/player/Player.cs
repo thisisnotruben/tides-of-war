@@ -12,7 +12,7 @@ namespace Game.Actor
 
 		public int xp { get; private set; }
 		public int gold;
-		private Item _weapon;
+		private Item _weapon = null;
 		public Item weapon
 		{
 			set
@@ -20,14 +20,14 @@ namespace Game.Actor
 				if (value == null && weapon != null)
 				{
 					Tuple<int, int> values = weapon.GetValues();
-					minDamage -= values.Item1;
-					maxDamage -= values.Item2;
+					// minDamage -= values.Item1;TODO
+					// maxDamage -= values.Item2;TODO
 				}
 				if (value != null)
 				{
 					Tuple<int, int> values = value.GetValues();
-					minDamage += values.Item1;
-					maxDamage += values.Item2;
+					// minDamage += values.Item1;TODO
+					// maxDamage += values.Item2;TODO
 				}
 				_weapon = value;
 			}
@@ -36,18 +36,18 @@ namespace Game.Actor
 				return _weapon;
 			}
 		}
-		private Item _vest;
+		private Item _vest = null;
 		public Item vest
 		{
 			set
 			{
 				if (value == null && vest != null)
 				{
-					armor -= vest.value;
+					// armor -= vest.value;TODO
 				}
 				if (value != null)
 				{
-					armor += vest.value;
+					// armor += vest.value;
 				}
 				_vest = value;
 			}
@@ -57,29 +57,16 @@ namespace Game.Actor
 			}
 		}
 
-		public Player()
-		{
-			player = this;
-		}
+		public Player() { player = this; }
 		public override void _Ready()
 		{
-			GameMenu.player = this;
-			base.init();
 			base._Ready();
-			init();
-		}
-		public override void init()
-		{
-			xp = 0;
-			gold = 0;
+			Init();
+			GameMenu.player = this;
+			gold = 10_000;
+			level = Stats.MAX_LEVEL;
 			SetImg("human-6");
-			SetAttributes();
-			hp = hpMax;
-			mana = manaMax;
-			weapon = null;
-			vest = null;
-			gold = 10000;
-			level = 10;
+			GetMenu().ConnectPlayerToHud(this);
 		}
 		public override void _UnhandledInput(InputEvent @event) { fsm.UnhandledInput(@event); }
 		public void _OnAnimFinished(string animName)
@@ -119,7 +106,6 @@ namespace Game.Actor
 				{
 					level = Stats.MAX_LEVEL;
 				}
-				SetAttributes();
 			}
 		}
 		public MenuHandler GetMenu() { return GetNode<MenuHandler>("in_game_menu"); }

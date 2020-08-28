@@ -30,11 +30,11 @@ namespace Game.Missile
 				spawnPos = originator.GetNode<Node2D>("img/missile").GlobalPosition;
 				if (rotate)
 				{
-					LookAt(target.GetCenterPos());
+					LookAt(target.pos);
 				}
 				if (instantSpawn)
 				{
-					GlobalPosition = target.GetCenterPos();
+					GlobalPosition = target.pos;
 				}
 				else
 				{
@@ -56,7 +56,7 @@ namespace Game.Missile
 		{
 			if (rotate && !hasHitTarget)
 			{
-				LookAt(target.GetCenterPos());
+				LookAt(target.pos);
 			}
 			else if (reverse)
 			{
@@ -104,8 +104,8 @@ namespace Game.Missile
 		private void Move(Character fromUnit, Character toUnit)
 		{
 			Tween tween = GetNode<Tween>("tween");
-			tween.InterpolateProperty(this, ":global_position", GlobalPosition, toUnit.GetCenterPos(),
-				spawnPos.DistanceTo(toUnit.GetCenterPos()) / (float)fromUnit.weaponRange,
+			tween.InterpolateProperty(this, ":global_position", GlobalPosition, toUnit.pos,
+				spawnPos.DistanceTo(toUnit.pos) / fromUnit.stats.weaponRange.value,
 				Tween.TransitionType.Circ, Tween.EaseType.Out);
 			tween.Start();
 		}
@@ -127,7 +127,7 @@ namespace Game.Missile
 				// attackTable = Stats.attackTable;
 			}
 			GD.Randomize();
-			int damage = (int)Math.Round(GD.RandRange((double)originator.minDamage, (double)originator.maxDamage));
+			int damage = (int)Math.Round(GD.RandRange(originator.stats.minDamage.valueI, originator.stats.maxDamage.valueI));
 			uint diceRoll = GD.Randi() % 100 + 1;
 			string weaponTypeName = Enum.GetName(typeof(WorldTypes), weaponType);
 			string swingTypeName = Enum.GetName(typeof(WorldTypes), swingType).ToLower();
@@ -167,7 +167,7 @@ namespace Game.Missile
 		{
 			string texturePath = "res://asset/img/missile-spell/{0}.tres";
 			string textureSize = "big";
-			string raceName = originator.GetNode<Sprite>("img").Texture.ResourcePath.GetBaseDir().GetFile();
+			string raceName = originator.img.Texture.ResourcePath.GetBaseDir().GetFile();
 			switch (raceName)
 			{
 				case "gnoll":

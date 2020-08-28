@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Actor;
+using Game.Actor.State;
 using Game.Database;
 using Game.Ui;
 using Godot;
@@ -126,31 +127,31 @@ namespace Game.Loot
 			switch (subType)
 			{
 				case WorldTypes.STAMINA:
-					percent = (double)character.hp / (double)character.hpMax;
-					character.hpMax += value;
-					character.hp = (int)Math.Round(percent * (double)character.hpMax);
+					percent = (double)character.hp / (double)character.stats.hpMax.value;
+					// character.hpMax += value;TODO
+					character.hp = (int)Math.Round(percent * (double)character.stats.hpMax.value);
 					break;
 				case WorldTypes.INTELLECT:
-					percent = (double)character.mana / (double)character.manaMax;
-					character.manaMax += value;
-					character.mana = (int)Math.Round(percent * (double)character.manaMax);
+					percent = (double)character.mana / (double)character.stats.manaMax.value;
+					// character.manaMax += value;
+					character.mana = (int)Math.Round(percent * (double)character.stats.manaMax.value);
 					break;
 				case WorldTypes.AGILITY:
 					int regenAmount = Stats.GetModifiedRegen(character.level,
-						Stats.GetMultiplier(character is Npc, character.GetNode<Sprite>("img").Texture.ResourcePath));
-					character.regenTime = regenAmount;
-					if (character.state != Character.States.ATTACKING)
+						Stats.GetMultiplier(character is Npc, character.img.Texture.ResourcePath));
+					// character.regenTime = regenAmount;
+					if (character.state != FSM.State.ATTACK)
 					{
 						// TODO: deprecated way to do this
 						// character.SetTime(character.regenTime, false);
 					}
 					break;
 				case WorldTypes.STRENGTH:
-					character.minDamage += value;
-					character.maxDamage += value;
+					// character.minDamage += value;TODO
+					// character.maxDamage += value;TODO
 					break;
 				case WorldTypes.DEFENSE:
-					character.armor += value;
+					// character.armor += value;TODO
 					break;
 			}
 			if (expire)

@@ -17,10 +17,7 @@ namespace Game.Actor.State
 			character.regenTimer.Stop();
 			AttackTarget();
 		}
-		public override void Exit()
-		{
-			character.regenTimer.Start();
-		}
+		public override void Exit() { character.regenTimer.Start(); }
 		public async void AttackTarget()
 		{
 			if (!ValidTarget())
@@ -28,83 +25,68 @@ namespace Game.Actor.State
 				return;
 			}
 
-			animationPlayer.Stop();
-			sprite.Frame = 0;
-			sprite.FlipH = false;
+			character.anim.Stop();
+			character.img.Frame = 0;
 
-			await ToSignal(GetTree().CreateTimer(character.weaponSpeed, false), "timeout");
+			await ToSignal(GetTree().CreateTimer(character.stats.weaponSpeed.value, false), "timeout");
 
 			if (!ValidTarget())
 			{
 				return;
 			}
 
-			Node2D missle = sprite.GetNode<Node2D>("missile");
+			Node2D missle = character.img.GetNode<Node2D>("missile");
 			Vector2 missilePos = new Vector2();
 			bool isLeft = character.target.GlobalPosition.x - character.GlobalPosition.x < 0.0f;
-			sprite.FlipH = isLeft;
+			character.img.FlipH = isLeft;
 			missilePos.x = Mathf.Abs(missilePos.x) * ((isLeft) ? -1.0f : 1.0f);
 			missle.Position = missilePos;
 
-			animationPlayer.Play("attacking", -1.0f, character.animSpeed);
-			await ToSignal(animationPlayer, "animation_finished");
+			character.anim.Play("attacking", -1.0f, character.stats.animSpeed.value);
+			await ToSignal(character.anim, "animation_finished");
 
 			if (!ValidTarget())
 			{
 				return;
 			}
 
-			GD.Randomize();
 			uint diceRoll = GD.Randi() % 100 + 1;
 
-			int damage = (int)Math.Round(GD.RandRange(character.minDamage, character.maxDamage));
+			int damage = (int)Math.Round(GD.RandRange(character.stats.minDamage.valueI, character.stats.maxDamage.valueI));
 			string soundName;
 			CombatText.TextType hitType;
 			Stats.AttackTableNode attackTable = Stats.ATTACK_TABLE[Stats.AttackTableType.MELEE];
 
-			// TODO: spell
-			// if (spell != null && !spell.casted)
-			// {
-			//     attackTable = spell.GetAttackTable();
-			//     if (diceRoll <= attackTable["CRITICAL"])
-			//     {
-			//         ignoreArmor = spell.ignoreArmor;
-			//         damage = (int)Math.Round((float)damage * spell.Cast());
-			//         target.SetSpell(spell);
-			//     }
-			//     else
-			//     {
-			//         mana = spell.manaCost;
-			//     }
-			// }
+			ImageDB.ImageNode imageNode = ImageDB.GetImageData(
+				UnitDB.GetUnitData(character.Name).img);
 
 			if (diceRoll <= attackTable.hit)
 			{
-				soundName = ImageDB.GetImageData(character.Name).weaponMaterial;
+				soundName = imageNode.weaponMaterial;
 				hitType = CombatText.TextType.HIT;
 			}
 			else if (diceRoll <= attackTable.critical)
 			{
-				soundName = ImageDB.GetImageData(character.Name).weaponMaterial;
+				soundName = imageNode.weaponMaterial;
 				hitType = CombatText.TextType.CRITICAL;
 				damage *= 2;
 			}
 			else if (diceRoll <= attackTable.dodge)
 			{
-				soundName = ImageDB.GetImageData(character.Name).swing;
+				soundName = imageNode.swing;
 				hitType = CombatText.TextType.DODGE;
 				damage = 0;
 			}
 			else if (diceRoll <= attackTable.parry)
 			{
 				// TODO: make sure unit/target can parry with weapon
-				soundName = ImageDB.GetImageData(character.Name).weaponMaterial;
+				soundName = imageNode.weaponMaterial;
 				hitType = CombatText.TextType.PARRY;
 				damage = 0;
 			}
 			else if (diceRoll <= attackTable.miss)
 			{
-				soundName = ImageDB.GetImageData(character.Name).swing;
+				soundName = imageNode.swing;
 				hitType = CombatText.TextType.MISS;
 				damage = 0;
 			}
@@ -118,6 +100,20 @@ namespace Game.Actor.State
 			if (character is Player || character.target is Player)
 			{
 				character.target.SpawnCombatText((damage > 0) ? damage.ToString() : hitType.ToString(), hitType);
+			}
+
+			// set target to self
+			if (character.target == null)
+			{
+				Player player = character.target as Player;
+				if (player != null)
+				{
+					player.GetMenu().NpcInteract(character as Npc);
+				}
+				else
+				{
+					character.target = character;
+				}
 			}
 
 			if (damage > 0)
@@ -149,7 +145,7 @@ namespace Game.Actor.State
 				}
 				return false;
 			}
-			else if (character.GetCenterPos().DistanceTo(character.target.GetCenterPos()) > character.weaponRange)
+			else if (character.pos.DistanceTo(character.target.pos) > character.stats.weaponRange.value)
 			{
 				fsm.ChangeState(
 					(character is Npc)

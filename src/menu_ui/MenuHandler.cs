@@ -40,6 +40,13 @@ namespace Game.Ui
 			Globals.PlaySound("click5", this, speaker);
 			mainMenu.ShowSpellBook();
 		}
+		public void ConnectPlayerToHud(Player player)
+		{
+			player.Connect(nameof(Character.UpdateHudStatus), hudStatus, nameof(HudStatus._OnUpdateStatus));
+			hudStatus.UpdateName(true, player.worldName);
+			hudStatus._OnUpdateStatus(player, true, player.hp, player.stats.hpMax.valueI);
+			hudStatus._OnUpdateStatus(player, false, player.mana, player.stats.manaMax.valueI);
+		}
 		public void NpcInteract(Npc npc)
 		{
 			string signal = nameof(Character.UpdateHudStatus);
@@ -71,11 +78,15 @@ namespace Game.Ui
 				}
 				npc.Connect(signal, hudStatus, method);
 				hudStatus.UpdateName(false, npc.worldName);
-				hudStatus._OnUpdateStatus(npc, true, npc.hp, npc.hpMax);
-				hudStatus._OnUpdateStatus(npc, false, npc.mana, npc.manaMax);
+				hudStatus._OnUpdateStatus(npc, true, npc.hp, npc.stats.hpMax.valueI);
+				hudStatus._OnUpdateStatus(npc, false, npc.mana, npc.stats.manaMax.valueI);
 				if (interactable)
 				{
 					mainMenu.NpcInteract(npc);
+				}
+				else
+				{
+					player.target = npc;
 				}
 			}
 		}

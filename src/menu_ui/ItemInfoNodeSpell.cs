@@ -29,7 +29,7 @@ namespace Game.Ui
 						popup.GetNode<Label>("m/error/label").Text = "Invalid\nTarget!";
 						showPopup = true;
 					}
-					else if (player.GetCenterPos().DistanceTo(player.target.GetCenterPos()) > spellNode.range
+					else if (player.pos.DistanceTo(player.target.pos) > spellNode.range
 					&& spellNode.range > 0 && spellNode.requiresTarget)
 					{
 						popup.GetNode<Label>("m/error/label").Text = "Target Not\nIn Range!";

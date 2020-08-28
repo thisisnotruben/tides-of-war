@@ -1,5 +1,6 @@
 using Game.Actor;
 using Game.Actor.Doodads;
+using Game.Actor.State;
 using Godot;
 namespace Game.Ability
 {
@@ -23,7 +24,7 @@ namespace Game.Ability
 		public override void ConfigureSpell()
 		{
 			caster.SetCurrentSpell(this);
-			caster.SetState(Character.States.IDLE);
+			caster.state = FSM.State.IDLE;
 			PrepSight();
 		}
 	}

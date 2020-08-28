@@ -13,9 +13,9 @@ namespace Game.Ability
 			PackedScene CombatTextScene = (PackedScene)GD.Load("res://src/character/doodads/combat_text.tscn");
 			CombatText combatText = (CombatText)CombatTextScene.Instance();
 			caster.AddChild(combatText);
-			if (mana + caster.mana > caster.manaMax)
+			if (mana + caster.mana > caster.stats.manaMax.valueI)
 			{
-				mana = caster.manaMax - caster.mana;
+				mana = caster.stats.manaMax.valueI - caster.mana;
 			}
 			combatText.SetType($"+{mana}", CombatText.TextType.MANA, caster.GetNode<Node2D>("img").Position);
 			return base.Cast();

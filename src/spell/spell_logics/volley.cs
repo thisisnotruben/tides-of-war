@@ -1,3 +1,4 @@
+using Game.Actor.State;
 using Godot;
 namespace Game.Ability
 {
@@ -12,7 +13,7 @@ namespace Game.Ability
 		}
 		public void VolleyCast(string animName)
 		{
-			AnimationPlayer casterAnim = caster.GetNode<AnimationPlayer>("anim");
+			AnimationPlayer casterAnim = caster.anim;
 			if (target == null)
 			{
 				if (!loaded)
@@ -25,7 +26,7 @@ namespace Game.Ability
 			}
 			else
 			{
-				if (caster.GetCenterPos().DistanceTo(target.GetCenterPos()) <= caster.weaponRange)
+				if (caster.pos.DistanceTo(target.pos) <= caster.stats.weaponRange.value)
 				{
 					count--;
 					if (count > 0)
@@ -44,10 +45,10 @@ namespace Game.Ability
 		public override void ConfigureSpell()
 		{
 			caster.SetCurrentSpell(this);
-			caster.SetState(Game.Actor.Character.States.IDLE);
+			caster.state = FSM.State.IDLE;
 			caster.SetProcess(false);
 			caster.GetNode<Timer>("timer").SetBlockSignals(true);
-			AnimationPlayer casterAnim = caster.GetNode<AnimationPlayer>("anim");
+			AnimationPlayer casterAnim = caster.anim;
 			casterAnim.Connect("animation_finished", this, nameof(VolleyCast));
 			casterAnim.Play(animName, -1.0f, animSpeed);
 		}

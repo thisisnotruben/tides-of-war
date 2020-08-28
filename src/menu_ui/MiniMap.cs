@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Actor;
+using Game.Actor.State;
 using Godot;
 namespace Game.Ui
 {
@@ -24,7 +25,7 @@ namespace Game.Ui
 		}
 		public override void _Process(float delta)
 		{
-			if (player.state == Character.States.MOVING)
+			if (player.state == FSM.State.MOVE)
 			{
 				Hide();
 			}
@@ -38,7 +39,7 @@ namespace Game.Ui
 			Vector2 playerPos = GetNode<Node2D>("player_pos").GlobalPosition;
 			foreach (Character character in GetTree().GetNodesInGroup("character"))
 			{
-				Rect2 rect2 = new Rect2(playerPos - ScaleToMapRatio(player.GetCenterPos() - character.GetCenterPos()) - offset, drawSize);
+				Rect2 rect2 = new Rect2(playerPos - ScaleToMapRatio(player.pos - character.pos) - offset, drawSize);
 				Color rectColor = new Color("#ffffff");
 				// TODO
 				// switch (character.worldType)
@@ -87,7 +88,7 @@ namespace Game.Ui
 			// {
 			//     path = Map.Map.map.getAPath(player.GlobalPosition, player.gravePos);
 			// }
-			GetNode<Node2D>("map").Position = GetNode<Node2D>("player_pos").GlobalPosition - ScaleToMapRatio(player.GetCenterPos());
+			GetNode<Node2D>("map").Position = GetNode<Node2D>("player_pos").GlobalPosition - ScaleToMapRatio(player.pos);
 			SetProcess(true);
 		}
 		public void _OnMiniMapHide()

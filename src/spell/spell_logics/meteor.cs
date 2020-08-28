@@ -27,7 +27,7 @@ namespace Game.Ability
 			if (hit)
 			{
 				GD.Randomize();
-				int damage = (int)(Math.Round(GD.RandRange(caster.minDamage, caster.maxDamage) * 1.2f));
+				int damage = (int)(Math.Round(GD.RandRange(caster.stats.minDamage.valueI, caster.stats.maxDamage.valueI) * 1.2f));
 				foreach (Character character in targetList)
 				{
 					character.Harm(damage);

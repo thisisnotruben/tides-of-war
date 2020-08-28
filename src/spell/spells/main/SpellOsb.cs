@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Actor;
+using Game.Actor.State;
 using Game.Utils;
 using Godot;
 namespace Game.Ability
@@ -20,9 +21,9 @@ namespace Game.Ability
 
 		public override void _Process(float delta)
 		{
-			GlobalPosition = player.GetCenterPos() + (GetGlobalMousePosition() - player.GetCenterPos()).Clamped(spellRange);
+			GlobalPosition = player.pos + (GetGlobalMousePosition() - player.pos).Clamped(spellRange);
 			player.GetMenu().GetNode<Control>("c/osb").
-			SetPosition((player.GetCenterPos().y > GlobalPosition.y) ?
+			SetPosition((player.pos.y > GlobalPosition.y) ?
 				new Vector2(0.0f, 666.0f) :
 				new Vector2(0.0f, 180.0f));
 		}
@@ -52,7 +53,7 @@ namespace Game.Ability
 		public override void ConfigureSpell()
 		{
 			caster.SetCurrentSpell(this);
-			caster.SetState(Character.States.IDLE);
+			caster.state = FSM.State.IDLE;
 			Control osb = player.GetMenu().GetNode<Control>("c/osb");
 			osb.SetPosition(new Vector2(0.0f, 180.0f));
 			GetNode<CollisionShape2D>("sight/distance").Disabled = false;
@@ -81,8 +82,8 @@ namespace Game.Ability
 		{
 			base._OnTweenCompleted(obj, nodePath);
 			Player player = obj as Player;
-			if (player != null && player.state == Character.States.MOVING &&
-				nodePath.Equals(":global_position"))
+			if (player != null && player.state == FSM.State.MOVE &&
+			nodePath.Equals(":global_position"))
 			{
 				player.GetMenu().GetNode<Control>("c/csb").Hide();
 				UnMake();

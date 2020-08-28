@@ -28,19 +28,19 @@ namespace Game.Actor.State
 			if (character is Player)
 			{
 				// TODO: delete tomb
-				character.hp = (int)(character.hpMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
-				character.mana = (int)(character.manaMax * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
+				character.hp = character.stats.hpMax.valueI * (int)GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0);
+				character.mana = character.stats.manaMax.valueI * (int)GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0);
 			}
 			else
 			{
-				character.hp = character.hpMax;
-				character.mana = character.manaMax;
+				character.hp = character.stats.hpMax.valueI;
+				character.mana = character.stats.manaMax.valueI;
 				if (IsInGroup(Globals.SAVE_GROUP))
 				{
 					RemoveFromGroup(Globals.SAVE_GROUP);
 				}
 				// little pop effect upon entry
-				tween.InterpolateProperty(sprite, ":scale", sprite.Scale, new Vector2(1.03f, 1.03f),
+				tween.InterpolateProperty(character.img, ":scale", character.img.Scale, new Vector2(1.03f, 1.03f),
 					0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
 			}
 			tween.Start();

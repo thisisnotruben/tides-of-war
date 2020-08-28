@@ -1,7 +1,7 @@
 using Godot;
 using Game.Loot;
 using Game.Database;
-using Game.Actor;
+using Game.Actor.State;
 namespace Game.Ui
 {
 	public class ItemInfoNodeInventory : ItemInfoNode
@@ -61,7 +61,7 @@ namespace Game.Ui
 			{
 				case "FOOD":
 					sndName = "eat";
-					if (player.state == Character.States.ATTACKING)
+					if (player.state == FSM.State.ATTACK)
 					{
 						GetNode<Control>("s").Hide();
 						popup.GetNode<Label>("m/error/label").Text = "Cannot Eat\nIn Combat!";

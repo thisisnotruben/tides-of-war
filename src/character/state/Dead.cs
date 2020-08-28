@@ -26,7 +26,7 @@ namespace Game.Actor.State
 			area2D.SetCollisionLayerBit(Globals.Collision["DEAD_CHARACTERS"], false);
 
 			// stop health/mana regenerations
-			character.GetNode<Timer>("timer").Stop();
+			character.regenTimer.Stop();
 
 			if (character is Npc && character.target is Player)
 			{
@@ -34,8 +34,8 @@ namespace Game.Actor.State
 			}
 
 			// play death animation
-			animationPlayer.Play("dying");
-			await ToSignal(animationPlayer, "animation_finished");
+			character.anim.Play("dying");
+			await ToSignal(character.anim, "animation_finished");
 			character.Modulate = new Color("#80ffffff");
 
 			character.hp = 0;

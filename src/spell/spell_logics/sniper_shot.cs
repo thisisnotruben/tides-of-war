@@ -1,5 +1,5 @@
 using System;
-using Game.Actor;
+using Game.Actor.State;
 namespace Game.Ability
 {
 	public class sniper_shot : Spell
@@ -7,15 +7,15 @@ namespace Game.Ability
 		int amount;
 		public override float Cast()
 		{
-			caster.weaponRange -= amount;
+			// caster.weaponRange -= amount;TODO
 			return base.Cast();
 		}
 		public override void ConfigureSpell()
 		{
 			caster.SetCurrentSpell(this);
-			caster.SetState(Character.States.IDLE);
-			amount = (int)Math.Round(caster.weaponRange * 0.25f);
-			caster.weaponRange += amount;
+			caster.state = FSM.State.IDLE;
+			amount = (int)Math.Round(caster.stats.weaponRange.value * 0.25f);
+			// caster.weaponRange += amount;TODO
 		}
 	}
 }

@@ -10,18 +10,18 @@ namespace Game.Ability
 		{
 			values = new Tuple<Character, float, float>(
 				caster.target,
-				caster.target.animSpeed * 0.5f,
-				caster.target.weaponSpeed * 0.5f
+				caster.target.stats.animSpeed.value * 0.5f,
+				caster.target.stats.weaponSpeed.value * 0.5f
 			);
-			values.Item1.animSpeed -= values.Item2;
-			values.Item1.weaponSpeed -= values.Item3;
+			// values.Item1.animSpeed -= values.Item2;TODO
+			// values.Item1.weaponSpeed -= values.Item3;TODO
 			SetTime(10.0f);
 			return base.Cast();
 		}
 		public override void _OnTimerTimeout()
 		{
-			values.Item1.animSpeed += values.Item2;
-			values.Item1.weaponSpeed += values.Item3;
+			// values.Item1.animSpeed += values.Item2;TODO
+			// values.Item1.weaponSpeed += values.Item3;TODO
 			UnMake();
 		}
 	}

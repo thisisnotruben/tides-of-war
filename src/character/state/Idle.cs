@@ -4,9 +4,9 @@ namespace Game.Actor.State
 	{
 		public override void Start()
 		{
-			animationPlayer.Stop();
-			sprite.Frame = 0;
-			sprite.FlipH = false;
+			character.anim.Stop();
+			character.img.Frame = 0;
+			character.img.FlipH = false;
 		}
 		public override void Exit() { }
 	}

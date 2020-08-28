@@ -13,15 +13,16 @@ namespace Game.Actor.State
 		}
 		public virtual void Harm(int damage)
 		{
-			damage -= character.armor;
+			damage -= character.stats.armor.valueI;
 			if (damage <= 0)
 			{
 				return;
 			}
 
-			character.hp = -damage;
+			character.hp -= damage;
 
-			if (!tween.IsActive() && fsm.GetState() != FSM.State.MOVE)
+			if (character.target != null && !tween.IsActive()
+			&& fsm.GetState() != FSM.State.MOVE)
 			{
 				Bump(Map.Map.map.GetDirection(character.GlobalPosition,
 					character.target.GlobalPosition).Rotated((float)Math.PI) / 4.0f);

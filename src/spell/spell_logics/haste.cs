@@ -6,8 +6,8 @@ namespace Game.Ability
 		private float amount;
 		public override float Cast()
 		{
-			amount = caster.animSpeed * 0.5f;
-			caster.animSpeed += amount;
+			amount = caster.stats.animSpeed.value * 0.5f;
+			// caster.animSpeed += amount;TODO
 			SetTime(30.0f);
 			caster.SetSpell(this,
 				(loaded) ?
@@ -18,7 +18,7 @@ namespace Game.Ability
 		}
 		public override void _OnTimerTimeout()
 		{
-			caster.animSpeed -= amount;
+			// caster.animSpeed -= amount;TODO
 			UnMake();
 		}
 	}

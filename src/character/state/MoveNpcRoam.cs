@@ -8,12 +8,6 @@ namespace Game.Actor.State
 		private Queue<Vector2> waypoints = new Queue<Vector2>();
 		private bool reversePath = false;
 
-		public override void _Ready()
-		{
-			base._Ready();
-			Connect(nameof(InvalidPath), this, nameof(_OnMoveAnomaly));
-			Connect(nameof(ObstructionDetected), this, nameof(_OnMoveAnomaly));
-		}
 		public override void Start()
 		{
 			base.Start();
@@ -46,7 +40,7 @@ namespace Game.Actor.State
 			SetPathToWaypoint();
 			MoveTo(path);
 		}
-		public void _OnMoveAnomaly()
+		private protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
 		{
 			// dequeue waypoint for anomaly and focus on the other waypoint
 			waypoints.Dequeue();

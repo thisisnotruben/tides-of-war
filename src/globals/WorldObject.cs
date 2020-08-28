@@ -6,8 +6,6 @@ namespace Game
 	{
 		public enum WorldTypes : byte
 		{
-			// For the unset
-			NOT_SET,
 			// Spell WorldTypes
 			CLEAVE,
 			BASH,

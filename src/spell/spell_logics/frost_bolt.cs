@@ -1,6 +1,5 @@
 using System;
 using Game.Actor;
-using Godot;
 namespace Game.Ability
 {
 	public class frost_bolt : Spell
@@ -10,18 +9,18 @@ namespace Game.Ability
 		{
 			values = new Tuple<Character, float, float>(
 				caster.target,
-				caster.animSpeed * 0.3f,
-				caster.weaponSpeed * 0.3f
+				caster.stats.animSpeed.value * 0.3f,
+				caster.stats.weaponSpeed.value * 0.3f
 			);
-			values.Item1.animSpeed -= values.Item2;
-			values.Item1.weaponSpeed -= values.Item3;
+			// values.Item1.animSpeed -= values.Item2;TODO
+			// values.Item1.weaponSpeed -= values.Item3;TODO
 			SetTime(10.0f);
 			return base.Cast();
 		}
 		public override void _OnTimerTimeout()
 		{
-			values.Item1.animSpeed += values.Item2;
-			values.Item1.weaponSpeed += values.Item3;
+			// values.Item1.animSpeed += values.Item2;TODO
+			// values.Item1.weaponSpeed += values.Item3;TODO
 			UnMake();
 		}
 		public override void ConfigureSnd()

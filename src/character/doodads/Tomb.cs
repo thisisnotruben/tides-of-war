@@ -1,4 +1,5 @@
 using Game.Utils;
+using Game.Actor.State;
 using Godot;
 namespace Game.Actor.Doodads
 {
@@ -37,7 +38,7 @@ namespace Game.Actor.Doodads
 			Map.Map.map.SetVeil(false);
 			deceasedPlayer.GetMenu().GetNode<CanvasItem>("c/osb").Hide();
 			deceasedPlayer.GetMenu().GetNode<BaseButton>("c/osb/m/cast").Disconnect("pressed", this, nameof(Revive));
-			deceasedPlayer.SetState(Character.States.ALIVE);
+			deceasedPlayer.state = FSM.State.ALIVE;
 			Tween tween = GetNode<Tween>("tween");
 			tween.InterpolateProperty(this, ":modulate", Modulate,
 				new Color(1.0f, 1.0f, 1.0f, 0.0f), 0.75f, Tween.TransitionType.Circ, Tween.EaseType.Out);

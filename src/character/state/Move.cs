@@ -4,13 +4,10 @@ namespace Game.Actor.State
 {
 	public abstract class Move : TakeDamage
 	{
+		public enum MoveAnomalyType { INVALID_PATH, OBSTRUCTION_DETECTED }
 		private protected Tween tween = new Tween();
 		private protected List<Vector2> path = new List<Vector2>();
 		private protected List<Vector2> reservedPath = new List<Vector2>();
-		[Signal]
-		public delegate void InvalidPath();
-		[Signal]
-		public delegate void ObstructionDetected();
 
 		public override void _Ready()
 		{
@@ -20,14 +17,16 @@ namespace Game.Actor.State
 		}
 		public override void Start()
 		{
-			sprite.FlipH = false;
-			animationPlayer.Play("moving", -1, character.animSpeed);
-			animationPlayer.Seek(0.3f, true);
+			character.img.FlipH = false;
+			character.anim.Play("moving", -1, character.stats.animSpeed.value);
+			character.anim.Seek(0.3f, true);
 		}
 		public override void Exit()
 		{
-			animationPlayer.Stop();
-			sprite.Frame = 0;
+			// stop all movement
+			tween.StopAll();
+			character.anim.Stop();
+			character.img.Frame = 0;
 		}
 		private void MoveCharacter(Vector2 targetPosition, float speedModifier = Stats.SPEED)
 		{
@@ -41,7 +40,8 @@ namespace Game.Actor.State
 		{
 			if (route.Count == 0)
 			{
-				EmitSignal(nameof(InvalidPath));
+				OnMoveAnomaly(MoveAnomalyType.INVALID_PATH);
+				return;
 			}
 			Vector2 direction = Map.Map.map.GetDirection(character.GlobalPosition, route[0]);
 			while (route.Count > 0 && direction.x == 0.0f && direction.y == 0.0f)
@@ -54,19 +54,20 @@ namespace Game.Actor.State
 			}
 			if (route.Count == 0)
 			{
-				EmitSignal(nameof(InvalidPath));
+				OnMoveAnomaly(MoveAnomalyType.INVALID_PATH);
+				return;
 			}
 
 			route[0] = Map.Map.map.RequestMove(character.GlobalPosition, direction);
 			if (route[0].x != 0.0f && route[0].y != 0.0f)
 			{
 				reservedPath.Add(route[0]);
-				MoveCharacter(route[0], Stats.MapAnimMoveSpeed(character.animSpeed));
+				MoveCharacter(route[0], Stats.MapAnimMoveSpeed(character.stats.animSpeed.value));
 				route.RemoveAt(0);
 			}
 			else
 			{
-				EmitSignal(nameof(ObstructionDetected));
+				OnMoveAnomaly(MoveAnomalyType.OBSTRUCTION_DETECTED);
 			}
 		}
 		public virtual void _OnTweenCompleted(Godot.Object Gobject, NodePath nodePath)
@@ -80,5 +81,6 @@ namespace Game.Actor.State
 				MoveTo(path);
 			}
 		}
+		private protected virtual void OnMoveAnomaly(MoveAnomalyType moveAnomalyType) { }
 	}
 }

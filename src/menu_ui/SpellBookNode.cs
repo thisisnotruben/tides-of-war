@@ -18,8 +18,8 @@ namespace Game.Ui
 		}
 		public void _OnSpellBookNodeDraw()
 		{
-			GetNode<Label>("s/v/m/v/player_hp_header").Text = $"Health: {player.hp} / {player.hpMax}";
-			GetNode<Label>("s/v/m/v/player_mana_header").Text = $"Mana: {player.mana} / {player.manaMax}";
+			GetNode<Label>("s/v/m/v/player_hp_header").Text = $"Health: {player.hp} / {player.stats.hpMax.valueI}";
+			GetNode<Label>("s/v/m/v/player_mana_header").Text = $"Mana: {player.mana} / {player.stats.manaMax.valueI}";
 		}
 		public void _OnSpellBookNodeHide()
 		{
