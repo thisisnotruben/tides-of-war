@@ -102,7 +102,6 @@ namespace Game.Actor
 		public Spell spell { get; private protected set; }
 		public Character target;
 		public List<Spell> spellQueue = new List<Spell>();
-		public Dictionary<string, List<Item>> buffs = new Dictionary<string, List<Item>>();
 		[Signal]
 		public delegate void UpdateHudStatus(Character character, bool hp, int currentValue, int maxValue);
 		[Signal]
@@ -116,17 +115,10 @@ namespace Game.Actor
 			fsm = GetNode<FSM>("fsm");
 			stats = new StatManager(this);
 
+			worldName = Name;
 			// always starting with full health on init
 			hp = stats.hpMax.valueI;
 			mana = stats.manaMax.valueI;
-		}
-		public virtual void Init()
-		{
-			buffs.Add("active", new List<Item>());
-			buffs.Add("pending", new List<Item>());
-			worldName = Name;
-			spell = null;
-			target = null;
 		}
 		private protected void SetImg(string imgName)
 		{
@@ -176,7 +168,6 @@ namespace Game.Actor
 			sightDistance.Position = areaBody.Position;
 
 		}
-		public override void _Process(float delta) { fsm.Process(delta); }
 		public void Harm(int damage) { fsm.Harm(damage); }
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
@@ -213,37 +204,6 @@ namespace Game.Actor
 			EmitSignal(nameof(UpdateHudIcon), worldName, spell, seek);
 		}
 		public void RemoveFromSpellQueue(Spell spell) { spellQueue.Remove(spell); }
-		public void SetBuff(List<Item> buffPool = null, float seek = 0.0f)
-		{
-			if (buffPool == null)
-			{
-				buffPool = buffs["pending"];
-			}
-			foreach (Item buff in buffPool)
-			{
-				if (seek == 0.0f)
-				{
-					BuffAnim buffAnim = (BuffAnim)buffAnimScene.Instance();
-					GetNode("img").AddChild(buffAnim);
-					buffAnim.item = buff;
-					buff.Connect(nameof(Item.UnMake), buffAnim, nameof(QueueFree));
-				}
-				buff.GetNode<Timer>("timer").Start();
-				foreach (Item currentBuff in buffs["active"])
-				{
-					if (currentBuff.subType == buff.subType && !buff.worldName.ToLower().Contains("potion"))
-					{
-						currentBuff.ConfigureBuff(this, true);
-					}
-				}
-				if (buff.subType != Item.WorldTypes.HEALING && buff.subType != Item.WorldTypes.MANA)
-				{
-					EmitSignal(nameof(UpdateHudIcon), worldName, buff, seek);
-				}
-				buffs["active"].Remove(buff);
-				buffPool.Remove(buff);
-			}
-		}
 		public void _OnRegenTimerTimeout()
 		{
 			// fsm controls when regen timer is allowed

@@ -75,7 +75,6 @@ namespace Game.Actor.State
 			}
 		}
 		// * Delegated functions for state
-		public void Process(float delta) { stateMap[GetState()].Process(delta); }
 		public void Harm(int damage)
 		{
 			TakeDamage takeDamageState = stateMap[GetState()] as TakeDamage;

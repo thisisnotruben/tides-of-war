@@ -21,7 +21,8 @@ namespace Game.Loot
 			ItemDB.ItemNode itemData = ItemDB.GetItemData(worldName);
 			this.worldName = worldName;
 			Name = worldName;
-			worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData.type.ToUpper());
+			// TODO
+			// worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData.type.ToUpper());
 			if (worldType == WorldTypes.WEAPON || worldType == WorldTypes.POTION)
 			{
 				subType = (WorldTypes)Enum.Parse(typeof(WorldTypes), itemData.subType.ToUpper());
@@ -97,11 +98,11 @@ namespace Game.Loot
 				ConfigureBuff(character, false);
 				if (GetTree().Paused)
 				{
-					character.buffs["pending"].Add(this);
+					// character.buffs["pending"].Add(this);
 				}
 				else
 				{
-					character.SetBuff(new List<Item> { this }, seek);
+					// character.SetBuff(new List<Item> { this }, seek);
 				}
 			}
 			else
@@ -156,7 +157,7 @@ namespace Game.Loot
 			}
 			if (expire)
 			{
-				character.buffs["active"].Remove(this);
+				// character.buffs["active"].Remove(this);
 				UnMake();
 			}
 		}

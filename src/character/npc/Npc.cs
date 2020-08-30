@@ -8,11 +8,6 @@ namespace Game.Actor
 		public override void _Ready()
 		{
 			base._Ready();
-			Init();
-		}
-		public override void Init()
-		{
-			base.Init();
 			UnitDB.UnitNode unitNode = UnitDB.GetUnitData(Name);
 			enemy = unitNode.enemy;
 			level = unitNode.level;
@@ -85,7 +80,5 @@ namespace Game.Actor
 		}
 		// makes sure player clicks on unit and not mistakingly select the tile to move to
 		public void _OnAreaMouseEnteredExited(bool entered) { Player.player.SetProcessUnhandledInput(!entered); }
-		// for performance reasons
-		public void _OnScreenEnteredExited(bool entered) { SetProcess(entered); }
 	}
 }

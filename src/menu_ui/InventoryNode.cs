@@ -1,5 +1,6 @@
 using Godot;
 using Game.Loot;
+using Game.ItemPoto;
 using Game.Database;
 namespace Game.Ui
 {
@@ -24,15 +25,15 @@ namespace Game.Ui
 			itemInfoNodeInventory.Hide();
 			GetNode<Control>("s").Show();
 		}
-		public void _OnItemEquipped(Item item, bool on)
+		public void _OnItemEquipped(Commodity item, bool on)
 		{
-			string nodePath = "s/v/slots/weapon/m/icon";
-			if (item.worldType == WorldObject.WorldTypes.ARMOR)
-			{
-				nodePath = "s/v/slots/armor/m/icon";
-			}
-			GetNode<TextureRect>(nodePath).Texture =
-				(on) ? ItemDB.GetItemData(item.worldName).icon : null;
+			ItemDB.ItemNode itemNode = ItemDB.GetItemData(item.worldName);
+
+			GetNode<TextureRect>(
+				(itemNode.type == ItemDB.ItemType.ARMOR)
+				? "s/v/slots/armor/m/icon"
+				: "s/v/slots/weapon/m/icon")
+					.Texture = (on) ? itemNode.icon : null;
 		}
 		public void _OnInventoryIndexSelected(int index)
 		{

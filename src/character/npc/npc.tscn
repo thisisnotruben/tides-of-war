@@ -134,6 +134,4 @@ anims/moving = SubResource( 4 )
 [connection signal="mouse_exited" from="area" to="." method="_OnAreaMouseEnteredExited" binds= [ false ]]
 [connection signal="area_entered" from="sight" to="." method="_OnCharacterEnteredSight"]
 [connection signal="area_exited" from="sight" to="." method="_OnCharacterExitedSight"]
-[connection signal="screen_entered" from="visible" to="." method="_OnScreenEnteredExited" binds= [ true ]]
-[connection signal="screen_exited" from="visible" to="." method="_OnScreenEnteredExited" binds= [ false ]]
 [connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]

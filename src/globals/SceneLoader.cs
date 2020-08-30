@@ -20,14 +20,14 @@ namespace Game
 		public static SceneLoader Init()
 		{
 			PackedScene sceneLoaderScene = (PackedScene)GD.Load("res://src/globals/scene_loader.tscn");
-			return (SceneLoader) sceneLoaderScene.Instance();
+			return (SceneLoader)sceneLoaderScene.Instance();
 		}
 		private void SetTransitions()
 		{
 			if (playerState.Count > 0)
 			{
 				Vector2 spawnLoc = Map.Map.map.GetNode<Node2D>("meta/transitions/" + playerState["_mapName"]).GlobalPosition;
-				playerState[nameof(Player.GlobalPosition)] = new Godot.Collections.Array(){spawnLoc[0], spawnLoc[1]};
+				playerState[nameof(Player.GlobalPosition)] = new Godot.Collections.Array() { spawnLoc[0], spawnLoc[1] };
 				playerState.Remove("_mapName");
 				Player.player.Deserialize(playerState);
 			}
@@ -40,7 +40,7 @@ namespace Game
 					progressBar.Value = 100.0f * mapLoader.GetStage() / mapLoader.GetStageCount();
 					break;
 				case Error.FileEof:
-					PackedScene packedScene = (PackedScene) mapLoader.GetResource();
+					PackedScene packedScene = (PackedScene)mapLoader.GetResource();
 					cache.Add(mapLoader.GetResource().ResourcePath, packedScene);
 					Node scene = packedScene.Instance();
 					rootNode.AddChild(scene);
@@ -50,7 +50,7 @@ namespace Game
 					break;
 			}
 		}
-		public void SetScene(string scenePath, CanvasItem currentScene, bool transition=false)
+		public void SetScene(string scenePath, CanvasItem currentScene, bool transition = false)
 		{
 			rootNode.AddChild(this);
 
@@ -61,11 +61,13 @@ namespace Game
 			}
 
 			// load map specific data
+			string mapPath = scenePath.GetFile().BaseName();
+			mapPath = $"res://data/{mapPath}/{mapPath}";
+			string dataPath = mapPath + ".json";
+			string contentPath = mapPath + "_content.json";
+			string questPath = mapPath + "_quest.json";
+
 			Directory directory = new Directory();
-			string mapName = scenePath.GetFile().BaseName();
-			string dataPath = $"res://data/{mapName}.json";
-			string contentPath = $"res://data/{mapName}_content.json";
-			string questPath = $"res://data/{mapName}_quest.json";
 			if (directory.FileExists(dataPath))
 			{
 				UnitDB.LoadUnitData(dataPath);

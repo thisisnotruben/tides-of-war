@@ -3,6 +3,7 @@ using Game.Actor.Doodads;
 using Game.Ui;
 using Game.Utils;
 using Game.Loot;
+using Game.ItemPoto;
 using Godot;
 namespace Game.Actor
 {
@@ -12,48 +13,38 @@ namespace Game.Actor
 
 		public int xp { get; private set; }
 		public int gold;
-		private Item _weapon = null;
-		public Item weapon
+		private Commodity _weapon;
+		public Commodity weapon
 		{
+			get { return _weapon; }
 			set
 			{
-				if (value == null && weapon != null)
+				if (weapon != null)
 				{
-					Tuple<int, int> values = weapon.GetValues();
-					// minDamage -= values.Item1;TODO
-					// maxDamage -= values.Item2;TODO
+					weapon.Exit();
 				}
 				if (value != null)
 				{
-					Tuple<int, int> values = value.GetValues();
-					// minDamage += values.Item1;TODO
-					// maxDamage += values.Item2;TODO
+					value.Start();
 				}
 				_weapon = value;
 			}
-			get
-			{
-				return _weapon;
-			}
 		}
-		private Item _vest = null;
-		public Item vest
+		private Commodity _vest;
+		public Commodity vest
 		{
+			get { return _vest; }
 			set
 			{
-				if (value == null && vest != null)
+				if (vest != null)
 				{
-					// armor -= vest.value;TODO
+					vest.Exit();
 				}
 				if (value != null)
 				{
-					// armor += vest.value;
+					value.Start();
 				}
-				_vest = value;
-			}
-			get
-			{
-				return _vest;
+				_weapon = value;
 			}
 		}
 
@@ -61,7 +52,6 @@ namespace Game.Actor
 		public override void _Ready()
 		{
 			base._Ready();
-			Init();
 			GameMenu.player = this;
 			gold = 10_000;
 			level = Stats.MAX_LEVEL;

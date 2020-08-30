@@ -1,6 +1,7 @@
 using Godot;
 using System.Linq;
 using System.Collections.Generic;
+using Game.ItemPoto;
 using Game.Loot;
 using Game.Database;
 namespace Game.Ui
@@ -47,20 +48,20 @@ namespace Game.Ui
 			if (!player.dead && itemList != null && ItemDB.HasItem(pickableWorldName))
 			{
 				showBttns = new string[] { "drop", "" };
-				string itemType = ItemDB.GetItemData(pickableWorldName).type;
+				ItemDB.ItemType itemType = ItemDB.GetItemData(pickableWorldName).type;
 				switch (itemType)
 				{
-					case "FOOD":
-					case "POTION":
+					case ItemDB.ItemType.FOOD:
+					case ItemDB.ItemType.POTION:
 						if (!itemList.IsSlotCoolingDown(itemList.GetItemSlot(pickableWorldName).GetIndex()))
 						{
 							showBttns[1] = "use";
 							GetNode<Label>("s/h/buttons/use/label").Text =
-								(itemType.Equals("FOOD")) ? "Eat" : "Drink";
+								(itemType == ItemDB.ItemType.FOOD) ? "Eat" : "Drink";
 						}
 						break;
-					case "ARMOR":
-					case "WEAPON":
+					case ItemDB.ItemType.WEAPON:
+					case ItemDB.ItemType.ARMOR:
 						showBttns[1] = "equip";
 						break;
 				}
@@ -68,6 +69,7 @@ namespace Game.Ui
 			HideExcept(showBttns);
 			GetNode<Label>("s/v/header").Text = pickableWorldName;
 			GetNode<TextureRect>("s/v/c/v/add_to_hud/m/icon").Texture = PickableDB.GetIcon(pickableWorldName);
+			// !!!! todo
 			GetNode<RichTextLabel>("s/v/c/v/m/info_text").BbcodeText = PickableDB.GetDescription(pickableWorldName);
 			Show();
 		}
@@ -159,10 +161,8 @@ namespace Game.Ui
 					{
 						shortcut.SetItem(null, false, true, false);
 					}
-					Item weapon = player.weapon;
-					Item armor = player.vest;
-					string weaponWorldName = (weapon == null) ? "" : player.weapon.worldName;
-					string armorWorldName = (armor == null) ? "" : player.vest.worldName;
+					string weaponWorldName = (player.weapon == null) ? "" : player.weapon.worldName;
+					string armorWorldName = (player.vest == null) ? "" : player.vest.worldName;
 					if (weaponWorldName.Equals(pickableWorldName))
 					{
 						shortcut.SetItem(weaponWorldName, false, false, false);

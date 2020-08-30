@@ -4,7 +4,6 @@ namespace Game.Actor
 {
 	public class TargetDummy : Npc
 	{
-		public override void Init() { }
 		public override void _OnSelectPressed()
 		{
 			if (Player.player.target == this)

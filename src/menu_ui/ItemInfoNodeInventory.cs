@@ -1,5 +1,6 @@
 using Godot;
 using Game.Loot;
+using Game.ItemPoto;
 using Game.Database;
 using Game.Actor.State;
 namespace Game.Ui
@@ -7,7 +8,7 @@ namespace Game.Ui
 	public class ItemInfoNodeInventory : ItemInfoNode
 	{
 		[Signal]
-		public delegate void ItemEquipped(Item item, bool on);
+		public delegate void ItemEquipped(Commodity item, bool on);
 
 		public override void _Ready()
 		{
@@ -24,13 +25,13 @@ namespace Game.Ui
 		public void EquipItem(bool on)
 		{
 			ItemDB.ItemNode itemNode = ItemDB.GetItemData(pickableWorldName);
-			Item item = PickableFactory.GetMakeItem(pickableWorldName);
+			Commodity item = PickableFactory.MakeCommodity(pickableWorldName);
 			switch (itemNode.type)
 			{
-				case "WEAPON":
+				case ItemDB.ItemType.WEAPON:
 					player.weapon = (on) ? item : null;
 					break;
-				case "ARMOR":
+				case ItemDB.ItemType.ARMOR:
 					player.vest = (on) ? item : null;
 					break;
 			}
@@ -55,11 +56,12 @@ namespace Game.Ui
 		}
 		public void _OnUsePressed()
 		{
-			string itemType = ItemDB.GetItemData(pickableWorldName).type;
+			ItemDB.ItemType itemType = ItemDB.GetItemData(pickableWorldName).type;
 			string sndName = "click2";
+
 			switch (itemType)
 			{
-				case "FOOD":
+				case ItemDB.ItemType.FOOD:
 					sndName = "eat";
 					if (player.state == FSM.State.ATTACK)
 					{
@@ -70,7 +72,7 @@ namespace Game.Ui
 						return;
 					}
 					break;
-				case "POTION":
+				case ItemDB.ItemType.POTION:
 					sndName = "drink";
 					break;
 			}
@@ -86,15 +88,15 @@ namespace Game.Ui
 		}
 		public void _OnEquipPressed()
 		{
-			string itemType = ItemDB.GetItemData(pickableWorldName).type;
+			ItemDB.ItemType itemType = ItemDB.GetItemData(pickableWorldName).type;
 			string currentPickableWorldName = pickableWorldName;
-			Item playerWeapon = player.weapon;
-			Item playerArmor = player.vest;
+			Commodity playerWeapon = player.weapon;
+			Commodity playerArmor = player.vest;
 			if (!itemList.IsFull())
 			{
 				switch (itemType)
 				{
-					case "WEAPON":
+					case ItemDB.ItemType.WEAPON:
 
 						if (playerWeapon != null)
 						{
@@ -103,7 +105,7 @@ namespace Game.Ui
 							pickableWorldName = currentPickableWorldName;
 						}
 						break;
-					case "ARMOR":
+					case ItemDB.ItemType.ARMOR:
 						if (playerArmor != null)
 						{
 							pickableWorldName = playerArmor.worldName;
@@ -113,8 +115,8 @@ namespace Game.Ui
 						break;
 				}
 			}
-			else if ((itemType.Equals("WEAPON") & playerWeapon != null)
-			|| (itemType.Equals("ARMOR") & playerArmor != null))
+			else if ((itemType == ItemDB.ItemType.WEAPON & playerWeapon != null)
+			|| (itemType == ItemDB.ItemType.ARMOR & playerArmor != null))
 			{
 				GetNode<Control>("s").Hide();
 				popup.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";

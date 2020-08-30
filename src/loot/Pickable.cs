@@ -48,47 +48,47 @@ namespace Game.Loot
 		}
 		public virtual void GetPickable(Character character, bool addToBag)
 		{
-			Player player = character as Player;
-			if (player != null && !IsConnected(nameof(DescribePickable), player.GetMenu(), nameof(InGameMenu._OnDescribePickable)))
-			{
-				Connect(nameof(DescribePickable), player.GetMenu(), nameof(InGameMenu._OnDescribePickable));
-				Connect(nameof(SetInMenu), player.GetMenu(), nameof(InGameMenu._OnSetPickableInMenu));
-				Item item = this as Item;
-			}
-			InGameMenu.Bags bag = (this is Item) ? InGameMenu.Bags.INVENTORY : InGameMenu.Bags.SPELL;
-			if (Owner == Map.Map.map && addToBag)
-			{
-				PauseMode = PauseModeEnum.Process;
-				EmitSignal(nameof(SetInMenu), this, PickableDB.GetStackSize(worldName) > 0, bag);
-			}
-			else
-			{
-				if (GetParent() != null)
-				{
-					if (Owner == Map.Map.map)
-					{
-						Map.Map.map.SetGetPickableLoc(GlobalPosition, false);
-					}
-					GetParent().RemoveChild(this);
-				}
-				else
-				{
-					GetNode("sight").SetBlockSignals(true);
-				}
-				if (this is Item)
-				{
-					character.GetNode("inventory").AddChild(this);
-				}
-				else if (this is Spell)
-				{
-					character.GetNode("spells").AddChild(this);
-				}
-				Owner = character;
-				if (addToBag)
-				{
-					EmitSignal(nameof(SetInMenu), this, PickableDB.GetStackSize(worldName), bag);
-				}
-			}
+			// Player player = character as Player;
+			// if (player != null && !IsConnected(nameof(DescribePickable), player.GetMenu(), nameof(InGameMenu._OnDescribePickable)))
+			// {
+			// 	Connect(nameof(DescribePickable), player.GetMenu(), nameof(InGameMenu._OnDescribePickable));
+			// 	Connect(nameof(SetInMenu), player.GetMenu(), nameof(InGameMenu._OnSetPickableInMenu));
+			// 	Item item = this as Item;
+			// }
+			// InGameMenu.Bags bag = (this is Item) ? InGameMenu.Bags.INVENTORY : InGameMenu.Bags.SPELL;
+			// if (Owner == Map.Map.map && addToBag)
+			// {
+			// 	PauseMode = PauseModeEnum.Process;
+			// 	EmitSignal(nameof(SetInMenu), this, PickableDB.GetStackSize(worldName) > 0, bag);
+			// }
+			// else
+			// {
+			// 	if (GetParent() != null)
+			// 	{
+			// 		if (Owner == Map.Map.map)
+			// 		{
+			// 			Map.Map.map.SetGetPickableLoc(GlobalPosition, false);
+			// 		}
+			// 		GetParent().RemoveChild(this);
+			// 	}
+			// 	else
+			// 	{
+			// 		GetNode("sight").SetBlockSignals(true);
+			// 	}
+			// 	if (this is Item)
+			// 	{
+			// 		character.GetNode("inventory").AddChild(this);
+			// 	}
+			// 	else if (this is Spell)
+			// 	{
+			// 		character.GetNode("spells").AddChild(this);
+			// 	}
+			// 	Owner = character;
+			// 	if (addToBag)
+			// 	{
+			// 		EmitSignal(nameof(SetInMenu), this, PickableDB.GetStackSize(worldName), bag);
+			// 	}
+			// }
 		}
 		public virtual float GetTimeLeft()
 		{

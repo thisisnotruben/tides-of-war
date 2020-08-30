@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game.Ability;
 using Game.Loot;
+using Game.ItemPoto;
 using Godot;
 namespace Game.Database
 {
@@ -47,6 +48,12 @@ namespace Game.Database
 			Item item = (Item)itemScene.Instance();
 			item.Init(worldName);
 			return item;
+		}
+		public static Commodity MakeCommodity(string worldName)
+		{
+			PackedScene itemScene = (PackedScene)GD.Load("res://src/item/commodity.tscn");
+			Commodity commodity = (Commodity)itemScene.Instance();
+			return commodity.Init(worldName);
 		}
 		public static SpellEffect GetMakeSpellEffect(string worldName)
 		{

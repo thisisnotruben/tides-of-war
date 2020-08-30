@@ -117,83 +117,85 @@ namespace Game
 		{
 			return (int)Math.Round((6.0f * characterLevel + 24.0f + ((3.0 + characterLevel) * unitMultiplier)) * unitMultiplier * 0.05f);
 		}
-		public static int GetItemGoldWorth(int itemLevel, WorldObject.WorldTypes itemType, float itemDurability)
-		{
-			int gold = 3 * itemLevel + 4;
-			switch (itemType)
-			{
-				case Item.WorldTypes.FOOD:
-					gold *= 2;
-					break;
-				case Item.WorldTypes.HEALING:
-				case Item.WorldTypes.MANA:
-					gold *= 3;
-					break;
-				case Item.WorldTypes.STAMINA:
-				case Item.WorldTypes.INTELLECT:
-				case Item.WorldTypes.AGILITY:
-				case Item.WorldTypes.STRENGTH:
-				case Item.WorldTypes.DEFENSE:
-					gold *= 4;
-					break;
-				case Item.WorldTypes.WEAPON:
-					gold *= 5;
-					break;
-				case Item.WorldTypes.ARMOR:
-					gold *= 6;
-					break;
-			}
-			return (int)Mathf.Round((float)gold * itemDurability);
-		}
+		// TODO
+		// public static int GetItemGoldWorth(int itemLevel, WorldObject.WorldTypes itemType, float itemDurability)
+		// {
+		// 	int gold = 3 * itemLevel + 4;
+		// 	switch (itemType)
+		// 	{
+		// 		case Item.WorldTypes.FOOD:
+		// 			gold *= 2;
+		// 			break;
+		// 		case Item.WorldTypes.HEALING:
+		// 		case Item.WorldTypes.MANA:
+		// 			gold *= 3;
+		// 			break;
+		// 		case Item.WorldTypes.STAMINA:
+		// 		case Item.WorldTypes.INTELLECT:
+		// 		case Item.WorldTypes.AGILITY:
+		// 		case Item.WorldTypes.STRENGTH:
+		// 		case Item.WorldTypes.DEFENSE:
+		// 			gold *= 4;
+		// 			break;
+		// 		case Item.WorldTypes.WEAPON:
+		// 			gold *= 5;
+		// 			break;
+		// 		case Item.WorldTypes.ARMOR:
+		// 			gold *= 6;
+		// 			break;
+		// 	}
+		// 	return (int)Mathf.Round((float)gold * itemDurability);
+		// }
 		public static Tuple<int, int> GetItemStats(int itemLevel, WorldObject.WorldTypes itemType, WorldObject.WorldTypes itemSubType)
 		{
 			CharacterStatsNode stats = UnitMake(itemLevel, MULTIPLIER);
 			double minValue = -1.0;
 			double maxValue = -1.0;
-			switch (itemSubType)
-			{
-				case Item.WorldTypes.HEALING:
-					minValue = stats.hpMax * 0.3;
-					maxValue = minValue * 1.25;
-					break;
-				case Item.WorldTypes.MANA:
-					minValue = stats.manaMax * 0.3;
-					maxValue = minValue * 1.25;
-					break;
-				case Item.WorldTypes.STAMINA:
-					minValue = stats.stamina * 0.5;
-					break;
-				case Item.WorldTypes.INTELLECT:
-					minValue = stats.intellect * 0.5;
-					break;
-				case Item.WorldTypes.AGILITY:
-					minValue = stats.agility * 0.5;
-					break;
-				case Item.WorldTypes.STRENGTH:
-					minValue = (stats.minDamage + stats.maxDamage) * 0.5;
-					break;
-				case Item.WorldTypes.DEFENSE:
-					minValue = (double)itemLevel;
-					break;
-				default:
-					switch (itemType)
-					{
-						case Item.WorldTypes.ARMOR:
-							minValue = (double)itemLevel;
-							break;
-						case Item.WorldTypes.WEAPON:
-							minValue = stats.minDamage;
-							maxValue = stats.maxDamage;
-							break;
-						case Item.WorldTypes.FOOD:
-							maxValue = stats.hpMax * 0.09375;
-							minValue = maxValue * 0.5;
-							break;
-					}
-					break;
-			}
-			minValue = Math.Round(minValue);
-			maxValue = Math.Round(maxValue);
+			// TODO
+			// switch (itemSubType)
+			// {
+			// 	case Item.WorldTypes.HEALING:
+			// 		minValue = stats.hpMax * 0.3;
+			// 		maxValue = minValue * 1.25;
+			// 		break;
+			// 	case Item.WorldTypes.MANA:
+			// 		minValue = stats.manaMax * 0.3;
+			// 		maxValue = minValue * 1.25;
+			// 		break;
+			// 	case Item.WorldTypes.STAMINA:
+			// 		minValue = stats.stamina * 0.5;
+			// 		break;
+			// 	case Item.WorldTypes.INTELLECT:
+			// 		minValue = stats.intellect * 0.5;
+			// 		break;
+			// 	case Item.WorldTypes.AGILITY:
+			// 		minValue = stats.agility * 0.5;
+			// 		break;
+			// 	case Item.WorldTypes.STRENGTH:
+			// 		minValue = (stats.minDamage + stats.maxDamage) * 0.5;
+			// 		break;
+			// 	case Item.WorldTypes.DEFENSE:
+			// 		minValue = (double)itemLevel;
+			// 		break;
+			// 	default:
+			// 		switch (itemType)
+			// 		{
+			// 			case Item.WorldTypes.ARMOR:
+			// 				minValue = (double)itemLevel;
+			// 				break;
+			// 			case Item.WorldTypes.WEAPON:
+			// 				minValue = stats.minDamage;
+			// 				maxValue = stats.maxDamage;
+			// 				break;
+			// 			case Item.WorldTypes.FOOD:
+			// 				maxValue = stats.hpMax * 0.09375;
+			// 				minValue = maxValue * 0.5;
+			// 				break;
+			// 		}
+			// 		break;
+			// }
+			// minValue = Math.Round(minValue);
+			// maxValue = Math.Round(maxValue);
 			return new Tuple<int, int>((int)minValue, (int)maxValue);
 		}
 		public static float GetMultiplier(string race)

@@ -13,7 +13,6 @@ namespace Game.Actor.State
 		}
 		public abstract void Start();
 		public abstract void Exit();
-		public virtual void Process(float delta) { }
 		public virtual void UnhandledInput(InputEvent @event)
 		{
 			if (!(@event is InputEventScreenTouch))

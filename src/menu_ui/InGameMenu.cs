@@ -98,7 +98,7 @@ namespace Game.Ui
 		public void _OnResumePressed()
 		{
 			Globals.PlaySound("click2", this, snd);
-			player.SetBuff();
+			// player.SetBuff();
 			HideMenu();
 		}
 		public void _OnInventoryPressed()
@@ -434,47 +434,47 @@ namespace Game.Ui
 		}
 		public void _OnWeaponSlotPressed()
 		{
-			ItemInfoGo(player.weapon);
+			// ItemInfoGo(player.weapon);
 		}
 		public void _OnArmorSlotPressed()
 		{
-			ItemInfoGo(player.vest);
+			// ItemInfoGo(player.vest);
 		}
 		public void _OnEquipPressed()
 		{
-			itemInfo.Hide();
-			Item selectedPickable = selected as Item;
-			if (selectedPickable == null)
-			{
-				GD.Print("Unexpected selected type in method _OnEquipPressed");
-				return;
-			}
-			if (!inventoryBag.IsFull())
-			{
-				switch (selectedPickable.worldType)
-				{
-					case WorldObject.WorldTypes.WEAPON:
-						if (player.weapon != null)
-						{
-							// player.weapon.Unequip();
-						}
-						break;
-					case WorldObject.WorldTypes.ARMOR:
-						if (player.vest != null)
-						{
-							// player.vest.Unequip();
-						}
-						break;
-				}
-			}
-			else if ((selectedPickable.worldType == WorldObject.WorldTypes.WEAPON & player.weapon != null) ||
-				(selectedPickable.worldType == WorldObject.WorldTypes.ARMOR & player.vest != null))
-			{
-				popup.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
-				popup.GetNode<Control>("m/error").Show();
-				popup.Show();
-				return;
-			}
+			// itemInfo.Hide();
+			// Item selectedPickable = selected as Item;
+			// if (selectedPickable == null)
+			// {
+			// 	GD.Print("Unexpected selected type in method _OnEquipPressed");
+			// 	return;
+			// }
+			// if (!inventoryBag.IsFull())
+			// {
+			// 	switch (selectedPickable.worldType)
+			// 	{
+			// 		case WorldObject.WorldTypes.WEAPON:
+			// 			if (player.weapon != null)
+			// 			{
+			// 				// player.weapon.Unequip();
+			// 			}
+			// 			break;
+			// 		case WorldObject.WorldTypes.ARMOR:
+			// 			if (player.vest != null)
+			// 			{
+			// 				// player.vest.Unequip();
+			// 			}
+			// 			break;
+			// 	}
+			// }
+			// else if ((selectedPickable.worldType == WorldObject.WorldTypes.WEAPON & player.weapon != null) ||
+			// 	(selectedPickable.worldType == WorldObject.WorldTypes.ARMOR & player.vest != null))
+			// {
+			// 	popup.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
+			// 	popup.GetNode<Control>("m/error").Show();
+			// 	popup.Show();
+			// 	return;
+			// }
 			// ItemSlot itemSlot = inventoryBag.GetItemSlot(selectedPickable);
 			// itemSlot.SetBlockSignals(true);
 			// selectedPickable.Equip();
@@ -525,40 +525,40 @@ namespace Game.Ui
 		}
 		public void _OnUsePressed(bool slotSelect)
 		{
-			Item selectedItem = selected as Item;
-			if (selectedItem == null)
-			{
-				GD.Print("Unexpected selected type in method _OnUsePressed");
-				return;
-			}
-			switch (selectedItem.worldType)
-			{
-				case WorldObject.WorldTypes.FOOD:
-					if (player.state == FSM.State.ATTACK)
-					{
-						popup.GetNode<Label>("m/error/label").Text = "Cannot Eat\nIn Combat!";
-						popup.GetNode<Control>("m/error").Show();
-						if (!GetTree().Paused)
-						{
-							GetNode<Control>("c/game_menu").Show();
-							selectedIdx = -1;
-							selected = null;
-						}
-						popup.Show();
-						return;
-					}
-					else
-					{
-						Globals.PlaySound("eat", this, snd);
-					}
-					break;
-				case WorldObject.WorldTypes.POTION:
-					Globals.PlaySound("drink", this, snd);
-					break;
-				default:
-					Globals.PlaySound("click2", this, snd);
-					break;
-			}
+			// Item selectedItem = selected as Item;
+			// if (selectedItem == null)
+			// {
+			// 	GD.Print("Unexpected selected type in method _OnUsePressed");
+			// 	return;
+			// }
+			// switch (selectedItem.worldType)
+			// {
+			// 	case WorldObject.WorldTypes.FOOD:
+			// 		if (player.state == FSM.State.ATTACK)
+			// 		{
+			// 			popup.GetNode<Label>("m/error/label").Text = "Cannot Eat\nIn Combat!";
+			// 			popup.GetNode<Control>("m/error").Show();
+			// 			if (!GetTree().Paused)
+			// 			{
+			// 				GetNode<Control>("c/game_menu").Show();
+			// 				selectedIdx = -1;
+			// 				selected = null;
+			// 			}
+			// 			popup.Show();
+			// 			return;
+			// 		}
+			// 		else
+			// 		{
+			// 			Globals.PlaySound("eat", this, snd);
+			// 		}
+			// 		break;
+			// 	case WorldObject.WorldTypes.POTION:
+			// 		Globals.PlaySound("drink", this, snd);
+			// 		break;
+			// 	default:
+			// 		Globals.PlaySound("click2", this, snd);
+			// 		break;
+			// }
 			// Item metaItem = inventoryBag.GetItemMetaData(selectedIdx)as Item;
 			// if (metaItem != null && selectedItem.worldType == WorldObject.WorldTypes.POTION)
 			// {
@@ -1038,47 +1038,47 @@ namespace Game.Ui
 			//         break;
 			// }
 		}
-		public void _OnEquipItem(Item item, bool on)
-		{
-			switch (item.worldType)
-			{
-				case WorldObject.WorldTypes.WEAPON:
-					Tuple<int, int> values = item.GetValues();
-					player.weapon = (on) ? item : null;
-					// player.minDamage += (on) ? values.Item1 : -values.Item1;TODO
-					// player.maxDamage += (on) ? values.Item2 : -values.Item2;
-					break;
-				case WorldObject.WorldTypes.ARMOR:
-					player.vest = (on) ? item : null;
-					// player.armor += (on) ? item.value : -item.value;
-					break;
-			}
-			string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), item.worldType).ToLower()}_slot/m/icon";
-			// inventory.GetNode<TextureRect>(nodePath).Texture = (on) ? item.icon : null;
-			// statsMenu.GetNode<TextureRect>(nodePath).Texture = (on) ? item.icon : null;
-			// if (on)
-			// {
-			//     if (selectedIdx == -1)
-			//     {
-			//         // this is for if the item is loaded from a save game
-			//         selectedIdx = inventoryBag.GetItemSlot(selected as Pickable).GetIndex();
-			//     }
-			//     inventoryBag.RemoveItem(selectedIdx);
-			// }
-			// else
-			// {
-			//     inventoryBag.AddItem(item, false);
-			//     ItemSlot itemSlot = inventoryBag.GetItemSlot(item);
-			//     foreach (ItemSlot otherItemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-			//     {
-			//         if (otherItemSlot.GetItem() == item &&
-			//             !itemSlot.IsConnected(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut)))
-			//         {
-			//             itemSlot.Connect(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut));
-			//         }
-			//     }
-			// }
-		}
+		// public void _OnEquipItem(Item item, bool on)
+		// {
+		// 	switch (item.worldType)
+		// 	{
+		// 		case WorldObject.WorldTypes.WEAPON:
+		// 			Tuple<int, int> values = item.GetValues();
+		// 			// player.weapon = (on) ? item : null;
+		// 			// player.minDamage += (on) ? values.Item1 : -values.Item1;TODO
+		// 			// player.maxDamage += (on) ? values.Item2 : -values.Item2;
+		// 			break;
+		// 		case WorldObject.WorldTypes.ARMOR:
+		// 			// player.vest = (on) ? item : null;
+		// 			// player.armor += (on) ? item.value : -item.value;
+		// 			break;
+		// 	}
+		// 	string nodePath = $"s/v/h/{Enum.GetName(typeof(WorldObject.WorldTypes), item.worldType).ToLower()}_slot/m/icon";
+		// inventory.GetNode<TextureRect>(nodePath).Texture = (on) ? item.icon : null;
+		// statsMenu.GetNode<TextureRect>(nodePath).Texture = (on) ? item.icon : null;
+		// if (on)
+		// {
+		//     if (selectedIdx == -1)
+		//     {
+		//         // this is for if the item is loaded from a save game
+		//         selectedIdx = inventoryBag.GetItemSlot(selected as Pickable).GetIndex();
+		//     }
+		//     inventoryBag.RemoveItem(selectedIdx);
+		// }
+		// else
+		// {
+		//     inventoryBag.AddItem(item, false);
+		//     ItemSlot itemSlot = inventoryBag.GetItemSlot(item);
+		//     foreach (ItemSlot otherItemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
+		//     {
+		//         if (otherItemSlot.GetItem() == item &&
+		//             !itemSlot.IsConnected(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut)))
+		//         {
+		//             itemSlot.Connect(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut));
+		//         }
+		//     }
+		// }
+		// }
 		public void _OnDropPickable(Pickable pickable)
 		{
 			// inventoryBag.RemoveItem(inventoryBag.GetItemSlot(pickable).GetIndex());

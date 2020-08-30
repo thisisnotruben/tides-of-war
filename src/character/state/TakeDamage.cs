@@ -27,12 +27,6 @@ namespace Game.Actor.State
 				Bump(Map.Map.map.GetDirection(character.GlobalPosition,
 					character.target.GlobalPosition).Rotated((float)Math.PI) / 4.0f);
 			}
-
-			Player player = character as Player;
-			if (player != null && player.vest != null)
-			{
-				player.vest.TakeDamage(false);
-			}
 		}
 		private protected async void Bump(Vector2 direction)
 		{

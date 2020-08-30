@@ -133,6 +133,7 @@
 		<Compile Include="src\menu_ui\SaveLoadNode.cs" />
 		<Compile Include="src\menu_ui\SpellBookNode.cs" />
 		<Compile Include="src\menu_ui\StartMenu.cs" />
+		<Compile Include="src\menu_ui\components\Inventory.cs" />
 		<Compile Include="src\light\GameLight.cs" />
 		<Compile Include="src\light\TorchLight.cs" />
 		<Compile Include="src\loot\Item.cs" />
@@ -205,6 +206,7 @@
 		<Compile Include="src\utils\SoundPlayer.cs" />
 		<Compile Include="src\utils\Speaker.cs" />
 		<Compile Include="src\utils\Speaker2D.cs" />
+		<Compile Include="src\item\Commodity.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

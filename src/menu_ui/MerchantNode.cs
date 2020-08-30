@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using Game.ItemPoto;
 using Game.Actor;
 using Game.Loot;
 using Game.Database;
@@ -155,8 +156,8 @@ namespace Game.Ui
 			Globals.PlaySound("click1", this, speaker);
 			popup.GetNode<Control>("m/repair").Show();
 			string text = "";
-			Item playerWeapon = player.weapon;
-			Item playerArmor = player.vest;
+			Commodity playerWeapon = player.weapon;
+			Commodity playerArmor = player.vest;
 			int weaponLevel = (playerWeapon == null) ? 0 : PickableDB.GetLevel(playerWeapon.worldName);
 			int armorLevel = (playerArmor == null) ? 0 : PickableDB.GetLevel(playerArmor.worldName);
 			if (playerWeapon == null)
@@ -190,52 +191,53 @@ namespace Game.Ui
 		}
 		public void _OnRepairConfirm(string what)
 		{
-			Item weapon = player.weapon;
-			Item armor = player.vest;
-			int weaponLevel = ItemDB.GetItemData(weapon.worldName).level;
-			int armorLevel = ItemDB.GetItemData(armor.worldName).level;
-			int cost = 0;
-			switch (what)
-			{
-				case "all":
-					cost = Stats.ItemRepairCost(weaponLevel) + Stats.ItemRepairCost(armorLevel);
-					break;
-				case "weapon":
-					cost = Stats.ItemRepairCost(weaponLevel);
-					break;
-				case "armor":
-					cost = Stats.ItemRepairCost(armorLevel);
-					break;
-			}
-			if (cost > player.gold)
-			{
-				popup.GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
-				popup.GetNode<Control>("m/repair").Hide();
-				popup.GetNode<Control>("m/error").Show();
-			}
-			else
-			{
-				foreach (string sndName in new string[] { "sell_buy", "anvil" })
-				{
-					Globals.PlaySound(sndName, this, speaker);
-				}
-				player.gold = -cost;
-				switch (what)
-				{
-					case "all":
-						weapon.RepairItem(Item.MAX_DURABILITY);
-						armor.RepairItem(Item.MAX_DURABILITY);
-						break;
-					case "weapon":
-						weapon.RepairItem(Item.MAX_DURABILITY);
-						break;
-					case "armor":
-						armor.RepairItem(Item.MAX_DURABILITY);
-						break;
-				}
-				GetNode<Label>("s/v/label2").Text = $"Gold: {player.gold.ToString("N0")}";
-				_OnMerchantNodeHide();
-			}
+			// TODO: might take out
+			// Commodity weapon = player.weapon;
+			// Commodity armor = player.vest;
+			// int weaponLevel = ItemDB.GetItemData(weapon.worldName).level;
+			// int armorLevel = ItemDB.GetItemData(armor.worldName).level;
+			// int cost = 0;
+			// switch (what)
+			// {
+			// 	case "all":
+			// 		cost = Stats.ItemRepairCost(weaponLevel) + Stats.ItemRepairCost(armorLevel);
+			// 		break;
+			// 	case "weapon":
+			// 		cost = Stats.ItemRepairCost(weaponLevel);
+			// 		break;
+			// 	case "armor":
+			// 		cost = Stats.ItemRepairCost(armorLevel);
+			// 		break;
+			// }
+			// if (cost > player.gold)
+			// {
+			// 	popup.GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
+			// 	popup.GetNode<Control>("m/repair").Hide();
+			// 	popup.GetNode<Control>("m/error").Show();
+			// }
+			// else
+			// {
+			// 	foreach (string sndName in new string[] { "sell_buy", "anvil" })
+			// 	{
+			// 		Globals.PlaySound(sndName, this, speaker);
+			// 	}
+			// 	player.gold = -cost;
+			// 	switch (what)
+			// 	{
+			// 		case "all":
+			// 			weapon.RepairItem(Item.MAX_DURABILITY);
+			// 			armor.RepairItem(Item.MAX_DURABILITY);
+			// 			break;
+			// 		case "weapon":
+			// 			weapon.RepairItem(Item.MAX_DURABILITY);
+			// 			break;
+			// 		case "armor":
+			// 			armor.RepairItem(Item.MAX_DURABILITY);
+			// 			break;
+			// 	}
+			// 	GetNode<Label>("s/v/label2").Text = $"Gold: {player.gold.ToString("N0")}";
+			_OnMerchantNodeHide();
+			// }
 		}
 		public override void _OnBackPressed()
 		{

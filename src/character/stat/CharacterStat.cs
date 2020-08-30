@@ -42,7 +42,7 @@ namespace Game.Actor.Stat
 		{
 			isDirty = true;
 			statModifiers.Add(statModifier);
-			statModifiers.Sort(CompateModifierOrder);
+			statModifiers.Sort(CompareModifierOrder);
 		}
 		public bool RemoveModifier(StatModifier statModifier)
 		{
@@ -100,7 +100,7 @@ namespace Game.Actor.Stat
 			}
 			return (float)Math.Round(finalValue, 4);
 		}
-		private int CompateModifierOrder(StatModifier a, StatModifier b)
+		private int CompareModifierOrder(StatModifier a, StatModifier b)
 		{
 			if (a.order < b.order)
 			{

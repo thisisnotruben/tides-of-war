@@ -119,12 +119,6 @@ namespace Game.Actor.State
 			if (damage > 0)
 			{
 				character.target.Harm(damage);
-
-				Player player = character as Player;
-				if (player != null)
-				{
-					player.weapon.TakeDamage();
-				}
 			}
 			AttackTarget();
 		}
