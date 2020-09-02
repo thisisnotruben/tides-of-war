@@ -11,6 +11,9 @@ rect_min_size = Vector2( 112, 112 )
 texture_normal = ExtResource( 1 )
 expand = true
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="tween" type="Tween" parent="."]
 pause_mode = 1
@@ -25,7 +28,6 @@ custom_constants/margin_left = 7
 custom_constants/margin_bottom = 7
 
 [node name="icon" type="TextureRect" parent="m"]
-editor/display_folded = true
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 105.0
@@ -34,7 +36,6 @@ rect_pivot_offset = Vector2( 49, 49 )
 expand = true
 
 [node name="overlay" type="ColorRect" parent="m/icon"]
-visible = false
 modulate = Color( 0, 0, 0, 0.75 )
 margin_right = 98.0
 margin_bottom = 98.0

@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=1]
+[ext_resource path="res://asset/img/ui/brown_bg_icon.tres" type="Texture" id=2]
+[ext_resource path="res://src/menu_ui/components/SlotController.cs" type="Script" id=3]
+[ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=4]
+
+[node name="slot" type="Control"]
+margin_right = 112.0
+margin_bottom = 112.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="tween" type="Tween" parent="."]
+
+[node name="button" type="TextureButton" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 112, 112 )
+texture_normal = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 112, 112 )
+mouse_filter = 2
+custom_constants/margin_right = 7
+custom_constants/margin_top = 7
+custom_constants/margin_left = 7
+custom_constants/margin_bottom = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="TextureRect" parent="margin"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 105.0
+margin_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 49, 49 )
+mouse_filter = 2
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cooldownOverlay" type="ColorRect" parent="margin"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 105.0
+margin_bottom = 105.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.74902 )
+
+[node name="cooldownText" type="Label" parent="margin"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 105.0
+margin_bottom = 105.0
+rect_pivot_offset = Vector2( 0, 49 )
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
+text = "60"
+align = 1
+valign = 1
+clip_text = true
+max_lines_visible = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stackCount" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = -11.0
+margin_right = -8.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 96, 75 )
+rect_pivot_offset = Vector2( 0, 49 )
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
+text = "1"
+clip_text = true
+max_lines_visible = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="button" to="." method="OnButtonChanged" binds= [ true ]]
+[connection signal="button_up" from="button" to="." method="OnButtonChanged" binds= [ false ]]

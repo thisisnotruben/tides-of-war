@@ -4,17 +4,23 @@
 [ext_resource path="res://asset/img/ui/grey2_bg.tres" type="Texture" id=2]
 [ext_resource path="res://asset/img/font/mago1_144.tres" type="DynamicFont" id=3]
 [ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=4]
-[ext_resource path="res://src/menu_ui/views/popup_view.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/menu_ui/views/inventory_view.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/menu_ui/views/stats_view.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/menu_ui/views/quest_log_view.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/menu_ui/views/about_view.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/menu_ui/views/save_load_view.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/menu_ui/views/spell_book_view.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/menu_ui/inventory/InventoryView.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/menu_ui/stats/StatsView.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/menu_ui/quest/QuestLogView.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/menu_ui/about/AboutView.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/menu_ui/saveLoad/SaveLoadView.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/menu_ui/spell/SpellBookView.tscn" type="PackedScene" id=11]
 [ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=12]
-[ext_resource path="res://src/menu_ui/views/dialogue_view.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/menu_ui/dialogue/DialogueView.tscn" type="PackedScene" id=13]
 
-[node name="main_menu" type="Control"]
+
+
+
+
+
+
+[node name="MainMenuView" type="Control"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0

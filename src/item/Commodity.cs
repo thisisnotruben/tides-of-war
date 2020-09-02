@@ -20,15 +20,15 @@ namespace Game.ItemPoto
 			modifiers = CreateModifiers();
 			return this;
 		}
-		private ItemDB.ModifierNode[] GetModifiers()
+		private static ItemDB.ModifierNode[] GetModifiers(string worldName)
 		{
-			ItemDB.Modifiers m = ItemDB.GetItemData(character.Name).modifiers;
+			ItemDB.Modifiers m = ItemDB.GetItemData(worldName).modifiers;
 			return new ItemDB.ModifierNode[] { m.stamina, m.intellect, m.agility, m.hpMax,
 				m.manaMax, m.maxDamage, m.minDamage, m.regenTime, m.armor, m.weaponRange, m.weaponSpeed };
 		}
-		public string GetDescription()
+		public static string GetDescription(string worldName)
 		{
-			ItemDB.ModifierNode[] mods = GetModifiers();
+			ItemDB.ModifierNode[] mods = GetModifiers(worldName);
 			// array in the same order as in 'GetModifiers;
 			string[] modNames = new string[] { "Stamina", "Intellect", "Agility", "hpMax",
 				"manaMax", "maxDamage", "minDamage", "regenTime", "armor", "weaponRange", "weaponSpeed" };
@@ -87,7 +87,7 @@ namespace Game.ItemPoto
 		private Dictionary<CharacterStat, StatModifier> CreateModifiers()
 		{
 			Dictionary<CharacterStat, StatModifier> modifierDict = new Dictionary<CharacterStat, StatModifier>();
-			ItemDB.ModifierNode[] mods = GetModifiers();
+			ItemDB.ModifierNode[] mods = GetModifiers(worldName);
 
 			StatManager s = character.stats;
 			// array in the same order as in 'GetModifiers;

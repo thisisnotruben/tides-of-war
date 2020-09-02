@@ -7,39 +7,47 @@ namespace Game.Ui
 	public class MainMenu : GameMenu
 	{
 		private Control main;
-		private InventoryNode inventory;
-		private StatsNode statsMenu;
-		private QuestLogNode questLog;
-		private AboutNode about;
-		private SaveLoadNode saveLoad;
-		private SpellBookNode spellBook;
-		private DialogueNode dialogue;
-		private Popup popup;
-		private ItemList inventoryItemList;
-		private ItemList spellItemList;
+		private InventoryController inventoryController;
+		private StatsController statsController;
+		private QuestLogController questLogController;
+		private AboutController aboutController;
+		private SaveLoadController saveLoadController;
+		private SpellBookController spellBookController;
+		private DialogueController dialogueController;
+		private PopupController popupController;
+		private InventoryModel playerInventory;
+		private InventoryModel playerSpellBook;
 
 		public override void _Ready()
 		{
 			main = GetNode<Control>("background/margin/main");
-			inventory = GetNode<InventoryNode>("background/margin/inventory");
-			inventoryItemList = inventory.GetNode<ItemList>("s/v/c/inventory");
-			statsMenu = GetNode<StatsNode>("background/margin/stats");
-			questLog = GetNode<QuestLogNode>("background/margin/quest_log");
-			about = GetNode<AboutNode>("background/margin/about");
-			saveLoad = GetNode<SaveLoadNode>("background/margin/save_load");
-			popup = GetNode<Popup>("background/margin/popup");
-			Popup.mainMenu = this;
-			popup.GetNode<BaseButton>("m/exit/exit_game")
+
+			inventoryController = GetNode<InventoryController>("background/margin/inventory");
+			playerInventory = inventoryController.inventory;
+
+			statsController = GetNode<StatsController>("background/margin/stats");
+			questLogController = GetNode<QuestLogController>("background/margin/quest_log");
+			aboutController = GetNode<AboutController>("background/margin/about");
+			saveLoadController = GetNode<SaveLoadController>("background/margin/save_load");
+
+			popupController = GetNode<PopupController>("background/margin/popup");
+			PopupController.mainMenu = this;
+			popupController.GetNode<BaseButton>("m/exit/exit_game")
 				.Connect("pressed", this, nameof(_OnExitGamePressed));
-			popup.GetNode<BaseButton>("m/exit/exit_menu")
+			popupController.GetNode<BaseButton>("m/exit/exit_menu")
 				.Connect("pressed", this, nameof(_OnExitMenuPressed));
-			spellBook = GetNode<SpellBookNode>("background/margin/spell_book");
-			spellBook.Connect("hide", this, nameof(_OnMainMenuHide));
-			spellItemList = spellBook.itemList;
-			dialogue = GetNode<DialogueNode>("background/margin/dialogue");
-			dialogue.Connect("hide", this, nameof(_OnMainMenuHide));
-			dialogue.InitMerchantView(inventoryItemList, spellItemList);
-			foreach (Control node in new Control[] { inventory, statsMenu, questLog, about, saveLoad, popup })
+
+			spellBookController = GetNode<SpellBookController>("background/margin/spell_book");
+			spellBookController.Connect("hide", this, nameof(_OnMainMenuHide));
+			playerSpellBook = spellBookController.spellBook;
+
+			dialogueController = GetNode<DialogueController>("background/margin/dialogue");
+			dialogueController.Connect("hide", this, nameof(_OnMainMenuHide));
+			dialogueController.Init(playerInventory, playerSpellBook);
+
+			// route hide events
+			foreach (Control node in new Control[] { inventoryController, statsController,
+			questLogController, aboutController, saveLoadController, popupController })
 			{
 				node.Connect("hide", this, nameof(_OnWindowClosed));
 			}
@@ -60,12 +68,12 @@ namespace Game.Ui
 			Hide();
 			GetTree().Paused = false;
 			main.Show();
-			popup.Hide();
+			popupController.Hide();
 		}
 		public void ShowSpellBook()
 		{
 			main.Hide();
-			spellBook.Show();
+			spellBookController.Show();
 			Show();
 		}
 		public void ShowBackground(bool show)
@@ -78,37 +86,37 @@ namespace Game.Ui
 		public void NpcInteract(Npc npc)
 		{
 			main.Hide();
-			dialogue.Show();
-			dialogue.Display(npc);
+			dialogueController.Show();
+			dialogueController.Display(npc);
 			Show();
 		}
 		public void LootInteract(LootChest lootChest)
 		{
 			if (SpellDB.HasSpell(lootChest.pickableWorldName))
 			{
-				if (spellItemList.IsFull())
+				if (playerSpellBook.IsFull())
 				{
-					popup.GetNode<Label>("m/error/label").Text = "Spell Book\nFull!";
-					popup.GetNode<Control>("m/error").Show();
-					popup.Show();
+					popupController.GetNode<Label>("m/error/label").Text = "Spell Book\nFull!";
+					popupController.GetNode<Control>("m/error").Show();
+					popupController.Show();
 				}
 				else
 				{
-					spellItemList.AddItem(lootChest.pickableWorldName, false);
+					playerSpellBook.AddCommodity(lootChest.pickableWorldName);
 					lootChest.Collect();
 				}
 			}
 			else
 			{
-				if (inventoryItemList.IsFull())
+				if (playerInventory.IsFull())
 				{
-					popup.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
-					popup.GetNode<Control>("m/error").Show();
-					popup.Show();
+					popupController.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
+					popupController.GetNode<Control>("m/error").Show();
+					popupController.Show();
 				}
 				else
 				{
-					inventoryItemList.AddItem(lootChest.pickableWorldName, true);
+					playerInventory.AddCommodity(lootChest.pickableWorldName);
 					lootChest.Collect();
 				}
 			}
@@ -121,22 +129,24 @@ namespace Game.Ui
 			// player.SetBuff();
 			Hide();
 		}
-		public void _OnInventoryPressed() { Transition(inventory); }
-		public void _OnStatsPressed() { Transition(statsMenu); }
-		public void _OnQuestLogPressed() { Transition(questLog); }
-		public void _OnAboutPressed() { Transition(about); }
-		public void _OnSaveLoadPressed() { Transition(saveLoad); }
+		public void _OnInventoryPressed() { Transition(inventoryController); }
+		public void _OnStatsPressed() { Transition(statsController); }
+		public void _OnQuestLogPressed() { Transition(questLogController); }
+		public void _OnAboutPressed() { Transition(aboutController); }
+		public void _OnSaveLoadPressed() { Transition(saveLoadController); }
 		public void _OnExitPressed()
 		{
-			popup.GetNode<Control>("m/exit").Show();
-			Transition(popup);
+			popupController.GetNode<Control>("m/exit").Show();
+			Transition(popupController);
 		}
 		public void _OnExitGamePressed() { GetTree().Quit(); }
 		public void _OnExitMenuPressed()
 		{
 			Globals.PlaySound("click0", this, speaker);
 			GetTree().Paused = false;
-			SceneLoader.Init().SetScene("res://src/menu_ui/views/start_menu_view.tscn", Map.Map.map);
+			SceneLoader.Init().SetScene(
+				(string)ProjectSettings.GetSetting("application/run/main_scene"),
+				Map.Map.map);
 		}
 		private void Transition(Control scene)
 		{

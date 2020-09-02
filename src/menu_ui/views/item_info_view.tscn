@@ -12,10 +12,13 @@
 [ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=10]
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=11]
 [ext_resource path="res://asset/img/font/mago1_112.tres" type="DynamicFont" id=12]
-[ext_resource path="res://src/menu_ui/ItemInfoNode.cs" type="Script" id=13]
-[ext_resource path="res://src/menu_ui/views/popup_view.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/menu_ui/ItemInfoController.cs" type="Script" id=13]
+[ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=14]
 
-[node name="item_info" type="Control"]
+
+
+
+[node name="itemInfo" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 13 )
@@ -156,8 +159,9 @@ valign = 1
 
 [node name="use" type="TextureButton" parent="s/h/buttons"]
 visible = false
+margin_top = 104.0
 margin_right = 380.0
-margin_bottom = 100.0
+margin_bottom = 204.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 10 )
@@ -175,8 +179,9 @@ valign = 1
 
 [node name="buy" type="TextureButton" parent="s/h/buttons"]
 visible = false
+margin_top = 208.0
 margin_right = 380.0
-margin_bottom = 100.0
+margin_bottom = 308.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 10 )
@@ -194,8 +199,9 @@ valign = 1
 
 [node name="sell" type="TextureButton" parent="s/h/buttons"]
 visible = false
+margin_top = 208.0
 margin_right = 380.0
-margin_bottom = 100.0
+margin_bottom = 308.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 10 )
@@ -213,8 +219,9 @@ valign = 1
 
 [node name="equip" type="TextureButton" parent="s/h/buttons"]
 visible = false
+margin_top = 416.0
 margin_right = 380.0
-margin_bottom = 100.0
+margin_bottom = 516.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 10 )
@@ -232,8 +239,9 @@ valign = 1
 
 [node name="unequip" type="TextureButton" parent="s/h/buttons"]
 visible = false
+margin_top = 520.0
 margin_right = 380.0
-margin_bottom = 100.0
+margin_bottom = 620.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 10 )
@@ -251,8 +259,9 @@ valign = 1
 
 [node name="drop" type="TextureButton" parent="s/h/buttons"]
 visible = false
+margin_top = 624.0
 margin_right = 380.0
-margin_bottom = 100.0
+margin_bottom = 724.0
 rect_min_size = Vector2( 380, 100 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 10 )

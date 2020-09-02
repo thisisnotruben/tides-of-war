@@ -114,11 +114,11 @@ namespace Game.Loot
 		{
 			if (character is Player)
 			{
-				Player player = (Player)character;
-				if (IsConnected(nameof(SetInMenu), player.GetMenu(), nameof(InGameMenu._OnSetPickableInMenu)))
-				{
-					Disconnect(nameof(SetInMenu), player.GetMenu(), nameof(InGameMenu._OnSetPickableInMenu));
-				}
+				// Player player = (Player)character;
+				// if (IsConnected(nameof(SetInMenu), player.GetMenu(), nameof(InGameMenu._OnSetPickableInMenu)))
+				// {
+				// 	Disconnect(nameof(SetInMenu), player.GetMenu(), nameof(InGameMenu._OnSetPickableInMenu));
+				// }
 			}
 			if (expire)
 			{

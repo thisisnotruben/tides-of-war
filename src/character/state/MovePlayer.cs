@@ -1,10 +1,10 @@
-using Game.Ui;
 using Godot;
+using Game.Ui;
 namespace Game.Actor.State
 {
 	public class MovePlayer : Move
 	{
-		private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/views/move_cursor.tscn");
+		private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/cursor/MoveCursorView.tscn");
 		[Signal]
 		public delegate void PositionChanged();
 
@@ -46,8 +46,8 @@ namespace Game.Actor.State
 
 			// set cursor animation
 			EmitSignal(nameof(PositionChanged));
-			MoveCursor cursor = (MoveCursor)moveCursorScene.Instance();
-			Connect(nameof(PositionChanged), cursor, nameof(MoveCursor.Delete));
+			MoveCursorController cursor = (MoveCursorController)moveCursorScene.Instance();
+			Connect(nameof(PositionChanged), cursor, nameof(MoveCursorController.Delete));
 			cursor.AddToMap(Map.Map.map.GetGridPosition(desiredPosition));
 		}
 	}
