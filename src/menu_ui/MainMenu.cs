@@ -94,7 +94,7 @@ namespace Game.Ui
 		{
 			if (SpellDB.HasSpell(lootChest.pickableWorldName))
 			{
-				if (playerSpellBook.IsFull())
+				if (playerSpellBook.IsFull(lootChest.pickableWorldName))
 				{
 					popupController.GetNode<Label>("m/error/label").Text = "Spell Book\nFull!";
 					popupController.GetNode<Control>("m/error").Show();
@@ -108,7 +108,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				if (playerInventory.IsFull())
+				if (playerInventory.IsFull(lootChest.pickableWorldName))
 				{
 					popupController.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
 					popupController.GetNode<Control>("m/error").Show();

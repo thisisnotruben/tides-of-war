@@ -9,6 +9,8 @@ namespace Game.Ui
 	{
 		[Signal]
 		public delegate void ItemEquipped(Commodity item, bool on);
+		[Signal]
+		public delegate void CommodityDropped();
 
 		public override void _Ready()
 		{
@@ -153,8 +155,9 @@ namespace Game.Ui
 		}
 		public void _OnDropPressed()
 		{
-			RouteConnections(nameof(_OnDropConfirm));
 			Globals.PlaySound("click2", this, speaker);
+
+			RouteConnections(nameof(_OnDropConfirm));
 			GetNode<Control>("s").Hide();
 			popupController.GetNode<Label>("m/yes_no/label").Text = "Drop?";
 			popupController.GetNode<Control>("m/yes_no").Show();
@@ -166,7 +169,12 @@ namespace Game.Ui
 			{
 				Globals.PlaySound(sndName, this, speaker);
 			}
+
+			// remove from inventory
 			itemList.RemoveCommodity(pickableWorldName);
+			EmitSignal(nameof(CommodityDropped));
+
+			// instance drop chest
 			PackedScene lootScene = (PackedScene)GD.Load("res://src/loot/loot_chest.tscn");
 			LootChest loot = (LootChest)lootScene.Instance();
 			loot.pickableWorldName = pickableWorldName;

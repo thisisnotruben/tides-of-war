@@ -21,15 +21,15 @@ namespace Game.Ui
 				this, nameof(_OnItemEquipped));
 
 			// connect slot events
-			foreach (Control control in GetNode("s/v/c/SlotGrid").GetChildren())
+			foreach (SlotController slot in inventorySlots.GetSlots())
 			{
-				SlotController slot = control as SlotController;
-				if (slot != null)
-				{
-					slot.button.Connect("pressed", this, nameof(_OnInventoryIndexSelected),
-						new Godot.Collections.Array() { slot.GetIndex() });
-				}
+				slot.button.Connect("pressed", this, nameof(_OnInventoryIndexSelected),
+					new Godot.Collections.Array() { slot.GetIndex() });
 			}
+
+			// refresh slots whenever an item is dropped from inventory
+			itemInfoInventoryController.Connect(nameof(ItemInfoInventoryController.CommodityDropped),
+				this, nameof(_OnInventoryControllerDraw));
 		}
 		public void _OnInventoryControllerDraw()
 		{
@@ -65,14 +65,14 @@ namespace Game.Ui
 			}
 
 			Globals.PlaySound("inventory_open", this, speaker);
-			string pickableWorldName = inventory.GetCommodity(slotIndex);
 			GetNode<Control>("s").Hide();
-			itemInfoInventoryController.Display(pickableWorldName, true);
+
+			itemInfoInventoryController.selectedSlotIdx = slotIndex;
+			itemInfoInventoryController.Display(inventory.GetCommodity(slotIndex), true);
 		}
 		public void _OnEquippedSlotMoved(string nodePath, bool down)
 		{
-			float scale = (down) ? 0.8f : 1.0f;
-			GetNode<Control>(nodePath).RectScale = new Vector2(scale, scale);
+			GetNode<Control>(nodePath).RectScale = (down) ? new Vector2(0.8f, 0.8f) : new Vector2(1.0f, 1.0f);
 		}
 		public void _OnEquippedSlotPressed(bool weapon)
 		{

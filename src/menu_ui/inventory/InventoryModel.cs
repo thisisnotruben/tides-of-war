@@ -55,7 +55,8 @@ namespace Game.Ui
 				return false;
 			}
 
-			int commodityStackSize = ItemDB.GetItemData(commodityWorldName).stackSize;
+			int commodityStackSize = PickableDB.GetStackSize(commodityWorldName);
+
 			for (int i = count - 1; i >= 0; i--)
 			{
 				// check if commodity already exists in inventory for stacking
@@ -92,6 +93,7 @@ namespace Game.Ui
 					// cannot modify directly
 					Slot focusedSlot = slots[i];
 					focusedSlot.stackSize -= 1;
+					slots[i] = focusedSlot;
 
 					// remove if stack depleted
 					if (slots[i].stackSize == 0)
@@ -107,7 +109,7 @@ namespace Game.Ui
 		public bool IsFull() { return maxSlots == count; }
 		public bool IsFull(string worldName)
 		{
-			int commodityStackSize = ItemDB.GetItemData(worldName).stackSize;
+			int commodityStackSize = PickableDB.GetStackSize(worldName);
 
 			// inventory might be full, but there might be some stack space
 			if (IsFull())

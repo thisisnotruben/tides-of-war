@@ -4,7 +4,7 @@ namespace Game.Ui
 {
 	public class SlotGridController : GridContainer
 	{
-		private List<SlotController> slots = new List<SlotController>();
+		private readonly List<SlotController> slots = new List<SlotController>();
 
 		public override void _Ready()
 		{
@@ -18,10 +18,8 @@ namespace Game.Ui
 				}
 			}
 		}
-		public void DisplaySlot(int index, string commodityName, int currentStackSize)
-		{
-			slots[index].Display(commodityName, currentStackSize);
-		}
+		public List<SlotController> GetSlots() { return slots; }
+		public void DisplaySlot(int index, string commodityName, int currentStackSize) { slots[index].Display(commodityName, currentStackSize); }
 		public void ClearSlots()
 		{
 			foreach (SlotController slot in slots)

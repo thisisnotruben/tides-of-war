@@ -22,7 +22,7 @@ namespace Game.ItemPoto
 		}
 		private static ItemDB.ModifierNode[] GetModifiers(string worldName)
 		{
-			ItemDB.Modifiers m = ItemDB.GetItemData(worldName).modifiers;
+			ItemDB.Modifiers m = PickableDB.GetModifiers(worldName);
 			return new ItemDB.ModifierNode[] { m.stamina, m.intellect, m.agility, m.hpMax,
 				m.manaMax, m.maxDamage, m.minDamage, m.regenTime, m.armor, m.weaponRange, m.weaponSpeed };
 		}
@@ -32,12 +32,33 @@ namespace Game.ItemPoto
 			// array in the same order as in 'GetModifiers;
 			string[] modNames = new string[] { "Stamina", "Intellect", "Agility", "hpMax",
 				"manaMax", "maxDamage", "minDamage", "regenTime", "armor", "weaponRange", "weaponSpeed" };
-			ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
 
-			string text = $"Name: {worldName}\nLevel: {itemNode.level}\n";
-			if (itemNode.coolDown > 0)
+			int coolDown, level, duration;
+			ItemDB.Use use;
+			string blurb;
+			if (SpellDB.HasSpell(worldName))
 			{
-				text += $"Cooldown: {itemNode.coolDown} sec.\n";
+				SpellDB.SpellNode spellNode = SpellDB.GetSpellData(worldName);
+				coolDown = spellNode.coolDown;
+				level = spellNode.level;
+				duration = spellNode.modifiers.duration;
+				use = spellNode.use;
+				blurb = spellNode.blurb;
+			}
+			else
+			{
+				ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
+				coolDown = itemNode.coolDown;
+				level = itemNode.level;
+				duration = itemNode.modifiers.duration;
+				use = itemNode.use;
+				blurb = itemNode.blurb;
+			}
+
+			string text = $"Name: {worldName}\nLevel: {level}\n";
+			if (coolDown > 0)
+			{
+				text += $"Cooldown: {coolDown} sec.\n";
 			}
 
 			// set modifier text
@@ -63,23 +84,23 @@ namespace Game.ItemPoto
 			}
 			if (!modText.Empty())
 			{
-				text += $"Duration: {itemNode.modifiers.duration} sec.\n" + modText;
+				text += $"Duration: {duration} sec.\n" + modText;
 			}
 
 			// set use text
-			if (itemNode.use.hp != 0)
+			if (use.hp != 0)
 			{
-				text += $"Hp: +{itemNode.use.hp}\n";
+				text += $"Hp: +{use.hp}\n";
 			}
-			if (itemNode.use.mana != 0)
+			if (use.mana != 0)
 			{
-				text += $"Mana: +{itemNode.use.mana}\n";
+				text += $"Mana: +{use.mana}\n";
 			}
 
 			// set blurb text
-			if (!itemNode.blurb.Empty())
+			if (!blurb.Empty())
 			{
-				text += itemNode.blurb;
+				text += blurb;
 			}
 
 			return text;
@@ -154,16 +175,32 @@ namespace Game.ItemPoto
 				return;
 			}
 
-			ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
-			AddCooldown(itemNode.coolDown);
-
-			if (itemNode.use.hp != 0)
+			ItemDB.Use use;
+			int duration, coolDown;
+			if (SpellDB.HasSpell(worldName))
 			{
-				character.hp += itemNode.use.hp;
+				SpellDB.SpellNode spellNode = SpellDB.GetSpellData(worldName);
+				use = spellNode.use;
+				duration = spellNode.modifiers.duration;
+				coolDown = spellNode.coolDown;
 			}
-			if (itemNode.use.mana != 0)
+			else
 			{
-				character.mana += itemNode.use.mana;
+				ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
+				use = itemNode.use;
+				duration = itemNode.modifiers.duration;
+				coolDown = itemNode.coolDown;
+			}
+
+			AddCooldown(coolDown);
+
+			if (use.hp != 0)
+			{
+				character.hp += use.hp;
+			}
+			if (use.mana != 0)
+			{
+				character.mana += use.mana;
 			}
 
 			foreach (CharacterStat stat in modifiers.Keys)
@@ -171,9 +208,9 @@ namespace Game.ItemPoto
 				stat.AddModifier(modifiers[stat]);
 			}
 
-			if (itemNode.modifiers.duration > 0)
+			if (duration > 0)
 			{
-				await ToSignal(GetTree().CreateTimer(itemNode.modifiers.duration, false), "timeout");
+				await ToSignal(GetTree().CreateTimer(duration, false), "timeout");
 				Exit();
 			}
 		}

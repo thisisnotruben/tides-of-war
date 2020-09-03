@@ -4,6 +4,7 @@ namespace Game.Ui
 	public class SpellBookController : GameMenu
 	{
 		public InventoryModel spellBook = new InventoryModel();
+		private SlotGridController spellSlots;
 		private ItemInfoSpellController itemInfoSpellController;
 		private PopupController popupController;
 
@@ -16,19 +17,25 @@ namespace Game.Ui
 			itemInfoSpellController.itemList = spellBook;
 			itemInfoSpellController.Connect("hide", this, nameof(_OnSpellBookNodeHide));
 
+			spellSlots = GetNode<SlotGridController>("s/v/c/InventoryGridView");
+
 			// connect slot events
-			foreach (Control control in GetNode("s/v/c/InventoryGridView").GetChildren())
+			foreach (SlotController slot in spellSlots.GetSlots())
 			{
-				SlotController slot = control as SlotController;
-				if (slot != null)
-				{
-					slot.button.Connect("pressed", this, nameof(_OnSpellBookIndexSelected),
-						new Godot.Collections.Array() { slot.GetIndex() });
-				}
+				slot.button.Connect("pressed", this, nameof(_OnSpellBookIndexSelected),
+					new Godot.Collections.Array() { slot.GetIndex() });
 			}
 		}
 		public void _OnSpellBookNodeDraw()
 		{
+			// display slots
+			spellSlots.ClearSlots();
+			for (int i = 0; i < spellBook.count; i++)
+			{
+				spellSlots.DisplaySlot(i, spellBook.GetCommodity(i), spellBook.GetCommodityStack(i));
+			}
+
+			// fill hp/mana headers
 			GetNode<Label>("s/v/m/v/playerHpHeader").Text = $"Health: {player.hp} / {player.stats.hpMax.valueI}";
 			GetNode<Label>("s/v/m/v/playerManaHeader").Text = $"Mana: {player.mana} / {player.stats.manaMax.valueI}";
 		}
@@ -48,6 +55,7 @@ namespace Game.Ui
 			Globals.PlaySound("spell_select", this, speaker);
 			GetNode<Control>("s").Hide();
 
+			itemInfoSpellController.selectedSlotIdx = slotIndex;
 			itemInfoSpellController.Display(spellBook.GetCommodity(slotIndex), true);
 		}
 	}

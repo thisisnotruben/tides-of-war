@@ -97,7 +97,7 @@ namespace Game.Database
 				itemData.Add(itemName, itemNode);
 			}
 		}
-		private static ModifierNode GetModifier(Godot.Collections.Dictionary itemDict, string attribute)
+		public static ModifierNode GetModifier(Godot.Collections.Dictionary itemDict, string attribute)
 		{
 			Godot.Collections.Dictionary modifierDict = (Godot.Collections.Dictionary)
 				((Godot.Collections.Dictionary)itemDict["modifiers"])[attribute];
@@ -110,7 +110,6 @@ namespace Game.Database
 			return modifierNode;
 		}
 		public static ItemNode GetItemData(string worldName) { return itemData[worldName]; }
-		public static string GetItemMaterial(string worldName) { return itemData[worldName].material; }
 		public static bool HasItem(string nameCheck) { return itemData.ContainsKey(nameCheck); }
 	}
 }

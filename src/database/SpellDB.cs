@@ -21,6 +21,8 @@ namespace Game.Database
 			public bool requiresTarget;
 			public int stackSize;
 			public int manaCost;
+			public ItemDB.Modifiers modifiers;
+			public ItemDB.Use use;
 		}
 		private static Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
 		private const string DB_PATH = "res://data/spell.json";
@@ -50,6 +52,30 @@ namespace Game.Database
 				spellNode.requiresTarget = (bool)itemDict[nameof(SpellNode.requiresTarget)];
 				spellNode.stackSize = 1;
 				spellNode.manaCost = -1; // TODO
+
+				// set modifiers
+				ItemDB.Modifiers modifiers;
+				modifiers.duration = (int)(Single)((Godot.Collections.Dictionary)itemDict["modifiers"])[nameof(ItemDB.Modifiers.duration)];
+				modifiers.stamina = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.stamina));
+				modifiers.intellect = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.intellect));
+				modifiers.agility = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.agility));
+				modifiers.hpMax = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.hpMax));
+				modifiers.manaMax = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.manaMax));
+				modifiers.maxDamage = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.maxDamage));
+				modifiers.minDamage = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.minDamage));
+				modifiers.regenTime = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.regenTime));
+				modifiers.armor = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.armor));
+				modifiers.weaponRange = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.weaponRange));
+				modifiers.weaponSpeed = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.weaponSpeed));
+				spellNode.modifiers = modifiers;
+
+				// set use
+				ItemDB.Use use;
+				use.hp = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(ItemDB.Use.hp)];
+				use.mana = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(ItemDB.Use.mana)];
+				spellNode.use = use;
+
+
 				spellData.Add(spellName, spellNode);
 			}
 		}

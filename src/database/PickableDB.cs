@@ -15,12 +15,6 @@ namespace Game.Database
 				? SpellDB.GetSpellData(worldName).stackSize
 				: ItemDB.GetItemData(worldName).stackSize;
 		}
-		public static string GetDescription(string worldName)
-		{
-			return (SpellDB.HasSpell(worldName))
-				? SpellDB.GetSpellData(worldName).blurb
-				: ItemDB.GetItemData(worldName).blurb;
-		}
 		public static Texture GetIcon(string worldName)
 		{
 			return (SpellDB.HasSpell(worldName))
@@ -38,6 +32,18 @@ namespace Game.Database
 			return (SpellDB.HasSpell(worldName))
 				? SpellDB.GetSpellData(worldName).coolDown
 				: ItemDB.GetItemData(worldName).coolDown;
+		}
+		public static ItemDB.Modifiers GetModifiers(string worldName)
+		{
+			return (SpellDB.HasSpell(worldName))
+				? SpellDB.GetSpellData(worldName).modifiers
+				: ItemDB.GetItemData(worldName).modifiers;
+		}
+		public static ItemDB.Use GetUse(string worldName)
+		{
+			return (SpellDB.HasSpell(worldName))
+				? SpellDB.GetSpellData(worldName).use
+				: ItemDB.GetItemData(worldName).use;
 		}
 	}
 }

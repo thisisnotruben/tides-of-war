@@ -47,15 +47,11 @@ namespace Game.Ui
 					"pressed", this, nameof(_OnMerchantNodeHide));
 			}
 
-			// connect slots
-			foreach (Control control in merchantContent.GetNode("v/c/SlotGrid").GetChildren())
+			// connect slot events
+			foreach (SlotController slot in merchantSlots.GetSlots())
 			{
-				SlotController slot = control as SlotController;
-				if (slot != null)
-				{
-					slot.button.Connect("pressed", this, nameof(OnMerchantSlotSelected),
-						new Godot.Collections.Array() { slot.GetIndex() });
-				}
+				slot.button.Connect("pressed", this, nameof(OnMerchantSlotSelected),
+					new Godot.Collections.Array() { slot.GetIndex() });
 			}
 
 			// set itemInfo view events
@@ -114,10 +110,13 @@ namespace Game.Ui
 		}
 		public void _OnMerchantNodeDraw()
 		{
-			// TODO
-			// Globals.PlaySound(
-			// (npcPickables.Count > 0 && SpellDB.HasSpell(npcPickables[0]))
-			// ? "turn_page" : "merchant_open", this, speaker);
+			ContentDB.ContentNode contentNode = ContentDB.GetContentData(merchant.Name);
+
+			Globals.PlaySound(
+				(SpellDB.HasSpell(contentNode.merchandise[0]))
+				? "turn_page"
+				: "merchant_open", this, speaker);
+
 			subHeader.Text = "Gold: " + player.gold;
 		}
 		public void _OnMerchantNodeHide()

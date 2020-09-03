@@ -27,10 +27,8 @@ namespace Game.Ui
 		}
 		public void Display(string worldName, int currentStack)
 		{
-			ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
-
 			// display stack count and icon
-			icon.Texture = itemNode.icon;
+			icon.Texture = PickableDB.GetIcon(worldName);
 			stackCount.Text = currentStack.ToString();
 			stackCount.Visible = currentStack > 1;
 		}
@@ -63,7 +61,7 @@ namespace Game.Ui
 			coolDownText.Hide();
 			cooldownOverlay.Hide();
 		}
-		private void SetCooldownText(float time) { coolDownText.Text = Math.Round(time, 0).ToString(); }
 		public void OnButtonChanged(bool down) { icon.RectScale = (down) ? new Vector2(0.8f, 0.8f) : new Vector2(1.0f, 1.0f); }
+		private void SetCooldownText(float time) { coolDownText.Text = Math.Round(time, 0).ToString(); }
 	}
 }
