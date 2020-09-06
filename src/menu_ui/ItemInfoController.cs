@@ -1,7 +1,7 @@
 using System.Linq;
-using Godot;
 using Game.Database;
 using Game.ItemPoto;
+using Godot;
 namespace Game.Ui
 {
 	public class ItemInfoController : GameMenu

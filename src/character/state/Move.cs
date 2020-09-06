@@ -74,7 +74,7 @@ namespace Game.Actor.State
 		{
 			if (path.Count == 0)
 			{
-				fsm.ChangeState(FSM.State.IDLE);
+				fsm.ChangeState((fsm.IsDead()) ? FSM.State.IDLE_DEAD : FSM.State.IDLE);
 			}
 			else
 			{

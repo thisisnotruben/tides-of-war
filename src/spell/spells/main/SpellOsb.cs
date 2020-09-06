@@ -22,7 +22,7 @@ namespace Game.Ability
 		public override void _Process(float delta)
 		{
 			GlobalPosition = player.pos + (GetGlobalMousePosition() - player.pos).Clamped(spellRange);
-			player.GetMenu().GetNode<Control>("c/osb").
+			player.menu.GetNode<Control>("c/osb").
 			SetPosition((player.pos.y > GlobalPosition.y) ?
 				new Vector2(0.0f, 666.0f) :
 				new Vector2(0.0f, 180.0f));
@@ -54,7 +54,7 @@ namespace Game.Ability
 		{
 			caster.SetCurrentSpell(this);
 			caster.state = FSM.State.IDLE;
-			Control osb = player.GetMenu().GetNode<Control>("c/osb");
+			Control osb = player.menu.GetNode<Control>("c/osb");
 			osb.SetPosition(new Vector2(0.0f, 180.0f));
 			GetNode<CollisionShape2D>("sight/distance").Disabled = false;
 			foreach (Spell spell in GetTree().GetNodesInGroup(osb.GetInstanceId().ToString()))
@@ -82,20 +82,19 @@ namespace Game.Ability
 		{
 			base._OnTweenCompleted(obj, nodePath);
 			Player player = obj as Player;
-			if (player != null && player.state == FSM.State.MOVE &&
-			nodePath.Equals(":global_position"))
+			if (player != null && player.moving && nodePath.Equals(":global_position"))
 			{
-				player.GetMenu().GetNode<Control>("c/csb").Hide();
+				player.menu.GetNode<Control>("c/csb").Hide();
 				UnMake();
 			}
 		}
 		public void _OnSpellAreaCast()
 		{
 			SetProcess(false);
-			player.GetMenu().GetNode<Control>("c/osb").Hide();
-			player.GetMenu().GetNode<Control>("c/osb/m/cast").Disconnect("pressed", this, nameof(_OnSpellAreaCast));
+			player.menu.GetNode<Control>("c/osb").Hide();
+			player.menu.GetNode<Control>("c/osb/m/cast").Disconnect("pressed", this, nameof(_OnSpellAreaCast));
 			player.GetNode<Tween>("tween").Disconnect("tween_Started", this, nameof(_OnTweenStarted));
-			RemoveFromGroup(player.GetMenu().GetNode("c/osb").GetInstanceId().ToString());
+			RemoveFromGroup(player.menu.GetNode("c/osb").GetInstanceId().ToString());
 			Globals.PlaySound("click2", this, new Speaker());
 			Hide();
 			Cast();

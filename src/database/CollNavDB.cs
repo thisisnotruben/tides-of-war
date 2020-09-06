@@ -25,7 +25,7 @@ namespace Game.Database
 		}
 		private static readonly collNavTile[] collNavTileID;
 		private const string DB_PATH = "res://data/coll_nav.json";
-		private static Dictionary<string, int[,]> graph = new Dictionary<string, int[,]>();
+		private static Dictionary<Ordinal, int[,]> graph = new Dictionary<Ordinal, int[,]>();
 
 		static CollNavDB()
 		{
@@ -41,24 +41,28 @@ namespace Game.Database
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+
+			int i, j;
+			int[,] matrix;
+			Godot.Collections.Array rawMatrix, rawRow;
 			foreach (string ordinalDir in rawDict.Keys)
 			{
-				Godot.Collections.Array rawMatrix = (Godot.Collections.Array)rawDict[ordinalDir];
-				int[,] matrix = new int[rawMatrix.Count, rawMatrix.Count];
-				for (int i = 0; i < rawMatrix.Count; i++)
+				rawMatrix = (Godot.Collections.Array)rawDict[ordinalDir];
+				matrix = new int[rawMatrix.Count, rawMatrix.Count];
+				for (i = 0; i < rawMatrix.Count; i++)
 				{
-					Godot.Collections.Array rawRow = (Godot.Collections.Array)rawMatrix[i];
-					for (int j = 0; j < rawMatrix.Count; j++)
+					rawRow = (Godot.Collections.Array)rawMatrix[i];
+					for (j = 0; j < rawMatrix.Count; j++)
 					{
 						matrix[i, j] = (int)(Single)rawRow[j];
 					}
 				}
-				graph.Add(ordinalDir, matrix);
+				graph.Add((Ordinal)Enum.Parse(typeof(Ordinal), ordinalDir), matrix);
 			}
 		}
 		public static bool CanConnect(collNavTile from, collNavTile to, Ordinal ordinal)
 		{
-			return graph[ordinal.ToString()][Array.IndexOf(collNavTileID, from), Array.IndexOf(collNavTileID, to)] > 0;
+			return graph[ordinal][Array.IndexOf(collNavTileID, from), Array.IndexOf(collNavTileID, to)] > 0;
 		}
 	}
 }

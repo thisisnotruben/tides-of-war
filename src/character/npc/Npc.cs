@@ -42,19 +42,17 @@ namespace Game.Actor
 		public void _OnCharacterExitedSight(Area2D area2D)
 		{
 			Character character = area2D.Owner as Character;
-			if (character != null && character == target
-			&& (state != FSM.State.ATTACK
-			|| state != FSM.State.NPC_MOVE_ATTACK))
+
+			if (character != null && character == target && !attacking)
 			{
 				target = null;
 			}
 		}
 		public virtual void _OnSelectPressed()
 		{
-			if (Player.player.state == FSM.State.IDLE
-			|| Player.player.state == FSM.State.MOVE)
+			if (Player.player.state == FSM.State.IDLE || Player.player.moving)
 			{
-				Player.player.GetMenu().NpcInteract(this);
+				Player.player.menu.NpcInteract(this);
 			}
 		}
 		public void _OnTweenCompleted(Godot.Object obj, NodePath nodePath)

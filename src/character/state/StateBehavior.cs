@@ -28,8 +28,8 @@ namespace Game.Actor.State
 			{
 				// any valid move overrides any state from player
 				fsm.ChangeState((fsm.IsDead())
-					? FSM.State.PLAYER_DEAD_MOVE
-					: FSM.State.MOVE);
+					? FSM.State.PLAYER_MOVE_DEAD
+					: FSM.State.PLAYER_MOVE);
 			}
 		}
 	}

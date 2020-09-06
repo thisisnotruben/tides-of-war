@@ -39,13 +39,13 @@ namespace Game.Utils
 			map.GlobalPosition = new Vector2(0.0f, CELL_SIZE.y);
 
 			// add dayTime scene
-			PackedScene dayTimeScene = (PackedScene)GD.Load("res://src/map/doodads/day_time.tscn");
+			PackedScene dayTimeScene = (PackedScene)GD.Load("res://src/map/doodads/DayTime.tscn");
 			Node dayTime = dayTimeScene.Instance();
 			map.AddChild(dayTime);
 			dayTime.Owner = map;
 
 			// add death scene
-			PackedScene veilScene = (PackedScene)GD.Load("res://src/map/doodads/veil_fog.tscn");
+			PackedScene veilScene = (PackedScene)GD.Load("res://src/map/doodads/VeilFog.tscn");
 			Node2D veil = (Node2D)veilScene.Instance();
 			map.AddChild(veil);
 			veil.Owner = map;

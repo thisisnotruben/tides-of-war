@@ -165,7 +165,7 @@ namespace Game.Ui
 			// display to what merchant is selling
 			merchantSlots.ClearSlots();
 			DisplayItems(merchant.worldName,
-				ContentDB.GetContentData(merchant.Name).merchandise.ToArray());
+				ContentDB.GetContentData(merchant.Name).merchandise);
 		}
 		public void _OnInventoryPressed()
 		{

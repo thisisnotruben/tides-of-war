@@ -17,13 +17,13 @@ use_parent_material = true
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 
-[node name="area2d" type="Area2D" parent="img"]
+[node name="sight" type="Area2D" parent="img"]
 position = Vector2( 0, 2 )
+monitorable = false
 collision_layer = 0
-collision_mask = 4
+collision_mask = 16
 
-[node name="detect" type="CollisionShape2D" parent="img/area2d"]
+[node name="detect" type="CollisionShape2D" parent="img/sight"]
 shape = SubResource( 1 )
-[connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
-[connection signal="area_entered" from="img/area2d" to="." method="_OnAreaEntered"]
-[connection signal="area_exited" from="img/area2d" to="." method="_OnAreaExited"]
+[connection signal="area_entered" from="img/sight" to="." method="_OnAreaEntered"]
+[connection signal="area_exited" from="img/sight" to="." method="_OnAreaExited"]

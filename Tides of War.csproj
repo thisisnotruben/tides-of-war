@@ -105,7 +105,11 @@
 		<Compile Include="src\globals\SceneLoader.cs" />
 		<Compile Include="src\globals\Stats.cs" />
 		<Compile Include="src\globals\WorldObject.cs" />
-		<Compile Include="src\loot\LootChest.cs" />
+		<Compile Include="src\item\factory\CommodityCreator.cs" />
+		<Compile Include="src\item\factory\ItemCreator.cs" />
+		<Compile Include="src\item\factory\SpellCreator.cs" />
+		<Compile Include="src\item\Item.cs" />
+		<Compile Include="src\item\TreasureChest.cs" />
 		<Compile Include="src\map\doodads\DayTime.cs" />
 		<Compile Include="src\map\doodads\TransitionZone.cs" />
 		<Compile Include="src\map\Map.cs" />
@@ -136,7 +140,6 @@
 		<Compile Include="src\menu_ui\MiniMap.cs" />
 		<Compile Include="src\light\GameLight.cs" />
 		<Compile Include="src\light\TorchLight.cs" />
-		<Compile Include="src\loot\Item.cs" />
 		<Compile Include="src\loot\Pickable.cs" />
 		<Compile Include="src\menu_ui\HudStatus.cs" />
 		<Compile Include="src\missile\ICombustible.cs" />
@@ -144,6 +147,7 @@
 		<Compile Include="src\missile\Missile.cs" />
 		<Compile Include="src\quest_system\Quest.cs" />
 		<Compile Include="src\quest_system\WorldQuests.cs" />
+		<Compile Include="src\spell\SpellProto.cs" />
 		<Compile Include="src\spell\spells\main\Spell.cs" />
 		<Compile Include="src\spell\spells\main\SpellOsb.cs" />
 		<Compile Include="src\spell\spell_effects\main\SpellEffect.cs" />

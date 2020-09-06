@@ -19,7 +19,15 @@ namespace Game.Ui
 			}
 		}
 		public List<SlotController> GetSlots() { return slots; }
-		public void DisplaySlot(int index, string commodityName, int currentStackSize) { slots[index].Display(commodityName, currentStackSize); }
+		public void DisplaySlot(int index, string commodityName, int currentStackSize)
+		{
+			slots[index].Display(commodityName, currentStackSize);
+		}
+		public void DisplaySlot(int index, string commodityName, int currentStackSize, float coolDown)
+		{
+			DisplaySlot(index, commodityName, currentStackSize);
+			slots[index].SetCooldown(coolDown);
+		}
 		public void ClearSlots()
 		{
 			foreach (SlotController slot in slots)

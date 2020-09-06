@@ -139,11 +139,11 @@ namespace Game.Quests
 						focusedQuest = quest;
 						// if (questCatagory == availableQuests)
 						// {
-						//     Globals.player.GetMenu().dialogue.GetNode<Control>("s/s/v/accept").Show();
+						//     Globals.player.menu.dialogue.GetNode<Control>("s/s/v/accept").Show();
 						// }
 						// else
 						// {
-						//     Globals.player.GetMenu().dialogue.GetNode<Control>("s/s/v/finish").Show();
+						//     Globals.player.menu.dialogue.GetNode<Control>("s/s/v/finish").Show();
 						// }
 						return;
 					}

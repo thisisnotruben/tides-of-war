@@ -66,7 +66,7 @@ namespace Game.Ability
 			if (player != null)
 			{
 				player.RemoveFromSpellQueue(this);
-				Control osb = player.GetMenu().GetNode<Control>("c/osb");
+				Control osb = player.menu.GetNode<Control>("c/osb");
 				if (IsInGroup(osb.GetInstanceId().ToString()))
 				{
 					RemoveFromGroup(osb.GetInstanceId().ToString());

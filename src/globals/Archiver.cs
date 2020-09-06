@@ -31,8 +31,8 @@ namespace Game
 			while (!fileName.Empty())
 			{
 				file.Open(savePathDir.PlusFile(fileName), File.ModeFlags.Read);
-				saveFileNames[fileName.BaseName().ToInt()] = 
-					(string) ((Godot.Collections.Dictionary) JSON.Parse(file.GetAsText()).Result)["saveTime"];
+				saveFileNames[fileName.BaseName().ToInt()] =
+					(string)((Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result)["saveTime"];
 				file.Close();
 				fileName = directory.GetNext();
 			}
@@ -45,7 +45,7 @@ namespace Game
 			}
 
 			Godot.Collections.Dictionary date = OS.GetDatetime();
-			string saveTime = string.Format("{0}-{1}-{2} {3}:{4}:{5}", 
+			string saveTime = string.Format("{0}-{1}-{2} {3}:{4}:{5}",
 				date["year"], date["month"], date["day"],
 				date["hour"], date["minute"], date["second"]);
 
@@ -81,7 +81,7 @@ namespace Game
 
 			// load file
 			file.Open(loadPath, File.ModeFlags.Read);
-			Godot.Collections.Dictionary payload = (Godot.Collections.Dictionary) JSON.Parse(file.GetAsText()).Result;
+			Godot.Collections.Dictionary payload = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
 			file.Close();
 
 			// set scene
@@ -89,7 +89,7 @@ namespace Game
 			CanvasItem recentScene = root.GetChild(root.GetChildren().Count - 1) as CanvasItem;
 			if (recentScene != null)
 			{
-				SceneLoader.Init().SetScene((string) payload["map"], recentScene);
+				SceneLoader.Init().SetScene((string)payload["map"], recentScene);
 			}
 
 			// load data
@@ -100,7 +100,7 @@ namespace Game
 					ISerializable serializadNode = GetNode(nodePath) as ISerializable;
 					if (serializadNode != null)
 					{
-						serializadNode.Deserialize((Godot.Collections.Dictionary) payload[nodePath]);    
+						serializadNode.Deserialize((Godot.Collections.Dictionary)payload[nodePath]);
 					}
 				}
 			}

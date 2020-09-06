@@ -1,3 +1,4 @@
+using System;
 using Godot;
 namespace Game.Actor.State
 {
@@ -13,37 +14,46 @@ namespace Game.Actor.State
 		}
 		public override void Start()
 		{
-			// changing character detection
-			Area2D area2D = character.GetNode<Area2D>("area");
-			area2D.SetCollisionLayerBit(Globals.Collision["CHARACTERS"], true);
-			area2D.SetCollisionLayerBit(Globals.Collision["DEAD_CHARACTERS"], true);
-
 			// animate transparency
 			tween.InterpolateProperty(character, ":modulate", character.Modulate,
-				new Color("#ffffff"), 0.5f, Tween.TransitionType.Quart, Tween.EaseType.Out);
+				new Color("ffffff"), 0.5f, Tween.TransitionType.Quart, Tween.EaseType.Out);
+			tween.Start();
 
 			// reset clock for health/mana regen
 			character.regenTimer.Start();
 
 			if (character is Player)
 			{
-				// TODO: delete tomb
-				character.hp = character.stats.hpMax.valueI * (int)GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0);
-				character.mana = character.stats.manaMax.valueI * (int)GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0);
+				// changing character detection for player
+				character.hitBox.CollisionLayer = (uint)Character.CollMask.PLAYER + (uint)Character.CollMask.NPC;
+
+				// reset health
+				character.hp = (int)Math.Round(character.stats.hpMax.value * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
+				character.mana = (int)Math.Round(character.stats.manaMax.value * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
 			}
 			else
 			{
+				// changing character detection for npc
+				character.hitBox.CollisionLayer = (uint)Character.CollMask.NPC;
+
+				// reset health
 				character.hp = character.stats.hpMax.valueI;
 				character.mana = character.stats.manaMax.valueI;
 				if (IsInGroup(Globals.SAVE_GROUP))
 				{
 					RemoveFromGroup(Globals.SAVE_GROUP);
 				}
-				// little pop effect upon entry
-				tween.InterpolateProperty(character.img, ":scale", character.img.Scale, new Vector2(1.03f, 1.03f),
-					0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
 			}
-			tween.Start();
+
+			// notify those you see around you
+			foreach (Area2D otherHitBox in character.sight.GetOverlappingAreas())
+			{
+				Npc otherNpc = otherHitBox.Owner as Npc;
+				if (otherNpc != null)
+				{
+					otherNpc._OnCharacterEnteredSight(character.hitBox);
+				}
+			}
 
 			fsm.ChangeState(FSM.State.IDLE);
 		}

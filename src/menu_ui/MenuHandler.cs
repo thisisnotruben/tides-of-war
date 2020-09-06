@@ -1,5 +1,6 @@
 using Game.Utils;
 using Game.Actor;
+using Game.Actor.State;
 using Game.Loot;
 using Game.Database;
 namespace Game.Ui
@@ -55,7 +56,7 @@ namespace Game.Ui
 				&& 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
 			if (npc.IsConnected(signal, hudStatus, method))
 			{
-				if (interactable)
+				if (!npc.enemy && interactable)
 				{
 					mainMenu.NpcInteract(npc);
 				}
@@ -70,26 +71,26 @@ namespace Game.Ui
 			{
 				foreach (Godot.Collections.Dictionary connectionPacket in hudStatus.GetIncomingConnections())
 				{
-					Npc otherNpc = connectionPacket["source"] as Npc;
-					if (otherNpc != null)
-					{
-						otherNpc.Disconnect(signal, hudStatus, method);
-					}
+					(connectionPacket["source"] as Npc)?.Disconnect(signal, hudStatus, method);
 				}
 				npc.Connect(signal, hudStatus, method);
 				hudStatus.UpdateName(false, npc.worldName);
 				hudStatus._OnUpdateStatus(npc, true, npc.hp, npc.stats.hpMax.valueI);
 				hudStatus._OnUpdateStatus(npc, false, npc.mana, npc.stats.manaMax.valueI);
-				if (interactable)
+				if (!npc.enemy && interactable)
 				{
 					mainMenu.NpcInteract(npc);
 				}
 				else
 				{
 					player.target = npc;
+					if (npc.enemy)
+					{
+						player.state = FSM.State.ATTACK;
+					}
 				}
 			}
 		}
-		public void LootInteract(LootChest lootChest) { mainMenu.LootInteract(lootChest); }
+		public void LootInteract(TreasureChest lootChest) { mainMenu.LootInteract(lootChest); }
 	}
 }

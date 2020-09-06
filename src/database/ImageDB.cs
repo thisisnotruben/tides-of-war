@@ -7,14 +7,8 @@ namespace Game.Database
 	{
 		public struct ImageNode
 		{
-			public int total;
-			public int moving;
-			public int dying;
-			public int attacking;
-			public string weapon;
-			public string swing;
-			public string body;
-			public string weaponMaterial;
+			public int total, moving, dying, attacking;
+			public string weapon, swing, body, weaponMaterial;
 			public bool melee;
 		}
 		private static Dictionary<string, ImageNode> imageData = new Dictionary<string, ImageNode>();
@@ -27,10 +21,11 @@ namespace Game.Database
 			file.Open(DB_PATH, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
-			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+
+			Godot.Collections.Dictionary imgDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			foreach (string imgName in rawDict.Keys)
 			{
-				Godot.Collections.Dictionary imgDict = (Godot.Collections.Dictionary)rawDict[imgName];
+				imgDict = (Godot.Collections.Dictionary)rawDict[imgName];
 				ImageNode imageNode;
 				imageNode.moving = (int)((Single)imgDict[nameof(ImageNode.moving)]);
 				imageNode.dying = (int)((Single)imgDict[nameof(ImageNode.dying)]);

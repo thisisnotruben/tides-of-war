@@ -6,21 +6,16 @@ namespace Game.Database
 	{
 		public struct QuestNode
 		{
-			public string questName;
-			public List<string> nextQuest;
-			public List<string> reward;
+			public string questName, questCompleter;
+			public string[] nextQuest, reward;
 			public bool keepRewardItems;
 			public int goldReward;
-			public string questCompleter;
 			public GiverDialogueNode giverDialogue;
 			public Dictionary<string, ObjectiveNode> objectives;
 		}
 		public struct GiverDialogueNode
 		{
-			public string start;
-			public string active;
-			public string completed;
-			public string delivered;
+			public string start, active, completed, delivered;
 		}
 		public struct ObjectiveNode
 		{
@@ -31,8 +26,7 @@ namespace Game.Database
 		}
 		public struct ExtraContentNode
 		{
-			public string dialogue;
-			public string reward;
+			public string dialogue, reward;
 			public int gold;
 		}
 		public static Dictionary<string, QuestNode> questData = new Dictionary<string, QuestNode>();
@@ -46,17 +40,17 @@ namespace Game.Database
 			file.Open(dbPath, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
+
 			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary questDict;
 			foreach (string characterName in rawDict.Keys)
 			{
-				Godot.Collections.Dictionary questDict = (Godot.Collections.Dictionary)rawDict[characterName];
+				questDict = (Godot.Collections.Dictionary)rawDict[characterName];
 				// load quest node
 				QuestNode questNode;
 				questNode.questName = (string)questDict[nameof(QuestNode.questName)];
-				questNode.nextQuest = new List<string>();
-				ContentDB.GetWorldNames((Godot.Collections.Array)questDict[nameof(QuestNode.nextQuest)], questNode.nextQuest);
-				questNode.reward = new List<string>();
-				ContentDB.GetWorldNames((Godot.Collections.Array)questDict[nameof(QuestNode.reward)], questNode.reward);
+				questNode.nextQuest = ContentDB.GetWorldNames((Godot.Collections.Array)questDict[nameof(QuestNode.nextQuest)]);
+				questNode.reward = ContentDB.GetWorldNames((Godot.Collections.Array)questDict[nameof(QuestNode.reward)]);
 				questNode.keepRewardItems = (bool)questDict[nameof(QuestNode.keepRewardItems)];
 				questNode.goldReward = (int)questDict[nameof(QuestNode.goldReward)];
 				questNode.questCompleter = (string)questDict[nameof(QuestNode.questCompleter)];

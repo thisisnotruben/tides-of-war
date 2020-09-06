@@ -65,12 +65,7 @@ namespace Game.Ui
 			else
 			{
 				Globals.PlaySound("click2", this, speaker);
-				// TODO: hmmm...
-				// Spell spell = PickableFactory.GetMakeSpell(pickableWorldName);
-				// spell.GetPickable(player, false);
-				// spell.ConfigureSpell();
-				// player.SetCurrentSpell(spell);
-				// itemList.SetSlotCoolDown(pickableWorldName, spellNode.coolDown, 0.0f);
+				// TODO: actually cast spell here
 				Hide();
 			}
 		}

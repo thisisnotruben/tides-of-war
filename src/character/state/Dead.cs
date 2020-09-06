@@ -21,9 +21,11 @@ namespace Game.Actor.State
 		private async void Die()
 		{
 			// changing character detection
-			Area2D area2D = character.GetNode<Area2D>("area");
-			area2D.SetCollisionLayerBit(Globals.Collision["CHARACTERS"], false);
-			area2D.SetCollisionLayerBit(Globals.Collision["DEAD_CHARACTERS"], false);
+			character.hitBox.CollisionLayer = (uint)Character.CollMask.DEAD;
+			if (character is Player)
+			{
+				character.hitBox.CollisionLayer += (uint)Character.CollMask.PLAYER;
+			}
 
 			// stop health/mana regenerations
 			character.regenTimer.Stop();
@@ -36,10 +38,8 @@ namespace Game.Actor.State
 			// play death animation
 			character.anim.Play("dying");
 			await ToSignal(character.anim, "animation_finished");
-			character.Modulate = new Color("#80ffffff");
+			character.Modulate = new Color("bfffffff");
 
-			character.hp = 0;
-			character.mana = 0;
 			foreach (Spell spell in character.spellQueue)
 			{
 				spell.UnMake();
@@ -57,11 +57,13 @@ namespace Game.Actor.State
 			{
 				// instance tomb
 				Tomb tomb = (Tomb)tombScene.Instance();
+				tomb.Init(player);
 				Map.Map.map.AddZChild(tomb);
-				tomb.SetDeceasedPlayer(player);
 				tomb.GlobalPosition = Map.Map.map.GetGridPosition(character.GlobalPosition);
+
 				// set map death effects
 				Map.Map.map.SetVeil(true);
+
 				// spawn to nearest graveyard
 				Dictionary<float, Vector2> graveSites = new Dictionary<float, Vector2>();
 				foreach (Node2D graveyard in GetTree().GetNodesInGroup("gravesite"))
@@ -70,7 +72,7 @@ namespace Game.Actor.State
 				}
 				character.GlobalPosition = Map.Map.map.GetGridPosition(graveSites[graveSites.Keys.Min()]);
 
-				fsm.ChangeState(FSM.State.PLAYER_DEAD_IDLE);
+				fsm.ChangeState(FSM.State.IDLE_DEAD);
 			}
 			else
 			{

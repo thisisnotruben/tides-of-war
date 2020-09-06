@@ -7,11 +7,10 @@ namespace Game.Database
 	{
 		public struct UnitNode
 		{
-			public string name;
-			public string img;
+			public string name, img;
 			public bool enemy;
 			public Vector2 spawnPos;
-			public List<Vector2> path;
+			public Vector2[] path;
 			public int level;
 		}
 		private static Dictionary<string, UnitNode> unitData = new Dictionary<string, UnitNode>();
@@ -25,22 +24,31 @@ namespace Game.Database
 			file.Open(dbPath, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
-			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+
+			Godot.Collections.Dictionary itemDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Array spawnPos, rawPath;
+			int i;
 			foreach (string itemName in rawDict.Keys)
 			{
-				Godot.Collections.Dictionary itemDict = (Godot.Collections.Dictionary)rawDict[itemName];
+				itemDict = (Godot.Collections.Dictionary)rawDict[itemName];
 				UnitNode unitNode;
 				unitNode.name = (string)itemDict[nameof(UnitNode.name)];
 				unitNode.img = (string)itemDict[nameof(UnitNode.img)];
 				unitNode.enemy = (bool)itemDict[nameof(UnitNode.enemy)];
-				Godot.Collections.Array spawnPos = (Godot.Collections.Array)itemDict[nameof(UnitNode.spawnPos)];
+				unitNode.level = (int)((Single)itemDict[nameof(UnitNode.level)]);
+
+				spawnPos = (Godot.Collections.Array)itemDict[nameof(UnitNode.spawnPos)];
 				unitNode.spawnPos = new Vector2((float)((Single)spawnPos[0]), (float)((Single)spawnPos[1]));
-				unitNode.path = new List<Vector2>();
-				foreach (Godot.Collections.Array vectorNode in (Godot.Collections.Array)(itemDict[nameof(UnitNode.path)]))
+
+				// get path data
+				rawPath = (Godot.Collections.Array)(itemDict[nameof(UnitNode.path)]);
+				unitNode.path = new Vector2[rawPath.Count];
+				i = 0;
+				foreach (Godot.Collections.Array vectorNode in rawPath)
 				{
-					unitNode.path.Add(new Vector2((float)((Single)vectorNode[0]), (float)((Single)vectorNode[1])));
+					unitNode.path[i++] = (new Vector2((float)((Single)vectorNode[0]), (float)((Single)vectorNode[1])));
 				}
-				unitNode.level = 1; // TODO
+
 				unitData.Add(itemName, unitNode);
 			}
 		}

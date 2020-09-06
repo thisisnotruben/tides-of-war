@@ -5,19 +5,10 @@ namespace Game.Ui
 	{
 		public static MainMenu mainMenu;
 
-		public void _OnPopupDraw()
-		{
-			if (mainMenu != null)
-			{
-				mainMenu.ShowBackground(false);
-			}
-		}
+		public void _OnPopupDraw() { mainMenu?.ShowBackground(false); }
 		public void _OnPopupHide()
 		{
-			if (mainMenu != null)
-			{
-				mainMenu.ShowBackground(true);
-			}
+			mainMenu?.ShowBackground(true);
 			foreach (Control control in GetNode("m").GetChildren())
 			{
 				control.Hide();

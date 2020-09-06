@@ -28,27 +28,28 @@ namespace Game.Ui
 			}
 
 			// refresh slots whenever an item is dropped from inventory
-			itemInfoInventoryController.Connect(nameof(ItemInfoInventoryController.CommodityDropped),
-				this, nameof(_OnInventoryControllerDraw));
+			itemInfoInventoryController.Connect(nameof(ItemInfoInventoryController.RefreshSlots),
+				this, nameof(RefreshSlots));
 		}
-		public void _OnInventoryControllerDraw()
+		public void _OnInventoryControllerDraw() { RefreshSlots(); }
+		public void RefreshSlots()
 		{
 			inventorySlots.ClearSlots();
 			for (int i = 0; i < inventory.count; i++)
 			{
-				inventorySlots.DisplaySlot(i, inventory.GetCommodity(i), inventory.GetCommodityStack(i));
+				inventorySlots.DisplaySlot(i, inventory.GetCommodity(i), inventory.GetCommodityStack(i),
+					Commodity.GetCoolDown(player, inventory.GetCommodity(i)));
 			}
 		}
 		public void _OnInventoryControllerHide()
 		{
-			// TODO: new sound please
-			// Globals.PlaySound("merchant_close", this, speaker);
+			Globals.PlaySound("merchant_close", this, speaker);
 			itemInfoInventoryController.Hide();
 			GetNode<Control>("s").Show();
 		}
-		public void _OnItemEquipped(Commodity item, bool on)
+		public void _OnItemEquipped(string worldName, bool on)
 		{
-			ItemDB.ItemNode itemNode = ItemDB.GetItemData(item.worldName);
+			ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
 
 			GetNode<TextureRect>(
 				(itemNode.type == ItemDB.ItemType.ARMOR)

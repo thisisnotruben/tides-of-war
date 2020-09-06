@@ -8,10 +8,7 @@ namespace Game.Actor.Doodads
 		private Commodity _item;
 		public Commodity item
 		{
-			get
-			{
-				return _item;
-			}
+			get { return _item; }
 			set
 			{
 				_item = value;
@@ -53,9 +50,6 @@ namespace Game.Actor.Doodads
 			Modulate = color;
 			Emitting = true;
 		}
-		public void _OnTimerTimeout()
-		{
-			QueueFree();
-		}
+		public void _OnTimerTimeout() { QueueFree(); }
 	}
 }

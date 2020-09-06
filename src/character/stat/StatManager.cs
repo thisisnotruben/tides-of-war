@@ -18,9 +18,7 @@ namespace Game.Actor.Stat
 		public RegenAmount regenAmount;
 		public Armor armor;
 
-		public CharacterStat weaponRange;
-		public CharacterStat animSpeed;
-		public CharacterStat weaponSpeed;
+		public CharacterStat weaponRange, animSpeed, weaponSpeed;
 
 		public StatManager(Character character)
 		{

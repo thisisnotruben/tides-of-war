@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/character/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/player/Player.cs" type="Script" id=2]
@@ -55,35 +55,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_local_to_scene = true
-resource_name = "dying"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("img:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 3, 9 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("img:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_local_to_scene = true
 resource_name = "moving"
 loop = true
 tracks/0/type = "value"
@@ -128,8 +99,7 @@ script = ExtResource( 2 )
 [node name="anim" parent="." index="2"]
 anims/attacking = SubResource( 1 )
 anims/casting = SubResource( 2 )
-anims/dying = SubResource( 3 )
-anims/moving = SubResource( 4 )
+anims/moving = SubResource( 3 )
 
 [node name="camera" type="Camera2D" parent="img" index="1"]
 current = true
@@ -149,4 +119,3 @@ collision_layer = 18
 collision_mask = 2
 
 [node name="in_game_menu" parent="." index="9" instance=ExtResource( 3 )]
-[connection signal="animation_finished" from="anim" to="." method="_OnAnimFinished"]

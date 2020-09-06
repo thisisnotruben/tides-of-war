@@ -47,13 +47,13 @@ namespace Game.Actor.State
 		private void RevertState()
 		{
 			fsm.ChangeState(
-				(UnitDB.GetUnitData(character.Name).path.Count > 0)
+				(UnitDB.GetUnitData(character.Name).path.Length > 0)
 				? FSM.State.NPC_MOVE_ROAM
 				: FSM.State.NPC_MOVE_RETURN);
 		}
 		private bool OutOfPursuitRange()
 		{
-			if (UnitDB.GetUnitData(character.Name).path.Count > 0)
+			if (UnitDB.GetUnitData(character.Name).path.Length > 0)
 			{
 				// if the closest waypoint the target is to...
 				return (from waypoint in UnitDB.GetUnitData(character.Name).path

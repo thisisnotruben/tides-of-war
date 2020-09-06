@@ -11,6 +11,12 @@ namespace Game.Actor
 {
 	public abstract class Character : WorldObject, ISerializable
 	{
+		public enum CollMask : uint
+		{
+			PLAYER = 0b_00000_00000_00000_10000,
+			NPC = 0b_00000_00000_00000_00010,
+			DEAD = 0b_00000_00000_00000_00100
+		}
 		public static readonly PackedScene footStepScene = (PackedScene)GD.Load("res://src/character/doodads/footstep.tscn");
 		public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/character/doodads/buff_anim.tscn");
 
@@ -19,13 +25,16 @@ namespace Game.Actor
 		public Timer regenTimer;
 		public Sprite img;
 		public AnimationPlayer anim;
+		public Area2D hitBox, sight;
 
 		public bool enemy { get; private protected set; }
 		public bool dead { get { return fsm.IsDead(); } }
+		public bool attacking { get { return fsm.IsAtacking(); } }
+		public bool moving { get { return fsm.IsMoving(); } }
 		public FSM.State state { get { return fsm.GetState(); } set { fsm.ChangeState(value); } }
 		public Vector2 pos { get { return img.GlobalPosition; } }
 
-		private int _level = Stats.MIN_LEVEL;
+		private int _level = Stats.MIN_LEVEL, _hp, _mana;
 		public int level
 		{
 			get { return _level; }
@@ -41,7 +50,6 @@ namespace Game.Actor
 				}
 			}
 		}
-		private int _hp;
 		public int hp
 		{
 			get { return _hp; }
@@ -59,20 +67,20 @@ namespace Game.Actor
 				else if (hp <= 0)
 				{
 					_hp = 0;
+					mana = 0;
 					state = FSM.State.DEAD;
 				}
 				else if (this is Npc && !IsInGroup(Globals.SAVE_GROUP))
 				{
 					AddToGroup(Globals.SAVE_GROUP);
 				}
-				if (hp > 0 && fsm.IsDead())
+				if (hp > 0 && dead)
 				{
 					state = FSM.State.ALIVE;
 				}
 				EmitSignal(nameof(UpdateHudStatus), this, true, hp, stats.hpMax.valueI);
 			}
 		}
-		private int _mana;
 		public int mana
 		{
 			get { return _mana; }
@@ -113,6 +121,8 @@ namespace Game.Actor
 			anim = GetNode<AnimationPlayer>("anim");
 			img = GetNode<Sprite>("img");
 			fsm = GetNode<FSM>("fsm");
+			hitBox = GetNode<Area2D>("area");
+			sight = GetNode<Area2D>("sight");
 			stats = new StatManager(this);
 
 			worldName = Name;
@@ -213,7 +223,7 @@ namespace Game.Actor
 		public void _OnFootStep(bool rightStep)
 		{
 			// called from 'moving' animation
-			if (!fsm.IsDead())
+			if (!dead)
 			{
 				FootStep footStep = (FootStep)footStepScene.Instance();
 				Vector2 stepPos = GlobalPosition;
@@ -232,11 +242,10 @@ namespace Game.Actor
 		}
 		public virtual Godot.Collections.Dictionary Serialize()
 		{
-			Godot.Collections.Dictionary payload = new Godot.Collections.Dictionary()
+			return new Godot.Collections.Dictionary()
 			{
 				{"GlobalPosition", new Godot.Collections.Array(){GlobalPosition.x, GlobalPosition.y}}
 			};
-			return payload;
 		}
 	}
 }

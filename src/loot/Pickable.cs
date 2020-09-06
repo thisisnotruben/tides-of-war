@@ -49,10 +49,10 @@ namespace Game.Loot
 		public virtual void GetPickable(Character character, bool addToBag)
 		{
 			// Player player = character as Player;
-			// if (player != null && !IsConnected(nameof(DescribePickable), player.GetMenu(), nameof(InGameMenu._OnDescribePickable)))
+			// if (player != null && !IsConnected(nameof(DescribePickable), player.menu, nameof(InGameMenu._OnDescribePickable)))
 			// {
-			// 	Connect(nameof(DescribePickable), player.GetMenu(), nameof(InGameMenu._OnDescribePickable));
-			// 	Connect(nameof(SetInMenu), player.GetMenu(), nameof(InGameMenu._OnSetPickableInMenu));
+			// 	Connect(nameof(DescribePickable), player.menu, nameof(InGameMenu._OnDescribePickable));
+			// 	Connect(nameof(SetInMenu), player.menu, nameof(InGameMenu._OnSetPickableInMenu));
 			// 	Item item = this as Item;
 			// }
 			// InGameMenu.Bags bag = (this is Item) ? InGameMenu.Bags.INVENTORY : InGameMenu.Bags.SPELL;

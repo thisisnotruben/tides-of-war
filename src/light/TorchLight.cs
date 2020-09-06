@@ -12,7 +12,7 @@ namespace Game.Light
 			visibility = GetNode<VisibilityNotifier2D>("visibility");
 		}
 
-		public override void SetIntensity(bool full, float min=0.8f, float max=1.0f)
+		public override void SetIntensity(bool full, float min = 0.8f, float max = 1.0f)
 		{
 			float choice = (full) ? max : min;
 			if (visibility.IsOnScreen())

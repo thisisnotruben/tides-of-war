@@ -16,7 +16,7 @@ tracks/0/keys = {
 "values": [ 3, 9 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("img:modulate")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false

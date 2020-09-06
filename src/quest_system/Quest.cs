@@ -186,7 +186,7 @@ namespace Game.Quests
 						}
 						else if (ItemDB.HasItem(data[key]))
 						{
-							reward = PickableFactory.GetMakeItem(data[key]);
+							// TODO reward = PickableFactory.GetMakeItem(data[key]);
 						}
 						else
 						{

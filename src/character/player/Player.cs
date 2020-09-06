@@ -1,8 +1,6 @@
-using System;
 using Game.Actor.Doodads;
 using Game.Ui;
 using Game.Utils;
-using Game.Loot;
 using Game.ItemPoto;
 using Godot;
 namespace Game.Actor
@@ -11,40 +9,29 @@ namespace Game.Actor
 	{
 		public static Player player;
 
+		public MenuHandler menu { get; private set; }
 		public int xp { get; private set; }
 		public int gold;
-		private Commodity _weapon;
-		public Commodity weapon
+
+		private Item _weapon, _vest;
+		public Item weapon
 		{
 			get { return _weapon; }
 			set
 			{
-				if (weapon != null)
-				{
-					weapon.Exit();
-				}
-				if (value != null)
-				{
-					value.Start();
-				}
+				weapon?.Exit();
+				value?.Start();
 				_weapon = value;
 			}
 		}
-		private Commodity _vest;
-		public Commodity vest
+		public Item vest
 		{
 			get { return _vest; }
 			set
 			{
-				if (vest != null)
-				{
-					vest.Exit();
-				}
-				if (value != null)
-				{
-					value.Start();
-				}
-				_weapon = value;
+				vest?.Exit();
+				value?.Start();
+				_vest = value;
 			}
 		}
 
@@ -54,23 +41,12 @@ namespace Game.Actor
 			base._Ready();
 			GameMenu.player = this;
 			gold = 10_000;
-			level = Stats.MAX_LEVEL;
+			// level = Stats.MAX_LEVEL;
 			SetImg("human-6");
-			GetMenu().ConnectPlayerToHud(this);
+			menu = GetNode<MenuHandler>("in_game_menu");
+			menu.ConnectPlayerToHud(this);
 		}
 		public override void _UnhandledInput(InputEvent @event) { fsm.UnhandledInput(@event); }
-		public void _OnAnimFinished(string animName)
-		{
-			if (animName.Equals("attacking") && spell != null)
-			{
-				// TODO: perhaps this came from the spell; configure this when you makr the state
-				// weaponRange = (ranged) ? Stats.WEAPON_RANGE_RANGE : Stats.WEAPON_RANGE_MELEE;
-			}
-			else if (animName.Equals("casting"))
-			{
-				SetProcess(true);
-			}
-		}
 		public void SetXP(int addedXP, bool showLabel = true, bool fromSaveFile = false)
 		{
 			xp += addedXP;
@@ -98,6 +74,5 @@ namespace Game.Actor
 				}
 			}
 		}
-		public MenuHandler GetMenu() { return GetNode<MenuHandler>("in_game_menu"); }
 	}
 }

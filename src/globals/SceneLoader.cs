@@ -78,8 +78,7 @@ namespace Game
 			}
 			if (directory.FileExists(questPath))
 			{
-				// TODO
-				// QuestDB.LoadQuestData(questPath);
+				QuestDB.LoadQuestData(questPath);
 			}
 			currentScene.Hide();
 			CallDeferred(nameof(DeferredSetScene), scenePath, currentScene);

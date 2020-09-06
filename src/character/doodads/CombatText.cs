@@ -50,7 +50,7 @@ namespace Game.Actor.Doodads
 			tween.InterpolateProperty(this, ":position", localCenterPos,
 				new Vector2(localCenterPos.x, localCenterPos.y - 14.0f), TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
 			tween.InterpolateProperty(label, ":modulate", colorBeginning, colorEnd, TIME, Tween.TransitionType.Linear, Tween.EaseType.In);
-			CombatText combatText = GetParent().GetChild(GetIndex() - 1)as CombatText;
+			CombatText combatText = GetParent().GetChild(GetIndex() - 1) as CombatText;
 			if (combatText != null)
 			{
 				combatText.Connect(nameof(QueueStart), this, nameof(Start));

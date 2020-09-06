@@ -21,8 +21,7 @@ namespace Game.Actor.State
 
 			character.hp -= damage;
 
-			if (character.target != null && !tween.IsActive()
-			&& fsm.GetState() != FSM.State.MOVE)
+			if (character.target != null && !tween.IsActive() && !fsm.IsMoving())
 			{
 				Bump(Map.Map.map.GetDirection(character.GlobalPosition,
 					character.target.GlobalPosition).Rotated((float)Math.PI) / 4.0f);

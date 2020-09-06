@@ -53,16 +53,7 @@ namespace Game.Ui
 			}
 		}
 		public void _OnWindowClosed() { main.Show(); }
-		public void _OnMainMenuDraw()
-		{
-			GetTree().Paused = true;
-			// TODO
-			// if (player.spell != null && 
-			// player.spell.subType == WorldObject.WorldTypes.CHOOSE_AREA_EFFECT)
-			// {
-			//     player.spell.UnMake();
-			// }
-		}
+		public void _OnMainMenuDraw() { GetTree().Paused = true; }
 		public void _OnMainMenuHide()
 		{
 			Hide();
@@ -90,11 +81,11 @@ namespace Game.Ui
 			dialogueController.Display(npc);
 			Show();
 		}
-		public void LootInteract(LootChest lootChest)
+		public void LootInteract(TreasureChest lootChest)
 		{
-			if (SpellDB.HasSpell(lootChest.pickableWorldName))
+			if (SpellDB.HasSpell(lootChest.commodityWorldName))
 			{
-				if (playerSpellBook.IsFull(lootChest.pickableWorldName))
+				if (playerSpellBook.IsFull(lootChest.commodityWorldName))
 				{
 					popupController.GetNode<Label>("m/error/label").Text = "Spell Book\nFull!";
 					popupController.GetNode<Control>("m/error").Show();
@@ -102,13 +93,13 @@ namespace Game.Ui
 				}
 				else
 				{
-					playerSpellBook.AddCommodity(lootChest.pickableWorldName);
+					playerSpellBook.AddCommodity(lootChest.commodityWorldName);
 					lootChest.Collect();
 				}
 			}
 			else
 			{
-				if (playerInventory.IsFull(lootChest.pickableWorldName))
+				if (playerInventory.IsFull(lootChest.commodityWorldName))
 				{
 					popupController.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
 					popupController.GetNode<Control>("m/error").Show();
@@ -116,7 +107,7 @@ namespace Game.Ui
 				}
 				else
 				{
-					playerInventory.AddCommodity(lootChest.pickableWorldName);
+					playerInventory.AddCommodity(lootChest.commodityWorldName);
 					lootChest.Collect();
 				}
 			}
@@ -125,8 +116,6 @@ namespace Game.Ui
 		public void _OnResumePressed()
 		{
 			Globals.PlaySound("click2", this, speaker);
-			// TODO
-			// player.SetBuff();
 			Hide();
 		}
 		public void _OnInventoryPressed() { Transition(inventoryController); }

@@ -25,7 +25,7 @@ namespace Game.Ui
 		}
 		public override void _Process(float delta)
 		{
-			if (player.state == FSM.State.MOVE)
+			if (player.moving)
 			{
 				Hide();
 			}

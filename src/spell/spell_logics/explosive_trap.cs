@@ -8,7 +8,7 @@ namespace Game.Ability
 		{
 			PackedScene landMineScene = (PackedScene)GD.Load("res://src/missile/land_mine.tscn");
 			LandMine landMine = (LandMine)landMineScene.Instance();
-			landMine.exludedUnitArea = caster.GetNode<Area2D>("area");
+			landMine.exludedUnitArea = caster.hitBox;
 			landMine.GlobalPosition = Map.Map.map.GetGridPosition(caster.GlobalPosition);
 			landMine.AddToGroup(caster.GetInstanceId().ToString() + "lm");
 			caster.GetParent().AddChild(landMine);

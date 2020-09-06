@@ -8,25 +8,25 @@ namespace Game.Actor.State
 		private const int MAX_HISTORY = 10;
 		public enum State
 		{
-			IDLE, MOVE, ATTACK, ALIVE, DEAD,
-			PLAYER_DEAD_IDLE, PLAYER_DEAD_MOVE,
+			IDLE, ATTACK, ALIVE, DEAD, IDLE_DEAD,
+			PLAYER_MOVE, PLAYER_MOVE_DEAD,
 			NPC_MOVE_ROAM, NPC_MOVE_ATTACK, NPC_MOVE_RETURN
 		}
-		private Dictionary<State, StateBehavior> stateMap = new Dictionary<State, StateBehavior>();
-		private Stack<State> stateHistory = new Stack<State>();
+		private readonly Dictionary<State, StateBehavior> stateMap = new Dictionary<State, StateBehavior>();
+		private readonly Stack<State> stateHistory = new Stack<State>();
 
 		public override void _Ready()
 		{
-			stateMap[State.IDLE] = (StateBehavior)GetChild((int)State.IDLE);
-			stateMap[State.MOVE] = (StateBehavior)GetChild((int)State.MOVE);
-			stateMap[State.ATTACK] = (StateBehavior)GetChild((int)State.ATTACK);
-			stateMap[State.ALIVE] = (StateBehavior)GetChild((int)State.ALIVE);
-			stateMap[State.DEAD] = (StateBehavior)GetChild((int)State.DEAD);
-			stateMap[State.PLAYER_DEAD_IDLE] = (StateBehavior)GetChild((int)State.PLAYER_DEAD_IDLE);
-			stateMap[State.PLAYER_DEAD_MOVE] = (StateBehavior)GetChild((int)State.PLAYER_DEAD_MOVE);
-			stateMap[State.NPC_MOVE_ROAM] = (StateBehavior)GetChild((int)State.NPC_MOVE_ROAM);
-			stateMap[State.NPC_MOVE_ATTACK] = (StateBehavior)GetChild((int)State.NPC_MOVE_ATTACK);
-			stateMap[State.NPC_MOVE_RETURN] = (StateBehavior)GetChild((int)State.NPC_MOVE_RETURN);
+			stateMap[State.IDLE] = (Idle)GetChild((int)State.IDLE);
+			stateMap[State.PLAYER_MOVE] = (MovePlayer)GetChild((int)State.PLAYER_MOVE);
+			stateMap[State.ATTACK] = (Attack)GetChild((int)State.ATTACK);
+			stateMap[State.ALIVE] = (Alive)GetChild((int)State.ALIVE);
+			stateMap[State.DEAD] = (Dead)GetChild((int)State.DEAD);
+			stateMap[State.IDLE_DEAD] = (IdleDead)GetChild((int)State.IDLE_DEAD);
+			stateMap[State.PLAYER_MOVE_DEAD] = (MovePlayerDead)GetChild((int)State.PLAYER_MOVE_DEAD);
+			stateMap[State.NPC_MOVE_ROAM] = (MoveNpcRoam)GetChild((int)State.NPC_MOVE_ROAM);
+			stateMap[State.NPC_MOVE_ATTACK] = (MoveNpcAttack)GetChild((int)State.NPC_MOVE_ATTACK);
+			stateMap[State.NPC_MOVE_RETURN] = (MoveNpcReturn)GetChild((int)State.NPC_MOVE_RETURN);
 
 			Character character = Owner as Character;
 			foreach (StateBehavior stateBehavior in GetChildren())
@@ -36,7 +36,7 @@ namespace Game.Actor.State
 
 			// call when map has finished loading
 			CallDeferred(nameof(SetState),
-				(UnitDB.HasUnitData(character.Name) && UnitDB.GetUnitData(character.Name).path.Count > 0)
+				(UnitDB.HasUnitData(character.Name) && UnitDB.GetUnitData(character.Name).path.Length > 0)
 				? State.NPC_MOVE_ROAM
 				: State.IDLE);
 		}
@@ -67,22 +67,40 @@ namespace Game.Actor.State
 			switch (GetState())
 			{
 				case State.DEAD:
-				case State.PLAYER_DEAD_IDLE:
-				case State.PLAYER_DEAD_MOVE:
+				case State.IDLE_DEAD:
+				case State.PLAYER_MOVE_DEAD:
+					return true;
+				default:
+					return false;
+			}
+		}
+		public bool IsAtacking()
+		{
+			switch (GetState())
+			{
+				case State.ATTACK:
+				case State.NPC_MOVE_ATTACK:
+					return true;
+				default:
+					return false;
+			}
+		}
+		public bool IsMoving()
+		{
+			switch (GetState())
+			{
+				case State.NPC_MOVE_ATTACK:
+				case State.NPC_MOVE_RETURN:
+				case State.NPC_MOVE_ROAM:
+				case State.PLAYER_MOVE:
+				case State.PLAYER_MOVE_DEAD:
 					return true;
 				default:
 					return false;
 			}
 		}
 		// * Delegated functions for state
-		public void Harm(int damage)
-		{
-			TakeDamage takeDamageState = stateMap[GetState()] as TakeDamage;
-			if (takeDamageState != null)
-			{
-				takeDamageState.Harm(damage);
-			}
-		}
+		public void Harm(int damage) { (stateMap[GetState()] as TakeDamage)?.Harm(damage); }
 		public void UnhandledInput(InputEvent @event) { stateMap[GetState()].UnhandledInput(@event); }
 	}
 }

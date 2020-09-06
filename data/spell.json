@@ -5,14 +5,14 @@
 		"level": 1,
 		"goldCost": 1,
 		"blurb": "Strike the target for 10% damage.",
-		"range": 32,
 		"coolDown": 5,
+		"range": 32,
 		"pctDamage": 1.1,
 		"ignoreArmor": false,
 		"effectOnTarget": true,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -59,8 +59,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Intimidating Shout": {
@@ -69,14 +80,14 @@
 		"level": 2,
 		"goldCost": 1,
 		"blurb": "Unleash a terrifying roar, reducing damage to your foes by 20% for 5 sec.",
-		"range": 0,
 		"coolDown": 45,
+		"range": 0,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": false,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -123,8 +134,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Cleave": {
@@ -133,14 +155,14 @@
 		"level": 3,
 		"goldCost": 1,
 		"blurb": "Strikes opponent for 17.5% damage with.",
-		"range": 32,
 		"coolDown": 15,
+		"range": 32,
 		"pctDamage": 1.175,
 		"ignoreArmor": false,
 		"effectOnTarget": true,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -187,8 +209,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Fortify": {
@@ -197,14 +230,14 @@
 		"level": 4,
 		"goldCost": 1,
 		"blurb": "Temporarily increases your armor by 25%, reducing damage dealt to you for 60 sec.",
-		"range": 0,
 		"coolDown": 120,
+		"range": 0,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": false,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -251,8 +284,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Bash": {
@@ -261,14 +305,14 @@
 		"level": 5,
 		"goldCost": 1,
 		"blurb": "Stuns opponent for 5 sec, and deals 10% damage.",
-		"range": 32,
 		"coolDown": 15,
+		"range": 32,
 		"pctDamage": 1.1,
 		"ignoreArmor": false,
 		"effectOnTarget": true,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -315,8 +359,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Hemorrhage": {
@@ -325,14 +380,14 @@
 		"level": 6,
 		"goldCost": 1,
 		"blurb": "Tears open target dealing 5% damage initially, then deals up to 25 damage in 1 min.",
-		"range": 32,
 		"coolDown": 110,
+		"range": 32,
 		"pctDamage": 1.05,
 		"ignoreArmor": false,
 		"effectOnTarget": true,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -379,8 +434,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Stomp": {
@@ -389,14 +455,14 @@
 		"level": 7,
 		"goldCost": 1,
 		"blurb": "Slams the ground, dealing 10 damage to nearby enemy units with a 20% chance to stun for 3 sec.",
-		"range": 0,
 		"coolDown": 30,
+		"range": 0,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": false,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -443,8 +509,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Overpower": {
@@ -453,14 +530,14 @@
 		"level": 9,
 		"goldCost": 1,
 		"blurb": "Strike at the opponent for 15% of damage. Cannot be blocked, dodged, or parried.",
-		"range": 32,
 		"coolDown": 25,
+		"range": 32,
 		"pctDamage": 1.15,
 		"ignoreArmor": false,
 		"effectOnTarget": true,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -507,8 +584,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Frenzy": {
@@ -517,14 +605,14 @@
 		"level": 10,
 		"goldCost": 1,
 		"blurb": "Increases attack speed by 50% and movement by 25%, but deals 5 damage every 5 sec to you. Lasts 120 sec.",
-		"range": 0,
 		"coolDown": 180,
+		"range": 0,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": false,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -571,8 +659,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Searing arrow": {
@@ -581,14 +680,14 @@
 		"level": 1,
 		"goldCost": 1,
 		"blurb": "Shoot a flaming arrow at target that deals up to 25 damage in 75 sec.",
-		"range": 64,
 		"coolDown": 5,
+		"range": 64,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -635,8 +734,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Concussive shot": {
@@ -645,14 +755,14 @@
 		"level": 2,
 		"goldCost": 1,
 		"blurb": "Hits the target for 10% damage, and dazes the target. Slowing movement and attack speed by 50% for 10 sec.",
-		"range": 64,
 		"coolDown": 10,
+		"range": 64,
 		"pctDamage": 1.1,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -699,8 +809,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Piercing shot": {
@@ -709,14 +830,14 @@
 		"level": 3,
 		"goldCost": 1,
 		"blurb": "A powerful shot at deals 10% damage that ignores target's armor.",
-		"range": 64,
 		"coolDown": 20,
+		"range": 64,
 		"pctDamage": 1.1,
 		"ignoreArmor": true,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -763,8 +884,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Stinging shot": {
@@ -773,14 +905,14 @@
 		"level": 4,
 		"goldCost": 1,
 		"blurb": "Fire a poison tipped arrow dealing 20% damage and 5 damage every 2 sec for 30 sec.",
-		"range": 64,
 		"coolDown": 10,
+		"range": 64,
 		"pctDamage": 1.2,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -827,8 +959,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Explosive arrow": {
@@ -837,14 +980,14 @@
 		"level": 5,
 		"goldCost": 1,
 		"blurb": "Fire a dynamite tipped arrow at target. When detonated, damages all units in blast radius by 10 damage.",
-		"range": 64,
 		"coolDown": 15,
+		"range": 64,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -891,8 +1034,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Precise shot": {
@@ -901,14 +1055,14 @@
 		"level": 6,
 		"goldCost": 1,
 		"blurb": "Aimed shot that deals 15% damage.",
-		"range": 64,
 		"coolDown": 45,
+		"range": 64,
 		"pctDamage": 1.5,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -955,8 +1109,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Sniper shot": {
@@ -965,14 +1130,14 @@
 		"level": 7,
 		"goldCost": 1,
 		"blurb": "Fires a well-aimed shot dealing 15% damage. Range of shot increased by 25%.",
-		"range": 80,
 		"coolDown": 110,
+		"range": 80,
 		"pctDamage": 1.15,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1019,8 +1184,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Explosive trap": {
@@ -1029,14 +1205,14 @@
 		"level": 8,
 		"goldCost": 1,
 		"blurb": "Plant an explosive trap, that'll explode when a unit passes near it. Arms itself in 5 sec, and self-destructs in 30 sec after.",
-		"range": 0,
 		"coolDown": 30,
+		"range": 0,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": false,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1083,8 +1259,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Volley": {
@@ -1093,14 +1280,14 @@
 		"level": 9,
 		"goldCost": 1,
 		"blurb": "Rapidly launch 3 arrows at target dealing 5% damage each arrow.",
-		"range": 64,
 		"coolDown": 120,
+		"range": 64,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1147,8 +1334,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Fireball": {
@@ -1157,14 +1355,14 @@
 		"level": 1,
 		"goldCost": 1,
 		"blurb": "Hurls a fiery ball that deals 5% of damage and 10 damage over 30 sec.",
-		"range": 64,
 		"coolDown": 5,
+		"range": 64,
 		"pctDamage": 1.05,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1211,8 +1409,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Shadow bolt": {
@@ -1221,14 +1430,14 @@
 		"level": 2,
 		"goldCost": 1,
 		"blurb": "Sends a shadowy bolt at target, dealing 12% damage.",
-		"range": 64,
 		"coolDown": 10,
+		"range": 64,
 		"pctDamage": 1.12,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1275,8 +1484,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Frost bolt": {
@@ -1285,14 +1505,14 @@
 		"level": 3,
 		"goldCost": 1,
 		"blurb": "Launches a bolt of frost at enemy. Deals 10% damage and slows target's movement by 30% for 10 sec.",
-		"range": 64,
 		"coolDown": 15,
+		"range": 64,
 		"pctDamage": 1.1,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1339,8 +1559,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Divine heal": {
@@ -1349,14 +1580,14 @@
 		"level": 4,
 		"goldCost": 1,
 		"blurb": "Restores 10%-30% of health.",
-		"range": 0,
 		"coolDown": 30,
+		"range": 0,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": false,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1403,8 +1634,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Siphon mana": {
@@ -1413,14 +1655,14 @@
 		"level": 5,
 		"goldCost": 1,
 		"blurb": "Drain up to 20% mana from enemy over 10 sec.",
-		"range": 40,
 		"coolDown": 20,
+		"range": 40,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1467,8 +1709,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Haste": {
@@ -1477,14 +1730,14 @@
 		"level": 6,
 		"goldCost": 1,
 		"blurb": "Increase your movement speed by 50% for 10 sec.",
-		"range": 0,
 		"coolDown": 60,
+		"range": 0,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": false,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1531,8 +1784,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Slow": {
@@ -1541,14 +1805,14 @@
 		"level": 7,
 		"goldCost": 1,
 		"blurb": "Slows target's movement and attack speed by 50% for 15 sec.",
-		"range": 32,
 		"coolDown": 30,
+		"range": 32,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1595,8 +1859,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Arcane bolt": {
@@ -1605,14 +1880,14 @@
 		"level": 8,
 		"goldCost": 1,
 		"blurb": "Hurl a lightning bolt at the enemy, dealing 12%, and then a 50% chance to jump to nearby enemies. Affects up to 3 units.",
-		"range": 64,
 		"coolDown": 20,
+		"range": 64,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1659,8 +1934,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Mind blast": {
@@ -1669,14 +1955,14 @@
 		"level": 9,
 		"goldCost": 1,
 		"blurb": "Blast the target's mind for 20% damage.",
-		"range": 40,
 		"coolDown": 110,
+		"range": 40,
 		"pctDamage": 1.2,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": true,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1723,8 +2009,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	},
 	"Meteor": {
@@ -1733,14 +2030,14 @@
 		"level": 10,
 		"goldCost": 1,
 		"blurb": "Rain down a meteor at target location, dealing 20% damage at target and 5% damage to units within the blast radius.",
-		"range": 64,
 		"coolDown": 180,
+		"range": 64,
 		"pctDamage": 1.0,
 		"ignoreArmor": false,
 		"effectOnTarget": false,
 		"requiresTarget": false,
 		"modifiers": {
-			"duration": 0,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1787,8 +2084,19 @@
 			}
 		},
 		"use": {
-			"hp": 0,
-			"mana": 0
+			"repeatSec": 0,
+			"hp": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"mana": {
+				"type": "FLAT",
+				"value": 0
+			},
+			"damage": {
+				"type": "FLAT",
+				"value": 0
+			}
 		}
 	}
 }

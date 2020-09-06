@@ -1,16 +1,15 @@
-using Godot;
 using Game.Loot;
 using Game.ItemPoto;
 using Game.Database;
-using Game.Actor.State;
+using Godot;
 namespace Game.Ui
 {
 	public class ItemInfoInventoryController : ItemInfoController
 	{
 		[Signal]
-		public delegate void ItemEquipped(Commodity item, bool on);
+		public delegate void ItemEquipped(string worldName, bool on);
 		[Signal]
-		public delegate void CommodityDropped();
+		public delegate void RefreshSlots();
 
 		public override void _Ready()
 		{
@@ -24,50 +23,53 @@ namespace Game.Ui
 			GetNode<BaseButton>("s/h/buttons/drop")
 				.Connect("pressed", this, nameof(_OnDropPressed));
 		}
-		public void EquipItem(bool on)
+		private void EquipItem(bool on, string worldName)
 		{
-			ItemDB.ItemNode itemNode = ItemDB.GetItemData(pickableWorldName);
-			Commodity item = PickableFactory.MakeCommodity(pickableWorldName);
-			switch (itemNode.type)
+			Item item = (Item)new ItemCreator().MakeCommodity(player, worldName);
+			switch (ItemDB.GetItemData(worldName).type)
 			{
 				case ItemDB.ItemType.WEAPON:
+					// add back to inventory
+					if (!on && player.weapon != null)
+					{
+						itemList.AddCommodity(player.weapon.worldName);
+					}
+
 					player.weapon = (on) ? item : null;
 					break;
 				case ItemDB.ItemType.ARMOR:
+					// add back to inventory
+					if (!on && player.vest != null)
+					{
+						itemList.AddCommodity(player.vest.worldName);
+					}
+
 					player.vest = (on) ? item : null;
 					break;
+				default:
+					return;
 			}
 			if (on)
 			{
-				// TODO: refresh slots
-				itemList.RemoveCommodity(pickableWorldName);
+				itemList.RemoveCommodity(worldName);
 			}
 			else
 			{
-				itemList.AddCommodity(pickableWorldName);
-				// ?TODO: confused here as well
-				// ItemSlot itemSlot = itemList.GetItemSlot(pickableWorldName);
-				// foreach (ItemSlot otherItemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-				// {
-				// 	if (otherItemSlot.GetItem().Equals(pickableWorldName)
-				// 	&& !itemSlot.IsConnected(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut)))
-				// 	{
-				// 		itemSlot.Connect(nameof(ItemSlot.SyncSlot), otherItemSlot, nameof(ItemSlot._OnSyncShortcut));
-				// 	}
-				// }
+				itemList.AddCommodity(worldName);
 			}
-			EmitSignal(nameof(ItemEquipped), item, on);
+			EmitSignal(nameof(RefreshSlots));
+			EmitSignal(nameof(ItemEquipped), worldName, on);
 		}
 		public void _OnUsePressed()
 		{
-			ItemDB.ItemType itemType = ItemDB.GetItemData(pickableWorldName).type;
 			string sndName = "click2";
 
-			switch (itemType)
+			switch (ItemDB.GetItemData(pickableWorldName).type)
 			{
 				case ItemDB.ItemType.FOOD:
 					sndName = "eat";
-					if (player.state == FSM.State.ATTACK)
+					// cannot eat in combat
+					if (player.attacking)
 					{
 						GetNode<Control>("s").Hide();
 						popupController.GetNode<Label>("m/error/label").Text = "Cannot Eat\nIn Combat!";
@@ -81,47 +83,51 @@ namespace Game.Ui
 					break;
 			}
 			Globals.PlaySound(sndName, this, speaker);
-			// TODO: going to need to get slot from inventory/spell bag
-			// if (itemType.Equals("POTION"))
-			// {
-			//     itemList.SetSlotCoolDown(item.worldName, item.duration, 0.0f);
-			// }
-			// itemList.RemoveItem(pickableWorldName, true, false, false);
-			// item.Consume(player, 0.0f);
+
+			// eat up or drink up
+			new ItemCreator().MakeCommodity(player, pickableWorldName).Start();
+			// remove from inventory
+			itemList.RemoveCommodity(pickableWorldName);
+
+			EmitSignal(nameof(RefreshSlots));
 			Hide();
 		}
 		public void _OnEquipPressed()
 		{
 			ItemDB.ItemType itemType = ItemDB.GetItemData(pickableWorldName).type;
-			string currentPickableWorldName = pickableWorldName;
-			Commodity playerWeapon = player.weapon;
-			Commodity playerArmor = player.vest;
-			if (!itemList.IsFull())
-			{
-				switch (itemType)
-				{
-					case ItemDB.ItemType.WEAPON:
+			Item playerWeapon = player.weapon;
+			Item playerArmor = player.vest;
+			bool inventoryFull = false;
 
-						if (playerWeapon != null)
-						{
-							pickableWorldName = playerWeapon.worldName;
-							EquipItem(false);
-							pickableWorldName = currentPickableWorldName;
-						}
-						break;
-					case ItemDB.ItemType.ARMOR:
-						if (playerArmor != null)
-						{
-							pickableWorldName = playerArmor.worldName;
-							EquipItem(false);
-							pickableWorldName = currentPickableWorldName;
-						}
-						break;
+			// unequip weapon if any to equip focused weapon
+			if (itemType == ItemDB.ItemType.WEAPON && playerWeapon != null)
+			{
+				if (itemList.IsFull(playerWeapon.worldName))
+				{
+					inventoryFull = true;
+				}
+				else
+				{
+					EquipItem(false, playerWeapon.worldName);
 				}
 			}
-			else if ((itemType == ItemDB.ItemType.WEAPON & playerWeapon != null)
-			|| (itemType == ItemDB.ItemType.ARMOR & playerArmor != null))
+
+			// unequip armor if any to equip focused armor
+			if (itemType == ItemDB.ItemType.ARMOR && playerArmor != null)
 			{
+				if (itemList.IsFull(playerArmor.worldName))
+				{
+					inventoryFull = true;
+				}
+				else
+				{
+					EquipItem(false, playerArmor.worldName);
+				}
+			}
+
+			if (inventoryFull)
+			{
+				// inventory full
 				GetNode<Control>("s").Hide();
 				popupController.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
 				popupController.GetNode<Control>("m/error").Show();
@@ -129,18 +135,14 @@ namespace Game.Ui
 			}
 			else
 			{
-				// ?TODO: I'm confused here
-				// ItemSlot itemSlot = itemList.GetItemSlot(pickableWorldName);
-				// itemSlot.SetBlockSignals(true);
-				EquipItem(true);
-				// itemSlot.SetBlockSignals(false);
 				Globals.PlaySound(ItemDB.GetItemData(pickableWorldName).material + "_off", this, speaker);
-				Hide();
+				// equip focused item
+				EquipItem(true, pickableWorldName);
 			}
 		}
 		public void _OnUnequipPressed()
 		{
-			if (itemList.IsFull())
+			if (itemList.IsFull(pickableWorldName))
 			{
 				GetNode<Control>("s").Hide();
 				popupController.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
@@ -150,7 +152,7 @@ namespace Game.Ui
 			else
 			{
 				Globals.PlaySound("inventory_unequip", this, speaker);
-				EquipItem(false);
+				EquipItem(false, pickableWorldName);
 			}
 		}
 		public void _OnDropPressed()
@@ -172,16 +174,19 @@ namespace Game.Ui
 
 			// remove from inventory
 			itemList.RemoveCommodity(pickableWorldName);
-			EmitSignal(nameof(CommodityDropped));
+			EmitSignal(nameof(RefreshSlots));
 
-			// instance drop chest
-			PackedScene lootScene = (PackedScene)GD.Load("res://src/loot/loot_chest.tscn");
-			LootChest loot = (LootChest)lootScene.Instance();
-			loot.pickableWorldName = pickableWorldName;
+			// instance treasure chest
+			PackedScene treasureChestScene = (PackedScene)GD.Load("res://src/item/TreasureChest.tscn");
+			TreasureChest treasureChest = (TreasureChest)treasureChestScene.Instance();
+			treasureChest.Init(pickableWorldName);
+
+			// place treasure chest in map
 			Map.Map map = Map.Map.map;
-			map.AddZChild(loot);
-			loot.Owner = map;
-			loot.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
+			map.AddZChild(treasureChest);
+			treasureChest.Owner = map;
+			treasureChest.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
+
 			Hide();
 		}
 	}

@@ -57,8 +57,7 @@ namespace Game.Actor.State
 			CombatText.TextType hitType;
 			Stats.AttackTableNode attackTable = Stats.ATTACK_TABLE[Stats.AttackTableType.MELEE];
 
-			ImageDB.ImageNode imageNode = ImageDB.GetImageData(
-				UnitDB.GetUnitData(character.Name).img);
+			ImageDB.ImageNode imageNode = ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName());
 
 			if (diceRoll <= attackTable.hit)
 			{
@@ -108,7 +107,7 @@ namespace Game.Actor.State
 				Player player = character.target as Player;
 				if (player != null)
 				{
-					player.GetMenu().NpcInteract(character as Npc);
+					player.menu.NpcInteract(character as Npc);
 				}
 				else
 				{
@@ -124,12 +123,14 @@ namespace Game.Actor.State
 		}
 		private bool ValidTarget()
 		{
-			if (character.target == null)
+			if (character.target == null || character.target.dead)
 			{
+				character.target = null;
+
 				if (character is Npc)
 				{
 					fsm.ChangeState(
-						(UnitDB.HasUnitData(character.Name) && UnitDB.GetUnitData(character.Name).path.Count > 0)
+						(UnitDB.HasUnitData(character.Name) && UnitDB.GetUnitData(character.Name).path.Length > 0)
 						? FSM.State.NPC_MOVE_ROAM
 						: FSM.State.NPC_MOVE_RETURN);
 				}

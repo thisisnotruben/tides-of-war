@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using Game.Database;
 using Godot;
 namespace Game.Actor.State
@@ -13,15 +14,13 @@ namespace Game.Actor.State
 			base.Start();
 			if (waypoints.Count == 0)
 			{
-				// copy array
-				List<Vector2> unitPath = UnitDB.GetUnitData(character.Name).path;
-				unitPath = unitPath.GetRange(0, unitPath.Count);
+				Vector2[] unitPath = UnitDB.GetUnitData(character.Name).path;
 
 				// in the special circumstance the unit went on to another state
 				// when waypoints.Count == 0
 				if (reversePath)
 				{
-					unitPath.Reverse();
+					Array.Reverse(unitPath);
 					reversePath = false;
 				}
 
@@ -35,7 +34,7 @@ namespace Game.Actor.State
 		}
 
 		// cyclic functions
-		public override void _OnTweenCompleted(Object Gobject, NodePath nodePath)
+		public override void _OnTweenCompleted(Godot.Object Gobject, NodePath nodePath)
 		{
 			SetPathToWaypoint();
 			MoveTo(path);
@@ -70,14 +69,12 @@ namespace Game.Actor.State
 		}
 		private void SetWaypoints()
 		{
-			// copy array
-			List<Vector2> mapPatrolPath = UnitDB.GetUnitData(character.Name).path;
-			mapPatrolPath = mapPatrolPath.GetRange(0, mapPatrolPath.Count);
+			Vector2[] mapPatrolPath = UnitDB.GetUnitData(character.Name).path;
 
 			reversePath = !reversePath;
 			if (reversePath)
 			{
-				mapPatrolPath.Reverse();
+				Array.Reverse(mapPatrolPath);
 			}
 
 			waypoints = new Queue<Vector2>(mapPatrolPath);

@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System;
 using Game.Database;
 using Game.Actor;
 using Game.Actor.Stat;
 using Godot;
 namespace Game.ItemPoto
 {
-	public class Commodity : Node
+	public class Commodity : Godot.Object
 	{
 		private static Dictionary<Character, Dictionary<string, SceneTreeTimer>> cooldowns =
 			new Dictionary<Character, Dictionary<string, SceneTreeTimer>>();
@@ -14,11 +15,12 @@ namespace Game.ItemPoto
 		public string worldName;
 		private Character character;
 
-		public Commodity Init(string worldName)
+		public Commodity(Character character, string worldName)
 		{
 			this.worldName = worldName;
+			this.character = character;
 			modifiers = CreateModifiers();
-			return this;
+			GD.Randomize();
 		}
 		private static ItemDB.ModifierNode[] GetModifiers(string worldName)
 		{
@@ -28,11 +30,6 @@ namespace Game.ItemPoto
 		}
 		public static string GetDescription(string worldName)
 		{
-			ItemDB.ModifierNode[] mods = GetModifiers(worldName);
-			// array in the same order as in 'GetModifiers;
-			string[] modNames = new string[] { "Stamina", "Intellect", "Agility", "hpMax",
-				"manaMax", "maxDamage", "minDamage", "regenTime", "armor", "weaponRange", "weaponSpeed" };
-
 			int coolDown, level, duration;
 			ItemDB.Use use;
 			string blurb;
@@ -41,7 +38,7 @@ namespace Game.ItemPoto
 				SpellDB.SpellNode spellNode = SpellDB.GetSpellData(worldName);
 				coolDown = spellNode.coolDown;
 				level = spellNode.level;
-				duration = spellNode.modifiers.duration;
+				duration = spellNode.modifiers.durationSec;
 				use = spellNode.use;
 				blurb = spellNode.blurb;
 			}
@@ -50,10 +47,43 @@ namespace Game.ItemPoto
 				ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
 				coolDown = itemNode.coolDown;
 				level = itemNode.level;
-				duration = itemNode.modifiers.duration;
+				duration = itemNode.modifiers.durationSec;
 				use = itemNode.use;
 				blurb = itemNode.blurb;
 			}
+
+			// statement lambda for getting representational data from modifiers nodes
+			Func<ItemDB.ModifierNode[], string[], string> GetModifierDescriptions = (m, n) =>
+			{
+				string description = "";
+				int value;
+				for (int i = 0; i < m.Length; i++)
+				{
+					if (m[i].value == 0.0f)
+					{
+						continue;
+					}
+
+					value = (int)m[i].value;
+					description += n[i] + ": ";
+
+					if (m[i].type == StatModifier.StatModType.PERCENT_ADD
+					|| m[i].type == StatModifier.StatModType.PERCENT_MUL)
+					{
+						description += (value > 0) ? "+" : "-";
+						if (m[i].type == StatModifier.StatModType.PERCENT_MUL)
+						{
+							description += "x";
+						}
+						description += (int)Math.Abs((m[i].value * 100f)) + "%\n";
+					}
+					else
+					{
+						description += value.ToString("+#;-#;0") + "\n";
+					}
+				}
+				return description;
+			};
 
 			string text = $"Name: {worldName}\nLevel: {level}\n";
 			if (coolDown > 0)
@@ -61,40 +91,24 @@ namespace Game.ItemPoto
 				text += $"Cooldown: {coolDown} sec.\n";
 			}
 
-			// set modifier text
-			string modText = "";
-			for (int i = 0; i < mods.Length; i++)
-			{
-				if ((int)mods[i].value == 0)
-				{
-					continue;
-				}
+			// set mod text | mod name array in the same order as in 'GetModifiers;
+			string modText = GetModifierDescriptions(GetModifiers(worldName),
+				new string[] { "Stamina", "Intellect", "Agility", "hpMax", "manaMax", "maxDamage",
+				"minDamage", "regenTime", "armor", "weaponRange", "weaponSpeed" });
 
-				modText += modNames[i] + ": ";
-
-				if (mods[i].type == StatModifier.StatModType.PERCENT_ADD
-				|| mods[i].type == StatModifier.StatModType.PERCENT_MUL)
-				{
-					modText += $"{((mods[i].type == StatModifier.StatModType.PERCENT_ADD) ? "+" : "x")}{(int)(mods[i].value * 100f)}%\n";
-				}
-				else
-				{
-					modText += $"+{(int)mods[i].value}\n";
-				}
-			}
 			if (!modText.Empty())
 			{
 				text += $"Duration: {duration} sec.\n" + modText;
 			}
 
 			// set use text
-			if (use.hp != 0)
+			modText = GetModifierDescriptions(
+				new ItemDB.ModifierNode[] { use.hp, use.mana, use.damage },
+				new string[] { "Hp", "Mana", "Damage" });
+
+			if (!modText.Empty())
 			{
-				text += $"Hp: +{use.hp}\n";
-			}
-			if (use.mana != 0)
-			{
-				text += $"Mana: +{use.mana}\n";
+				text += $"Repeat: {duration} sec.\n" + modText;
 			}
 
 			// set blurb text
@@ -124,6 +138,10 @@ namespace Game.ItemPoto
 			}
 			return modifierDict;
 		}
+		public static float GetCoolDown(Character character, string worldName)
+		{
+			return IsCoolingDown(character, worldName) ? cooldowns[character][worldName].TimeLeft : 0.0f;
+		}
 		public static bool IsCoolingDown(Character character, string worldName)
 		{
 			if (cooldowns.ContainsKey(character) && cooldowns[character].ContainsKey(worldName))
@@ -131,8 +149,8 @@ namespace Game.ItemPoto
 				if (cooldowns[character][worldName].TimeLeft == 0.0f)
 				{
 					cooldowns[character].Remove(worldName);
-					return true;
 				}
+				return true;
 			}
 			return false;
 		}
@@ -147,14 +165,14 @@ namespace Game.ItemPoto
 				}
 			}
 		}
-		public bool AddCooldown(float cooldownSec)
+		public bool AddCooldown(string worldName, float cooldownSec)
 		{
 			if (IsCoolingDown(character, worldName))
 			{
 				return false;
 			}
 
-			SceneTreeTimer cooldown = GetTree().CreateTimer(cooldownSec, false);
+			SceneTreeTimer cooldown = character.GetTree().CreateTimer(cooldownSec, false);
 			cooldown.Connect("timeout", this, nameof(OnCooldownTimeout),
 				new Godot.Collections.Array() { character, worldName });
 
@@ -167,6 +185,30 @@ namespace Game.ItemPoto
 				cooldowns.Add(character, new Dictionary<string, SceneTreeTimer>() { { worldName, cooldown } });
 			}
 			return true;
+		}
+		public async virtual void StartUse(ItemDB.Use use, int durationSec)
+		{
+			for (int i = 0; use.repeatSec > 0 && i < durationSec / use.repeatSec; i++)
+			{
+				if (use.hp.value != 0)
+				{
+					character.hp += (use.hp.type == StatModifier.StatModType.FLAT)
+					? (int)use.hp.value
+					: (int)Math.Round(use.hp.value * character.stats.hpMax.value);
+				}
+				if (use.mana.value != 0)
+				{
+					character.mana += (use.mana.type == StatModifier.StatModType.FLAT)
+						? (int)use.mana.value
+						: (int)Math.Round(use.mana.value * character.stats.hpMax.value);
+				}
+				if (use.damage.value != 0)
+				{
+					character.Harm((int)use.damage.value);
+				}
+
+				await character.ToSignal(character.GetTree().CreateTimer(use.repeatSec, false), "timeout");
+			}
 		}
 		public async virtual void Start()
 		{
@@ -181,36 +223,29 @@ namespace Game.ItemPoto
 			{
 				SpellDB.SpellNode spellNode = SpellDB.GetSpellData(worldName);
 				use = spellNode.use;
-				duration = spellNode.modifiers.duration;
+				duration = spellNode.modifiers.durationSec;
 				coolDown = spellNode.coolDown;
 			}
 			else
 			{
 				ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
 				use = itemNode.use;
-				duration = itemNode.modifiers.duration;
+				duration = itemNode.modifiers.durationSec;
 				coolDown = itemNode.coolDown;
 			}
 
-			AddCooldown(coolDown);
-
-			if (use.hp != 0)
-			{
-				character.hp += use.hp;
-			}
-			if (use.mana != 0)
-			{
-				character.mana += use.mana;
-			}
+			AddCooldown(worldName, coolDown);
 
 			foreach (CharacterStat stat in modifiers.Keys)
 			{
 				stat.AddModifier(modifiers[stat]);
 			}
 
+			StartUse(use, duration);
+
 			if (duration > 0)
 			{
-				await ToSignal(GetTree().CreateTimer(duration, false), "timeout");
+				await character.ToSignal(character.GetTree().CreateTimer(duration, false), "timeout");
 				Exit();
 			}
 		}

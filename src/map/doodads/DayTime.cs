@@ -5,20 +5,14 @@ namespace Game.Map.Doodads
 	public class DayTime : Timer, ISerializable
 	{
 		private const float LENGTH_OF_DAY = 210.0f;
+		private const string ANIM_NAME = "SunUpDown";
 		private bool dayLight = true;
+		private AnimationPlayer anim;
 
+		public override void _Ready() { anim = GetNode<AnimationPlayer>("anim"); }
 		public void _OnTimerTimeout()
 		{
-			AnimationPlayer anim = GetNode<AnimationPlayer>("anim");
-			string animName = "sun_up_down";
-			if (dayLight)
-			{
-				anim.Play(animName);
-			}
-			else
-			{
-				anim.PlayBackwards(animName);
-			}
+			anim.Play(ANIM_NAME, -1.0f, (dayLight) ? 1.0f : -1.0f, !dayLight);
 			dayLight = !dayLight;
 		}
 		public void _OnAnimFinished(string animName)
@@ -35,12 +29,29 @@ namespace Game.Map.Doodads
 		}
 		public void Deserialize(Godot.Collections.Dictionary payload)
 		{
-			// TODO
+			dayLight = (bool)payload[nameof(dayLight)];
+
+			if ((bool)payload["animPlaying"])
+			{
+				anim.Play(ANIM_NAME, -1.0f, (dayLight) ? 1.0f : -1.0f, !dayLight);
+				anim.Seek((float)payload["animPosition"]);
+			}
+			else
+			{
+				Stop();
+				WaitTime = (float)payload["timerPosition"];
+				Start();
+			}
 		}
 		public Godot.Collections.Dictionary Serialize()
 		{
-			// TODO
-			return new Godot.Collections.Dictionary();
+			return new Godot.Collections.Dictionary()
+			{
+				{"animPosition", anim.CurrentAnimationPosition},
+				{"animPlaying", anim.IsPlaying()},
+				{"timerPosition", TimeLeft},
+				{nameof(dayLight), dayLight}
+			};
 		}
 	}
 }

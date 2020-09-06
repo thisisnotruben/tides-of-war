@@ -1,3 +1,4 @@
+using Game.ItemPoto;
 using Godot;
 namespace Game.Ui
 {
@@ -32,7 +33,8 @@ namespace Game.Ui
 			spellSlots.ClearSlots();
 			for (int i = 0; i < spellBook.count; i++)
 			{
-				spellSlots.DisplaySlot(i, spellBook.GetCommodity(i), spellBook.GetCommodityStack(i));
+				spellSlots.DisplaySlot(i, spellBook.GetCommodity(i), spellBook.GetCommodityStack(i),
+					Commodity.GetCoolDown(player, spellBook.GetCommodity(i)));
 			}
 
 			// fill hp/mana headers

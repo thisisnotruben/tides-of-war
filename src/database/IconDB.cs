@@ -3,7 +3,7 @@ namespace Game.Database
 {
 	public static class IconDB
 	{
-		private static readonly Texture img = (Texture) GD.Load("res://asset/img/icon/icons.png");
+		private static readonly Texture img = (Texture)GD.Load("res://asset/img/icon/icons.png");
 		private static int atlasWidth = 16;
 		private static Vector2 iconSize = new Vector2(16, 16);
 

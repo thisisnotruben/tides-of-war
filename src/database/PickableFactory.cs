@@ -42,19 +42,6 @@ namespace Game.Database
 			}
 			return spell;
 		}
-		public static Item GetMakeItem(string worldName)
-		{
-			PackedScene itemScene = (PackedScene)GD.Load("res://src/loot/item.tscn");
-			Item item = (Item)itemScene.Instance();
-			item.Init(worldName);
-			return item;
-		}
-		public static Commodity MakeCommodity(string worldName)
-		{
-			PackedScene itemScene = (PackedScene)GD.Load("res://src/item/commodity.tscn");
-			Commodity commodity = (Commodity)itemScene.Instance();
-			return commodity.Init(worldName);
-		}
 		public static SpellEffect GetMakeSpellEffect(string worldName)
 		{
 			SpellEffect spellEffect;

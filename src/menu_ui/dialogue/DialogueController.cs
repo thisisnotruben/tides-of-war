@@ -46,7 +46,7 @@ namespace Game.Ui
 			dialogueContent.GetNode<RichTextLabel>("s/text").BbcodeText = contentNode.dialogue;
 
 			// allow merchant view button if npc has merchandise to offer
-			dialogueContent.GetNode<Control>("s/v/buy").Visible = contentNode.merchandise.Count > 0;
+			dialogueContent.GetNode<Control>("s/v/buy").Visible = contentNode.merchandise.Length > 0;
 		}
 		public void _OnDialogueDraw() { Globals.PlaySound("turn_page", this, speaker); }
 		public void _OnDialogueHide()
@@ -85,7 +85,7 @@ namespace Game.Ui
 		{
 			// called for when user wants to buy
 			merchantController.DisplayItems(npc.worldName,
-				ContentDB.GetContentData(npc.Name).merchandise.ToArray());
+				ContentDB.GetContentData(npc.Name).merchandise);
 
 			// switch to merchant view
 			dialogueContent.Hide();
