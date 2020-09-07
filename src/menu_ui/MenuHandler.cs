@@ -1,6 +1,5 @@
 using Game.Utils;
 using Game.Actor;
-using Game.Actor.State;
 using Game.Loot;
 using Game.Database;
 namespace Game.Ui
@@ -48,12 +47,24 @@ namespace Game.Ui
 			hudStatus._OnUpdateStatus(player, true, player.hp, player.stats.hpMax.valueI);
 			hudStatus._OnUpdateStatus(player, false, player.mana, player.stats.manaMax.valueI);
 		}
+		public void ClearTarget()
+		{
+			hudStatus.ClearNpcConnections();
+			hudStatus.npcStatus.Hide();
+			player.target = null;
+		}
 		public void NpcInteract(Npc npc)
 		{
+			if (player.dead)
+			{
+				return;
+			}
+
 			string signal = nameof(Character.UpdateHudStatus);
 			string method = nameof(HudStatus._OnUpdateStatus);
 			bool interactable = ContentDB.HasContent(npc.Name)
 				&& 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
+
 			if (npc.IsConnected(signal, hudStatus, method))
 			{
 				if (!npc.enemy && interactable)
@@ -62,21 +73,20 @@ namespace Game.Ui
 				}
 				else
 				{
-					npc.Disconnect(signal, hudStatus, method);
-					hudStatus.npcStatus.Hide();
-					player.target = null;
+					ClearTarget();
 				}
 			}
 			else
 			{
-				foreach (Godot.Collections.Dictionary connectionPacket in hudStatus.GetIncomingConnections())
-				{
-					(connectionPacket["source"] as Npc)?.Disconnect(signal, hudStatus, method);
-				}
+				hudStatus.ClearNpcConnections();
+
+				// connect focused npc to hud and update hud
 				npc.Connect(signal, hudStatus, method);
 				hudStatus.UpdateName(false, npc.worldName);
 				hudStatus._OnUpdateStatus(npc, true, npc.hp, npc.stats.hpMax.valueI);
 				hudStatus._OnUpdateStatus(npc, false, npc.mana, npc.stats.manaMax.valueI);
+
+				// interact with npc
 				if (!npc.enemy && interactable)
 				{
 					mainMenu.NpcInteract(npc);
@@ -84,13 +94,22 @@ namespace Game.Ui
 				else
 				{
 					player.target = npc;
+					// checks to see is play can attack
 					if (npc.enemy)
 					{
-						player.state = FSM.State.ATTACK;
+						player.OnAttacked(npc);
 					}
 				}
 			}
 		}
-		public void LootInteract(TreasureChest lootChest) { mainMenu.LootInteract(lootChest); }
+		public void LootInteract(TreasureChest lootChest)
+		{
+			if (player.dead)
+			{
+				return;
+			}
+
+			mainMenu.LootInteract(lootChest);
+		}
 	}
 }

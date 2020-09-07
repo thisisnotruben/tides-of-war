@@ -17,6 +17,8 @@ namespace Game.Ui
 		public void _OnHideNPCStatusHudPressed()
 		{
 			Globals.PlaySound("click5", this, speaker);
+
+			ClearNpcConnections();
 			npcStatus.Hide();
 			player.target = null;
 		}
@@ -54,6 +56,13 @@ namespace Game.Ui
 			}
 			progressBar.Value = 100.0f * (float)currentValue / (float)maxValue;
 			label.Text = $"{currentValue} / {maxValue}";
+		}
+		public void ClearNpcConnections()
+		{
+			foreach (Godot.Collections.Dictionary connectionPacket in GetIncomingConnections())
+			{
+				(connectionPacket["source"] as Npc)?.Disconnect(nameof(Character.UpdateHudStatus), this, nameof(_OnUpdateStatus));
+			}
 		}
 	}
 }

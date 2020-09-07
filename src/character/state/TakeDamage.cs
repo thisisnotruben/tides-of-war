@@ -21,11 +21,12 @@ namespace Game.Actor.State
 
 			character.hp -= damage;
 
-			if (character.target != null && !tween.IsActive() && !fsm.IsMoving())
-			{
-				Bump(Map.Map.map.GetDirection(character.GlobalPosition,
-					character.target.GlobalPosition).Rotated((float)Math.PI) / 4.0f);
-			}
+			// TODO: causing move problems, maybe do a camera shake
+			// if (character.target != null && !tween.IsActive() && !fsm.IsMoving())
+			// {
+			// 	Bump(Map.Map.map.GetDirection(character.GlobalPosition,
+			// 		character.target.GlobalPosition).Rotated((float)Math.PI) / 4.0f);
+			// }
 		}
 		private protected async void Bump(Vector2 direction)
 		{

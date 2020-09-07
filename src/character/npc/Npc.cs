@@ -48,13 +48,6 @@ namespace Game.Actor
 				target = null;
 			}
 		}
-		public virtual void _OnSelectPressed()
-		{
-			if (Player.player.state == FSM.State.IDLE || Player.player.moving)
-			{
-				Player.player.menu.NpcInteract(this);
-			}
-		}
 		public void _OnTweenCompleted(Godot.Object obj, NodePath nodePath)
 		{
 			Tween tween = GetNode<Tween>("tween");
@@ -78,5 +71,21 @@ namespace Game.Actor
 		}
 		// makes sure player clicks on unit and not mistakingly select the tile to move to
 		public void _OnAreaMouseEnteredExited(bool entered) { Player.player.SetProcessUnhandledInput(!entered); }
+		public virtual void _OnSelectPressed() { Player.player.menu.NpcInteract(this); }
+		public override void OnAttacked(Character whosAttacking)
+		{
+			if (!dead && !attacking
+			&& (target == null || enemy != target.enemy)
+			&& !MoveNpcAttack.OutOfPursuitRange(this, whosAttacking))
+			{
+				target = whosAttacking;
+				state = FSM.State.ATTACK;
+			}
+			else if (whosAttacking != null && target != whosAttacking
+			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), this, nameof(OnAttacked)))
+			{
+				whosAttacking.Disconnect(nameof(Character.NotifyAttack), this, nameof(OnAttacked));
+			}
+		}
 	}
 }

@@ -74,6 +74,14 @@ namespace Game.Actor.State
 		{
 			if (path.Count == 0)
 			{
+				// makes sure player can combat with enemies within range
+				(character as Player)?.OnAttacked(character.target);
+				if (!fsm.IsMoving())
+				{
+					// then we are atacking and ignore rest
+					return;
+				}
+
 				fsm.ChangeState((fsm.IsDead()) ? FSM.State.IDLE_DEAD : FSM.State.IDLE);
 			}
 			else

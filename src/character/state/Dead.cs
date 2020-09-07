@@ -30,8 +30,13 @@ namespace Game.Actor.State
 			// stop health/mana regenerations
 			character.regenTimer.Stop();
 
-			if (character is Npc && character.target is Player)
+			// clear targets
+			(character as Player)?.menu.ClearTarget();
+			if (character is Npc
+			&& character.target is Player
+			&& character.target == character)
 			{
+				((Player)character.target).menu.ClearTarget();
 				character.target.target = null;
 			}
 

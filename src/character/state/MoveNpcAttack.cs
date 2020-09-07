@@ -9,32 +9,11 @@ namespace Game.Actor.State
 			base.Start();
 			StartPursuit();
 		}
-		public override void _OnTweenCompleted(Godot.Object Gobject, Godot.NodePath nodePath)
-		{
-			if (character.target == null || OutOfPursuitRange())
-			{
-				RevertState();
-			}
-			else if (character.pos.DistanceTo(character.target.pos) <= character.stats.weaponRange.value)
-			{
-				fsm.ChangeState(FSM.State.ATTACK);
-			}
-			else
-			{
-				// keep on pursuing
-				MoveTo(path);
-			}
-		}
-		private protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
-		{
-			// just find another way to target
-			StartPursuit();
-		}
 		private void StartPursuit()
 		{
-			if (character.target == null)
+			if (character.target == null || OutOfPursuitRange(character, character.target))
 			{
-				// can't pursuit without target
+				// can't pursuit without target or too far
 				RevertState();
 			}
 			else
@@ -51,17 +30,39 @@ namespace Game.Actor.State
 				? FSM.State.NPC_MOVE_ROAM
 				: FSM.State.NPC_MOVE_RETURN);
 		}
-		private bool OutOfPursuitRange()
+		public static bool OutOfPursuitRange(Character character, Character target)
 		{
 			if (UnitDB.GetUnitData(character.Name).path.Length > 0)
 			{
-				// if the closest waypoint the target is to...
+				// if the closest waypoint the target is > FLEE_DISTANCE
 				return (from waypoint in UnitDB.GetUnitData(character.Name).path
-						select character.target.GlobalPosition.DistanceTo(waypoint)).Min()
+						select target.GlobalPosition.DistanceTo(waypoint)).Min()
 						> Stats.FLEE_DISTANCE;
 			}
 			return character.GlobalPosition.DistanceTo(
 				UnitDB.GetUnitData(character.Name).spawnPos) > Stats.FLEE_DISTANCE;
+		}
+		public override void _OnTweenCompleted(Godot.Object Gobject, Godot.NodePath nodePath)
+		{
+			if (character.target == null || OutOfPursuitRange(character, character.target))
+			{
+				// can't pursuit without target or too far
+				RevertState();
+			}
+			else if (character.pos.DistanceTo(character.target.pos) <= character.stats.weaponRange.value)
+			{
+				fsm.ChangeState(FSM.State.ATTACK);
+			}
+			else
+			{
+				// keep on pursuing
+				MoveTo(path);
+			}
+		}
+		private protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
+		{
+			// just find another way to target
+			StartPursuit();
 		}
 	}
 }

@@ -7,9 +7,14 @@ namespace Game.Actor.State
 {
 	public class Attack : TakeDamage
 	{
+		private Timer timer = new Timer();
+
 		public override void _Ready()
 		{
 			base._Ready();
+			AddChild(timer);
+			timer.OneShot = true;
+
 			GD.Randomize();
 		}
 		public override void Start()
@@ -17,7 +22,12 @@ namespace Game.Actor.State
 			character.regenTimer.Stop();
 			AttackTarget();
 		}
-		public override void Exit() { character.regenTimer.Start(); }
+		public override void Exit()
+		{
+			timer.Stop();
+			character.anim.Stop();
+			character.regenTimer.Start();
+		}
 		public async void AttackTarget()
 		{
 			if (!ValidTarget())
@@ -25,16 +35,26 @@ namespace Game.Actor.State
 				return;
 			}
 
+			if (!character.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)))
+			{
+				character.Connect(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked),
+				   new Godot.Collections.Array() { character });
+			}
+
 			character.anim.Stop();
 			character.img.Frame = 0;
 
-			await ToSignal(GetTree().CreateTimer(character.stats.weaponSpeed.value, false), "timeout");
+			timer.WaitTime = character.stats.weaponSpeed.value;
+			timer.Start();
+			await ToSignal(timer, "timeout");
+
 
 			if (!ValidTarget())
 			{
 				return;
 			}
 
+			// align missile spawn entry to image
 			Node2D missle = character.img.GetNode<Node2D>("missile");
 			Vector2 missilePos = new Vector2();
 			bool isLeft = character.target.GlobalPosition.x - character.GlobalPosition.x < 0.0f;
@@ -49,6 +69,8 @@ namespace Game.Actor.State
 			{
 				return;
 			}
+
+			character.EmitSignal(nameof(Character.NotifyAttack));
 
 			uint diceRoll = GD.Randi() % 100 + 1;
 
@@ -123,8 +145,19 @@ namespace Game.Actor.State
 		}
 		private bool ValidTarget()
 		{
-			if (character.target == null || character.target.dead)
+			// the async await function still waits on
+			// the timer even when I call stop on timer
+			// this is to ensure nothing else gets executed
+			if (fsm.GetState() != FSM.State.ATTACK)
 			{
+				return false;
+			}
+			else if (character.target == null || character.target.dead)
+			{
+				if (character.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)))
+				{
+					character.Disconnect(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked));
+				}
 				character.target = null;
 
 				if (character is Npc)

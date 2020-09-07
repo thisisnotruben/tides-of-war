@@ -114,6 +114,8 @@ namespace Game.Actor
 		public delegate void UpdateHudStatus(Character character, bool hp, int currentValue, int maxValue);
 		[Signal]
 		public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
+		[Signal]
+		public delegate void NotifyAttack(Character whosAttacking);
 
 		public override void _Ready()
 		{
@@ -179,11 +181,12 @@ namespace Game.Actor
 
 		}
 		public void Harm(int damage) { fsm.Harm(damage); }
+		public abstract void OnAttacked(Character whosAttacking);
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
 			CombatText combatText = (CombatText)Globals.combatText.Instance();
 			AddChild(combatText);
-			combatText.SetType(text, textType, GetNode<Node2D>("img").Position);
+			combatText.SetType(text, textType, img.Position);
 		}
 		public async void Cast()
 		{

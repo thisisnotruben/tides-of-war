@@ -1,4 +1,5 @@
 using Game.Actor.Doodads;
+using Game.Actor.State;
 using Game.Ui;
 using Game.Utils;
 using Game.ItemPoto;
@@ -47,6 +48,21 @@ namespace Game.Actor
 			menu.ConnectPlayerToHud(this);
 		}
 		public override void _UnhandledInput(InputEvent @event) { fsm.UnhandledInput(@event); }
+		public override void OnAttacked(Character whosAttacking)
+		{
+			if (!dead && !attacking
+			&& target != null && target == whosAttacking
+			&& pos.DistanceTo(whosAttacking.pos) <= stats.weaponRange.value)
+			{
+				target = whosAttacking;
+				state = FSM.State.ATTACK;
+			}
+			else if (whosAttacking != null && target != whosAttacking
+			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), this, nameof(OnAttacked)))
+			{
+				whosAttacking.Disconnect(nameof(Character.NotifyAttack), this, nameof(OnAttacked));
+			}
+		}
 		public void SetXP(int addedXP, bool showLabel = true, bool fromSaveFile = false)
 		{
 			xp += addedXP;
@@ -58,7 +74,7 @@ namespace Game.Actor
 			{
 				CombatText combatText = (CombatText)Globals.combatText.Instance();
 				AddChild(combatText);
-				combatText.SetType($"+{xp}", CombatText.TextType.XP, GetNode<Node2D>("img").Position);
+				combatText.SetType($"+{xp}", CombatText.TextType.XP, img.Position);
 			}
 			int _level = Stats.CheckLevel(xp);
 			if (level != _level && level < Stats.MAX_LEVEL)
