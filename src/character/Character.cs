@@ -24,6 +24,7 @@ namespace Game.Actor
 		public StatManager stats;
 		public Timer regenTimer;
 		public Sprite img;
+		public Position2D missileSpawnPos;
 		public AnimationPlayer anim;
 		public Area2D hitBox, sight;
 
@@ -122,6 +123,7 @@ namespace Game.Actor
 			regenTimer = GetNode<Timer>("regenTimer");
 			anim = GetNode<AnimationPlayer>("anim");
 			img = GetNode<Sprite>("img");
+			missileSpawnPos = img.GetNode<Position2D>("missile");
 			fsm = GetNode<FSM>("fsm");
 			hitBox = GetNode<Area2D>("area");
 			sight = GetNode<Area2D>("sight");
@@ -145,6 +147,9 @@ namespace Game.Actor
 				(UnitDB.HasUnitData(Name))
 				? imgName.Split('-')[0] // character race
 				: Name); // is player
+
+			// set unit weapon range based on sprite
+			stats.weaponRange.baseValue = (imageData.melee) ? Stats.WEAPON_RANGE_MELEE : Stats.WEAPON_RANGE_RANGE;
 			stats.Recalculate();
 
 			// set sprite animation key-frames
@@ -160,9 +165,6 @@ namespace Game.Actor
 			animRes = anim.GetAnimation("casting");
 			animRes.TrackSetKeyValue(0, 0, imageData.moving);
 			animRes.TrackSetKeyValue(0, 1, imageData.moving + 3);
-
-			// set unit weapon range based on sprite
-			stats.weaponRange.baseValue = (imageData.melee) ? Stats.WEAPON_RANGE_MELEE : Stats.WEAPON_RANGE_RANGE;
 
 			// center nodes based sprite
 			AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData.body}.tres");

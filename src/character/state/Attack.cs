@@ -2,11 +2,13 @@ using System;
 using Game.Actor.Doodads;
 using Game.Database;
 using Game.Utils;
+using Game.Projectile;
 using Godot;
 namespace Game.Actor.State
 {
 	public class Attack : TakeDamage
 	{
+		public static PackedScene missileScene = (PackedScene)GD.Load("res://src/projectile/Missile.tscn");
 		private Timer timer = new Timer();
 
 		public override void _Ready()
@@ -20,7 +22,7 @@ namespace Game.Actor.State
 		public override void Start()
 		{
 			character.regenTimer.Stop();
-			AttackTarget();
+			AttackStart();
 		}
 		public override void Exit()
 		{
@@ -28,7 +30,7 @@ namespace Game.Actor.State
 			character.anim.Stop();
 			character.regenTimer.Start();
 		}
-		public async void AttackTarget()
+		public async void AttackStart()
 		{
 			if (!ValidTarget())
 			{
@@ -48,19 +50,17 @@ namespace Game.Actor.State
 			timer.Start();
 			await ToSignal(timer, "timeout");
 
-
 			if (!ValidTarget())
 			{
 				return;
 			}
 
 			// align missile spawn entry to image
-			Node2D missle = character.img.GetNode<Node2D>("missile");
-			Vector2 missilePos = new Vector2();
+			Vector2 missilePos = character.missileSpawnPos.Position;
 			bool isLeft = character.target.GlobalPosition.x - character.GlobalPosition.x < 0.0f;
 			character.img.FlipH = isLeft;
 			missilePos.x = Mathf.Abs(missilePos.x) * ((isLeft) ? -1.0f : 1.0f);
-			missle.Position = missilePos;
+			character.missileSpawnPos.Position = missilePos;
 
 			character.anim.Play("attacking", -1.0f, character.stats.animSpeed.value);
 			await ToSignal(character.anim, "animation_finished");
@@ -70,6 +70,29 @@ namespace Game.Actor.State
 				return;
 			}
 
+			// if only melee
+			if (GetImageNode().melee)
+			{
+				AttackEnd(character, character.target);
+			}
+			else
+			{
+				// launch missile
+				Projectile.Missile missile = (Projectile.Missile)missileScene.Instance();
+
+				missile.Init(character, character.target);
+				missile.Connect(nameof(Projectile.Missile.OnHit), this, nameof(AttackEnd),
+					new Godot.Collections.Array() { character, character.target });
+
+				// add to scene
+				Map.Map.map.AddZChild(missile);
+				missile.Owner = Map.Map.map;
+			}
+
+			AttackStart();
+		}
+		public void AttackEnd(Character character, Character target)
+		{
 			character.EmitSignal(nameof(Character.NotifyAttack));
 
 			uint diceRoll = GD.Randi() % 100 + 1;
@@ -77,9 +100,12 @@ namespace Game.Actor.State
 			int damage = (int)Math.Round(GD.RandRange(character.stats.minDamage.valueI, character.stats.maxDamage.valueI));
 			string soundName;
 			CombatText.TextType hitType;
-			Stats.AttackTableNode attackTable = Stats.ATTACK_TABLE[Stats.AttackTableType.MELEE];
 
-			ImageDB.ImageNode imageNode = ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName());
+			ImageDB.ImageNode imageNode = GetImageNode();
+			Stats.AttackTableNode attackTable = Stats.ATTACK_TABLE[
+				imageNode.melee
+				? Stats.AttackTableType.MELEE
+				: Stats.AttackTableType.RANGED];
 
 			if (diceRoll <= attackTable.hit)
 			{
@@ -118,30 +144,15 @@ namespace Game.Actor.State
 
 			SoundPlayer.PlaySound(soundName, SoundPlayer.SoundType.RANDOM);
 
-			if (character is Player || character.target is Player)
+			if (character is Player || target is Player)
 			{
-				character.target.SpawnCombatText((damage > 0) ? damage.ToString() : hitType.ToString(), hitType);
-			}
-
-			// set target to self
-			if (character.target == null)
-			{
-				Player player = character.target as Player;
-				if (player != null)
-				{
-					player.menu.NpcInteract(character as Npc);
-				}
-				else
-				{
-					character.target = character;
-				}
+				target.SpawnCombatText((damage > 0) ? damage.ToString() : hitType.ToString(), hitType);
 			}
 
 			if (damage > 0)
 			{
-				character.target.Harm(damage);
+				target.Harm(damage);
 			}
-			AttackTarget();
 		}
 		private bool ValidTarget()
 		{
@@ -183,5 +194,6 @@ namespace Game.Actor.State
 			}
 			return true;
 		}
+		private ImageDB.ImageNode GetImageNode() { return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName()); }
 	}
 }

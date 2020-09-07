@@ -42,8 +42,6 @@ namespace Game.Actor.Stat
 			weaponRange = new CharacterStat(this); // baseValue set by 'Character.SetImg'
 			animSpeed = new CharacterStat(this, 1.0f);
 			weaponSpeed = new CharacterStat(this, 1.3f);
-
-
 		}
 		public void Recalculate()
 		{

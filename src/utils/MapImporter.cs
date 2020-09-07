@@ -175,7 +175,7 @@ namespace Game.Utils
 		}
 		private void SetTransitions(Node map)
 		{
-			string resourcePath = "res://src/map/doodads/transition_zone.tscn";
+			string resourcePath = "res://src/map/doodads/TransitionZone.tscn";
 			Node2D transitions = (Node2D)map.GetNode("meta/transitionZones");
 			foreach (Node2D node2D in transitions.GetChildren())
 			{

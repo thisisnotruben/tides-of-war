@@ -145,6 +145,7 @@
 		<Compile Include="src\missile\ICombustible.cs" />
 		<Compile Include="src\missile\LandMine.cs" />
 		<Compile Include="src\missile\Missile.cs" />
+		<Compile Include="src\projectile\Missile.cs" />
 		<Compile Include="src\quest_system\Quest.cs" />
 		<Compile Include="src\quest_system\WorldQuests.cs" />
 		<Compile Include="src\spell\SpellProto.cs" />

@@ -43,7 +43,7 @@ namespace Game.Actor
 			GameMenu.player = this;
 			gold = 10_000;
 			// level = Stats.MAX_LEVEL;
-			SetImg("human-6");
+			SetImg("human-20");
 			menu = GetNode<MenuHandler>("in_game_menu");
 			menu.ConnectPlayerToHud(this);
 		}
@@ -57,6 +57,7 @@ namespace Game.Actor
 				target = whosAttacking;
 				state = FSM.State.ATTACK;
 			}
+			// cleans up this signal
 			else if (whosAttacking != null && target != whosAttacking
 			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), this, nameof(OnAttacked)))
 			{

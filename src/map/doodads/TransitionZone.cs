@@ -6,8 +6,8 @@ namespace Game.Map.Doodads
 	{
 		public void _OnPlayerEntered(Area2D area)
 		{
-			Character character = area.Owner as Character;
-			if (character == null || character.dead)
+			Player player = area.Owner as Player;
+			if (player == null || player.dead || player.attacking)
 			{
 				return;
 			}

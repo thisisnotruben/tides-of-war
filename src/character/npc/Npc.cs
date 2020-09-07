@@ -81,6 +81,7 @@ namespace Game.Actor
 				target = whosAttacking;
 				state = FSM.State.ATTACK;
 			}
+			// cleans up this signal
 			else if (whosAttacking != null && target != whosAttacking
 			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), this, nameof(OnAttacked)))
 			{
