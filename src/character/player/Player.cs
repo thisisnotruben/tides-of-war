@@ -73,9 +73,9 @@ namespace Game.Actor
 			}
 			else if (xp > 0 && xp < Stats.MAX_XP && showLabel)
 			{
-				CombatText combatText = (CombatText)Globals.combatText.Instance();
+				CombatText combatText = (CombatText)CombatText.scene.Instance();
 				AddChild(combatText);
-				combatText.SetType($"+{xp}", CombatText.TextType.XP, img.Position);
+				combatText.Init($"+{xp}", CombatText.TextType.XP, img.Position);
 			}
 			int _level = Stats.CheckLevel(xp);
 			if (level != _level && level < Stats.MAX_LEVEL)

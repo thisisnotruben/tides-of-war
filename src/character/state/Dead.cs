@@ -8,8 +8,6 @@ namespace Game.Actor.State
 {
 	public class Dead : StateBehavior
 	{
-		private static readonly PackedScene tombScene = (PackedScene)GD.Load("res://src/character/doodads/tomb.tscn");
-
 		public override void Start()
 		{
 			character.regenTimer.Stop();
@@ -61,7 +59,7 @@ namespace Game.Actor.State
 			if (player != null)
 			{
 				// instance tomb
-				Tomb tomb = (Tomb)tombScene.Instance();
+				Tomb tomb = (Tomb)Tomb.scene.Instance();
 				tomb.Init(player);
 				Map.Map.map.AddZChild(tomb);
 				tomb.GlobalPosition = Map.Map.map.GetGridPosition(character.GlobalPosition);
@@ -70,10 +68,10 @@ namespace Game.Actor.State
 				Map.Map.map.SetVeil(true);
 
 				// spawn to nearest graveyard
-				Dictionary<float, Vector2> graveSites = new Dictionary<float, Vector2>();
+				Dictionary<int, Vector2> graveSites = new Dictionary<int, Vector2>();
 				foreach (Node2D graveyard in GetTree().GetNodesInGroup("gravesite"))
 				{
-					graveSites.Add(character.GlobalPosition.DistanceTo(graveyard.GlobalPosition), graveyard.GlobalPosition);
+					graveSites[Map.Map.map.getAPath(character.GlobalPosition, graveyard.GlobalPosition).Count] = graveyard.GlobalPosition;
 				}
 				character.GlobalPosition = Map.Map.map.GetGridPosition(graveSites[graveSites.Keys.Min()]);
 
@@ -83,14 +81,17 @@ namespace Game.Actor.State
 			{
 				// npc
 				character.Hide();
+				character.sight.Monitoring = false;
 				if (!IsInGroup(Globals.SAVE_GROUP))
 				{
 					AddToGroup(Globals.SAVE_GROUP);
 				}
-				character.GlobalPosition = UnitDB.GetUnitData(Name).spawnPos;
+				character.GlobalPosition = UnitDB.GetUnitData(character.Name).spawnPos;
 
 				// create spawn timer
 				await ToSignal(GetTree().CreateTimer((float)GD.RandRange(60.0, 240.0), false), "timeout");
+
+				character.sight.Monitoring = true;
 				fsm.ChangeState(FSM.State.ALIVE);
 			}
 

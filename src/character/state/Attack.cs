@@ -8,7 +8,6 @@ namespace Game.Actor.State
 {
 	public class Attack : TakeDamage
 	{
-		public static PackedScene missileScene = (PackedScene)GD.Load("res://src/projectile/Missile.tscn");
 		private Timer timer = new Timer();
 
 		public override void _Ready()
@@ -78,7 +77,7 @@ namespace Game.Actor.State
 			else
 			{
 				// launch missile
-				Projectile.Missile missile = (Projectile.Missile)missileScene.Instance();
+				Projectile.Missile missile = (Projectile.Missile)Projectile.Missile.scene.Instance();
 
 				missile.Init(character, character.target);
 				missile.Connect(nameof(Projectile.Missile.OnHit), this, nameof(AttackEnd),

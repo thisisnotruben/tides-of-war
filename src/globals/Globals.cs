@@ -6,7 +6,6 @@ namespace Game
 {
 	public class Globals : Node
 	{
-		public static readonly PackedScene combatText = (PackedScene)GD.Load("res://src/character/doodads/combat_text.tscn");
 		public static readonly Dictionary<string, int> WEAPON_TYPE = new Dictionary<string, int>
 		{ { "AXE", 5 },
 			{ "CLUB", 3 },
@@ -33,7 +32,7 @@ namespace Game
 		public const string SAVE_GROUP = "save";
 		public static Dictionary<string, AudioStream> sndData = new Dictionary<string, AudioStream>();
 		public static WorldQuests worldQuests { get; private set; }
-		
+
 		public override void _Ready()
 		{
 			LoadSnd();

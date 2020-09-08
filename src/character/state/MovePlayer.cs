@@ -4,7 +4,6 @@ namespace Game.Actor.State
 {
 	public class MovePlayer : Move
 	{
-		private static readonly PackedScene moveCursorScene = (PackedScene)GD.Load("res://src/menu_ui/cursor/MoveCursorView.tscn");
 		[Signal]
 		public delegate void PositionChanged();
 
@@ -46,7 +45,7 @@ namespace Game.Actor.State
 
 			// set cursor animation
 			EmitSignal(nameof(PositionChanged));
-			MoveCursorController cursor = (MoveCursorController)moveCursorScene.Instance();
+			MoveCursorController cursor = (MoveCursorController)MoveCursorController.scene.Instance();
 			Connect(nameof(PositionChanged), cursor, nameof(MoveCursorController.Delete));
 			cursor.AddToMap(Map.Map.map.GetGridPosition(desiredPosition));
 		}

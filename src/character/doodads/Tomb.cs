@@ -5,6 +5,8 @@ namespace Game.Actor.Doodads
 {
 	public class Tomb : Node2D
 	{
+		public static readonly PackedScene scene = (PackedScene)GD.Load("res://src/character/doodads/Tomb.tscn");
+
 		private Player deceasedPlayer;
 		private Tween tween;
 		private Area2D sight;
@@ -49,7 +51,7 @@ namespace Game.Actor.Doodads
 
 			// fade out tomb
 			tween.InterpolateProperty(this, ":modulate", Modulate,
-				new Color(1.0f, 1.0f, 1.0f, 0.0f), 0.75f, Tween.TransitionType.Circ, Tween.EaseType.Out);
+				new Color("00ffffff"), 0.75f, Tween.TransitionType.Circ, Tween.EaseType.Out);
 			tween.Start();
 
 			await ToSignal(tween, "tween_completed");

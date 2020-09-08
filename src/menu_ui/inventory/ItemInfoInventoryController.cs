@@ -177,7 +177,7 @@ namespace Game.Ui
 			EmitSignal(nameof(RefreshSlots));
 
 			// instance treasure chest
-			PackedScene treasureChestScene = (PackedScene)GD.Load("res://src/item/TreasureChest.tscn");
+			PackedScene treasureChestScene = (PackedScene)TreasureChest.scene;
 			TreasureChest treasureChest = (TreasureChest)treasureChestScene.Instance();
 			treasureChest.Init(pickableWorldName);
 

@@ -17,10 +17,10 @@ namespace Game.Actor
 			NPC = 0b_00000_00000_00000_00010,
 			DEAD = 0b_00000_00000_00000_00100
 		}
-		public static readonly PackedScene footStepScene = (PackedScene)GD.Load("res://src/character/doodads/footstep.tscn");
 		public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/character/doodads/buff_anim.tscn");
 
 		private protected FSM fsm;
+		private CombatTextHandler combatTextHandler;
 		public StatManager stats;
 		public Timer regenTimer;
 		public Sprite img;
@@ -124,6 +124,7 @@ namespace Game.Actor
 			anim = GetNode<AnimationPlayer>("anim");
 			img = GetNode<Sprite>("img");
 			missileSpawnPos = img.GetNode<Position2D>("missile");
+			combatTextHandler = img.GetNode<CombatTextHandler>("CombatTextHandler");
 			fsm = GetNode<FSM>("fsm");
 			hitBox = GetNode<Area2D>("area");
 			sight = GetNode<Area2D>("sight");
@@ -186,9 +187,10 @@ namespace Game.Actor
 		public abstract void OnAttacked(Character whosAttacking);
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
-			CombatText combatText = (CombatText)Globals.combatText.Instance();
-			AddChild(combatText);
-			combatText.SetType(text, textType, img.Position);
+			CombatText combatText = (CombatText)CombatText.scene.Instance();
+			combatTextHandler.AddChild(combatText);
+			combatText.Init(text, textType, img.Position);
+			combatTextHandler.AddCombatText(combatText);
 		}
 		public async void Cast()
 		{
@@ -230,7 +232,7 @@ namespace Game.Actor
 			// called from 'moving' animation
 			if (!dead)
 			{
-				FootStep footStep = (FootStep)footStepScene.Instance();
+				FootStep footStep = (FootStep)FootStep.scene.Instance();
 				Vector2 stepPos = GlobalPosition;
 				stepPos.y -= 3;
 				stepPos.x += (rightStep) ? 1.0f : -4.0f;

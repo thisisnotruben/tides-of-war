@@ -4,38 +4,27 @@
 [ext_resource path="res://asset/img/font/mago1_16.tres" type="DynamicFont" id=2]
 
 [sub_resource type="Animation" id=1]
-resource_name = "label_fade"
+resource_name = "labelFade"
 length = 1.1
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("label:visible")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0.35 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "Queue"
+"method": "OnMidwayThroughAnimation"
 } ]
 }
 
-[node name="combat_text" type="Node2D"]
+[node name="CombatText" type="Node2D"]
 modulate = Color( 1, 0, 0, 1 )
+self_modulate = Color( 1, 1, 1, 0.501961 )
 use_parent_material = true
 script = ExtResource( 1 )
 __meta__ = {
@@ -43,15 +32,23 @@ __meta__ = {
 }
 
 [node name="label" type="Label" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0.5 )
+modulate = Color( 1, 1, 1, 0.501961 )
 show_behind_parent = true
 use_parent_material = true
-margin_bottom = 14.0
+margin_left = -32.0
+margin_right = 32.0
+margin_bottom = 13.0
 custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+clip_text = true
+max_lines_visible = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="anim" type="AnimationPlayer" parent="."]
-anims/label_fade = SubResource( 1 )
+anims/labelFade = SubResource( 1 )
 
 [node name="tween" type="Tween" parent="."]
-[connection signal="animation_finished" from="anim" to="." method="_OnAnimFinished"]
+[connection signal="animation_finished" from="anim" to="." method="OnAnimationFinished"]

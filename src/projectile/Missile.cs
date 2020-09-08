@@ -4,6 +4,8 @@ namespace Game.Projectile
 {
 	public class Missile : Node2D
 	{
+		public static PackedScene scene = (PackedScene)GD.Load("res://src/projectile/Missile.tscn");
+
 		private Tween tween;
 		private AnimationPlayer anim;
 		private Area2D hitbox;

@@ -13,6 +13,7 @@ namespace Game.Actor.State
 		{
 			base._Ready();
 			AddChild(tween);
+			tween.PlaybackProcessMode = Tween.TweenProcessMode.Physics;
 			tween.Connect("tween_completed", this, nameof(_OnTweenCompleted));
 		}
 		public override void Start()
