@@ -1,4 +1,5 @@
 using Game.Actor;
+using Game.Ui;
 using Godot;
 namespace Game.Map.Doodads
 {
@@ -17,7 +18,7 @@ namespace Game.Map.Doodads
 			if (new File().FileExists(sceneMapPath))
 			{
 				Name = Name + "-DELETE";
-				SceneLoader.Init().SetScene(sceneMapPath, Map.map, true);
+				SceneLoaderController.Init().SetScene(sceneMapPath, Map.map, true);
 			}
 		}
 		public void _OnPlayerExited(Area2D area)

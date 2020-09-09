@@ -10,8 +10,6 @@
 [ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=8]
 [ext_resource path="res://src/utils/audio_stream_player.tscn" type="PackedScene" id=9]
 
-
-
 [node name="start_menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

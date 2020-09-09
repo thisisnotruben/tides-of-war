@@ -2,8 +2,11 @@
 
 [ext_resource path="res://src/character/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/player/Player.cs" type="Script" id=2]
-[ext_resource path="res://src/menu_ui/views/menu_handler_view.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/menu_ui/handler/MenuHandlerView.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/character/player/PlayerCamera.cs" type="Script" id=4]
+
+
+
 
 [sub_resource type="Animation" id=1]
 resource_local_to_scene = true

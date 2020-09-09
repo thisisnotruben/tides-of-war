@@ -47,13 +47,9 @@ namespace Game.Actor.State
 			{
 				spell.UnMake();
 			}
-			foreach (Node node in character.GetChildren())
-			{
-				if (node is CombatText)
-				{
-					node.QueueFree();
-				}
-			}
+
+			// hide combat text
+			character.combatTextHandler.Hide();
 
 			Player player = character as Player;
 			if (player != null)

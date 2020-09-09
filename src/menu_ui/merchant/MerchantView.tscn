@@ -8,7 +8,9 @@
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=6]
 [ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=7]
 [ext_resource path="res://src/menu_ui/merchant/ItemInfoMerchantController.cs" type="Script" id=8]
-[ext_resource path="res://src/menu_ui/views/item_info_view.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/menu_ui/components/ItemInfoView.tscn" type="PackedScene" id=9]
+
+
 
 
 

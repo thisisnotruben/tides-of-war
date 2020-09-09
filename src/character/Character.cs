@@ -20,7 +20,7 @@ namespace Game.Actor
 		public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/character/doodads/buff_anim.tscn");
 
 		private protected FSM fsm;
-		private CombatTextHandler combatTextHandler;
+		public CombatTextHandler combatTextHandler;
 		public StatManager stats;
 		public Timer regenTimer;
 		public Sprite img;

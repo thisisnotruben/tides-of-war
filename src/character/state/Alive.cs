@@ -22,6 +22,9 @@ namespace Game.Actor.State
 			// reset clock for health/mana regen
 			character.regenTimer.Start();
 
+			// show combat text
+			character.combatTextHandler.Show();
+
 			if (character is Player)
 			{
 				// changing character detection for player

@@ -28,9 +28,10 @@ namespace Game.Actor.Doodads
 		{
 			label.Text = text;
 
-			Color colorBeginning = new Color("80ffffff");
-			Color colorEnd = new Color("00ffffff");
-			Color selfColor = new Color("ff0000");
+			Color colorBeginning = new Color("80ffffff"),
+				colorEnd = new Color("00ffffff"),
+				selfColor = new Color("ff0000");
+
 			switch (textType)
 			{
 				case TextType.XP:

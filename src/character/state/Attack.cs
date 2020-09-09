@@ -164,7 +164,7 @@ namespace Game.Actor.State
 			}
 			else if (character.target == null || character.target.dead)
 			{
-				if (character.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)))
+				if (character != null && character.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)))
 				{
 					character.Disconnect(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked));
 				}

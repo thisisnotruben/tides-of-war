@@ -107,10 +107,10 @@ namespace Game.Loot
 			EmitSignal(nameof(Unmake));
 			QueueFree();
 		}
-		public void UncoupleSlot(ItemSlot itemSlot)
-		{
-			itemSlot.Disconnect("hide", this, nameof(UncoupleSlot));
-			Disconnect(nameof(Unmake), itemSlot, nameof(ItemSlot.SetItem));
-		}
+		// public void UncoupleSlot(ItemSlot itemSlot)
+		// {
+		// 	itemSlot.Disconnect("hide", this, nameof(UncoupleSlot));
+		// 	Disconnect(nameof(Unmake), itemSlot, nameof(ItemSlot.SetItem));
+		// }
 	}
 }

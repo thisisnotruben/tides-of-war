@@ -28,8 +28,8 @@ namespace Game.Ui
 		public void _OnNewGamePressed()
 		{
 			Globals.PlaySound("click0", this, speaker);
-			SceneLoader.rootNode = GetTree().Root;
-			SceneLoader.Init().SetScene("res://src/map/zone_1.tscn", this);
+			SceneLoaderController.rootNode = GetTree().Root;
+			SceneLoaderController.Init().SetScene("res://src/map/zone_1.tscn", this);
 		}
 		public void _OnLoadPressed() { Transition(saveLoadController); }
 		public void _OnAboutPressed() { Transition(aboutController); }

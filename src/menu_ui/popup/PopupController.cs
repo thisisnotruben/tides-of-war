@@ -3,12 +3,12 @@ namespace Game.Ui
 {
 	public class PopupController : GameMenu
 	{
-		public static MainMenu mainMenu;
+		public static MainMenuController mainMenuController;
 
-		public void _OnPopupDraw() { mainMenu?.ShowBackground(false); }
+		public void _OnPopupDraw() { mainMenuController?.ShowBackground(false); }
 		public void _OnPopupHide()
 		{
-			mainMenu?.ShowBackground(true);
+			mainMenuController?.ShowBackground(true);
 			foreach (Control control in GetNode("m").GetChildren())
 			{
 				control.Hide();

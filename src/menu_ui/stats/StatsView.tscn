@@ -6,8 +6,10 @@
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=4]
 [ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=6]
-[ext_resource path="res://src/menu_ui/views/item_info_view.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/menu_ui/components/ItemInfoView.tscn" type="PackedScene" id=7]
 [ext_resource path="res://asset/img/font/mago1_144.tres" type="DynamicFont" id=8]
+
+
 
 [node name="StatsView" type="Control"]
 anchor_right = 1.0

@@ -3,13 +3,13 @@ namespace Game.Ui
 {
 	public class SaveLoadController : GameMenu
 	{
-		private readonly Archiver archiver = new Archiver();
+		private readonly SaveLoadModel saveLoadModel = new SaveLoadModel();
 		private PopupController popupController;
 		private int index;
 
 		public override void _Ready()
 		{
-			AddChild(archiver);
+			AddChild(saveLoadModel);
 			popupController = GetNode<PopupController>("popup");
 			popupController.Connect("hide", this, nameof(_OnSaveLoadNodeHide));
 			popupController.GetNode<BaseButton>("m/save_load/save").Connect("pressed", this, nameof(_OnSavePressed));
@@ -17,8 +17,8 @@ namespace Game.Ui
 		}
 		private void SaveGame()
 		{
-			archiver.SaveGame(index);
-			GetLabel(index - 1).Text = Archiver.GetSaveFileName(index);
+			saveLoadModel.SaveGame(index);
+			GetLabel(index - 1).Text = SaveLoadModel.GetSaveFileName(index);
 		}
 		private Label GetLabel(int index) { return GetNode<Label>($"v/s/c/g/slot_label_{index}"); }
 		private void SetLabels()
@@ -30,15 +30,20 @@ namespace Game.Ui
 				Label label = node as Label;
 				if (label != null)
 				{
-					GetLabel(labelIdx - 1).Text = Archiver.GetSaveFileName(labelIdx);
+					GetLabel(labelIdx - 1).Text = SaveLoadModel.GetSaveFileName(labelIdx);
 					labelIdx++;
 				}
 			}
 		}
-		public void RouteConnections(string toMethod)
+		private protected void RouteConnections(string toMethod)
 		{
-			// TODO: need to clear pervious signal list before connecting
-			popupController.GetNode("m/yes_no/yes").Connect("pressed", this, toMethod);
+			BaseButton yesBttn = popupController.GetNode<BaseButton>("m/yes_no/yes");
+			string signal = "pressed";
+			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
+			{
+				yesBttn.Disconnect(signal, this, (string)connectionPacket["method"]);
+			}
+			yesBttn.Connect(signal, this, toMethod);
 		}
 		public void _OnSaveLoadNodeHide()
 		{
@@ -75,8 +80,8 @@ namespace Game.Ui
 		}
 		public void _OnDeleteConfirm()
 		{
-			Archiver.DeleteSaveFile(index);
-			GetLabel(index).Text = Archiver.GetSaveFileName(index);
+			SaveLoadModel.DeleteSaveFile(index);
+			GetLabel(index).Text = SaveLoadModel.GetSaveFileName(index);
 			_OnSaveLoadNodeHide();
 		}
 		public void _OnSavePressed()
@@ -101,7 +106,7 @@ namespace Game.Ui
 		public void _OnLoadPressed()
 		{
 			Globals.PlaySound("click0", this, speaker);
-			archiver.LoadGame(index);
+			saveLoadModel.LoadGame(index);
 			Hide();
 		}
 	}

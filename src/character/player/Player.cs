@@ -10,7 +10,7 @@ namespace Game.Actor
 	{
 		public static Player player;
 
-		public MenuHandler menu { get; private set; }
+		public MenuHandlerController menu { get; private set; }
 		public int xp { get; private set; }
 		public int gold;
 
@@ -44,7 +44,7 @@ namespace Game.Actor
 			gold = 10_000;
 			// level = Stats.MAX_LEVEL;
 			SetImg("human-20");
-			menu = GetNode<MenuHandler>("in_game_menu");
+			menu = GetNode<MenuHandlerController>("in_game_menu");
 			menu.ConnectPlayerToHud(this);
 		}
 		public override void _UnhandledInput(InputEvent @event) { fsm.UnhandledInput(@event); }
