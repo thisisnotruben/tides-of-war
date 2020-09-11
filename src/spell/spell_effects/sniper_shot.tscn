@@ -6,11 +6,6 @@
 [ext_resource path="res://asset/img/missile-spell/sniper_shot.tres" type="Texture" id=4]
 [ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=5]
 
-
-
-
-
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 resource_name = "color_ramp"
@@ -54,8 +49,9 @@ scale = 2.0
 scale_curve = ExtResource( 5 )
 color_ramp = ExtResource( 4 )
 
-[node name="sniper_shot" index="0" instance=ExtResource( 1 )]
+[node name="sniper_shot" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+playSound = true
 
 [node name="light" parent="." index="3"]
 visible = false

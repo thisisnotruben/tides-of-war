@@ -4,34 +4,39 @@ namespace Game.Ability
 {
 	public abstract class SpellEffect : WorldObject
 	{
+		[Export] protected float lightFadeDelay = 0.65f;
+		[Export] protected bool fadeLight = true;
+		[Export] protected bool playSound = false;
 		public Vector2 seekPos = new Vector2();
-		private protected float lightFadeDelay = 0.65f;
-		private protected bool playSound = false;
-		private protected bool fadeLight = true;
-		private protected Character character;
-		private protected Tween tween;
-		private protected Timer timer;
-		public virtual void Init(Character character)
-		{
-			this.character = character;
-		}
+		protected Character character;
+		protected Tween tween;
+		protected Timer timer;
+		protected Sprite light;
+		protected Node2D idleParticles, explodeParticles;
+
+		public virtual void Init(Character character) { this.character = character; }
+		public virtual void _OnTimerTimeout() { QueueFree(); }
 		public override void _Ready()
 		{
-			foreach (Node2D node2D in GetNode("idle").GetChildren())
-			{
-				node2D.UseParentMaterial = true;
-			}
-			foreach (Node2D node2D in GetNode("explode").GetChildren())
-			{
-				node2D.UseParentMaterial = true;
-			}
 			tween = GetNode<Tween>("tween");
 			timer = GetNode<Timer>("timer");
+			light = GetNode<Sprite>("light");
+			idleParticles = GetNode<Node2D>("idle");
+			explodeParticles = GetNode<Node2D>("explode");
+
+			foreach (Node2D node2D in idleParticles.GetChildren())
+			{
+				node2D.UseParentMaterial = true;
+			}
+			foreach (Node2D node2D in explodeParticles.GetChildren())
+			{
+				node2D.UseParentMaterial = true;
+			}
+
 			SetProcess(false);
 		}
 		public override void _Process(float delta)
 		{
-			Tween tween = GetNode<Tween>("tween");
 			tween.InterpolateProperty(this, ":global_position", GlobalPosition,
 				seekPos, 5.0f, Tween.TransitionType.Circ, Tween.EaseType.Out);
 			tween.Start();
@@ -45,27 +50,21 @@ namespace Game.Ability
 		{
 			if (fade)
 			{
-				Tween tween = GetNode<Tween>("tween");
-				Node2D light = GetNode<Node2D>("light");
 				tween.InterpolateProperty(light, ":modulate", light.Modulate,
-					new Color(1.0f, 1.0f, 1.0f, 0.0f), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.InOut);
+					new Color("00ffffff"), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.In);
 			}
-		}
-		public virtual void _OnTimerTimeout()
-		{
-			EmitSignal(nameof(Unmake));
 		}
 		public virtual void OnHit(Spell spell = null)
 		{
 			GetNode<AudioStreamPlayer2D>("snd").Play();
 			tween.InterpolateProperty(this, ":scale", new Vector2(0.75f, 0.75f),
-				new Vector2(1.0f, 1.0f), 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
+				Vector2.One, 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
 			FadeLight(fadeLight);
-			foreach (Particles2D particles2D in GetNode("idle").GetChildren())
+			foreach (Particles2D particles2D in idleParticles.GetChildren())
 			{
 				particles2D.Emitting = false;
 			}
-			foreach (Particles2D particles2D in GetNode("explode").GetChildren())
+			foreach (Particles2D particles2D in explodeParticles.GetChildren())
 			{
 				particles2D.Emitting = true;
 			}

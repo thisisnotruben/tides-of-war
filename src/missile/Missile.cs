@@ -198,7 +198,7 @@ namespace Game.Missile
 					case WorldTypes.MIND_BLAST:
 					case WorldTypes.SLOW:
 					case WorldTypes.SIPHON_MANA:
-						GetNode<CollisionShape2D>("coll").Shape = (Shape2D)GD.Load("res://asset/img/missile-spell/spell_coll.tres");
+						GetNode<CollisionShape2D>("coll").Shape = (Shape2D)GD.Load("res://asset/img/missile-spell/SpellHitBox.tres");
 						switch (spell.worldType)
 						{
 							case WorldTypes.MIND_BLAST:

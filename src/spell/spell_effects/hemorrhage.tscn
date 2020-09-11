@@ -6,9 +6,6 @@
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=4]
 [ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=5]
 
-
-
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 resource_name = "color_ramp"
@@ -28,8 +25,9 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 color = Color( 0.662745, 0, 0, 1 )
 
-[node name="hemorrhage" index="0" instance=ExtResource( 1 )]
+[node name="hemorrhage" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+playSound = true
 
 [node name="snd" parent="." index="2"]
 stream = ExtResource( 3 )

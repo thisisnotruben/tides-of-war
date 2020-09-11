@@ -7,9 +7,6 @@
 [ext_resource path="res://asset/img/missile-spell/haste.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/missile-spell/ball1.png" type="Texture" id=6]
 
-
-
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_name = "color_ramp"
 shader = ExtResource( 4 )
@@ -38,8 +35,9 @@ orbit_velocity = 2.0
 orbit_velocity_random = 0.0
 color_ramp = ExtResource( 5 )
 
-[node name="haste" index="0" instance=ExtResource( 1 )]
+[node name="haste" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+lightFadeDelay = 0.8
 
 [node name="snd" parent="." index="2"]
 stream = ExtResource( 3 )

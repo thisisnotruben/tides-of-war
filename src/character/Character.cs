@@ -24,7 +24,7 @@ namespace Game.Actor
 		public StatManager stats;
 		public Timer regenTimer;
 		public Sprite img;
-		public Position2D missileSpawnPos;
+		public Position2D head, missileSpawnPos;
 		public AnimationPlayer anim;
 		public Area2D hitBox, sight;
 
@@ -123,6 +123,7 @@ namespace Game.Actor
 			regenTimer = GetNode<Timer>("regenTimer");
 			anim = GetNode<AnimationPlayer>("anim");
 			img = GetNode<Sprite>("img");
+			head = GetNode<Position2D>("head");
 			missileSpawnPos = img.GetNode<Position2D>("missile");
 			combatTextHandler = img.GetNode<CombatTextHandler>("CombatTextHandler");
 			fsm = GetNode<FSM>("fsm");
@@ -171,9 +172,8 @@ namespace Game.Actor
 			AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData.body}.tres");
 			TouchScreenButton select = GetNode<TouchScreenButton>("select");
 			Vector2 textureSize = texture.Region.Size;
-			Node2D sightDistance = GetNode<Node2D>("sight/distance");
-			Node2D areaBody = GetNode<Node2D>("area/body");
-			Node2D head = GetNode<Node2D>("head");
+			Node2D sightDistance = sight.GetNode<Node2D>("distance"),
+				areaBody = hitBox.GetNode<Node2D>("body");
 
 			select.Normal = texture;
 			img.Position = new Vector2(0.0f, -img.Texture.GetHeight() / 2.0f);

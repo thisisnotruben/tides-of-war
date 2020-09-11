@@ -45,7 +45,7 @@ namespace Game.Actor.State
 				return;
 			}
 			Vector2 direction = Map.Map.map.GetDirection(character.GlobalPosition, route[0]);
-			while (route.Count > 0 && direction.x == 0.0f && direction.y == 0.0f)
+			while (route.Count > 0 && direction.Equals(Vector2.Zero))
 			{
 				route.RemoveAt(0);
 				if (route.Count > 0)
@@ -60,7 +60,7 @@ namespace Game.Actor.State
 			}
 
 			route[0] = Map.Map.map.RequestMove(character.GlobalPosition, direction);
-			if (route[0].x != 0.0f && route[0].y != 0.0f)
+			if (!route[0].Equals(Vector2.Zero))
 			{
 				reservedPath.Add(route[0]);
 				MoveCharacter(route[0], Stats.MapAnimMoveSpeed(character.stats.animSpeed.value));

@@ -21,6 +21,18 @@ tracks/0/keys = {
 "method": "OnMidwayThroughAnimation"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [node name="CombatText" type="Node2D"]
 modulate = Color( 1, 0, 0, 1 )
@@ -32,6 +44,7 @@ __meta__ = {
 }
 
 [node name="label" type="Label" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0.501961 )
 show_behind_parent = true
 use_parent_material = true

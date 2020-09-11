@@ -1,29 +1,22 @@
 using Godot;
 namespace Game.Ability
 {
-	public class bash_effect : SpellEffect
+	public class bash_effect : stomp_effect
 	{
-		public override void Init(Actor.Character character)
-		{
-			base.Init(character);
-			fadeLight = false;
-		}
 		public override void OnHit(Spell spell = null)
 		{
 			base.OnHit(spell);
-			Position = character.GetNode<Node2D>("head").Position;
-			tween.Start();
-			timer.Start();
+			Position = character.head.Position;
 		}
 		public override void _OnTimerTimeout()
 		{
 			base._OnTimerTimeout();
 			FadeLight(true);
 			tween.InterpolateProperty(this, ":modulate", Modulate,
-				new Color(1.0f, 1.0f, 1.0f, 0.0f), lightFadeDelay,
+				new Color("00ffffff"), lightFadeDelay,
 				Tween.TransitionType.Linear, Tween.EaseType.InOut);
 			tween.Start();
-			foreach (Particles2D particles2D in GetNode("idle").GetChildren())
+			foreach (Particles2D particles2D in idleParticles.GetChildren())
 			{
 				particles2D.Emitting = false;
 			}

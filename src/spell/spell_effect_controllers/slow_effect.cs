@@ -4,12 +4,6 @@ namespace Game.Ability
 {
 	public class slow_effect : SpellEffect
 	{
-		public override void Init(Actor.Character character)
-		{
-			base.Init(character);
-			fadeLight = false;
-			lightFadeDelay = 4.0f;
-		}
 		public override void OnHit(Spell spell = null)
 		{
 			base.OnHit(spell);
@@ -18,7 +12,7 @@ namespace Game.Ability
 			{
 				GetParent().RemoveChild(this);
 				bolt.target.AddChild(this);
-				Position = bolt.target.GetNode<Node2D>("img").Position;
+				Position = bolt.target.img.Position;
 				spell.Connect(nameof(Unmake), this, nameof(_OnTimerTimeout));
 				tween.Start();
 				timer.Start();
@@ -32,7 +26,7 @@ namespace Game.Ability
 		{
 			base._OnTimerTimeout();
 			FadeLight(true);
-			foreach (Particles2D particles2D in GetNode("idle").GetChildren())
+			foreach (Particles2D particles2D in idleParticles.GetChildren())
 			{
 				particles2D.Emitting = false;
 			}

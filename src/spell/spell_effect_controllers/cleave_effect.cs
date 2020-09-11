@@ -6,14 +6,9 @@ namespace Game.Ability
 		public override void OnHit(Spell spell = null)
 		{
 			base.OnHit(spell);
-			Position = character.GetNode<Node2D>("img").Position;
+			Position = character.img.Position;
 			tween.Start();
 			timer.Start();
-		}
-		public override void _OnTimerTimeout()
-		{
-			base._OnTimerTimeout();
-			QueueFree();
 		}
 	}
 }

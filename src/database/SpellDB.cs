@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Game.Ability;
 using Godot;
 namespace Game.Database
 {
@@ -8,22 +9,41 @@ namespace Game.Database
 	{
 		public struct SpellNode
 		{
-			public Texture icon;
+			public AtlasTexture icon;
 			public int level, goldCost, range, coolDown, stackSize, manaCost;
-			public string type, blurb;
+			public string type, blurb, spellEffect;
 			public float pctDamage;
 			public bool ignoreArmor, effectOnTarget, requiresTarget;
 			public ItemDB.Modifiers modifiers;
 			public ItemDB.Use use;
 		}
-		private static Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
-		private const string DB_PATH = "res://data/spell.json";
+		public struct SpellMissileNode
+		{
+			public Shape2D hitBox;
+			public AtlasTexture img;
+			public Boolean rotate, instantSpawn, reverse;
+		}
+		private static readonly Dictionary<string, SpellNode> spellData;
+		private static readonly Dictionary<string, SpellMissileNode> spellMissileData;
+		private static readonly Dictionary<string, PackedScene> spellEffectData;
 
-		static SpellDB() { LoadSpellData(); }
-		private static void LoadSpellData()
+		static SpellDB()
+		{
+			spellData = LoadSpellData("res://data/spell.json");
+			spellMissileData = LoadSpellMissileData("");
+			spellEffectData = LoadSpellEffects("res://src/spell/spell_effects/");
+		}
+		private static Dictionary<string, SpellNode> LoadSpellData(string path)
 		{
 			File file = new File();
-			file.Open(DB_PATH, File.ModeFlags.Read);
+			if (!file.FileExists(path))
+			{
+				return null;
+			}
+
+			Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
+
+			file.Open(path, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 
@@ -45,6 +65,7 @@ namespace Game.Database
 				spellNode.requiresTarget = (bool)itemDict[nameof(SpellNode.requiresTarget)];
 				spellNode.stackSize = 1;
 				spellNode.manaCost = -1; // TODO
+				spellNode.spellEffect = "TODO";
 
 				// set modifiers
 				ItemDB.Modifiers modifiers;
@@ -70,12 +91,53 @@ namespace Game.Database
 				use.damage = ItemDB.GetModifier(itemDict, nameof(ItemDB.Use.damage), "use");
 				spellNode.use = use;
 
-
 				spellData.Add(spellName, spellNode);
 			}
+			return spellData;
 		}
-		public static SpellNode GetSpellData(string worldName) { return spellData[worldName]; }
+		private static Dictionary<string, SpellMissileNode> LoadSpellMissileData(string path)
+		{
+			Dictionary<string, SpellMissileNode> spellMissileData = new Dictionary<string, SpellMissileNode>();
+
+			return spellMissileData;
+		}
+		private static Dictionary<string, PackedScene> LoadSpellEffects(string path)
+		{
+			Directory directory = new Directory();
+			if (!directory.DirExists(path))
+			{
+				return null;
+			}
+
+			Dictionary<string, PackedScene> spellEffectData = new Dictionary<string, PackedScene>();
+
+			directory.Open(path);
+			directory.ListDirBegin(true, true);
+
+			string resourceName = directory.GetNext();
+			while (!resourceName.Empty())
+			{
+				if (!directory.CurrentIsDir())
+				{
+					spellEffectData[resourceName.BaseName()] = (PackedScene)GD.Load(path.PlusFile(resourceName));
+				}
+				resourceName = directory.GetNext();
+			}
+
+			directory.ListDirEnd();
+			return spellEffectData;
+		}
 		public static bool HasSpell(string nameCheck) { return spellData.ContainsKey(nameCheck); }
+		public static SpellNode GetSpellData(string worldName) { return spellData[worldName]; }
 		public static string[] GetSpellNames() { return spellData.Keys.ToArray(); }
+
+		public static bool HasSpellMissile(string nameCheck) { return spellMissileData.ContainsKey(nameCheck); }
+		public static SpellMissileNode GetSpellMissileData(string worldName) { return spellMissileData[worldName]; }
+
+		public static bool HasSpellEffect(string worldName)
+		{
+			return HasSpell(worldName) ? spellEffectData.ContainsKey(GetSpellData(worldName).spellEffect) : false;
+		}
+		public static SpellEffect GetSpellEffect(string worldName) { return (SpellEffect)spellEffectData[worldName].Instance(); }
 	}
 }

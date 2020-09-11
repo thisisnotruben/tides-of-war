@@ -13,10 +13,8 @@ namespace Game.Actor.Doodads
 		private Label label;
 		public AnimationPlayer anim;
 
-		[Signal]
-		public delegate void MidwayThrough();
-		[Signal]
-		public delegate void Finished();
+		[Signal] public delegate void MidwayThrough();
+		[Signal] public delegate void Finished();
 
 		public override void _Ready()
 		{

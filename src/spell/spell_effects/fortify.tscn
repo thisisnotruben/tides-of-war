@@ -8,7 +8,6 @@
 [ext_resource path="res://asset/img/missile-spell/line2.png" type="Texture" id=6]
 [ext_resource path="res://asset/img/missile-spell/fortify.png" type="Texture" id=7]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 resource_name = "color_ramp"
@@ -51,6 +50,7 @@ orbit_velocity_random = 0.0
 
 [node name="fortify" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+fadeLight = false
 
 [node name="timer" parent="." index="0"]
 wait_time = 2.5

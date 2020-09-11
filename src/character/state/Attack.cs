@@ -76,10 +76,10 @@ namespace Game.Actor.State
 			}
 			else
 			{
-				// launch missile
-				Projectile.Missile missile = (Projectile.Missile)Projectile.Missile.scene.Instance();
+				// TODO: launch missile
+				Projectile.MissileSpell missile = (Projectile.MissileSpell)Projectile.MissileSpell.scene.Instance();
 
-				missile.Init(character, character.target);
+				missile.Init(character, character.target, "test");
 				missile.Connect(nameof(Projectile.Missile.OnHit), this, nameof(AttackEnd),
 					new Godot.Collections.Array() { character, character.target });
 

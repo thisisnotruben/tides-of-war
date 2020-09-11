@@ -6,29 +6,34 @@ namespace Game.Projectile
 	{
 		public static PackedScene scene = (PackedScene)GD.Load("res://src/projectile/Missile.tscn");
 
-		private Tween tween;
-		private AnimationPlayer anim;
-		private Area2D hitbox;
+		protected Tween tween;
+		protected AnimationPlayer anim;
+		protected Sprite img;
+		protected Area2D hitbox;
+		protected CollisionShape2D hitboxBody;
 
-		private Character character, target;
-		private Vector2 spawnPos;
-		private bool hit;
+		protected Character character, target;
+		protected Vector2 spawnPos;
+		protected bool hit;
 
-		[Signal]
-		public delegate void OnHit();
+		[Signal] public delegate void OnHit();
+		protected delegate void MoveBehavior();
+		protected MoveBehavior moveBehavior;
 
 		public override void _Ready()
 		{
 			tween = GetNode<Tween>("tween");
 			anim = GetNode<AnimationPlayer>("anim");
+			img = GetNode<Sprite>("img");
 			hitbox = GetNode<Area2D>("hitbox");
+			hitboxBody = hitbox.GetNode<CollisionShape2D>("body");
 			LookAt(target.pos);
 		}
-		private void MoveMissile()
+		protected void MoveMissile(Vector2 startPos, Vector2 targetPos)
 		{
 			tween.StopAll();
-			tween.InterpolateProperty(this, ":global_position", GlobalPosition, target.pos,
-				spawnPos.DistanceTo(target.pos) / character.stats.weaponRange.value,
+			tween.InterpolateProperty(this, ":global_position", startPos, targetPos,
+				spawnPos.DistanceTo(targetPos) / character.stats.weaponRange.value,
 				Tween.TransitionType.Circ, Tween.EaseType.Out);
 			tween.Start();
 		}
@@ -37,15 +42,16 @@ namespace Game.Projectile
 			this.character = character;
 			this.target = target;
 
-			spawnPos = character.missileSpawnPos.GlobalPosition;
-			GlobalPosition = spawnPos;
+			spawnPos = GlobalPosition = character.missileSpawnPos.GlobalPosition;
+
+			moveBehavior = () =>
+			{
+				LookAt(target.pos);
+				MoveMissile(GlobalPosition, target.pos);
+			};
 		}
-		public override void _Process(float delta)
-		{
-			LookAt(target.pos);
-			MoveMissile();
-		}
-		public async void OnHitBoxEntered(Area2D area2D)
+		public override void _Process(float delta) { moveBehavior(); }
+		public async virtual void OnHitBoxEntered(Area2D area2D)
 		{
 			if ((area2D.Owner as Character) == target && !hit)
 			{

@@ -10,7 +10,7 @@ namespace Game.Ability
 			Bolt bolt = Owner as Bolt;
 			if (bolt != null)
 			{
-				bolt.GlobalPosition = bolt.target.GetNode<Node2D>("head").GlobalPosition;
+				bolt.GlobalPosition = bolt.target.head.GlobalPosition;
 				tween.Start();
 				timer.Start();
 			}
@@ -18,11 +18,6 @@ namespace Game.Ability
 			{
 				GD.Print("Owner not bolt in class MindBlast");
 			}
-		}
-		public override void _OnTimerTimeout()
-		{
-			base._OnTimerTimeout();
-			QueueFree();
 		}
 	}
 }

@@ -30,7 +30,7 @@ namespace Game.Actor.State
 		}
 		private protected async void Bump(Vector2 direction)
 		{
-			if (direction.x == 0.0f && direction.y == 0.0f)
+			if (direction.Equals(Vector2.Zero))
 			{
 				return;
 			}

@@ -6,17 +6,12 @@ namespace Game.Ability
 		public override void OnHit(Spell spell = null)
 		{
 			base.OnHit(spell);
-			Node2D bolt = GetNode<Node2D>("idle/bolt");
+			Node2D bolt = idleParticles.GetNode<Node2D>("bolt");
 			tween.InterpolateProperty(bolt, ":modulate", bolt.Modulate,
-				new Color(1.0f, 1.0f, 1.0f, 0.0f), lightFadeDelay,
-				Tween.TransitionType.Linear, Tween.EaseType.InOut);
+				new Color("00ffffff"), lightFadeDelay,
+				Tween.TransitionType.Linear, Tween.EaseType.In);
 			tween.Start();
 			timer.Start();
-		}
-		public override void _OnTimerTimeout()
-		{
-			base._OnTimerTimeout();
-			QueueFree();
 		}
 	}
 }

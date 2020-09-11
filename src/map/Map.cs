@@ -125,35 +125,35 @@ namespace Game.Map
 
 							// get ordinal from direction
 							direction = to - from;
-							if (direction.x == -1 && direction.y == -1)
+							if (direction.Equals(Vector2.Up + Vector2.Left))
 							{
 								ordinal = CollNavDB.Ordinal.NW;
 							}
-							else if (direction.x == 0 && direction.y == -1)
+							else if (direction.Equals(Vector2.Up))
 							{
 								ordinal = CollNavDB.Ordinal.N;
 							}
-							else if (direction.x == 1 && direction.y == -1)
+							else if (direction.Equals(Vector2.Up + Vector2.Right))
 							{
 								ordinal = CollNavDB.Ordinal.NE;
 							}
-							else if (direction.x == -1 && direction.y == 0)
+							else if (direction.Equals(Vector2.Left))
 							{
 								ordinal = CollNavDB.Ordinal.W;
 							}
-							else if (direction.x == 1 && direction.y == 0)
+							else if (direction.Equals(Vector2.Right))
 							{
 								ordinal = CollNavDB.Ordinal.E;
 							}
-							else if (direction.x == -1 && direction.y == 1)
+							else if (direction.Equals(Vector2.Down + Vector2.Left))
 							{
 								ordinal = CollNavDB.Ordinal.SW;
 							}
-							else if (direction.x == 0 && direction.y == 1)
+							else if (direction.Equals(Vector2.Down))
 							{
 								ordinal = CollNavDB.Ordinal.S;
 							}
-							else if (direction.x == 1 && direction.y == 1)
+							else if (direction.Equals(Vector2.Down + Vector2.Right))
 							{
 								ordinal = CollNavDB.Ordinal.SE;
 							}

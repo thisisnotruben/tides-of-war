@@ -8,10 +8,5 @@ namespace Game.Ability
 			tween.Start();
 			timer.Start();
 		}
-		public override void _OnTimerTimeout()
-		{
-			base._OnTimerTimeout();
-			QueueFree();
-		}
 	}
 }

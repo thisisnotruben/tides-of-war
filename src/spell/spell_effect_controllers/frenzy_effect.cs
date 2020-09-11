@@ -3,15 +3,10 @@ namespace Game.Ability
 {
 	public class frenzy_effect : SpellEffect
 	{
-		public override void Init(Actor.Character character)
-		{
-			base.Init(character);
-			fadeLight = false;
-		}
 		public override void OnHit(Spell spell)
 		{
 			base.OnHit(spell);
-			Position = character.GetNode<Node2D>("head").Position;
+			Position = character.head.Position;
 			character.GetParent().MoveChild(this, 0);
 			tween.Start();
 			timer.Start();
@@ -20,7 +15,7 @@ namespace Game.Ability
 		{
 			base._OnTimerTimeout();
 			FadeLight(true);
-			foreach (Particles2D particles2D in GetNode("idle").GetChildren())
+			foreach (Particles2D particles2D in idleParticles.GetChildren())
 			{
 				particles2D.Emitting = false;
 			}

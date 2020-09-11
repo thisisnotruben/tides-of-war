@@ -1,0 +1,64 @@
+using Game.Database;
+using Game.Ability;
+using Game.ItemPoto;
+using Game.Actor;
+using Godot;
+namespace Game.Projectile
+{
+	public class MissileSpell : Missile
+	{
+		public new static PackedScene scene = (PackedScene)GD.Load("res://src/projectile/MissileSpell.tscn");
+
+		protected SpellProto spell;
+
+		public override void _Ready()
+		{
+			base._Ready();
+			Connect(nameof(OnHit), this, nameof(StartSpell));
+		}
+		public void Init(Character character, Character target, string spellWorldName)
+		{
+			Init(character, target);
+			// TODO: spell = (SpellProto)new SpellCreator().MakeCommodity(character, spellWorldName);
+
+			if (SpellDB.HasSpellMissile(spellWorldName))
+			{
+				SpellDB.SpellMissileNode spellMissileNode = SpellDB.GetSpellMissileData(spellWorldName);
+				img.Texture = spellMissileNode.img;
+				hitboxBody.Shape = spellMissileNode.hitBox;
+
+				if (spellMissileNode.instantSpawn)
+				{
+					spawnPos = GlobalPosition = target.pos;
+				}
+
+				moveBehavior = () =>
+				{
+					if (spellMissileNode.rotate)
+					{
+						LookAt(target.pos);
+					}
+
+					if (spellMissileNode.reverse)
+					{
+						MoveMissile(target.pos, GlobalPosition);
+					}
+					else
+					{
+						MoveMissile(GlobalPosition, target.pos);
+					}
+				};
+			}
+
+			// TODO: need to instance spell effect
+			if (SpellDB.HasSpellEffect(spellWorldName))
+			{
+				SpellEffect spellEffect = SpellDB.GetSpellEffect(spellWorldName);
+				AddChild(spellEffect);
+				spellEffect.Owner = this;
+				// Connect(nameof(OnHit), spellEffect, "TODO");
+			}
+		}
+		public void StartSpell() { spell?.Start(); }
+	}
+}
