@@ -50,13 +50,14 @@ namespace Game.Projectile
 				};
 			}
 
-			// TODO: need to instance spell effect
+			// instance spell effect
 			if (SpellDB.HasSpellEffect(spellWorldName))
 			{
 				SpellEffect spellEffect = SpellDB.GetSpellEffect(spellWorldName);
+				// TODO: need to Init spell with spellWorldName
 				AddChild(spellEffect);
 				spellEffect.Owner = this;
-				// Connect(nameof(OnHit), spellEffect, "TODO");
+				Connect(nameof(OnHit), spellEffect, nameof(SpellEffect.OnHit));
 			}
 		}
 		public void StartSpell() { spell?.Start(); }

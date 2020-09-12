@@ -2,6 +2,9 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build"
 	xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup>
 		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 		<ProjectGuid>{E11668A2-6F38-47C5-9855-2B96DDE7295F}</ProjectGuid>
@@ -100,6 +103,7 @@
 		<Compile Include="src\database\SpellDB.cs" />
 		<Compile Include="src\database\ImageDB.cs" />
 		<Compile Include="src\database\UnitDB.cs" />
+		<Compile Include="src\database\WorldNameDB.cs" />
 		<Compile Include="src\globals\Globals.cs" />
 		<Compile Include="src\globals\ISerializable.cs" />
 		<Compile Include="src\globals\Stats.cs" />

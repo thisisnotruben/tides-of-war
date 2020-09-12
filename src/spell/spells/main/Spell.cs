@@ -170,12 +170,13 @@ namespace Game.Ability
 		}
 		private protected SpellEffect SetEffect()
 		{
-			SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(worldName);
-			((effectOnTarget) ? target : caster).AddChild(spellEffect);
-			spellEffect.Owner = (effectOnTarget) ? target : caster;
-			spellEffect.Init((effectOnTarget) ? target : caster);
-			spellEffect.OnHit(this);
-			return spellEffect;
+			// SpellEffect spellEffect = PickableFactory.GetMakeSpellEffect(worldName);
+			// ((effectOnTarget) ? target : caster).AddChild(spellEffect);
+			// spellEffect.Owner = (effectOnTarget) ? target : caster;
+			// spellEffect.Init((effectOnTarget) ? target : caster);
+			// spellEffect.OnHit(this);
+			// return spellEffect;
+			return null;
 		}
 	}
 }

@@ -1,5 +1,5 @@
-using Godot;
 using Game.Utils;
+using Godot;
 namespace Game.Ui
 {
 	public class StartMenuController : Control

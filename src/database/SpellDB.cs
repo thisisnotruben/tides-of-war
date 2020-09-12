@@ -31,7 +31,7 @@ namespace Game.Database
 		{
 			spellData = LoadSpellData("res://data/spell.json");
 			spellMissileData = LoadSpellMissileData("");
-			spellEffectData = LoadSpellEffects("res://src/spell/spell_effects/");
+			spellEffectData = LoadSpellEffects("res://src/spell/spell_effects/missile/");
 		}
 		private static Dictionary<string, SpellNode> LoadSpellData(string path)
 		{
