@@ -53,13 +53,37 @@ namespace Game.Projectile
 			// instance spell effect
 			if (SpellDB.HasSpellEffect(spellWorldName))
 			{
-				SpellEffect spellEffect = SpellDB.GetSpellEffect(spellWorldName);
-				// TODO: need to Init spell with spellWorldName
+				SpellEffect spellEffect = SpellDB.GetSpellEffect(
+					SpellDB.GetSpellData(spellWorldName).spellEffect);
+
 				AddChild(spellEffect);
 				spellEffect.Owner = this;
+
+				spellEffect.Init(character, spellWorldName);
 				Connect(nameof(OnHit), spellEffect, nameof(SpellEffect.OnHit));
 			}
 		}
 		public void StartSpell() { spell?.Start(); }
+		public async override void OnHitBoxEntered(Area2D area2D)
+		{
+			if (DidHitTarget(area2D))
+			{
+				hit = true;
+				ZIndex = 1;
+				CallDeferred("set", hitbox.Monitoring, false);
+
+				EmitSignal(nameof(OnHit));
+
+				anim.Play("missileFade");
+				await ToSignal(anim, "animation_finished");
+
+				// allow spell it animation if any to process then delete
+				await ToSignal(GetTree().CreateTimer(2.5f), "timeout");
+
+				tween.RemoveAll();
+				SetProcess(false);
+				QueueFree();
+			}
+		}
 	}
 }

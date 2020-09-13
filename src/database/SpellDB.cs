@@ -31,7 +31,7 @@ namespace Game.Database
 		{
 			spellData = LoadSpellData("res://data/spell.json");
 			spellMissileData = LoadSpellMissileData("");
-			spellEffectData = LoadSpellEffects("res://src/spell/spell_effects/missile/");
+			spellEffectData = LoadSpellEffects("res://src/spell/spellEffect/");
 		}
 		private static Dictionary<string, SpellNode> LoadSpellData(string path)
 		{
@@ -63,9 +63,9 @@ namespace Game.Database
 				spellNode.ignoreArmor = (bool)itemDict[nameof(SpellNode.ignoreArmor)];
 				spellNode.effectOnTarget = (bool)itemDict[nameof(SpellNode.effectOnTarget)];
 				spellNode.requiresTarget = (bool)itemDict[nameof(SpellNode.requiresTarget)];
+				spellNode.spellEffect = (string)itemDict[nameof(SpellNode.spellEffect)];
 				spellNode.stackSize = 1;
 				spellNode.manaCost = -1; // TODO
-				spellNode.spellEffect = "TODO";
 
 				// set modifiers
 				ItemDB.Modifiers modifiers;
@@ -117,9 +117,16 @@ namespace Game.Database
 			string resourceName = directory.GetNext();
 			while (!resourceName.Empty())
 			{
-				if (!directory.CurrentIsDir())
+				if (!resourceName.Equals("abstract"))
 				{
-					spellEffectData[resourceName.BaseName()] = (PackedScene)GD.Load(path.PlusFile(resourceName));
+					if (directory.CurrentIsDir())
+					{
+						LoadSpellEffects(path.PlusFile(resourceName)).ToList().ForEach(x => spellEffectData.Add(x.Key, x.Value));
+					}
+					else
+					{
+						spellEffectData[resourceName.BaseName()] = (PackedScene)GD.Load(path.PlusFile(resourceName));
+					}
 				}
 				resourceName = directory.GetNext();
 			}

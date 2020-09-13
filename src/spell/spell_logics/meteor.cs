@@ -37,17 +37,18 @@ namespace Game.Ability
 			}
 			else
 			{
-				Transform2D ctrans = GetCanvasTransform();
-				Vector2 minPos = -ctrans.origin / ctrans.Scale;
-				Vector2 maxPos = minPos + GetViewportRect().Size / ctrans.Scale;
-				PackedScene meteorScene = (PackedScene)GD.Load("res://src/spell/spellEffects/meteor.tscn");
-				meteor_effect meteorEffect = (meteor_effect)meteorScene.Instance();
-				meteorEffect.seekPos = GlobalPosition;
-				float side = (meteorEffect.seekPos.x > 0.50f * (maxPos.x - minPos.x) + minPos.x) ? 0.25f : 0.75f;
-				meteorEffect.GlobalPosition = new Vector2(side * (maxPos.x - minPos.x) + minPos.x, minPos.y);
-				meteorEffect.Connect(nameof(meteor_effect.Hit), this, nameof(MeteorCast));
-				caster.GetParent().AddChild(meteorEffect);
-				meteorEffect.Owner = caster.GetParent();
+				// TODO
+				// Transform2D ctrans = GetCanvasTransform();
+				// Vector2 minPos = -ctrans.origin / ctrans.Scale;
+				// Vector2 maxPos = minPos + GetViewportRect().Size / ctrans.Scale;
+				// PackedScene meteorScene = (PackedScene)GD.Load("res://src/spell/spellEffects/meteor.tscn");
+				// meteor_effect meteorEffect = (meteor_effect)meteorScene.Instance();
+				// meteorEffect.seekPos = GlobalPosition;
+				// float side = (meteorEffect.seekPos.x > 0.50f * (maxPos.x - minPos.x) + minPos.x) ? 0.25f : 0.75f;
+				// meteorEffect.GlobalPosition = new Vector2(side * (maxPos.x - minPos.x) + minPos.x, minPos.y);
+				// meteorEffect.Connect(nameof(meteor_effect.Hit), this, nameof(MeteorCast));
+				// caster.GetParent().AddChild(meteorEffect);
+				// meteorEffect.Owner = caster.GetParent();
 			}
 		}
 	}

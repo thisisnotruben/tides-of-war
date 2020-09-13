@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/spell/spellEffect/missile/FireballEffect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=3]
+[ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+resource_name = "color_ramp"
+shader = ExtResource( 3 )
+shader_param/color_speed = 1.5
+shader_param/scale_speed = 1.0
+shader_param/energy = 0.7
+shader_param/scale = Vector2( 0.9, 1 )
+shader_param/gradient = ExtResource( 4 )
+
+[node name="searing_arrow" instance=ExtResource( 1 )]
+playSound = true
+
+[node name="timer" parent="." index="0"]
+wait_time = 2.0
+
+[node name="light" parent="." index="3"]
+material = SubResource( 1 )
+
+[node name="bolt" parent="idle" index="1"]
+visible = false
+use_parent_material = true

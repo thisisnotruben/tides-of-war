@@ -1,4 +1,5 @@
 using Game.Utils;
+using Game.Database;
 using Godot;
 namespace Game.Ui
 {
@@ -12,6 +13,8 @@ namespace Game.Ui
 
 		public override void _Ready()
 		{
+			GD.PrintT(SpellDB.HasSpell(WorldNameDB.FIREBALL));
+
 			speaker = GetNode<Speaker>("speaker");
 			GameMenu.player = null;
 			GameMenu.speaker = speaker;

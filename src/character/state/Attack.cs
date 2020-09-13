@@ -79,7 +79,7 @@ namespace Game.Actor.State
 				// TODO: launch missile
 				Projectile.MissileSpell missile = (Projectile.MissileSpell)Projectile.MissileSpell.scene.Instance();
 
-				missile.Init(character, character.target, "test");
+				missile.Init(character, character.target, WorldNameDB.FIREBALL);
 				missile.Connect(nameof(Projectile.Missile.OnHit), this, nameof(AttackEnd),
 					new Godot.Collections.Array() { character, character.target });
 

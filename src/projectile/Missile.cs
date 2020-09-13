@@ -29,14 +29,6 @@ namespace Game.Projectile
 			hitboxBody = hitbox.GetNode<CollisionShape2D>("body");
 			LookAt(target.pos);
 		}
-		protected void MoveMissile(Vector2 startPos, Vector2 targetPos)
-		{
-			tween.StopAll();
-			tween.InterpolateProperty(this, ":global_position", startPos, targetPos,
-				spawnPos.DistanceTo(targetPos) / character.stats.weaponRange.value,
-				Tween.TransitionType.Circ, Tween.EaseType.Out);
-			tween.Start();
-		}
 		public void Init(Character character, Character target)
 		{
 			this.character = character;
@@ -51,9 +43,18 @@ namespace Game.Projectile
 			};
 		}
 		public override void _Process(float delta) { moveBehavior(); }
+		protected void MoveMissile(Vector2 startPos, Vector2 targetPos)
+		{
+			tween.StopAll();
+			tween.InterpolateProperty(this, ":global_position", startPos, targetPos,
+				spawnPos.DistanceTo(targetPos) / character.stats.weaponRange.value,
+				Tween.TransitionType.Circ, Tween.EaseType.Out);
+			tween.Start();
+		}
+		protected bool DidHitTarget(Area2D area2D) { return (area2D.Owner as Character) == target && !hit; }
 		public async virtual void OnHitBoxEntered(Area2D area2D)
 		{
-			if ((area2D.Owner as Character) == target && !hit)
+			if (DidHitTarget(area2D))
 			{
 				hit = true;
 				ZIndex = 1;
