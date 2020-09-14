@@ -148,7 +148,6 @@
 		<Compile Include="src\loot\Pickable.cs" />
 		<Compile Include="src\missile\ICombustible.cs" />
 		<Compile Include="src\missile\LandMine.cs" />
-		<Compile Include="src\missile\Missile.cs" />
 		<Compile Include="src\projectile\Missile.cs" />
 		<Compile Include="src\projectile\MissileSpell.cs" />
 		<Compile Include="src\quest_system\Quest.cs" />
