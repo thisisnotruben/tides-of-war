@@ -17,9 +17,8 @@ namespace Game.Actor
 			NPC = 0b_00000_00000_00000_00010,
 			DEAD = 0b_00000_00000_00000_00100
 		}
-		public static readonly PackedScene buffAnimScene = (PackedScene)GD.Load("res://src/character/doodads/buff_anim.tscn");
 
-		private protected FSM fsm;
+		protected FSM fsm;
 		public CombatTextHandler combatTextHandler;
 		public StatManager stats;
 		public Timer regenTimer;
@@ -111,12 +110,10 @@ namespace Game.Actor
 		public Spell spell { get; private protected set; }
 		public Character target;
 		public List<Spell> spellQueue = new List<Spell>();
-		[Signal]
-		public delegate void UpdateHudStatus(Character character, bool hp, int currentValue, int maxValue);
-		[Signal]
-		public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
-		[Signal]
-		public delegate void NotifyAttack(Character whosAttacking);
+
+		[Signal] public delegate void UpdateHudStatus(Character character, bool hp, int currentValue, int maxValue);
+		[Signal] public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
+		[Signal] public delegate void NotifyAttack(Character whosAttacking);
 
 		public override void _Ready()
 		{

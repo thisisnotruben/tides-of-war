@@ -24,7 +24,7 @@ namespace Game.Database
 			NW_I = 1484
 		}
 		private static readonly collNavTile[] collNavTileID;
-		private const string DB_PATH = "res://data/coll_nav.json";
+		private const string DB_PATH = "res://data/collNav.json";
 		private static Dictionary<Ordinal, int[,]> graph = new Dictionary<Ordinal, int[,]>();
 
 		static CollNavDB()

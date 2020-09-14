@@ -11,7 +11,7 @@ namespace Game.Database
 		{
 			public AtlasTexture icon;
 			public int level, goldCost, range, coolDown, stackSize, manaCost;
-			public string type, blurb, spellEffect;
+			public string type, blurb, spellEffect, sound;
 			public float pctDamage;
 			public bool ignoreArmor, effectOnTarget, requiresTarget;
 			public ItemDB.Modifiers modifiers;
@@ -30,7 +30,7 @@ namespace Game.Database
 		static SpellDB()
 		{
 			spellData = LoadSpellData("res://data/spell.json");
-			spellMissileData = LoadSpellMissileData("");
+			spellMissileData = LoadSpellMissileData("res://data/missileSpell.json");
 			spellEffectData = LoadSpellEffects("res://src/spell/spellEffect/");
 		}
 		private static Dictionary<string, SpellNode> LoadSpellData(string path)
@@ -41,11 +41,11 @@ namespace Game.Database
 				return null;
 			}
 
-			Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
-
 			file.Open(path, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
+
+			Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
 
 			Godot.Collections.Dictionary itemDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			foreach (string spellName in rawDict.Keys)
@@ -64,6 +64,7 @@ namespace Game.Database
 				spellNode.effectOnTarget = (bool)itemDict[nameof(SpellNode.effectOnTarget)];
 				spellNode.requiresTarget = (bool)itemDict[nameof(SpellNode.requiresTarget)];
 				spellNode.spellEffect = (string)itemDict[nameof(SpellNode.spellEffect)];
+				spellNode.sound = (string)itemDict[nameof(SpellNode.sound)];
 				spellNode.stackSize = 1;
 				spellNode.manaCost = -1; // TODO
 
@@ -97,8 +98,39 @@ namespace Game.Database
 		}
 		private static Dictionary<string, SpellMissileNode> LoadSpellMissileData(string path)
 		{
+			File file = new File();
+			if (!file.FileExists(path))
+			{
+				return null;
+			}
+
+			file.Open(path, File.ModeFlags.Read);
+			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
+			file.Close();
+
 			Dictionary<string, SpellMissileNode> spellMissileData = new Dictionary<string, SpellMissileNode>();
 
+			Godot.Collections.Dictionary itemDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			string filePath = "res://asset/img/missile-spell/{0}.tres";
+			foreach (string spellName in rawDict.Keys)
+			{
+				itemDict = (Godot.Collections.Dictionary)rawDict[spellName];
+				SpellMissileNode spellMissileNode;
+
+
+				spellMissileNode.img = itemDict[nameof(SpellMissileNode.img)] == null
+					? null
+					: (AtlasTexture)GD.Load(string.Format(filePath, (string)itemDict[nameof(SpellMissileNode.img)]));
+
+				spellMissileNode.hitBox = (Shape2D)GD.Load(string.Format(
+					filePath, (string)itemDict[nameof(SpellMissileNode.hitBox)]));
+
+				spellMissileNode.rotate = (bool)itemDict[nameof(SpellMissileNode.rotate)];
+				spellMissileNode.instantSpawn = (bool)itemDict[nameof(SpellMissileNode.instantSpawn)];
+				spellMissileNode.reverse = (bool)itemDict[nameof(SpellMissileNode.reverse)];
+
+				spellMissileData.Add(spellName, spellMissileNode);
+			}
 			return spellMissileData;
 		}
 		private static Dictionary<string, PackedScene> LoadSpellEffects(string path)
@@ -109,10 +141,10 @@ namespace Game.Database
 				return null;
 			}
 
-			Dictionary<string, PackedScene> spellEffectData = new Dictionary<string, PackedScene>();
-
 			directory.Open(path);
 			directory.ListDirBegin(true, true);
+
+			Dictionary<string, PackedScene> spellEffectData = new Dictionary<string, PackedScene>();
 
 			string resourceName = directory.GetNext();
 			while (!resourceName.Empty())

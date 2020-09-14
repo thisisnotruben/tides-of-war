@@ -7,14 +7,14 @@ namespace Game.Ability
 	{
 		[Export] protected float lightFadeDelay = 0.65f;
 		[Export] protected bool fadeLight = true;
-		[Export] protected bool playSound = false;
+		[Export] protected bool playSound = false; // for missile to play sound?
 
-		public Vector2 seekPos = Vector2.Zero; // only meteor uses this
 		protected Character character;
 		protected Tween tween;
 		protected Timer timer;
 		protected Sprite light;
 		protected Node2D idleParticles, explodeParticles;
+		protected string sound;
 
 		protected delegate void Routine();
 		protected Routine onHitEffect, onTimeOut;
@@ -22,6 +22,7 @@ namespace Game.Ability
 		public virtual void Init(Character character, string spellWorldName)
 		{
 			this.character = character;
+			sound = SpellDB.GetSpellData(spellWorldName).sound;
 
 			switch (spellWorldName)
 			{
@@ -40,12 +41,12 @@ namespace Game.Ability
 					};
 
 					break;
-				case WorldNameDB.FIREBALL:
 				case WorldNameDB.ARCANE_BOLT:
+				case WorldNameDB.FIREBALL:
 				case WorldNameDB.FROST_BOLT:
-				case WorldNameDB.METEOR:
 				case WorldNameDB.SHADOW_BOLT:
 				case WorldNameDB.SIPHON_MANA:
+				case WorldNameDB.METEOR:
 
 					onHitEffect = () =>
 					{
@@ -75,7 +76,6 @@ namespace Game.Ability
 						// character.target.AddChild(bash);
 						// bash.Owner = character.target;
 						// spell.Connect(nameof(Unmake), bash, nameof(bash_effect._OnTimerTimeout));
-						// bash.GetNode<AudioStreamPlayer2D>("snd").Stream = null;
 						// bash.OnHit();
 						tween.Start();
 						timer.Start();
@@ -258,11 +258,8 @@ namespace Game.Ability
 			{
 				node2D.UseParentMaterial = true;
 			}
-
-			// SetProcess(false);
-			// onTimeOut?.Invoke();
 		}
-		public virtual void _OnTimerTimeout() { /* QueueFree(); */ }
+		public virtual void _OnTimerTimeout() { onTimeOut?.Invoke(); }
 		// public override void _Process(float delta)
 		// {
 		// only meteor uses this
@@ -283,9 +280,9 @@ namespace Game.Ability
 					new Color("00ffffff"), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.In);
 			}
 		}
-		public virtual void OnHit(Spell spell = null)
+		public virtual void OnHit()
 		{
-			GetNode<AudioStreamPlayer2D>("snd").Play();
+			Globals.PlaySound(sound, this, new Utils.Speaker2D());
 
 			tween.InterpolateProperty(this, ":scale", new Vector2(0.75f, 0.75f),
 				Vector2.One, 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
@@ -300,11 +297,8 @@ namespace Game.Ability
 			{
 				particles2D.Emitting = true;
 			}
+
 			onHitEffect?.Invoke();
-		}
-		public void OnHit()
-		{
-			OnHit(null);
 		}
 	}
 }

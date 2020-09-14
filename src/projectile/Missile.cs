@@ -42,7 +42,7 @@ namespace Game.Projectile
 				MoveMissile(GlobalPosition, target.pos);
 			};
 		}
-		public override void _Process(float delta) { moveBehavior(); }
+		public override void _Process(float delta) { moveBehavior?.Invoke(); }
 		protected void MoveMissile(Vector2 startPos, Vector2 targetPos)
 		{
 			tween.StopAll();

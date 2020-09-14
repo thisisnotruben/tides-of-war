@@ -1,3 +1,4 @@
+using Game.Database;
 using Game.Actor;
 using Game.Ability;
 namespace Game.ItemPoto
@@ -6,7 +7,11 @@ namespace Game.ItemPoto
 	{
 		private protected override Commodity CreateCommodity(Character character, string worldName)
 		{
-			return new SpellProto(character, worldName);
+			switch (worldName)
+			{
+				default:
+					return new SpellProto(character, worldName);
+			}
 		}
 	}
 }

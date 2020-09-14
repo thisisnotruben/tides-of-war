@@ -6,23 +6,8 @@ namespace Game
 	{
 		public enum WorldTypes : byte
 		{
-			FRENZY,
-			CONCUSSIVE_SHOT,
-			EXPLOSIVE_ARROW,
-			PIERCING_SHOT,
-			VOLLEY,
-			EXPLOSIVE_TRAP,
-			FIREBALL,
-			SHADOW_BOLT,
-			FROST_BOLT,
-			SIPHON_MANA,
-			SLOW,
-			MIND_BLAST,
-			CASTING,
-			DAMAGE_MODIFIER,
-			CHOOSE_AREA_EFFECT,
-			ARROW_HIT_ARMOR,
-			ARROW_PASS
+			FRENZY, EXPLOSIVE_TRAP, CASTING,
+			DAMAGE_MODIFIER, CHOOSE_AREA_EFFECT,
 		}
 		public WorldTypes worldType { get; private protected set; }
 		public String worldName { get; private protected set; }

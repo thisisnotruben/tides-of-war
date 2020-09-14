@@ -20,7 +20,7 @@ playSound = true
 [node name="timer" parent="." index="0"]
 wait_time = 2.0
 
-[node name="light" parent="." index="3"]
+[node name="light" parent="." index="2"]
 material = SubResource( 1 )
 
 [node name="bolt" parent="idle" index="1"]

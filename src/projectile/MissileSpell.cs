@@ -15,6 +15,14 @@ namespace Game.Projectile
 		{
 			base._Ready();
 			Connect(nameof(OnHit), this, nameof(StartSpell));
+
+			// can't add in Init due to this section needing nodes
+			if (spell != null && SpellDB.HasSpellMissile(spell.worldName))
+			{
+				SpellDB.SpellMissileNode spellMissileNode = SpellDB.GetSpellMissileData(spell.worldName);
+				img.Texture = spellMissileNode.img;
+				hitboxBody.Shape = spellMissileNode.hitBox;
+			}
 		}
 		public void Init(Character character, Character target, string spellWorldName)
 		{
@@ -24,8 +32,6 @@ namespace Game.Projectile
 			if (SpellDB.HasSpellMissile(spellWorldName))
 			{
 				SpellDB.SpellMissileNode spellMissileNode = SpellDB.GetSpellMissileData(spellWorldName);
-				img.Texture = spellMissileNode.img;
-				hitboxBody.Shape = spellMissileNode.hitBox;
 
 				if (spellMissileNode.instantSpawn)
 				{
