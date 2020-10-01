@@ -13,13 +13,18 @@ namespace Game.ItemPoto
 
 		private Dictionary<CharacterStat, StatModifier> modifiers;
 		public string worldName;
-		private Character character;
+		protected Character character;
+		private Timer useTimer = new Timer(), durTimer = new Timer();
+		private int useCount = 0;
 
 		public Commodity(Character character, string worldName)
 		{
 			this.worldName = worldName;
 			this.character = character;
 			modifiers = CreateModifiers();
+
+			durTimer.Connect("timeout", this, nameof(Exit));
+			durTimer.OneShot = true;
 			GD.Randomize();
 		}
 		private static ItemDB.ModifierNode[] GetModifiers(string worldName)
@@ -186,28 +191,43 @@ namespace Game.ItemPoto
 			}
 			return true;
 		}
-		public async virtual void StartUse(ItemDB.Use use, int durationSec)
+		public virtual void StartUse(ItemDB.Use use, int durationSec)
 		{
-			for (int i = 0; use.repeatSec > 0 && i < durationSec / use.repeatSec; i++)
+			if (use.hp.value != 0)
 			{
-				if (use.hp.value != 0)
-				{
-					character.hp += (use.hp.type == StatModifier.StatModType.FLAT)
-					? (int)use.hp.value
-					: (int)Math.Round(use.hp.value * character.stats.hpMax.value);
-				}
-				if (use.mana.value != 0)
-				{
-					character.mana += (use.mana.type == StatModifier.StatModType.FLAT)
-						? (int)use.mana.value
-						: (int)Math.Round(use.mana.value * character.stats.hpMax.value);
-				}
-				if (use.damage.value != 0)
-				{
-					character.Harm((int)use.damage.value);
-				}
+				character.hp += (use.hp.type == StatModifier.StatModType.FLAT)
+				? (int)use.hp.value
+				: (int)Math.Round(use.hp.value * character.stats.hpMax.value);
+			}
+			if (use.mana.value != 0)
+			{
+				character.mana += (use.mana.type == StatModifier.StatModType.FLAT)
+					? (int)use.mana.value
+					: (int)Math.Round(use.mana.value * character.stats.hpMax.value);
+			}
+			if (use.damage.value != 0)
+			{
+				character.Harm((int)use.damage.value);
+			}
 
-				await character.ToSignal(character.GetTree().CreateTimer(use.repeatSec, false), "timeout");
+			// iterate through use count
+			if (useTimer.IsStopped() && use.repeatSec > 0)
+			{
+				useTimer.WaitTime = use.repeatSec;
+				useTimer.Connect("timeout", this, nameof(OnUseTimeout),
+					new Godot.Collections.Array() { use, durationSec });
+				useTimer.Start();
+			}
+		}
+		public void OnUseTimeout(ItemDB.Use use, int durationSec)
+		{
+			if (++useCount < durationSec / use.repeatSec)
+			{
+				StartUse(use, durationSec);
+			}
+			else
+			{
+				useTimer.Stop();
 			}
 		}
 		public async virtual void Start()
@@ -245,8 +265,9 @@ namespace Game.ItemPoto
 
 			if (duration > 0)
 			{
-				await character.ToSignal(character.GetTree().CreateTimer(duration, false), "timeout");
-				Exit();
+				// upon timeout, will exit
+				durTimer.WaitTime = duration;
+				durTimer.Start();
 			}
 		}
 		public virtual void Exit()

@@ -1,7 +1,7 @@
 using Game.Actor;
 using Game.Actor.Doodads;
 using Godot;
-namespace Game.Missile
+namespace Game.MissileDEP
 {
 	public class LandMine : WorldObject, ICombustible
 	{

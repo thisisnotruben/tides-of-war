@@ -50,7 +50,7 @@ namespace Game.Actor
 		public override void _UnhandledInput(InputEvent @event) { fsm.UnhandledInput(@event); }
 		public override void OnAttacked(Character whosAttacking)
 		{
-			if (!dead && !attacking
+			if (!dead && !attacking && !moving
 			&& target != null && target == whosAttacking
 			&& pos.DistanceTo(whosAttacking.pos) <= stats.weaponRange.value)
 			{

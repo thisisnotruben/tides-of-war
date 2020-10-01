@@ -1,4 +1,4 @@
-namespace Game.Missile
+namespace Game.MissileDEP
 {
 	public interface ICombustible
 	{

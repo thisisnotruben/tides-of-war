@@ -9,6 +9,8 @@ namespace Game.ItemPoto
 		{
 			switch (worldName)
 			{
+				case WorldNameDB.BASH:
+					return new Bash(character, worldName);
 				default:
 					return new SpellProto(character, worldName);
 			}

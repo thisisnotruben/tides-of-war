@@ -1,19 +1,21 @@
-using System;
 using Godot;
 namespace Game.Actor.State
 {
 	public abstract class TakeDamage : StateBehavior
 	{
 		private Tween tween = new Tween();
+		private bool bumpReturn;
 
 		public override void _Ready()
 		{
 			base._Ready();
+			tween.Connect("tween_completed", this, nameof(OnTweenCompleted));
 			AddChild(tween);
 		}
 		public virtual void Harm(int damage)
 		{
-			damage -= character.stats.armor.valueI;
+
+			// TODO: damage -= character.stats.armor.valueI;
 			if (damage <= 0)
 			{
 				return;
@@ -28,12 +30,14 @@ namespace Game.Actor.State
 			// 		character.target.GlobalPosition).Rotated((float)Math.PI) / 4.0f);
 			// }
 		}
-		private protected async void Bump(Vector2 direction)
+		private protected void Bump(Vector2 direction)
 		{
 			if (direction.Equals(Vector2.Zero))
 			{
 				return;
 			}
+
+			bumpReturn = false;
 
 			// bump
 			tween.InterpolateProperty(character, ":global_position",
@@ -43,9 +47,15 @@ namespace Game.Actor.State
 				Tween.TransitionType.Elastic,
 				Tween.EaseType.Out);
 			tween.Start();
+		}
+		public void OnTweenCompleted(Godot.Object gObject, NodePath key)
+		{
+			if (bumpReturn)
+			{
+				return;
+			}
 
-			// wait for bump animation to finish
-			await ToSignal(tween, "tween_completed");
+			bumpReturn = true;
 
 			// return to center tile
 			Vector2 gridPos = Map.Map.map.GetGridPosition(character.GlobalPosition);

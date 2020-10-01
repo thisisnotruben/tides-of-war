@@ -1,47 +1,32 @@
 using System;
 using System.Collections.Generic;
-using Game.Loot;
-using Game.Database;
 using Godot;
 namespace Game
 {
 	public static class Stats
 	{
+		public enum AttackTableType { MELEE, RANGED }
 		public struct CharacterStatsNode
 		{
-			public float stamina;
-			public float intellect;
-			public float agility;
-			public float hpMax;
-			public float manaMax;
-			public float maxDamage;
-			public float minDamage;
-			public float regenTime;
-			public float armor;
+			public float stamina, intellect, agility, hpMax,
+				manaMax, maxDamage, minDamage, regenTime, armor;
 		}
-		public static readonly Dictionary<AttackTableType, AttackTableNode> ATTACK_TABLE;
-		public enum AttackTableType { MELEE, RANGED }
-		public struct AttackTableNode
-		{
-			public byte hit;
-			public byte critical;
-			public byte dodge;
-			public byte parry;
-			public byte miss;
-		}
+		public struct AttackTableNode { public byte hit, critical, dodge, parry, miss; }
 
-		public const float MULTIPLIER = 2.6f;
-		public const byte MAX_LEVEL = 10;
-		public const byte MIN_LEVEL = 1;
-		public const int XP_INTERVAL = 1_000;
-		public const int MAX_XP = MAX_LEVEL * XP_INTERVAL;
-		public const double HP_MANA_RESPAWN_MIN_LIMIT = 0.3f;
-		public const int FLEE_DISTANCE = 128;
-		public const float SPEED = 0.5f;
-		public const float WEAPON_RANGE_MELEE = 32 + 4;
-		public const float WEAPON_RANGE_RANGE = 64 + 4;
-		public static readonly Dictionary<string, int> dropTable = new Dictionary<string, int>()
-		{ { "drop", 60 }, { "questItem", 50 }, { "misc", 50 }, { "foodPotion", 70 }, { "weapon", 60 }, { "armor", 100 }};
+		public const int
+			MIN_LEVEL = 1,
+			MAX_LEVEL = 10,
+			FLEE_DISTANCE = 128,
+			XP_INTERVAL = 1_000,
+			MAX_XP = MAX_LEVEL * XP_INTERVAL;
+
+		public const float
+			HP_MANA_RESPAWN_MIN_LIMIT = 0.3f,
+			WEAPON_RANGE_MELEE = 32.0f + 4.0f,
+			WEAPON_RANGE_RANGE = 64.0f + 4.0f,
+			SPEED = 0.5f,
+			MULTIPLIER = 2.6f;
+		public static readonly Dictionary<AttackTableType, AttackTableNode> ATTACK_TABLE;
 
 		static Stats()
 		{

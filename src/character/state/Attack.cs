@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System;
 using Game.Actor.Doodads;
 using Game.Database;
@@ -9,27 +11,34 @@ namespace Game.Actor.State
 	public class Attack : TakeDamage
 	{
 		private Timer timer = new Timer();
+		public bool attackIgnoreArmor;
+		private string spellName = "";
 
 		public override void _Ready()
 		{
 			base._Ready();
-			AddChild(timer);
+
+			timer.Connect("timeout", this, nameof(OnAttackSpeedTimeout));
 			timer.OneShot = true;
+			AddChild(timer);
 
 			GD.Randomize();
 		}
 		public override void Start()
 		{
+			character.anim.Connect("animation_finished", this, nameof(OnAttackAnimationFinished));
 			character.regenTimer.Stop();
 			AttackStart();
 		}
 		public override void Exit()
 		{
 			timer.Stop();
+			character.anim.Disconnect("animation_finished", this, nameof(OnAttackAnimationFinished));
 			character.anim.Stop();
 			character.regenTimer.Start();
+			attackIgnoreArmor = false;
 		}
-		public async void AttackStart()
+		public void AttackStart()
 		{
 			if (!ValidTarget())
 			{
@@ -47,8 +56,9 @@ namespace Game.Actor.State
 
 			timer.WaitTime = character.stats.weaponSpeed.value;
 			timer.Start();
-			await ToSignal(timer, "timeout");
-
+		}
+		private void OnAttackSpeedTimeout()
+		{
 			if (!ValidTarget())
 			{
 				return;
@@ -61,26 +71,33 @@ namespace Game.Actor.State
 			missilePos.x = Mathf.Abs(missilePos.x) * ((isLeft) ? -1.0f : 1.0f);
 			character.missileSpawnPos.Position = missilePos;
 
-			character.anim.Play("attacking", -1.0f, character.stats.animSpeed.value);
-			await ToSignal(character.anim, "animation_finished");
+			// get spell if any and anim (if npc)
+			spellName = TryGetSpell(character);
 
+			character.anim.Play(
+				SpellDB.HasSpell(spellName)
+				? SpellDB.GetSpellData(spellName).characterAnim
+				: "attacking",
+				-1.0f, character.stats.animSpeed.value);
+		}
+		public void OnAttackAnimationFinished(string animName)
+		{
 			if (!ValidTarget())
 			{
 				return;
 			}
 
 			// if only melee
-			if (GetImageNode().melee)
+			if (GetImageNode(character).melee)
 			{
-				AttackEnd(character, character.target);
+				AttackHit(character, character.target);
 			}
 			else
 			{
-				// TODO: launch missile
-				Projectile.MissileSpell missile = (Projectile.MissileSpell)Projectile.MissileSpell.scene.Instance();
+				Missile missile = MissileFactory.CreateMissile(character, spellName);
 
-				missile.Init(character, character.target, WorldNameDB.FIREBALL);
-				missile.Connect(nameof(Projectile.Missile.OnHit), this, nameof(AttackEnd),
+				// sync missile to attack
+				missile.Connect(nameof(Missile.OnHit), this, nameof(AttackHit),
 					new Godot.Collections.Array() { character, character.target });
 
 				// add to scene
@@ -90,7 +107,7 @@ namespace Game.Actor.State
 
 			AttackStart();
 		}
-		public void AttackEnd(Character character, Character target)
+		public void AttackHit(Character character, Character target)
 		{
 			character.EmitSignal(nameof(Character.NotifyAttack));
 
@@ -100,7 +117,7 @@ namespace Game.Actor.State
 			string soundName;
 			CombatText.TextType hitType;
 
-			ImageDB.ImageNode imageNode = GetImageNode();
+			ImageDB.ImageNode imageNode = GetImageNode(character);
 			Stats.AttackTableNode attackTable = Stats.ATTACK_TABLE[
 				imageNode.melee
 				? Stats.AttackTableType.MELEE
@@ -148,6 +165,11 @@ namespace Game.Actor.State
 				target.SpawnCombatText((damage > 0) ? damage.ToString() : hitType.ToString(), hitType);
 			}
 
+
+			if (!attackIgnoreArmor)
+			{
+				damage -= character.target.stats.armor.valueI;
+			}
 			if (damage > 0)
 			{
 				target.Harm(damage);
@@ -155,9 +177,6 @@ namespace Game.Actor.State
 		}
 		private bool ValidTarget()
 		{
-			// the async await function still waits on
-			// the timer even when I call stop on timer
-			// this is to ensure nothing else gets executed
 			if (fsm.GetState() != FSM.State.ATTACK)
 			{
 				return false;
@@ -193,6 +212,24 @@ namespace Game.Actor.State
 			}
 			return true;
 		}
-		private ImageDB.ImageNode GetImageNode() { return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName()); }
+		private static string TryGetSpell(Character character)
+		{
+			if (character is Npc && ContentDB.HasContent(character.worldName))
+			{
+				// select only spells within range
+				IEnumerable<string> spells =
+				from spellName in ContentDB.GetContentData(character.worldName).spells
+				where SpellDB.GetSpellData(spellName).range >= character.pos.DistanceTo(character.target.pos)
+				select spellName;
+
+				// TODO: need to have a chance table on when a spell can be casted
+				if (spells.Any() && GD.Randi() % 100 + 1 >= 50)
+				{
+					return spells.ElementAt((int)(GD.Randi() % spells.Count()));
+				}
+			}
+			return "";
+		}
+		private static ImageDB.ImageNode GetImageNode(Character character) { return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName()); }
 	}
 }

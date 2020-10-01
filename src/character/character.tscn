@@ -4,7 +4,8 @@
 [ext_resource path="res://src/character/Character.cs" type="Script" id=2]
 [ext_resource path="res://asset/img/character/resource/animations/attacking.tres" type="Animation" id=3]
 [ext_resource path="res://src/character/doodads/CombatTextHandler.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/character/state/fsm.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/character/state/FSM.tscn" type="PackedScene" id=7]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "casting"

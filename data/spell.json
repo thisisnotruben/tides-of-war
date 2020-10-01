@@ -13,6 +13,7 @@
 		"requiresTarget": true,
 		"spellEffect": "DevastateEffect",
 		"sound": "devastate",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -90,6 +91,7 @@
 		"requiresTarget": false,
 		"spellEffect": "IntimidatingShoutEffect",
 		"sound": "frenzy",
+		"characterAnim": "casting",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -167,6 +169,7 @@
 		"requiresTarget": true,
 		"spellEffect": "CleaveEffect",
 		"sound": "cleave",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -244,6 +247,7 @@
 		"requiresTarget": false,
 		"spellEffect": "FortifyEffect",
 		"sound": "fortify",
+		"characterAnim": "casting",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -321,6 +325,7 @@
 		"requiresTarget": true,
 		"spellEffect": "BashEffect",
 		"sound": "bash",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -398,6 +403,7 @@
 		"requiresTarget": true,
 		"spellEffect": "HemorrhageEffect",
 		"sound": "hemorrhage",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -475,6 +481,7 @@
 		"requiresTarget": false,
 		"spellEffect": "StompEffect",
 		"sound": "stomp",
+		"characterAnim": "casting",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -552,6 +559,7 @@
 		"requiresTarget": true,
 		"spellEffect": "OverpowerEffect",
 		"sound": "devastate",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -629,6 +637,7 @@
 		"requiresTarget": false,
 		"spellEffect": "FrenzyEffect",
 		"sound": "frenzy",
+		"characterAnim": "casting",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -706,6 +715,7 @@
 		"requiresTarget": true,
 		"spellEffect": "SearingArrowEffect",
 		"sound": "fireball_hit",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -783,6 +793,7 @@
 		"requiresTarget": true,
 		"spellEffect": "ConcussiveShotEffect",
 		"sound": "concussive_shot",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -860,6 +871,7 @@
 		"requiresTarget": true,
 		"spellEffect": "PiercingShotEffect",
 		"sound": "piercing_shot",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -937,6 +949,7 @@
 		"requiresTarget": true,
 		"spellEffect": "StingingShotEffect",
 		"sound": "stinging_shot",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1014,6 +1027,7 @@
 		"requiresTarget": true,
 		"spellEffect": "ExplosiveArrowEffect",
 		"sound": "explosion",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1091,6 +1105,7 @@
 		"requiresTarget": true,
 		"spellEffect": "PreciseShotEffect",
 		"sound": "piercing_shot",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1168,6 +1183,7 @@
 		"requiresTarget": true,
 		"spellEffect": "SniperShotEffect",
 		"sound": "",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1245,6 +1261,7 @@
 		"requiresTarget": false,
 		"spellEffect": "",
 		"sound": "",
+		"characterAnim": "casting",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1322,6 +1339,7 @@
 		"requiresTarget": true,
 		"spellEffect": "",
 		"sound": "",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1399,6 +1417,7 @@
 		"requiresTarget": true,
 		"spellEffect": "FireballEffect",
 		"sound": "fireball_hit",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1476,6 +1495,7 @@
 		"requiresTarget": true,
 		"spellEffect": "ShadowBoltEffect",
 		"sound": "shadow_bolt_hit",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1553,6 +1573,7 @@
 		"requiresTarget": true,
 		"spellEffect": "FrostBoltEffect",
 		"sound": "Elemental - Ice Impact_1",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1630,6 +1651,7 @@
 		"requiresTarget": false,
 		"spellEffect": "DivineHealEffect",
 		"sound": "divine_heal",
+		"characterAnim": "casting",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1707,6 +1729,7 @@
 		"requiresTarget": true,
 		"spellEffect": "SiphonManaEffect",
 		"sound": "siphon_mana",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1784,6 +1807,7 @@
 		"requiresTarget": false,
 		"spellEffect": "HasteEffect",
 		"sound": "haste",
+		"characterAnim": "casting",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1861,6 +1885,7 @@
 		"requiresTarget": true,
 		"spellEffect": "SlowEffect",
 		"sound": "slow",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1938,6 +1963,7 @@
 		"requiresTarget": true,
 		"spellEffect": "ArcaneBoltEffect",
 		"sound": "arcane_bolt_hit",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -2015,6 +2041,7 @@
 		"requiresTarget": true,
 		"spellEffect": "MindBlastEffect",
 		"sound": "mind_blast",
+		"characterAnim": "attacking",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -2092,6 +2119,7 @@
 		"requiresTarget": false,
 		"spellEffect": "MeteorEffect",
 		"sound": "",
+		"characterAnim": "casting",
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {

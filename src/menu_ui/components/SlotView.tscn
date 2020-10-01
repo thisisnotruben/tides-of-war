@@ -100,5 +100,6 @@ max_lines_visible = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="tween_completed" from="tween" to="." method="OnTweenCompleted"]
 [connection signal="button_down" from="button" to="." method="OnButtonChanged" binds= [ true ]]
 [connection signal="button_up" from="button" to="." method="OnButtonChanged" binds= [ false ]]

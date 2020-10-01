@@ -33,7 +33,7 @@ namespace Game.Map
 		}
 		public void SetVeil(bool on)
 		{
-			Particles2D veil = GetNode<Particles2D>("veil_fog");
+			Particles2D veil = GetNode<Particles2D>("VeilFog");
 			veil.Emitting = on;
 			if (on)
 			{
@@ -59,7 +59,7 @@ namespace Game.Map
 		private void SetVeilSize()
 		{
 			Vector2 veilSize = mapSize * HALF_CELL_SIZE;
-			Particles2D veil = GetNode<Particles2D>("veil_fog");
+			Particles2D veil = GetNode<Particles2D>("VeilFog");
 			ParticlesMaterial veilMaterial = (ParticlesMaterial)veil.ProcessMaterial;
 			veilMaterial.EmissionBoxExtents = new Vector3(veilSize.x, veilSize.y, 0.0f);
 			veil.Amount = (int)((veilSize.x + veilSize.y) / 2.0f);

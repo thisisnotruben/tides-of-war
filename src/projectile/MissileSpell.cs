@@ -9,12 +9,14 @@ namespace Game.Projectile
 	{
 		public new static PackedScene scene = (PackedScene)GD.Load("res://src/projectile/MissileSpell.tscn");
 
+		private Timer timer;
 		protected SpellProto spell;
 
 		public override void _Ready()
 		{
 			base._Ready();
 			Connect(nameof(OnHit), this, nameof(StartSpell));
+			timer = GetNode<Timer>("timer");
 
 			// can't add in Init due to this section needing nodes
 			if (spell != null && SpellDB.HasSpellMissile(spell.worldName))
@@ -70,26 +72,6 @@ namespace Game.Projectile
 			}
 		}
 		public void StartSpell() { spell?.Start(); }
-		public async override void OnHitBoxEntered(Area2D area2D)
-		{
-			if (DidHitTarget(area2D))
-			{
-				hit = true;
-				ZIndex = 1;
-				CallDeferred("set", hitbox.Monitoring, false);
-
-				EmitSignal(nameof(OnHit));
-
-				anim.Play("missileFade");
-				await ToSignal(anim, "animation_finished");
-
-				// allow spell it animation if any to process then delete
-				await ToSignal(GetTree().CreateTimer(2.5f), "timeout");
-
-				tween.RemoveAll();
-				SetProcess(false);
-				QueueFree();
-			}
-		}
+		public override void OnMissileFadeFinished(string animName) { timer.Start(); }
 	}
 }

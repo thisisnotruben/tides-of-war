@@ -11,17 +11,18 @@ namespace Game.Ui
 		private List<Vector2> path = new List<Vector2>();
 		private Vector2 mapRatio = new Vector2();
 		private Player player;
+
 		public override void _Ready()
 		{
-			// player = ((InGameMenu)Owner).player;
 			SetProcess(false);
-			return;
-			string mapName = Map.Map.map.Name;
-			string miniMapPath = $"res://asset/img/map/{mapName}.png";
-			if (new Directory().FileExists(miniMapPath))
-			{
-				GetNode<Sprite>("map").Texture = (Texture)GD.Load(miniMapPath);
-			}
+			// player = ((InGameMenu)Owner).player;
+			// return;
+			// string mapName = Map.Map.map.Name;
+			// string miniMapPath = $"res://asset/img/map/{mapName}.png";
+			// if (new Directory().FileExists(miniMapPath))
+			// {
+			// 	GetNode<Sprite>("map").Texture = (Texture)GD.Load(miniMapPath);
+			// }
 		}
 		public override void _Process(float delta)
 		{

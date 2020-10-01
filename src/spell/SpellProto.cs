@@ -7,7 +7,7 @@ namespace Game.Ability
 		/* 
 					!──TODO──!
 		 *	─01 []`Arcane bolt` implementation
-		 *	─02 []`Bash`: ability to stun
+		 *	─02 [✓]`Bash`: ability to stun
 		 *	─03 []`Divine Heal`: heals in % of health not abs
 		 *	─04 []`Explosive Arrow` && `Explosive Trap`: need a blast area upon impact
 		 *	─05 []`Intimidating Shout`: need a radius in which in affect

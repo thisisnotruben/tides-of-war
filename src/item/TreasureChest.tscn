@@ -101,6 +101,13 @@ __meta__ = {
 
 [node name="speaker2d" parent="." instance=ExtResource( 2 )]
 
+[node name="timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+__meta__ = {
+"_editor_description_": "to make sure the sound plays entirely"
+}
+
 [node name="anim" type="AnimationPlayer" parent="."]
 anims/close_chest = SubResource( 1 )
 anims/collect = SubResource( 2 )
@@ -133,6 +140,9 @@ process_material = SubResource( 5 )
 [node name="select" type="TouchScreenButton" parent="."]
 position = Vector2( -11, 0 )
 shape = SubResource( 6 )
+[connection signal="timeout" from="timer" to="." method="Delete"]
+[connection signal="animation_finished" from="anim" to="." method="OnAnimFinished"]
+[connection signal="tween_completed" from="tween" to="." method="OnTweenCompleted"]
 [connection signal="area_entered" from="sight" to="." method="_OnSightAreaEntered"]
 [connection signal="area_exited" from="sight" to="." method="_OnSightAreaExited"]
 [connection signal="pressed" from="select" to="." method="_OnSelectPressed"]

@@ -11,7 +11,7 @@ namespace Game.Database
 		{
 			public AtlasTexture icon;
 			public int level, goldCost, range, coolDown, stackSize, manaCost;
-			public string type, blurb, spellEffect, sound;
+			public string type, blurb, spellEffect, sound, characterAnim;
 			public float pctDamage;
 			public bool ignoreArmor, effectOnTarget, requiresTarget;
 			public ItemDB.Modifiers modifiers;
@@ -65,6 +65,7 @@ namespace Game.Database
 				spellNode.requiresTarget = (bool)itemDict[nameof(SpellNode.requiresTarget)];
 				spellNode.spellEffect = (string)itemDict[nameof(SpellNode.spellEffect)];
 				spellNode.sound = (string)itemDict[nameof(SpellNode.sound)];
+				spellNode.characterAnim = (string)itemDict[nameof(SpellNode.characterAnim)];
 				spellNode.stackSize = 1;
 				spellNode.manaCost = -1; // TODO
 

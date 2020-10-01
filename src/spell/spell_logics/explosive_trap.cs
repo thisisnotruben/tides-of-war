@@ -1,5 +1,5 @@
 using Godot;
-using Game.Missile;
+using Game.MissileDEP;
 namespace Game.Ability
 {
 	public class explosive_trap : Spell

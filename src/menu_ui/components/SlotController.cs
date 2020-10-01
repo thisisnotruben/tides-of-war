@@ -7,8 +7,7 @@ namespace Game.Ui
 	{
 		private Tween tween;
 		private ColorRect cooldownOverlay;
-		private Label coolDownText;
-		private Label stackCount;
+		private Label coolDownText, stackCount;
 		private TextureRect icon;
 		private BaseButton _button;
 		public BaseButton button { get { return _button; } }
@@ -41,7 +40,7 @@ namespace Game.Ui
 			cooldownOverlay.Hide();
 			tween.RemoveAll();
 		}
-		public async void SetCooldown(float time)
+		public void SetCooldown(float time)
 		{
 			if (time == 0.0f)
 			{
@@ -55,13 +54,13 @@ namespace Game.Ui
 				time, 0.0f, time,
 				Tween.TransitionType.Linear, Tween.EaseType.In);
 			tween.Start();
-
-			await ToSignal(tween, "tween_completed");
-
+		}
+		public void OnTweenCompleted(Godot.Object gObject, NodePath key)
+		{
 			coolDownText.Hide();
 			cooldownOverlay.Hide();
 		}
-		public void OnButtonChanged(bool down) { icon.RectScale = (down) ? new Vector2(0.8f, 0.8f) : new Vector2(1.0f, 1.0f); }
+		public void OnButtonChanged(bool down) { icon.RectScale = (down) ? new Vector2(0.8f, 0.8f) : Vector2.One; }
 		private void SetCooldownText(float time) { coolDownText.Text = Math.Round(time, 0).ToString(); }
 	}
 }

@@ -8,7 +8,7 @@ namespace Game.Actor.State
 		private const int MAX_HISTORY = 10;
 		public enum State
 		{
-			IDLE, ATTACK, ALIVE, DEAD, IDLE_DEAD,
+			IDLE, ATTACK, ALIVE, DEAD, IDLE_DEAD, STUN,
 			PLAYER_MOVE, PLAYER_MOVE_DEAD,
 			NPC_MOVE_ROAM, NPC_MOVE_ATTACK, NPC_MOVE_RETURN
 		}
@@ -18,11 +18,12 @@ namespace Game.Actor.State
 		public override void _Ready()
 		{
 			stateMap[State.IDLE] = (Idle)GetChild((int)State.IDLE);
-			stateMap[State.PLAYER_MOVE] = (MovePlayer)GetChild((int)State.PLAYER_MOVE);
 			stateMap[State.ATTACK] = (Attack)GetChild((int)State.ATTACK);
 			stateMap[State.ALIVE] = (Alive)GetChild((int)State.ALIVE);
 			stateMap[State.DEAD] = (Dead)GetChild((int)State.DEAD);
 			stateMap[State.IDLE_DEAD] = (IdleDead)GetChild((int)State.IDLE_DEAD);
+			stateMap[State.STUN] = (Stun)GetChild((int)State.STUN);
+			stateMap[State.PLAYER_MOVE] = (MovePlayer)GetChild((int)State.PLAYER_MOVE);
 			stateMap[State.PLAYER_MOVE_DEAD] = (MovePlayerDead)GetChild((int)State.PLAYER_MOVE_DEAD);
 			stateMap[State.NPC_MOVE_ROAM] = (MoveNpcRoam)GetChild((int)State.NPC_MOVE_ROAM);
 			stateMap[State.NPC_MOVE_ATTACK] = (MoveNpcAttack)GetChild((int)State.NPC_MOVE_ATTACK);

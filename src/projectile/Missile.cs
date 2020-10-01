@@ -51,25 +51,24 @@ namespace Game.Projectile
 				Tween.TransitionType.Circ, Tween.EaseType.Out);
 			tween.Start();
 		}
-		protected bool DidHitTarget(Area2D area2D) { return (area2D.Owner as Character) == target && !hit; }
-		public async virtual void OnHitBoxEntered(Area2D area2D)
+		public void OnHitBoxEntered(Area2D area2D)
 		{
-			if (DidHitTarget(area2D))
+			if (!hit && (area2D.Owner as Character) == target)
 			{
 				hit = true;
 				ZIndex = 1;
-				CallDeferred("set", hitbox.Monitoring, false);
 
 				EmitSignal(nameof(OnHit));
 
 				anim.Play("missileFade");
-				await ToSignal(anim, "animation_finished");
-
-				// delete self
-				SetProcess(false);
-				tween.RemoveAll();
-				QueueFree();
 			}
+		}
+		public virtual void OnMissileFadeFinished(string animName) { Delete(); }
+		protected void Delete()
+		{
+			SetProcess(false);
+			tween.RemoveAll();
+			QueueFree();
 		}
 	}
 }

@@ -189,17 +189,6 @@ namespace Game.Actor
 			combatText.Init(text, textType, img.Position);
 			combatTextHandler.AddCombatText(combatText);
 		}
-		public async void Cast()
-		{
-			if (spell != null)
-			{
-				SetProcess(false);
-				spell.Cast();
-				await ToSignal(anim, "animation_finished");
-				img.Frame = 0;
-				SetProcess(true);
-			}
-		}
 		public void SetCurrentSpell(Spell spell) { this.spell = spell; }
 		public void SetSpell(Spell spell, float seek = 0.0f)
 		{

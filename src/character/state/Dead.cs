@@ -8,15 +8,26 @@ namespace Game.Actor.State
 {
 	public class Dead : StateBehavior
 	{
+		private const string deathAnim = "dying";
+		private Timer timer = new Timer();
+
+		public override void _Ready()
+		{
+			base._Ready();
+			timer.OneShot = true;
+			AddChild(timer);
+			timer.Connect("timeout", this, nameof(OnNpcRespawn));
+		}
 		public override void Start()
 		{
+			character.anim.Connect("animation_finished", this, nameof(DieEnd));
 			character.regenTimer.Stop();
 			GD.Randomize();
-			Die();
+			DieStart();
 		}
-		public override void Exit() { }
+		public override void Exit() { character.anim.Disconnect("animation_finished", this, nameof(DieEnd)); }
 		public override void UnhandledInput(InputEvent @event) { }
-		private async void Die()
+		private void DieStart()
 		{
 			// changing character detection
 			character.hitBox.CollisionLayer = (uint)Character.CollMask.DEAD;
@@ -39,8 +50,15 @@ namespace Game.Actor.State
 			}
 
 			// play death animation
-			character.anim.Play("dying");
-			await ToSignal(character.anim, "animation_finished");
+			character.anim.Play(deathAnim);
+		}
+		private void DieEnd(string animName)
+		{
+			if (!animName.Equals(deathAnim))
+			{
+				return;
+			}
+
 			character.Modulate = new Color("bfffffff");
 
 			foreach (Spell spell in character.spellQueue)
@@ -84,13 +102,18 @@ namespace Game.Actor.State
 				}
 				character.GlobalPosition = UnitDB.GetUnitData(character.Name).spawnPos;
 
-				// create spawn timer
-				await ToSignal(GetTree().CreateTimer((float)GD.RandRange(60.0, 240.0), false), "timeout");
-
+				// set spawn timer
+				timer.WaitTime = (float)GD.RandRange(60.0, 240.0);
+				timer.Start();
+			}
+		}
+		private void OnNpcRespawn()
+		{
+			if (character is Npc)
+			{
 				character.sight.Monitoring = true;
 				fsm.ChangeState(FSM.State.ALIVE);
 			}
-
 		}
 	}
 }

@@ -31,12 +31,8 @@ namespace Game
 		public const string HUD_SHORTCUT_GROUP = "HUD-shortcut";
 		public const string SAVE_GROUP = "save";
 		public static Dictionary<string, AudioStream> sndData = new Dictionary<string, AudioStream>();
-		public static WorldQuests worldQuests { get; private set; }
 
-		public override void _Ready()
-		{
-			LoadSnd();
-		}
+		public override void _Ready() { LoadSnd(); }
 		private void LoadSnd(string path = "res://asset/snd")
 		{
 			sndData.Clear();
