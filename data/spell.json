@@ -14,6 +14,7 @@
 		"spellEffect": "DevastateEffect",
 		"sound": "devastate",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -57,8 +58,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -72,8 +73,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -92,8 +93,9 @@
 		"spellEffect": "IntimidatingShoutEffect",
 		"sound": "frenzy",
 		"characterAnim": "casting",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 5,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -135,8 +137,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -150,8 +152,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -170,6 +172,7 @@
 		"spellEffect": "CleaveEffect",
 		"sound": "cleave",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -213,8 +216,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -228,8 +231,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -248,8 +251,9 @@
 		"spellEffect": "FortifyEffect",
 		"sound": "fortify",
 		"characterAnim": "casting",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 60,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -291,8 +295,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -306,8 +310,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -326,6 +330,7 @@
 		"spellEffect": "BashEffect",
 		"sound": "bash",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -369,8 +374,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -384,8 +389,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -394,7 +399,7 @@
 		"icon": 1227,
 		"level": 6,
 		"goldCost": 1,
-		"blurb": "Tears open target dealing 5% damage initially, then deals up to 25 damage in 1 min.",
+		"blurb": "Tears open target dealing up to 25 damage in 1 min.",
 		"coolDown": 110,
 		"range": 32,
 		"pctDamage": 1.05,
@@ -404,8 +409,9 @@
 		"spellEffect": "HemorrhageEffect",
 		"sound": "hemorrhage",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 60,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -447,12 +453,12 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
-			"repeatSec": 0,
+			"repeatSec": 12,
 			"hp": {
 				"type": "FLAT",
 				"value": 0
@@ -462,8 +468,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -482,6 +488,7 @@
 		"spellEffect": "StompEffect",
 		"sound": "stomp",
 		"characterAnim": "casting",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -525,8 +532,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -540,8 +547,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -560,6 +567,7 @@
 		"spellEffect": "OverpowerEffect",
 		"sound": "devastate",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -603,8 +611,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -618,8 +626,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -638,8 +646,9 @@
 		"spellEffect": "FrenzyEffect",
 		"sound": "frenzy",
 		"characterAnim": "casting",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 120,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -681,12 +690,12 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
-			"repeatSec": 0,
+			"repeatSec": 5,
 			"hp": {
 				"type": "FLAT",
 				"value": 0
@@ -696,8 +705,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -716,8 +725,9 @@
 		"spellEffect": "SearingArrowEffect",
 		"sound": "fireball_hit",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 75,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -759,12 +769,12 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
-			"repeatSec": 0,
+			"repeatSec": 15,
 			"hp": {
 				"type": "FLAT",
 				"value": 0
@@ -774,8 +784,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -794,8 +804,9 @@
 		"spellEffect": "ConcussiveShotEffect",
 		"sound": "concussive_shot",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 10,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -837,8 +848,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -852,8 +863,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -872,6 +883,7 @@
 		"spellEffect": "PiercingShotEffect",
 		"sound": "piercing_shot",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -915,8 +927,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -930,8 +942,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -950,8 +962,9 @@
 		"spellEffect": "StingingShotEffect",
 		"sound": "stinging_shot",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 30,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -993,12 +1006,12 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
-			"repeatSec": 0,
+			"repeatSec": 2,
 			"hp": {
 				"type": "FLAT",
 				"value": 0
@@ -1008,8 +1021,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1028,6 +1041,7 @@
 		"spellEffect": "ExplosiveArrowEffect",
 		"sound": "explosion",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1071,8 +1085,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1086,8 +1100,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1106,6 +1120,7 @@
 		"spellEffect": "PreciseShotEffect",
 		"sound": "piercing_shot",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1149,8 +1164,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1164,8 +1179,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1184,6 +1199,7 @@
 		"spellEffect": "SniperShotEffect",
 		"sound": "",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1227,8 +1243,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1242,8 +1258,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1262,6 +1278,7 @@
 		"spellEffect": "",
 		"sound": "",
 		"characterAnim": "casting",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1305,8 +1322,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1320,8 +1337,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1340,6 +1357,7 @@
 		"spellEffect": "",
 		"sound": "",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1383,8 +1401,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1398,8 +1416,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1418,8 +1436,9 @@
 		"spellEffect": "FireballEffect",
 		"sound": "fireball_hit",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 30,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1461,12 +1480,12 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
-			"repeatSec": 0,
+			"repeatSec": 10,
 			"hp": {
 				"type": "FLAT",
 				"value": 0
@@ -1476,8 +1495,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1496,6 +1515,7 @@
 		"spellEffect": "ShadowBoltEffect",
 		"sound": "shadow_bolt_hit",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1539,8 +1559,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1554,8 +1574,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1574,8 +1594,9 @@
 		"spellEffect": "FrostBoltEffect",
 		"sound": "Elemental - Ice Impact_1",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 10,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1617,8 +1638,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1632,8 +1653,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1652,6 +1673,7 @@
 		"spellEffect": "DivineHealEffect",
 		"sound": "divine_heal",
 		"characterAnim": "casting",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -1695,8 +1717,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1710,8 +1732,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1730,8 +1752,9 @@
 		"spellEffect": "SiphonManaEffect",
 		"sound": "siphon_mana",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 10,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1773,8 +1796,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1788,8 +1811,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1808,8 +1831,9 @@
 		"spellEffect": "HasteEffect",
 		"sound": "haste",
 		"characterAnim": "casting",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 10,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1851,8 +1875,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1866,8 +1890,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1886,8 +1910,9 @@
 		"spellEffect": "SlowEffect",
 		"sound": "slow",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 0,
+			"durationSec": 15,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1929,8 +1954,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -1944,8 +1969,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -1964,6 +1989,7 @@
 		"spellEffect": "ArcaneBoltEffect",
 		"sound": "arcane_bolt_hit",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -2007,8 +2033,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -2022,8 +2048,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -2042,6 +2068,7 @@
 		"spellEffect": "MindBlastEffect",
 		"sound": "mind_blast",
 		"characterAnim": "attacking",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -2085,8 +2112,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -2100,8 +2127,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	},
@@ -2120,6 +2147,7 @@
 		"spellEffect": "MeteorEffect",
 		"sound": "",
 		"characterAnim": "casting",
+		"manaCost": 0,
 		"modifiers": {
 			"durationSec": 0,
 			"stamina": {
@@ -2163,8 +2191,8 @@
 				"value": 0
 			},
 			"weaponSpeed": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
@@ -2178,8 +2206,8 @@
 				"value": 0
 			},
 			"damage": {
-				"type": "FLAT",
-				"value": 0
+				"type": "PERCENT_MUL",
+				"value": 20
 			}
 		}
 	}

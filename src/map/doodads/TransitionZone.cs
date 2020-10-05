@@ -13,17 +13,14 @@ namespace Game.Map.Doodads
 				return;
 			}
 
-			string sceneMapPath = $"res://src/map/{Name}.tscn";
-			string mapName = Name;
-			if (new File().FileExists(sceneMapPath))
+			string sceneMapPath = $"res://src/map/{Name}.tscn",
+				mapName = Name;
+			if (ResourceLoader.Exists(sceneMapPath))
 			{
 				Name = Name + "-DELETE";
 				SceneLoaderController.Init().SetScene(sceneMapPath, Map.map, true);
 			}
 		}
-		public void _OnPlayerExited(Area2D area)
-		{
-
-		}
+		public void _OnPlayerExited(Area2D area) { }
 	}
 }

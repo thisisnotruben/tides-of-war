@@ -67,7 +67,7 @@ namespace Game.Database
 				spellNode.sound = (string)itemDict[nameof(SpellNode.sound)];
 				spellNode.characterAnim = (string)itemDict[nameof(SpellNode.characterAnim)];
 				spellNode.stackSize = 1;
-				spellNode.manaCost = -1; // TODO
+				spellNode.manaCost = (int)((Single)itemDict[nameof(SpellNode.manaCost)]);
 
 				// set modifiers
 				ItemDB.Modifiers modifiers;

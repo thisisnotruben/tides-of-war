@@ -29,7 +29,7 @@ namespace Game.Map.Doodads
 		}
 		public void Deserialize(Godot.Collections.Dictionary payload)
 		{
-			dayLight = (bool)payload[nameof(dayLight)];
+			dayLight = (bool)payload["dayLight"];
 
 			if ((bool)payload["animPlaying"])
 			{
@@ -50,7 +50,7 @@ namespace Game.Map.Doodads
 				{"animPosition", anim.CurrentAnimationPosition},
 				{"animPlaying", anim.IsPlaying()},
 				{"timerPosition", TimeLeft},
-				{nameof(dayLight), dayLight}
+				{"dayLight", dayLight}
 			};
 		}
 	}

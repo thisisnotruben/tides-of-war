@@ -230,7 +230,7 @@ namespace Game.ItemPoto
 				useTimer.Stop();
 			}
 		}
-		public async virtual void Start()
+		public virtual void Start()
 		{
 			if (IsCoolingDown(character, worldName))
 			{

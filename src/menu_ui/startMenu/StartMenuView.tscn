@@ -99,7 +99,7 @@ __meta__ = {
 [node name="load" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
 margin_top = 404.0
 margin_right = 520.0
-margin_bottom = 569.0
+margin_bottom = 570.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 8 )
@@ -119,9 +119,9 @@ __meta__ = {
 }
 
 [node name="settings" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
-margin_top = 573.0
+margin_top = 574.0
 margin_right = 520.0
-margin_bottom = 738.0
+margin_bottom = 740.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 8 )
@@ -141,9 +141,9 @@ __meta__ = {
 }
 
 [node name="about" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
-margin_top = 742.0
+margin_top = 744.0
 margin_right = 520.0
-margin_bottom = 907.0
+margin_bottom = 910.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture_normal = ExtResource( 8 )
@@ -163,7 +163,7 @@ __meta__ = {
 }
 
 [node name="exit" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
-margin_top = 911.0
+margin_top = 914.0
 margin_right = 520.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3

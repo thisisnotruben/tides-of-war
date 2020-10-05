@@ -9,16 +9,13 @@ namespace Game.Map
 		private TileMap collNav;
 		private readonly AStar2D aStar = new AStar2D();
 		private static readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
-		private const float ASTAR_OCCUPIED_WEIGHT = 50.0f;
-		private const float ASTAR_ITEM_WEIGHT = 25.0f;
-		private const float ASTAR_NORMAL_WEIGHT = 1.0f;
+		private const float ASTAR_OCCUPIED_WEIGHT = 50.0f,
+			ASTAR_ITEM_WEIGHT = 25.0f,
+			ASTAR_NORMAL_WEIGHT = 1.0f;
 		private Vector2 mapSize;
 		public static Map map;
 
-		public Map()
-		{
-			map = this;
-		}
+		public Map() { map = this; }
 		public override void _Ready()
 		{
 			collNav = GetNode<TileMap>("meta/coll_nav");
@@ -27,10 +24,7 @@ namespace Game.Map
 			SetVeilSize();
 			SetPlayerCameraLimits();
 		}
-		public void AddZChild(Node node)
-		{
-			GetNode("zed/z1").AddChild(node);
-		}
+		public void AddZChild(Node node) { GetNode("zed/z1").AddChild(node); }
 		public void SetVeil(bool on)
 		{
 			Particles2D veil = GetNode<Particles2D>("VeilFog");
@@ -70,21 +64,10 @@ namespace Game.Map
 		{
 			aStar.Clear();
 
-			int y;
-			int x;
-			int tileId;
-			Vector2 from;
-			int fromIdx;
-
-			int toY;
-			int toX;
-			Vector2 to;
-			int toIdx;
-			int toTileId;
-
+			int x, y, tileId, fromIdx, toX, toY, toIdx, toTileId;
+			Vector2 from, to, direction;
 			CollNavDB.collNavTile fromTile;
 			CollNavDB.Ordinal ordinal;
-			Vector2 direction;
 
 			// for each tile in map
 			for (y = 0; y < (int)mapSize.y; y++)
@@ -162,7 +145,7 @@ namespace Game.Map
 								continue;
 							}
 
-							// connect by the rules in 'coll_nav.json'
+							// connect by the rules in 'collNav.json'
 							if (CollNavDB.CanConnect(fromTile, (CollNavDB.collNavTile)toTileId, ordinal))
 							{
 								aStar.AddPoint(toIdx, collNav.MapToWorld(to) + HALF_CELL_SIZE, ASTAR_NORMAL_WEIGHT);
@@ -179,10 +162,9 @@ namespace Game.Map
 		}
 		private int GetPointIndex(Vector2 point)
 		{
-			int x = (int)point.x;
-			int y = (int)point.y;
 			// Cantor pairing function
-			return ((x + y + 1) * (x + y)) / 2 * y;
+			int x = (int)point.x, y = (int)point.y;
+			return ((x + y) * (x + y + 1)) / 2 + y;
 		}
 		private void SetPointWeight(Vector2 worldPosition, float weight)
 		{
@@ -191,14 +173,12 @@ namespace Game.Map
 		public List<Vector2> getAPath(Vector2 worldStart, Vector2 worldEnd)
 		{
 			List<Vector2> worldPath = new List<Vector2>();
-			int worldStartPointIdx = GetPointIndex(collNav.WorldToMap(worldStart));
-			int worldEndPointIdx = GetPointIndex(collNav.WorldToMap(worldEnd));
+			int worldStartPointIdx = GetPointIndex(collNav.WorldToMap(worldStart)),
+				worldEndPointIdx = GetPointIndex(collNav.WorldToMap(worldEnd));
+
 			if (aStar.HasPoint(worldStartPointIdx) && aStar.HasPoint(worldEndPointIdx))
 			{
-				foreach (Vector2 point in aStar.GetPointPath(worldStartPointIdx, worldEndPointIdx))
-				{
-					worldPath.Add(point);
-				}
+				worldPath.AddRange(aStar.GetPointPath(worldStartPointIdx, worldEndPointIdx));
 			}
 			return worldPath;
 		}
@@ -218,7 +198,7 @@ namespace Game.Map
 				{
 					aStar.SetPointWeightScale(currentPointIndex, ASTAR_NORMAL_WEIGHT);
 				}
-				aStar.SetPointWeightScale(targetPointIndex, ASTAR_OCCUPIED_WEIGHT);
+				// aStar.SetPointWeightScale(targetPointIndex, ASTAR_OCCUPIED_WEIGHT);
 				return collNav.MapToWorld(cellTarget) + HALF_CELL_SIZE;
 			}
 			return new Vector2();

@@ -63,9 +63,9 @@ namespace Game.Ui
 			// load map specific data
 			string mapPath = scenePath.GetFile().BaseName();
 			mapPath = $"res://data/{mapPath}/{mapPath}";
-			string dataPath = mapPath + ".json";
-			string contentPath = mapPath + "_content.json";
-			string questPath = mapPath + "_quest.json";
+			string dataPath = mapPath + ".json",
+				contentPath = mapPath + "_content.json",
+				questPath = mapPath + "_quest.json";
 
 			Directory directory = new Directory();
 			if (directory.FileExists(dataPath))

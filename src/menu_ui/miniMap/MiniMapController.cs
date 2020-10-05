@@ -6,8 +6,8 @@ namespace Game.Ui
 {
 	public class MiniMapController : Node2D
 	{
-		private readonly Vector2 drawSize = new Vector2(14.0f, 14.0f);
-		private readonly Vector2 offset = new Vector2(7.0f, 0.0f);
+		private readonly Vector2 drawSize = new Vector2(14.0f, 14.0f),
+			offset = new Vector2(7.0f, 0.0f);
 		private List<Vector2> path = new List<Vector2>();
 		private Vector2 mapRatio = new Vector2();
 		private Player player;
@@ -42,7 +42,6 @@ namespace Game.Ui
 			{
 				Rect2 rect2 = new Rect2(playerPos - ScaleToMapRatio(player.pos - character.pos) - offset, drawSize);
 				Color rectColor = new Color("#ffffff");
-				// TODO
 				// switch (character.worldType)
 				// {
 				//     case Character.WorldTypes.PLAYER:
@@ -57,7 +56,6 @@ namespace Game.Ui
 				//         rectColor = new Color("#00ff00");
 				//         break;
 				//     case Character.WorldTypes.HEALER:
-				//         GD.Print("TODO: add color for healer");
 				//         break;
 				// }
 				DrawRect(rect2, rectColor);
@@ -84,7 +82,6 @@ namespace Game.Ui
 				mapRatio = tileMap.GetUsedRect().Size * tileMap.CellSize / (map.Texture.GetSize() * map.Scale);
 				mapRatio = new Vector2(1.0f / mapRatio.x, 1.0f / mapRatio.y);
 			}
-			// TODO
 			// if (player.dead && !player.gravePos.Equals(new Vector2()) && path.Count == 0)
 			// {
 			//     path = Map.Map.map.getAPath(player.GlobalPosition, player.gravePos);

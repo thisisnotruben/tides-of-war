@@ -4,8 +4,8 @@ namespace Game.Ui
 {
 	public class SaveLoadModel : Node
 	{
-		public const string DEFAULT_SAVE_FILE_NAME = "Slot {0}";
-		public const string SAVE_PATH = "res://data/save/{0}.json";
+		public const string DEFAULT_SAVE_FILE_NAME = "Slot {0}",
+			SAVE_PATH = "res://data/save/{0}.json";
 		public const int MAX_SAVE_FILES = 8;
 		private static Dictionary<int, string> saveFileNames = new Dictionary<int, string>();
 		private static readonly File file = new File();
