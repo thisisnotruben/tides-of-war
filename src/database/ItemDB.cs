@@ -98,13 +98,14 @@ namespace Game.Database
 				Enum.Parse(typeof(StatModifier.StatModType), (string)modifierDict["type"]);
 			modifierNode.value = (float)((Single)modifierDict["value"]);
 
-			if (primaryTag.Equals("use")
-			&& (modifierNode.type == StatModifier.StatModType.PERCENT_ADD
-			|| (modifierNode.type != StatModifier.StatModType.FLAT && attribute.Equals(nameof(Use.damage)))))
-			{
-				// this doesn't make sense for one-time use attributes so throw exception
-				throw new Exception($"{nameof(Use)} type cannot be : {modifierNode.type}");
-			}
+			// TODO: rethink this
+			// if (primaryTag.Equals("use")
+			// && (modifierNode.type == StatModifier.StatModType.PERCENT_ADD
+			// || (modifierNode.type != StatModifier.StatModType.FLAT && attribute.Equals(nameof(Use.damage)))))
+			// {
+			// 	// this doesn't make sense for one-time use attributes so throw exception
+			// 	throw new Exception($"{nameof(Use)} type cannot be : {modifierNode.type}");
+			// }
 
 			return modifierNode;
 		}

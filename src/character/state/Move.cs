@@ -5,9 +5,20 @@ namespace Game.Actor.State
 	public abstract class Move : TakeDamage
 	{
 		public enum MoveAnomalyType { INVALID_PATH, OBSTRUCTION_DETECTED }
-		private protected Tween tween = new Tween();
-		private protected List<Vector2> path = new List<Vector2>();
-		private protected List<Vector2> reservedPath = new List<Vector2>();
+
+		protected Tween tween = new Tween();
+
+		private Queue<Vector2> reservedPath = new Queue<Vector2>();
+		protected Queue<Vector2> _path = new Queue<Vector2>();
+		protected Queue<Vector2> path
+		{
+			get { return _path; }
+			set
+			{
+				ResetPath();
+				_path = value;
+			}
+		}
 
 		public override void _Ready()
 		{
@@ -15,12 +26,13 @@ namespace Game.Actor.State
 			AddChild(tween);
 			tween.PlaybackProcessMode = Tween.TweenProcessMode.Physics;
 			tween.Connect("tween_completed", this, nameof(_OnTweenCompleted));
+			tween.Connect("tween_completed", this, nameof(_OnMoveCompleted));
 		}
 		public override void Start()
 		{
 			character.img.FlipH = false;
 			character.anim.Play("moving", -1, character.stats.animSpeed.value);
-			character.anim.Seek(0.3f, true);
+			character.anim.Seek(0.33f, true);
 		}
 		public override void Exit()
 		{
@@ -28,29 +40,42 @@ namespace Game.Actor.State
 			tween.StopAll();
 			character.anim.Stop();
 			character.img.Frame = 0;
+			path.Clear();
+		}
+		protected void ResetPath()
+		{
+			if (reservedPath.Count > 0)
+			{
+				if (fsm.IsMoving())
+				{
+					Map.Map.map.OccupyCell(reservedPath.Peek(), false);
+				}
+				reservedPath.Dequeue();
+			}
 		}
 		private void MoveCharacter(Vector2 targetPosition, float speedModifier = Stats.SPEED)
 		{
-			tween.StopAll();
+			// tween.StopAll();
 			tween.InterpolateProperty(character, ":global_position", character.GlobalPosition, targetPosition,
 				character.GlobalPosition.DistanceTo(targetPosition) / 16.0f * speedModifier,
 				Tween.TransitionType.Linear, Tween.EaseType.In);
 			tween.Start();
 		}
-		private protected void MoveTo(List<Vector2> route)
+		private protected void MoveTo(Queue<Vector2> route)
 		{
 			if (route.Count == 0)
 			{
 				OnMoveAnomaly(MoveAnomalyType.INVALID_PATH);
 				return;
 			}
-			Vector2 direction = Map.Map.map.GetDirection(character.GlobalPosition, route[0]);
+
+			Vector2 direction = Map.Map.map.GetDirection(character.GlobalPosition, route.Peek());
 			while (route.Count > 0 && direction.Equals(Vector2.Zero))
 			{
-				route.RemoveAt(0);
+				route.Dequeue();
 				if (route.Count > 0)
 				{
-					direction = Map.Map.map.GetDirection(character.GlobalPosition, route[0]);
+					direction = Map.Map.map.GetDirection(character.GlobalPosition, route.Peek());
 				}
 			}
 			if (route.Count == 0)
@@ -59,12 +84,12 @@ namespace Game.Actor.State
 				return;
 			}
 
-			route[0] = Map.Map.map.RequestMove(character.GlobalPosition, direction);
-			if (!route[0].Equals(Vector2.Zero))
+			if (Map.Map.map.IsValidMove(route.Peek()))
 			{
-				reservedPath.Add(route[0]);
-				MoveCharacter(route[0], Stats.MapAnimMoveSpeed(character.stats.animSpeed.value));
-				route.RemoveAt(0);
+				Map.Map.map.OccupyCell(route.Peek(), true);
+				reservedPath.Enqueue(route.Peek());
+
+				MoveCharacter(route.Dequeue(), Stats.MapAnimMoveSpeed(character.stats.animSpeed.value));
 			}
 			else
 			{
@@ -83,13 +108,14 @@ namespace Game.Actor.State
 					return;
 				}
 
-				fsm.ChangeState((fsm.IsDead()) ? FSM.State.IDLE_DEAD : FSM.State.IDLE);
+				fsm.ChangeState(fsm.IsDead() ? FSM.State.IDLE_DEAD : FSM.State.IDLE);
 			}
 			else
 			{
 				MoveTo(path);
 			}
 		}
-		private protected virtual void OnMoveAnomaly(MoveAnomalyType moveAnomalyType) { }
+		private void _OnMoveCompleted(Godot.Object Gobject, NodePath nodePath) { ResetPath(); }
+		protected virtual void OnMoveAnomaly(MoveAnomalyType moveAnomalyType) { }
 	}
 }

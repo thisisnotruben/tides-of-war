@@ -28,8 +28,9 @@ namespace Game.Actor.State
 			stateMap[State.NPC_MOVE_ROAM] = (MoveNpcRoam)GetChild((int)State.NPC_MOVE_ROAM);
 			stateMap[State.NPC_MOVE_ATTACK] = (MoveNpcAttack)GetChild((int)State.NPC_MOVE_ATTACK);
 			stateMap[State.NPC_MOVE_RETURN] = (MoveNpcReturn)GetChild((int)State.NPC_MOVE_RETURN);
-
-			Character character = Owner as Character;
+		}
+		public void Init(Character character)
+		{
 			foreach (StateBehavior stateBehavior in GetChildren())
 			{
 				stateBehavior.Init(this, character);
@@ -37,7 +38,7 @@ namespace Game.Actor.State
 
 			// call when map has finished loading
 			CallDeferred(nameof(SetState),
-				(UnitDB.HasUnitData(character.Name) && UnitDB.GetUnitData(character.Name).path.Length > 0)
+				UnitDB.HasUnitData(character.Name) && UnitDB.GetUnitData(character.Name).path.Length > 0
 				? State.NPC_MOVE_ROAM
 				: State.IDLE);
 		}
@@ -46,7 +47,7 @@ namespace Game.Actor.State
 			stateMap[GetState()].Exit();
 			SetState(state);
 		}
-		public void SetState(State state)
+		private void SetState(State state)
 		{
 			stateHistory.Push(state);
 			stateMap[state].Start();

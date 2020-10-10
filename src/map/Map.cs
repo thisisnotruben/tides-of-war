@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using Game.Actor;
 using Game.Database;
 using Godot;
 namespace Game.Map
@@ -22,7 +23,7 @@ namespace Game.Map
 			mapSize = collNav.GetUsedRect().Size;
 			MakeNav();
 			SetVeilSize();
-			SetPlayerCameraLimits();
+			SetCharacterCameraLimits();
 		}
 		public void AddZChild(Node node) { GetNode("zed/z1").AddChild(node); }
 		public void SetVeil(bool on)
@@ -40,15 +41,27 @@ namespace Game.Map
 				veil.Hide();
 			}
 		}
-		private void SetPlayerCameraLimits()
+		private void SetCharacterCameraLimits()
 		{
-			Rect2 mapBorders = collNav.GetUsedRect();
-			Vector2 mapCellSize = collNav.CellSize;
-			Camera2D playerCamera = Actor.Player.player.GetNode<Camera2D>("img/camera");
-			playerCamera.LimitLeft = (int)(mapBorders.Position.x * mapCellSize.x);
-			playerCamera.LimitRight = (int)(mapBorders.End.x * mapCellSize.x);
-			playerCamera.LimitTop = (int)(mapBorders.Position.y * mapCellSize.y);
-			playerCamera.LimitBottom = (int)(mapBorders.End.y * mapCellSize.y);
+			Camera2D camera2D;
+			Rect2 mapBorders;
+			Vector2 mapCellSize;
+
+			foreach (Node node in GetNode("zed/z1").GetChildren())
+			{
+				camera2D = (node as Character)?.camera;
+				if (camera2D == null)
+				{
+					continue;
+				}
+
+				mapBorders = collNav.GetUsedRect();
+				mapCellSize = collNav.CellSize;
+				camera2D.LimitLeft = (int)(mapBorders.Position.x * mapCellSize.x);
+				camera2D.LimitRight = (int)(mapBorders.End.x * mapCellSize.x);
+				camera2D.LimitTop = (int)(mapBorders.Position.y * mapCellSize.y);
+				camera2D.LimitBottom = (int)(mapBorders.End.y * mapCellSize.y);
+			}
 		}
 		private void SetVeilSize()
 		{
@@ -166,60 +179,36 @@ namespace Game.Map
 			int x = (int)point.x, y = (int)point.y;
 			return ((x + y) * (x + y + 1)) / 2 + y;
 		}
-		private void SetPointWeight(Vector2 worldPosition, float weight)
+		public Queue<Vector2> getAPath(Vector2 worldStart, Vector2 worldEnd)
 		{
-			aStar.SetPointWeightScale(GetPointIndex(collNav.WorldToMap(worldPosition)), weight);
-		}
-		public List<Vector2> getAPath(Vector2 worldStart, Vector2 worldEnd)
-		{
-			List<Vector2> worldPath = new List<Vector2>();
 			int worldStartPointIdx = GetPointIndex(collNav.WorldToMap(worldStart)),
 				worldEndPointIdx = GetPointIndex(collNav.WorldToMap(worldEnd));
 
 			if (aStar.HasPoint(worldStartPointIdx) && aStar.HasPoint(worldEndPointIdx))
 			{
-				worldPath.AddRange(aStar.GetPointPath(worldStartPointIdx, worldEndPointIdx));
+				return new Queue<Vector2>(aStar.GetPointPath(worldStartPointIdx, worldEndPointIdx));
 			}
-			return worldPath;
+			return new Queue<Vector2>();
 		}
 		public Vector2 GetGridPosition(Vector2 worldPosition)
 		{
-			return collNav.MapToWorld(collNav.WorldToMap(worldPosition)) + HALF_CELL_SIZE;
-		}
-		public Vector2 RequestMove(Vector2 currentWorldPosition, Vector2 direction)
-		{
-			Vector2 cellStart = collNav.WorldToMap(currentWorldPosition);
-			Vector2 cellTarget = cellStart + direction;
-			int targetPointIndex = GetPointIndex(cellTarget);
-			if (aStar.HasPoint(targetPointIndex) && aStar.GetPointWeightScale(targetPointIndex) == ASTAR_NORMAL_WEIGHT)
-			{
-				int currentPointIndex = GetPointIndex(cellStart);
-				if (aStar.GetPointWeightScale(currentPointIndex) != ASTAR_ITEM_WEIGHT)
-				{
-					aStar.SetPointWeightScale(currentPointIndex, ASTAR_NORMAL_WEIGHT);
-				}
-				// aStar.SetPointWeightScale(targetPointIndex, ASTAR_OCCUPIED_WEIGHT);
-				return collNav.MapToWorld(cellTarget) + HALF_CELL_SIZE;
-			}
-			return new Vector2();
+			return aStar.GetPointPosition(GetPointIndex(collNav.WorldToMap(worldPosition)));
 		}
 		public bool IsValidMove(Vector2 worldPosition)
 		{
 			int pointIndex = GetPointIndex(collNav.WorldToMap(worldPosition));
 			return aStar.HasPoint(pointIndex) && aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT;
 		}
-		public void ResetPath(List<Vector2> pointList)
+		public bool CanPlayerMove(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
 		{
-			foreach (Vector2 point in pointList)
-			{
-				SetPointWeight(point, ASTAR_NORMAL_WEIGHT);
-			}
+			return IsValidMove(targetWorldPosition) && !GetDirection(currentWorldPosition, targetWorldPosition).Equals(Vector2.Zero);
 		}
 		public Vector2 GetDirection(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
 		{
 			currentWorldPosition = GetGridPosition(currentWorldPosition);
 			targetWorldPosition = GetGridPosition(targetWorldPosition);
-			Vector2 direction = new Vector2();
+			Vector2 direction = Vector2.Zero;
+
 			if (currentWorldPosition.x > targetWorldPosition.x)
 			{
 				direction.x = -1;
@@ -238,47 +227,43 @@ namespace Game.Map
 			}
 			return direction;
 		}
-
-		public List<Vector2> GetAttackSlot(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
+		public Queue<Vector2> GetAttackSlot(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
 		{
-			Vector2 targetCell = collNav.WorldToMap(targetWorldPosition);
+			int localY, localX, pointLocalIndex;
+			Vector2 pointLocal, randomizedSlot, targetCell = collNav.WorldToMap(targetWorldPosition);
 			List<Vector2> pointList = new List<Vector2>();
-			for (int localY = 0; localY < 3; localY++)
+
+			for (localY = 0; localY < 3; localY++)
 			{
-				for (int localX = 0; localX < 3; localX++)
+				for (localX = 0; localX < 3; localX++)
 				{
-					Vector2 pointLocal = new Vector2(targetCell.x + localX - 1, targetCell.y + localY - 1);
-					int pointLocalIndex = GetPointIndex(pointLocal);
-					if (aStar.HasPoint(pointLocalIndex) && aStar.GetPointWeightScale(pointLocalIndex) != ASTAR_OCCUPIED_WEIGHT)
+					pointLocal = new Vector2(targetCell.x + localX - 1, targetCell.y + localY - 1);
+					pointLocalIndex = GetPointIndex(pointLocal);
+					if (aStar.HasPoint(pointLocalIndex) && aStar.GetPointWeightScale(pointLocalIndex) == ASTAR_NORMAL_WEIGHT)
 					{
 						pointList.Add(pointLocal);
 					}
 				}
 			}
 			GD.Randomize();
-			Vector2 randomizedSlot = collNav.MapToWorld(pointList[(int)GD.Randi() % pointList.Count]) + HALF_CELL_SIZE;
+			randomizedSlot = collNav.MapToWorld(pointList[(int)GD.Randi() % pointList.Count]) + HALF_CELL_SIZE;
 			return getAPath(currentWorldPosition, randomizedSlot);
 		}
 		public Vector2 SetGetPickableLoc(Vector2 worldPosition, bool setWeight)
 		{
-			SetPointWeight(worldPosition, (setWeight) ? ASTAR_ITEM_WEIGHT : ASTAR_NORMAL_WEIGHT);
+			aStar.SetPointWeightScale(
+				GetPointIndex(collNav.WorldToMap(worldPosition)),
+				setWeight ? ASTAR_ITEM_WEIGHT : ASTAR_NORMAL_WEIGHT
+			);
 			return GetGridPosition(worldPosition);
 		}
-		private void OccupyOriginCell(Vector2 worldPosition)
+		public void OccupyCell(Vector2 worldPosition, bool occupy)
 		{
-			// Used in SetUnits method; used for placing units in they're origin cell
-
-			// TODO
-			// Vector2 point = collNav.WorldToMap(worldPosition);
-			// if (!mapObstacles.Contains(point) && !IsOutsideMapBounds(point))
-			// {
-			//     int pointIndex = GetPointIndex(point);
-			//     aStar.SetPointWeightScale(pointIndex, ASTAR_OCCUPIED_WEIGHT);
-			// }
-			// else
-			// {
-			//     GD.Print($"Object incorrectly placed at\ngrid position: {point}\nglobal position: {collNav.MapToWorld(point)}\n");
-			// }
+			int pointIndex = GetPointIndex(collNav.WorldToMap(worldPosition));
+			if (aStar.HasPoint(pointIndex))
+			{
+				aStar.SetPointWeightScale(pointIndex, occupy ? ASTAR_OCCUPIED_WEIGHT : ASTAR_NORMAL_WEIGHT);
+			}
 		}
 	}
 }

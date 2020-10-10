@@ -29,6 +29,8 @@ namespace Game.Actor.State
 		public override void UnhandledInput(InputEvent @event) { }
 		private void DieStart()
 		{
+			Map.Map.map.OccupyCell(character.GlobalPosition, false);
+
 			// changing character detection
 			character.hitBox.CollisionLayer = (uint)Character.CollMask.DEAD;
 			if (character is Player)

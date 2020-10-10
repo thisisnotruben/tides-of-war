@@ -29,6 +29,8 @@ namespace Game.Actor.State
 			character.anim.Connect("animation_finished", this, nameof(OnAttackAnimationFinished));
 			character.regenTimer.Stop();
 			AttackStart();
+
+			Map.Map.map.OccupyCell(character.GlobalPosition, true);
 		}
 		public override void Exit()
 		{
@@ -37,6 +39,8 @@ namespace Game.Actor.State
 			character.anim.Stop();
 			character.regenTimer.Start();
 			attackIgnoreArmor = false;
+
+			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
 		public void AttackStart()
 		{

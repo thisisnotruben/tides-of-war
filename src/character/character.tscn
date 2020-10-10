@@ -6,7 +6,6 @@
 [ext_resource path="res://src/character/doodads/CombatTextHandler.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/character/state/FSM.tscn" type="PackedScene" id=7]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "casting"
 length = 0.8
@@ -84,6 +83,8 @@ extents = Vector2( 40, 40 )
 use_parent_material = true
 script = ExtResource( 2 )
 __meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
 "_edit_vertical_guides_": [  ]
 }
 
@@ -92,6 +93,7 @@ __meta__ = {
 [node name="fsm" parent="." instance=ExtResource( 7 )]
 
 [node name="anim" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/attacking = ExtResource( 3 )
 anims/casting = SubResource( 1 )
 anims/dying = ExtResource( 1 )
@@ -105,9 +107,22 @@ modulate = Color( 1, 1, 1, 0 )
 [node name="img" type="Sprite" parent="."]
 use_parent_material = true
 
+[node name="CombatTextHandler" parent="img" instance=ExtResource( 4 )]
+
 [node name="missile" type="Position2D" parent="img"]
 
-[node name="CombatTextHandler" parent="img" instance=ExtResource( 4 )]
+[node name="camera" type="Camera2D" parent="img"]
+zoom = Vector2( 0.175, 0.175 )
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 3.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+editor_draw_drag_margin = true
 
 [node name="area" type="Area2D" parent="."]
 monitoring = false

@@ -35,7 +35,10 @@ namespace Game.Actor
 				{
 					// attack
 					target = character;
-					state = FSM.State.ATTACK;
+
+					state = pos.DistanceTo(character.pos) > stats.weaponRange.value
+						? FSM.State.NPC_MOVE_ATTACK
+						: FSM.State.ATTACK;
 				}
 			}
 		}

@@ -26,8 +26,9 @@ namespace Game.Actor
 		public Position2D head, missileSpawnPos;
 		public AnimationPlayer anim;
 		public Area2D hitBox, sight;
+		public Camera2D camera { get; protected set; }
 
-		public bool enemy { get; private protected set; }
+		public bool enemy { get; protected set; }
 		public bool dead { get { return fsm.IsDead(); } }
 		public bool attacking { get { return fsm.IsAtacking(); } }
 		public bool moving { get { return fsm.IsMoving(); } }
@@ -123,10 +124,13 @@ namespace Game.Actor
 			head = GetNode<Position2D>("head");
 			missileSpawnPos = img.GetNode<Position2D>("missile");
 			combatTextHandler = img.GetNode<CombatTextHandler>("CombatTextHandler");
+			camera = img.GetNode<Camera2D>("camera");
 			fsm = GetNode<FSM>("fsm");
 			hitBox = GetNode<Area2D>("area");
 			sight = GetNode<Area2D>("sight");
 			stats = new StatManager(this);
+
+			fsm.Init(this);
 
 			worldName = Name;
 			// always starting with full health on init

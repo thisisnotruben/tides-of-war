@@ -24,7 +24,7 @@ namespace Game.Actor.State
 				return;
 			}
 
-			if (Map.Map.map.IsValidMove(character.GetGlobalMousePosition()))
+			if (Map.Map.map.CanPlayerMove(character.GlobalPosition, character.GetGlobalMousePosition()))
 			{
 				// any valid move overrides any state from player
 				fsm.ChangeState((fsm.IsDead())

@@ -39,7 +39,7 @@ namespace Game.Actor.State
 			SetPathToWaypoint();
 			MoveTo(path);
 		}
-		private protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
+		protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
 		{
 			// dequeue waypoint for anomaly and focus on the other waypoint
 			waypoints.Dequeue();

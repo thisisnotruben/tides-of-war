@@ -59,7 +59,7 @@ namespace Game.Actor.State
 				MoveTo(path);
 			}
 		}
-		private protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
+		protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
 		{
 			// just find another way to target
 			StartPursuit();

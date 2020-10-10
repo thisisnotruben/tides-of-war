@@ -1,4 +1,5 @@
 using Game.Database;
+using Godot;
 namespace Game.Actor.State
 {
 	public class MoveNpcReturn : Move
@@ -8,7 +9,7 @@ namespace Game.Actor.State
 			base.Start();
 
 			GetReturnPath();
-			if (path.Count > 0 && path[0].Equals(UnitDB.GetUnitData(character.Name).spawnPos))
+			if (path.Count == 0 || IsAtSpawnPos())
 			{
 				fsm.ChangeState(FSM.State.IDLE);
 			}
@@ -17,7 +18,7 @@ namespace Game.Actor.State
 				MoveTo(path);
 			}
 		}
-		private protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
+		protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType)
 		{
 			switch (moveAnomalyType)
 			{
@@ -34,6 +35,11 @@ namespace Game.Actor.State
 		private void GetReturnPath()
 		{
 			path = Map.Map.map.getAPath(character.GlobalPosition, UnitDB.GetUnitData(character.Name).spawnPos);
+		}
+		private bool IsAtSpawnPos()
+		{
+			return Map.Map.map.GetDirection(
+				character.GlobalPosition, UnitDB.GetUnitData(character.Name).spawnPos).Equals(Vector2.Zero);
 		}
 	}
 }

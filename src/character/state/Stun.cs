@@ -8,13 +8,13 @@ namespace Game.Actor.State
 		{
 
 		}
-		public override void Exit()
-		{
-			throw new NotImplementedException();
-		}
 		public override void Start()
 		{
-			throw new NotImplementedException();
+			Map.Map.map.OccupyCell(character.GlobalPosition, true);
+		}
+		public override void Exit()
+		{
+			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
 	}
 }

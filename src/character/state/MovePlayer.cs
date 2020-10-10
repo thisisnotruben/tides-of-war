@@ -4,8 +4,7 @@ namespace Game.Actor.State
 {
 	public class MovePlayer : Move
 	{
-		[Signal]
-		public delegate void PositionChanged();
+		[Signal] public delegate void PositionChanged();
 
 		public override void Start()
 		{
@@ -27,7 +26,7 @@ namespace Game.Actor.State
 		public void GetPathWay()
 		{
 			Vector2 desiredPosition = character.GetGlobalMousePosition();
-			if (!Map.Map.map.IsValidMove(desiredPosition))
+			if (!Map.Map.map.CanPlayerMove(character.GlobalPosition, desiredPosition))
 			{
 				return;
 			}
@@ -35,8 +34,6 @@ namespace Game.Actor.State
 			// if desired position changed while we are moving
 			if (tween.IsActive())
 			{
-				Map.Map.map.ResetPath(reservedPath);
-				reservedPath.Clear();
 				tween.RemoveAll();
 			}
 
@@ -49,5 +46,6 @@ namespace Game.Actor.State
 			Connect(nameof(PositionChanged), cursor, nameof(MoveCursorController.Delete));
 			cursor.AddToMap(Map.Map.map.GetGridPosition(desiredPosition));
 		}
+		protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType) { fsm.ChangeState(fsm.IsDead() ? FSM.State.IDLE_DEAD : FSM.State.IDLE); }
 	}
 }
