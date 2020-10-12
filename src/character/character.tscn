@@ -101,9 +101,6 @@ anims/moving = SubResource( 2 )
 
 [node name="head" type="Position2D" parent="."]
 
-[node name="select" type="TouchScreenButton" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-
 [node name="camera" type="Camera2D" parent="."]
 zoom = Vector2( 0.175, 0.175 )
 limit_smoothed = true
@@ -143,4 +140,7 @@ shape = SubResource( 4 )
 [node name="visible" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -80, -80, 160, 160 )
 process_parent = true
+
+[node name="select" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 [connection signal="timeout" from="regenTimer" to="." method="_OnRegenTimerTimeout"]

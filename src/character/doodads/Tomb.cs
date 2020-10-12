@@ -22,7 +22,7 @@ namespace Game.Actor.Doodads
 			this.deceasedPlayer = deceasedPlayer;
 			deceasedPlayer.menu.GetNode<BaseButton>("c/osb/m/cast").Connect("pressed", this, nameof(Revive));
 			deceasedPlayer.menu.GetNode<Control>("c/osb/").SetPosition(new Vector2(0.0f, 180.0f));
-			deceasedPlayer.menu.GetNode<Label>("c/osb/m/cast/label").Text = "Revive";
+			deceasedPlayer.menu.GetNode<Button>("c/osb/m/cast").Text = "Revive";
 
 			// set on map correctly
 			GlobalPosition = Map.Map.map.GetGridPosition(deceasedPlayer.GlobalPosition);

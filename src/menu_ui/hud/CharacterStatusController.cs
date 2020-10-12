@@ -35,8 +35,12 @@ public class CharacterStatusController : Control
 	}
 	public void Clear(bool show = true)
 	{
-		characterFocused?.Disconnect(nameof(Character.UpdateHudHealthStatus), this, nameof(UpdateHealth));
-		characterFocused?.Disconnect(nameof(Character.UpdateHudManaStatus), this, nameof(UpdateMana));
+		if (characterFocused != null)
+		{
+			characterFocused.Disconnect(nameof(Character.UpdateHudHealthStatus), this, nameof(UpdateHealth));
+			characterFocused.Disconnect(nameof(Character.UpdateHudManaStatus), this, nameof(UpdateMana));
+			(characterFocused as Npc)?.unitFocus.Hide();
+		}
 		characterFocused = null;
 		Visible = show;
 	}

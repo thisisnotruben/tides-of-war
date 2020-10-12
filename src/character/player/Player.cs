@@ -50,18 +50,17 @@ namespace Game.Actor
 		public override void _UnhandledInput(InputEvent @event) { fsm.UnhandledInput(@event); }
 		public override void OnAttacked(Character whosAttacking)
 		{
-			if (!dead && !attacking && !moving
-			&& target != null && target == whosAttacking
+			if (whosAttacking != null
+			&& !dead && !attacking && !moving
+			&& (target == null || target == whosAttacking)
 			&& pos.DistanceTo(whosAttacking.pos) <= stats.weaponRange.value)
 			{
 				target = whosAttacking;
 				state = FSM.State.ATTACK;
 			}
-			// cleans up this signal
-			else if (whosAttacking != null && target != whosAttacking
-			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), this, nameof(OnAttacked)))
+			else
 			{
-				whosAttacking.Disconnect(nameof(Character.NotifyAttack), this, nameof(OnAttacked));
+				base.OnAttacked(whosAttacking);
 			}
 		}
 		public void SetXP(int addedXP, bool showLabel = true, bool fromSaveFile = false)

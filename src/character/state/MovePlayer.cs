@@ -26,15 +26,15 @@ namespace Game.Actor.State
 		public void GetPathWay()
 		{
 			Vector2 desiredPosition = character.GetGlobalMousePosition();
-			if (!Map.Map.map.CanPlayerMove(character.GlobalPosition, desiredPosition))
+			if (!Map.Map.map.IsValidMove(character.GlobalPosition, desiredPosition))
 			{
 				return;
 			}
 
 			// if desired position changed while we are moving
-			if (tween.IsActive())
+			if (moving)
 			{
-				tween.RemoveAll();
+				moving = false;
 			}
 
 			path = Map.Map.map.getAPath(character.GlobalPosition, desiredPosition);

@@ -5,9 +5,14 @@ namespace Game.Actor.State
 	public abstract class Move : TakeDamage
 	{
 		public enum MoveAnomalyType { INVALID_PATH, OBSTRUCTION_DETECTED }
+		public const float CHARACTER_SPEED = 32.0f;
 
-		protected Tween tween = new Tween();
-
+		public bool moving
+		{
+			get { return IsPhysicsProcessing(); }
+			set { SetPhysicsProcess(value); }
+		}
+		private Vector2 targetPosition;
 		private Queue<Vector2> reservedPath = new Queue<Vector2>();
 		protected Queue<Vector2> _path = new Queue<Vector2>();
 		protected Queue<Vector2> path
@@ -15,7 +20,7 @@ namespace Game.Actor.State
 			get { return _path; }
 			set
 			{
-				ResetPath();
+				ResetPoint();
 				_path = value;
 			}
 		}
@@ -23,10 +28,7 @@ namespace Game.Actor.State
 		public override void _Ready()
 		{
 			base._Ready();
-			AddChild(tween);
-			tween.PlaybackProcessMode = Tween.TweenProcessMode.Physics;
-			tween.Connect("tween_completed", this, nameof(_OnTweenCompleted));
-			tween.Connect("tween_completed", this, nameof(_OnMoveCompleted));
+			SetPhysicsProcess(false);
 		}
 		public override void Start()
 		{
@@ -36,13 +38,12 @@ namespace Game.Actor.State
 		}
 		public override void Exit()
 		{
-			// stop all movement
-			tween.StopAll();
+			SetPhysicsProcess(false);
 			character.anim.Stop();
 			character.img.Frame = 0;
 			path.Clear();
 		}
-		protected void ResetPath()
+		protected void ResetPoint()
 		{
 			if (reservedPath.Count > 0)
 			{
@@ -53,15 +54,19 @@ namespace Game.Actor.State
 				reservedPath.Dequeue();
 			}
 		}
-		private void MoveCharacter(Vector2 targetPosition, float speedModifier = Stats.SPEED)
+		public override void _PhysicsProcess(float delta)
 		{
-			// tween.StopAll();
-			tween.InterpolateProperty(character, ":global_position", character.GlobalPosition, targetPosition,
-				character.GlobalPosition.DistanceTo(targetPosition) / 16.0f * speedModifier,
-				Tween.TransitionType.Linear, Tween.EaseType.In);
-			tween.Start();
+			if (character.GlobalPosition.DistanceTo(targetPosition) < 0.25f)
+			{
+				ResetPoint();
+				OnMovePointFinished();
+			}
+			else
+			{
+				character.GlobalPosition += character.GlobalPosition.DirectionTo(targetPosition) * CHARACTER_SPEED * delta;
+			}
 		}
-		private protected void MoveTo(Queue<Vector2> route)
+		protected void MoveTo(Queue<Vector2> route)
 		{
 			if (route.Count == 0)
 			{
@@ -69,45 +74,27 @@ namespace Game.Actor.State
 				return;
 			}
 
-			Vector2 direction = Map.Map.map.GetDirection(character.GlobalPosition, route.Peek());
-			while (route.Count > 0 && direction.Equals(Vector2.Zero))
-			{
-				route.Dequeue();
-				if (route.Count > 0)
-				{
-					direction = Map.Map.map.GetDirection(character.GlobalPosition, route.Peek());
-				}
-			}
-			if (route.Count == 0)
-			{
-				OnMoveAnomaly(MoveAnomalyType.INVALID_PATH);
-				return;
-			}
-
-			if (Map.Map.map.IsValidMove(route.Peek()))
+			if (Map.Map.map.IsValidMove(character.GlobalPosition, route.Peek()))
 			{
 				Map.Map.map.OccupyCell(route.Peek(), true);
 				reservedPath.Enqueue(route.Peek());
 
-				MoveCharacter(route.Dequeue(), Stats.MapAnimMoveSpeed(character.stats.animSpeed.value));
+				MoveCharacter(route.Dequeue());
 			}
 			else
 			{
 				OnMoveAnomaly(MoveAnomalyType.OBSTRUCTION_DETECTED);
 			}
 		}
-		public virtual void _OnTweenCompleted(Godot.Object Gobject, NodePath nodePath)
+		private void MoveCharacter(Vector2 targetPosition)
+		{
+			this.targetPosition = targetPosition;
+			SetPhysicsProcess(true);
+		}
+		protected virtual void OnMovePointFinished()
 		{
 			if (path.Count == 0)
 			{
-				// makes sure player can combat with enemies within range
-				(character as Player)?.OnAttacked(character.target);
-				if (!fsm.IsMoving())
-				{
-					// then we are atacking and ignore rest
-					return;
-				}
-
 				fsm.ChangeState(fsm.IsDead() ? FSM.State.IDLE_DEAD : FSM.State.IDLE);
 			}
 			else
@@ -115,7 +102,6 @@ namespace Game.Actor.State
 				MoveTo(path);
 			}
 		}
-		private void _OnMoveCompleted(Godot.Object Gobject, NodePath nodePath) { ResetPath(); }
 		protected virtual void OnMoveAnomaly(MoveAnomalyType moveAnomalyType) { }
 	}
 }

@@ -107,4 +107,4 @@ current = true
 collision_layer = 18
 collision_mask = 2
 
-[node name="in_game_menu" parent="." index="9" instance=ExtResource( 3 )]
+[node name="in_game_menu" parent="." index="10" instance=ExtResource( 3 )]

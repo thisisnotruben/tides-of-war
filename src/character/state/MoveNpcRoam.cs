@@ -34,7 +34,7 @@ namespace Game.Actor.State
 		}
 
 		// cyclic functions
-		public override void _OnTweenCompleted(Godot.Object Gobject, NodePath nodePath)
+		protected override void OnMovePointFinished()
 		{
 			SetPathToWaypoint();
 			MoveTo(path);

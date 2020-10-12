@@ -138,17 +138,19 @@ namespace Game.Actor
 			hp = stats.hpMax.valueI;
 			mana = stats.manaMax.valueI;
 		}
-		private protected void SetImg(string imgName)
+		protected void SetImg(string imgName)
 		{
 			ImageDB.ImageNode imageData = ImageDB.GetImageData(imgName);
 
 			// set sprite
-			img.Texture = (Texture)GD.Load($"res://asset/img/character/{imgName}.png");
+			Texture imgTexture = (Texture)GD.Load($"res://asset/img/character/{imgName}.png");
+			img.Texture = imgTexture;
 			img.Hframes = imageData.total;
+			img.Position = new Vector2(0.0f, -imgTexture.GetHeight() / 2.0f);
 
 			// set multiplier
 			stats.multiplier = Stats.GetMultiplier(
-				(UnitDB.HasUnitData(Name))
+				UnitDB.HasUnitData(Name)
 				? imgName.Split('-')[0] // character race
 				: Name); // is player
 
@@ -171,22 +173,27 @@ namespace Game.Actor
 			animRes.TrackSetKeyValue(0, 1, imageData.moving + 3);
 
 			// center nodes based sprite
-			AtlasTexture texture = (AtlasTexture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData.body}.tres");
+			Texture hitBoxTexture = (Texture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData.body}.tres");
 			TouchScreenButton select = GetNode<TouchScreenButton>("select");
-			Vector2 textureSize = texture.Region.Size;
 			Node2D sightDistance = sight.GetNode<Node2D>("distance"),
 				areaBody = hitBox.GetNode<Node2D>("body");
 
-			select.Normal = texture;
-			img.Position = new Vector2(0.0f, -texture.GetHeight() / 2.0f);
-			head.Position = new Vector2(0.0f, -texture.GetHeight());
-			select.Position = new Vector2(-textureSize.x / 2.0f, -textureSize.y);
-			areaBody.Position = new Vector2(-0.5f, -textureSize.y / 2.0f);
+			select.Normal = hitBoxTexture;
+			head.Position = new Vector2(0.0f, -hitBoxTexture.GetHeight());
+			areaBody.Position = new Vector2(0.0f, -hitBoxTexture.GetHeight() / 2.0f);
+			camera.Position = new Vector2(0.0f, hitBoxTexture.GetHeight() / 2.0f);
+			select.Position = new Vector2(-hitBoxTexture.GetWidth() / 2.0f, -hitBoxTexture.GetHeight());
 			sightDistance.Position = areaBody.Position;
-			camera.Position = new Vector2(0.0f, texture.GetHeight() / 2.0f);
 		}
 		public void Harm(int damage) { fsm.Harm(damage); }
-		public abstract void OnAttacked(Character whosAttacking);
+		public virtual void OnAttacked(Character whosAttacking)
+		{
+			if (whosAttacking != null && target != whosAttacking
+			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), this, nameof(OnAttacked)))
+			{
+				whosAttacking.Disconnect(nameof(Character.NotifyAttack), this, nameof(OnAttacked));
+			}
+		}
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
 			CombatText combatText = (CombatText)CombatText.scene.Instance();
@@ -227,7 +234,7 @@ namespace Game.Actor
 				Vector2 stepPos = GlobalPosition;
 				stepPos.y -= 3;
 				stepPos.x += (rightStep) ? 1.0f : -4.0f;
-				Map.Map.map.GetNode("ground").AddChild(footStep);
+				Map.Map.map.AddGChild(footStep);
 				footStep.GlobalPosition = stepPos;
 			}
 		}

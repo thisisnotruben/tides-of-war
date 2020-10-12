@@ -7,38 +7,46 @@ namespace Game.Map
 {
 	public class Map : Node2D
 	{
-		private TileMap collNav;
-		private readonly AStar2D aStar = new AStar2D();
+		private const float ASTAR_NORMAL_WEIGHT = 1.0f,
+			ASTAR_OCCUPIED_WEIGHT = 50.0f,
+			ASTAR_ITEM_WEIGHT = 25.0f;
 		private static readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
-		private const float ASTAR_OCCUPIED_WEIGHT = 50.0f,
-			ASTAR_ITEM_WEIGHT = 25.0f,
-			ASTAR_NORMAL_WEIGHT = 1.0f;
-		private Vector2 mapSize;
 		public static Map map;
+
+		private readonly AStar2D aStar = new AStar2D();
+		private TileMap collNav;
+		private Vector2 mapSize;
+
+		private Node2D ground, zed;
+		private Particles2D veilFog;
 
 		public Map() { map = this; }
 		public override void _Ready()
 		{
 			collNav = GetNode<TileMap>("meta/coll_nav");
+			ground = GetNode<Node2D>("ground");
+			zed = GetNode<Node2D>("zed/z1");
+			veilFog = GetNode<Particles2D>("VeilFog");
+
 			mapSize = collNav.GetUsedRect().Size;
 			MakeNav();
 			SetVeilSize();
 			SetCharacterCameraLimits();
 		}
-		public void AddZChild(Node node) { GetNode("zed/z1").AddChild(node); }
+		public void AddGChild(Node node) { ground.AddChild(node); }
+		public void AddZChild(Node node) { zed.AddChild(node); }
 		public void SetVeil(bool on)
 		{
-			Particles2D veil = GetNode<Particles2D>("VeilFog");
-			veil.Emitting = on;
+			veilFog.Emitting = on;
 			if (on)
 			{
 				Material = (ShaderMaterial)GD.Load("res://asset/img/map/veil.tres");
-				veil.Show();
+				veilFog.Show();
 			}
 			else
 			{
 				Material = null;
-				veil.Hide();
+				veilFog.Hide();
 			}
 		}
 		private void SetCharacterCameraLimits()
@@ -47,7 +55,7 @@ namespace Game.Map
 			Rect2 mapBorders;
 			Vector2 mapCellSize;
 
-			foreach (Node node in GetNode("zed/z1").GetChildren())
+			foreach (Node node in zed.GetChildren())
 			{
 				camera2D = (node as Character)?.camera;
 				if (camera2D == null)
@@ -67,12 +75,11 @@ namespace Game.Map
 		private void SetVeilSize()
 		{
 			Vector2 veilSize = mapSize * HALF_CELL_SIZE;
-			Particles2D veil = GetNode<Particles2D>("VeilFog");
-			ParticlesMaterial veilMaterial = (ParticlesMaterial)veil.ProcessMaterial;
+			ParticlesMaterial veilMaterial = (ParticlesMaterial)veilFog.ProcessMaterial;
 			veilMaterial.EmissionBoxExtents = new Vector3(veilSize.x, veilSize.y, 0.0f);
-			veil.Amount = (int)((veilSize.x + veilSize.y) / 2.0f);
-			veil.VisibilityRect = new Rect2(-veilSize, veilSize * 2.0f);
-			veil.GlobalPosition = veilSize;
+			veilFog.Amount = (int)((veilSize.x + veilSize.y) / 2.0f);
+			veilFog.VisibilityRect = new Rect2(-veilSize, veilSize * 2.0f);
+			veilFog.GlobalPosition = veilSize;
 		}
 		private void MakeNav()
 		{
@@ -187,7 +194,10 @@ namespace Game.Map
 
 			if (aStar.HasPoint(worldStartPointIdx) && aStar.HasPoint(worldEndPointIdx))
 			{
-				return new Queue<Vector2>(aStar.GetPointPath(worldStartPointIdx, worldEndPointIdx));
+				Queue<Vector2> path = new Queue<Vector2>(aStar.GetPointPath(worldStartPointIdx, worldEndPointIdx));
+				// first point is where worldStart is at
+				path.Dequeue();
+				return path;
 			}
 			return new Queue<Vector2>();
 		}
@@ -195,14 +205,12 @@ namespace Game.Map
 		{
 			return aStar.GetPointPosition(GetPointIndex(collNav.WorldToMap(worldPosition)));
 		}
-		public bool IsValidMove(Vector2 worldPosition)
+		public bool IsValidMove(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
 		{
-			int pointIndex = GetPointIndex(collNav.WorldToMap(worldPosition));
-			return aStar.HasPoint(pointIndex) && aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT;
-		}
-		public bool CanPlayerMove(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
-		{
-			return IsValidMove(targetWorldPosition) && !GetDirection(currentWorldPosition, targetWorldPosition).Equals(Vector2.Zero);
+			int pointIndex = GetPointIndex(collNav.WorldToMap(targetWorldPosition));
+			return aStar.HasPoint(pointIndex)
+				&& aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT
+				&& !GetDirection(currentWorldPosition, targetWorldPosition).Equals(Vector2.Zero);
 		}
 		public Vector2 GetDirection(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
 		{

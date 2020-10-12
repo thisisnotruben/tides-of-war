@@ -42,7 +42,7 @@ namespace Game.Actor.State
 			return character.GlobalPosition.DistanceTo(
 				UnitDB.GetUnitData(character.Name).spawnPos) > Stats.FLEE_DISTANCE;
 		}
-		public override void _OnTweenCompleted(Godot.Object Gobject, Godot.NodePath nodePath)
+		protected override void OnMovePointFinished()
 		{
 			if (character.target == null || OutOfPursuitRange(character, character.target))
 			{

@@ -56,7 +56,6 @@ theme = ExtResource( 10 )
 [node name="SlotGrid" parent="s/v/c" instance=ExtResource( 4 )]
 margin_left = 80.0
 margin_right = 640.0
-theme = ExtResource( 10 )
 
 [node name="buttons" type="VBoxContainer" parent="s"]
 margin_top = 872.0
@@ -116,7 +115,6 @@ text = "Back"
 
 [node name="item_info" parent="." instance=ExtResource( 9 )]
 visible = false
-theme = ExtResource( 10 )
 script = ExtResource( 8 )
 [connection signal="draw" from="." to="." method="_OnMerchantNodeDraw"]
 [connection signal="hide" from="." to="." method="_OnMerchantNodeHide"]

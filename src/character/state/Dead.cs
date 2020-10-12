@@ -42,12 +42,12 @@ namespace Game.Actor.State
 			character.regenTimer.Stop();
 
 			// clear targets
-			(character as Player)?.menu.ClearTarget(character.target as Npc);
+			(character as Player)?.menu.ClearTarget();
 			if (character is Npc
 			&& character.target is Player
 			&& character.target == character)
 			{
-				((Player)character.target).menu.ClearTarget(character.target as Npc);
+				((Player)character.target).menu.ClearTarget();
 				character.target.target = null;
 			}
 

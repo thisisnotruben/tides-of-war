@@ -91,15 +91,27 @@ margin_bottom = 127.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="targetStatus" parent="split/background/margin/split/characterStatus" instance=ExtResource( 7 )]
+[node name="targetContainer" type="Control" parent="split/background/margin/split/characterStatus"]
 visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 348.0
 margin_right = 688.0
 margin_bottom = 127.0
 size_flags_horizontal = 3
+
+[node name="targetStatus" parent="split/background/margin/split/characterStatus/targetContainer" instance=ExtResource( 7 )]
+visible = false
+margin_right = 0.0
+margin_bottom = 0.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="clearTarget" type="Button" parent="split/background/margin/split/characterStatus/targetContainer"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="center" type="CenterContainer" parent="split/background/margin/split"]
 margin_top = 135.0

@@ -41,9 +41,8 @@ namespace Game.Ui
 		{
 			hudControlController.playerStatus.ConnectCharacterStatusAndUpdate(player);
 		}
-		public void ClearTarget(Npc playerTarget = null)
+		public void ClearTarget()
 		{
-			playerTarget?.unitFocus.Hide();
 			player.target = null;
 			hudControlController.targetStatus.Clear(false);
 		}
@@ -65,7 +64,7 @@ namespace Game.Ui
 				}
 				else
 				{
-					ClearTarget(npc);
+					ClearTarget();
 				}
 			}
 			else

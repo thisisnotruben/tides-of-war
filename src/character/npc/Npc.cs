@@ -85,13 +85,13 @@ namespace Game.Actor
 			&& !MoveNpcAttack.OutOfPursuitRange(this, whosAttacking))
 			{
 				target = whosAttacking;
-				state = FSM.State.ATTACK;
+				state = pos.DistanceTo(whosAttacking.pos) > stats.weaponRange.value
+					? FSM.State.NPC_MOVE_ATTACK
+					: FSM.State.ATTACK;
 			}
-			// cleans up this signal
-			else if (whosAttacking != null && target != whosAttacking
-			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), this, nameof(OnAttacked)))
+			else
 			{
-				whosAttacking.Disconnect(nameof(Character.NotifyAttack), this, nameof(OnAttacked));
+				base.OnAttacked(whosAttacking);
 			}
 		}
 	}

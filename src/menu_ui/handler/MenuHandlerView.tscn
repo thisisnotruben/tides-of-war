@@ -1,8 +1,5 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=2]
-[ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=3]
-[ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=4]
 [ext_resource path="res://asset/img/ui/mini_map_mask.png" type="Texture" id=5]
 [ext_resource path="res://src/menu_ui/miniMap/MiniMapController.cs" type="Script" id=6]
 [ext_resource path="res://src/utils/audio_stream_player.tscn" type="PackedScene" id=7]
@@ -118,28 +115,16 @@ custom_constants/margin_top = 16
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 16
 
-[node name="cast" type="TextureButton" parent="c/osb/m"]
+[node name="cast" type="Button" parent="c/osb/m"]
+margin_left = 192.0
 margin_top = 16.0
-margin_right = 720.0
-margin_bottom = 116.0
-rect_min_size = Vector2( 380, 100 )
+margin_right = 528.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 336, 112 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme = ExtResource( 13 )
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 4 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="label" type="Label" parent="c/osb/m/cast"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 13 )
-custom_fonts/font = ExtResource( 2 )
 text = "Cast"
-align = 1
-valign = 1
 
 [node name="hud" parent="c" instance=ExtResource( 11 )]
 theme = ExtResource( 13 )
