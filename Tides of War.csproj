@@ -87,8 +87,8 @@
     <Compile Include="src\menu_ui\cursor\MoveCursorController.cs" />
     <Compile Include="src\menu_ui\dialogue\DialogueController.cs" />
     <Compile Include="src\menu_ui\handler\MenuHandlerController.cs" />
+    <Compile Include="src\menu_ui\hud\CharacterStatusController.cs" />
     <Compile Include="src\menu_ui\hud\HudControlController.cs" />
-    <Compile Include="src\menu_ui\hud\HudStatusController.cs" />
     <Compile Include="src\menu_ui\inventory\InventoryController.cs" />
     <Compile Include="src\menu_ui\inventory\InventoryModel.cs" />
     <Compile Include="src\menu_ui\mainMenu\MainMenuController.cs" />

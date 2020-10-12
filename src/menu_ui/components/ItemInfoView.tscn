@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://asset/img/ui/black_bg_icon_used0.tres" type="Texture" id=1]
 [ext_resource path="res://asset/img/ui/arrow_left.tres" type="Texture" id=2]
@@ -7,18 +7,14 @@
 [ext_resource path="res://asset/img/ui/arrow_right.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/ui/arrow_right_pressed.tres" type="Texture" id=6]
 [ext_resource path="res://asset/img/ui/arrow_right_disabled.tres" type="Texture" id=7]
-[ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=8]
-[ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=9]
-[ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=10]
-[ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=11]
-[ext_resource path="res://asset/img/font/mago1_112.tres" type="DynamicFont" id=12]
 [ext_resource path="res://src/menu_ui/components/ItemInfoController.cs" type="Script" id=13]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=14]
-
+[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=15]
 
 [node name="itemInfo" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 15 )
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -27,6 +23,7 @@ __meta__ = {
 [node name="s" type="VSplitContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 15 )
 collapsed = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -36,32 +33,33 @@ __meta__ = {
 margin_right = 720.0
 margin_bottom = 1156.0
 size_flags_vertical = 3
+theme = ExtResource( 15 )
 custom_constants/separation = 24
 
 [node name="header" type="Label" parent="s/v"]
 margin_right = 720.0
-margin_bottom = 89.0
+margin_bottom = 114.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 12 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Fortify"
+theme = ExtResource( 15 )
 align = 1
 autowrap = true
 
 [node name="c" type="HBoxContainer" parent="s/v"]
-margin_top = 113.0
+margin_top = 138.0
 margin_right = 720.0
 margin_bottom = 1156.0
 size_flags_vertical = 3
+theme = ExtResource( 15 )
 custom_constants/separation = 0
 alignment = 1
 
 [node name="v" type="VBoxContainer" parent="s/v/c"]
 margin_left = 60.0
 margin_right = 660.0
-margin_bottom = 1043.0
+margin_bottom = 1018.0
 rect_min_size = Vector2( 600, 0 )
 size_flags_vertical = 3
+theme = ExtResource( 15 )
 custom_constants/separation = 24
 
 [node name="add_to_hud" type="TextureButton" parent="s/v/c/v"]
@@ -72,6 +70,7 @@ rect_min_size = Vector2( 300, 300 )
 mouse_filter = 1
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme = ExtResource( 15 )
 texture_normal = ExtResource( 1 )
 expand = true
 
@@ -79,12 +78,13 @@ expand = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource( 15 )
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
 custom_constants/margin_left = 16
 custom_constants/margin_bottom = 16
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="icon" type="TextureRect" parent="s/v/c/v/add_to_hud/m"]
@@ -93,37 +93,37 @@ margin_top = 16.0
 margin_right = 284.0
 margin_bottom = 284.0
 rect_pivot_offset = Vector2( 134, 134 )
+theme = ExtResource( 15 )
 expand = true
 
 [node name="m" type="Control" parent="s/v/c/v"]
 margin_top = 324.0
 margin_right = 600.0
-margin_bottom = 1043.0
+margin_bottom = 1018.0
 size_flags_vertical = 7
+theme = ExtResource( 15 )
 
 [node name="info_text" type="RichTextLabel" parent="s/v/c/v/m"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/normal_font = ExtResource( 11 )
-custom_colors/default_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
-custom_constants/table_vseparation = 0
-custom_constants/table_hseparation = 0
-custom_constants/line_separation = 0
+theme = ExtResource( 15 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="h" type="HBoxContainer" parent="s"]
 margin_top = 1168.0
 margin_right = 720.0
 margin_bottom = 1280.0
+theme = ExtResource( 15 )
 alignment = 1
 
 [node name="left" type="TextureButton" parent="s/h"]
-margin_left = 54.0
-margin_right = 166.0
+margin_left = 76.0
+margin_right = 188.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 112, 112 )
+theme = ExtResource( 15 )
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 3 )
 texture_disabled = ExtResource( 4 )
@@ -131,177 +131,81 @@ expand = true
 stretch_mode = 5
 
 [node name="buttons" type="VBoxContainer" parent="s/h"]
-margin_left = 170.0
-margin_right = 550.0
+margin_left = 192.0
+margin_right = 528.0
 margin_bottom = 112.0
+theme = ExtResource( 15 )
 alignment = 2
 
-[node name="cast" type="TextureButton" parent="s/h/buttons"]
+[node name="cast" type="Button" parent="s/h/buttons"]
 visible = false
-margin_right = 380.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 10 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/h/buttons/cast"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Cast"
-align = 1
-valign = 1
-
-[node name="use" type="TextureButton" parent="s/h/buttons"]
-visible = false
-margin_top = 104.0
-margin_right = 380.0
-margin_bottom = 204.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 10 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/h/buttons/use"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Use"
-align = 1
-valign = 1
-
-[node name="buy" type="TextureButton" parent="s/h/buttons"]
-visible = false
-margin_top = 208.0
-margin_right = 380.0
-margin_bottom = 308.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 10 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/h/buttons/buy"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Buy"
-align = 1
-valign = 1
-
-[node name="sell" type="TextureButton" parent="s/h/buttons"]
-visible = false
-margin_top = 208.0
-margin_right = 380.0
-margin_bottom = 308.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 10 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/h/buttons/sell"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Sell"
-align = 1
-valign = 1
-
-[node name="equip" type="TextureButton" parent="s/h/buttons"]
-visible = false
-margin_top = 416.0
-margin_right = 380.0
-margin_bottom = 516.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 10 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/h/buttons/equip"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Equip"
-align = 1
-valign = 1
-
-[node name="unequip" type="TextureButton" parent="s/h/buttons"]
-visible = false
-margin_top = 520.0
-margin_right = 380.0
-margin_bottom = 620.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 10 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/h/buttons/unequip"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Unequip"
-align = 1
-valign = 1
-
-[node name="drop" type="TextureButton" parent="s/h/buttons"]
-visible = false
-margin_top = 624.0
-margin_right = 380.0
-margin_bottom = 724.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 10 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/h/buttons/drop"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Drop"
-align = 1
-valign = 1
-
-[node name="back" type="TextureButton" parent="s/h/buttons"]
-margin_top = 12.0
-margin_right = 380.0
+margin_right = 336.0
 margin_bottom = 112.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 10 )
-expand = true
-stretch_mode = 5
+rect_min_size = Vector2( 336, 112 )
+theme = ExtResource( 15 )
+text = "Cast"
 
-[node name="label" type="Label" parent="s/h/buttons/back"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+[node name="use" type="Button" parent="s/h/buttons"]
+visible = false
+margin_right = 336.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 336, 112 )
+theme = ExtResource( 15 )
+text = "Use"
+
+[node name="buy" type="Button" parent="s/h/buttons"]
+visible = false
+margin_right = 336.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 336, 112 )
+theme = ExtResource( 15 )
+text = "Buy"
+
+[node name="sell" type="Button" parent="s/h/buttons"]
+visible = false
+margin_right = 336.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 336, 112 )
+theme = ExtResource( 15 )
+text = "Sell"
+
+[node name="equip" type="Button" parent="s/h/buttons"]
+visible = false
+margin_right = 336.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 336, 112 )
+theme = ExtResource( 15 )
+text = "Equip"
+
+[node name="unequip" type="Button" parent="s/h/buttons"]
+visible = false
+margin_right = 336.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 336, 112 )
+theme = ExtResource( 15 )
+text = "Unequip"
+
+[node name="drop" type="Button" parent="s/h/buttons"]
+visible = false
+margin_right = 336.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 336, 112 )
+theme = ExtResource( 15 )
+text = "Drop"
+
+[node name="back" type="Button" parent="s/h/buttons"]
+margin_right = 336.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 336, 112 )
+theme = ExtResource( 15 )
 text = "Back"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="right" type="TextureButton" parent="s/h"]
-margin_left = 554.0
-margin_right = 666.0
+margin_left = 532.0
+margin_right = 644.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 112, 112 )
+theme = ExtResource( 15 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 texture_disabled = ExtResource( 7 )

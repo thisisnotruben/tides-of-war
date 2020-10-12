@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/character/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/npc/Npc.cs" type="Script" id=2]
+[ext_resource path="res://asset/img/light/light.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_local_to_scene = true
@@ -99,6 +100,17 @@ anims/casting = SubResource( 2 )
 anims/moving = SubResource( 3 )
 
 [node name="tween" type="Tween" parent="." index="9"]
+
+[node name="unitFocus" type="Sprite" parent="." index="10"]
+visible = false
+modulate = Color( 1, 1, 1, 0.2 )
+show_behind_parent = true
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, -2 )
+__meta__ = {
+"_editor_description_": ""
+}
 [connection signal="pressed" from="select" to="." method="_OnSelectPressed"]
 [connection signal="mouse_entered" from="area" to="." method="_OnAreaMouseEnteredExited" binds= [ true ]]
 [connection signal="mouse_exited" from="area" to="." method="_OnAreaMouseEnteredExited" binds= [ false ]]

@@ -166,13 +166,13 @@ namespace Game.Actor.State
 
 			if (character is Player || target is Player)
 			{
-				target.SpawnCombatText((damage > 0) ? damage.ToString() : hitType.ToString(), hitType);
+				target.SpawnCombatText(damage > 0 ? damage.ToString() : hitType.ToString(), hitType);
 			}
 
 
 			if (!attackIgnoreArmor)
 			{
-				damage -= character.target.stats.armor.valueI;
+				damage -= target.stats.armor.valueI;
 			}
 			if (damage > 0)
 			{

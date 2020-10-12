@@ -1,20 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=1]
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=2]
-[ext_resource path="res://asset/img/font/mago1_112.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/menu_ui/merchant/MerchantView.tscn" type="PackedScene" id=4]
-[ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=5]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=6]
-[ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=7]
 [ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=8]
 [ext_resource path="res://src/menu_ui/dialogue/DialogueController.cs" type="Script" id=9]
-
-
+[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=10]
 
 [node name="DialogueView" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 10 )
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 10 )
 collapsed = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,14 +29,14 @@ __meta__ = {
 
 [node name="control" type="VBoxContainer" parent="s"]
 margin_right = 720.0
-margin_bottom = 89.0
+margin_bottom = 114.0
+theme = ExtResource( 10 )
 
 [node name="header" type="Label" parent="s/control"]
 margin_right = 720.0
-margin_bottom = 89.0
+margin_bottom = 114.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+theme = ExtResource( 10 )
 text = "Unit Name"
 align = 1
 autowrap = true
@@ -53,8 +50,8 @@ margin_top = 93.0
 margin_right = 720.0
 margin_bottom = 182.0
 size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
 align = 1
 autowrap = true
 __meta__ = {
@@ -62,18 +59,20 @@ __meta__ = {
 }
 
 [node name="s" type="VSplitContainer" parent="s"]
-margin_top = 101.0
+margin_top = 126.0
 margin_right = 720.0
 margin_bottom = 1280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 10 )
 collapsed = true
 
 [node name="text" type="RichTextLabel" parent="s/s"]
 margin_right = 720.0
-margin_bottom = 1067.0
+margin_bottom = 1030.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 10 )
 custom_fonts/bold_font = ExtResource( 8 )
 custom_fonts/normal_font = ExtResource( 2 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
@@ -84,109 +83,86 @@ bbcode_enabled = true
 scroll_active = false
 
 [node name="v" type="VBoxContainer" parent="s/s"]
-margin_top = 1079.0
+margin_top = 1042.0
 margin_right = 720.0
-margin_bottom = 1179.0
+margin_bottom = 1154.0
+theme = ExtResource( 10 )
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="heal" type="TextureButton" parent="s/s/v"]
+[node name="heal" type="Button" parent="s/s/v"]
 visible = false
-margin_right = 720.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 5 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/s/v/heal"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
+margin_left = 191.0
+margin_top = -1.0
+margin_right = 527.0
+margin_bottom = 111.0
+rect_min_size = Vector2( 336, 112 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 10 )
 text = "Heal"
-align = 1
-valign = 1
-
-[node name="buy" type="TextureButton" parent="s/s/v"]
-visible = false
-margin_right = 720.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 5 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/s/v/buy"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Buy"
-align = 1
-valign = 1
-
-[node name="accept" type="TextureButton" parent="s/s/v"]
-visible = false
-margin_right = 720.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 5 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/s/v/accept"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Accept"
-align = 1
-valign = 1
-
-[node name="finish" type="TextureButton" parent="s/s/v"]
-visible = false
-margin_right = 720.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 5 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/s/v/finish"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Complete"
-align = 1
-valign = 1
-
-[node name="back" type="TextureButton" parent="s/s/v"]
-margin_right = 720.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 380, 100 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 5 )
-expand = true
-stretch_mode = 5
-
-[node name="label" type="Label" parent="s/s/v/back"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0847059, 0.0847059, 0.0847059, 1 )
-text = "Back"
-align = 1
-valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
+}
+
+[node name="buy" type="Button" parent="s/s/v"]
+visible = false
+margin_left = 191.0
+margin_top = 115.0
+margin_right = 527.0
+margin_bottom = 227.0
+rect_min_size = Vector2( 336, 112 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 10 )
+text = "Buy"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="accept" type="Button" parent="s/s/v"]
+visible = false
+margin_left = 191.0
+margin_top = 231.0
+margin_right = 527.0
+margin_bottom = 343.0
+rect_min_size = Vector2( 336, 112 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 10 )
+text = "Accept"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="finish" type="Button" parent="s/s/v"]
+visible = false
+margin_left = 191.0
+margin_top = 347.0
+margin_right = 527.0
+margin_bottom = 459.0
+rect_min_size = Vector2( 336, 112 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 10 )
+text = "Complete"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="back" type="Button" parent="s/s/v"]
+margin_left = 192.0
+margin_right = 528.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 336, 112 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 10 )
+text = "Back"
+__meta__ = {
+"_editor_description_": ""
 }
 
 [node name="merchant" parent="." instance=ExtResource( 4 )]

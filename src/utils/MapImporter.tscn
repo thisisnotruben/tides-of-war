@@ -3,8 +3,7 @@
 [ext_resource path="res://src/utils/MapImporter.cs" type="Script" id=1]
 [ext_resource path="res://src/utils/MapImporter.gd" type="Script" id=2]
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=3]
-[ext_resource path="res://asset/img/font/mago1_128.tres" type="DynamicFont" id=4]
-
+[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=5]
 
 [node name="map_importer" type="Node"]
 script = ExtResource( 1 )
@@ -15,6 +14,7 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 5 )
 color = Color( 1, 0.752941, 0.796078, 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -26,7 +26,7 @@ __meta__ = {
 anchor_right = 1.0
 margin_right = 6.10352e-05
 margin_bottom = 120.0
-custom_fonts/font = ExtResource( 4 )
+theme = ExtResource( 5 )
 text = "Map Importer"
 align = 1
 valign = 1
@@ -42,6 +42,7 @@ __meta__ = {
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 5 )
 color = Color( 0.501961, 0.501961, 0.501961, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -52,6 +53,7 @@ anchor_right = 1.0
 margin_top = 240.0
 margin_right = 6.10352e-05
 margin_bottom = 360.0
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 align = 1
 valign = 1
@@ -67,6 +69,7 @@ __meta__ = {
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 5 )
 color = Color( 0.501961, 0.501961, 0.501961, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -81,6 +84,7 @@ margin_left = -188.0
 margin_top = -240.0
 margin_right = 188.0
 margin_bottom = 240.0
+theme = ExtResource( 5 )
 custom_constants/separation = 8
 __meta__ = {
 "_edit_group_": true,
@@ -92,6 +96,7 @@ margin_right = 376.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 1"
 
@@ -101,42 +106,47 @@ margin_right = 376.0
 margin_bottom = 154.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 2"
 
 [node name="button_3" type="Button" parent="v_box_container"]
 margin_top = 162.0
 margin_right = 376.0
-margin_bottom = 235.0
+margin_bottom = 236.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 3"
 
 [node name="button_4" type="Button" parent="v_box_container"]
-margin_top = 243.0
+margin_top = 244.0
 margin_right = 376.0
-margin_bottom = 316.0
+margin_bottom = 317.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 4"
 
 [node name="button_5" type="Button" parent="v_box_container"]
-margin_top = 324.0
+margin_top = 325.0
 margin_right = 376.0
-margin_bottom = 397.0
+margin_bottom = 398.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 5"
 
 [node name="button_6" type="Button" parent="v_box_container"]
-margin_top = 405.0
+margin_top = 406.0
 margin_right = 376.0
 margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Quit"
 [connection signal="pressed" from="v_box_container/button_1" to="." method="ImportMap" binds= [ "res://src/map/zone_1.tscn" ]]

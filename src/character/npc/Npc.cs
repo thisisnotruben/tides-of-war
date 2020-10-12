@@ -5,9 +5,12 @@ namespace Game.Actor
 {
 	public class Npc : Character
 	{
+		public Node2D unitFocus { get; private set; }
+
 		public override void _Ready()
 		{
 			base._Ready();
+			unitFocus = GetNode<Node2D>("unitFocus");
 			UnitDB.UnitNode unitNode = UnitDB.GetUnitData(Name);
 			enemy = unitNode.enemy;
 			level = unitNode.level;

@@ -100,10 +100,10 @@ anims/attacking = SubResource( 1 )
 anims/casting = SubResource( 2 )
 anims/moving = SubResource( 3 )
 
-[node name="camera" parent="img" index="2"]
+[node name="camera" parent="." index="5"]
 current = true
 
-[node name="area" parent="." index="6"]
+[node name="area" parent="." index="7"]
 collision_layer = 18
 collision_mask = 2
 

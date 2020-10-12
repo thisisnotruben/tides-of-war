@@ -1,0 +1,137 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://asset/img/font/mago1_48.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/menu_ui/hud/CharacterStatusController.cs" type="Script" id=2]
+[ext_resource path="res://asset/img/ui/progressBarBg.tres" type="Texture" id=3]
+[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=4]
+[ext_resource path="res://asset/img/ui/progressBarFg.tres" type="Texture" id=5]
+[ext_resource path="res://asset/img/ui/grey_button.tres" type="Texture" id=6]
+[ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=7]
+
+[node name="CharacterStatusView" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -368.0
+margin_bottom = -1152.0
+theme = ExtResource( 4 )
+custom_constants/separation = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="nameContainer" type="Control" parent="."]
+margin_right = 352.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 0, 51 )
+
+[node name="background" type="NinePatchRect" parent="nameContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin" type="MarginContainer" parent="nameContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 6
+custom_constants/margin_left = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="unitName" type="Label" parent="nameContainer/margin"]
+margin_left = 6.0
+margin_right = 346.0
+margin_bottom = 51.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 7 )
+text = "Unit Name"
+align = 1
+valign = 1
+clip_text = true
+max_lines_visible = 1
+
+[node name="healthHeader" type="Label" parent="."]
+margin_top = 51.0
+margin_right = 352.0
+margin_bottom = 89.0
+size_flags_vertical = 1
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "0/0"
+align = 1
+valign = 1
+clip_text = true
+max_lines_visible = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="healthBar" type="TextureProgress" parent="healthHeader"]
+self_modulate = Color( 1, 0, 0, 1 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+size_flags_vertical = 0
+theme = ExtResource( 4 )
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 5 )
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="manaHeader" type="Label" parent="."]
+margin_top = 89.0
+margin_right = 352.0
+margin_bottom = 127.0
+size_flags_vertical = 0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "0/0"
+align = 1
+valign = 1
+clip_text = true
+max_lines_visible = 1
+
+[node name="manaBar" type="TextureProgress" parent="manaHeader"]
+self_modulate = Color( 0, 0.686275, 1, 1 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+size_flags_vertical = 0
+theme = ExtResource( 4 )
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 5 )
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}

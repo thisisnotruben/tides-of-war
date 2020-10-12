@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://asset/img/ui/brown_bg_icon.tres" type="Texture" id=2]
 [ext_resource path="res://src/menu_ui/components/SlotController.cs" type="Script" id=3]
 [ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=4]
+[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=5]
 
 [node name="slot" type="Control"]
 margin_right = 112.0
 margin_bottom = 112.0
+theme = ExtResource( 5 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
@@ -21,10 +23,11 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 112, 112 )
+theme = ExtResource( 5 )
 texture_normal = ExtResource( 2 )
 expand = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="margin" type="MarginContainer" parent="."]
@@ -32,12 +35,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 2
+theme = ExtResource( 5 )
 custom_constants/margin_right = 7
 custom_constants/margin_top = 7
 custom_constants/margin_left = 7
 custom_constants/margin_bottom = 7
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="icon" type="TextureRect" parent="margin"]
@@ -49,6 +53,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 49, 49 )
 mouse_filter = 2
+theme = ExtResource( 5 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -61,6 +66,7 @@ margin_top = 7.0
 margin_right = 105.0
 margin_bottom = 105.0
 mouse_filter = 2
+theme = ExtResource( 5 )
 color = Color( 0, 0, 0, 0.74902 )
 
 [node name="cooldownText" type="Label" parent="margin"]
@@ -71,6 +77,7 @@ margin_right = 105.0
 margin_bottom = 105.0
 rect_pivot_offset = Vector2( 0, 49 )
 size_flags_vertical = 1
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 text = "60"
@@ -92,6 +99,7 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 96, 75 )
 rect_pivot_offset = Vector2( 0, 49 )
 size_flags_vertical = 0
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 text = "1"

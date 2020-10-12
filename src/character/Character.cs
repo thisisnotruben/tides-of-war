@@ -79,7 +79,7 @@ namespace Game.Actor
 				{
 					state = FSM.State.ALIVE;
 				}
-				EmitSignal(nameof(UpdateHudStatus), this, true, hp, stats.hpMax.valueI);
+				EmitSignal(nameof(UpdateHudHealthStatus), hp, stats.hpMax.valueI);
 			}
 		}
 		public int mana
@@ -104,7 +104,7 @@ namespace Game.Actor
 				{
 					_mana = 0;
 				}
-				EmitSignal(nameof(UpdateHudStatus), this, false, mana, stats.manaMax.valueI);
+				EmitSignal(nameof(UpdateHudManaStatus), mana, stats.manaMax.valueI);
 			}
 		}
 
@@ -112,7 +112,8 @@ namespace Game.Actor
 		public Character target;
 		public List<Spell> spellQueue = new List<Spell>();
 
-		[Signal] public delegate void UpdateHudStatus(Character character, bool hp, int currentValue, int maxValue);
+		[Signal] public delegate void UpdateHudHealthStatus(int currentValue, int maxValue);
+		[Signal] public delegate void UpdateHudManaStatus(int currentValue, int maxValue);
 		[Signal] public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
 		[Signal] public delegate void NotifyAttack(Character whosAttacking);
 
@@ -124,7 +125,7 @@ namespace Game.Actor
 			head = GetNode<Position2D>("head");
 			missileSpawnPos = img.GetNode<Position2D>("missile");
 			combatTextHandler = img.GetNode<CombatTextHandler>("CombatTextHandler");
-			camera = img.GetNode<Camera2D>("camera");
+			camera = GetNode<Camera2D>("camera");
 			fsm = GetNode<FSM>("fsm");
 			hitBox = GetNode<Area2D>("area");
 			sight = GetNode<Area2D>("sight");
@@ -177,12 +178,12 @@ namespace Game.Actor
 				areaBody = hitBox.GetNode<Node2D>("body");
 
 			select.Normal = texture;
-			img.Position = new Vector2(0.0f, -img.Texture.GetHeight() / 2.0f);
+			img.Position = new Vector2(0.0f, -texture.GetHeight() / 2.0f);
 			head.Position = new Vector2(0.0f, -texture.GetHeight());
 			select.Position = new Vector2(-textureSize.x / 2.0f, -textureSize.y);
 			areaBody.Position = new Vector2(-0.5f, -textureSize.y / 2.0f);
 			sightDistance.Position = areaBody.Position;
-
+			camera.Position = new Vector2(0.0f, texture.GetHeight() / 2.0f);
 		}
 		public void Harm(int damage) { fsm.Harm(damage); }
 		public abstract void OnAttacked(Character whosAttacking);

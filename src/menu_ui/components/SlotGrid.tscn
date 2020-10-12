@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/menu_ui/components/SlotView.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/menu_ui/components/SlotGridController.cs" type="Script" id=2]
+[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=3]
 
 [node name="SlotGrid" type="GridContainer"]
 margin_right = 560.0
 margin_bottom = 560.0
 rect_min_size = Vector2( 560, 560 )
+theme = ExtResource( 3 )
 custom_constants/vseparation = 112
 custom_constants/hseparation = 112
 columns = 5

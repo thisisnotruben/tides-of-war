@@ -1,18 +1,18 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://asset/img/font/mago1_144.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu_ui/about/AboutView.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/menu_ui/saveLoad/SaveLoadView.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/menu_ui/startMenu/StartMenuController.cs" type="Script" id=4]
-[ext_resource path="res://asset/img/ui/brown_button_pressed.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/ui/grey2_bg.tres" type="Texture" id=6]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=7]
-[ext_resource path="res://asset/img/ui/brown_button.tres" type="Texture" id=8]
 [ext_resource path="res://src/utils/audio_stream_player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=10]
 
 [node name="start_menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 10 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -23,11 +23,13 @@ __meta__ = {
 [node name="bg" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 10 )
 color = Color( 0, 0, 0, 0.264706 )
 
 [node name="list_of_menus" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 10 )
 custom_constants/margin_right = 50
 custom_constants/margin_top = 50
 custom_constants/margin_left = 50
@@ -41,6 +43,7 @@ margin_left = 50.0
 margin_top = 50.0
 margin_right = 670.0
 margin_bottom = 1230.0
+theme = ExtResource( 10 )
 texture = ExtResource( 6 )
 expand = true
 
@@ -49,6 +52,7 @@ margin_left = 50.0
 margin_top = 50.0
 margin_right = 670.0
 margin_bottom = 1230.0
+theme = ExtResource( 10 )
 custom_constants/margin_right = 50
 custom_constants/margin_top = 50
 custom_constants/margin_left = 50
@@ -59,127 +63,87 @@ margin_left = 50.0
 margin_top = 50.0
 margin_right = 570.0
 margin_bottom = 1130.0
+theme = ExtResource( 10 )
 
 [node name="v" type="VBoxContainer" parent="list_of_menus/m/main_menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label" type="Label" parent="list_of_menus/m/main_menu/v"]
 margin_right = 520.0
 margin_bottom = 231.0
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "Tides of
 War"
 align = 1
 valign = 1
 
-[node name="new_game" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+[node name="newGame" type="Button" parent="list_of_menus/m/main_menu/v"]
 margin_top = 235.0
 margin_right = 520.0
 margin_bottom = 400.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 5 )
-expand = true
-
-[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/new_game"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "New Game"
-align = 1
-valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
-[node name="load" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+[node name="load" type="Button" parent="list_of_menus/m/main_menu/v"]
 margin_top = 404.0
 margin_right = 520.0
 margin_bottom = 570.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 5 )
-expand = true
-
-[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/load"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "Load"
-align = 1
-valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
-[node name="settings" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+[node name="settings" type="Button" parent="list_of_menus/m/main_menu/v"]
 margin_top = 574.0
 margin_right = 520.0
 margin_bottom = 740.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 5 )
-expand = true
-
-[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/settings"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "Settings"
-align = 1
-valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
-[node name="about" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+[node name="about" type="Button" parent="list_of_menus/m/main_menu/v"]
 margin_top = 744.0
 margin_right = 520.0
 margin_bottom = 910.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 5 )
-expand = true
-
-[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/about"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "About"
-align = 1
-valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
-[node name="exit" type="TextureButton" parent="list_of_menus/m/main_menu/v"]
+[node name="exit" type="Button" parent="list_of_menus/m/main_menu/v"]
 margin_top = 914.0
 margin_right = 520.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 5 )
-expand = true
-
-[node name="label" type="Label" parent="list_of_menus/m/main_menu/v/exit"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 text = "Exit"
-align = 1
-valign = 1
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="save_load" parent="list_of_menus/m" instance=ExtResource( 3 )]
 visible = false
@@ -189,6 +153,7 @@ margin_left = 50.0
 margin_top = 50.0
 margin_right = 570.0
 margin_bottom = 1130.0
+theme = ExtResource( 10 )
 
 [node name="header" parent="list_of_menus/m/save_load/v" index="0"]
 visible = false
@@ -204,7 +169,8 @@ margin_right = 570.0
 margin_bottom = 1130.0
 
 [node name="popup" parent="." instance=ExtResource( 7 )]
-[connection signal="pressed" from="list_of_menus/m/main_menu/v/new_game" to="." method="_OnNewGamePressed"]
+theme = ExtResource( 10 )
+[connection signal="pressed" from="list_of_menus/m/main_menu/v/newGame" to="." method="_OnNewGamePressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/load" to="." method="_OnLoadPressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/about" to="." method="_OnAboutPressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/exit" to="." method="_OnExitPressed"]

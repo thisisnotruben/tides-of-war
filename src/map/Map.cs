@@ -60,7 +60,8 @@ namespace Game.Map
 				camera2D.LimitLeft = (int)(mapBorders.Position.x * mapCellSize.x);
 				camera2D.LimitRight = (int)(mapBorders.End.x * mapCellSize.x);
 				camera2D.LimitTop = (int)(mapBorders.Position.y * mapCellSize.y);
-				camera2D.LimitBottom = (int)(mapBorders.End.y * mapCellSize.y);
+				// +68 for hud size
+				camera2D.LimitBottom = (int)(mapBorders.End.y * mapCellSize.y) + 68;
 			}
 		}
 		private void SetVeilSize()

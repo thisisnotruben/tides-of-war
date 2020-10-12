@@ -104,14 +104,7 @@ anims/moving = SubResource( 2 )
 [node name="select" type="TouchScreenButton" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 
-[node name="img" type="Sprite" parent="."]
-use_parent_material = true
-
-[node name="CombatTextHandler" parent="img" instance=ExtResource( 4 )]
-
-[node name="missile" type="Position2D" parent="img"]
-
-[node name="camera" type="Camera2D" parent="img"]
+[node name="camera" type="Camera2D" parent="."]
 zoom = Vector2( 0.175, 0.175 )
 limit_smoothed = true
 drag_margin_h_enabled = true
@@ -123,6 +116,13 @@ drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 editor_draw_drag_margin = true
+
+[node name="img" type="Sprite" parent="."]
+use_parent_material = true
+
+[node name="CombatTextHandler" parent="img" instance=ExtResource( 4 )]
+
+[node name="missile" type="Position2D" parent="img"]
 
 [node name="area" type="Area2D" parent="."]
 monitoring = false
