@@ -41,6 +41,13 @@ namespace Game.Ui
 		{
 			hudControlController.playerStatus.ConnectCharacterStatusAndUpdate(player);
 		}
+		public void SetTargetDisplay(Npc target)
+		{
+			if (!hudControlController.targetStatus.IsCharacterConnected(target))
+			{
+				hudControlController.targetStatus.ConnectCharacterStatusAndUpdate(target);
+			}
+		}
 		public void ClearTarget()
 		{
 			player.target = null;
@@ -53,12 +60,12 @@ namespace Game.Ui
 				return;
 			}
 
-			bool interactable = ContentDB.HasContent(npc.Name)
+			bool interactable = !npc.enemy && ContentDB.HasContent(npc.Name)
 				&& 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
 
 			if (hudControlController.targetStatus.IsCharacterConnected(npc))
 			{
-				if (!npc.enemy && interactable)
+				if (interactable)
 				{
 					mainMenuController.NpcInteract(npc);
 				}
@@ -69,26 +76,17 @@ namespace Game.Ui
 			}
 			else
 			{
-				// clear previous focus
-				if (player.target != null)
-				{
-					(player.target as Npc)?.unitFocus.Hide();
-				}
-
-				npc.unitFocus.Show();
-
-				// connect focused npc to hud and update hud
-				hudControlController.targetStatus.ConnectCharacterStatusAndUpdate(npc);
+				SetTargetDisplay(npc);
 
 				// interact with npc
-				if (!npc.enemy && interactable)
+				if (interactable)
 				{
 					mainMenuController.NpcInteract(npc);
 				}
 				else
 				{
 					player.target = npc;
-					// checks to see is play can attack
+					// checks to see if play can attack
 					if (npc.enemy)
 					{
 						player.OnAttacked(npc);

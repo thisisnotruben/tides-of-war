@@ -11,12 +11,9 @@ namespace Game.Actor
 {
 	public abstract class Character : WorldObject, ISerializable
 	{
-		public enum CollMask : uint
-		{
-			PLAYER = 0b_00000_00000_00000_10000,
-			NPC = 0b_00000_00000_00000_00010,
-			DEAD = 0b_00000_00000_00000_00100
-		}
+		public const uint COLL_MASK_PLAYER = 0b_00000_00000_00000_10000,
+			COLL_MASK_NPC = 0b_00000_00000_00000_00010,
+			COLL_MASK_DEAD = 0b_00000_00000_00000_00100;
 
 		protected FSM fsm;
 		public CombatTextHandler combatTextHandler;
@@ -186,14 +183,7 @@ namespace Game.Actor
 			sightDistance.Position = areaBody.Position;
 		}
 		public void Harm(int damage) { fsm.Harm(damage); }
-		public virtual void OnAttacked(Character whosAttacking)
-		{
-			if (whosAttacking != null && target != whosAttacking
-			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), this, nameof(OnAttacked)))
-			{
-				whosAttacking.Disconnect(nameof(Character.NotifyAttack), this, nameof(OnAttacked));
-			}
-		}
+		public void OnAttacked(Character whosAttacking) { fsm.OnAttacked(whosAttacking); }
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
 			CombatText combatText = (CombatText)CombatText.scene.Instance();

@@ -30,6 +30,7 @@ public class CharacterStatusController : Control
 			nameHeader.Text = character.worldName;
 
 			characterFocused = character;
+			(character as Npc)?.unitFocus.Show();
 			Show();
 		}
 	}

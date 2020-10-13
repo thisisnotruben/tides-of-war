@@ -5,7 +5,7 @@ namespace Game.Actor.State
 	public abstract class Move : TakeDamage
 	{
 		public enum MoveAnomalyType { INVALID_PATH, OBSTRUCTION_DETECTED }
-		public const float CHARACTER_SPEED = 32.0f;
+		public const float CHARACTER_SPEED = 32.0f, MIN_ARRIVAL_DIST = 1.0f;
 
 		public bool moving
 		{
@@ -43,6 +43,7 @@ namespace Game.Actor.State
 			character.img.Frame = 0;
 			path.Clear();
 		}
+		public override void OnAttacked(Character whosAttacking) { ClearOnAttackedSignals(whosAttacking); }
 		protected void ResetPoint()
 		{
 			if (reservedPath.Count > 0)
@@ -56,7 +57,7 @@ namespace Game.Actor.State
 		}
 		public override void _PhysicsProcess(float delta)
 		{
-			if (character.GlobalPosition.DistanceTo(targetPosition) < 0.25f)
+			if (character.GlobalPosition.DistanceTo(targetPosition) < MIN_ARRIVAL_DIST)
 			{
 				ResetPoint();
 				OnMovePointFinished();

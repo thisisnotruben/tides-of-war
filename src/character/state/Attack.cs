@@ -42,6 +42,7 @@ namespace Game.Actor.State
 
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
+		public override void OnAttacked(Character whosAttacking) { ClearOnAttackedSignals(whosAttacking); }
 		public void AttackStart()
 		{
 			if (!ValidTarget())
@@ -202,6 +203,7 @@ namespace Game.Actor.State
 				}
 				else
 				{
+					(character as Player)?.menu.ClearTarget();
 					fsm.ChangeState(FSM.State.IDLE);
 				}
 				return false;

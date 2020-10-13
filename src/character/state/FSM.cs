@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using Game.Database;
 using Godot;
 namespace Game.Actor.State
 {
 	public class FSM : Node
 	{
-		private const int MAX_HISTORY = 10;
+		private const int HISTORY_MAX = 10, HISTORY_CUT = HISTORY_MAX / 2;
 		public enum State
 		{
 			IDLE, ATTACK, ALIVE, DEAD, IDLE_DEAD, STUN,
@@ -13,7 +14,7 @@ namespace Game.Actor.State
 			NPC_MOVE_ROAM, NPC_MOVE_ATTACK, NPC_MOVE_RETURN
 		}
 		private readonly Dictionary<State, StateBehavior> stateMap = new Dictionary<State, StateBehavior>();
-		private readonly Stack<State> stateHistory = new Stack<State>();
+		private Stack<State> stateHistory = new Stack<State>();
 
 		public override void _Ready()
 		{
@@ -51,6 +52,11 @@ namespace Game.Actor.State
 		{
 			stateHistory.Push(state);
 			stateMap[state].Start();
+
+			if (stateHistory.Count == HISTORY_MAX)
+			{
+				stateHistory = new Stack<State>(stateHistory.ToArray().Take(HISTORY_CUT));
+			}
 		}
 		public State GetState() { return (stateHistory.Count == 0) ? State.IDLE : stateHistory.Peek(); }
 		public State GetLastState()
@@ -102,6 +108,7 @@ namespace Game.Actor.State
 			}
 		}
 		// * Delegated functions for state
+		public void OnAttacked(Character whosAttacking) { stateMap[GetState()].OnAttacked(whosAttacking); }
 		public void Harm(int damage) { (stateMap[GetState()] as TakeDamage)?.Harm(damage); }
 		public void UnhandledInput(InputEvent @event) { stateMap[GetState()].UnhandledInput(@event); }
 	}

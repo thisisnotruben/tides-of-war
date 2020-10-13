@@ -78,21 +78,5 @@ namespace Game.Actor
 		// makes sure player clicks on unit and not mistakingly select the tile to move to
 		public void _OnAreaMouseEnteredExited(bool entered) { Player.player.SetProcessUnhandledInput(!entered); }
 		public virtual void _OnSelectPressed() { Player.player.menu.NpcInteract(this); }
-		public override void OnAttacked(Character whosAttacking)
-		{
-			if (!dead && !attacking
-			&& (target == null || enemy != target.enemy)
-			&& !MoveNpcAttack.OutOfPursuitRange(this, whosAttacking))
-			{
-				target = whosAttacking;
-				state = pos.DistanceTo(whosAttacking.pos) > stats.weaponRange.value
-					? FSM.State.NPC_MOVE_ATTACK
-					: FSM.State.ATTACK;
-			}
-			else
-			{
-				base.OnAttacked(whosAttacking);
-			}
-		}
 	}
 }

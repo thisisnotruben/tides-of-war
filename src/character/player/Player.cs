@@ -1,5 +1,4 @@
 using Game.Actor.Doodads;
-using Game.Actor.State;
 using Game.Ui;
 using Game.Utils;
 using Game.ItemPoto;
@@ -48,21 +47,6 @@ namespace Game.Actor
 			menu.ConnectPlayerToHud(this);
 		}
 		public override void _UnhandledInput(InputEvent @event) { fsm.UnhandledInput(@event); }
-		public override void OnAttacked(Character whosAttacking)
-		{
-			if (whosAttacking != null
-			&& !dead && !attacking && !moving
-			&& (target == null || target == whosAttacking)
-			&& pos.DistanceTo(whosAttacking.pos) <= stats.weaponRange.value)
-			{
-				target = whosAttacking;
-				state = FSM.State.ATTACK;
-			}
-			else
-			{
-				base.OnAttacked(whosAttacking);
-			}
-		}
 		public void SetXP(int addedXP, bool showLabel = true, bool fromSaveFile = false)
 		{
 			xp += addedXP;

@@ -26,16 +26,17 @@ namespace Game.Actor.State
 			DieStart();
 		}
 		public override void Exit() { character.anim.Disconnect("animation_finished", this, nameof(DieEnd)); }
+		public override void OnAttacked(Character whosAttacking) { ClearOnAttackedSignals(whosAttacking); }
 		public override void UnhandledInput(InputEvent @event) { }
 		private void DieStart()
 		{
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 
 			// changing character detection
-			character.hitBox.CollisionLayer = (uint)Character.CollMask.DEAD;
+			character.hitBox.CollisionLayer = Character.COLL_MASK_DEAD;
 			if (character is Player)
 			{
-				character.hitBox.CollisionLayer += (uint)Character.CollMask.PLAYER;
+				character.hitBox.CollisionLayer += Character.COLL_MASK_PLAYER;
 			}
 
 			// stop health/mana regenerations
@@ -44,11 +45,11 @@ namespace Game.Actor.State
 			// clear targets
 			(character as Player)?.menu.ClearTarget();
 			if (character is Npc
+			&& character.target != null
 			&& character.target is Player
-			&& character.target == character)
+			&& character.target.target == character)
 			{
 				((Player)character.target).menu.ClearTarget();
-				character.target.target = null;
 			}
 
 			// play death animation

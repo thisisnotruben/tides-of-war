@@ -32,5 +32,43 @@ namespace Game.Actor.State
 					: FSM.State.PLAYER_MOVE);
 			}
 		}
+		public virtual void OnAttacked(Character whosAttacking)
+		{
+			if (whosAttacking == null)
+			{
+				return;
+			}
+
+			if (character is Npc
+			&& character.target == null
+			&& !MoveNpcAttack.OutOfPursuitRange(character, whosAttacking))
+			{
+				character.target = whosAttacking;
+				fsm.ChangeState(
+					character.pos.DistanceTo(character.target.pos) > character.stats.weaponRange.value
+					? FSM.State.NPC_MOVE_ATTACK
+					: FSM.State.ATTACK);
+			}
+			else if (character is Player
+			&& (character.target == null || character.target == whosAttacking)
+			&& character.pos.DistanceTo(whosAttacking.pos) <= character.stats.weaponRange.value)
+			{
+				character.target = whosAttacking;
+				((Player)character).menu.SetTargetDisplay(whosAttacking as Npc);
+				fsm.ChangeState(FSM.State.ATTACK);
+			}
+			else
+			{
+				ClearOnAttackedSignals(whosAttacking);
+			}
+		}
+		protected void ClearOnAttackedSignals(Character whosAttacking)
+		{
+			if (whosAttacking != null && character.target != whosAttacking
+			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), character, nameof(Character.OnAttacked)))
+			{
+				whosAttacking.Disconnect(nameof(Character.NotifyAttack), character, nameof(Character.OnAttacked));
+			}
+		}
 	}
 }

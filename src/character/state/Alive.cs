@@ -28,7 +28,7 @@ namespace Game.Actor.State
 			if (character is Player)
 			{
 				// changing character detection for player
-				character.hitBox.CollisionLayer = (uint)Character.CollMask.PLAYER + (uint)Character.CollMask.NPC;
+				character.hitBox.CollisionLayer = Character.COLL_MASK_PLAYER + Character.COLL_MASK_NPC;
 
 				// reset health
 				character.hp = (int)Math.Round(character.stats.hpMax.value * GD.RandRange(Stats.HP_MANA_RESPAWN_MIN_LIMIT, 1.0));
@@ -37,7 +37,7 @@ namespace Game.Actor.State
 			else
 			{
 				// changing character detection for npc
-				character.hitBox.CollisionLayer = (uint)Character.CollMask.NPC;
+				character.hitBox.CollisionLayer = Character.COLL_MASK_NPC;
 
 				// reset health
 				character.hp = character.stats.hpMax.valueI;

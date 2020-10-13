@@ -1,7 +1,7 @@
 using Godot;
 namespace Game.Ui
 {
-	public class HudControlController : Control
+	public class HudControlController : GameMenu
 	{
 		private static Texture normal = (Texture)GD.Load("res://asset/img/ui/on_screen_button_pressed.tres"),
 			pressed = (Texture)GD.Load("res://asset/img/ui/on_screen_button.tres");
@@ -54,6 +54,7 @@ namespace Game.Ui
 		public void _OnTargetStatusVisibilityChanged() { targetContainer.Visible = targetStatus.Visible; }
 		public void ClearTargetStatus()
 		{
+			player.target = null;
 			targetContainer.Hide();
 			targetStatus.Clear(false);
 		}
