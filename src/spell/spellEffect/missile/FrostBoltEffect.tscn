@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/spell/spellEffect/abstract/SpellEffectTemplate.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/spell/spellEffect/abstract/SpellEffect.cs" type="Script" id=2]
+[ext_resource path="res://src/spell/spellEffect/missile/SpellEffectMissile.cs" type="Script" id=2]
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=4]
 [ext_resource path="res://asset/img/missile-spell/frost_bolt.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=6]

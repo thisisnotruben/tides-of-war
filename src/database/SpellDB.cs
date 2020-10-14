@@ -157,7 +157,7 @@ namespace Game.Database
 					{
 						LoadSpellEffects(path.PlusFile(resourceName)).ToList().ForEach(x => spellEffectData.Add(x.Key, x.Value));
 					}
-					else
+					else if (resourceName.Extension().Equals("tscn"))
 					{
 						spellEffectData[resourceName.BaseName()] = (PackedScene)GD.Load(path.PlusFile(resourceName));
 					}

@@ -42,7 +42,7 @@ namespace Game.Projectile
 
 				moveBehavior = () =>
 				{
-					if (spellMissileNode.rotate)
+					if (spellMissileNode.rotate && !hit)
 					{
 						LookAt(target.pos);
 					}

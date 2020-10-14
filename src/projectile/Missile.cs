@@ -38,7 +38,10 @@ namespace Game.Projectile
 
 			moveBehavior = () =>
 			{
-				LookAt(target.pos);
+				if (!hit)
+				{
+					LookAt(target.pos);
+				}
 				MoveMissile(GlobalPosition, target.pos);
 			};
 		}
