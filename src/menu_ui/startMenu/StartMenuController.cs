@@ -1,4 +1,5 @@
 using Game.Utils;
+using Game.Database;
 using Godot;
 namespace Game.Ui
 {
@@ -10,6 +11,15 @@ namespace Game.Ui
 		private PopupController popupController;
 		private Control main;
 
+		public StartMenuController()
+		{
+			// load all static data when loaded
+			// since this is the entry point to the game
+			CollNavDB.Init();
+			ImageDB.Init();
+			ItemDB.Init();
+			SpellDB.Init();
+		}
 		public override void _Ready()
 		{
 			speaker = GetNode<Speaker>("speaker");

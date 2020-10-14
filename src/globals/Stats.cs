@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Godot;
 namespace Game
 {
 	public static class Stats
@@ -24,7 +23,6 @@ namespace Game
 			HP_MANA_RESPAWN_MIN_LIMIT = 0.3f,
 			WEAPON_RANGE_MELEE = 32.0f + 4.0f,
 			WEAPON_RANGE_RANGE = 64.0f + 4.0f,
-			SPEED = 0.5f,
 			MULTIPLIER = 2.6f;
 		public static readonly Dictionary<AttackTableType, AttackTableNode> ATTACK_TABLE;
 
@@ -213,42 +211,6 @@ namespace Game
 			}
 			return multiplier;
 		}
-		public static float GetMultiplier(bool npc, string imgPath)
-		{
-			float multiplier = MULTIPLIER;
-			string[] splittedImgPath = imgPath.Split('/');
-			string raceName = imgPath.GetFile().BaseName().Split("-")[0];
-			if (npc)
-			{
-				switch (raceName)
-				{
-					case "minotaur":
-					case "oliphant":
-						multiplier = 2.4f;
-						break;
-					case "human":
-					case "orc":
-						multiplier = 2.2f;
-						break;
-					case "gnoll":
-					case "goblin":
-					case "warthog":
-						multiplier = 2.0f;
-						break;
-					case "critter":
-						multiplier = 1.8f;
-						break;
-				}
-			}
-			return multiplier;
-		}
-		public static int CheckLevel(int xp)
-		{
-			return xp / XP_INTERVAL;
-		}
-		public static float MapAnimMoveSpeed(float characterCurrAnimSpeed)
-		{
-			return Mathf.Clamp(1.0f - SPEED * characterCurrAnimSpeed, 0.01f, 1.0f);
-		}
+		public static int CheckLevel(int xp) { return xp / XP_INTERVAL; }
 	}
 }

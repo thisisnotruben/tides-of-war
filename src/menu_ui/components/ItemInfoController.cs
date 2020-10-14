@@ -8,8 +8,8 @@ namespace Game.Ui
 	{
 		public InventoryModel itemList;
 		public int selectedSlotIdx;
-		private protected PopupController popupController;
-		private protected string pickableWorldName;
+		protected PopupController popupController;
+		protected string pickableWorldName;
 
 		public override void _Ready()
 		{
@@ -83,14 +83,14 @@ namespace Game.Ui
 
 			Show();
 		}
-		private protected void HideExcept(params string[] nodesToShow)
+		protected void HideExcept(params string[] nodesToShow)
 		{
 			foreach (Control node in GetNode("s/h/buttons").GetChildren())
 			{
 				node.Visible = nodesToShow.Contains(node.Name) || node.Name.Equals("back");
 			}
 		}
-		private protected void RouteConnections(string toMethod)
+		protected void RouteConnections(string toMethod)
 		{
 			BaseButton yesBttn = popupController.GetNode<BaseButton>("m/yes_no/yes");
 			string signal = "pressed";

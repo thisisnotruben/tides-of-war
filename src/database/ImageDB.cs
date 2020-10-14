@@ -15,6 +15,7 @@ namespace Game.Database
 		private const string DB_PATH = "res://data/image.json";
 
 		static ImageDB() { LoadImageData(); }
+		public static void Init() { }
 		private static void LoadImageData()
 		{
 			File file = new File();

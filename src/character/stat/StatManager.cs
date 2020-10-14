@@ -3,7 +3,7 @@ namespace Game.Actor.Stat
 {
 	public class StatManager
 	{
-		private protected Character character;
+		protected Character character;
 		public int level { get { return character.level; } }
 		public float multiplier;
 

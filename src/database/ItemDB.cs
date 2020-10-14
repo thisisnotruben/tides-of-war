@@ -37,6 +37,7 @@ namespace Game.Database
 		private const string DB_PATH = "res://data/item.json";
 
 		static ItemDB() { LoadItemData(); }
+		public static void Init() { }
 		private static void LoadItemData()
 		{
 			File file = new File();

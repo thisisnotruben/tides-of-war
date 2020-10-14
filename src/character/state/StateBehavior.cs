@@ -3,8 +3,8 @@ namespace Game.Actor.State
 {
 	public abstract class StateBehavior : Node
 	{
-		private protected FSM fsm;
-		private protected Character character;
+		protected FSM fsm;
+		protected Character character;
 
 		public void Init(FSM FSM, Character character)
 		{
@@ -50,7 +50,7 @@ namespace Game.Actor.State
 					: FSM.State.ATTACK);
 			}
 			else if (character is Player
-			&& (character.target == null || character.target == whosAttacking)
+			&& character.target == whosAttacking
 			&& character.pos.DistanceTo(whosAttacking.pos) <= character.stats.weaponRange.value)
 			{
 				character.target = whosAttacking;

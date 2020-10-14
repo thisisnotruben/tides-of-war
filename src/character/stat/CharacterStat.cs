@@ -25,7 +25,7 @@ namespace Game.Actor.Stat
 		private bool isDirty = true;
 		private float _value;
 		private float lastBaseValue = float.MinValue;
-		private protected StatManager manager;
+		protected StatManager manager;
 
 		public CharacterStat(StatManager statManager)
 		{

@@ -34,6 +34,7 @@ namespace Game.Database
 				collNavTile.SE_I, collNavTile.SW_I, collNavTile.NE_I, collNavTile.NW_I };
 			LoadCollNavData();
 		}
+		public static void Init() { }
 		private static void LoadCollNavData()
 		{
 			File file = new File();

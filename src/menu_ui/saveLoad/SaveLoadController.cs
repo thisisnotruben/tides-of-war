@@ -35,7 +35,7 @@ namespace Game.Ui
 				}
 			}
 		}
-		private protected void RouteConnections(string toMethod)
+		protected void RouteConnections(string toMethod)
 		{
 			BaseButton yesBttn = popupController.GetNode<BaseButton>("m/yes_no/yes");
 			string signal = "pressed";

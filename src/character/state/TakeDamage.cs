@@ -30,7 +30,7 @@ namespace Game.Actor.State
 			// 		character.target.GlobalPosition).Rotated((float)Math.PI) / 4.0f);
 			// }
 		}
-		private protected void Bump(Vector2 direction)
+		protected void Bump(Vector2 direction)
 		{
 			if (direction.Equals(Vector2.Zero))
 			{

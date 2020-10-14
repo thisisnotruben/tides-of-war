@@ -5,7 +5,7 @@ namespace Game.ItemPoto
 {
 	public class SpellCreator : CommodityCreator
 	{
-		private protected override Commodity CreateCommodity(Character character, string worldName)
+		protected override Commodity CreateCommodity(Character character, string worldName)
 		{
 			switch (worldName)
 			{
