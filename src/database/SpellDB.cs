@@ -31,7 +31,7 @@ namespace Game.Database
 		{
 			spellData = LoadSpellData("res://data/spell.json");
 			spellMissileData = LoadSpellMissileData("res://data/missileSpell.json");
-			spellEffectData = LoadSpellEffects("res://src/spell/spellEffect/");
+			spellEffectData = LoadSpellEffects("res://src/spell/visual/");
 		}
 		public static void Init() { }
 		private static Dictionary<string, SpellNode> LoadSpellData(string path)
@@ -145,22 +145,21 @@ namespace Game.Database
 
 			directory.Open(path);
 			directory.ListDirBegin(true, true);
+			string masterDirName = "master",
+				sceneExt = "tscn";
 
 			Dictionary<string, PackedScene> spellEffectData = new Dictionary<string, PackedScene>();
 
 			string resourceName = directory.GetNext();
 			while (!resourceName.Empty())
 			{
-				if (!resourceName.Equals("abstract"))
+				if (directory.CurrentIsDir() && !resourceName.Equals(masterDirName))
 				{
-					if (directory.CurrentIsDir())
-					{
-						LoadSpellEffects(path.PlusFile(resourceName)).ToList().ForEach(x => spellEffectData.Add(x.Key, x.Value));
-					}
-					else if (resourceName.Extension().Equals("tscn"))
-					{
-						spellEffectData[resourceName.BaseName()] = (PackedScene)GD.Load(path.PlusFile(resourceName));
-					}
+					LoadSpellEffects(path.PlusFile(resourceName)).ToList().ForEach(x => spellEffectData.Add(x.Key, x.Value));
+				}
+				else if (resourceName.Extension().Equals(sceneExt))
+				{
+					spellEffectData[resourceName.BaseName()] = (PackedScene)GD.Load(path.PlusFile(resourceName));
 				}
 				resourceName = directory.GetNext();
 			}

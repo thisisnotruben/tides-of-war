@@ -117,13 +117,10 @@
     <Compile Include="src\quest_system\Quest.cs" />
     <Compile Include="src\quest_system\WorldQuests.cs" />
     <Compile Include="src\spell\Bash.cs" />
-    <Compile Include="src\spell\spellEffect\melee\SpellEffectMelee.cs" />
-    <Compile Include="src\spell\spellEffect\missile\SpellEffectMissile.cs" />
-    <Compile Include="src\spell\spellEffect\targetless\SpellEffectTargetless.cs" />
     <Compile Include="src\spell\SpellProto.cs" />
     <Compile Include="src\spell\spells\main\Spell.cs" />
     <Compile Include="src\spell\spells\main\SpellOsb.cs" />
-    <Compile Include="src\spell\spellEffect\abstract\SpellEffect.cs" />
+    <Compile Include="src\spell\visual\master\SpellEffect.cs" />
     <Compile Include="src\spell\spell_logics\arcane_bolt.cs" />
     <Compile Include="src\spell\spell_logics\bash.cs" />
     <Compile Include="src\spell\spell_logics\cleave.cs" />

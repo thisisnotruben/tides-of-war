@@ -1,6 +1,5 @@
 using Game.Database;
 using Game.Ability;
-using Game.ItemPoto;
 using Game.Actor;
 using Godot;
 namespace Game.Projectile
@@ -10,26 +9,26 @@ namespace Game.Projectile
 		public new static PackedScene scene = (PackedScene)GD.Load("res://src/projectile/MissileSpell.tscn");
 
 		private Timer timer;
-		protected SpellProto spell;
+		protected string spellWorldName = string.Empty;
 
 		public override void _Ready()
 		{
 			base._Ready();
-			Connect(nameof(OnHit), this, nameof(StartSpell));
 			timer = GetNode<Timer>("timer");
 
 			// can't add in Init due to this section needing nodes
-			if (spell != null && SpellDB.HasSpellMissile(spell.worldName))
+			if (!spellWorldName.Equals(string.Empty) && SpellDB.HasSpellMissile(spellWorldName))
 			{
-				SpellDB.SpellMissileNode spellMissileNode = SpellDB.GetSpellMissileData(spell.worldName);
+				SpellDB.SpellMissileNode spellMissileNode = SpellDB.GetSpellMissileData(spellWorldName);
 				img.Texture = spellMissileNode.img;
 				hitboxBody.Shape = spellMissileNode.hitBox;
 			}
 		}
 		public void Init(Character character, Character target, string spellWorldName)
 		{
+			this.spellWorldName = spellWorldName ?? string.Empty;
+
 			Init(character, target);
-			// TODO: spell = (SpellProto)new SpellCreator().MakeCommodity(character, spellWorldName);
 
 			if (SpellDB.HasSpellMissile(spellWorldName))
 			{
@@ -58,20 +57,16 @@ namespace Game.Projectile
 				};
 			}
 
-			// instance spell effect
+			// instance spell effect visuals
 			if (SpellDB.HasSpellEffect(spellWorldName))
 			{
 				SpellEffect spellEffect = SpellDB.GetSpellEffect(
 					SpellDB.GetSpellData(spellWorldName).spellEffect);
 
-				AddChild(spellEffect);
-				spellEffect.Owner = this;
-
-				spellEffect.Init(character, spellWorldName);
+				spellEffect.Init(target, spellWorldName, this);
 				Connect(nameof(OnHit), spellEffect, nameof(SpellEffect.OnHit));
 			}
 		}
-		public void StartSpell() { spell?.Start(); }
 		public override void OnMissileFadeFinished(string animName) { timer.Start(); }
 	}
 }

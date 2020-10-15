@@ -51,11 +51,7 @@ namespace Game.Actor.State
 			// notify those you see around you
 			foreach (Area2D otherHitBox in character.sight.GetOverlappingAreas())
 			{
-				Npc otherNpc = otherHitBox.Owner as Npc;
-				if (otherNpc != null)
-				{
-					otherNpc._OnCharacterEnteredSight(character.hitBox);
-				}
+				(otherHitBox.Owner as Npc)?._OnCharacterEnteredSight(character.hitBox);
 			}
 
 			fsm.ChangeState(FSM.State.IDLE);

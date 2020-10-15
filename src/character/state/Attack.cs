@@ -5,6 +5,8 @@ using Game.Actor.Doodads;
 using Game.Database;
 using Game.Utils;
 using Game.Projectile;
+using Game.ItemPoto;
+using Game.Ability;
 using Godot;
 namespace Game.Actor.State
 {
@@ -12,7 +14,7 @@ namespace Game.Actor.State
 	{
 		private Timer timer = new Timer();
 		public bool attackIgnoreArmor;
-		private string spellName = "";
+		private SpellProto spell;
 
 		public override void _Ready()
 		{
@@ -77,11 +79,11 @@ namespace Game.Actor.State
 			character.missileSpawnPos.Position = missilePos;
 
 			// get spell if any and anim (if npc)
-			spellName = TryGetSpell(character);
+			spell = TryGetSpell(character);
 
 			character.anim.Play(
-				SpellDB.HasSpell(spellName)
-				? SpellDB.GetSpellData(spellName).characterAnim
+				spell != null
+				? SpellDB.GetSpellData(spell.worldName).characterAnim
 				: "attacking",
 				-1.0f, character.stats.animSpeed.value);
 		}
@@ -92,27 +94,37 @@ namespace Game.Actor.State
 				return;
 			}
 
-			// if only melee
 			if (GetImageNode(character).melee)
 			{
-				AttackHit(character, character.target);
+				if (spell != null)
+				{
+					// instance spell effect visuals
+					SpellEffect spellEffect = SpellDB.GetSpellEffect(
+						SpellDB.GetSpellData(spell.worldName).spellEffect);
+
+					spellEffect.Init(character.target, spell.worldName, character.target);
+					spellEffect.OnHit();
+				}
+
+				AttackHit(character, character.target, spell);
 			}
 			else
 			{
-				Missile missile = MissileFactory.CreateMissile(character, spellName);
+				Missile missile = MissileFactory.CreateMissile(character, spell);
 
 				// sync missile to attack
 				missile.Connect(nameof(Missile.OnHit), this, nameof(AttackHit),
-					new Godot.Collections.Array() { character, character.target });
+					new Godot.Collections.Array() { character, character.target, spell });
 
 				// add to scene
 				Map.Map.map.AddZChild(missile);
 				missile.Owner = Map.Map.map;
 			}
+			spell = null;
 
 			AttackStart();
 		}
-		public void AttackHit(Character character, Character target)
+		public void AttackHit(Character character, Character target, SpellProto spell)
 		{
 			character.EmitSignal(nameof(Character.NotifyAttack));
 
@@ -163,13 +175,17 @@ namespace Game.Actor.State
 				return;
 			}
 
+			if (damage != 0)
+			{
+				spell?.Start();
+			}
+
 			SoundPlayer.PlaySound(soundName, SoundPlayer.SoundType.RANDOM);
 
 			if (character is Player || target is Player)
 			{
 				target.SpawnCombatText(damage > 0 ? damage.ToString() : hitType.ToString(), hitType);
 			}
-
 
 			if (!attackIgnoreArmor)
 			{
@@ -186,9 +202,9 @@ namespace Game.Actor.State
 			{
 				return false;
 			}
-			else if (character.target == null || character.target.dead)
+			else if (character.target?.dead ?? true)
 			{
-				if (character != null && character.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)))
+				if (character?.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)) ?? false)
 				{
 					character.Disconnect(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked));
 				}
@@ -218,7 +234,7 @@ namespace Game.Actor.State
 			}
 			return true;
 		}
-		private static string TryGetSpell(Character character)
+		private static SpellProto TryGetSpell(Character character)
 		{
 			if (character is Npc && ContentDB.HasContent(character.worldName))
 			{
@@ -231,10 +247,11 @@ namespace Game.Actor.State
 				// TODO: need to have a chance table on when a spell can be casted
 				if (spells.Any() && GD.Randi() % 100 + 1 >= 50)
 				{
-					return spells.ElementAt((int)(GD.Randi() % spells.Count()));
+					return (SpellProto)new SpellCreator().MakeCommodity(
+						character, spells.ElementAt((int)(GD.Randi() % spells.Count())));
 				}
 			}
-			return "";
+			return null;
 		}
 		private static ImageDB.ImageNode GetImageNode(Character character) { return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName()); }
 	}

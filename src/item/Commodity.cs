@@ -6,7 +6,7 @@ using Game.Actor.Stat;
 using Godot;
 namespace Game.ItemPoto
 {
-	public class Commodity : Godot.Object
+	public class Commodity : Node
 	{
 		private static Dictionary<Character, Dictionary<string, SceneTreeTimer>> cooldowns =
 			new Dictionary<Character, Dictionary<string, SceneTreeTimer>>();

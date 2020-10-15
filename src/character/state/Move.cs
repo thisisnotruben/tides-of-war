@@ -12,7 +12,7 @@ namespace Game.Actor.State
 			get { return IsPhysicsProcessing(); }
 			set { SetPhysicsProcess(value); }
 		}
-		private Vector2 targetPosition;
+		private Vector2 targetPosition = Vector2.Zero;
 		private Queue<Vector2> reservedPath = new Queue<Vector2>();
 		protected Queue<Vector2> _path = new Queue<Vector2>();
 		protected Queue<Vector2> path

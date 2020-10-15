@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
+[ext_resource path="res://asset/img/missile-spell/bash.tres" type="Texture" id=2]
+[ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=3]
+[ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=4]
+
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/color_speed = 1.0
+shader_param/scale_speed = 3.0
+shader_param/energy = 1.0
+shader_param/scale = Vector2( 0.8, 1 )
+shader_param/gradient = ExtResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 16.0
+angular_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0, 0.768627, 0.768627, 1 )
+
+[node name="concussive_shot" instance=ExtResource( 4 )]
+script = ExtResource( 3 )
+lightFadeDelay = 0.75
+playSound = true
+
+[node name="light" parent="." index="2"]
+visible = false
+material = SubResource( 1 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="explode" type="Particles2D" parent="explode" index="0"]
+use_parent_material = true
+emitting = false
+amount = 24
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource( 2 )

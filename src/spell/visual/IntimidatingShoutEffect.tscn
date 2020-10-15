@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
+[ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=2]
+[ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=3]
+[ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=5]
+[ext_resource path="res://asset/img/missile-spell/circle.png" type="Texture" id=6]
+[ext_resource path="res://asset/img/light/smoke_scale.tres" type="Texture" id=7]
+
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+resource_name = "color_ramp"
+shader = ExtResource( 1 )
+shader_param/color_speed = 1.0
+shader_param/scale_speed = 0.5
+shader_param/energy = 1.0
+shader_param/scale = Vector2( 0.9, 1 )
+shader_param/gradient = ExtResource( 2 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.33, 0.66, 1 )
+colors = PoolColorArray( 0.309804, 0.0823529, 0.027451, 1, 0.529412, 0.0862745, 0.27451, 1, 0.878431, 0.235294, 0.156863, 1, 1, 0.458824, 0, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+trail_divisor = 2
+trail_size_modifier = ExtResource( 5 )
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 90.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = ExtResource( 7 )
+color_ramp = SubResource( 3 )
+
+[node name="intimidating_shout" instance=ExtResource( 4 )]
+script = ExtResource( 3 )
+
+[node name="timer" parent="." index="0"]
+wait_time = 1.0
+
+[node name="light" parent="." index="2"]
+visible = false
+material = SubResource( 1 )
+
+[node name="shout" type="Particles2D" parent="explode" index="0"]
+amount = 4
+preprocess = 10.0
+process_material = SubResource( 4 )
+texture = ExtResource( 6 )
