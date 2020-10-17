@@ -8,6 +8,7 @@ namespace Game.ItemPoto
 {
 	public class Commodity : Node
 	{
+		// TODO: when changing scenes, null characters will remain...
 		private static Dictionary<Character, Dictionary<string, SceneTreeTimer>> cooldowns =
 			new Dictionary<Character, Dictionary<string, SceneTreeTimer>>();
 

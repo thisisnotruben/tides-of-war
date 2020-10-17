@@ -10,7 +10,6 @@ namespace Game.Ability
 		[Export] protected bool fadeLight = true;
 		[Export] protected bool playSound = false; // for missile to play sound?
 
-		private Character character;
 		private Tween tween;
 		private Timer timer;
 		private Sprite light;
@@ -40,7 +39,6 @@ namespace Game.Ability
 		}
 		public void Init(Character character, string spellWorldName, Node attachTo)
 		{
-			this.character = character;
 			sound = SpellDB.GetSpellData(spellWorldName).sound;
 
 			attachTo.AddChild(this);
@@ -53,6 +51,14 @@ namespace Game.Ability
 				timer.Start();
 			});
 
+			// optional onTimeOut behavior
+			Routine fadeLightRoutine = () =>
+			{
+				FadeLight();
+				SetEmitting(idleParticles, false);
+				timer.Start();
+			};
+
 			// added behavior
 			switch (spellWorldName)
 			{
@@ -62,16 +68,11 @@ namespace Game.Ability
 					AddBehavior(() => Position = character.head.Position);
 					onTimeOut = () =>
 					{
-						FadeLight(true);
 						tween.InterpolateProperty(this, ":modulate", Modulate,
 							new Color("00ffffff"), lightFadeDelay,
 							Tween.TransitionType.Linear, Tween.EaseType.InOut);
 						tween.Start();
-						timer.Start();
-						foreach (Particles2D particles2D in idleParticles.GetChildren())
-						{
-							particles2D.Emitting = false;
-						}
+						fadeLightRoutine();
 					};
 					break;
 
@@ -89,29 +90,12 @@ namespace Game.Ability
 						Position = character.head.Position;
 						character.GetParent().MoveChild(this, 0);
 					});
-					onTimeOut = () =>
-					{
-						FadeLight(true);
-						foreach (Particles2D particles2D in idleParticles.GetChildren())
-						{
-							particles2D.Emitting = false;
-						}
-						timer.Start();
-					};
+					onTimeOut = fadeLightRoutine;
 					break;
 
 				case WorldNameDB.INTIMIDATING_SHOUT:
 					AddBehavior(() => Position = character.head.Position + new Vector2(0.0f, 6.0f));
-
-					onTimeOut = () =>
-					{
-						FadeLight(true);
-						foreach (Particles2D particles2D in idleParticles.GetChildren())
-						{
-							particles2D.Emitting = false;
-						}
-						timer.Start();
-					};
+					onTimeOut = fadeLightRoutine;
 					break;
 
 				case WorldNameDB.MIND_BLAST:
@@ -119,24 +103,8 @@ namespace Game.Ability
 					break;
 
 				case WorldNameDB.SLOW:
-					AddBehavior(() =>
-					{
-						// GetParent().RemoveChild(this);
-						// bolt.target.AddChild(this);
-						// Position = bolt.target.img.Position;
-						// spell.Connect(nameof(Unmake), this, nameof(_OnTimerTimeout));
-						// tween.Start();
-						// timer.Start();
-					});
-					onTimeOut = () =>
-					{
-						FadeLight(true);
-						foreach (Particles2D particles2D in idleParticles.GetChildren())
-						{
-							particles2D.Emitting = false;
-						}
-						timer.Start();
-					};
+					AddBehavior(() => Position = character.img.Position);
+					onTimeOut = fadeLightRoutine;
 					break;
 
 				case WorldNameDB.ARCANE_BOLT:
@@ -155,16 +123,16 @@ namespace Game.Ability
 					break;
 
 				case WorldNameDB.CONCUSSIVE_SHOT:
-					// polyBehavior.Push(() =>
-					// 	{
-					// 		light.Show();
-					// 		PackedScene bashScene = (PackedScene)GD.Load("res://src/spell/effects/bash.tscn");
-					// 		bash_effect bash = (bash_effect)bashScene.Instance();
-					// 		character.target.AddChild(bash);
-					// 		bash.Owner = character.target;
-					// 		spell.Connect(nameof(Unmake), bash, nameof(bash_effect._OnTimerTimeout));
-					// 		bash.OnHit();
-					// 	});
+					// remember, bash effect can change and this with it
+					string bashName = WorldNameDB.BASH;
+					SpellEffect bashEffect = SpellDB.GetSpellEffect(SpellDB.GetSpellData(bashName).spellEffect);
+					bashEffect.Init(character, bashName, character);
+
+					polyBehavior.Push(() =>
+						{
+							light.Show();
+							bashEffect.OnHit();
+						});
 					break;
 
 				case WorldNameDB.EXPLOSIVE_ARROW:
@@ -174,48 +142,42 @@ namespace Game.Ability
 			}
 		}
 		private void AddBehavior(Routine routine) { polyBehavior.Push(routine); }
-		public virtual void _OnTimerTimeout() { onTimeOut?.Invoke(); }
-		// public override void _Process(float delta)
-		// {
-		// only meteor uses this
-		// tween.InterpolateProperty(this, ":global_position", GlobalPosition,
-		// 	seekPos, 5.0f, Tween.TransitionType.Circ, Tween.EaseType.Out);
-		// tween.Start();
-		// if (GlobalPosition.DistanceTo(seekPos) < 2.0f)
-		// {
-		// 	SetProcess(false);
-		// 	OnHit();
-		// }
-		// }
-		public void FadeLight(bool fade = true)
+		public void FadeLight()
 		{
-			if (fade)
-			{
-				tween.InterpolateProperty(light, ":modulate", light.Modulate,
-					new Color("00ffffff"), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.In);
-			}
+			tween.InterpolateProperty(light, ":modulate", light.Modulate,
+				new Color("00ffffff"), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.In);
 		}
-		public virtual void OnHit()
+		public void _OnTimerTimeout() { onTimeOut?.Invoke(); }
+		public void OnHit()
 		{
 			Globals.PlaySound(sound, this, new Utils.Speaker2D());
 
 			tween.InterpolateProperty(this, ":scale", new Vector2(0.75f, 0.75f),
 				Vector2.One, 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
 
-			FadeLight(fadeLight);
+			if (fadeLight)
+			{
+				FadeLight();
+			}
 
-			foreach (Particles2D particles2D in idleParticles.GetChildren())
-			{
-				particles2D.Emitting = false;
-			}
-			foreach (Particles2D particles2D in explodeParticles.GetChildren())
-			{
-				particles2D.Emitting = true;
-			}
+			SetEmitting(idleParticles, false);
+			SetEmitting(explodeParticles, true);
 
 			while (polyBehavior.Count > 0)
 			{
 				polyBehavior.Pop().Invoke();
+			}
+		}
+		private void SetEmitting(Node parent, bool emitting)
+		{
+			Particles2D particles;
+			foreach (Node node in parent.GetChildren())
+			{
+				particles = node as Particles2D;
+				if (particles != null)
+				{
+					particles.Emitting = emitting;
+				}
 			}
 		}
 	}

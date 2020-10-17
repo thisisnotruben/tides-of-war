@@ -60,7 +60,6 @@
     <Compile Include="src\database\ContentDB.cs" />
     <Compile Include="src\database\IconDB.cs" />
     <Compile Include="src\database\ItemDB.cs" />
-    <Compile Include="src\database\PickableFactory.cs" />
     <Compile Include="src\database\PickableDB.cs" />
     <Compile Include="src\database\QuestDB.cs" />
     <Compile Include="src\database\SpellDB.cs" />

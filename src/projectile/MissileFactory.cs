@@ -1,25 +1,29 @@
 using Game.Database;
 using Game.Actor;
-using Game.Ability;
 namespace Game.Projectile
 {
 	public static class MissileFactory
 	{
-		public static Missile CreateMissile(Character character, SpellProto spell = null)
+		public static Missile CreateMissile(Character character, string spellName)
 		{
 			Missile missile;
 
-			if (spell != null)
+			if (!spellName.Equals(string.Empty) && SpellDB.HasSpellMissile(spellName))
 			{
 				missile = (MissileSpell)MissileSpell.scene.Instance();
-				((MissileSpell)missile).Init(character, character.target, spell.worldName);
+				((MissileSpell)missile).Init(character, character.target, spellName);
 			}
 			else
 			{
-				missile = (Missile)Missile.scene.Instance();
-				missile.Init(character, character.target);
+				missile = CreateMissile(character);
 			}
 
+			return missile;
+		}
+		public static Missile CreateMissile(Character character)
+		{
+			Missile missile = (Missile)Missile.scene.Instance();
+			missile.Init(character, character.target);
 			return missile;
 		}
 	}

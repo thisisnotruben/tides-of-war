@@ -119,7 +119,6 @@ namespace Game.Database
 				itemDict = (Godot.Collections.Dictionary)rawDict[spellName];
 				SpellMissileNode spellMissileNode;
 
-
 				spellMissileNode.img = itemDict[nameof(SpellMissileNode.img)] == null
 					? null
 					: (AtlasTexture)GD.Load(string.Format(filePath, (string)itemDict[nameof(SpellMissileNode.img)]));

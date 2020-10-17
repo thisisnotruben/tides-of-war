@@ -78,8 +78,8 @@ namespace Game.Actor.State
 			missilePos.x = Mathf.Abs(missilePos.x) * ((isLeft) ? -1.0f : 1.0f);
 			character.missileSpawnPos.Position = missilePos;
 
-			// get spell if any and anim (if npc)
-			spell = TryGetSpell(character);
+			// get spell if any
+			TryGetSpell(out spell, character);
 
 			character.anim.Play(
 				spell != null
@@ -96,21 +96,21 @@ namespace Game.Actor.State
 
 			if (GetImageNode(character).melee)
 			{
-				if (spell != null)
+				if (spell != null && SpellDB.HasSpellEffect(spell.worldName))
 				{
-					// instance spell effect visuals
-					SpellEffect spellEffect = SpellDB.GetSpellEffect(
-						SpellDB.GetSpellData(spell.worldName).spellEffect);
-
-					spellEffect.Init(character.target, spell.worldName, character.target);
-					spellEffect.OnHit();
+					InstancSpellEffect(spell.worldName, character.target);
 				}
 
 				AttackHit(character, character.target, spell);
 			}
 			else
 			{
-				Missile missile = MissileFactory.CreateMissile(character, spell);
+				Missile missile = MissileFactory.CreateMissile(character, spell?.worldName ?? string.Empty);
+
+				if (spell != null && !(missile is MissileSpell) && SpellDB.HasSpellEffect(spell.worldName))
+				{
+					InstancSpellEffect(spell.worldName, character.target);
+				}
 
 				// sync missile to attack
 				missile.Connect(nameof(Missile.OnHit), this, nameof(AttackHit),
@@ -234,7 +234,7 @@ namespace Game.Actor.State
 			}
 			return true;
 		}
-		private static SpellProto TryGetSpell(Character character)
+		private static void TryGetSpell(out SpellProto spell, Character character)
 		{
 			if (character is Npc && ContentDB.HasContent(character.worldName))
 			{
@@ -247,12 +247,21 @@ namespace Game.Actor.State
 				// TODO: need to have a chance table on when a spell can be casted
 				if (spells.Any() && GD.Randi() % 100 + 1 >= 50)
 				{
-					return (SpellProto)new SpellCreator().MakeCommodity(
+					spell = (SpellProto)new SpellCreator().MakeCommodity(
 						character, spells.ElementAt((int)(GD.Randi() % spells.Count())));
+					return;
 				}
 			}
-			return null;
+			spell = null;
 		}
 		private static ImageDB.ImageNode GetImageNode(Character character) { return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName()); }
+		private static void InstancSpellEffect(string spellName, Character target)
+		{
+			SpellEffect spellEffect = SpellDB.GetSpellEffect(
+				SpellDB.GetSpellData(spellName).spellEffect);
+
+			spellEffect.Init(target, spellName, target);
+			spellEffect.OnHit();
+		}
 	}
 }

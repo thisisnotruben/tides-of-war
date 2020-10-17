@@ -182,7 +182,7 @@ namespace Game.Quests
 					case "pickable":
 						if (SpellDB.HasSpell(data[key]))
 						{
-							reward = PickableFactory.GetMakeSpell(data[key]);
+							// TODO: reward = PickableFactory.GetMakeSpell(data[key]);
 						}
 						else if (ItemDB.HasItem(data[key]))
 						{
