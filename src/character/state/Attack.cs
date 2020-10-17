@@ -210,24 +210,26 @@ namespace Game.Actor.State
 				}
 				character.target = null;
 
+				FSM.State state;
 				if (character is Npc)
 				{
-					fsm.ChangeState(
-						(UnitDB.HasUnitData(character.Name) && UnitDB.GetUnitData(character.Name).path.Length > 0)
+					state = UnitDB.HasUnitData(character.Name) && UnitDB.GetUnitData(character.Name).path.Length > 0
 						? FSM.State.NPC_MOVE_ROAM
-						: FSM.State.NPC_MOVE_RETURN);
+						: FSM.State.NPC_MOVE_RETURN;
 				}
 				else
 				{
+					state = FSM.State.IDLE;
 					(character as Player)?.menu.ClearTarget();
-					fsm.ChangeState(FSM.State.IDLE);
 				}
+
+				fsm.ChangeState(state);
 				return false;
 			}
 			else if (character.pos.DistanceTo(character.target.pos) > character.stats.weaponRange.value)
 			{
 				fsm.ChangeState(
-					(character is Npc)
+					character is Npc
 					? FSM.State.NPC_MOVE_ATTACK
 					: FSM.State.IDLE);
 				return false;
