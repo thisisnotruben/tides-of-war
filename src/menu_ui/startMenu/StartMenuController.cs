@@ -15,6 +15,7 @@ namespace Game.Ui
 		{
 			// load all static data when loaded
 			// since this is the entry point to the game
+			AreaEffectDB.Init();
 			CollNavDB.Init();
 			ImageDB.Init();
 			ItemDB.Init();

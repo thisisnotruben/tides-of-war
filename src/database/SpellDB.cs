@@ -84,10 +84,12 @@ namespace Game.Database
 				modifiers.armor = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.armor));
 				modifiers.weaponRange = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.weaponRange));
 				modifiers.weaponSpeed = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.weaponSpeed));
+				modifiers.moveSpeed = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.moveSpeed));
 				spellNode.modifiers = modifiers;
 
 				// set use
 				ItemDB.Use use;
+				use.totalSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(ItemDB.Use.totalSec)];
 				use.repeatSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(ItemDB.Use.repeatSec)];
 				use.hp = ItemDB.GetModifier(itemDict, nameof(ItemDB.Use.hp), "use");
 				use.mana = ItemDB.GetModifier(itemDict, nameof(ItemDB.Use.mana), "use");

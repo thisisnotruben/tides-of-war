@@ -1,9 +1,8 @@
-using Game.ItemPoto;
 using Game.Actor.State;
 using Game.Actor;
 namespace Game.Ability
 {
-	public class Bash : Commodity
+	public class Bash : SpellProto
 	{
 		private FSM.State previousState;
 

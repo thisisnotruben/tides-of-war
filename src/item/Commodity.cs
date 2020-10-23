@@ -197,8 +197,8 @@ namespace Game.ItemPoto
 			if (use.hp.value != 0)
 			{
 				character.hp += (use.hp.type == StatModifier.StatModType.FLAT)
-				? (int)use.hp.value
-				: (int)Math.Round(use.hp.value * character.stats.hpMax.value);
+					? (int)use.hp.value
+					: (int)Math.Round(use.hp.value * character.stats.hpMax.value);
 			}
 			if (use.mana.value != 0)
 			{

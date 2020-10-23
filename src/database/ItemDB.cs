@@ -21,7 +21,7 @@ namespace Game.Database
 			public int durationSec;
 			public ModifierNode stamina, intellect, agility,
 				hpMax, manaMax, maxDamage, minDamage, regenTime,
-				armor, weaponRange, weaponSpeed;
+				armor, weaponRange, weaponSpeed, moveSpeed;
 		}
 		public struct ModifierNode
 		{
@@ -30,7 +30,7 @@ namespace Game.Database
 		}
 		public struct Use
 		{
-			public int repeatSec;
+			public int totalSec, repeatSec;
 			public ModifierNode hp, mana, damage;
 		}
 		private static Dictionary<string, ItemNode> itemData = new Dictionary<string, ItemNode>();
@@ -74,11 +74,13 @@ namespace Game.Database
 				modifiers.armor = GetModifier(itemDict, nameof(Modifiers.armor));
 				modifiers.weaponRange = GetModifier(itemDict, nameof(Modifiers.weaponRange));
 				modifiers.weaponSpeed = GetModifier(itemDict, nameof(Modifiers.weaponSpeed));
+				modifiers.moveSpeed = GetModifier(itemDict, nameof(Modifiers.moveSpeed));
 				itemNode.modifiers = modifiers;
 
 				// set use
 
 				Use use;
+				use.totalSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(Use.totalSec)];
 				use.repeatSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(Use.repeatSec)];
 				use.hp = GetModifier(itemDict, nameof(Use.hp), "use");
 				use.mana = GetModifier(itemDict, nameof(Use.mana), "use");

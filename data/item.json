@@ -54,9 +54,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -127,9 +132,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -200,9 +210,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -273,9 +288,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -346,9 +366,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -419,9 +444,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -492,9 +522,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -565,9 +600,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -638,9 +678,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -711,9 +756,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -784,9 +834,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -857,9 +912,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -930,9 +990,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1003,9 +1068,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1076,9 +1146,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1149,9 +1224,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1222,9 +1302,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1295,9 +1380,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1368,9 +1458,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1441,9 +1536,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1514,9 +1614,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1587,9 +1692,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1660,9 +1770,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1733,9 +1848,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1806,9 +1926,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1879,9 +2004,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1952,9 +2082,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2025,9 +2160,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2098,9 +2238,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2171,9 +2316,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2244,9 +2394,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2317,9 +2472,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2390,9 +2550,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2463,9 +2628,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2536,9 +2706,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2609,9 +2784,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2682,9 +2862,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2755,9 +2940,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2828,9 +3018,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2901,9 +3096,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2974,9 +3174,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3047,9 +3252,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3120,9 +3330,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3193,9 +3408,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3266,9 +3486,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3339,9 +3564,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3412,9 +3642,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3485,9 +3720,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3558,9 +3798,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3631,9 +3876,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3704,9 +3954,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3777,9 +4032,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3850,9 +4110,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3923,9 +4188,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -3996,9 +4266,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4069,9 +4344,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4142,9 +4422,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4215,9 +4500,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4288,9 +4578,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4361,9 +4656,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4434,9 +4734,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4507,9 +4812,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4580,9 +4890,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4653,9 +4968,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4726,9 +5046,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4799,9 +5124,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4872,9 +5202,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -4945,9 +5280,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5018,9 +5358,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5091,9 +5436,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5164,9 +5514,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5237,9 +5592,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5310,9 +5670,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5383,9 +5748,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5456,9 +5826,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5529,9 +5904,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5602,9 +5982,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5675,9 +6060,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5748,9 +6138,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5821,9 +6216,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5894,9 +6294,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -5967,9 +6372,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6040,9 +6450,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6113,9 +6528,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6186,9 +6606,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6259,9 +6684,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6332,9 +6762,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6405,9 +6840,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6478,9 +6918,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6551,9 +6996,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6624,9 +7074,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6697,9 +7152,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6770,9 +7230,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6843,9 +7308,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6916,9 +7386,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -6989,9 +7464,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7062,9 +7542,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7135,9 +7620,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7208,9 +7698,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7281,9 +7776,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7354,9 +7854,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7427,9 +7932,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7500,9 +8010,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7573,9 +8088,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7646,9 +8166,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7719,9 +8244,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7792,9 +8322,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7865,9 +8400,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -7938,9 +8478,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8011,9 +8556,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8084,9 +8634,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8157,9 +8712,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8230,9 +8790,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8303,9 +8868,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8376,9 +8946,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8449,9 +9024,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8522,9 +9102,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8595,9 +9180,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8668,9 +9258,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8741,9 +9336,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8814,9 +9414,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8887,9 +9492,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -8960,9 +9570,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9033,9 +9648,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9106,9 +9726,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9179,9 +9804,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9252,9 +9882,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9325,9 +9960,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9398,9 +10038,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9471,9 +10116,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9544,9 +10194,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9617,9 +10272,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9690,9 +10350,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9763,9 +10428,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9836,9 +10506,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9909,9 +10584,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -9982,9 +10662,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10055,9 +10740,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10128,9 +10818,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10201,9 +10896,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10274,9 +10974,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10347,9 +11052,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10420,9 +11130,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10493,9 +11208,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10566,9 +11286,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10639,9 +11364,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10712,9 +11442,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10785,9 +11520,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10858,9 +11598,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -10931,9 +11676,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11004,9 +11754,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11077,9 +11832,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11150,9 +11910,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11223,9 +11988,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11296,9 +12066,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11369,9 +12144,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11442,9 +12222,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11515,9 +12300,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11588,9 +12378,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11661,9 +12456,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11734,9 +12534,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11807,9 +12612,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11880,9 +12690,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -11953,9 +12768,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12026,9 +12846,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12099,9 +12924,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12172,9 +13002,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12245,9 +13080,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12318,9 +13158,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12391,9 +13236,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12464,9 +13314,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12537,9 +13392,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12610,9 +13470,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12683,9 +13548,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12756,9 +13626,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12829,9 +13704,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12902,9 +13782,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -12975,9 +13860,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13048,9 +13938,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13121,9 +14016,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13194,9 +14094,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13267,9 +14172,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13340,9 +14250,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13413,9 +14328,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13486,9 +14406,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13559,9 +14484,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13632,9 +14562,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13705,9 +14640,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13778,9 +14718,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13851,9 +14796,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13924,9 +14874,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -13997,9 +14952,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14070,9 +15030,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14143,9 +15108,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14216,9 +15186,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14289,9 +15264,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14362,9 +15342,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14435,9 +15420,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14508,9 +15498,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14581,9 +15576,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14654,9 +15654,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14727,9 +15732,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14800,9 +15810,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14873,9 +15888,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -14946,9 +15966,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -15019,9 +16044,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -15092,9 +16122,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -15165,9 +16200,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -15238,9 +16278,14 @@
 			"weaponSpeed": {
 				"type": "FLAT",
 				"value": 0
+			},
+			"moveSpeed": {
+				"type": "FLAT",
+				"value": 0
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",

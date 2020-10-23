@@ -13,7 +13,6 @@ namespace Game.Actor.State
 	public class Attack : TakeDamage
 	{
 		private Timer timer = new Timer();
-		public bool attackIgnoreArmor;
 		private SpellProto spell;
 
 		public override void _Ready()
@@ -40,7 +39,6 @@ namespace Game.Actor.State
 			character.anim.Disconnect("animation_finished", this, nameof(OnAttackAnimationFinished));
 			character.anim.Stop();
 			character.regenTimer.Start();
-			attackIgnoreArmor = false;
 
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
@@ -139,6 +137,9 @@ namespace Game.Actor.State
 				imageNode.melee
 				? Stats.AttackTableType.MELEE
 				: Stats.AttackTableType.RANGED];
+			// set spell attack-table/ignoreArmor if any
+			attackTable = spell?.attackTable ?? attackTable;
+			bool ignoreArmor = spell?.ignoreArmor ?? false;
 
 			if (diceRoll <= attackTable.hit)
 			{
@@ -175,7 +176,11 @@ namespace Game.Actor.State
 				return;
 			}
 
-			if (damage != 0)
+			if (damage == 0)
+			{
+				spell?.QueueFree();
+			}
+			else
 			{
 				spell?.Start();
 			}
@@ -187,7 +192,7 @@ namespace Game.Actor.State
 				target.SpawnCombatText(damage > 0 ? damage.ToString() : hitType.ToString(), hitType);
 			}
 
-			if (!attackIgnoreArmor)
+			if (!ignoreArmor)
 			{
 				damage -= target.stats.armor.valueI;
 			}
@@ -251,6 +256,9 @@ namespace Game.Actor.State
 				{
 					spell = (SpellProto)new SpellCreator().MakeCommodity(
 						character, spells.ElementAt((int)(GD.Randi() % spells.Count())));
+
+					character.target.AddChild(spell);
+					spell.Owner = character.target;
 					return;
 				}
 			}

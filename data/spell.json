@@ -60,9 +60,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -139,9 +144,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -218,9 +228,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -297,9 +312,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -376,9 +396,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 5,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -411,7 +436,7 @@
 		"characterAnim": "attacking",
 		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 60,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -455,9 +480,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 60,
 			"repeatSec": 12,
 			"hp": {
 				"type": "FLAT",
@@ -534,9 +564,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 3,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -613,9 +648,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -692,9 +732,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 120,
 			"repeatSec": 5,
 			"hp": {
 				"type": "FLAT",
@@ -727,7 +772,7 @@
 		"characterAnim": "attacking",
 		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 75,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -771,9 +816,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 75,
 			"repeatSec": 15,
 			"hp": {
 				"type": "FLAT",
@@ -850,9 +900,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -929,9 +984,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -964,7 +1024,7 @@
 		"characterAnim": "attacking",
 		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 30,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1008,9 +1068,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 30,
 			"repeatSec": 2,
 			"hp": {
 				"type": "FLAT",
@@ -1087,9 +1152,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1166,9 +1236,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1245,9 +1320,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1324,9 +1404,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1403,9 +1488,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1438,7 +1528,7 @@
 		"characterAnim": "attacking",
 		"manaCost": 0,
 		"modifiers": {
-			"durationSec": 30,
+			"durationSec": 0,
 			"stamina": {
 				"type": "FLAT",
 				"value": 0
@@ -1482,9 +1572,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 30,
 			"repeatSec": 10,
 			"hp": {
 				"type": "FLAT",
@@ -1561,9 +1656,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1640,9 +1740,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1719,9 +1824,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1798,9 +1908,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1877,9 +1992,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -1956,9 +2076,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2035,9 +2160,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2114,9 +2244,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
@@ -2193,9 +2328,14 @@
 			"weaponSpeed": {
 				"type": "PERCENT_MUL",
 				"value": -50
+			},
+			"moveSpeed": {
+				"type": "PERCENT_MUL",
+				"value": -50
 			}
 		},
 		"use": {
+			"totalSec": 0,
 			"repeatSec": 0,
 			"hp": {
 				"type": "FLAT",
