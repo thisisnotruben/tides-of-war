@@ -5,13 +5,27 @@ namespace Game.Database
 {
 	public static class ImageDB
 	{
-		public struct ImageNode
+		public class ImageData
 		{
-			public int total, moving, dying, attacking;
-			public string weapon, swing, body, weaponMaterial;
-			public bool melee;
+			public readonly int total, moving, dying, attacking;
+			public readonly string weapon, swing, body, weaponMaterial;
+			public readonly bool melee;
+
+			public ImageData(int total, int moving, int dying, int attacking,
+			string weapon, string swing, string body, string weaponMaterial, bool melee)
+			{
+				this.total = total;
+				this.moving = moving;
+				this.dying = dying;
+				this.attacking = attacking;
+				this.weapon = weapon;
+				this.swing = swing;
+				this.body = body;
+				this.weaponMaterial = weaponMaterial;
+				this.melee = melee;
+			}
 		}
-		private static Dictionary<string, ImageNode> imageData = new Dictionary<string, ImageNode>();
+		private static Dictionary<string, ImageData> imageData = new Dictionary<string, ImageData>();
 		private const string DB_PATH = "res://data/image.json";
 
 		static ImageDB() { LoadImageData(); }
@@ -23,23 +37,29 @@ namespace Game.Database
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 
-			Godot.Collections.Dictionary imgDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			int moving, dying, attacking;
 			foreach (string imgName in rawDict.Keys)
 			{
-				imgDict = (Godot.Collections.Dictionary)rawDict[imgName];
-				ImageNode imageNode;
-				imageNode.moving = (int)((Single)imgDict[nameof(ImageNode.moving)]);
-				imageNode.dying = (int)((Single)imgDict[nameof(ImageNode.dying)]);
-				imageNode.attacking = (int)((Single)imgDict[nameof(ImageNode.attacking)]);
-				imageNode.total = imageNode.moving + imageNode.dying + imageNode.attacking;
-				imageNode.weapon = (string)imgDict[nameof(ImageNode.weapon)];
-				imageNode.weaponMaterial = (string)imgDict[nameof(ImageNode.weaponMaterial)];
-				imageNode.swing = (string)imgDict[nameof(ImageNode.swing)];
-				imageNode.body = (string)imgDict[nameof(ImageNode.body)];
-				imageNode.melee = (bool)imgDict[nameof(ImageNode.melee)];
-				imageData.Add(imgName, imageNode);
+				dict = (Godot.Collections.Dictionary)rawDict[imgName];
+
+				moving = (int)((Single)dict[nameof(ImageData.moving)]);
+				dying = (int)((Single)dict[nameof(ImageData.dying)]);
+				attacking = (int)((Single)dict[nameof(ImageData.attacking)]);
+
+				imageData.Add(imgName, new ImageData(
+					total: moving + dying + attacking,
+					moving: moving,
+					dying: dying,
+					attacking: attacking,
+					weapon: (string)dict[nameof(ImageData.weapon)],
+					weaponMaterial: (string)dict[nameof(ImageData.weaponMaterial)],
+					swing: (string)dict[nameof(ImageData.swing)],
+					body: (string)dict[nameof(ImageData.body)],
+					melee: (bool)dict[nameof(ImageData.melee)]
+				));
 			}
 		}
-		public static ImageNode GetImageData(string imageName) { return imageData[imageName]; }
+		public static ImageData GetImageData(string imageName) { return imageData[imageName]; }
 	}
 }

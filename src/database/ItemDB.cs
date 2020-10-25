@@ -7,33 +7,84 @@ namespace Game.Database
 	public static class ItemDB
 	{
 		public enum ItemType { WEAPON, ARMOR, POTION, FOOD, MISC }
-		public struct ItemNode
+		public class ItemData
 		{
-			public ItemType type;
-			public Texture icon;
-			public int level, goldCost, stackSize, coolDown;
-			public string blurb, subType, material;
-			public Modifiers modifiers;
-			public Use use;
+			public readonly ItemType type;
+			public readonly Texture icon;
+			public readonly int level, goldCost, stackSize, coolDown;
+			public readonly string blurb, subType, material;
+			public readonly Modifiers modifiers;
+			public readonly Use use;
+
+			public ItemData(ItemType type, Texture icon, int level, int goldCost, int stackSize,
+			int coolDown, string blurb, string subType, string material, Modifiers modifiers, Use use)
+			{
+				this.type = type;
+				this.icon = icon;
+				this.level = level;
+				this.goldCost = goldCost;
+				this.stackSize = stackSize;
+				this.coolDown = coolDown;
+				this.blurb = blurb;
+				this.subType = subType;
+				this.material = material;
+				this.modifiers = modifiers;
+				this.use = use;
+			}
 		}
-		public struct Modifiers
+		public class Modifiers
 		{
-			public int durationSec;
-			public ModifierNode stamina, intellect, agility,
+			public readonly int durationSec;
+			public readonly ModifierNode stamina, intellect, agility,
 				hpMax, manaMax, maxDamage, minDamage, regenTime,
 				armor, weaponRange, weaponSpeed, moveSpeed;
+
+			public Modifiers(int durationSec, ModifierNode stamina, ModifierNode intellect,
+			ModifierNode agility, ModifierNode hpMax, ModifierNode manaMax,
+			ModifierNode maxDamage, ModifierNode minDamage, ModifierNode regenTime,
+			ModifierNode armor, ModifierNode weaponRange, ModifierNode weaponSpeed, ModifierNode moveSpeed)
+			{
+				this.durationSec = durationSec;
+				this.stamina = stamina;
+				this.intellect = intellect;
+				this.agility = agility;
+				this.hpMax = hpMax;
+				this.manaMax = manaMax;
+				this.maxDamage = maxDamage;
+				this.minDamage = minDamage;
+				this.regenTime = regenTime;
+				this.armor = armor;
+				this.weaponRange = weaponRange;
+				this.weaponSpeed = weaponSpeed;
+				this.moveSpeed = moveSpeed;
+			}
 		}
-		public struct ModifierNode
+		public class ModifierNode
 		{
-			public StatModifier.StatModType type;
-			public float value;
+			public readonly StatModifier.StatModType type;
+			public readonly float value;
+
+			public ModifierNode(StatModifier.StatModType type, float value)
+			{
+				this.type = type;
+				this.value = value;
+			}
 		}
-		public struct Use
+		public class Use
 		{
-			public int totalSec, repeatSec;
-			public ModifierNode hp, mana, damage;
+			public readonly int totalSec, repeatSec;
+			public readonly ModifierNode hp, mana, damage;
+
+			public Use(int totalSec, int repeatSec, ModifierNode hp, ModifierNode mana, ModifierNode damage)
+			{
+				this.totalSec = totalSec;
+				this.repeatSec = repeatSec;
+				this.hp = hp;
+				this.mana = mana;
+				this.damage = damage;
+			}
 		}
-		private static Dictionary<string, ItemNode> itemData = new Dictionary<string, ItemNode>();
+		private static Dictionary<string, ItemData> itemData = new Dictionary<string, ItemData>();
 		private const string DB_PATH = "res://data/item.json";
 
 		static ItemDB() { LoadItemData(); }
@@ -45,74 +96,58 @@ namespace Game.Database
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 
-			Godot.Collections.Dictionary itemDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			foreach (string itemName in rawDict.Keys)
 			{
-				itemDict = (Godot.Collections.Dictionary)rawDict[itemName];
-				ItemNode itemNode;
-				itemNode.type = (ItemType)Enum.Parse(typeof(ItemType), (string)itemDict[nameof(ItemNode.type)]);
-				itemNode.icon = IconDB.GetIcon((int)((Single)itemDict[nameof(ItemNode.icon)]));
-				itemNode.level = (int)((Single)itemDict[nameof(ItemNode.level)]);
-				itemNode.goldCost = (int)((Single)itemDict[nameof(ItemNode.goldCost)]);
-				itemNode.blurb = (string)itemDict[nameof(ItemNode.blurb)];
-				itemNode.subType = (string)itemDict[nameof(ItemNode.subType)];
-				itemNode.material = (string)itemDict[nameof(ItemNode.material)];
-				itemNode.stackSize = (int)((Single)itemDict[nameof(ItemNode.stackSize)]);
-				itemNode.coolDown = (int)((Single)itemDict[nameof(ItemNode.coolDown)]);
-
-				// set modifiers
-				Modifiers modifiers;
-				modifiers.durationSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["modifiers"])[nameof(Modifiers.durationSec)];
-				modifiers.stamina = GetModifier(itemDict, nameof(Modifiers.stamina));
-				modifiers.intellect = GetModifier(itemDict, nameof(Modifiers.intellect));
-				modifiers.agility = GetModifier(itemDict, nameof(Modifiers.agility));
-				modifiers.hpMax = GetModifier(itemDict, nameof(Modifiers.hpMax));
-				modifiers.manaMax = GetModifier(itemDict, nameof(Modifiers.manaMax));
-				modifiers.maxDamage = GetModifier(itemDict, nameof(Modifiers.maxDamage));
-				modifiers.minDamage = GetModifier(itemDict, nameof(Modifiers.minDamage));
-				modifiers.regenTime = GetModifier(itemDict, nameof(Modifiers.regenTime));
-				modifiers.armor = GetModifier(itemDict, nameof(Modifiers.armor));
-				modifiers.weaponRange = GetModifier(itemDict, nameof(Modifiers.weaponRange));
-				modifiers.weaponSpeed = GetModifier(itemDict, nameof(Modifiers.weaponSpeed));
-				modifiers.moveSpeed = GetModifier(itemDict, nameof(Modifiers.moveSpeed));
-				itemNode.modifiers = modifiers;
-
-				// set use
-
-				Use use;
-				use.totalSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(Use.totalSec)];
-				use.repeatSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(Use.repeatSec)];
-				use.hp = GetModifier(itemDict, nameof(Use.hp), "use");
-				use.mana = GetModifier(itemDict, nameof(Use.mana), "use");
-				use.damage = GetModifier(itemDict, nameof(Use.damage), "use");
-				itemNode.use = use;
+				dict = (Godot.Collections.Dictionary)rawDict[itemName];
 
 				// add to cache
-				itemData.Add(itemName, itemNode);
+				itemData.Add(itemName, new ItemData(
+					type: (ItemType)Enum.Parse(typeof(ItemType), (string)dict[nameof(ItemData.type)]),
+					icon: IconDB.GetIcon((int)((Single)dict[nameof(ItemData.icon)])),
+					level: (int)((Single)dict[nameof(ItemData.level)]),
+					goldCost: (int)((Single)dict[nameof(ItemData.goldCost)]),
+					blurb: (string)dict[nameof(ItemData.blurb)],
+					subType: (string)dict[nameof(ItemData.subType)],
+					material: (string)dict[nameof(ItemData.material)],
+					stackSize: (int)((Single)dict[nameof(ItemData.stackSize)]),
+					coolDown: (int)((Single)dict[nameof(ItemData.coolDown)]),
+					modifiers: new Modifiers(
+						durationSec: (int)(Single)((Godot.Collections.Dictionary)dict["modifiers"])[nameof(Modifiers.durationSec)],
+						stamina: GetModifier(dict, nameof(Modifiers.stamina)),
+						intellect: GetModifier(dict, nameof(Modifiers.intellect)),
+						agility: GetModifier(dict, nameof(Modifiers.agility)),
+						hpMax: GetModifier(dict, nameof(Modifiers.hpMax)),
+						manaMax: GetModifier(dict, nameof(Modifiers.manaMax)),
+						maxDamage: GetModifier(dict, nameof(Modifiers.maxDamage)),
+						minDamage: GetModifier(dict, nameof(Modifiers.minDamage)),
+						regenTime: GetModifier(dict, nameof(Modifiers.regenTime)),
+						armor: GetModifier(dict, nameof(Modifiers.armor)),
+						weaponRange: GetModifier(dict, nameof(Modifiers.weaponRange)),
+						weaponSpeed: GetModifier(dict, nameof(Modifiers.weaponSpeed)),
+						moveSpeed: GetModifier(dict, nameof(Modifiers.moveSpeed))
+					),
+					use: new Use(
+						totalSec: (int)(Single)((Godot.Collections.Dictionary)dict["use"])[nameof(Use.totalSec)],
+						repeatSec: (int)(Single)((Godot.Collections.Dictionary)dict["use"])[nameof(Use.repeatSec)],
+						hp: GetModifier(dict, nameof(Use.hp), "use"),
+						mana: GetModifier(dict, nameof(Use.mana), "use"),
+						damage: GetModifier(dict, nameof(Use.damage), "use")
+					)
+				));
 			}
 		}
-		public static ModifierNode GetModifier(Godot.Collections.Dictionary itemDict, string attribute, string primaryTag = "modifiers")
+		public static ModifierNode GetModifier(Godot.Collections.Dictionary mainDict, string attribute, string primaryTag = "modifiers")
 		{
-			Godot.Collections.Dictionary modifierDict = (Godot.Collections.Dictionary)
-				((Godot.Collections.Dictionary)itemDict[primaryTag])[attribute];
-			ModifierNode modifierNode;
+			Godot.Collections.Dictionary dict = (Godot.Collections.Dictionary)
+				((Godot.Collections.Dictionary)mainDict[primaryTag])[attribute];
 
-			modifierNode.type = (StatModifier.StatModType)
-				Enum.Parse(typeof(StatModifier.StatModType), (string)modifierDict["type"]);
-			modifierNode.value = (float)((Single)modifierDict["value"]);
-
-			// TODO: rethink this
-			// if (primaryTag.Equals("use")
-			// && (modifierNode.type == StatModifier.StatModType.PERCENT_ADD
-			// || (modifierNode.type != StatModifier.StatModType.FLAT && attribute.Equals(nameof(Use.damage)))))
-			// {
-			// 	// this doesn't make sense for one-time use attributes so throw exception
-			// 	throw new Exception($"{nameof(Use)} type cannot be : {modifierNode.type}");
-			// }
-
-			return modifierNode;
+			return new ModifierNode(
+				type: (StatModifier.StatModType)Enum.Parse(typeof(StatModifier.StatModType), (string)dict["type"]),
+				value: (float)((Single)dict["value"])
+			);
 		}
-		public static ItemNode GetItemData(string worldName) { return itemData[worldName]; }
+		public static ItemData GetItemData(string worldName) { return itemData[worldName]; }
 		public static bool HasItem(string nameCheck) { return itemData.ContainsKey(nameCheck); }
 	}
 }

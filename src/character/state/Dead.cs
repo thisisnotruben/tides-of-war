@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using Game.Actor.Doodads;
 using Game.Ability;
 using Game.Database;
@@ -22,7 +23,6 @@ namespace Game.Actor.State
 		{
 			character.anim.Connect("animation_finished", this, nameof(DieEnd));
 			character.regenTimer.Stop();
-			GD.Randomize();
 			DieStart();
 		}
 		public override void Exit() { character.anim.Disconnect("animation_finished", this, nameof(DieEnd)); }
@@ -106,7 +106,7 @@ namespace Game.Actor.State
 				character.GlobalPosition = UnitDB.GetUnitData(character.Name).spawnPos;
 
 				// set spawn timer
-				timer.WaitTime = (float)GD.RandRange(60.0, 240.0);
+				timer.WaitTime = new Random().Next(60, 241);
 				timer.Start();
 			}
 		}

@@ -137,7 +137,7 @@ namespace Game.Actor
 		}
 		protected void SetImg(string imgName)
 		{
-			ImageDB.ImageNode imageData = ImageDB.GetImageData(imgName);
+			ImageDB.ImageData imageData = ImageDB.GetImageData(imgName);
 
 			// set sprite
 			Texture imgTexture = (Texture)GD.Load($"res://asset/img/character/{imgName}.png");

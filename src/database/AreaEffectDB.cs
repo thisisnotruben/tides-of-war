@@ -5,38 +5,45 @@ namespace Game.Database
 {
 	public static class AreaEffectDB
 	{
-		public struct AreaEffectNode { public int radius; }
+		public class AreaEffectData
+		{
+			public readonly int radius;
 
-		private static readonly Dictionary<string, AreaEffectNode> areaEffectData;
+			public AreaEffectData(int radius)
+			{
+				this.radius = radius;
+			}
+		}
+
+		private static readonly Dictionary<string, AreaEffectData> areaEffectData;
 
 		static AreaEffectDB()
 		{
 			areaEffectData = LoadAreaEffectData("res://data/areaEffect.json");
 		}
 		public static void Init() { }
-		private static Dictionary<string, AreaEffectNode> LoadAreaEffectData(string path)
+		private static Dictionary<string, AreaEffectData> LoadAreaEffectData(string path)
 		{
 			File file = new File();
 			file.Open(path, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 
-			Dictionary<string, AreaEffectNode> areaEffectData = new Dictionary<string, AreaEffectNode>();
+			Dictionary<string, AreaEffectData> areaEffectData = new Dictionary<string, AreaEffectData>();
 
 			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			foreach (string worldName in rawDict.Keys)
 			{
 				dict = (Godot.Collections.Dictionary)rawDict[worldName];
 
-				AreaEffectNode areaEffectNode;
-				areaEffectNode.radius = (int)((Single)dict[nameof(AreaEffectNode.radius)]);
-
-				areaEffectData.Add(worldName, areaEffectNode);
+				areaEffectData.Add(worldName, new AreaEffectData(
+					radius: (int)((Single)dict[nameof(AreaEffectData.radius)]))
+				);
 			}
 
 			return areaEffectData;
 		}
 		public static bool HasAreaEffect(string worldName) { return areaEffectData.ContainsKey(worldName); }
-		public static AreaEffectNode GetAreaEffect(string worldName) { return areaEffectData[worldName]; }
+		public static AreaEffectData GetAreaEffect(string worldName) { return areaEffectData[worldName]; }
 	}
 }

@@ -22,25 +22,23 @@ namespace Game.Ability
 				((CircleShape2D)sight.Shape).Radius = AreaEffectDB.GetAreaEffect(worldName).radius;
 			}
 		}
-		public void OnCharacterEntered(Area2D area2D)
-		{
-			Character character = area2D.Owner as Character;
-			if (character != null)
-			{
-				targetedCharacters.Add(character);
-			}
-		}
-		public void OnCharacterExited(Area2D area2D) { targetedCharacters.Remove(area2D.Owner as Character); }
 		public override void Start()
 		{
 			base.Start();
 
 			// lock in characters
 			area.Monitoring = false;
-			// don't want to double cast on primary target
-			targetedCharacters.Remove(character);
 
-			targetedCharacters.ForEach(c => StartAreaEffect(c));
+			Character c;
+			foreach (Area2D area2D in area.GetOverlappingAreas())
+			{
+				c = area2D.Owner as Character;
+				if (c != null && c != character)
+				{
+					targetedCharacters.Add(c);
+					StartAreaEffect(c);
+				}
+			}
 		}
 		public override void Exit()
 		{

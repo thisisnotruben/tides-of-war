@@ -22,8 +22,6 @@ namespace Game.Actor.State
 			timer.Connect("timeout", this, nameof(OnAttackSpeedTimeout));
 			timer.OneShot = true;
 			AddChild(timer);
-
-			GD.Randomize();
 		}
 		public override void Start()
 		{
@@ -92,7 +90,7 @@ namespace Game.Actor.State
 				return;
 			}
 
-			if (GetImageNode(character).melee)
+			if (GetImageData(character).melee)
 			{
 				if (spell != null && SpellDB.HasSpellEffect(spell.worldName))
 				{
@@ -126,15 +124,19 @@ namespace Game.Actor.State
 		{
 			character.EmitSignal(nameof(Character.NotifyAttack));
 
-			uint diceRoll = GD.Randi() % 100 + 1;
+			Random rand = new Random();
 
-			int damage = (int)Math.Round(GD.RandRange(character.stats.minDamage.valueI, character.stats.maxDamage.valueI));
+			int diceRoll = rand.Next(1, 101),
+				damage = rand.Next(
+					character.stats.minDamage.valueI,
+					character.stats.maxDamage.valueI + 1);
+
 			string soundName;
 			CombatText.TextType hitType;
 
-			ImageDB.ImageNode imageNode = GetImageNode(character);
+			ImageDB.ImageData imageData = GetImageData(character);
 			Stats.AttackTableNode attackTable = Stats.ATTACK_TABLE[
-				imageNode.melee
+				imageData.melee
 				? Stats.AttackTableType.MELEE
 				: Stats.AttackTableType.RANGED];
 			// set spell attack-table/ignoreArmor if any
@@ -143,31 +145,31 @@ namespace Game.Actor.State
 
 			if (diceRoll <= attackTable.hit)
 			{
-				soundName = imageNode.weaponMaterial;
+				soundName = imageData.weaponMaterial;
 				hitType = CombatText.TextType.HIT;
 			}
 			else if (diceRoll <= attackTable.critical)
 			{
-				soundName = imageNode.weaponMaterial;
+				soundName = imageData.weaponMaterial;
 				hitType = CombatText.TextType.CRITICAL;
 				damage *= 2;
 			}
 			else if (diceRoll <= attackTable.dodge)
 			{
-				soundName = imageNode.swing;
+				soundName = imageData.swing;
 				hitType = CombatText.TextType.DODGE;
 				damage = 0;
 			}
 			else if (diceRoll <= attackTable.parry)
 			{
 				// TODO: make sure unit/target can parry with weapon
-				soundName = imageNode.weaponMaterial;
+				soundName = imageData.weaponMaterial;
 				hitType = CombatText.TextType.PARRY;
 				damage = 0;
 			}
 			else if (diceRoll <= attackTable.miss)
 			{
-				soundName = imageNode.swing;
+				soundName = imageData.swing;
 				hitType = CombatText.TextType.MISS;
 				damage = 0;
 			}
@@ -251,11 +253,13 @@ namespace Game.Actor.State
 				where SpellDB.GetSpellData(spellName).range >= character.pos.DistanceTo(character.target.pos)
 				select spellName;
 
+				Random rand = new Random();
+
 				// TODO: need to have a chance table on when a spell can be casted
-				if (spells.Any() && GD.Randi() % 100 + 1 >= 50)
+				if (spells.Any() && 50 >= rand.Next(1, 101))
 				{
 					spell = (SpellProto)new SpellCreator().MakeCommodity(
-						character, spells.ElementAt((int)(GD.Randi() % spells.Count())));
+						character, spells.ElementAt(rand.Next(spells.Count())));
 
 					character.target.AddChild(spell);
 					spell.Owner = character.target;
@@ -264,7 +268,7 @@ namespace Game.Actor.State
 			}
 			spell = null;
 		}
-		private static ImageDB.ImageNode GetImageNode(Character character) { return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName()); }
+		private static ImageDB.ImageData GetImageData(Character character) { return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName()); }
 		private static void InstancSpellEffect(string spellName, Character target)
 		{
 			SpellEffect spellEffect = SpellDB.GetSpellEffect(

@@ -23,12 +23,12 @@ namespace Game.Ui
 		public void _OnCastPressed()
 		{
 			bool showPopup = false;
-			SpellDB.SpellNode spellNode = SpellDB.GetSpellData(pickableWorldName);
+			SpellDB.SpellData spellData = SpellDB.GetSpellData(pickableWorldName);
 			Label popupErrLabel = popupController.GetNode<Label>("m/error/label");
 
-			if (player.mana >= spellNode.manaCost)
+			if (player.mana >= spellData.manaCost)
 			{
-				if (spellNode.requiresTarget)
+				if (spellData.requiresTarget)
 				{
 					if (player.target == null)
 					{
@@ -42,7 +42,7 @@ namespace Game.Ui
 							popupErrLabel.Text = "Invalid\nTarget!";
 							showPopup = true;
 						}
-						else if (player.pos.DistanceTo(player.target.pos) > spellNode.range && spellNode.range > 0)
+						else if (player.pos.DistanceTo(player.target.pos) > spellData.range && spellData.range > 0)
 						{
 							popupErrLabel.Text = "Target Not\nIn Range!";
 							showPopup = true;

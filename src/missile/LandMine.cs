@@ -1,62 +1,141 @@
 using Game.Actor;
 using Game.Actor.Doodads;
 using Godot;
+using System;
 namespace Game.MissileDEP
 {
-	public class LandMine : WorldObject, ICombustible
+	public class LandMine : Node2D, ICombustible
 	{
-		public Area2D exludedUnitArea;
-		private bool exploded;
-		public int minDamage = 0;
-		public int maxDamage = 10;
+		public static PackedScene scene = (PackedScene)GD.Load("res://src/missile/LandMine.tscn");
 
-		public override void _Ready() { GD.Randomize(); }
-		public void _OnTimerTimeout() { Explode(); }
-		public void _OnAffectedAreaEntered(Area2D area2d)
+		private Area2D blastCircle, body;
+		private Timer timer;
+		private Tween tween;
+		private Node2D img, explodeParticles;
+
+		private Character exludedCharacter;
+		private float timeToDetonationSec = 1.0f;
+		private bool arming, exploded;
+		private int minDamage, maxDamage;
+
+		public override void _Ready()
 		{
-			if (area2d != exludedUnitArea && area2d.CollisionLayer == Globals.Collision["CHARACTERS"])
+			timer = GetNode<Timer>("timer");
+			tween = GetNode<Tween>("tween");
+			img = GetNode<Node2D>("img");
+			explodeParticles = img.GetNode<Node2D>("explode");
+			blastCircle = img.GetNode<Area2D>("blastCircle");
+			body = img.GetNode<Area2D>("body");
+		}
+		public void Init(Character exludedCharacter, int minDamage, int maxDamage, float armDelaySec = -1.0f, float timeToDetonationSec = -1.0f)
+		{
+			this.exludedCharacter = exludedCharacter;
+			this.timeToDetonationSec = timeToDetonationSec;
+			this.minDamage = minDamage;
+			this.maxDamage = maxDamage;
+
+			Map.Map.map.AddZChild(this);
+			GlobalPosition = Map.Map.map.GetGridPosition(exludedCharacter.GlobalPosition);
+			Owner = Map.Map.map;
+
+			// activates detection
+			body.Monitorable = true;
+			body.Monitoring = true;
+
+			if (armDelaySec > 0.0f)
+			{
+				arming = true;
+				timer.WaitTime = armDelaySec;
+				timer.Start();
+			}
+			else if (timeToDetonationSec > 0.0f)
+			{
+				timer.WaitTime = timeToDetonationSec;
+				timer.Start();
+			}
+		}
+		public void OnTimerTimeout()
+		{
+			if (arming)
+			{
+				arming = false;
+
+				if (timeToDetonationSec > 0.0f)
+				{
+					timer.WaitTime = timeToDetonationSec;
+					timer.Start();
+				}
+				else
+				{
+					Explode();
+				}
+			}
+			else if (exploded)
+			{
+				QueueFree();
+			}
+			else
 			{
 				Explode();
 			}
 		}
-		public void _OnTweenCompleted(Godot.Object obj, NodePath nodePath) { QueueFree(); }
+		public void OnCharacterEnteredBlastCircle(Area2D area2d)
+		{
+			Character character = area2d.Owner as Character;
+
+			if (character != null && character != exludedCharacter)
+			{
+				Explode();
+			}
+		}
 		public void Explode()
 		{
-			if (!exploded)
+			if (exploded)
 			{
-				exploded = true;
-				GetNode<AudioStreamPlayer2D>("img/snd").Play();
-				foreach (Node node in GetNode("img/explode").GetChildren())
+				return;
+			}
+
+			exploded = true;
+			int damage = new Random().Next(minDamage, maxDamage + 1);
+
+			GetNode<AudioStreamPlayer2D>("img/snd").Play();
+
+			Particles2D particles2D;
+			foreach (Node node in explodeParticles.GetChildren())
+			{
+				particles2D = node as Particles2D;
+				if (particles2D != null)
 				{
-					Particles2D particles2D = node as Particles2D;
-					if (particles2D != null)
-					{
-						particles2D.Emitting = true;
-					}
-				}
-				foreach (Area2D area2D in GetNode("img/affected_area").GetChildren())
-				{
-					uint layer = area2D.CollisionLayer;
-					if (layer == Globals.Collision["CHARACTERS"] && area2D != exludedUnitArea)
-					{
-						Character character = area2D.Owner as Character;
-						if (character != null)
-						{
-							int damage = (int)GD.RandRange((double)minDamage, (double)maxDamage);
-							character.Harm(damage);
-							character.SpawnCombatText(damage.ToString(), CombatText.TextType.HIT);
-						}
-					}
-					else if (layer == Globals.Collision["COMBUSTIBLE"])
-					{
-						ICombustible obj = area2D.Owner as ICombustible;
-						if (obj != null)
-						{
-							obj.Explode();
-						}
-					}
+					particles2D.Emitting = true;
 				}
 			}
+
+			Character character;
+			foreach (Area2D area2D in blastCircle.GetChildren())
+			{
+				character = area2D.Owner as Character;
+
+				if (character != null && character != exludedCharacter)
+				{
+					character.Harm(damage);
+					character.SpawnCombatText(damage.ToString(), CombatText.TextType.HIT);
+				}
+
+				(area2D.Owner as ICombustible)?.Explode();
+			}
+
+			tween.InterpolateProperty(img, ":modulate",
+				img.Modulate, new Color("00ffffff"),
+				0.5f, Tween.TransitionType.Linear, Tween.EaseType.In);
+			tween.InterpolateProperty(img, ":scale",
+				img.Scale, new Vector2(0.8f, 0.8f),
+				0.5f, Tween.TransitionType.Bounce, Tween.EaseType.In);
+			tween.Start();
+
+			// makes sure to play effects/sounds before deleting
+			timer.Stop();
+			timer.WaitTime = 5.0f;
+			timer.Start();
 		}
 	}
 }

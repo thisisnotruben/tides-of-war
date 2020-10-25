@@ -6,12 +6,7 @@
 [ext_resource path="res://asset/snd/spell/explosion.ogg" type="AudioStream" id=4]
 [ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=6]
-
-
-
-
-
-
+[ext_resource path="res://asset/img/missile-spell/LandMineHitBox.tres" type="Shape2D" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -73,10 +68,7 @@ color_ramp = ExtResource( 6 )
 [sub_resource type="CircleShape2D" id=9]
 radius = 24.0
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 3.5, 2 )
-
-[node name="land_mine" type="Node2D"]
+[node name="landMine" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true,
@@ -84,9 +76,7 @@ __meta__ = {
 }
 
 [node name="timer" type="Timer" parent="."]
-wait_time = 30.0
 one_shot = true
-autostart = true
 
 [node name="tween" type="Tween" parent="."]
 
@@ -130,22 +120,23 @@ explosiveness = 0.6
 local_coords = false
 process_material = SubResource( 8 )
 
-[node name="affected_area" type="Area2D" parent="img"]
+[node name="blastCircle" type="Area2D" parent="img"]
+monitoring = false
 monitorable = false
 collision_layer = 0
-collision_mask = 10
+collision_mask = 26
 
-[node name="blast_circle" type="CollisionShape2D" parent="img/affected_area"]
+[node name="blastRadius" type="CollisionShape2D" parent="img/blastCircle"]
 shape = SubResource( 9 )
 
 [node name="body" type="Area2D" parent="img"]
 monitoring = false
+monitorable = false
 collision_layer = 8
-collision_mask = 0
+collision_mask = 18
 
 [node name="shape" type="CollisionShape2D" parent="img/body"]
 position = Vector2( -0.5, 0 )
-shape = SubResource( 10 )
-[connection signal="timeout" from="timer" to="." method="_OnTimerTimeout"]
-[connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
-[connection signal="area_entered" from="img/affected_area" to="." method="_OnAffectedAreaEntered"]
+shape = ExtResource( 7 )
+[connection signal="timeout" from="timer" to="." method="OnTimerTimeout"]
+[connection signal="area_entered" from="img/body" to="." method="OnCharacterEnteredBlastCircle"]

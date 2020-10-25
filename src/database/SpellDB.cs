@@ -7,24 +7,58 @@ namespace Game.Database
 {
 	public static class SpellDB
 	{
-		public struct SpellNode
+		public class SpellData
 		{
-			public AtlasTexture icon;
-			public int level, goldCost, range, coolDown, stackSize, manaCost;
-			public string type, blurb, spellEffect, sound, characterAnim;
-			public float pctDamage;
-			public bool ignoreArmor, effectOnTarget, requiresTarget;
-			public ItemDB.Modifiers modifiers;
-			public ItemDB.Use use;
+			public readonly Texture icon;
+			public readonly int level, goldCost, range, coolDown, stackSize, manaCost;
+			public readonly string type, blurb, spellEffect, sound, characterAnim;
+			public readonly float pctDamage;
+			public readonly bool ignoreArmor, effectOnTarget, requiresTarget;
+			public readonly ItemDB.Modifiers modifiers;
+			public readonly ItemDB.Use use;
+
+			public SpellData(Texture icon, int level, int goldCost, int range, int coolDown,
+			int stackSize, int manaCost, string type, string blurb, string spellEffect,
+			string sound, string characterAnim, float pctDamage, bool ignoreArmor,
+			bool effectOnTarget, bool requiresTarget, ItemDB.Modifiers modifiers, ItemDB.Use use)
+			{
+				this.icon = icon;
+				this.level = level;
+				this.goldCost = goldCost;
+				this.range = range;
+				this.coolDown = coolDown;
+				this.stackSize = stackSize;
+				this.manaCost = manaCost;
+				this.type = type;
+				this.blurb = blurb;
+				this.spellEffect = spellEffect;
+				this.sound = sound;
+				this.characterAnim = characterAnim;
+				this.pctDamage = pctDamage;
+				this.ignoreArmor = ignoreArmor;
+				this.effectOnTarget = effectOnTarget;
+				this.requiresTarget = requiresTarget;
+				this.modifiers = modifiers;
+				this.use = use;
+			}
 		}
-		public struct SpellMissileNode
+		public class SpellMissileData
 		{
-			public Shape2D hitBox;
-			public AtlasTexture img;
-			public Boolean rotate, instantSpawn, reverse;
+			public readonly Shape2D hitBox;
+			public readonly Texture img;
+			public readonly Boolean rotate, instantSpawn, reverse;
+
+			public SpellMissileData(Shape2D hitBox, Texture img, bool rotate, bool instantSpawn, bool reverse)
+			{
+				this.hitBox = hitBox;
+				this.img = img;
+				this.rotate = rotate;
+				this.instantSpawn = instantSpawn;
+				this.reverse = reverse;
+			}
 		}
-		private static readonly Dictionary<string, SpellNode> spellData;
-		private static readonly Dictionary<string, SpellMissileNode> spellMissileData;
+		private static readonly Dictionary<string, SpellData> spellData;
+		private static readonly Dictionary<string, SpellMissileData> spellMissileData;
 		private static readonly Dictionary<string, PackedScene> spellEffectData;
 
 		static SpellDB()
@@ -34,7 +68,7 @@ namespace Game.Database
 			spellEffectData = LoadSpellEffects("res://src/spell/visual/");
 		}
 		public static void Init() { }
-		private static Dictionary<string, SpellNode> LoadSpellData(string path)
+		private static Dictionary<string, SpellData> LoadSpellData(string path)
 		{
 			File file = new File();
 			if (!file.FileExists(path))
@@ -46,61 +80,57 @@ namespace Game.Database
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 
-			Dictionary<string, SpellNode> spellData = new Dictionary<string, SpellNode>();
+			Dictionary<string, SpellData> spellData = new Dictionary<string, SpellData>();
 
-			Godot.Collections.Dictionary itemDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			foreach (string spellName in rawDict.Keys)
 			{
-				itemDict = (Godot.Collections.Dictionary)rawDict[spellName];
-				SpellNode spellNode;
-				spellNode.type = (string)itemDict[nameof(SpellNode.type)];
-				spellNode.icon = IconDB.GetIcon((int)((Single)itemDict[nameof(SpellNode.icon)]));
-				spellNode.level = (int)((Single)itemDict[nameof(SpellNode.level)]);
-				spellNode.goldCost = (int)((Single)itemDict[nameof(SpellNode.goldCost)]);
-				spellNode.blurb = (string)itemDict[nameof(SpellNode.blurb)];
-				spellNode.range = (int)((Single)itemDict[nameof(SpellNode.range)]);
-				spellNode.coolDown = (int)((Single)itemDict[nameof(SpellNode.coolDown)]);
-				spellNode.pctDamage = (float)((Single)itemDict[nameof(SpellNode.pctDamage)]);
-				spellNode.ignoreArmor = (bool)itemDict[nameof(SpellNode.ignoreArmor)];
-				spellNode.effectOnTarget = (bool)itemDict[nameof(SpellNode.effectOnTarget)];
-				spellNode.requiresTarget = (bool)itemDict[nameof(SpellNode.requiresTarget)];
-				spellNode.spellEffect = (string)itemDict[nameof(SpellNode.spellEffect)];
-				spellNode.sound = (string)itemDict[nameof(SpellNode.sound)];
-				spellNode.characterAnim = (string)itemDict[nameof(SpellNode.characterAnim)];
-				spellNode.stackSize = 1;
-				spellNode.manaCost = (int)((Single)itemDict[nameof(SpellNode.manaCost)]);
+				dict = (Godot.Collections.Dictionary)rawDict[spellName];
 
-				// set modifiers
-				ItemDB.Modifiers modifiers;
-				modifiers.durationSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["modifiers"])[nameof(ItemDB.Modifiers.durationSec)];
-				modifiers.stamina = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.stamina));
-				modifiers.intellect = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.intellect));
-				modifiers.agility = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.agility));
-				modifiers.hpMax = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.hpMax));
-				modifiers.manaMax = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.manaMax));
-				modifiers.maxDamage = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.maxDamage));
-				modifiers.minDamage = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.minDamage));
-				modifiers.regenTime = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.regenTime));
-				modifiers.armor = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.armor));
-				modifiers.weaponRange = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.weaponRange));
-				modifiers.weaponSpeed = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.weaponSpeed));
-				modifiers.moveSpeed = ItemDB.GetModifier(itemDict, nameof(ItemDB.Modifiers.moveSpeed));
-				spellNode.modifiers = modifiers;
-
-				// set use
-				ItemDB.Use use;
-				use.totalSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(ItemDB.Use.totalSec)];
-				use.repeatSec = (int)(Single)((Godot.Collections.Dictionary)itemDict["use"])[nameof(ItemDB.Use.repeatSec)];
-				use.hp = ItemDB.GetModifier(itemDict, nameof(ItemDB.Use.hp), "use");
-				use.mana = ItemDB.GetModifier(itemDict, nameof(ItemDB.Use.mana), "use");
-				use.damage = ItemDB.GetModifier(itemDict, nameof(ItemDB.Use.damage), "use");
-				spellNode.use = use;
-
-				spellData.Add(spellName, spellNode);
+				spellData.Add(spellName, new SpellData(
+					icon: IconDB.GetIcon((int)((Single)dict[nameof(SpellData.icon)])),
+					type: (string)dict[nameof(SpellData.type)],
+					level: (int)((Single)dict[nameof(SpellData.level)]),
+					goldCost: (int)((Single)dict[nameof(SpellData.goldCost)]),
+					blurb: (string)dict[nameof(SpellData.blurb)],
+					range: (int)((Single)dict[nameof(SpellData.range)]),
+					coolDown: (int)((Single)dict[nameof(SpellData.coolDown)]),
+					pctDamage: (float)((Single)dict[nameof(SpellData.pctDamage)]),
+					ignoreArmor: (bool)dict[nameof(SpellData.ignoreArmor)],
+					effectOnTarget: (bool)dict[nameof(SpellData.effectOnTarget)],
+					requiresTarget: (bool)dict[nameof(SpellData.requiresTarget)],
+					spellEffect: (string)dict[nameof(SpellData.spellEffect)],
+					sound: (string)dict[nameof(SpellData.sound)],
+					characterAnim: (string)dict[nameof(SpellData.characterAnim)],
+					stackSize: 1,
+					manaCost: (int)((Single)dict[nameof(SpellData.manaCost)]),
+					modifiers: new ItemDB.Modifiers(
+						durationSec: (int)(Single)((Godot.Collections.Dictionary)dict["modifiers"])[nameof(ItemDB.Modifiers.durationSec)],
+						stamina: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.stamina)),
+						intellect: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.intellect)),
+						agility: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.agility)),
+						hpMax: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.hpMax)),
+						manaMax: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.manaMax)),
+						maxDamage: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.maxDamage)),
+						minDamage: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.minDamage)),
+						regenTime: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.regenTime)),
+						armor: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.armor)),
+						weaponRange: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.weaponRange)),
+						weaponSpeed: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.weaponSpeed)),
+						moveSpeed: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.moveSpeed))
+					),
+					use: new ItemDB.Use(
+						totalSec: (int)(Single)((Godot.Collections.Dictionary)dict["use"])[nameof(ItemDB.Use.totalSec)],
+						repeatSec: (int)(Single)((Godot.Collections.Dictionary)dict["use"])[nameof(ItemDB.Use.repeatSec)],
+						hp: ItemDB.GetModifier(dict, nameof(ItemDB.Use.hp), "use"),
+						mana: ItemDB.GetModifier(dict, nameof(ItemDB.Use.mana), "use"),
+						damage: ItemDB.GetModifier(dict, nameof(ItemDB.Use.damage), "use")
+					)
+				));
 			}
 			return spellData;
 		}
-		private static Dictionary<string, SpellMissileNode> LoadSpellMissileData(string path)
+		private static Dictionary<string, SpellMissileData> LoadSpellMissileData(string path)
 		{
 			File file = new File();
 			if (!file.FileExists(path))
@@ -112,27 +142,22 @@ namespace Game.Database
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 
-			Dictionary<string, SpellMissileNode> spellMissileData = new Dictionary<string, SpellMissileNode>();
+			Dictionary<string, SpellMissileData> spellMissileData = new Dictionary<string, SpellMissileData>();
 
-			Godot.Collections.Dictionary itemDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			string filePath = "res://asset/img/missile-spell/{0}.tres";
 			foreach (string spellName in rawDict.Keys)
 			{
-				itemDict = (Godot.Collections.Dictionary)rawDict[spellName];
-				SpellMissileNode spellMissileNode;
+				dict = (Godot.Collections.Dictionary)rawDict[spellName];
 
-				spellMissileNode.img = itemDict[nameof(SpellMissileNode.img)] == null
-					? null
-					: (AtlasTexture)GD.Load(string.Format(filePath, (string)itemDict[nameof(SpellMissileNode.img)]));
-
-				spellMissileNode.hitBox = (Shape2D)GD.Load(string.Format(
-					filePath, (string)itemDict[nameof(SpellMissileNode.hitBox)]));
-
-				spellMissileNode.rotate = (bool)itemDict[nameof(SpellMissileNode.rotate)];
-				spellMissileNode.instantSpawn = (bool)itemDict[nameof(SpellMissileNode.instantSpawn)];
-				spellMissileNode.reverse = (bool)itemDict[nameof(SpellMissileNode.reverse)];
-
-				spellMissileData.Add(spellName, spellMissileNode);
+				spellMissileData.Add(spellName, new SpellMissileData(
+					hitBox: (Shape2D)GD.Load(string.Format(filePath, (string)dict[nameof(SpellMissileData.hitBox)])),
+					img: dict[nameof(SpellMissileData.img)] == null ? null
+						: GD.Load<Texture>(string.Format(filePath, (string)dict[nameof(SpellMissileData.img)])),
+					rotate: (bool)dict[nameof(SpellMissileData.rotate)],
+					instantSpawn: (bool)dict[nameof(SpellMissileData.instantSpawn)],
+					reverse: (bool)dict[nameof(SpellMissileData.reverse)]
+				));
 			}
 			return spellMissileData;
 		}
@@ -169,11 +194,11 @@ namespace Game.Database
 			return spellEffectData;
 		}
 		public static bool HasSpell(string nameCheck) { return spellData.ContainsKey(nameCheck); }
-		public static SpellNode GetSpellData(string worldName) { return spellData[worldName]; }
+		public static SpellData GetSpellData(string worldName) { return spellData[worldName]; }
 		public static string[] GetSpellNames() { return spellData.Keys.ToArray(); }
 
 		public static bool HasSpellMissile(string nameCheck) { return spellMissileData.ContainsKey(nameCheck); }
-		public static SpellMissileNode GetSpellMissileData(string worldName) { return spellMissileData[worldName]; }
+		public static SpellMissileData GetSpellMissileData(string worldName) { return spellMissileData[worldName]; }
 
 		public static bool HasSpellEffect(string worldName)
 		{

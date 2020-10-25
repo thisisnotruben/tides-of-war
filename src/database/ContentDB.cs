@@ -5,14 +5,27 @@ namespace Game.Database
 {
 	public static class ContentDB
 	{
-		public struct ContentNode
+		public class ContentData
 		{
-			public int level, healerCost;
-			public bool enemy, healer;
-			public string dialogue;
-			public string[] drops, spells, merchandise;
+			public readonly int level, healerCost;
+			public readonly bool enemy, healer;
+			public readonly string dialogue;
+			public readonly string[] drops, spells, merchandise;
+
+			public ContentData(int level, int healerCost, bool enemy, bool healer,
+			string dialogue, string[] drops, string[] spells, string[] merchandise)
+			{
+				this.level = level;
+				this.healerCost = healerCost;
+				this.enemy = enemy;
+				this.healer = healer;
+				this.dialogue = dialogue;
+				this.drops = drops;
+				this.spells = spells;
+				this.merchandise = merchandise;
+			}
 		}
-		private static Dictionary<string, ContentNode> contentData = new Dictionary<string, ContentNode>();
+		private static Dictionary<string, ContentData> contentData = new Dictionary<string, ContentData>();
 
 		public static void LoadContentData(string dbPath)
 		{
@@ -28,18 +41,17 @@ namespace Game.Database
 			foreach (string characterName in rawDict.Keys)
 			{
 				contentDict = (Godot.Collections.Dictionary)rawDict[characterName];
-				ContentNode contentNode;
-				contentNode.level = (int)((Single)contentDict[nameof(ContentNode.level)]);
-				contentNode.enemy = (bool)contentDict[nameof(ContentNode.enemy)];
-				contentNode.healer = (bool)contentDict[nameof(ContentNode.healer)];
-				contentNode.healerCost = (int)((Single)contentDict[nameof(ContentNode.healerCost)]);
-				contentNode.dialogue = (string)contentDict[nameof(ContentNode.dialogue)];
 
-				contentNode.drops = GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentNode.drops)]);
-				contentNode.spells = GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentNode.spells)]);
-				contentNode.merchandise = GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentNode.merchandise)]);
-
-				contentData.Add(characterName, contentNode);
+				contentData.Add(characterName, new ContentData(
+					level: (int)((Single)contentDict[nameof(ContentData.level)]),
+					healerCost: (int)((Single)contentDict[nameof(ContentData.healerCost)]),
+					enemy: (bool)contentDict[nameof(ContentData.enemy)],
+					healer: (bool)contentDict[nameof(ContentData.healer)],
+					dialogue: (string)contentDict[nameof(ContentData.dialogue)],
+					drops: GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentData.drops)]),
+					spells: GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentData.spells)]),
+					merchandise: GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentData.merchandise)])
+				));
 			}
 		}
 		public static string[] GetWorldNames(Godot.Collections.Array inArray)
@@ -51,7 +63,7 @@ namespace Game.Database
 			}
 			return worldNames;
 		}
-		public static ContentNode GetContentData(string editorName) { return contentData[editorName]; }
+		public static ContentData GetContentData(string editorName) { return contentData[editorName]; }
 		public static bool HasContent(string nameCheck) { return contentData.ContainsKey(nameCheck); }
 	}
 }

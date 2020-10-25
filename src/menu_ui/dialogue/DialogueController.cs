@@ -34,19 +34,19 @@ namespace Game.Ui
 			dialogueContent.GetNode<Label>("control/header").Text = npc.worldName;
 
 			// check if player could use some healing
-			ContentDB.ContentNode contentNode = ContentDB.GetContentData(npc.Name);
+			ContentDB.ContentData contentData = ContentDB.GetContentData(npc.Name);
 			bool notFullHealth = player.hp < player.stats.hpMax.valueI;
 
 			Label subHeader = dialogueContent.GetNode<Label>("control/sub_header");
-			subHeader.Visible = contentNode.healer && notFullHealth;
-			subHeader.Text = "Healer cost: " + contentNode.healerCost;
-			dialogueContent.GetNode<Control>("s/v/heal").Visible = contentNode.healer && notFullHealth;
+			subHeader.Visible = contentData.healer && notFullHealth;
+			subHeader.Text = "Healer cost: " + contentData.healerCost;
+			dialogueContent.GetNode<Control>("s/v/heal").Visible = contentData.healer && notFullHealth;
 
 			// set dialogue
-			dialogueContent.GetNode<RichTextLabel>("s/text").BbcodeText = contentNode.dialogue;
+			dialogueContent.GetNode<RichTextLabel>("s/text").BbcodeText = contentData.dialogue;
 
 			// allow merchant view button if npc has merchandise to offer
-			dialogueContent.GetNode<Control>("s/v/buy").Visible = contentNode.merchandise.Length > 0;
+			dialogueContent.GetNode<Control>("s/v/buy").Visible = contentData.merchandise.Length > 0;
 		}
 		public void _OnDialogueDraw() { Globals.PlaySound("turn_page", this, speaker); }
 		public void _OnDialogueHide()

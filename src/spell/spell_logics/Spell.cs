@@ -45,7 +45,7 @@ namespace Game.Ability
 			worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_"));
 			this.worldName = worldName;
 			Name = worldName;
-			SpellDB.SpellNode spellData = SpellDB.GetSpellData(worldName);
+			SpellDB.SpellData spellData = SpellDB.GetSpellData(worldName);
 			spellRange = spellData.range;
 			percentDamage = spellData.pctDamage;
 			ignoreArmor = spellData.ignoreArmor;

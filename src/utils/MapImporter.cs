@@ -4,15 +4,15 @@ namespace Game.Utils
 {
 	public class MapImporter : Node
 	{
-		private static readonly Vector2 CELL_SIZE = new Vector2(16.0f, 16.0f);
-		private static readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
-		private static readonly Vector2 OFFSET = new Vector2(0.0f, -CELL_SIZE.y);
+		private static readonly Vector2 CELL_SIZE = new Vector2(16.0f, 16.0f),
+			HALF_CELL_SIZE = CELL_SIZE / 2.0f,
+			OFFSET = new Vector2(0.0f, -CELL_SIZE.y);
+
 		public string scenePath;
 		private TileMap tileMap;
 		private ColorRect colorRect;
 		private Label label;
-		[Signal]
-		public delegate void SendScenePath(string scenePath);
+		[Signal] public delegate void SendScenePath(string scenePath);
 
 		public override void _Ready()
 		{

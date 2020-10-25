@@ -26,7 +26,6 @@ namespace Game.ItemPoto
 
 			durTimer.Connect("timeout", this, nameof(Exit));
 			durTimer.OneShot = true;
-			GD.Randomize();
 		}
 		private static ItemDB.ModifierNode[] GetModifiers(string worldName)
 		{
@@ -41,21 +40,21 @@ namespace Game.ItemPoto
 			string blurb;
 			if (SpellDB.HasSpell(worldName))
 			{
-				SpellDB.SpellNode spellNode = SpellDB.GetSpellData(worldName);
-				coolDown = spellNode.coolDown;
-				level = spellNode.level;
-				duration = spellNode.modifiers.durationSec;
-				use = spellNode.use;
-				blurb = spellNode.blurb;
+				SpellDB.SpellData spellData = SpellDB.GetSpellData(worldName);
+				coolDown = spellData.coolDown;
+				level = spellData.level;
+				duration = spellData.modifiers.durationSec;
+				use = spellData.use;
+				blurb = spellData.blurb;
 			}
 			else
 			{
-				ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
-				coolDown = itemNode.coolDown;
-				level = itemNode.level;
-				duration = itemNode.modifiers.durationSec;
-				use = itemNode.use;
-				blurb = itemNode.blurb;
+				ItemDB.ItemData itemData = ItemDB.GetItemData(worldName);
+				coolDown = itemData.coolDown;
+				level = itemData.level;
+				duration = itemData.modifiers.durationSec;
+				use = itemData.use;
+				blurb = itemData.blurb;
 			}
 
 			// statement lambda for getting representational data from modifiers nodes
@@ -242,17 +241,17 @@ namespace Game.ItemPoto
 			int duration, coolDown;
 			if (SpellDB.HasSpell(worldName))
 			{
-				SpellDB.SpellNode spellNode = SpellDB.GetSpellData(worldName);
-				use = spellNode.use;
-				duration = spellNode.modifiers.durationSec;
-				coolDown = spellNode.coolDown;
+				SpellDB.SpellData spellData = SpellDB.GetSpellData(worldName);
+				use = spellData.use;
+				duration = spellData.modifiers.durationSec;
+				coolDown = spellData.coolDown;
 			}
 			else
 			{
-				ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
-				use = itemNode.use;
-				duration = itemNode.modifiers.durationSec;
-				coolDown = itemNode.coolDown;
+				ItemDB.ItemData itemData = ItemDB.GetItemData(worldName);
+				use = itemData.use;
+				duration = itemData.modifiers.durationSec;
+				coolDown = itemData.coolDown;
 			}
 
 			AddCooldown(worldName, coolDown);

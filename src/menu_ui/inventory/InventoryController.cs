@@ -49,13 +49,13 @@ namespace Game.Ui
 		}
 		public void _OnItemEquipped(string worldName, bool on)
 		{
-			ItemDB.ItemNode itemNode = ItemDB.GetItemData(worldName);
+			ItemDB.ItemData itemData = ItemDB.GetItemData(worldName);
 
 			GetNode<TextureRect>(
-				(itemNode.type == ItemDB.ItemType.ARMOR)
+				(itemData.type == ItemDB.ItemType.ARMOR)
 				? "s/v/slots/armor/m/icon"
 				: "s/v/slots/weapon/m/icon")
-					.Texture = (on) ? itemNode.icon : null;
+					.Texture = (on) ? itemData.icon : null;
 		}
 		public void _OnInventoryIndexSelected(int slotIndex)
 		{

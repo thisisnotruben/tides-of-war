@@ -19,9 +19,9 @@ namespace Game.Projectile
 			// can't add in Init due to this section needing nodes
 			if (!spellWorldName.Equals(string.Empty) && SpellDB.HasSpellMissile(spellWorldName))
 			{
-				SpellDB.SpellMissileNode spellMissileNode = SpellDB.GetSpellMissileData(spellWorldName);
-				img.Texture = spellMissileNode.img;
-				hitboxBody.Shape = spellMissileNode.hitBox;
+				SpellDB.SpellMissileData spellMissileData = SpellDB.GetSpellMissileData(spellWorldName);
+				img.Texture = spellMissileData.img;
+				hitboxBody.Shape = spellMissileData.hitBox;
 			}
 		}
 		public void Init(Character character, Character target, string spellWorldName)
@@ -32,21 +32,21 @@ namespace Game.Projectile
 
 			if (SpellDB.HasSpellMissile(spellWorldName))
 			{
-				SpellDB.SpellMissileNode spellMissileNode = SpellDB.GetSpellMissileData(spellWorldName);
+				SpellDB.SpellMissileData spellMissileData = SpellDB.GetSpellMissileData(spellWorldName);
 
-				if (spellMissileNode.instantSpawn)
+				if (spellMissileData.instantSpawn)
 				{
 					spawnPos = GlobalPosition = target.pos;
 				}
 
 				moveBehavior = () =>
 				{
-					if (spellMissileNode.rotate && !hit)
+					if (spellMissileData.rotate && !hit)
 					{
 						LookAt(target.pos);
 					}
 
-					if (spellMissileNode.reverse)
+					if (spellMissileData.reverse)
 					{
 						MoveMissile(target.pos, GlobalPosition);
 					}

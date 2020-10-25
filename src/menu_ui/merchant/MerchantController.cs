@@ -110,10 +110,10 @@ namespace Game.Ui
 		}
 		public void _OnMerchantNodeDraw()
 		{
-			ContentDB.ContentNode contentNode = ContentDB.GetContentData(merchant.Name);
+			ContentDB.ContentData contentData = ContentDB.GetContentData(merchant.Name);
 
 			Globals.PlaySound(
-				(SpellDB.HasSpell(contentNode.merchandise[0]))
+				(SpellDB.HasSpell(contentData.merchandise[0]))
 				? "turn_page"
 				: "merchant_open", this, speaker);
 

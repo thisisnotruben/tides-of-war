@@ -5,15 +5,25 @@ namespace Game.Database
 {
 	public static class UnitDB
 	{
-		public struct UnitNode
+		public class UnitData
 		{
-			public string name, img;
-			public bool enemy;
-			public Vector2 spawnPos;
-			public Vector2[] path;
-			public int level;
+			public readonly string name, img;
+			public readonly bool enemy;
+			public readonly Vector2 spawnPos;
+			public readonly Vector2[] path;
+			public readonly int level;
+
+			public UnitData(string name, string img, bool enemy, Vector2 spawnPos, Vector2[] path, int level)
+			{
+				this.name = name;
+				this.img = img;
+				this.enemy = enemy;
+				this.spawnPos = spawnPos;
+				this.path = path;
+				this.level = level;
+			}
 		}
-		private static Dictionary<string, UnitNode> unitData = new Dictionary<string, UnitNode>();
+		private static Dictionary<string, UnitData> unitData = new Dictionary<string, UnitData>();
 
 		public static void LoadUnitData(string dbPath)
 		{
@@ -25,34 +35,36 @@ namespace Game.Database
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 
-			Godot.Collections.Dictionary itemDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			Godot.Collections.Array spawnPos, rawPath;
 			int i;
+			Vector2[] path;
 			foreach (string itemName in rawDict.Keys)
 			{
-				itemDict = (Godot.Collections.Dictionary)rawDict[itemName];
-				UnitNode unitNode;
-				unitNode.name = (string)itemDict[nameof(UnitNode.name)];
-				unitNode.img = (string)itemDict[nameof(UnitNode.img)];
-				unitNode.enemy = (bool)itemDict[nameof(UnitNode.enemy)];
-				unitNode.level = (int)((Single)itemDict[nameof(UnitNode.level)]);
+				dict = (Godot.Collections.Dictionary)rawDict[itemName];
 
-				spawnPos = (Godot.Collections.Array)itemDict[nameof(UnitNode.spawnPos)];
-				unitNode.spawnPos = new Vector2((float)((Single)spawnPos[0]), (float)((Single)spawnPos[1]));
+				spawnPos = (Godot.Collections.Array)dict[nameof(UnitData.spawnPos)];
 
 				// get path data
-				rawPath = (Godot.Collections.Array)(itemDict[nameof(UnitNode.path)]);
-				unitNode.path = new Vector2[rawPath.Count];
+				rawPath = (Godot.Collections.Array)(dict[nameof(UnitData.path)]);
+				path = new Vector2[rawPath.Count];
 				i = 0;
 				foreach (Godot.Collections.Array vectorNode in rawPath)
 				{
-					unitNode.path[i++] = (new Vector2((float)((Single)vectorNode[0]), (float)((Single)vectorNode[1])));
+					path[i++] = (new Vector2((float)((Single)vectorNode[0]), (float)((Single)vectorNode[1])));
 				}
 
-				unitData.Add(itemName, unitNode);
+				unitData.Add(itemName, new UnitData(
+					name: (string)dict[nameof(UnitData.name)],
+					img: (string)dict[nameof(UnitData.img)],
+					enemy: (bool)dict[nameof(UnitData.enemy)],
+					spawnPos: new Vector2((float)((Single)spawnPos[0]), (float)((Single)spawnPos[1])),
+					path: path,
+					level: (int)((Single)dict[nameof(UnitData.level)])
+				));
 			}
 		}
-		public static UnitNode GetUnitData(string unitEditorName) { return unitData[unitEditorName]; }
+		public static UnitData GetUnitData(string unitEditorName) { return unitData[unitEditorName]; }
 		public static bool HasUnitData(string nameCheck) { return unitData.ContainsKey(nameCheck); }
 	}
 }

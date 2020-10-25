@@ -4,32 +4,69 @@ namespace Game.Database
 {
 	public static class QuestDB
 	{
-		public struct QuestNode
+		public class QuestData
 		{
-			public string questName, questCompleter;
-			public string[] nextQuest, reward;
-			public bool keepRewardItems;
-			public int goldReward;
-			public GiverDialogueNode giverDialogue;
-			public Dictionary<string, ObjectiveNode> objectives;
+			public readonly string questName, questCompleter;
+			public readonly string[] nextQuest, reward;
+			public readonly bool keepRewardItems;
+			public readonly int goldReward;
+			public readonly GiverDialogueNode giverDialogue;
+			public readonly Dictionary<string, ObjectiveNode> objectives;
+
+			public QuestData(string questName, string questCompleter, string[] nextQuest,
+			string[] reward, bool keepRewardItems, int goldReward,
+			GiverDialogueNode giverDialogue, Dictionary<string, ObjectiveNode> objectives)
+			{
+				this.questName = questName;
+				this.questCompleter = questCompleter;
+				this.nextQuest = nextQuest;
+				this.reward = reward;
+				this.keepRewardItems = keepRewardItems;
+				this.goldReward = goldReward;
+				this.giverDialogue = giverDialogue;
+				this.objectives = objectives;
+			}
 		}
-		public struct GiverDialogueNode
+		public class GiverDialogueNode
 		{
 			public string start, active, completed, delivered;
+
+			public GiverDialogueNode(string start, string active, string completed, string delivered)
+			{
+				this.start = start;
+				this.active = active;
+				this.completed = completed;
+				this.delivered = delivered;
+			}
 		}
-		public struct ObjectiveNode
+		public class ObjectiveNode
 		{
-			public bool keepWorldItems;
-			public string questType;
-			public int amount;
-			public ExtraContentNode extraContent;
+			public readonly bool keepWorldItems;
+			public readonly string questType;
+			public readonly int amount;
+			public readonly ExtraContentNode extraContent;
+
+			public ObjectiveNode(bool keepWorldItems, string questType, int amount, ExtraContentNode extraContent)
+			{
+				this.keepWorldItems = keepWorldItems;
+				this.questType = questType;
+				this.amount = amount;
+				this.extraContent = extraContent;
+			}
 		}
-		public struct ExtraContentNode
+		public class ExtraContentNode
 		{
-			public string dialogue, reward;
-			public int gold;
+			public readonly string dialogue, reward;
+			public readonly int gold;
+
+			public ExtraContentNode(string dialogue, string reward, int gold)
+			{
+				this.dialogue = dialogue;
+				this.reward = reward;
+				this.gold = gold;
+			}
 		}
-		public static Dictionary<string, QuestNode> questData = new Dictionary<string, QuestNode>();
+		public static Dictionary<string, QuestData> questData = new Dictionary<string, QuestData>();
 
 		public static void LoadQuestData(string dbPath)
 		{
@@ -41,51 +78,49 @@ namespace Game.Database
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 
-			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
-			Godot.Collections.Dictionary questDict;
+			Godot.Collections.Dictionary objectivesDict, extraContentDict,
+				dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Dictionary<string, ObjectiveNode> objectives;
 			foreach (string characterName in rawDict.Keys)
 			{
-				questDict = (Godot.Collections.Dictionary)rawDict[characterName];
-				// load quest node
-				QuestNode questNode;
-				questNode.questName = (string)questDict[nameof(QuestNode.questName)];
-				questNode.nextQuest = ContentDB.GetWorldNames((Godot.Collections.Array)questDict[nameof(QuestNode.nextQuest)]);
-				questNode.reward = ContentDB.GetWorldNames((Godot.Collections.Array)questDict[nameof(QuestNode.reward)]);
-				questNode.keepRewardItems = (bool)questDict[nameof(QuestNode.keepRewardItems)];
-				questNode.goldReward = (int)questDict[nameof(QuestNode.goldReward)];
-				questNode.questCompleter = (string)questDict[nameof(QuestNode.questCompleter)];
-				// load dialogue
-				GiverDialogueNode giverDialogueNode;
-				giverDialogueNode.start = (string)((Godot.Collections.Dictionary)questDict[nameof(QuestNode.giverDialogue)])[nameof(GiverDialogueNode.start)];
-				giverDialogueNode.active = (string)((Godot.Collections.Dictionary)questDict[nameof(QuestNode.giverDialogue)])[nameof(GiverDialogueNode.active)];
-				giverDialogueNode.completed = (string)((Godot.Collections.Dictionary)questDict[nameof(QuestNode.giverDialogue)])[nameof(GiverDialogueNode.completed)];
-				giverDialogueNode.delivered = (string)((Godot.Collections.Dictionary)questDict[nameof(QuestNode.giverDialogue)])[nameof(GiverDialogueNode.delivered)];
-				questNode.giverDialogue = giverDialogueNode;
-				// load all objectives
-				questNode.objectives = new Dictionary<string, ObjectiveNode>();
-				Godot.Collections.Dictionary objectivesDict = (Godot.Collections.Dictionary)questDict[nameof(QuestNode.objectives)];
+				dict = (Godot.Collections.Dictionary)rawDict[characterName];
+
+				objectives = new Dictionary<string, ObjectiveNode>();
+				objectivesDict = (Godot.Collections.Dictionary)dict[nameof(QuestData.objectives)];
 				foreach (string objectiveName in objectivesDict)
 				{
-					// load objective
-					ObjectiveNode objectiveNode;
-					objectiveNode.keepWorldItems = (bool)objectivesDict[nameof(ObjectiveNode.keepWorldItems)];
-					objectiveNode.questType = (string)objectivesDict[nameof(ObjectiveNode.questType)];
-					objectiveNode.amount = (int)objectivesDict[nameof(ObjectiveNode.amount)];
-					// load extra content
-					Godot.Collections.Dictionary extraContentDict = (Godot.Collections.Dictionary)objectivesDict[nameof(ObjectiveNode.extraContent)];
-					ExtraContentNode extraContent;
-					extraContent.dialogue = (string)extraContentDict[nameof(ExtraContentNode.dialogue)];
-					extraContent.reward = (string)extraContentDict[nameof(ExtraContentNode.reward)];
-					extraContent.gold = (int)extraContentDict[nameof(ExtraContentNode.gold)];
-					objectiveNode.extraContent = extraContent;
-					// add to objectives
-					questNode.objectives.Add(objectiveName, objectiveNode);
+					extraContentDict = (Godot.Collections.Dictionary)objectivesDict[nameof(ObjectiveNode.extraContent)];
+
+					objectives.Add(objectiveName, new ObjectiveNode(
+						keepWorldItems: (bool)objectivesDict[nameof(ObjectiveNode.keepWorldItems)],
+						questType: (string)objectivesDict[nameof(ObjectiveNode.questType)],
+						amount: (int)objectivesDict[nameof(ObjectiveNode.amount)],
+						extraContent: new ExtraContentNode(
+							dialogue: (string)extraContentDict[nameof(ExtraContentNode.dialogue)],
+							reward: (string)extraContentDict[nameof(ExtraContentNode.reward)],
+							gold: (int)extraContentDict[nameof(ExtraContentNode.gold)]
+						)
+					));
 				}
-				// add quest to cache
-				questData.Add(characterName, questNode);
+
+				questData.Add(characterName, new QuestData(
+					questName: (string)dict[nameof(QuestData.questName)],
+					nextQuest: ContentDB.GetWorldNames((Godot.Collections.Array)dict[nameof(QuestData.nextQuest)]),
+					reward: ContentDB.GetWorldNames((Godot.Collections.Array)dict[nameof(QuestData.reward)]),
+					keepRewardItems: (bool)dict[nameof(QuestData.keepRewardItems)],
+					goldReward: (int)dict[nameof(QuestData.goldReward)],
+					questCompleter: (string)dict[nameof(QuestData.questCompleter)],
+					giverDialogue: new GiverDialogueNode(
+						start: (string)((Godot.Collections.Dictionary)dict[nameof(QuestData.giverDialogue)])[nameof(GiverDialogueNode.start)],
+						active: (string)((Godot.Collections.Dictionary)dict[nameof(QuestData.giverDialogue)])[nameof(GiverDialogueNode.active)],
+						completed: (string)((Godot.Collections.Dictionary)dict[nameof(QuestData.giverDialogue)])[nameof(GiverDialogueNode.completed)],
+						delivered: (string)((Godot.Collections.Dictionary)dict[nameof(QuestData.giverDialogue)])[nameof(GiverDialogueNode.delivered)]
+					),
+					objectives: objectives
+				));
 			}
 		}
-		public static QuestNode GetQuestData(string editorName) { return questData[editorName]; }
+		public static QuestData GetQuestData(string editorName) { return questData[editorName]; }
 		public static bool HasQuest(string nameCheck) { return questData.ContainsKey(nameCheck); }
 	}
 }

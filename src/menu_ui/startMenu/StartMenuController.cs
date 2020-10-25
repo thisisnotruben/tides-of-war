@@ -19,6 +19,7 @@ namespace Game.Ui
 			CollNavDB.Init();
 			ImageDB.Init();
 			ItemDB.Init();
+			LandMineDB.Init();
 			SpellDB.Init();
 		}
 		public override void _Ready()
