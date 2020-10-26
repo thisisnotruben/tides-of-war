@@ -21,11 +21,5 @@ namespace Game.Database
 				? SpellDB.GetSpellData(worldName).goldCost
 				: ItemDB.GetItemData(worldName).goldCost;
 		}
-		public static ItemDB.Modifiers GetModifiers(string worldName)
-		{
-			return (SpellDB.HasSpell(worldName))
-				? SpellDB.GetSpellData(worldName).modifiers
-				: ItemDB.GetItemData(worldName).modifiers;
-		}
 	}
 }

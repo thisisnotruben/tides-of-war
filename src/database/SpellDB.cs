@@ -14,13 +14,11 @@ namespace Game.Database
 			public readonly string type, blurb, spellEffect, sound, characterAnim;
 			public readonly float pctDamage;
 			public readonly bool ignoreArmor, effectOnTarget, requiresTarget;
-			public readonly ItemDB.Modifiers modifiers;
-			public readonly ItemDB.Use use;
 
 			public SpellData(Texture icon, int level, int goldCost, int range, int coolDown,
 			int stackSize, int manaCost, string type, string blurb, string spellEffect,
 			string sound, string characterAnim, float pctDamage, bool ignoreArmor,
-			bool effectOnTarget, bool requiresTarget, ItemDB.Modifiers modifiers, ItemDB.Use use)
+			bool effectOnTarget, bool requiresTarget)
 			{
 				this.icon = icon;
 				this.level = level;
@@ -38,8 +36,6 @@ namespace Game.Database
 				this.ignoreArmor = ignoreArmor;
 				this.effectOnTarget = effectOnTarget;
 				this.requiresTarget = requiresTarget;
-				this.modifiers = modifiers;
-				this.use = use;
 			}
 		}
 		public class SpellMissileData
@@ -103,29 +99,7 @@ namespace Game.Database
 					sound: (string)dict[nameof(SpellData.sound)],
 					characterAnim: (string)dict[nameof(SpellData.characterAnim)],
 					stackSize: 1,
-					manaCost: (int)((Single)dict[nameof(SpellData.manaCost)]),
-					modifiers: new ItemDB.Modifiers(
-						durationSec: (int)(Single)((Godot.Collections.Dictionary)dict["modifiers"])[nameof(ItemDB.Modifiers.durationSec)],
-						stamina: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.stamina)),
-						intellect: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.intellect)),
-						agility: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.agility)),
-						hpMax: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.hpMax)),
-						manaMax: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.manaMax)),
-						maxDamage: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.maxDamage)),
-						minDamage: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.minDamage)),
-						regenTime: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.regenTime)),
-						armor: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.armor)),
-						weaponRange: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.weaponRange)),
-						weaponSpeed: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.weaponSpeed)),
-						moveSpeed: ItemDB.GetModifier(dict, nameof(ItemDB.Modifiers.moveSpeed))
-					),
-					use: new ItemDB.Use(
-						totalSec: (int)(Single)((Godot.Collections.Dictionary)dict["use"])[nameof(ItemDB.Use.totalSec)],
-						repeatSec: (int)(Single)((Godot.Collections.Dictionary)dict["use"])[nameof(ItemDB.Use.repeatSec)],
-						hp: ItemDB.GetModifier(dict, nameof(ItemDB.Use.hp), "use"),
-						mana: ItemDB.GetModifier(dict, nameof(ItemDB.Use.mana), "use"),
-						damage: ItemDB.GetModifier(dict, nameof(ItemDB.Use.damage), "use")
-					)
+					manaCost: (int)((Single)dict[nameof(SpellData.manaCost)])
 				));
 			}
 			return spellData;

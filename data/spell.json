@@ -14,74 +14,7 @@
 		"spellEffect": "DevastateEffect",
 		"sound": "devastate",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Intimidating Shout": {
 		"type": "CASTING",
@@ -98,74 +31,7 @@
 		"spellEffect": "IntimidatingShoutEffect",
 		"sound": "frenzy",
 		"characterAnim": "casting",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 5,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Cleave": {
 		"type": "DAMAGE_MODIFIER",
@@ -182,74 +48,7 @@
 		"spellEffect": "CleaveEffect",
 		"sound": "cleave",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Fortify": {
 		"type": "CASTING",
@@ -266,74 +65,7 @@
 		"spellEffect": "FortifyEffect",
 		"sound": "fortify",
 		"characterAnim": "casting",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 60,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Bash": {
 		"type": "DAMAGE_MODIFIER",
@@ -350,74 +82,7 @@
 		"spellEffect": "BashEffect",
 		"sound": "bash",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 5,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Hemorrhage": {
 		"type": "DAMAGE_MODIFIER",
@@ -434,74 +99,7 @@
 		"spellEffect": "HemorrhageEffect",
 		"sound": "hemorrhage",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 60,
-			"repeatSec": 12,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Stomp": {
 		"type": "CASTING",
@@ -518,74 +116,7 @@
 		"spellEffect": "StompEffect",
 		"sound": "stomp",
 		"characterAnim": "casting",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 3,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Overpower": {
 		"type": "DAMAGE_MODIFIER",
@@ -602,74 +133,7 @@
 		"spellEffect": "OverpowerEffect",
 		"sound": "devastate",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Frenzy": {
 		"type": "CASTING",
@@ -686,74 +150,7 @@
 		"spellEffect": "FrenzyEffect",
 		"sound": "frenzy",
 		"characterAnim": "casting",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 120,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 120,
-			"repeatSec": 5,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Searing arrow": {
 		"type": "DAMAGE_MODIFIER",
@@ -770,74 +167,7 @@
 		"spellEffect": "SearingArrowEffect",
 		"sound": "fireball_hit",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 75,
-			"repeatSec": 15,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Concussive shot": {
 		"type": "DAMAGE_MODIFIER",
@@ -854,74 +184,7 @@
 		"spellEffect": "ConcussiveShotEffect",
 		"sound": "concussive_shot",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 10,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Piercing shot": {
 		"type": "DAMAGE_MODIFIER",
@@ -938,74 +201,7 @@
 		"spellEffect": "PiercingShotEffect",
 		"sound": "piercing_shot",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Stinging shot": {
 		"type": "DAMAGE_MODIFIER",
@@ -1022,74 +218,7 @@
 		"spellEffect": "StingingShotEffect",
 		"sound": "stinging_shot",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 30,
-			"repeatSec": 2,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Explosive arrow": {
 		"type": "CASTING",
@@ -1106,74 +235,7 @@
 		"spellEffect": "ExplosiveArrowEffect",
 		"sound": "explosion",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Precise shot": {
 		"type": "DAMAGE_MODIFIER",
@@ -1190,74 +252,7 @@
 		"spellEffect": "PreciseShotEffect",
 		"sound": "piercing_shot",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Sniper shot": {
 		"type": "DAMAGE_MODIFIER",
@@ -1274,74 +269,7 @@
 		"spellEffect": "SniperShotEffect",
 		"sound": "",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Explosive trap": {
 		"type": "DAMAGE_MODIFIER",
@@ -1358,74 +286,7 @@
 		"spellEffect": "",
 		"sound": "",
 		"characterAnim": "casting",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Volley": {
 		"type": "DAMAGE_MODIFIER",
@@ -1442,74 +303,7 @@
 		"spellEffect": "",
 		"sound": "",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Fireball": {
 		"type": "DAMAGE_MODIFIER",
@@ -1526,74 +320,7 @@
 		"spellEffect": "FireballEffect",
 		"sound": "fireball_hit",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 30,
-			"repeatSec": 10,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Shadow bolt": {
 		"type": "DAMAGE_MODIFIER",
@@ -1610,74 +337,7 @@
 		"spellEffect": "ShadowBoltEffect",
 		"sound": "shadow_bolt_hit",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Frost bolt": {
 		"type": "DAMAGE_MODIFIER",
@@ -1694,74 +354,7 @@
 		"spellEffect": "FrostBoltEffect",
 		"sound": "Elemental - Ice Impact_1",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 10,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Divine heal": {
 		"type": "CASTING",
@@ -1778,74 +371,7 @@
 		"spellEffect": "DivineHealEffect",
 		"sound": "divine_heal",
 		"characterAnim": "casting",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Siphon mana": {
 		"type": "DAMAGE_MODIFIER",
@@ -1862,74 +388,7 @@
 		"spellEffect": "SiphonManaEffect",
 		"sound": "siphon_mana",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Haste": {
 		"type": "CASTING",
@@ -1946,74 +405,7 @@
 		"spellEffect": "HasteEffect",
 		"sound": "haste",
 		"characterAnim": "casting",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 10,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Slow": {
 		"type": "DAMAGE_MODIFIER",
@@ -2030,74 +422,7 @@
 		"spellEffect": "SlowEffect",
 		"sound": "slow",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 15,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Arcane bolt": {
 		"type": "DAMAGE_MODIFIER",
@@ -2114,74 +439,7 @@
 		"spellEffect": "ArcaneBoltEffect",
 		"sound": "arcane_bolt_hit",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Mind blast": {
 		"type": "DAMAGE_MODIFIER",
@@ -2198,74 +456,7 @@
 		"spellEffect": "MindBlastEffect",
 		"sound": "mind_blast",
 		"characterAnim": "attacking",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	},
 	"Meteor": {
 		"type": "CHOOSE_AREA_EFFECT",
@@ -2282,73 +473,6 @@
 		"spellEffect": "MeteorEffect",
 		"sound": "",
 		"characterAnim": "casting",
-		"manaCost": 0,
-		"modifiers": {
-			"durationSec": 0,
-			"stamina": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"intellect": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"agility": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"hpMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"manaMax": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"maxDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"minDamage": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"regenTime": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"armor": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponRange": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"weaponSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			},
-			"moveSpeed": {
-				"type": "PERCENT_MUL",
-				"value": -50
-			}
-		},
-		"use": {
-			"totalSec": 0,
-			"repeatSec": 0,
-			"hp": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"mana": {
-				"type": "FLAT",
-				"value": 0
-			},
-			"damage": {
-				"type": "PERCENT_MUL",
-				"value": 20
-			}
-		}
+		"manaCost": 0
 	}
 }

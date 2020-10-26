@@ -58,7 +58,7 @@ namespace Game.Database
 					name: (string)dict[nameof(UnitData.name)],
 					img: (string)dict[nameof(UnitData.img)],
 					enemy: (bool)dict[nameof(UnitData.enemy)],
-					spawnPos: new Vector2((float)((Single)spawnPos[0]), (float)((Single)spawnPos[1])),
+					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1]),
 					path: path,
 					level: (int)((Single)dict[nameof(UnitData.level)])
 				));
