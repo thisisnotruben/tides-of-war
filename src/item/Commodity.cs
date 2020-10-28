@@ -23,9 +23,11 @@ namespace Game.ItemPoto
 			this.worldName = worldName;
 			this.character = character;
 			modifiers = CreateModifiers();
-
-			durTimer.Connect("timeout", this, nameof(Exit));
+		}
+		public override void _Ready()
+		{
 			durTimer.OneShot = true;
+			durTimer.Connect("timeout", this, nameof(Exit));
 		}
 		private static ModUseDB.ModifierNode[] GetModifiers(string worldName)
 		{

@@ -7,18 +7,19 @@ namespace Game.Database
 {
 	public static class SpellDB
 	{
+		public enum SpellTypes : byte { HIT_HOSTILE, MOD_FRIENDLY, MOD_HOSTILE }
+
 		public class SpellData
 		{
+			public SpellTypes type;
 			public readonly Texture icon;
 			public readonly int level, goldCost, range, coolDown, stackSize, manaCost;
-			public readonly string type, blurb, spellEffect, sound, characterAnim;
-			public readonly float pctDamage;
-			public readonly bool ignoreArmor, effectOnTarget, requiresTarget;
+			public readonly string blurb, spellEffect, sound, characterAnim;
+			public readonly bool ignoreArmor, requiresTarget;
 
 			public SpellData(Texture icon, int level, int goldCost, int range, int coolDown,
-			int stackSize, int manaCost, string type, string blurb, string spellEffect,
-			string sound, string characterAnim, float pctDamage, bool ignoreArmor,
-			bool effectOnTarget, bool requiresTarget)
+			int stackSize, int manaCost, SpellTypes type, string blurb, string spellEffect,
+			string sound, string characterAnim, bool ignoreArmor, bool requiresTarget)
 			{
 				this.icon = icon;
 				this.level = level;
@@ -32,9 +33,7 @@ namespace Game.Database
 				this.spellEffect = spellEffect;
 				this.sound = sound;
 				this.characterAnim = characterAnim;
-				this.pctDamage = pctDamage;
 				this.ignoreArmor = ignoreArmor;
-				this.effectOnTarget = effectOnTarget;
 				this.requiresTarget = requiresTarget;
 			}
 		}
@@ -42,15 +41,13 @@ namespace Game.Database
 		{
 			public readonly Shape2D hitBox;
 			public readonly Texture img;
-			public readonly Boolean rotate, instantSpawn, reverse;
+			public readonly Boolean rotate;
 
-			public SpellMissileData(Shape2D hitBox, Texture img, bool rotate, bool instantSpawn, bool reverse)
+			public SpellMissileData(Shape2D hitBox, Texture img, bool rotate)
 			{
 				this.hitBox = hitBox;
 				this.img = img;
 				this.rotate = rotate;
-				this.instantSpawn = instantSpawn;
-				this.reverse = reverse;
 			}
 		}
 		private static readonly Dictionary<string, SpellData> spellData;
@@ -85,15 +82,13 @@ namespace Game.Database
 
 				spellData.Add(spellName, new SpellData(
 					icon: IconDB.GetIcon((int)((Single)dict[nameof(SpellData.icon)])),
-					type: (string)dict[nameof(SpellData.type)],
+					type: (SpellTypes)Enum.Parse(typeof(SpellTypes), (string)dict[nameof(SpellData.type)]),
 					level: (int)((Single)dict[nameof(SpellData.level)]),
 					goldCost: (int)((Single)dict[nameof(SpellData.goldCost)]),
 					blurb: (string)dict[nameof(SpellData.blurb)],
 					range: (int)((Single)dict[nameof(SpellData.range)]),
 					coolDown: (int)((Single)dict[nameof(SpellData.coolDown)]),
-					pctDamage: (float)((Single)dict[nameof(SpellData.pctDamage)]),
 					ignoreArmor: (bool)dict[nameof(SpellData.ignoreArmor)],
-					effectOnTarget: (bool)dict[nameof(SpellData.effectOnTarget)],
 					requiresTarget: (bool)dict[nameof(SpellData.requiresTarget)],
 					spellEffect: (string)dict[nameof(SpellData.spellEffect)],
 					sound: (string)dict[nameof(SpellData.sound)],
@@ -128,9 +123,7 @@ namespace Game.Database
 					hitBox: (Shape2D)GD.Load(string.Format(filePath, (string)dict[nameof(SpellMissileData.hitBox)])),
 					img: dict[nameof(SpellMissileData.img)] == null ? null
 						: GD.Load<Texture>(string.Format(filePath, (string)dict[nameof(SpellMissileData.img)])),
-					rotate: (bool)dict[nameof(SpellMissileData.rotate)],
-					instantSpawn: (bool)dict[nameof(SpellMissileData.instantSpawn)],
-					reverse: (bool)dict[nameof(SpellMissileData.reverse)]
+					rotate: (bool)dict[nameof(SpellMissileData.rotate)]
 				));
 			}
 			return spellMissileData;

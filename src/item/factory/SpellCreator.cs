@@ -15,14 +15,16 @@ namespace Game.ItemPoto
 					return new Bash(character, worldName);
 				case WorldNameDB.EXPLOSIVE_TRAP:
 					return new ExplosiveTrap(character, worldName);
+				case WorldNameDB.METEOR:
+					return new Meteor(character, worldName);
 				case WorldNameDB.SIPHON_MANA:
 					return new SiphonMana(character, worldName);
 				case WorldNameDB.STOMP:
 					return new Stomp(character, worldName);
 				case WorldNameDB.OVERPOWER:
 					return new Overpower(character, worldName);
-				case WorldNameDB.PIERCING_SHOT:
-					return new PiercingShot(character, worldName);
+				case WorldNameDB.VOLLEY:
+					return new Volley(character, worldName);
 			}
 
 			if (SpellDB.HasSpell(worldName))

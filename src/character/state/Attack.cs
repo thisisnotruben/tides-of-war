@@ -15,6 +15,8 @@ namespace Game.Actor.State
 		private Timer timer = new Timer();
 		private SpellProto spell;
 
+		[Signal] public delegate void CastSpell(SpellProto spell);
+
 		public override void _Ready()
 		{
 			base._Ready();
@@ -25,6 +27,11 @@ namespace Game.Actor.State
 		}
 		public override void Start()
 		{
+			if (!ValidTarget())
+			{
+				return;
+			}
+
 			character.anim.Connect("animation_finished", this, nameof(OnAttackAnimationFinished));
 			character.regenTimer.Stop();
 			AttackStart();
@@ -33,6 +40,11 @@ namespace Game.Actor.State
 		}
 		public override void Exit()
 		{
+			if (!character.anim.IsConnected("animation_finished", this, nameof(OnAttackAnimationFinished)))
+			{
+				return;
+			}
+
 			timer.Stop();
 			character.anim.Disconnect("animation_finished", this, nameof(OnAttackAnimationFinished));
 			character.anim.Stop();
@@ -48,6 +60,20 @@ namespace Game.Actor.State
 				return;
 			}
 
+			// get spell if any
+			TryGetSpell(out spell, character);
+			if (spell != null)
+			{
+				switch (SpellDB.GetSpellData(spell.worldName).type)
+				{
+					case SpellDB.SpellTypes.MOD_FRIENDLY:
+					case SpellDB.SpellTypes.MOD_HOSTILE:
+						EmitSignal(nameof(CastSpell), spell);
+						fsm.ChangeState(FSM.State.CAST);
+						return;
+				}
+			}
+
 			if (!character.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)))
 			{
 				character.Connect(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked),
@@ -57,6 +83,7 @@ namespace Game.Actor.State
 			character.anim.Stop();
 			character.img.Frame = 0;
 
+			// TODO: add spell mod here or.... hmmm...
 			timer.WaitTime = character.stats.weaponSpeed.value;
 			timer.Start();
 		}
@@ -73,9 +100,6 @@ namespace Game.Actor.State
 			character.img.FlipH = isLeft;
 			missilePos.x = Mathf.Abs(missilePos.x) * ((isLeft) ? -1.0f : 1.0f);
 			character.missileSpawnPos.Position = missilePos;
-
-			// get spell if any
-			TryGetSpell(out spell, character);
 
 			character.anim.Play(
 				spell != null
@@ -135,13 +159,13 @@ namespace Game.Actor.State
 			CombatText.TextType hitType;
 
 			ImageDB.ImageData imageData = GetImageData(character);
-			Stats.AttackTableNode attackTable = Stats.ATTACK_TABLE[
-				imageData.melee
-				? Stats.AttackTableType.MELEE
-				: Stats.AttackTableType.RANGED];
-			// set spell attack-table/ignoreArmor if any
-			attackTable = spell?.attackTable ?? attackTable;
-			bool ignoreArmor = spell?.ignoreArmor ?? false;
+			Stats.AttackTableNode attackTable = spell?.attackTable
+				?? Stats.ATTACK_TABLE[
+					imageData.melee
+					? Stats.AttackTableType.MELEE
+					: Stats.AttackTableType.RANGED];
+			bool ignoreArmor = spell == null ? false
+				: SpellDB.GetSpellData(spell.worldName).ignoreArmor;
 
 			if (diceRoll <= attackTable.hit)
 			{
@@ -245,30 +269,68 @@ namespace Game.Actor.State
 		}
 		private static void TryGetSpell(out SpellProto spell, Character character)
 		{
-			if (character is Npc && ContentDB.HasContent(character.worldName))
+			Random rand = new Random();
+
+			// TODO: need to have a chance table on when a spell can be casted
+			if (50 >= rand.Next(1, 101)
+			&& character is Npc
+			&& ContentDB.HasContent(character.worldName)
+			&& ContentDB.GetContentData(character.worldName).spells.Length > 0)
 			{
-				// select only spells within range
-				IEnumerable<string> spells =
-				from spellName in ContentDB.GetContentData(character.worldName).spells
-				where SpellDB.GetSpellData(spellName).range >= character.pos.DistanceTo(character.target.pos)
-				select spellName;
 
-				Random rand = new Random();
+				string[] characterSpells = ContentDB.GetContentData(character.worldName).spells;
+				IEnumerable<SpellDB.SpellTypes> characterSpellTypes =
+					from spellName in characterSpells
+					select SpellDB.GetSpellData(spellName).type;
 
-				// TODO: need to have a chance table on when a spell can be casted
-				if (spells.Any() && 50 >= rand.Next(1, 101))
+				Array spellTypes = Enum.GetValues(typeof(SpellDB.SpellTypes));
+				SpellDB.SpellTypes spellType;
+				IEnumerable<string> spells;
+
+				do
+				{
+					spellType = (SpellDB.SpellTypes)spellTypes.GetValue(rand.Next(spellTypes.Length));
+				} while (!characterSpellTypes.Contains(spellType));
+
+				spells = from spellName in characterSpells
+						 where SpellDB.GetSpellData(spellName).type.Equals(spellType)
+						 select spellName;
+
+				if (spellType.Equals(SpellDB.SpellTypes.HIT_HOSTILE))
+				{
+					// select only spells within range
+					spells =
+						from spellName in spells
+						where SpellDB.GetSpellData(spellName).range >= character.pos.DistanceTo(character.target.pos)
+						select spellName;
+				}
+
+				if (spells.Any())
 				{
 					spell = (SpellProto)new SpellCreator().MakeCommodity(
 						character, spells.ElementAt(rand.Next(spells.Count())));
 
-					character.target.AddChild(spell);
-					spell.Owner = character.target;
+					switch (spellType)
+					{
+						case SpellDB.SpellTypes.HIT_HOSTILE:
+							character.target.AddChild(spell);
+							spell.Owner = character.target;
+							break;
+						default:
+							// MOD_HOSTILE || MOD_FRIENDLY
+							character.AddChild(spell);
+							spell.Owner = character;
+							break;
+					}
 					return;
 				}
 			}
 			spell = null;
 		}
-		private static ImageDB.ImageData GetImageData(Character character) { return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName()); }
+		private static ImageDB.ImageData GetImageData(Character character)
+		{
+			return ImageDB.GetImageData(character.img.Texture.ResourcePath.GetFile().BaseName());
+		}
 		private static void InstancSpellEffect(string spellName, Character target)
 		{
 			SpellEffect spellEffect = SpellDB.GetSpellEffect(

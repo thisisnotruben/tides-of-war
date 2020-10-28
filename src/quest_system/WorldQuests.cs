@@ -97,30 +97,30 @@ namespace Game.Quests
 				}
 			}
 		}
-		public void UpdateQuestPickable(Pickable pickable, bool add)
-		{
-			foreach (Node questCatagory in new Node[] { activeQuests, completedQuests })
-			{
-				if (questCatagory == completedQuests && add)
-				{
-					break;
-				}
-				foreach (Quest quest in questCatagory.GetChildren())
-				{
-					if (quest.IsPartOf(pickable))
-					{
-						if (quest.CheckQuest(pickable, add))
-						{
-							MoveQuest(quest, completedQuests);
-						}
-						else
-						{
-							MoveQuest(quest, activeQuests);
-						}
-					}
-				}
-			}
-		}
+		// public void UpdateQuestPickable(Pickable pickable, bool add)
+		// {
+		// 	foreach (Node questCatagory in new Node[] { activeQuests, completedQuests })
+		// 	{
+		// 		if (questCatagory == completedQuests && add)
+		// 		{
+		// 			break;
+		// 		}
+		// 		foreach (Quest quest in questCatagory.GetChildren())
+		// 		{
+		// 			if (quest.IsPartOf(pickable))
+		// 			{
+		// 				if (quest.CheckQuest(pickable, add))
+		// 				{
+		// 					MoveQuest(quest, completedQuests);
+		// 				}
+		// 				else
+		// 				{
+		// 					MoveQuest(quest, activeQuests);
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// }
 		public void UpdateQuestCharacter(Character character)
 		{
 			foreach (Quest quest in activeQuests.GetChildren())

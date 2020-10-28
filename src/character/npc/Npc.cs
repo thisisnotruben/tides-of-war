@@ -29,7 +29,7 @@ namespace Game.Actor
 		public void _OnCharacterEnteredSight(Area2D area2D)
 		{
 			Character character = area2D.Owner as Character;
-			if (character != null)
+			if (!attacking && character != null)
 			{
 				Npc npc = character as Npc;
 

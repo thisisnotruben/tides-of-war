@@ -6,6 +6,8 @@ namespace Game.Actor.State
 		protected FSM fsm;
 		protected Character character;
 
+		[Signal] public delegate void PlayerWantsToMove(bool wantsToMove);
+
 		public void Init(FSM FSM, Character character)
 		{
 			this.fsm = FSM;
@@ -26,6 +28,7 @@ namespace Game.Actor.State
 
 			if (Map.Map.map.IsValidMove(character.GlobalPosition, character.GetGlobalMousePosition()))
 			{
+				EmitSignal(nameof(PlayerWantsToMove), true);
 				// any valid move overrides any state from player
 				fsm.ChangeState((fsm.IsDead())
 					? FSM.State.PLAYER_MOVE_DEAD

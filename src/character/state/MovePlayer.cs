@@ -4,13 +4,30 @@ namespace Game.Actor.State
 {
 	public class MovePlayer : Move
 	{
+		protected bool wantsToMove;
 		[Signal] public delegate void PositionChanged();
 
 		public override void Start()
 		{
 			base.Start();
-			GetPathWay();
+			if (wantsToMove)
+			{
+				GetPathWay();
+			}
+			else
+			{
+				fsm.ChangeState(
+					fsm.IsDead()
+					? FSM.State.IDLE_DEAD
+					: FSM.State.IDLE);
+			}
 		}
+		public override void Exit()
+		{
+			base.Exit();
+			wantsToMove = false;
+		}
+		public void OnPlayerWantsToMove(bool wantsToMove) { this.wantsToMove = wantsToMove; }
 		public override void UnhandledInput(InputEvent @event)
 		{
 			if (!(@event is InputEventScreenTouch))

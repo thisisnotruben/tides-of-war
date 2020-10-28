@@ -45,14 +45,14 @@ namespace Game.Ability
 			worldType = (WorldTypes)Enum.Parse(typeof(WorldTypes), worldName.ToUpper().Replace(" ", "_"));
 			this.worldName = worldName;
 			Name = worldName;
-			SpellDB.SpellData spellData = SpellDB.GetSpellData(worldName);
-			spellRange = spellData.range;
-			percentDamage = spellData.pctDamage;
-			ignoreArmor = spellData.ignoreArmor;
-			effectOnTarget = spellData.effectOnTarget;
-			requiresTarget = spellData.requiresTarget;
-			attackTable = (spellRange > Stats.WEAPON_RANGE_MELEE) ? Stats.ATTACK_TABLE[Stats.AttackTableType.RANGED] : Stats.ATTACK_TABLE[Stats.AttackTableType.MELEE];
-			manaCost = Stats.GetSpellManaCost(spellData.level);
+			// SpellDB.SpellData spellData = SpellDB.GetSpellData(worldName);
+			// spellRange = spellData.range;
+			// percentDamage = spellData.pctDamage;
+			// ignoreArmor = spellData.ignoreArmor;
+			// effectOnTarget = spellData.effectOnTarget;
+			// requiresTarget = spellData.requiresTarget;
+			// attackTable = (spellRange > Stats.WEAPON_RANGE_MELEE) ? Stats.ATTACK_TABLE[Stats.AttackTableType.RANGED] : Stats.ATTACK_TABLE[Stats.AttackTableType.MELEE];
+			// manaCost = Stats.GetSpellManaCost(spellData.level);
 		}
 		public override void GetPickable(Character character, bool addToBag)
 		{
@@ -65,16 +65,16 @@ namespace Game.Ability
 			Player player = caster as Player;
 			if (player != null)
 			{
-				player.RemoveFromSpellQueue(this);
+				// player.RemoveFromSpellQueue(this);
 				Control osb = player.menu.GetNode<Control>("c/osb");
 				if (IsInGroup(osb.GetInstanceId().ToString()))
 				{
 					RemoveFromGroup(osb.GetInstanceId().ToString());
 				}
-				if (player.spell == this)
-				{
-					player.SetCurrentSpell(null);
-				}
+				// if (player.spell == this)
+				// {
+				// 	player.SetCurrentSpell(null);
+				// }
 			}
 			base.UnMake();
 		}
@@ -114,7 +114,7 @@ namespace Game.Ability
 		}
 		public virtual async void ConfigureSpell()
 		{
-			caster.SetCurrentSpell(this);
+			// caster.SetCurrentSpell(this);
 			switch (subType)
 			{
 				case WorldTypes.DAMAGE_MODIFIER:

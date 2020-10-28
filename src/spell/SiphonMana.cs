@@ -1,4 +1,5 @@
 using Game.Actor;
+using Game.Actor.Doodads;
 namespace Game.Ability
 {
 	public class SiphonMana : SpellProto
@@ -13,6 +14,8 @@ namespace Game.Ability
 
 			character.target.mana -= siphonedAmount;
 			character.mana += siphonedAmount;
+
+			character.SpawnCombatText(siphonedAmount.ToString(), CombatText.TextType.MANA);
 		}
 	}
 }

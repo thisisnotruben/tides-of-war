@@ -64,11 +64,6 @@ namespace Game.Actor.State
 
 			character.Modulate = new Color("bfffffff");
 
-			foreach (Spell spell in character.spellQueue)
-			{
-				spell.UnMake();
-			}
-
 			// hide combat text
 			character.combatTextHandler.Hide();
 

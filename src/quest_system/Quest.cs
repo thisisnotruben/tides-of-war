@@ -19,7 +19,7 @@ namespace Game.Quests
 		private string questRecieverDelivered;
 		private bool keepPickables;
 		private int gold;
-		public Pickable reward { get; private set; }
+		// public Pickable reward { get; private set; }
 		private Dictionary<string, string> objective = new Dictionary<string, string>();
 		public WorldQuests.QuestState state { get; private set; }
 

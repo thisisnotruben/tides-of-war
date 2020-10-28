@@ -51,7 +51,7 @@ namespace Game.Database
 				i = 0;
 				foreach (Godot.Collections.Array vectorNode in rawPath)
 				{
-					path[i++] = (new Vector2((float)((Single)vectorNode[0]), (float)((Single)vectorNode[1])));
+					path[i++] = new Vector2((float)vectorNode[0], (float)vectorNode[1]);
 				}
 
 				unitData.Add(itemName, new UnitData(

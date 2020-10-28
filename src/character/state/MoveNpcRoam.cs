@@ -31,6 +31,10 @@ namespace Game.Actor.State
 				SetPathToWaypoint();
 				MoveTo(path);
 			}
+			else
+			{
+				fsm.ChangeState(FSM.State.NPC_MOVE_RETURN);
+			}
 		}
 
 		// cyclic functions

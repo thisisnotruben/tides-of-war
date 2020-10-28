@@ -52,7 +52,7 @@ namespace Game.Ability
 		}
 		public override void ConfigureSpell()
 		{
-			caster.SetCurrentSpell(this);
+			// caster.SetCurrentSpell(this);
 			caster.state = FSM.State.IDLE;
 			Control osb = player.menu.GetNode<Control>("c/osb");
 			osb.SetPosition(new Vector2(0.0f, 180.0f));

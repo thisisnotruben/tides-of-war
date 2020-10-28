@@ -1,4 +1,5 @@
 using System;
+using Game.Database;
 using Godot;
 namespace Game.Actor.State
 {
@@ -54,7 +55,10 @@ namespace Game.Actor.State
 				(otherHitBox.Owner as Npc)?._OnCharacterEnteredSight(character.hitBox);
 			}
 
-			fsm.ChangeState(FSM.State.IDLE);
+			fsm.ChangeState(UnitDB.HasUnitData(character.Name)
+				&& UnitDB.GetUnitData(character.Name).path.Length > 0
+				? FSM.State.NPC_MOVE_ROAM
+				: FSM.State.IDLE);
 		}
 		public override void Exit() { }
 	}

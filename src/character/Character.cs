@@ -15,7 +15,7 @@ namespace Game.Actor
 			COLL_MASK_NPC = 0b_00000_00000_00000_00010,
 			COLL_MASK_DEAD = 0b_00000_00000_00000_00100;
 
-		protected FSM fsm;
+		public FSM fsm;
 		public CombatTextHandler combatTextHandler;
 		public StatManager stats;
 		public Timer regenTimer;
@@ -57,7 +57,7 @@ namespace Game.Actor
 				if (hp >= stats.hpMax.valueI)
 				{
 					_hp = stats.hpMax.valueI;
-					if (this is Npc && !spellQueue.Any() && IsInGroup(Globals.SAVE_GROUP))
+					if (this is Npc && IsInGroup(Globals.SAVE_GROUP))
 					{
 						RemoveFromGroup(Globals.SAVE_GROUP);
 					}
@@ -88,7 +88,7 @@ namespace Game.Actor
 				if (mana >= stats.manaMax.valueI)
 				{
 					_mana = stats.manaMax.valueI;
-					if (this is Npc && !spellQueue.Any() && IsInGroup(Globals.SAVE_GROUP))
+					if (this is Npc && IsInGroup(Globals.SAVE_GROUP))
 					{
 						RemoveFromGroup(Globals.SAVE_GROUP);
 					}
@@ -105,13 +105,10 @@ namespace Game.Actor
 			}
 		}
 
-		public Spell spell { get; private protected set; }
 		public Character target;
-		public List<Spell> spellQueue = new List<Spell>();
 
 		[Signal] public delegate void UpdateHudHealthStatus(int currentValue, int maxValue);
 		[Signal] public delegate void UpdateHudManaStatus(int currentValue, int maxValue);
-		[Signal] public delegate void UpdateHudIcon(string worldName, Pickable pickable, float seek);
 		[Signal] public delegate void NotifyAttack(Character whosAttacking);
 
 		public override void _Ready()
@@ -191,24 +188,6 @@ namespace Game.Actor
 			combatText.Init(text, textType, img.Position);
 			combatTextHandler.AddCombatText(combatText);
 		}
-		public void SetCurrentSpell(Spell spell) { this.spell = spell; }
-		public void SetSpell(Spell spell, float seek = 0.0f)
-		{
-			foreach (Spell otherSpell in spellQueue)
-			{
-				if (otherSpell.Equals(spell))
-				{
-					otherSpell.UnMake();
-				}
-			}
-			if (spell.duration > 0.0f)
-			{
-				spellQueue.Add(spell);
-				spell.Connect(nameof(Spell.Unmake), this, nameof(RemoveFromSpellQueue), new Godot.Collections.Array() { spell });
-			}
-			EmitSignal(nameof(UpdateHudIcon), worldName, spell, seek);
-		}
-		public void RemoveFromSpellQueue(Spell spell) { spellQueue.Remove(spell); }
 		public void _OnRegenTimerTimeout()
 		{
 			// fsm controls when regen timer is allowed

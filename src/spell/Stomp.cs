@@ -1,14 +1,11 @@
-using System.Collections.Generic;
-using System;
 using Game.Actor;
 using Game.Actor.State;
-using Godot;
+using System;
 namespace Game.Ability
 {
 	public class Stomp : SpellAreaEffect
 	{
 		private readonly Random rand = new Random();
-		private readonly Dictionary<Character, FSM.State> prevState = new Dictionary<Character, FSM.State>();
 
 		public Stomp(Character character, string worldName) : base(character, worldName) { }
 		protected override void StartAreaEffect(Character character)
@@ -17,17 +14,18 @@ namespace Game.Ability
 
 			if (20 >= rand.Next(1, 101))
 			{
-				prevState[character] = character.state;
 				character.state = FSM.State.STUN;
+				character.fsm.lockState = true;
 			}
 		}
 		protected override void ExitAreaEffect(Character character)
 		{
 			base.ExitAreaEffect(character);
 
-			if (prevState.ContainsKey(character) && character.state.Equals(FSM.State.STUN))
+			if (character.state.Equals(FSM.State.STUN))
 			{
-				character.state = prevState[character];
+				character.fsm.lockState = false;
+				character.fsm.RevertState();
 			}
 		}
 	}

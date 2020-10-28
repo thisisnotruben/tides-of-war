@@ -28,6 +28,7 @@
     <Compile Include="src\character\doodads\CombatText.cs" />
     <Compile Include="src\character\doodads\FootStep.cs" />
     <Compile Include="src\character\doodads\Tomb.cs" />
+    <Compile Include="src\character\state\Cast.cs" />
     <Compile Include="src\character\state\FSM.cs" />
     <Compile Include="src\character\state\StateBehavior.cs" />
     <Compile Include="src\character\state\Move.cs" />
@@ -121,8 +122,8 @@
     <Compile Include="src\spell\ArcaneBolt.cs" />
     <Compile Include="src\spell\Bash.cs" />
     <Compile Include="src\spell\ExplosiveTrap.cs" />
+    <Compile Include="src\spell\Meteor.cs" />
     <Compile Include="src\spell\Overpower.cs" />
-    <Compile Include="src\spell\PiercingShot.cs" />
     <Compile Include="src\spell\SiphonMana.cs" />
     <Compile Include="src\spell\SpellAreaEffect.cs" />
     <Compile Include="src\spell\SpellProto.cs" />
@@ -130,10 +131,8 @@
     <Compile Include="src\spell\spell_logics\SpellOsb.cs" />
     <Compile Include="src\spell\Stomp.cs" />
     <Compile Include="src\spell\visual\master\SpellEffect.cs" />
-    <Compile Include="src\spell\spell_logics\divine_heal.cs" />
     <Compile Include="src\spell\spell_logics\meteor.cs" />
-    <Compile Include="src\spell\spell_logics\siphon_mana.cs" />
-    <Compile Include="src\spell\spell_logics\volley.cs" />
+    <Compile Include="src\spell\Volley.cs" />
     <Compile Include="src\utils\MapImporter.cs" />
     <Compile Include="src\utils\SoundPlayer.cs" />
     <Compile Include="src\utils\Speaker.cs" />

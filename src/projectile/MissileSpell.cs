@@ -34,26 +34,14 @@ namespace Game.Projectile
 			{
 				SpellDB.SpellMissileData spellMissileData = SpellDB.GetSpellMissileData(spellWorldName);
 
-				if (spellMissileData.instantSpawn)
-				{
-					spawnPos = GlobalPosition = target.pos;
-				}
-
 				moveBehavior = () =>
 				{
-					if (spellMissileData.rotate && !hit)
+					if (!hit && spellMissileData.rotate)
 					{
 						LookAt(target.pos);
 					}
 
-					if (spellMissileData.reverse)
-					{
-						MoveMissile(target.pos, GlobalPosition);
-					}
-					else
-					{
-						MoveMissile(GlobalPosition, target.pos);
-					}
+					MoveMissile(GlobalPosition, target.pos);
 				};
 			}
 
