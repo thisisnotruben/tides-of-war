@@ -1,6 +1,7 @@
 using Game.Loot;
-using Game.ItemPoto;
+using Game.GameItem;
 using Game.Database;
+using Game.Factory;
 using Godot;
 namespace Game.Ui
 {
@@ -25,7 +26,7 @@ namespace Game.Ui
 		}
 		private void EquipItem(bool on, string worldName)
 		{
-			Item item = (Item)new ItemCreator().MakeCommodity(player, worldName);
+			Item item = (Item)new ItemFactory().MakeCommodity(player, worldName);
 			switch (ItemDB.GetItemData(worldName).type)
 			{
 				case ItemDB.ItemType.WEAPON:
@@ -85,7 +86,7 @@ namespace Game.Ui
 			Globals.PlaySound(sndName, this, speaker);
 
 			// eat up or drink up
-			new ItemCreator().MakeCommodity(player, pickableWorldName).Start();
+			new ItemFactory().MakeCommodity(player, pickableWorldName).Start();
 			// remove from inventory
 			itemList.RemoveCommodity(pickableWorldName);
 

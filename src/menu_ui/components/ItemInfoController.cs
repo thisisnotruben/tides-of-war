@@ -1,6 +1,6 @@
 using System.Linq;
 using Game.Database;
-using Game.ItemPoto;
+using Game.GameItem;
 using Godot;
 namespace Game.Ui
 {
@@ -61,7 +61,7 @@ namespace Game.Ui
 				{
 					case ItemDB.ItemType.FOOD:
 					case ItemDB.ItemType.POTION:
-						if (!Commodity.IsCoolingDown(player, pickableWorldName))
+						if (!Commodity.IsCoolingDown(player.GetPath(), pickableWorldName))
 						{
 							showBttns[1] = "use";
 							GetNode<Label>("s/h/buttons/use/label").Text =

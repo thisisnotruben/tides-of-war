@@ -1,9 +1,10 @@
 using Game.Ability;
 using Game.Actor;
 using Game.Database;
-namespace Game.ItemPoto
+using Game.GameItem;
+namespace Game.Factory
 {
-	public class SpellCreator : CommodityCreator
+	public class SpellFactory : CommodityFactory
 	{
 		protected override Commodity CreateCommodity(Character character, string worldName)
 		{
@@ -17,12 +18,12 @@ namespace Game.ItemPoto
 					return new ExplosiveTrap(character, worldName);
 				case WorldNameDB.METEOR:
 					return new Meteor(character, worldName);
+				case WorldNameDB.OVERPOWER:
+					return new Overpower(character, worldName);
 				case WorldNameDB.SIPHON_MANA:
 					return new SiphonMana(character, worldName);
 				case WorldNameDB.STOMP:
 					return new Stomp(character, worldName);
-				case WorldNameDB.OVERPOWER:
-					return new Overpower(character, worldName);
 				case WorldNameDB.VOLLEY:
 					return new Volley(character, worldName);
 			}
@@ -31,7 +32,7 @@ namespace Game.ItemPoto
 			{
 				return AreaEffectDB.HasAreaEffect(worldName)
 					? new SpellAreaEffect(character, worldName)
-					: new SpellProto(character, worldName);
+					: new Spell(character, worldName);
 			}
 			return null;
 		}

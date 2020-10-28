@@ -6,8 +6,9 @@
 [ext_resource path="res://src/menu_ui/startMenu/StartMenuController.cs" type="Script" id=4]
 [ext_resource path="res://asset/img/ui/grey2_bg.tres" type="Texture" id=6]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/utils/audio_stream_player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/util/audio_stream_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=10]
+
 
 [node name="start_menu" type="Control"]
 anchor_right = 1.0

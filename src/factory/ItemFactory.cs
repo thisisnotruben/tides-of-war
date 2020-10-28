@@ -1,7 +1,8 @@
 using Game.Actor;
-namespace Game.ItemPoto
+using Game.GameItem;
+namespace Game.Factory
 {
-	public class ItemCreator : CommodityCreator
+	public class ItemFactory : CommodityFactory
 	{
 		protected override Commodity CreateCommodity(Character character, string worldName)
 		{

@@ -1,12 +1,14 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://src/missile/LandMine.cs" type="Script" id=1]
+[ext_resource path="res://src/landMine/LandMine.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/missile-spell/LandMine.tres" type="Texture" id=2]
-[ext_resource path="res://src/utils/audio_stream_player_2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/util/audio_stream_player_2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://asset/snd/spell/explosion.ogg" type="AudioStream" id=4]
 [ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=6]
 [ext_resource path="res://asset/img/missile-spell/LandMineHitBox.tres" type="Shape2D" id=7]
+
+
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1

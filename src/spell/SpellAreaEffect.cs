@@ -4,7 +4,7 @@ using Game.Database;
 using Godot;
 namespace Game.Ability
 {
-	public class SpellAreaEffect : SpellProto
+	public class SpellAreaEffect : Spell
 	{
 		private Area2D area;
 		private CollisionShape2D sight;
@@ -47,7 +47,7 @@ namespace Game.Ability
 		}
 		protected virtual void StartAreaEffect(Character character)
 		{
-			SpellProto spell = new SpellProto(character, worldName);
+			Spell spell = new Spell(character, worldName);
 
 			character.AddChild(spell);
 			spell.Owner = character;

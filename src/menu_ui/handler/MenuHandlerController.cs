@@ -1,4 +1,4 @@
-using Game.Utils;
+using Game.Util;
 using Game.Actor;
 using Game.Loot;
 using Game.Database;

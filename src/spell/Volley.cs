@@ -2,7 +2,7 @@ using Game.Actor;
 using Game.Actor.State;
 namespace Game.Ability
 {
-	public class Volley : SpellProto
+	public class Volley : Spell
 	{
 		private int hit = 3;
 

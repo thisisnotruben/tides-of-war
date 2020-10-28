@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Godot;
-namespace Game.Utils
+namespace Game.Util
 {
 	public abstract class SoundPlayer : Node
 	{

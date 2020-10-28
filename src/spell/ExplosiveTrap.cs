@@ -1,9 +1,9 @@
 using Game.Actor;
 using Game.Database;
-using Game.MissileDEP;
+using Game.Mine;
 namespace Game.Ability
 {
-	public class ExplosiveTrap : SpellProto
+	public class ExplosiveTrap : Spell
 	{
 		public ExplosiveTrap(Character character, string worldName) : base(character, worldName) { }
 

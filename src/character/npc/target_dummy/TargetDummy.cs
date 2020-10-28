@@ -1,4 +1,4 @@
-using Game.Utils;
+using Game.Util;
 using Godot;
 namespace Game.Actor
 {

@@ -1,5 +1,5 @@
 using Godot;
-using Game.ItemPoto;
+using Game.GameItem;
 using Game.Database;
 namespace Game.Ui
 {
@@ -38,7 +38,7 @@ namespace Game.Ui
 			for (int i = 0; i < inventory.count; i++)
 			{
 				inventorySlots.DisplaySlot(i, inventory.GetCommodity(i), inventory.GetCommodityStack(i),
-					Commodity.GetCoolDown(player, inventory.GetCommodity(i)));
+					Commodity.GetCoolDown(player.GetPath(), inventory.GetCommodity(i)));
 			}
 		}
 		public void _OnInventoryControllerHide()

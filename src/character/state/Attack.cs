@@ -3,9 +3,9 @@ using System.Linq;
 using System;
 using Game.Actor.Doodads;
 using Game.Database;
-using Game.Utils;
+using Game.Util;
 using Game.Projectile;
-using Game.ItemPoto;
+using Game.Factory;
 using Game.Ability;
 using Godot;
 namespace Game.Actor.State
@@ -13,9 +13,9 @@ namespace Game.Actor.State
 	public class Attack : TakeDamage
 	{
 		private Timer timer = new Timer();
-		private SpellProto spell;
+		private Spell spell;
 
-		[Signal] public delegate void CastSpell(SpellProto spell);
+		[Signal] public delegate void CastSpell(Spell spell);
 
 		public override void _Ready()
 		{
@@ -127,7 +127,7 @@ namespace Game.Actor.State
 			{
 				Missile missile = MissileFactory.CreateMissile(character, spell?.worldName ?? string.Empty);
 
-				if (spell != null && !(missile is MissileSpell) && SpellDB.HasSpellEffect(spell.worldName))
+				if (spell != null && missile! is MissileSpell && SpellDB.HasSpellEffect(spell.worldName))
 				{
 					InstancSpellEffect(spell.worldName, character.target);
 				}
@@ -138,13 +138,14 @@ namespace Game.Actor.State
 
 				// add to scene
 				Map.Map.map.AddZChild(missile);
+				missile.LookAt(character.target.pos);
 				missile.Owner = Map.Map.map;
 			}
 			spell = null;
 
 			AttackStart();
 		}
-		public void AttackHit(Character character, Character target, SpellProto spell)
+		public void AttackHit(Character character, Character target, Spell spell)
 		{
 			character.EmitSignal(nameof(Character.NotifyAttack));
 
@@ -267,7 +268,7 @@ namespace Game.Actor.State
 			}
 			return true;
 		}
-		private static void TryGetSpell(out SpellProto spell, Character character)
+		private static void TryGetSpell(out Spell spell, Character character)
 		{
 			Random rand = new Random();
 
@@ -307,7 +308,7 @@ namespace Game.Actor.State
 
 				if (spells.Any())
 				{
-					spell = (SpellProto)new SpellCreator().MakeCommodity(
+					spell = (Spell)new SpellFactory().MakeCommodity(
 						character, spells.ElementAt(rand.Next(spells.Count())));
 
 					switch (spellType)

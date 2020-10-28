@@ -2,7 +2,7 @@ using Game.Actor;
 using Game.Actor.Doodads;
 namespace Game.Ability
 {
-	public class SiphonMana : SpellProto
+	public class SiphonMana : Spell
 	{
 		public SiphonMana(Character character, string worldName) : base(character, worldName) { }
 

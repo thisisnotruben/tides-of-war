@@ -1,5 +1,5 @@
 using Game.Actor;
-namespace Game.ItemPoto
+namespace Game.GameItem
 {
 	public class Item : Commodity
 	{

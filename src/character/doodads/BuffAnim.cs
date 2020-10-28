@@ -1,4 +1,4 @@
-using Game.ItemPoto;
+using Game.GameItem;
 using Godot;
 namespace Game.Actor.Doodads
 {

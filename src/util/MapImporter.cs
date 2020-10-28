@@ -1,6 +1,6 @@
 using System;
 using Godot;
-namespace Game.Utils
+namespace Game.Util
 {
 	public class MapImporter : Node
 	{

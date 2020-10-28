@@ -6,7 +6,7 @@ namespace Game.Projectile
 {
 	public class MissileSpell : Missile
 	{
-		public new static PackedScene scene = (PackedScene)GD.Load("res://src/projectile/MissileSpell.tscn");
+		public new static PackedScene scene = (PackedScene)GD.Load("res://src/missile/MissileSpell.tscn");
 
 		private Timer timer;
 		protected string spellWorldName = string.Empty;
@@ -44,8 +44,10 @@ namespace Game.Projectile
 					MoveMissile(GlobalPosition, target.pos);
 				};
 			}
-
-			// instance spell effect visuals
+			InstanceSpellEffect(target);
+		}
+		protected void InstanceSpellEffect(Character target)
+		{
 			if (SpellDB.HasSpellEffect(spellWorldName))
 			{
 				SpellEffect spellEffect = SpellDB.GetSpellEffect(

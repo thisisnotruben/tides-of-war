@@ -1,6 +1,4 @@
 using Game.Actor;
-using Godot;
-using System;
 namespace Game.Ability
 {
 	public class Meteor : SpellAreaEffect

@@ -4,21 +4,22 @@ namespace Game.Projectile
 {
 	public class Missile : Node2D
 	{
-		public static PackedScene scene = (PackedScene)GD.Load("res://src/projectile/Missile.tscn");
+		public static PackedScene scene = (PackedScene)GD.Load("res://src/missile/Missile.tscn");
 
 		protected Tween tween;
 		protected AnimationPlayer anim;
 		protected Sprite img;
-		protected Area2D hitbox;
+		protected Area2D hitbox, targetHitBox;
 		protected CollisionShape2D hitboxBody;
 
-		protected Character character, target;
+		protected Character character;
 		protected Vector2 spawnPos;
 		protected bool hit;
 
 		[Signal] public delegate void OnHit();
 		protected delegate void MoveBehavior();
 		protected MoveBehavior moveBehavior;
+		protected MoveBehavior moveMissile;
 
 		public override void _Ready()
 		{
@@ -27,12 +28,11 @@ namespace Game.Projectile
 			img = GetNode<Sprite>("img");
 			hitbox = GetNode<Area2D>("hitbox");
 			hitboxBody = hitbox.GetNode<CollisionShape2D>("body");
-			LookAt(target.pos);
 		}
 		public void Init(Character character, Character target)
 		{
 			this.character = character;
-			this.target = target;
+			targetHitBox = target.hitBox;
 
 			spawnPos = GlobalPosition = character.missileSpawnPos.GlobalPosition;
 
@@ -46,7 +46,7 @@ namespace Game.Projectile
 			};
 		}
 		public override void _Process(float delta) { moveBehavior?.Invoke(); }
-		protected void MoveMissile(Vector2 startPos, Vector2 targetPos)
+		protected virtual void MoveMissile(Vector2 startPos, Vector2 targetPos)
 		{
 			tween.StopAll();
 			tween.InterpolateProperty(this, ":global_position", startPos, targetPos,
@@ -56,7 +56,7 @@ namespace Game.Projectile
 		}
 		public void OnHitBoxEntered(Area2D area2D)
 		{
-			if (!hit && (area2D.Owner as Character) == target)
+			if (!hit && area2D == targetHitBox)
 			{
 				hit = true;
 				ZIndex = 1;

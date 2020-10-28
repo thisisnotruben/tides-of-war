@@ -1,5 +1,4 @@
-using System;
-using Game.Utils;
+using Game.Util;
 using Game.Actor.State;
 using Godot;
 namespace Game.Actor.Doodads

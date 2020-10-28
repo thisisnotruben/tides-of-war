@@ -2,7 +2,7 @@ using Game.Actor.State;
 using Game.Actor;
 namespace Game.Ability
 {
-	public class Bash : SpellProto
+	public class Bash : Spell
 	{
 		public Bash(Character character, string worldName) : base(character, worldName) { }
 		public override void Start()

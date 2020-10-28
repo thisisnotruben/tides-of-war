@@ -4,16 +4,14 @@ using Game.Database;
 using Game.Actor;
 using Game.Actor.Stat;
 using Godot;
-namespace Game.ItemPoto
+namespace Game.GameItem
 {
-	public class Commodity : Node
+	public class Commodity : WorldObject
 	{
-		// TODO: when changing scenes, null characters will remain...
-		private static Dictionary<Character, Dictionary<string, SceneTreeTimer>> cooldowns =
-			new Dictionary<Character, Dictionary<string, SceneTreeTimer>>();
+		private static readonly Dictionary<NodePath, Dictionary<string, SceneTreeTimer>> cooldowns =
+			new Dictionary<NodePath, Dictionary<string, SceneTreeTimer>>();
 
 		private Dictionary<CharacterStat, StatModifier> modifiers;
-		public string worldName;
 		protected Character character;
 		private Timer useTimer = new Timer(), durTimer = new Timer();
 		private int useCount = 0;
@@ -153,51 +151,53 @@ namespace Game.ItemPoto
 			}
 			return modifierDict;
 		}
-		public static float GetCoolDown(Character character, string worldName)
+		public static float GetCoolDown(NodePath rootNodePath, string worldName)
 		{
-			return IsCoolingDown(character, worldName) ? cooldowns[character][worldName].TimeLeft : 0.0f;
+			return IsCoolingDown(rootNodePath, worldName)
+				? cooldowns[rootNodePath][worldName].TimeLeft
+				: 0.0f;
 		}
-		public static bool IsCoolingDown(Character character, string worldName)
+		public static bool IsCoolingDown(NodePath rootNodePath, string worldName)
 		{
-			if (cooldowns.ContainsKey(character) && cooldowns[character].ContainsKey(worldName))
+			if (cooldowns.ContainsKey(rootNodePath) && cooldowns[rootNodePath].ContainsKey(worldName))
 			{
-				if (cooldowns[character][worldName].TimeLeft == 0.0f)
+				if (cooldowns[rootNodePath][worldName].TimeLeft == 0.0f)
 				{
-					cooldowns[character].Remove(worldName);
+					cooldowns[rootNodePath].Remove(worldName);
 				}
 				return true;
 			}
 			return false;
 		}
-		public static void OnCooldownTimeout(Character character, string worldName)
+		public static void OnCooldownTimeout(NodePath rootNodePath, string worldName)
 		{
-			if (cooldowns.ContainsKey(character) && cooldowns[character].ContainsKey(worldName))
+			if (cooldowns.ContainsKey(rootNodePath) && cooldowns[rootNodePath].ContainsKey(worldName))
 			{
-				cooldowns[character].Remove(worldName);
-				if (cooldowns[character].Count == 0)
+				cooldowns[rootNodePath].Remove(worldName);
+				if (cooldowns[rootNodePath].Count == 0)
 				{
-					cooldowns.Remove(character);
+					cooldowns.Remove(rootNodePath);
 				}
 			}
 		}
-		public bool AddCooldown(string worldName, float cooldownSec)
+		public bool AddCooldown(NodePath rootNodePath, string worldName, float cooldownSec)
 		{
-			if (IsCoolingDown(character, worldName))
+			if (IsCoolingDown(rootNodePath, worldName))
 			{
 				return false;
 			}
 
 			SceneTreeTimer cooldown = character.GetTree().CreateTimer(cooldownSec, false);
 			cooldown.Connect("timeout", this, nameof(OnCooldownTimeout),
-				new Godot.Collections.Array() { character, worldName });
+				new Godot.Collections.Array() { character.GetPath(), worldName });
 
-			if (cooldowns.ContainsKey(character))
+			if (cooldowns.ContainsKey(rootNodePath))
 			{
-				cooldowns[character].Add(worldName, cooldown);
+				cooldowns[rootNodePath].Add(worldName, cooldown);
 			}
 			else
 			{
-				cooldowns.Add(character, new Dictionary<string, SceneTreeTimer>() { { worldName, cooldown } });
+				cooldowns.Add(rootNodePath, new Dictionary<string, SceneTreeTimer>() { { worldName, cooldown } });
 			}
 			return true;
 		}
@@ -242,7 +242,7 @@ namespace Game.ItemPoto
 		}
 		public virtual void Start()
 		{
-			if (IsCoolingDown(character, worldName))
+			if (IsCoolingDown(character.GetPath(), worldName))
 			{
 				return;
 			}
@@ -254,7 +254,7 @@ namespace Game.ItemPoto
 				? SpellDB.GetSpellData(worldName).coolDown
 				: ItemDB.GetItemData(worldName).coolDown;
 
-			AddCooldown(worldName, coolDown);
+			AddCooldown(character.GetPath(), worldName, coolDown);
 
 			foreach (CharacterStat stat in modifiers.Keys)
 			{

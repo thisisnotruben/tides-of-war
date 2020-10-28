@@ -1,6 +1,6 @@
 using Godot;
 using Game.Database;
-using Game.ItemPoto;
+using Game.GameItem;
 namespace Game.Ui
 {
 	public class ItemInfoSpellController : ItemInfoController
@@ -16,7 +16,7 @@ namespace Game.Ui
 			base.Display(pickableWorldName, allowMove);
 
 			// disaply cast option if spell not cooling down and player not dead
-			HideExcept((Commodity.IsCoolingDown(player, pickableWorldName) || player.dead)
+			HideExcept((Commodity.IsCoolingDown(player.GetPath(), pickableWorldName) || player.dead)
 				? new string[] { }
 				: new string[] { "cast" });
 		}

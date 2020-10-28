@@ -1,8 +1,8 @@
 using Game.Actor;
-using Game.ItemPoto;
+using Game.GameItem;
 namespace Game.Ability
 {
-	public class SpellProto : Commodity
+	public class Spell : Commodity
 	{
 		/* 
 					!──TODO──!
@@ -10,6 +10,6 @@ namespace Game.Ability
 		*/
 		public Stats.AttackTableNode? attackTable = null;
 
-		public SpellProto(Character character, string worldName) : base(character, worldName) { }
+		public Spell(Character character, string worldName) : base(character, worldName) { }
 	}
 }

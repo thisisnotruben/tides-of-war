@@ -150,7 +150,7 @@ namespace Game.Ability
 		public void _OnTimerTimeout() { onTimeOut?.Invoke(); }
 		public void OnHit()
 		{
-			Globals.PlaySound(sound, this, new Utils.Speaker2D());
+			Globals.PlaySound(sound, this, new Util.Speaker2D());
 
 			tween.InterpolateProperty(this, ":scale", new Vector2(0.75f, 0.75f),
 				Vector2.One, 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);

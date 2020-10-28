@@ -1,6 +1,7 @@
 using Game.Database;
 using Game.Actor;
-namespace Game.Projectile
+using Game.Projectile;
+namespace Game.Factory
 {
 	public static class MissileFactory
 	{
@@ -8,7 +9,7 @@ namespace Game.Projectile
 		{
 			Missile missile;
 
-			if (!spellName.Equals(string.Empty) && SpellDB.HasSpellMissile(spellName))
+			if (SpellDB.HasSpellMissile(spellName))
 			{
 				missile = (MissileSpell)MissileSpell.scene.Instance();
 				((MissileSpell)missile).Init(character, character.target, spellName);

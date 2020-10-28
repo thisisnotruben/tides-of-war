@@ -129,58 +129,58 @@ namespace Game
 		// 	}
 		// 	return (int)Mathf.Round((float)gold * itemDurability);
 		// }
-		public static Tuple<int, int> GetItemStats(int itemLevel, WorldObject.WorldTypes itemType, WorldObject.WorldTypes itemSubType)
-		{
-			CharacterStatsNode stats = UnitMake(itemLevel, MULTIPLIER);
-			double minValue = -1.0;
-			double maxValue = -1.0;
-			// TODO
-			// switch (itemSubType)
-			// {
-			// 	case Item.WorldTypes.HEALING:
-			// 		minValue = stats.hpMax * 0.3;
-			// 		maxValue = minValue * 1.25;
-			// 		break;
-			// 	case Item.WorldTypes.MANA:
-			// 		minValue = stats.manaMax * 0.3;
-			// 		maxValue = minValue * 1.25;
-			// 		break;
-			// 	case Item.WorldTypes.STAMINA:
-			// 		minValue = stats.stamina * 0.5;
-			// 		break;
-			// 	case Item.WorldTypes.INTELLECT:
-			// 		minValue = stats.intellect * 0.5;
-			// 		break;
-			// 	case Item.WorldTypes.AGILITY:
-			// 		minValue = stats.agility * 0.5;
-			// 		break;
-			// 	case Item.WorldTypes.STRENGTH:
-			// 		minValue = (stats.minDamage + stats.maxDamage) * 0.5;
-			// 		break;
-			// 	case Item.WorldTypes.DEFENSE:
-			// 		minValue = (double)itemLevel;
-			// 		break;
-			// 	default:
-			// 		switch (itemType)
-			// 		{
-			// 			case Item.WorldTypes.ARMOR:
-			// 				minValue = (double)itemLevel;
-			// 				break;
-			// 			case Item.WorldTypes.WEAPON:
-			// 				minValue = stats.minDamage;
-			// 				maxValue = stats.maxDamage;
-			// 				break;
-			// 			case Item.WorldTypes.FOOD:
-			// 				maxValue = stats.hpMax * 0.09375;
-			// 				minValue = maxValue * 0.5;
-			// 				break;
-			// 		}
-			// 		break;
-			// }
-			// minValue = Math.Round(minValue);
-			// maxValue = Math.Round(maxValue);
-			return new Tuple<int, int>((int)minValue, (int)maxValue);
-		}
+		// public static Tuple<int, int> GetItemStats(int itemLevel, WorldObject.WorldTypes itemType, WorldObject.WorldTypes itemSubType)
+		// {
+		// CharacterStatsNode stats = UnitMake(itemLevel, MULTIPLIER);
+		// double minValue = -1.0;
+		// double maxValue = -1.0;
+		// TODO
+		// switch (itemSubType)
+		// {
+		// 	case Item.WorldTypes.HEALING:
+		// 		minValue = stats.hpMax * 0.3;
+		// 		maxValue = minValue * 1.25;
+		// 		break;
+		// 	case Item.WorldTypes.MANA:
+		// 		minValue = stats.manaMax * 0.3;
+		// 		maxValue = minValue * 1.25;
+		// 		break;
+		// 	case Item.WorldTypes.STAMINA:
+		// 		minValue = stats.stamina * 0.5;
+		// 		break;
+		// 	case Item.WorldTypes.INTELLECT:
+		// 		minValue = stats.intellect * 0.5;
+		// 		break;
+		// 	case Item.WorldTypes.AGILITY:
+		// 		minValue = stats.agility * 0.5;
+		// 		break;
+		// 	case Item.WorldTypes.STRENGTH:
+		// 		minValue = (stats.minDamage + stats.maxDamage) * 0.5;
+		// 		break;
+		// 	case Item.WorldTypes.DEFENSE:
+		// 		minValue = (double)itemLevel;
+		// 		break;
+		// 	default:
+		// 		switch (itemType)
+		// 		{
+		// 			case Item.WorldTypes.ARMOR:
+		// 				minValue = (double)itemLevel;
+		// 				break;
+		// 			case Item.WorldTypes.WEAPON:
+		// 				minValue = stats.minDamage;
+		// 				maxValue = stats.maxDamage;
+		// 				break;
+		// 			case Item.WorldTypes.FOOD:
+		// 				maxValue = stats.hpMax * 0.09375;
+		// 				minValue = maxValue * 0.5;
+		// 				break;
+		// 		}
+		// 		break;
+		// }
+		// minValue = Math.Round(minValue);
+		// maxValue = Math.Round(maxValue);
+		// return new Tuple<int, int>((int)minValue, (int)maxValue);
+		// }
 		public static float GetMultiplier(string race)
 		{
 			float multiplier;

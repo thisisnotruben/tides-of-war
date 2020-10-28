@@ -1,4 +1,4 @@
-using Game.Utils;
+using Game.Util;
 using Game.Database;
 using Godot;
 namespace Game.Ui

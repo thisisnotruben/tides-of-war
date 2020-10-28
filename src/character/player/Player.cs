@@ -1,7 +1,7 @@
 using Game.Actor.Doodads;
 using Game.Ui;
-using Game.Utils;
-using Game.ItemPoto;
+using Game.Util;
+using Game.GameItem;
 using Godot;
 namespace Game.Actor
 {

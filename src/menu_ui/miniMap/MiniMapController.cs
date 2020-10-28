@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Game.Actor;
-using Game.Actor.State;
 using Godot;
 namespace Game.Ui
 {

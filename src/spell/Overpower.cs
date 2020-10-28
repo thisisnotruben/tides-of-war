@@ -1,7 +1,7 @@
 using Game.Actor;
 namespace Game.Ability
 {
-	public class Overpower : SpellProto
+	public class Overpower : Spell
 	{
 		public Overpower(Character character, string worldName) : base(character, worldName)
 		{

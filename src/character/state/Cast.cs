@@ -1,11 +1,9 @@
-using Godot;
 using Game.Ability;
-using System;
 namespace Game.Actor.State
 {
 	public class Cast : TakeDamage
 	{
-		private SpellProto spell;
+		private Spell spell;
 
 		public override void Start()
 		{
@@ -26,7 +24,7 @@ namespace Game.Actor.State
 				Map.Map.map.OccupyCell(character.GlobalPosition, false);
 			}
 		}
-		public void OnSetCastSpell(SpellProto spell) { this.spell = spell; }
+		public void OnSetCastSpell(Spell spell) { this.spell = spell; }
 
 		public void OnCastFinished(string animName)
 		{

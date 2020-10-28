@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Game.Actor.Doodads;
-using Game.Ability;
 using Game.Database;
 using Godot;
 namespace Game.Actor.State

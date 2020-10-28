@@ -2,11 +2,11 @@ using Game.Actor;
 using Game.Actor.Doodads;
 using Godot;
 using System;
-namespace Game.MissileDEP
+namespace Game.Mine
 {
 	public class LandMine : Node2D, ICombustible
 	{
-		public static PackedScene scene = (PackedScene)GD.Load("res://src/missile/LandMine.tscn");
+		public static PackedScene scene = (PackedScene)GD.Load("res://src/landMine/LandMine.tscn");
 
 		private Area2D blastCircle, body;
 		private Timer timer;

@@ -13,8 +13,7 @@ namespace Game.Map.Doodads
 				return;
 			}
 
-			string sceneMapPath = $"res://src/map/{Name}.tscn",
-				mapName = Name;
+			string sceneMapPath = $"res://src/map/{Name}.tscn";
 			if (ResourceLoader.Exists(sceneMapPath))
 			{
 				Name = Name + "-DELETE";

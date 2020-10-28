@@ -1,7 +1,6 @@
 using System;
 using Game.Actor;
 using Game.Database;
-using Godot;
 namespace Game.Ability
 {
 	public class ArcaneBolt : SpellAreaEffect

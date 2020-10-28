@@ -1,5 +1,5 @@
 using Godot;
-namespace Game.Utils
+namespace Game.Util
 {
 	public class Speaker : AudioStreamPlayer
 	{
