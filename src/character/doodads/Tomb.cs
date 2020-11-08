@@ -5,8 +5,6 @@ namespace Game.Actor.Doodads
 {
 	public class Tomb : Node2D
 	{
-		public static readonly PackedScene scene = (PackedScene)GD.Load("res://src/character/doodads/Tomb.tscn");
-
 		private Player deceasedPlayer;
 		private Tween tween;
 		private Area2D sight;

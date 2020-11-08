@@ -16,16 +16,19 @@ namespace Game.GameItem
 		private Timer useTimer = new Timer(), durTimer = new Timer();
 		private int useCount = 0;
 
-		public Commodity(Character character, string worldName)
+		public override void _Ready()
+		{
+			durTimer.OneShot = true;
+			AddChild(useTimer);
+			AddChild(durTimer);
+			durTimer.Connect("timeout", this, nameof(Exit));
+		}
+		public virtual Commodity Init(Character character, string worldName)
 		{
 			this.worldName = worldName;
 			this.character = character;
 			modifiers = CreateModifiers();
-		}
-		public override void _Ready()
-		{
-			durTimer.OneShot = true;
-			durTimer.Connect("timeout", this, nameof(Exit));
+			return this;
 		}
 		private static ModUseDB.ModifierNode[] GetModifiers(string worldName)
 		{

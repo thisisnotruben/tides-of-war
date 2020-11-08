@@ -1,10 +1,13 @@
 using Game.Actor;
+using Game.GameItem;
 namespace Game.Ability
 {
 	public class Overpower : Spell
 	{
-		public Overpower(Character character, string worldName) : base(character, worldName)
+		public override Commodity Init(Character character, string worldName)
 		{
+			base.Init(character, worldName);
+
 			Stats.AttackTableNode attackTable;
 			attackTable.hit = 90;
 			attackTable.critical = 100;
@@ -12,6 +15,8 @@ namespace Game.Ability
 			attackTable.parry = 100;
 			attackTable.miss = 100;
 			this.attackTable = attackTable;
+
+			return this;
 		}
 	}
 }

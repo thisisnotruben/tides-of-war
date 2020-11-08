@@ -11,7 +11,15 @@ namespace Game.Factory
 
 			if (SpellDB.HasSpellMissile(spellName))
 			{
-				missile = (MissileSpell)MissileSpell.scene.Instance();
+				switch (spellName)
+				{
+					case WorldNameDB.METEOR:
+						missile = (MissileSpellOrbital)SceneDB.missileSpelOrbital.Instance();
+						break;
+					default:
+						missile = (MissileSpell)SceneDB.missileSpell.Instance();
+						break;
+				}
 				((MissileSpell)missile).Init(character, character.target, spellName);
 			}
 			else
@@ -23,7 +31,7 @@ namespace Game.Factory
 		}
 		public static Missile CreateMissile(Character character)
 		{
-			Missile missile = (Missile)Missile.scene.Instance();
+			Missile missile = (Missile)SceneDB.missile.Instance();
 			missile.Init(character, character.target);
 			return missile;
 		}

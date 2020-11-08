@@ -37,20 +37,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 3, 5 ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "Cast"
-} ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_local_to_scene = true
@@ -111,9 +97,9 @@ offset = Vector2( 0, -2 )
 __meta__ = {
 "_editor_description_": ""
 }
-[connection signal="pressed" from="select" to="." method="_OnSelectPressed"]
 [connection signal="mouse_entered" from="area" to="." method="_OnAreaMouseEnteredExited" binds= [ true ]]
 [connection signal="mouse_exited" from="area" to="." method="_OnAreaMouseEnteredExited" binds= [ false ]]
 [connection signal="area_entered" from="sight" to="." method="_OnCharacterEnteredSight"]
 [connection signal="area_exited" from="sight" to="." method="_OnCharacterExitedSight"]
 [connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]
+[connection signal="pressed" from="select" to="." method="_OnSelectPressed"]

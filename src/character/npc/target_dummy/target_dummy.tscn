@@ -37,20 +37,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 3, 5 ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "Cast"
-} ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_local_to_scene = true
@@ -127,19 +113,16 @@ radius = 6.0
 [node name="target_dummy" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="anim" parent="." index="1"]
+[node name="anim" parent="." index="2"]
 anims/attacking = SubResource( 1 )
 anims/casting = SubResource( 2 )
 anims/dying = SubResource( 3 )
 anims/moving = SubResource( 4 )
 
-[node name="head" parent="." index="4"]
+[node name="head" parent="." index="3"]
 position = Vector2( 0, -26 )
 
-[node name="ray" parent="." index="6"]
-visible = false
-
-[node name="img" parent="." index="7"]
+[node name="img" parent="." index="5"]
 use_parent_material = false
 position = Vector2( 0, -16 )
 texture = ExtResource( 3 )
@@ -152,5 +135,5 @@ shape = SubResource( 5 )
 position = Vector2( -12.5, -17.5 )
 shape = SubResource( 6 )
 
-[node name="sight" parent="." index="9"]
+[node name="sight" parent="." index="7"]
 visible = false

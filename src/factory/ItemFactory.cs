@@ -6,7 +6,7 @@ namespace Game.Factory
 	{
 		protected override Commodity CreateCommodity(Character character, string worldName)
 		{
-			return new Item(character, worldName);
+			return new Item().Init(character, worldName);
 		}
 	}
 }

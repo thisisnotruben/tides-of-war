@@ -1,11 +1,8 @@
-using Game.Actor;
 using Game.Actor.Doodads;
 namespace Game.Ability
 {
 	public class SiphonMana : Spell
 	{
-		public SiphonMana(Character character, string worldName) : base(character, worldName) { }
-
 		public override void Start()
 		{
 			base.Start();

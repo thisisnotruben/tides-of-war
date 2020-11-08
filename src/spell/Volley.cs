@@ -1,4 +1,3 @@
-using Game.Actor;
 using Game.Actor.State;
 namespace Game.Ability
 {
@@ -6,7 +5,6 @@ namespace Game.Ability
 	{
 		private int hit = 3;
 
-		public Volley(Character character, string worldName) : base(character, worldName) { }
 		public override void _Ready()
 		{
 			base._Ready();

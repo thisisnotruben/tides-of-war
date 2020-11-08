@@ -7,7 +7,6 @@ namespace Game.Ability
 	{
 		private readonly Random rand = new Random();
 
-		public ArcaneBolt(Character character, string worldName) : base(character, worldName) { }
 		protected override void StartAreaEffect(Character character)
 		{
 			if (50 >= rand.Next(1, 101))

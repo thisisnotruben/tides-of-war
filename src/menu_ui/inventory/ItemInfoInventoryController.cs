@@ -178,8 +178,7 @@ namespace Game.Ui
 			EmitSignal(nameof(RefreshSlots));
 
 			// instance treasure chest
-			PackedScene treasureChestScene = (PackedScene)TreasureChest.scene;
-			TreasureChest treasureChest = (TreasureChest)treasureChestScene.Instance();
+			TreasureChest treasureChest = (TreasureChest)SceneDB.treasureChest.Instance();
 			treasureChest.Init(pickableWorldName);
 
 			// place treasure chest in map

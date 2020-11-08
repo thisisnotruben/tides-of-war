@@ -4,8 +4,6 @@ namespace Game.Projectile
 {
 	public class Missile : Node2D
 	{
-		public static PackedScene scene = (PackedScene)GD.Load("res://src/missile/Missile.tscn");
-
 		protected Tween tween;
 		protected AnimationPlayer anim;
 		protected Sprite img;
@@ -17,7 +15,7 @@ namespace Game.Projectile
 		protected bool hit;
 
 		[Signal] public delegate void OnHit();
-		protected delegate void MoveBehavior();
+		protected delegate void MoveBehavior(float delta);
 		protected MoveBehavior moveBehavior;
 		protected MoveBehavior moveMissile;
 
@@ -29,23 +27,23 @@ namespace Game.Projectile
 			hitbox = GetNode<Area2D>("hitbox");
 			hitboxBody = hitbox.GetNode<CollisionShape2D>("body");
 		}
-		public void Init(Character character, Character target)
+		public virtual void Init(Character character, Character target)
 		{
 			this.character = character;
 			targetHitBox = target.hitBox;
 
 			spawnPos = GlobalPosition = character.missileSpawnPos.GlobalPosition;
 
-			moveBehavior = () =>
-			{
-				if (!hit)
-				{
-					LookAt(target.pos);
-				}
-				MoveMissile(GlobalPosition, target.pos);
-			};
+			moveBehavior = (float delta) =>
+		   {
+			   if (!hit)
+			   {
+				   LookAt(target.pos);
+			   }
+			   MoveMissile(GlobalPosition, target.pos);
+		   };
 		}
-		public override void _Process(float delta) { moveBehavior?.Invoke(); }
+		public override void _PhysicsProcess(float delta) { moveBehavior?.Invoke(delta); }
 		protected virtual void MoveMissile(Vector2 startPos, Vector2 targetPos)
 		{
 			tween.StopAll();

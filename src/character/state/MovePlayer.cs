@@ -1,4 +1,5 @@
 using Godot;
+using Game.Database;
 using Game.Ui;
 namespace Game.Actor.State
 {
@@ -59,7 +60,7 @@ namespace Game.Actor.State
 
 			// set cursor animation
 			EmitSignal(nameof(PositionChanged));
-			MoveCursorController cursor = (MoveCursorController)MoveCursorController.scene.Instance();
+			MoveCursorController cursor = (MoveCursorController)SceneDB.moveCursor.Instance();
 			Connect(nameof(PositionChanged), cursor, nameof(MoveCursorController.Delete));
 			cursor.AddToMap(Map.Map.map.GetGridPosition(desiredPosition));
 		}

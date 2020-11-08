@@ -8,33 +8,43 @@ namespace Game.Factory
 	{
 		protected override Commodity CreateCommodity(Character character, string worldName)
 		{
+			Spell spell = null;
+
 			switch (worldName)
 			{
 				case WorldNameDB.ARCANE_BOLT:
-					return new ArcaneBolt(character, worldName);
+					spell = (ArcaneBolt)SceneDB.arcaneBoltAreaEffect.Instance();
+					break;
 				case WorldNameDB.BASH:
-					return new Bash(character, worldName);
+					spell = new Bash();
+					break;
 				case WorldNameDB.EXPLOSIVE_TRAP:
-					return new ExplosiveTrap(character, worldName);
-				case WorldNameDB.METEOR:
-					return new Meteor(character, worldName);
+					spell = new ExplosiveTrap();
+					break;
 				case WorldNameDB.OVERPOWER:
-					return new Overpower(character, worldName);
+					spell = new Overpower();
+					break;
 				case WorldNameDB.SIPHON_MANA:
-					return new SiphonMana(character, worldName);
+					spell = new SiphonMana();
+					break;
 				case WorldNameDB.STOMP:
-					return new Stomp(character, worldName);
+					spell = (Stomp)SceneDB.stompAreaEffect.Instance();
+					break;
 				case WorldNameDB.VOLLEY:
-					return new Volley(character, worldName);
+					spell = new Volley();
+					break;
+				default:
+					if (SpellDB.HasSpell(worldName))
+					{
+						spell = AreaEffectDB.HasAreaEffect(worldName)
+							? (SpellAreaEffect)SceneDB.spellAreaEffect.Instance()
+							: new Spell();
+					}
+					break;
 			}
 
-			if (SpellDB.HasSpell(worldName))
-			{
-				return AreaEffectDB.HasAreaEffect(worldName)
-					? new SpellAreaEffect(character, worldName)
-					: new Spell(character, worldName);
-			}
-			return null;
+			spell?.Init(character, worldName);
+			return spell;
 		}
 	}
 }

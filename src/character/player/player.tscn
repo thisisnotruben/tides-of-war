@@ -37,20 +37,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 3, 5 ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "Cast"
-} ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_local_to_scene = true
@@ -100,10 +86,10 @@ anims/attacking = SubResource( 1 )
 anims/casting = SubResource( 2 )
 anims/moving = SubResource( 3 )
 
-[node name="camera" parent="." index="5"]
+[node name="camera" parent="." index="4"]
 current = true
 
-[node name="area" parent="." index="7"]
+[node name="area" parent="." index="6"]
 collision_layer = 18
 collision_mask = 2
 

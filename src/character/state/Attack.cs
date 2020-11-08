@@ -127,7 +127,7 @@ namespace Game.Actor.State
 			{
 				Missile missile = MissileFactory.CreateMissile(character, spell?.worldName ?? string.Empty);
 
-				if (spell != null && missile! is MissileSpell && SpellDB.HasSpellEffect(spell.worldName))
+				if (spell != null && !(missile is MissileSpell) && SpellDB.HasSpellEffect(spell.worldName))
 				{
 					InstancSpellEffect(spell.worldName, character.target);
 				}
@@ -314,13 +314,11 @@ namespace Game.Actor.State
 					switch (spellType)
 					{
 						case SpellDB.SpellTypes.HIT_HOSTILE:
-							character.target.AddChild(spell);
-							spell.Owner = character.target;
+							character.target.CallDeferred("add_child", spell);
 							break;
 						default:
 							// MOD_HOSTILE || MOD_FRIENDLY
-							character.AddChild(spell);
-							spell.Owner = character;
+							character.CallDeferred("add_child", spell);
 							break;
 					}
 					return;

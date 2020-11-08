@@ -6,8 +6,6 @@ namespace Game.Mine
 {
 	public class LandMine : Node2D, ICombustible
 	{
-		public static PackedScene scene = (PackedScene)GD.Load("res://src/landMine/LandMine.tscn");
-
 		private Area2D blastCircle, body;
 		private Timer timer;
 		private Tween tween;

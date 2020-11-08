@@ -4,8 +4,6 @@ namespace Game.Actor.Doodads
 {
 	public class CombatText : Node2D
 	{
-		public static readonly PackedScene scene = (PackedScene)GD.Load("res://src/character/doodads/CombatText.tscn");
-
 		public enum TextType : byte { XP, GOLD, CRITICAL, MANA, DODGE, PARRY, MISS, HIT }
 		private const float TIME = 1.1f, DISTANCE = 12.0f;
 

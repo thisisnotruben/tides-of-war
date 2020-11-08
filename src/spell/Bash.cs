@@ -1,10 +1,8 @@
 using Game.Actor.State;
-using Game.Actor;
 namespace Game.Ability
 {
 	public class Bash : Spell
 	{
-		public Bash(Character character, string worldName) : base(character, worldName) { }
 		public override void Start()
 		{
 			base.Start();
@@ -18,5 +16,4 @@ namespace Game.Ability
 			character.fsm.RevertState();
 		}
 	}
-
 }

@@ -6,8 +6,6 @@ namespace Game.Projectile
 {
 	public class MissileSpell : Missile
 	{
-		public new static PackedScene scene = (PackedScene)GD.Load("res://src/missile/MissileSpell.tscn");
-
 		private Timer timer;
 		protected string spellWorldName = string.Empty;
 
@@ -24,7 +22,7 @@ namespace Game.Projectile
 				hitboxBody.Shape = spellMissileData.hitBox;
 			}
 		}
-		public void Init(Character character, Character target, string spellWorldName)
+		public virtual void Init(Character character, Character target, string spellWorldName)
 		{
 			this.spellWorldName = spellWorldName ?? string.Empty;
 
@@ -34,7 +32,7 @@ namespace Game.Projectile
 			{
 				SpellDB.SpellMissileData spellMissileData = SpellDB.GetSpellMissileData(spellWorldName);
 
-				moveBehavior = () =>
+				moveBehavior = (float delta) =>
 				{
 					if (!hit && spellMissileData.rotate)
 					{
@@ -44,10 +42,7 @@ namespace Game.Projectile
 					MoveMissile(GlobalPosition, target.pos);
 				};
 			}
-			InstanceSpellEffect(target);
-		}
-		protected void InstanceSpellEffect(Character target)
-		{
+
 			if (SpellDB.HasSpellEffect(spellWorldName))
 			{
 				SpellEffect spellEffect = SpellDB.GetSpellEffect(

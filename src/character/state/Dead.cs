@@ -70,7 +70,7 @@ namespace Game.Actor.State
 			if (player != null)
 			{
 				// instance tomb
-				Tomb tomb = (Tomb)Tomb.scene.Instance();
+				Tomb tomb = (Tomb)SceneDB.tomb.Instance();
 				tomb.Init(player);
 				Map.Map.map.AddZChild(tomb);
 				tomb.GlobalPosition = Map.Map.map.GetGridPosition(character.GlobalPosition);

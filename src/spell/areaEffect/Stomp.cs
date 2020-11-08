@@ -7,7 +7,6 @@ namespace Game.Ability
 	{
 		private readonly Random rand = new Random();
 
-		public Stomp(Character character, string worldName) : base(character, worldName) { }
 		protected override void StartAreaEffect(Character character)
 		{
 			base.StartAreaEffect(character);

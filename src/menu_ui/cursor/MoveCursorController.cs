@@ -3,8 +3,6 @@ namespace Game.Ui
 {
 	public class MoveCursorController : Node2D
 	{
-		public static readonly PackedScene scene = (PackedScene)GD.Load("res://src/menu_ui/cursor/MoveCursorView.tscn");
-
 		public void AddToMap(Vector2 globalTilePosition)
 		{
 			Map.Map.map.GetNode("ground").AddChild(this);

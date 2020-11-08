@@ -179,7 +179,7 @@ namespace Game.Actor
 		public void OnAttacked(Character whosAttacking) { fsm.OnAttacked(whosAttacking); }
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
-			CombatText combatText = (CombatText)CombatText.scene.Instance();
+			CombatText combatText = (CombatText)SceneDB.combatText.Instance();
 			combatTextHandler.AddChild(combatText);
 			combatText.Init(text, textType, img.Position);
 			combatTextHandler.AddCombatText(combatText);
@@ -195,7 +195,7 @@ namespace Game.Actor
 			// called from 'moving' animation
 			if (!dead)
 			{
-				FootStep footStep = (FootStep)FootStep.scene.Instance();
+				FootStep footStep = (FootStep)SceneDB.footStep.Instance();
 				Vector2 stepPos = GlobalPosition;
 				stepPos.y -= 3;
 				stepPos.x += (rightStep) ? 1.0f : -4.0f;

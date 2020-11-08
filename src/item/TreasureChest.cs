@@ -5,8 +5,6 @@ namespace Game.Loot
 {
 	public class TreasureChest : Node2D
 	{
-		public static PackedScene scene = (PackedScene)GD.Load("res://src/item/TreasureChest.tscn");
-
 		public string commodityWorldName { get; private set; }
 		private Timer timer;
 		private Tween tween;

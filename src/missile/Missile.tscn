@@ -4,7 +4,6 @@
 [ext_resource path="res://asset/img/missile-spell/arrow_big0.tres" type="Texture" id=2]
 [ext_resource path="res://asset/img/missile-spell/missileFade.tres" type="Animation" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 1.5 )
 
@@ -15,8 +14,10 @@ __meta__ = {
 }
 
 [node name="tween" type="Tween" parent="."]
+playback_process_mode = 0
 
 [node name="anim" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/missileFade = ExtResource( 3 )
 
 [node name="img" type="Sprite" parent="."]

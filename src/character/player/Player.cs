@@ -1,3 +1,4 @@
+using Game.Database;
 using Game.Actor.Doodads;
 using Game.Ui;
 using Game.Util;
@@ -56,7 +57,7 @@ namespace Game.Actor
 			}
 			else if (xp > 0 && xp < Stats.MAX_XP && showLabel)
 			{
-				CombatText combatText = (CombatText)CombatText.scene.Instance();
+				CombatText combatText = (CombatText)SceneDB.combatText.Instance();
 				AddChild(combatText);
 				combatText.Init($"+{xp}", CombatText.TextType.XP, img.Position);
 			}
