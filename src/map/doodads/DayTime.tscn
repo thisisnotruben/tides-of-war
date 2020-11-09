@@ -45,5 +45,4 @@ position = Vector2( 0, -1 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
 anims/SunUpDown = SubResource( 1 )
-[connection signal="timeout" from="." to="." method="_OnTimerTimeout"]
 [connection signal="animation_finished" from="anim" to="." method="_OnAnimFinished"]

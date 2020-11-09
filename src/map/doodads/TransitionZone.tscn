@@ -7,5 +7,3 @@ monitorable = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource( 1 )
-[connection signal="area_entered" from="." to="." method="_OnPlayerEntered"]
-[connection signal="area_exited" from="." to="." method="_OnPlayerExited"]

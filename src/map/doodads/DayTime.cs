@@ -9,7 +9,14 @@ namespace Game.Map.Doodads
 		private bool dayLight = true;
 		private AnimationPlayer anim;
 
-		public override void _Ready() { anim = GetNode<AnimationPlayer>("anim"); }
+		public override void _Ready()
+		{
+			if (!IsConnected("timeout", this, nameof(_OnTimerTimeout)))
+			{
+				Connect("timeout", this, nameof(_OnTimerTimeout));
+			}
+			anim = GetNode<AnimationPlayer>("anim");
+		}
 		public void _OnTimerTimeout()
 		{
 			anim.Play(ANIM_NAME, -1.0f, (dayLight) ? 1.0f : -1.0f, !dayLight);
