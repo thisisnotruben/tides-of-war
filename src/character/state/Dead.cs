@@ -3,6 +3,7 @@ using System.Linq;
 using System;
 using Game.Actor.Doodads;
 using Game.Database;
+using Game.Quest;
 using Godot;
 namespace Game.Actor.State
 {
@@ -42,13 +43,20 @@ namespace Game.Actor.State
 			character.regenTimer.Stop();
 
 			// clear targets
-			(character as Player)?.menu.ClearTarget();
-			if (character is Npc
-			&& character.target != null
-			&& character.target is Player
-			&& character.target.target == character)
+			if (character is Npc)
 			{
-				((Player)character.target).menu.ClearTarget();
+				QuestMaster.CheckQuests(character.worldName, QuestDB.QuestType.KILL, true);
+
+				if (character.target != null
+				&& character.target is Player
+				&& character.target.target == character)
+				{
+					((Player)character.target).menu.ClearTarget();
+				}
+			}
+			else
+			{
+				(character as Player)?.menu.ClearTarget();
 			}
 
 			// play death animation

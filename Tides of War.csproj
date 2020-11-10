@@ -118,8 +118,8 @@
     <Compile Include="src\factory\MissileFactory.cs" />
     <Compile Include="src\missile\MissileSpellOrbital.cs" />
     <Compile Include="src\missile\MissileSpell.cs" />
-    <Compile Include="src\quest_system\Quest.cs" />
-    <Compile Include="src\quest_system\WorldQuests.cs" />
+    <Compile Include="src\quest\QuestMaster.cs" />
+    <Compile Include="src\quest\WorldQuest.cs" />
     <Compile Include="src\spell\areaEffect\ArcaneBolt.cs" />
     <Compile Include="src\spell\Bash.cs" />
     <Compile Include="src\spell\ExplosiveTrap.cs" />

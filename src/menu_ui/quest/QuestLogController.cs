@@ -43,14 +43,15 @@ namespace Game.Ui
 			Globals.PlaySound("click1", this, speaker);
 			foreach (QuestEntryController questSlot in GetNode("s/v/s/quest_nodes").GetChildren())
 			{
-				if (questSlot.quest.state != Game.Quests.WorldQuests.QuestState.ACTIVE)
-				{
-					questSlot.Hide();
-				}
-				else
-				{
-					questSlot.Show();
-				}
+				// TODO
+				// if (questSlot.quest.state != Game.Quests.WorldQuests.QuestState.ACTIVE)
+				// {
+				// questSlot.Hide();
+				// }
+				// else
+				// {
+				questSlot.Show();
+				// }
 			}
 			_OnQuestLogNodeHide();
 		}
@@ -59,14 +60,15 @@ namespace Game.Ui
 			Globals.PlaySound("click1", this, speaker);
 			foreach (QuestEntryController questSlot in GetNode("s/v/s/quest_nodes").GetChildren())
 			{
-				if (questSlot.quest.state != Game.Quests.WorldQuests.QuestState.DELIVERED)
-				{
-					questSlot.Hide();
-				}
-				else
-				{
-					questSlot.Show();
-				}
+				// TODO
+				// if (questSlot.quest.state != Game.Quests.WorldQuests.QuestState.DELIVERED)
+				// {
+				// 	questSlot.Hide();
+				// }
+				// else
+				// {
+				questSlot.Show();
+				// }
 			}
 			_OnQuestLogNodeHide();
 		}
