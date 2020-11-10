@@ -1,6 +1,7 @@
 using Godot;
 using Game.Actor;
 using Game.Database;
+using Game.Quest;
 namespace Game.Ui
 {
 	public class MerchantController : GameMenu
@@ -64,9 +65,10 @@ namespace Game.Ui
 		public void _OnTransaction(string CommodityName, int goldAmount, bool bought)
 		{
 			// called from ItemInfo when player buys/sells
+			bool isSpell = SpellDB.HasSpell(CommodityName);
 			if (bought)
 			{
-				if (SpellDB.HasSpell(CommodityName))
+				if (isSpell)
 				{
 					playerSpellBook.AddCommodity(CommodityName);
 				}
@@ -77,7 +79,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				if (SpellDB.HasSpell(CommodityName))
+				if (isSpell)
 				{
 					playerSpellBook.RemoveCommodity(CommodityName);
 				}
@@ -86,6 +88,12 @@ namespace Game.Ui
 					playerInventory.RemoveCommodity(CommodityName);
 				}
 			}
+
+			QuestMaster.CheckQuests(CommodityName,
+				isSpell
+					? QuestDB.QuestType.LEARN
+					: QuestDB.QuestType.COLLECT,
+				bought);
 
 			// add/sub gold
 			player.gold += goldAmount;

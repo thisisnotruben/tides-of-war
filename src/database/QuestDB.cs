@@ -9,7 +9,7 @@ namespace Game.Database
 
 		public class QuestData
 		{
-			public readonly string questName, questCompleter,
+			public readonly string questName, questGiver, questCompleter,
 				// dialogue
 				start, active, completed, delivered;
 			public readonly string[] nextQuest, reward;
@@ -17,11 +17,13 @@ namespace Game.Database
 			public readonly int goldReward;
 			public readonly Dictionary<string, ObjectiveData> objectives;
 
-			public QuestData(string questName, string questCompleter, string start, string active,
-			string completed, string delivered, string[] nextQuest, string[] reward,
-			bool keepRewardItems, int goldReward, Dictionary<string, ObjectiveData> objectives)
+			public QuestData(string questName, string questGiver, string questCompleter,
+			string start, string active, string completed, string delivered,
+			string[] nextQuest, string[] reward, bool keepRewardItems,
+			int goldReward, Dictionary<string, ObjectiveData> objectives)
 			{
 				this.questName = questName;
+				this.questGiver = questGiver;
 				this.questCompleter = questCompleter;
 				this.start = start;
 				this.active = active;
@@ -102,6 +104,7 @@ namespace Game.Database
 					reward: ContentDB.GetWorldNames((Godot.Collections.Array)dict[nameof(QuestData.reward)]),
 					keepRewardItems: (bool)dict[nameof(QuestData.keepRewardItems)],
 					goldReward: (int)dict[nameof(QuestData.goldReward)],
+					questGiver: characterName,
 					questCompleter: (string)dict[nameof(QuestData.questCompleter)],
 					start: (string)((Godot.Collections.Dictionary)dict[""])[nameof(QuestData.start)],
 					active: (string)((Godot.Collections.Dictionary)dict[""])[nameof(QuestData.active)],

@@ -1,5 +1,6 @@
 using Game.Util;
 using Game.Actor;
+using Game.Quest;
 using Game.Loot;
 using Game.Database;
 namespace Game.Ui
@@ -60,7 +61,8 @@ namespace Game.Ui
 				return;
 			}
 
-			bool interactable = !npc.enemy && ContentDB.HasContent(npc.Name)
+			bool interactable = !npc.enemy &&
+				(ContentDB.HasContent(npc.Name) || QuestMaster.HasQuestOrQuestExtraContent(npc.worldName, npc.Name))
 				&& 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
 
 			if (hudControlController.targetStatus.IsCharacterConnected(npc))

@@ -2,6 +2,7 @@ using Godot;
 using Game.Actor;
 using Game.Loot;
 using Game.Database;
+using Game.Quest;
 namespace Game.Ui
 {
 	public class MainMenuController : GameMenu
@@ -93,6 +94,7 @@ namespace Game.Ui
 				}
 				else
 				{
+					QuestMaster.CheckQuests(lootChest.commodityWorldName, QuestDB.QuestType.LEARN, true);
 					playerSpellBook.AddCommodity(lootChest.commodityWorldName);
 					lootChest.Collect();
 				}
@@ -107,6 +109,7 @@ namespace Game.Ui
 				}
 				else
 				{
+					QuestMaster.CheckQuests(lootChest.commodityWorldName, QuestDB.QuestType.COLLECT, true);
 					playerInventory.AddCommodity(lootChest.commodityWorldName);
 					lootChest.Collect();
 				}

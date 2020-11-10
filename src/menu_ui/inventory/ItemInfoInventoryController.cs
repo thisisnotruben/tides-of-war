@@ -2,6 +2,7 @@ using Game.Loot;
 using Game.GameItem;
 using Game.Database;
 using Game.Factory;
+using Game.Quest;
 using Godot;
 namespace Game.Ui
 {
@@ -186,6 +187,12 @@ namespace Game.Ui
 			map.AddZChild(treasureChest);
 			treasureChest.Owner = map;
 			treasureChest.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
+
+			QuestMaster.CheckQuests(pickableWorldName,
+				SpellDB.HasSpell(pickableWorldName)
+					? QuestDB.QuestType.LEARN
+					: QuestDB.QuestType.COLLECT,
+				false);
 
 			Hide();
 		}
