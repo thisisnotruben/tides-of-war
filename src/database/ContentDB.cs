@@ -43,8 +43,8 @@ namespace Game.Database
 				contentDict = (Godot.Collections.Dictionary)rawDict[characterName];
 
 				contentData.Add(characterName, new ContentData(
-					level: (int)((Single)contentDict[nameof(ContentData.level)]),
-					healerCost: (int)((Single)contentDict[nameof(ContentData.healerCost)]),
+					level: (int)(Single)contentDict[nameof(ContentData.level)],
+					healerCost: (int)(Single)contentDict[nameof(ContentData.healerCost)],
 					enemy: (bool)contentDict[nameof(ContentData.enemy)],
 					healer: (bool)contentDict[nameof(ContentData.healer)],
 					dialogue: (string)contentDict[nameof(ContentData.dialogue)],

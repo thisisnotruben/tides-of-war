@@ -11,7 +11,7 @@ namespace Game.Ui
 		private MerchantController merchantController;
 		private Label header, subHeader;
 		private RichTextLabel dialogue;
-		private Control dialogueContent;
+		private Control dialogueContent, heal, buy;
 
 		private Npc npc;
 		private WorldQuest worldQuest;
@@ -28,6 +28,9 @@ namespace Game.Ui
 			header = dialogueContent.GetNode<Label>("control/header");
 			subHeader = dialogueContent.GetNode<Label>("control/sub_header");
 			dialogue = dialogueContent.GetNode<RichTextLabel>("s/text");
+
+			heal = dialogueContent.GetNode<Control>("s/v/heal");
+			buy = dialogueContent.GetNode<Control>("s/v/buy");
 		}
 		public void Init(InventoryModel playerInventory, InventoryModel playerSpellBook)
 		{
@@ -47,33 +50,37 @@ namespace Game.Ui
 				ContentDB.ContentData contentData = ContentDB.GetContentData(npc.Name);
 
 				subHeader.Text = "Healer cost: " + contentData.healerCost;
-				subHeader.Visible = player.hp < player.stats.hpMax.valueI;
-
 				dialogue.BbcodeText = contentData.dialogue;
 
-				dialogueContent.GetNode<Control>("s/v/heal").Visible = subHeader.Visible;
-				dialogueContent.GetNode<Control>("s/v/buy").Visible = contentData.merchandise.Length > 0;
+				subHeader.Visible = player.hp < player.stats.hpMax.valueI;
+				heal.Visible = subHeader.Visible;
+				buy.Visible = contentData.merchandise.Length > 0;
+			}
+			else
+			{
+				subHeader.Hide();
+				heal.Hide();
+				buy.Hide();
 			}
 
-			if (QuestMaster.TryGetActiveQuest(npc.Name, true, out worldQuest) && worldQuest.IsCompleted())
+			if (QuestMaster.TryGetQuest(npc.GetPath(), out worldQuest, true) && worldQuest.IsCompleted())
 			{
-				// quest completed
 				dialogue.Text = worldQuest.quest.completed;
 			}
-			else if (QuestMaster.TryGetActiveQuest(npc.Name, false, out worldQuest))
+			else if (QuestMaster.TryGetQuest(npc.GetPath(), out worldQuest))
 			{
-				// quest active
-				dialogue.Text = worldQuest.quest.active;
-			}
-			else if (QuestMaster.TryGetAvailableQuest(npc.Name, out worldQuest))
-			{
-				// quest available
-				dialogue.Text = worldQuest.quest.start;
-			}
-			else if (QuestMaster.TryGetCompletedQuest(npc.Name, out worldQuest))
-			{
-				// quest turned-in
-				dialogue.Text = worldQuest.quest.delivered;
+				switch (worldQuest.status)
+				{
+					case QuestMaster.QuestStatus.ACTIVE:
+						dialogue.Text = worldQuest.quest.active;
+						break;
+					case QuestMaster.QuestStatus.AVAILABLE:
+						dialogue.Text = worldQuest.quest.available;
+						break;
+					case QuestMaster.QuestStatus.COMPLETED:
+						dialogue.Text = worldQuest.quest.delivered;
+						break;
+				}
 			}
 
 			QuestDB.ExtraContentData extraContentData;
@@ -84,9 +91,8 @@ namespace Game.Ui
 					dialogue.BbcodeText = extraContentData.dialogue;
 				}
 
-				if (!QuestMaster.HasTalkedTo(npc.GetPath(), npc.worldName))
+				if (!QuestMaster.HasTalkedTo(npc.GetPath(), npc.worldName, extraContentData))
 				{
-					// TODO: reward
 					if (extraContentData.gold > 0)
 					{
 						player.gold += extraContentData.gold;
@@ -126,7 +132,7 @@ namespace Game.Ui
 
 				// hide label/buttons since already healed
 				subHeader.Hide();
-				GetNode<Control>("s/s/v/heal").Hide();
+				heal.Hide();
 			}
 		}
 		public void _OnBuyPressed()

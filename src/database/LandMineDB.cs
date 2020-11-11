@@ -54,11 +54,11 @@ namespace Game.Database
 					img: dict[nameof(LandMineData.img)] == null ? null
 						: GD.Load<Texture>(string.Format(filePath, (string)dict[nameof(LandMineData.img)])),
 					sound: (string)dict[nameof(LandMineData.sound)],
-					minDamage: (int)((Single)dict[nameof(LandMineData.minDamage)]),
-					maxDamage: (int)((Single)dict[nameof(LandMineData.maxDamage)]),
-					armDelaySec: (int)((Single)dict[nameof(LandMineData.armDelaySec)]),
-					timeToDetSec: (int)((Single)dict[nameof(LandMineData.timeToDetSec)]),
-					radius: (int)((Single)dict[nameof(LandMineData.radius)])
+					minDamage: (int)(Single)dict[nameof(LandMineData.minDamage)],
+					maxDamage: (int)(Single)dict[nameof(LandMineData.maxDamage)],
+					armDelaySec: (int)(Single)dict[nameof(LandMineData.armDelaySec)],
+					timeToDetSec: (int)(Single)dict[nameof(LandMineData.timeToDetSec)],
+					radius: (int)(Single)dict[nameof(LandMineData.radius)]
 				));
 			}
 

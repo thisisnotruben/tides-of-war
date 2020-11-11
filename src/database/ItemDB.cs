@@ -48,14 +48,14 @@ namespace Game.Database
 				// add to cache
 				itemData.Add(itemName, new ItemData(
 					type: (ItemType)Enum.Parse(typeof(ItemType), (string)dict[nameof(ItemData.type)]),
-					icon: IconDB.GetIcon((int)((Single)dict[nameof(ItemData.icon)])),
-					level: (int)((Single)dict[nameof(ItemData.level)]),
-					goldCost: (int)((Single)dict[nameof(ItemData.goldCost)]),
+					icon: IconDB.GetIcon((int)(Single)dict[nameof(ItemData.icon)]),
+					level: (int)(Single)dict[nameof(ItemData.level)],
+					goldCost: (int)(Single)dict[nameof(ItemData.goldCost)],
 					blurb: (string)dict[nameof(ItemData.blurb)],
 					subType: (string)dict[nameof(ItemData.subType)],
 					material: (string)dict[nameof(ItemData.material)],
-					stackSize: (int)((Single)dict[nameof(ItemData.stackSize)]),
-					coolDown: (int)((Single)dict[nameof(ItemData.coolDown)])
+					stackSize: (int)(Single)dict[nameof(ItemData.stackSize)],
+					coolDown: (int)(Single)dict[nameof(ItemData.coolDown)]
 				));
 			}
 		}

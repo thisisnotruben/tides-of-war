@@ -60,7 +60,7 @@ namespace Game.Database
 					enemy: (bool)dict[nameof(UnitData.enemy)],
 					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1]),
 					path: path,
-					level: (int)((Single)dict[nameof(UnitData.level)])
+					level: (int)(Single)dict[nameof(UnitData.level)]
 				));
 			}
 		}

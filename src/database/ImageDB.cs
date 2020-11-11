@@ -43,9 +43,9 @@ namespace Game.Database
 			{
 				dict = (Godot.Collections.Dictionary)rawDict[imgName];
 
-				moving = (int)((Single)dict[nameof(ImageData.moving)]);
-				dying = (int)((Single)dict[nameof(ImageData.dying)]);
-				attacking = (int)((Single)dict[nameof(ImageData.attacking)]);
+				moving = (int)(Single)dict[nameof(ImageData.moving)];
+				dying = (int)(Single)dict[nameof(ImageData.dying)];
+				attacking = (int)(Single)dict[nameof(ImageData.attacking)];
 
 				imageData.Add(imgName, new ImageData(
 					total: moving + dying + attacking,

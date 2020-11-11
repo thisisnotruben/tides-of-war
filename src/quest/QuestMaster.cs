@@ -7,22 +7,38 @@ namespace Game.Quest
 	public static class QuestMaster
 	{
 		public enum QuestStatus : byte { UNAVAILABLE, AVAILABLE, ACTIVE, COMPLETED }
-		private static readonly List<WorldQuest> unavailableQuests = new List<WorldQuest>(),
-			availableQuests = new List<WorldQuest>(),
-			activeQuests = new List<WorldQuest>(),
-			completedQuests = new List<WorldQuest>();
+		private static readonly List<WorldQuest> quests = new List<WorldQuest>();
 
-		public static void Init(string dbPath)
+		static QuestMaster()
 		{
-			Dictionary<string, QuestDB.QuestData> questData = QuestDB.LoadQuestData(dbPath);
-			foreach (string questName in questData.Keys)
+			string path = "res://data/quest/";
+
+			Directory directory = new Directory();
+			directory.Open(path);
+			directory.ListDirBegin(true, true);
+
+			string resourceName = directory.GetNext(),
+				ext = "json";
+
+			Dictionary<string, QuestDB.QuestData> questData;
+			while (!resourceName.Empty())
 			{
-				unavailableQuests.Add(new WorldQuest(questData[questName]));
+				if (resourceName.Extension().Equals(ext))
+				{
+					questData = QuestDB.LoadQuestData(path.PlusFile(resourceName));
+					foreach (string questName in questData.Keys)
+					{
+						quests.Add(new WorldQuest(questData[questName]));
+					}
+				}
+				resourceName = directory.GetNext();
 			}
+			directory.ListDirEnd();
 		}
-		private static bool TryGetQuest(string questName, List<WorldQuest> questHolder, out WorldQuest worldQuest)
+		public static void Init() { }
+		private static bool TryGetQuestByName(string questName, out WorldQuest worldQuest)
 		{
-			foreach (WorldQuest q in questHolder)
+			foreach (WorldQuest q in quests)
 			{
 				if (questName.Equals(q.quest.questName))
 				{
@@ -35,37 +51,46 @@ namespace Game.Quest
 		}
 		public static void CheckQuests(string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
 		{
-			activeQuests.ForEach(q => q.UpdateQuest(objectiveName, questType, countTowardsObjective));
+			quests.ForEach(q =>
+			{
+				if (q.status == QuestStatus.ACTIVE)
+				{
+					q.UpdateQuest(objectiveName, questType, countTowardsObjective);
+				}
+			});
 		}
 		public static void CheckQuests(NodePath characterPath, string objectiveName, QuestDB.QuestType questType)
 		{
-			activeQuests.ForEach(q => q.UpdateQuest(characterPath, objectiveName, questType, true));
+			quests.ForEach(q =>
+			{
+				if (q.status == QuestStatus.ACTIVE)
+				{
+					q.UpdateQuest(characterPath, objectiveName, questType, true);
+				}
+			});
 		}
 		public static void ActivateQuest(string questName)
 		{
 			WorldQuest worldQuest;
-			if (TryGetQuest(questName, availableQuests, out worldQuest))
+			if (TryGetQuestByName(questName, out worldQuest))
 			{
-				availableQuests.Remove(worldQuest);
-				activeQuests.Add(worldQuest);
+				worldQuest.status = QuestStatus.ACTIVE;
 			}
 		}
 		public static void CompleteQuest(string questName)
 		{
 			WorldQuest worldQuest;
-			if (TryGetQuest(questName, activeQuests, out worldQuest) && worldQuest.IsCompleted())
+			if (TryGetQuestByName(questName, out worldQuest) && worldQuest.IsCompleted())
 			{
-				activeQuests.Remove(worldQuest);
-				completedQuests.Add(worldQuest);
+				worldQuest.status = QuestStatus.COMPLETED;
 
 				// move all chained quests to available status
 				WorldQuest chainedQuest;
 				foreach (string chainedQuestName in worldQuest.quest.nextQuest)
 				{
-					if (TryGetQuest(chainedQuestName, unavailableQuests, out chainedQuest))
+					if (TryGetQuestByName(chainedQuestName, out chainedQuest))
 					{
-						unavailableQuests.Remove(chainedQuest);
-						availableQuests.Add(chainedQuest);
+						chainedQuest.status = QuestStatus.AVAILABLE;
 					}
 				}
 			}
@@ -73,15 +98,16 @@ namespace Game.Quest
 		public static bool TurnInItems(string questName, InventoryModel playerInventory)
 		{
 			WorldQuest worldQuest;
-			TryGetQuest(questName, completedQuests, out worldQuest);
+			TryGetQuestByName(questName, out worldQuest);
 			worldQuest?.TurnInItems(playerInventory);
 			return worldQuest != null;
 		}
 		public static bool TryGetExtraQuestContent(string characterWorldName, out QuestDB.ExtraContentData extraContentData)
 		{
-			foreach (WorldQuest worldQuest in activeQuests)
+			foreach (WorldQuest worldQuest in quests)
 			{
-				if (worldQuest.quest.objectives.ContainsKey(characterWorldName))
+				if (worldQuest.status == QuestStatus.ACTIVE
+				&& worldQuest.quest.objectives.ContainsKey(characterWorldName))
 				{
 					extraContentData = worldQuest.quest.objectives[characterWorldName].extraContent;
 					return true;
@@ -90,22 +116,26 @@ namespace Game.Quest
 			extraContentData = null;
 			return false;
 		}
-		public static bool HasTalkedTo(NodePath characterPath, string characterWorldName)
+		public static bool HasTalkedTo(NodePath characterPath, string characterWorldName, QuestDB.ExtraContentData extraContentData)
 		{
-			foreach (WorldQuest worldQuest in activeQuests)
+			foreach (WorldQuest worldQuest in quests)
 			{
-				if (worldQuest.quest.objectives.ContainsKey(characterWorldName) && worldQuest.HasCharacterPath(characterPath))
+				if (worldQuest.status == QuestStatus.ACTIVE
+				&& worldQuest.quest.objectives.ContainsKey(characterWorldName)
+				&& worldQuest.quest.objectives[characterWorldName].extraContent == extraContentData
+				&& worldQuest.HasCharacterPath(characterPath))
 				{
 					return true;
 				}
 			}
 			return false;
 		}
-		public static bool TryGetAvailableQuest(string characterEditorName, out WorldQuest quest)
+		public static bool TryGetQuest(NodePath characterPath, out WorldQuest quest, bool questCompleter = false)
 		{
-			foreach (WorldQuest worldQuest in availableQuests)
+			foreach (WorldQuest worldQuest in quests)
 			{
-				if (worldQuest.quest.questGiver.Equals(characterEditorName))
+				if ((questCompleter && worldQuest.quest.questCompleter.Equals(characterPath) && worldQuest.status == QuestStatus.ACTIVE)
+				|| (!questCompleter && worldQuest.quest.questGiver.Equals(characterPath)))
 				{
 					quest = worldQuest;
 					return true;
@@ -114,49 +144,10 @@ namespace Game.Quest
 			quest = null;
 			return false;
 		}
-		public static bool TryGetActiveQuest(string characterEditorName, bool questCompleter, out WorldQuest quest)
+		public static bool HasQuestOrQuestExtraContent(string characterWorldName, NodePath characterPath)
 		{
-			foreach (WorldQuest worldQuest in activeQuests)
-			{
-				if (questCompleter)
-				{
-					if (worldQuest.quest.questCompleter.Equals(characterEditorName))
-					{
-						quest = worldQuest;
-						return true;
-					}
-				}
-				else
-				{
-					if (worldQuest.quest.questGiver.Equals(characterEditorName))
-					{
-						quest = worldQuest;
-						return true;
-					}
-				}
-			}
-			quest = null;
-			return false;
-		}
-		public static bool TryGetCompletedQuest(string characterEditorName, out WorldQuest quest)
-		{
-			foreach (WorldQuest worldQuest in completedQuests)
-			{
-				if (worldQuest.quest.questGiver.Equals(characterEditorName))
-				{
-					quest = worldQuest;
-					return true;
-				}
-			}
-			quest = null;
-			return false;
-		}
-		public static bool HasQuestOrQuestExtraContent(string characterWorldName, string characterEditorName)
-		{
-			return TryGetActiveQuest(characterEditorName, false, out _)
-			|| TryGetActiveQuest(characterEditorName, true, out _)
-			|| TryGetAvailableQuest(characterEditorName, out _)
-			|| TryGetCompletedQuest(characterEditorName, out _)
+			return TryGetQuest(characterPath, out _)
+			|| TryGetQuest(characterPath, out _, true)
 			|| TryGetExtraQuestContent(characterWorldName, out _);
 		}
 	}

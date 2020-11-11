@@ -6,6 +6,8 @@ namespace Game.Quest
 {
 	public class WorldQuest : ISerializable
 	{
+		public QuestMaster.QuestStatus status = QuestMaster.QuestStatus.UNAVAILABLE;
+
 		public readonly QuestDB.QuestData quest;
 		private readonly Dictionary<string, int> objectives = new Dictionary<string, int>();
 		private readonly List<NodePath> charactersTalkedTo = new List<NodePath>();
@@ -62,7 +64,7 @@ namespace Game.Quest
 
 			foreach (string objectiveName in quest.objectives.Keys)
 			{
-				if (!quest.objectives[objectiveName].keepWorldItems)
+				if (!quest.objectives[objectiveName].keepWorldObject)
 				{
 					playerInventory.RemoveCommodity(objectiveName);
 				}

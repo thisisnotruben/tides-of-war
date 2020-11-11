@@ -83,18 +83,18 @@ namespace Game.Database
 				spellData.Add(spellName, new SpellData(
 					icon: IconDB.GetIcon((int)((Single)dict[nameof(SpellData.icon)])),
 					type: (SpellTypes)Enum.Parse(typeof(SpellTypes), (string)dict[nameof(SpellData.type)]),
-					level: (int)((Single)dict[nameof(SpellData.level)]),
-					goldCost: (int)((Single)dict[nameof(SpellData.goldCost)]),
+					level: (int)(Single)dict[nameof(SpellData.level)],
+					goldCost: (int)(Single)dict[nameof(SpellData.goldCost)],
 					blurb: (string)dict[nameof(SpellData.blurb)],
-					range: (int)((Single)dict[nameof(SpellData.range)]),
-					coolDown: (int)((Single)dict[nameof(SpellData.coolDown)]),
+					range: (int)(Single)dict[nameof(SpellData.range)],
+					coolDown: (int)(Single)dict[nameof(SpellData.coolDown)],
 					ignoreArmor: (bool)dict[nameof(SpellData.ignoreArmor)],
 					requiresTarget: (bool)dict[nameof(SpellData.requiresTarget)],
 					spellEffect: (string)dict[nameof(SpellData.spellEffect)],
 					sound: (string)dict[nameof(SpellData.sound)],
 					characterAnim: (string)dict[nameof(SpellData.characterAnim)],
 					stackSize: 1,
-					manaCost: (int)((Single)dict[nameof(SpellData.manaCost)])
+					manaCost: (int)(Single)dict[nameof(SpellData.manaCost)]
 				));
 			}
 			return spellData;
@@ -162,7 +162,6 @@ namespace Game.Database
 		}
 		public static bool HasSpell(string nameCheck) { return spellData.ContainsKey(nameCheck); }
 		public static SpellData GetSpellData(string worldName) { return spellData[worldName]; }
-		public static string[] GetSpellNames() { return spellData.Keys.ToArray(); }
 
 		public static bool HasSpellMissile(string nameCheck) { return spellMissileData.ContainsKey(nameCheck); }
 		public static SpellMissileData GetSpellMissileData(string worldName) { return spellMissileData[worldName]; }

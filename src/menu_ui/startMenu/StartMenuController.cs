@@ -1,5 +1,6 @@
 using Game.Util;
 using Game.Database;
+using Game.Quest;
 using Godot;
 namespace Game.Ui
 {
@@ -22,6 +23,7 @@ namespace Game.Ui
 			LandMineDB.Init();
 			ModUseDB.Init();
 			SpellDB.Init();
+			QuestMaster.Init();
 		}
 		public override void _Ready()
 		{
