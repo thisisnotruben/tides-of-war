@@ -43,7 +43,7 @@ namespace Game.Ui
 		}
 		public void _OnInventoryControllerHide()
 		{
-			Globals.soundPlayer.PlaySound("merchant_close");
+			Globals.soundPlayer.PlaySound(NameDB.UI.MERCHANT_CLOSE);
 			itemInfoInventoryController.Hide();
 			GetNode<Control>("s").Show();
 		}
@@ -65,7 +65,7 @@ namespace Game.Ui
 				return;
 			}
 
-			Globals.soundPlayer.PlaySound("inventory_open");
+			Globals.soundPlayer.PlaySound(NameDB.UI.INVENTORY_OPEN);
 			GetNode<Control>("s").Hide();
 
 			itemInfoInventoryController.selectedSlotIdx = slotIndex;

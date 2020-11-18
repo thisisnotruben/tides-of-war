@@ -1,6 +1,8 @@
 using Godot;
 using Game.Database;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 namespace Game.Sound
 {
 	public class SoundPlayer : Node
@@ -9,6 +11,7 @@ namespace Game.Sound
 		private const byte INIT_PLAYERS = 10;
 
 		private List<AudioStreamPlayer> players = new List<AudioStreamPlayer>();
+		private readonly Random rand = new Random();
 
 		static SoundPlayer() { LoadSoundLibrary(PathManager.sndDir); }
 		public override void _Ready()
@@ -24,8 +27,6 @@ namespace Game.Sound
 		}
 		private static void LoadSoundLibrary(string path)
 		{
-			library.Clear();
-
 			string importExt = ".import";
 
 			Directory directory = new Directory();
@@ -51,6 +52,19 @@ namespace Game.Sound
 			}
 			directory.ListDirEnd();
 		}
+		public void PlaySoundRandomized(string soundName)
+		{
+			IEnumerable<string> soundNames =
+				from sound in library.Keys
+				where sound.Contains(soundName)
+				select sound;
+
+			if (soundNames.Any())
+			{
+				PlaySound(soundNames.ElementAt(rand.Next(soundNames.Count())));
+			}
+		}
+		public void PlaySound(string soundName, bool on) { PlaySound(soundName + (on ? "_on" : "_off")); }
 		public void PlaySound(string soundName)
 		{
 			if (!library.ContainsKey(soundName))

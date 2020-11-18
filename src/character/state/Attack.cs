@@ -124,6 +124,9 @@ namespace Game.Actor.State
 			}
 			else
 			{
+				// TODO: make constants
+				Globals.soundPlayer.PlaySoundRandomized("bow");
+
 				Missile missile = MissileFactory.CreateMissile(character, spell?.worldName ?? string.Empty);
 
 				if (spell != null && !(missile is MissileSpell) && SpellDB.HasSpellEffect(spell.worldName))
@@ -155,10 +158,8 @@ namespace Game.Actor.State
 					character.stats.minDamage.valueI,
 					character.stats.maxDamage.valueI + 1);
 
-			string soundName;
-			CombatText.TextType hitType;
-
-			ImageDB.ImageData imageData = GetImageData(character);
+			ImageDB.ImageData imageData = GetImageData(character),
+				targetImageData = GetImageData(target);
 			Stats.AttackTableNode attackTable = spell?.attackTable
 				?? Stats.ATTACK_TABLE[
 					imageData.melee
@@ -167,14 +168,15 @@ namespace Game.Actor.State
 			bool ignoreArmor = spell == null ? false
 				: SpellDB.GetSpellData(spell.worldName).ignoreArmor;
 
+			string soundName = imageData.weapon;
+			CombatText.TextType hitType;
+
 			if (diceRoll <= attackTable.hit)
 			{
-				soundName = imageData.weaponMaterial;
 				hitType = CombatText.TextType.HIT;
 			}
 			else if (diceRoll <= attackTable.critical)
 			{
-				soundName = imageData.weaponMaterial;
 				hitType = CombatText.TextType.CRITICAL;
 				damage *= 2;
 			}
@@ -184,10 +186,20 @@ namespace Game.Actor.State
 				hitType = CombatText.TextType.DODGE;
 				damage = 0;
 			}
-			else if (diceRoll <= attackTable.parry)
+			else if (diceRoll <= attackTable.parry && imageData.melee == targetImageData.melee)
 			{
-				// TODO: make sure unit/target can parry with weapon
-				soundName = imageData.weaponMaterial;
+				// TODO: make constants
+				if (imageData.weaponMaterial.Equals(targetImageData.weaponMaterial))
+				{
+					soundName = imageData.weaponMaterial.Equals("metal")
+						? "block_metal_metal"
+						: "block_wood_wood";
+				}
+				else
+				{
+					soundName = "block_metal_wood";
+				}
+
 				hitType = CombatText.TextType.PARRY;
 				damage = 0;
 			}
@@ -211,8 +223,7 @@ namespace Game.Actor.State
 				spell?.Start();
 			}
 
-			// TODO
-			Globals.soundPlayer.PlaySound(soundName);//, SoundPlayer.SoundType.RANDOM);
+			Globals.soundPlayer.PlaySoundRandomized(soundName);
 
 			if (character is Player || target is Player)
 			{

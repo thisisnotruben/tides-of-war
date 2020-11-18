@@ -1,4 +1,5 @@
 using Game.Actor.State;
+using Game.Database;
 using Godot;
 namespace Game.Actor.Doodads
 {
@@ -34,7 +35,7 @@ namespace Game.Actor.Doodads
 		}
 		public void Revive()
 		{
-			Globals.soundPlayer.PlaySound("click2");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 
 			// hide button to avoid double click
 			sight.Monitoring = false;

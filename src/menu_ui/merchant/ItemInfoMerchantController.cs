@@ -23,7 +23,7 @@ namespace Game.Ui
 		}
 		public override void _OnMovePressed(int by)
 		{
-			Globals.soundPlayer.PlaySound("click2");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 
 			// get next commodity when pressing arrows
 			selectedSlotIdx += by;
@@ -46,7 +46,7 @@ namespace Game.Ui
 		public void _OnBuyPressed()
 		{
 			RouteConnections(nameof(_OnBuyConfirm));
-			Globals.soundPlayer.PlaySound("click2");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 			GetNode<Control>("s").Hide();
 			if (SpellDB.HasSpell(pickableWorldName)
 			&& player.level < SpellDB.GetSpellData(pickableWorldName).level)
@@ -69,10 +69,10 @@ namespace Game.Ui
 		}
 		public void _OnBuyConfirm()
 		{
-			Globals.soundPlayer.PlaySound("sell_buy");
+			Globals.soundPlayer.PlaySound(NameDB.UI.SELL_BUY);
 			if (popupController.GetNode<Label>("m/yes_no/label").Text.Equals("Learn?"))
 			{
-				Globals.soundPlayer.PlaySound("learn_spell");
+				Globals.soundPlayer.PlaySound(NameDB.UI.LEARN_SPELL);
 				GetNode<Control>("s/h/buttons/buy").Hide();
 			}
 			EmitSignal(nameof(OnTransaction),
@@ -82,7 +82,7 @@ namespace Game.Ui
 		public void _OnSellPressed()
 		{
 			RouteConnections(nameof(_OnSellConfirm));
-			Globals.soundPlayer.PlaySound("click2");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 			GetNode<Control>("s").Hide();
 			popupController.GetNode<Label>("m/yes_no/label").Text = "Sell?";
 			popupController.GetNode<Control>("m/yes_no").Show();
@@ -90,7 +90,7 @@ namespace Game.Ui
 		}
 		public void _OnSellConfirm()
 		{
-			Globals.soundPlayer.PlaySound("sell_buy");
+			Globals.soundPlayer.PlaySound(NameDB.UI.SELL_BUY);
 			EmitSignal(nameof(OnTransaction),
 				pickableWorldName, PickableDB.GetGoldCost(pickableWorldName), false);
 			Hide();

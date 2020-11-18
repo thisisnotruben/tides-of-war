@@ -64,12 +64,12 @@ namespace Game.Ui
 		}
 		public void _OnUsePressed()
 		{
-			string sndName = "click2";
+			string sndName = NameDB.UI.CLICK2;
 
 			switch (ItemDB.GetItemData(pickableWorldName).type)
 			{
 				case ItemDB.ItemType.FOOD:
-					sndName = "eat";
+					sndName = NameDB.UI.EAT;
 					// cannot eat in combat
 					if (player.attacking)
 					{
@@ -81,7 +81,7 @@ namespace Game.Ui
 					}
 					break;
 				case ItemDB.ItemType.POTION:
-					sndName = "drink";
+					sndName = NameDB.UI.DRINK;
 					break;
 			}
 			Globals.soundPlayer.PlaySound(sndName);
@@ -137,7 +137,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(ItemDB.GetItemData(pickableWorldName).material + "_off");
+				Globals.soundPlayer.PlaySound(ItemDB.GetItemData(pickableWorldName).material, false);
 				// equip focused item
 				EquipItem(true, pickableWorldName);
 			}
@@ -153,13 +153,13 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound("inventory_unequip");
+				Globals.soundPlayer.PlaySound(NameDB.UI.INVENTORY_UNEQUIP);
 				EquipItem(false, pickableWorldName);
 			}
 		}
 		public void _OnDropPressed()
 		{
-			Globals.soundPlayer.PlaySound("click2");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 
 			RouteConnections(nameof(_OnDropConfirm));
 			GetNode<Control>("s").Hide();
@@ -169,10 +169,8 @@ namespace Game.Ui
 		}
 		public void _OnDropConfirm()
 		{
-			foreach (string sndName in new string[] { "click2", "inventory_drop" })
-			{
-				Globals.soundPlayer.PlaySound(sndName);
-			}
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			Globals.soundPlayer.PlaySound(NameDB.UI.INVENTORY_DROP);
 
 			// remove from inventory
 			itemList.RemoveCommodity(pickableWorldName);

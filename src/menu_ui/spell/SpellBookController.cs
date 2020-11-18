@@ -1,4 +1,5 @@
 using Game.GameItem;
+using Game.Database;
 using Godot;
 namespace Game.Ui
 {
@@ -54,11 +55,16 @@ namespace Game.Ui
 				return;
 			}
 
-			Globals.soundPlayer.PlaySound("spell_select");
+			Globals.soundPlayer.PlaySound(NameDB.UI.SPELL_SELECT);
 			GetNode<Control>("s").Hide();
 
 			itemInfoSpellController.selectedSlotIdx = slotIndex;
 			itemInfoSpellController.Display(spellBook.GetCommodity(slotIndex), true);
+		}
+		public override void _OnBackPressed()
+		{
+			Globals.soundPlayer.PlaySound(NameDB.UI.SPELL_BOOK_CLOSE);
+			Hide();
 		}
 	}
 }

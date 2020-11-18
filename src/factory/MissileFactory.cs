@@ -13,7 +13,7 @@ namespace Game.Factory
 			{
 				switch (spellName)
 				{
-					case WorldNameDB.METEOR:
+					case NameDB.Spell.METEOR:
 						missile = (MissileSpellOrbital)SceneDB.missileSpelOrbital.Instance();
 						break;
 					default:

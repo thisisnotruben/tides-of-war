@@ -38,7 +38,7 @@ namespace Game.Ui
 		public void _OnWindowClosed() { main.Show(); }
 		public void _OnNewGamePressed()
 		{
-			Globals.soundPlayer.PlaySound("click0");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK0);
 			SceneLoaderController.rootNode = GetTree().Root;
 			SceneLoaderController.Init().SetScene("res://src/map/zone_1.tscn", this);
 		}
@@ -47,7 +47,7 @@ namespace Game.Ui
 		public void _OnExitPressed() { GetTree().Quit(); }
 		private void Transition(Control scene)
 		{
-			Globals.soundPlayer.PlaySound("click1");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
 			main.Hide();
 			scene.Show();
 		}

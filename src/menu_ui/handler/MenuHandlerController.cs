@@ -28,12 +28,12 @@ namespace Game.Ui
 		}
 		public void _OnHudPausePressed()
 		{
-			Globals.soundPlayer.PlaySound("click5");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK5);
 			mainMenuController.Show();
 		}
 		public void _OnHudSpellBookPressed()
 		{
-			Globals.soundPlayer.PlaySound("click5");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK5);
 			mainMenuController.ShowSpellBook();
 		}
 		public void ConnectPlayerToHud(Player player)

@@ -235,7 +235,7 @@ namespace Game.Ui
 		}
 		public virtual void _OnMovePressed(int by)
 		{
-			Globals.soundPlayer.PlaySound("click2");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 			// update selection and display
 			selectedSlotIdx += by;
 			Display(itemList.GetCommodity(selectedSlotIdx), true);

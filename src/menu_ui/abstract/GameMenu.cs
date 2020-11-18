@@ -1,5 +1,6 @@
 using Godot;
 using Game.Actor;
+using Game.Database;
 namespace Game.Ui
 {
 	public abstract class GameMenu : Control
@@ -8,7 +9,7 @@ namespace Game.Ui
 
 		public virtual void _OnBackPressed()
 		{
-			Globals.soundPlayer.PlaySound("click3");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK3);
 			Hide();
 		}
 	}

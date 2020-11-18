@@ -71,7 +71,7 @@
     <Compile Include="src\database\SpellDB.cs" />
     <Compile Include="src\database\ImageDB.cs" />
     <Compile Include="src\database\UnitDB.cs" />
-    <Compile Include="src\database\WorldNameDB.cs" />
+    <Compile Include="src\database\NameDB.cs" />
     <Compile Include="src\global\Globals.cs" />
     <Compile Include="src\global\ISerializable.cs" />
     <Compile Include="src\global\Stats.cs" />

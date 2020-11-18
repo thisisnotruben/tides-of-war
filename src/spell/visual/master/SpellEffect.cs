@@ -64,9 +64,9 @@ namespace Game.Ability
 			// added behavior
 			switch (spellWorldName)
 			{
-				case WorldNameDB.BASH:
-				case WorldNameDB.DIVINE_HEAL:
-				case WorldNameDB.FORTIFY:
+				case NameDB.Spell.BASH:
+				case NameDB.Spell.DIVINE_HEAL:
+				case NameDB.Spell.FORTIFY:
 					AddBehavior(() => Position = character.head.Position);
 					onTimeOut = () =>
 					{
@@ -78,15 +78,15 @@ namespace Game.Ability
 					};
 					break;
 
-				case WorldNameDB.CLEAVE:
-				case WorldNameDB.DEVASTATE:
-				case WorldNameDB.HASTE:
-				case WorldNameDB.HEMORRHAGE:
-				case WorldNameDB.OVERPOWER:
+				case NameDB.Spell.CLEAVE:
+				case NameDB.Spell.DEVASTATE:
+				case NameDB.Spell.HASTE:
+				case NameDB.Spell.HEMORRHAGE:
+				case NameDB.Spell.OVERPOWER:
 					AddBehavior(() => Position = character.img.Position);
 					break;
 
-				case WorldNameDB.FRENZY:
+				case NameDB.Spell.FRENZY:
 					AddBehavior(() =>
 					{
 						Position = character.head.Position;
@@ -95,26 +95,26 @@ namespace Game.Ability
 					onTimeOut = fadeLightRoutine;
 					break;
 
-				case WorldNameDB.INTIMIDATING_SHOUT:
+				case NameDB.Spell.INTIMIDATING_SHOUT:
 					AddBehavior(() => Position = character.head.Position + new Vector2(0.0f, 6.0f));
 					onTimeOut = fadeLightRoutine;
 					break;
 
-				case WorldNameDB.MIND_BLAST:
+				case NameDB.Spell.MIND_BLAST:
 					AddBehavior(() => Position = character.head.Position);
 					break;
 
-				case WorldNameDB.SLOW:
+				case NameDB.Spell.SLOW:
 					AddBehavior(() => Position = character.img.Position);
 					onTimeOut = fadeLightRoutine;
 					break;
 
-				case WorldNameDB.ARCANE_BOLT:
-				case WorldNameDB.FIREBALL:
-				case WorldNameDB.FROST_BOLT:
-				case WorldNameDB.METEOR:
-				case WorldNameDB.SHADOW_BOLT:
-				case WorldNameDB.SIPHON_MANA:
+				case NameDB.Spell.ARCANE_BOLT:
+				case NameDB.Spell.FIREBALL:
+				case NameDB.Spell.FROST_BOLT:
+				case NameDB.Spell.METEOR:
+				case NameDB.Spell.SHADOW_BOLT:
+				case NameDB.Spell.SIPHON_MANA:
 					AddBehavior(() =>
 					{
 						Node2D bolt = idleParticles.GetNode<Node2D>("bolt");
@@ -124,9 +124,9 @@ namespace Game.Ability
 					});
 					break;
 
-				case WorldNameDB.CONCUSSIVE_SHOT:
+				case NameDB.Spell.CONCUSSIVE_SHOT:
 					// remember, bash effect can change and this with it
-					string bashName = WorldNameDB.BASH;
+					string bashName = NameDB.Spell.BASH;
 					SpellEffect bashEffect = SpellDB.GetSpellEffect(SpellDB.GetSpellData(bashName).spellEffect);
 					bashEffect.Init(character, bashName, character);
 
@@ -137,8 +137,8 @@ namespace Game.Ability
 						});
 					break;
 
-				case WorldNameDB.EXPLOSIVE_ARROW:
-				case WorldNameDB.SNIPER_SHOT:
+				case NameDB.Spell.EXPLOSIVE_ARROW:
+				case NameDB.Spell.SNIPER_SHOT:
 					AddBehavior(() => light.Show());
 					break;
 			}

@@ -12,25 +12,25 @@ namespace Game.Factory
 
 			switch (worldName)
 			{
-				case WorldNameDB.ARCANE_BOLT:
+				case NameDB.Spell.ARCANE_BOLT:
 					spell = (ArcaneBolt)SceneDB.arcaneBoltAreaEffect.Instance();
 					break;
-				case WorldNameDB.BASH:
+				case NameDB.Spell.BASH:
 					spell = new Bash();
 					break;
-				case WorldNameDB.EXPLOSIVE_TRAP:
+				case NameDB.Spell.EXPLOSIVE_TRAP:
 					spell = new ExplosiveTrap();
 					break;
-				case WorldNameDB.OVERPOWER:
+				case NameDB.Spell.OVERPOWER:
 					spell = new Overpower();
 					break;
-				case WorldNameDB.SIPHON_MANA:
+				case NameDB.Spell.SIPHON_MANA:
 					spell = new SiphonMana();
 					break;
-				case WorldNameDB.STOMP:
+				case NameDB.Spell.STOMP:
 					spell = (Stomp)SceneDB.stompAreaEffect.Instance();
 					break;
-				case WorldNameDB.VOLLEY:
+				case NameDB.Spell.VOLLEY:
 					spell = new Volley();
 					break;
 				default:

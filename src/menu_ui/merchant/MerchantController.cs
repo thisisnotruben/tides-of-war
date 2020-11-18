@@ -122,15 +122,15 @@ namespace Game.Ui
 
 			Globals.soundPlayer.PlaySound(
 				SpellDB.HasSpell(contentData.merchandise[0])
-				? "turn_page"
-				: "merchant_open"
+				? NameDB.UI.TURN_PAGE
+				: NameDB.UI.MERCHANT_OPEN
 			);
 
 			subHeader.Text = "Gold: " + player.gold;
 		}
 		public void _OnMerchantNodeHide()
 		{
-			Globals.soundPlayer.PlaySound("merchant_close");
+			Globals.soundPlayer.PlaySound(NameDB.UI.MERCHANT_CLOSE);
 			popupController.Hide();
 			merchantContent.Show();
 		}
@@ -147,16 +147,15 @@ namespace Game.Ui
 			bool isSpell = SpellDB.HasSpell(CommodityName);
 			bool alreadyHave = false;
 
-			Globals.soundPlayer.PlaySound(
-				isSpell
-				? "spell_select"
-				: Database.ItemDB.GetItemData(CommodityName).material + "_on"
-			);
-
 			if (isSpell)
 			{
-				Globals.soundPlayer.PlaySound("click1");
+				Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
+				Globals.soundPlayer.PlaySound(NameDB.UI.SPELL_SELECT);
 				alreadyHave = playerSpellBook.HasItem(CommodityName);
+			}
+			else
+			{
+				Globals.soundPlayer.PlaySound(Database.ItemDB.GetItemData(CommodityName).material, true);
 			}
 
 			// show item details and switch view
@@ -168,7 +167,7 @@ namespace Game.Ui
 		public void _OnMerchantPressed()
 		{
 			// switches to what the merchant is selling view
-			Globals.soundPlayer.PlaySound("click1");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
 			toInventoryBttn.Show();
 			toMerchantBttn.Hide();
 
@@ -180,7 +179,7 @@ namespace Game.Ui
 		public void _OnInventoryPressed()
 		{
 			// switches to what the player is selling view
-			Globals.soundPlayer.PlaySound("click1");
+			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
 			toInventoryBttn.Hide();
 			toMerchantBttn.Show();
 

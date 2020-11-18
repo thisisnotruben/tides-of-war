@@ -1,5 +1,6 @@
 using Game.Actor;
 using Game.Ui;
+using Game.Database;
 using Godot;
 namespace Game.Map.Doodads
 {
@@ -17,7 +18,6 @@ namespace Game.Map.Doodads
 				Connect("area_exited", this, nameof(_OnPlayerExited));
 			}
 		}
-
 		public void _OnPlayerEntered(Area2D area)
 		{
 			Player player = area.Owner as Player;
@@ -26,7 +26,7 @@ namespace Game.Map.Doodads
 				return;
 			}
 
-			string sceneMapPath = $"res://src/map/{Name}.tscn";
+			string sceneMapPath = string.Format(PathManager.sceneMapPath, Name);
 			if (ResourceLoader.Exists(sceneMapPath))
 			{
 				Name = Name + "-DELETE";

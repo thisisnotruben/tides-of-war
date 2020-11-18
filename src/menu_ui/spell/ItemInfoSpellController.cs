@@ -64,7 +64,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound("click2");
+				Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 				// TODO: actually cast spell here
 				Hide();
 			}
