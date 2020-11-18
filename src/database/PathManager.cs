@@ -14,6 +14,7 @@ namespace Game.Database
 			missileSpell = "res://data/missileSpell.json",
 			spellEffectDir = "res://src/spell/visual/",
 			questDir = "res://data/quest/",
+			sndDir = "res://asset/snd/",
 			// format with map name
 			unitDataTemplate = "res://data/{0}/{0}.json",
 			contentDataTemplate = "res://data/{0}/{0}_content.json";

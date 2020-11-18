@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Game.Actor;
-using Game.Sound;
 using Game.Database;
 using Godot;
 namespace Game.Ability
@@ -153,7 +152,7 @@ namespace Game.Ability
 		public void _OnTimerTimeout() { onTimeOut?.Invoke(); }
 		public void OnHit()
 		{
-			SoundPlayer.INSTANCE.PlaySound(sound, player2D);
+			Globals.soundPlayer.PlaySound(sound, player2D);
 
 			tween.InterpolateProperty(this, ":scale", new Vector2(0.75f, 0.75f),
 				Vector2.One, 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);

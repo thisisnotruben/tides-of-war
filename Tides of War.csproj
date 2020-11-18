@@ -72,10 +72,10 @@
     <Compile Include="src\database\ImageDB.cs" />
     <Compile Include="src\database\UnitDB.cs" />
     <Compile Include="src\database\WorldNameDB.cs" />
-    <Compile Include="src\globals\Globals.cs" />
-    <Compile Include="src\globals\ISerializable.cs" />
-    <Compile Include="src\globals\Stats.cs" />
-    <Compile Include="src\globals\WorldObject.cs" />
+    <Compile Include="src\global\Globals.cs" />
+    <Compile Include="src\global\ISerializable.cs" />
+    <Compile Include="src\global\Stats.cs" />
+    <Compile Include="src\global\WorldObject.cs" />
     <Compile Include="src\factory\CommodityFactory.cs" />
     <Compile Include="src\factory\ItemFactory.cs" />
     <Compile Include="src\factory\SpellFactory.cs" />
@@ -121,7 +121,7 @@
     <Compile Include="src\missile\MissileSpell.cs" />
     <Compile Include="src\quest\QuestMaster.cs" />
     <Compile Include="src\quest\WorldQuest.cs" />
-    <Compile Include="src\sound\SoundPlayer.cs" />
+    <Compile Include="src\global\SoundPlayer.cs" />
     <Compile Include="src\spell\areaEffect\ArcaneBolt.cs" />
     <Compile Include="src\spell\Bash.cs" />
     <Compile Include="src\spell\ExplosiveTrap.cs" />

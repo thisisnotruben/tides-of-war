@@ -3,7 +3,6 @@ using Game.Actor;
 using Game.Actor.Doodads;
 using Game.Database;
 using Game.Quest;
-using Game.Sound;
 namespace Game.Ui
 {
 	public class DialogueController : GameMenu
@@ -103,7 +102,7 @@ namespace Game.Ui
 			}
 			QuestMaster.CheckQuests(npc.GetPath(), npc.worldName, QuestDB.QuestType.TALK);
 		}
-		public void _OnDialogueDraw() { SoundPlayer.INSTANCE.PlaySound("turn_page"); }
+		public void _OnDialogueDraw() { Globals.soundPlayer.PlaySound("turn_page"); }
 		public void _OnDialogueHide()
 		{
 			// provides a reset of all views
@@ -124,7 +123,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				SoundPlayer.INSTANCE.PlaySound("sell_buy");
+				Globals.soundPlayer.PlaySound("sell_buy");
 
 				// player gives gold
 				player.gold -= healerCost;

@@ -1,25 +1,28 @@
 using Godot;
+using Game.Database;
 using System.Collections.Generic;
 namespace Game.Sound
 {
-	public class SoundPlayer : Godot.Object
+	public class SoundPlayer : Node
 	{
-		public static readonly SoundPlayer INSTANCE = new SoundPlayer();
 		private static readonly Dictionary<string, AudioStream> library = new Dictionary<string, AudioStream>();
 		private const byte INIT_PLAYERS = 10;
 
 		private List<AudioStreamPlayer> players = new List<AudioStreamPlayer>();
 
-
-		static SoundPlayer() { LoadSoundLibrary(); }
-		private SoundPlayer()
+		static SoundPlayer() { LoadSoundLibrary(PathManager.sndDir); }
+		public override void _Ready()
 		{
+			Name = nameof(SoundPlayer);
+			PauseMode = PauseModeEnum.Process;
 			for (int i = 0; i < INIT_PLAYERS; i++)
 			{
 				players.Add(new AudioStreamPlayer());
+				players[i].Name = $"player{i}";
+				AddChild(players[i]);
 			}
 		}
-		private static void LoadSoundLibrary(string path = "res://asset/snd")
+		private static void LoadSoundLibrary(string path)
 		{
 			library.Clear();
 
@@ -55,7 +58,7 @@ namespace Game.Sound
 				return;
 			}
 
-			players.ForEach(p =>
+			foreach (AudioStreamPlayer p in players)
 			{
 				if (!p.Playing)
 				{
@@ -63,9 +66,11 @@ namespace Game.Sound
 					p.Play();
 					return;
 				}
-			});
+			}
 
 			AudioStreamPlayer player = new AudioStreamPlayer();
+
+			AddChild(player);
 			player.Connect("finished", this, nameof(Delete),
 				new Godot.Collections.Array() { player });
 

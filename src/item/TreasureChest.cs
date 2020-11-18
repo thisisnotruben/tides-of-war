@@ -1,4 +1,3 @@
-using Game.Sound;
 using Game.Actor;
 using Godot;
 namespace Game.Loot
@@ -34,7 +33,7 @@ namespace Game.Loot
 
 			// start all animations/sounds
 
-			SoundPlayer.INSTANCE.PlaySound("chest_collect", player2D);
+			Globals.soundPlayer.PlaySound("chest_collect", player2D);
 			animationPlayer.Queue("collect");
 		}
 		public void _OnSightAreaEntered(Area2D area2D)
@@ -47,7 +46,7 @@ namespace Game.Loot
 			select.Show();
 
 			// start all animations/sounds
-			SoundPlayer.INSTANCE.PlaySound("chest_open", player2D);
+			Globals.soundPlayer.PlaySound("chest_open", player2D);
 			animationPlayer.Queue("open_chest");
 			tween.Start();
 		}
@@ -57,7 +56,7 @@ namespace Game.Loot
 			select.Hide();
 
 			// start all animations/sounds
-			SoundPlayer.INSTANCE.PlaySound("chest_open", player2D);
+			Globals.soundPlayer.PlaySound("chest_open", player2D);
 			animationPlayer.Queue("close_chest");
 		}
 		public void _OnSelectPressed() { Player.player.menu.LootInteract(this); }

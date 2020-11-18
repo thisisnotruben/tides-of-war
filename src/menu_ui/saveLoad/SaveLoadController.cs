@@ -1,5 +1,4 @@
 using Godot;
-using Game.Sound;
 namespace Game.Ui
 {
 	public class SaveLoadController : GameMenu
@@ -60,7 +59,7 @@ namespace Game.Ui
 		public void _OnSlotPressed(int index)
 		{
 			this.index = index + 1;
-			SoundPlayer.INSTANCE.PlaySound("click2");
+			Globals.soundPlayer.PlaySound("click2");
 			GetNode<Control>("v").Hide();
 			popupController.GetNode<Control>("m/save_load/save").Show();
 			if (!GetLabel(index).Text.Equals($"Slot {index + 1}"))
@@ -73,7 +72,7 @@ namespace Game.Ui
 		}
 		public void _OnDeletePressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click1");
+			Globals.soundPlayer.PlaySound("click1");
 			RouteConnections(nameof(_OnDeleteConfirm));
 			popupController.GetNode<Label>("m/yes_no/label").Text = "Delete?";
 			popupController.GetNode<Control>("m/yes_no").Show();
@@ -87,7 +86,7 @@ namespace Game.Ui
 		}
 		public void _OnSavePressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click1");
+			Globals.soundPlayer.PlaySound("click1");
 			if (GetLabel(index).Text.Contains("Slot"))
 			{
 				_OnOverwriteConfirm();
@@ -106,7 +105,7 @@ namespace Game.Ui
 		}
 		public void _OnLoadPressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click0");
+			Globals.soundPlayer.PlaySound("click0");
 			saveLoadModel.LoadGame(index);
 			Hide();
 		}

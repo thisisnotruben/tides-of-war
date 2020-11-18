@@ -24,7 +24,7 @@ config/quit_on_go_back=false
 
 [autoload]
 
-Globals="*res://src/globals/Globals.cs"
+Globals="*res://src/global/Globals.cs"
 
 [debug]
 

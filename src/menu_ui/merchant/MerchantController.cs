@@ -2,7 +2,6 @@ using Godot;
 using Game.Actor;
 using Game.Database;
 using Game.Quest;
-using Game.Sound;
 namespace Game.Ui
 {
 	public class MerchantController : GameMenu
@@ -121,7 +120,7 @@ namespace Game.Ui
 		{
 			ContentDB.ContentData contentData = ContentDB.GetContentData(merchant.Name);
 
-			SoundPlayer.INSTANCE.PlaySound(
+			Globals.soundPlayer.PlaySound(
 				SpellDB.HasSpell(contentData.merchandise[0])
 				? "turn_page"
 				: "merchant_open"
@@ -131,7 +130,7 @@ namespace Game.Ui
 		}
 		public void _OnMerchantNodeHide()
 		{
-			SoundPlayer.INSTANCE.PlaySound("merchant_close");
+			Globals.soundPlayer.PlaySound("merchant_close");
 			popupController.Hide();
 			merchantContent.Show();
 		}
@@ -148,7 +147,7 @@ namespace Game.Ui
 			bool isSpell = SpellDB.HasSpell(CommodityName);
 			bool alreadyHave = false;
 
-			SoundPlayer.INSTANCE.PlaySound(
+			Globals.soundPlayer.PlaySound(
 				isSpell
 				? "spell_select"
 				: Database.ItemDB.GetItemData(CommodityName).material + "_on"
@@ -156,7 +155,7 @@ namespace Game.Ui
 
 			if (isSpell)
 			{
-				SoundPlayer.INSTANCE.PlaySound("click1");
+				Globals.soundPlayer.PlaySound("click1");
 				alreadyHave = playerSpellBook.HasItem(CommodityName);
 			}
 
@@ -169,7 +168,7 @@ namespace Game.Ui
 		public void _OnMerchantPressed()
 		{
 			// switches to what the merchant is selling view
-			SoundPlayer.INSTANCE.PlaySound("click1");
+			Globals.soundPlayer.PlaySound("click1");
 			toInventoryBttn.Show();
 			toMerchantBttn.Hide();
 
@@ -181,7 +180,7 @@ namespace Game.Ui
 		public void _OnInventoryPressed()
 		{
 			// switches to what the player is selling view
-			SoundPlayer.INSTANCE.PlaySound("click1");
+			Globals.soundPlayer.PlaySound("click1");
 			toInventoryBttn.Hide();
 			toMerchantBttn.Show();
 

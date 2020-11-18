@@ -1,6 +1,5 @@
 using Game.Actor;
 using Game.Actor.Doodads;
-using Game.Sound;
 using Godot;
 using System;
 namespace Game.Mine
@@ -99,7 +98,7 @@ namespace Game.Mine
 			exploded = true;
 			int damage = new Random().Next(minDamage, maxDamage + 1);
 
-			SoundPlayer.INSTANCE.PlaySound("TODO", player2D);
+			Globals.soundPlayer.PlaySound("TODO", player2D);
 
 			Particles2D particles2D;
 			foreach (Node node in explodeParticles.GetChildren())

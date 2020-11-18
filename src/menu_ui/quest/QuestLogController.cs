@@ -1,5 +1,4 @@
 using Godot;
-using Game.Sound;
 namespace Game.Ui
 {
 	public class QuestLogController : GameMenu
@@ -24,14 +23,14 @@ namespace Game.Ui
 		}
 		public void _OnFilterPressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click2");
+			Globals.soundPlayer.PlaySound("click2");
 			GetNode<Control>("s").Hide();
 			popupController.GetNode<Control>("m/filter_options").Show();
 			popupController.Show();
 		}
 		public void _OnAllPressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click1");
+			Globals.soundPlayer.PlaySound("click1");
 			foreach (QuestEntryController questSlot in GetNode("s/v/s/quest_nodes").GetChildren())
 			{
 				questSlot.Show();
@@ -41,7 +40,7 @@ namespace Game.Ui
 		}
 		public void _OnActivePressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click1");
+			Globals.soundPlayer.PlaySound("click1");
 			foreach (QuestEntryController questSlot in GetNode("s/v/s/quest_nodes").GetChildren())
 			{
 				// TODO
@@ -58,7 +57,7 @@ namespace Game.Ui
 		}
 		public void _OnCompletedPressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click1");
+			Globals.soundPlayer.PlaySound("click1");
 			foreach (QuestEntryController questSlot in GetNode("s/v/s/quest_nodes").GetChildren())
 			{
 				// TODO

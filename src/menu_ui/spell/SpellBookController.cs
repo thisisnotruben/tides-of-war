@@ -1,5 +1,4 @@
 using Game.GameItem;
-using Game.Sound;
 using Godot;
 namespace Game.Ui
 {
@@ -55,7 +54,7 @@ namespace Game.Ui
 				return;
 			}
 
-			SoundPlayer.INSTANCE.PlaySound("spell_select");
+			Globals.soundPlayer.PlaySound("spell_select");
 			GetNode<Control>("s").Hide();
 
 			itemInfoSpellController.selectedSlotIdx = slotIndex;

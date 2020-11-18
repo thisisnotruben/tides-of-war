@@ -25,9 +25,9 @@ namespace Game.Database
 				this.melee = melee;
 			}
 		}
-		private static Dictionary<string, ImageData> imageData = new Dictionary<string, ImageData>();
+		private static Dictionary<string, ImageData> imageData;
 
-		public static void Init() { LoadImageData(PathManager.image); }
+		public static void Init() { imageData = LoadImageData(PathManager.image); }
 		private static Dictionary<string, ImageData> LoadImageData(string path)
 		{
 			File file = new File();

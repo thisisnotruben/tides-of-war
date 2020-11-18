@@ -1,4 +1,3 @@
-using Game.Sound;
 using Game.Actor;
 using Game.Quest;
 using Game.Loot;
@@ -29,12 +28,12 @@ namespace Game.Ui
 		}
 		public void _OnHudPausePressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click5");
+			Globals.soundPlayer.PlaySound("click5");
 			mainMenuController.Show();
 		}
 		public void _OnHudSpellBookPressed()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click5");
+			Globals.soundPlayer.PlaySound("click5");
 			mainMenuController.ShowSpellBook();
 		}
 		public void ConnectPlayerToHud(Player player)

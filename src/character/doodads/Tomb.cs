@@ -1,4 +1,3 @@
-using Game.Sound;
 using Game.Actor.State;
 using Godot;
 namespace Game.Actor.Doodads
@@ -35,7 +34,7 @@ namespace Game.Actor.Doodads
 		}
 		public void Revive()
 		{
-			SoundPlayer.INSTANCE.PlaySound("click2");
+			Globals.soundPlayer.PlaySound("click2");
 
 			// hide button to avoid double click
 			sight.Monitoring = false;

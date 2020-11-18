@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Game.Sound;
 namespace Game
 {
 	public class Globals : Node
@@ -28,5 +29,8 @@ namespace Game
 		};
 		public const string HUD_SHORTCUT_GROUP = "HUD-shortcut";
 		public const string SAVE_GROUP = "save";
+		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
+
+		public override void _Ready() { AddChild(soundPlayer); }
 	}
 }

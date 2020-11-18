@@ -3,7 +3,6 @@ using System.Linq;
 using System;
 using Game.Actor.Doodads;
 using Game.Database;
-using Game.Sound;
 using Game.Projectile;
 using Game.Factory;
 using Game.Ability;
@@ -213,7 +212,7 @@ namespace Game.Actor.State
 			}
 
 			// TODO
-			SoundPlayer.INSTANCE.PlaySound(soundName);//, SoundPlayer.SoundType.RANDOM);
+			Globals.soundPlayer.PlaySound(soundName);//, SoundPlayer.SoundType.RANDOM);
 
 			if (character is Player || target is Player)
 			{

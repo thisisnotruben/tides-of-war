@@ -1,7 +1,6 @@
 using Godot;
 using Game.Database;
 using Game.GameItem;
-using Game.Sound;
 namespace Game.Ui
 {
 	public class ItemInfoSpellController : ItemInfoController
@@ -65,7 +64,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				SoundPlayer.INSTANCE.PlaySound("click2");
+				Globals.soundPlayer.PlaySound("click2");
 				// TODO: actually cast spell here
 				Hide();
 			}

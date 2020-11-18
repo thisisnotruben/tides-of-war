@@ -1,4 +1,3 @@
-using Game.Sound;
 using Godot;
 namespace Game.Actor
 {
@@ -13,7 +12,7 @@ namespace Game.Actor
 			}
 			else
 			{
-				SoundPlayer.INSTANCE.PlaySound("click4");
+				Globals.soundPlayer.PlaySound("click4");
 				Tween tween = GetNode<Tween>("tween");
 				tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
 					0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
