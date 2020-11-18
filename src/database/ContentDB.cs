@@ -27,13 +27,13 @@ namespace Game.Database
 		}
 		private static Dictionary<string, ContentData> contentData = new Dictionary<string, ContentData>();
 
-		public static void LoadContentData(string dbPath)
+		public static void LoadContentData(string path)
 		{
 			// clear out cached database for switching between maps
 			contentData.Clear();
 			// load & parse data
 			File file = new File();
-			file.Open(dbPath, File.ModeFlags.Read);
+			file.Open(path, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 

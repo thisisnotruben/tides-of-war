@@ -1,4 +1,5 @@
 using Godot;
+using Game.Sound;
 namespace Game.Ui
 {
 	public class PopupController : GameMenu
@@ -14,7 +15,7 @@ namespace Game.Ui
 				control.Hide();
 			}
 		}
-		public void _OnErrorDraw() { Globals.PlaySound("click6", this, speaker); }
+		public void _OnErrorDraw() { SoundPlayer.INSTANCE.PlaySound("click6"); }
 		public void _OnMResized() { GetNode<Control>("bg").RectMinSize = GetNode<Control>("m").RectSize; }
 		public void _OnRepairDraw()
 		{

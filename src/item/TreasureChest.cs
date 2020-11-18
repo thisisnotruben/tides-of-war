@@ -1,4 +1,4 @@
-using Game.Util;
+using Game.Sound;
 using Game.Actor;
 using Godot;
 namespace Game.Loot
@@ -12,7 +12,7 @@ namespace Game.Loot
 		private Node2D select;
 		private Area2D sight;
 		private Sprite img;
-		private Speaker2D speaker2D;
+		private AudioStreamPlayer2D player2D;
 
 		public override void _Ready()
 		{
@@ -22,7 +22,7 @@ namespace Game.Loot
 			select = GetNode<Node2D>("select");
 			sight = GetNode<Area2D>("sight");
 			img = GetNode<Sprite>("img");
-			speaker2D = GetNode<Speaker2D>("speaker2d");
+			player2D = GetNode<AudioStreamPlayer2D>("snd");
 		}
 		public void Init(string commodityWorldName) { this.commodityWorldName = commodityWorldName; }
 		private void Delete() { QueueFree(); }
@@ -33,7 +33,8 @@ namespace Game.Loot
 			sight.Monitoring = false;
 
 			// start all animations/sounds
-			Globals.PlaySound("chest_collect", this, speaker2D);
+
+			SoundPlayer.INSTANCE.PlaySound("chest_collect", player2D);
 			animationPlayer.Queue("collect");
 		}
 		public void _OnSightAreaEntered(Area2D area2D)
@@ -46,7 +47,7 @@ namespace Game.Loot
 			select.Show();
 
 			// start all animations/sounds
-			Globals.PlaySound("chest_open", this, speaker2D);
+			SoundPlayer.INSTANCE.PlaySound("chest_open", player2D);
 			animationPlayer.Queue("open_chest");
 			tween.Start();
 		}
@@ -56,7 +57,7 @@ namespace Game.Loot
 			select.Hide();
 
 			// start all animations/sounds
-			Globals.PlaySound("chest_open", this, speaker2D);
+			SoundPlayer.INSTANCE.PlaySound("chest_open", player2D);
 			animationPlayer.Queue("close_chest");
 		}
 		public void _OnSelectPressed() { Player.player.menu.LootInteract(this); }

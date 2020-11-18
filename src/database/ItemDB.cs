@@ -29,14 +29,12 @@ namespace Game.Database
 		}
 
 		private static Dictionary<string, ItemData> itemData = new Dictionary<string, ItemData>();
-		private const string DB_PATH = "res://data/item.json";
 
-		static ItemDB() { LoadItemData(); }
-		public static void Init() { }
-		private static void LoadItemData()
+		public static void Init() { LoadItemData(PathManager.item); }
+		private static void LoadItemData(string path)
 		{
 			File file = new File();
-			file.Open(DB_PATH, File.ModeFlags.Read);
+			file.Open(path, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
 

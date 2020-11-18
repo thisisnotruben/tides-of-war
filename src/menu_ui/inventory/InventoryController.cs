@@ -1,6 +1,7 @@
 using Godot;
 using Game.GameItem;
 using Game.Database;
+using Game.Sound;
 namespace Game.Ui
 {
 	public class InventoryController : GameMenu
@@ -43,7 +44,7 @@ namespace Game.Ui
 		}
 		public void _OnInventoryControllerHide()
 		{
-			Globals.PlaySound("merchant_close", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("merchant_close");
 			itemInfoInventoryController.Hide();
 			GetNode<Control>("s").Show();
 		}
@@ -65,7 +66,7 @@ namespace Game.Ui
 				return;
 			}
 
-			Globals.PlaySound("inventory_open", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("inventory_open");
 			GetNode<Control>("s").Hide();
 
 			itemInfoInventoryController.selectedSlotIdx = slotIndex;

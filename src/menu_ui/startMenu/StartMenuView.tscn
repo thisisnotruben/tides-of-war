@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://asset/img/font/mago1_144.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu_ui/about/AboutView.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://src/menu_ui/startMenu/StartMenuController.cs" type="Script" id=4]
 [ext_resource path="res://asset/img/ui/grey2_bg.tres" type="Texture" id=6]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/util/audio_stream_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=10]
 
 [node name="start_menu" type="Control"]
@@ -17,8 +16,6 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="speaker" parent="." instance=ExtResource( 9 )]
 
 [node name="bg" type="ColorRect" parent="."]
 anchor_right = 1.0

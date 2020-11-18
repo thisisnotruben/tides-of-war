@@ -61,19 +61,18 @@ namespace Game.Ui
 			}
 
 			// load map specific data
-			string mapPath = scenePath.GetFile().BaseName();
-			mapPath = $"res://data/{mapPath}/{mapPath}";
-			string dataPath = mapPath + ".json",
-				contentPath = mapPath + "_content.json";
+			string mapName = scenePath.GetFile().BaseName(),
+				unitDataPath = string.Format(PathManager.unitDataTemplate, mapName),
+				contentDataPath = string.Format(PathManager.contentDataTemplate, mapName);
 
 			Directory directory = new Directory();
-			if (directory.FileExists(dataPath))
+			if (directory.FileExists(unitDataPath))
 			{
-				UnitDB.LoadUnitData(dataPath);
+				UnitDB.LoadUnitData(unitDataPath);
 			}
-			if (directory.FileExists(contentPath))
+			if (directory.FileExists(contentDataPath))
 			{
-				ContentDB.LoadContentData(contentPath);
+				ContentDB.LoadContentData(contentDataPath);
 			}
 			currentScene.Hide();
 			CallDeferred(nameof(DeferredSetScene), scenePath, currentScene);

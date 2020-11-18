@@ -20,10 +20,7 @@ namespace Game.Util
 			label = GetNode<Label>("label");
 			Connect(nameof(SendScenePath), GetNode(nameof(ColorRect)), "set_map_script");
 		}
-		public void _OnQuit()
-		{
-			GetTree().Quit();
-		}
+		public void _OnQuit() { GetTree().Quit(); }
 		public void ImportMap(string scenePath)
 		{
 			this.scenePath = scenePath;
@@ -199,7 +196,6 @@ namespace Game.Util
 			foreach (Node2D node2D in map.GetNode("meta/transitions").GetChildren())
 			{
 				node2D.GlobalPosition = GetCenterPos(node2D.GlobalPosition);
-
 			}
 		}
 		private void TreeUseMaterial(Node root)

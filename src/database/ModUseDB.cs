@@ -62,12 +62,11 @@ namespace Game.Database
 		private static Dictionary<string, Modifiers> modData;
 		private static Dictionary<string, Use> useData;
 
-		static ModUseDB()
+		public static void Init()
 		{
-			modData = LoadModData("res://data/modifier.json");
-			useData = LoadUseData("res://data/use.json");
+			modData = LoadModData(PathManager.modifier);
+			useData = LoadUseData(PathManager.use);
 		}
-		public static void Init() { }
 		private static Dictionary<string, Modifiers> LoadModData(string path)
 		{
 			File file = new File();

@@ -1,6 +1,7 @@
 using System.Linq;
 using Game.Database;
 using Game.GameItem;
+using Game.Sound;
 using Godot;
 namespace Game.Ui
 {
@@ -235,7 +236,7 @@ namespace Game.Ui
 		}
 		public virtual void _OnMovePressed(int by)
 		{
-			Globals.PlaySound("click2", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("click2");
 			// update selection and display
 			selectedSlotIdx += by;
 			Display(itemList.GetCommodity(selectedSlotIdx), true);

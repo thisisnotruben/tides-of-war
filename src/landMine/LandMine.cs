@@ -1,5 +1,6 @@
 using Game.Actor;
 using Game.Actor.Doodads;
+using Game.Sound;
 using Godot;
 using System;
 namespace Game.Mine
@@ -10,6 +11,7 @@ namespace Game.Mine
 		private Timer timer;
 		private Tween tween;
 		private Node2D img, explodeParticles;
+		private AudioStreamPlayer2D player2D;
 
 		private Character exludedCharacter;
 		private float timeToDetonationSec = 1.0f;
@@ -24,6 +26,7 @@ namespace Game.Mine
 			explodeParticles = img.GetNode<Node2D>("explode");
 			blastCircle = img.GetNode<Area2D>("blastCircle");
 			body = img.GetNode<Area2D>("body");
+			player2D = img.GetNode<AudioStreamPlayer2D>("snd");
 		}
 		public void Init(Character exludedCharacter, int minDamage, int maxDamage, float armDelaySec = -1.0f, float timeToDetonationSec = -1.0f)
 		{
@@ -96,7 +99,7 @@ namespace Game.Mine
 			exploded = true;
 			int damage = new Random().Next(minDamage, maxDamage + 1);
 
-			GetNode<AudioStreamPlayer2D>("img/snd").Play();
+			SoundPlayer.INSTANCE.PlaySound("TODO", player2D);
 
 			Particles2D particles2D;
 			foreach (Node node in explodeParticles.GetChildren())

@@ -64,6 +64,7 @@
     <Compile Include="src\database\ItemDB.cs" />
     <Compile Include="src\database\LandMineDB.cs" />
     <Compile Include="src\database\ModUseDB.cs" />
+    <Compile Include="src\database\PathManager.cs" />
     <Compile Include="src\database\PickableDB.cs" />
     <Compile Include="src\database\QuestDB.cs" />
     <Compile Include="src\database\SceneDB.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="src\missile\MissileSpell.cs" />
     <Compile Include="src\quest\QuestMaster.cs" />
     <Compile Include="src\quest\WorldQuest.cs" />
+    <Compile Include="src\sound\SoundPlayer.cs" />
     <Compile Include="src\spell\areaEffect\ArcaneBolt.cs" />
     <Compile Include="src\spell\Bash.cs" />
     <Compile Include="src\spell\ExplosiveTrap.cs" />
@@ -131,9 +133,6 @@
     <Compile Include="src\spell\visual\master\SpellEffect.cs" />
     <Compile Include="src\spell\Volley.cs" />
     <Compile Include="src\util\MapImporter.cs" />
-    <Compile Include="src\util\SoundPlayer.cs" />
-    <Compile Include="src\util\Speaker.cs" />
-    <Compile Include="src\util\Speaker2D.cs" />
     <Compile Include="src\item\Commodity.cs" />
   </ItemGroup>
 </Project>

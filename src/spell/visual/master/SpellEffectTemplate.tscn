@@ -12,6 +12,8 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="snd" type="AudioStreamPlayer2D" parent="."]
+
 [node name="timer" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true

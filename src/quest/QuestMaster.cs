@@ -11,10 +11,8 @@ namespace Game.Quest
 
 		static QuestMaster()
 		{
-			string path = "res://data/quest/";
-
 			Directory directory = new Directory();
-			directory.Open(path);
+			directory.Open(PathManager.questDir);
 			directory.ListDirBegin(true, true);
 
 			string resourceName = directory.GetNext(),
@@ -25,7 +23,7 @@ namespace Game.Quest
 			{
 				if (resourceName.Extension().Equals(ext))
 				{
-					questData = QuestDB.LoadQuestData(path.PlusFile(resourceName));
+					questData = QuestDB.LoadQuestData(PathManager.questDir.PlusFile(resourceName));
 					foreach (string questName in questData.Keys)
 					{
 						quests.Add(new WorldQuest(questData[questName]));

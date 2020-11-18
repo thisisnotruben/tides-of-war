@@ -1,4 +1,4 @@
-using Game.Util;
+using Game.Sound;
 using Game.Actor;
 using Game.Quest;
 using Game.Loot;
@@ -12,7 +12,6 @@ namespace Game.Ui
 
 		public override void _Ready()
 		{
-			GameMenu.speaker = GetNode<Speaker>("speaker");
 			mainMenuController = GetNode<MainMenuController>("c/game_menu");
 			mainMenuController.Connect("draw", this, nameof(_OnMainMenuDraw));
 			mainMenuController.Connect("hide", this, nameof(_OnMainMenuHide));
@@ -30,12 +29,12 @@ namespace Game.Ui
 		}
 		public void _OnHudPausePressed()
 		{
-			Globals.PlaySound("click5", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("click5");
 			mainMenuController.Show();
 		}
 		public void _OnHudSpellBookPressed()
 		{
-			Globals.PlaySound("click5", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("click5");
 			mainMenuController.ShowSpellBook();
 		}
 		public void ConnectPlayerToHud(Player player)

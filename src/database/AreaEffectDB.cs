@@ -15,13 +15,9 @@ namespace Game.Database
 			}
 		}
 
-		private static readonly Dictionary<string, AreaEffectData> areaEffectData;
+		private static Dictionary<string, AreaEffectData> areaEffectData;
 
-		static AreaEffectDB()
-		{
-			areaEffectData = LoadAreaEffectData("res://data/areaEffect.json");
-		}
-		public static void Init() { }
+		public static void Init() { areaEffectData = LoadAreaEffectData(PathManager.areaEffect); }
 		private static Dictionary<string, AreaEffectData> LoadAreaEffectData(string path)
 		{
 			File file = new File();
@@ -37,8 +33,8 @@ namespace Game.Database
 				dict = (Godot.Collections.Dictionary)rawDict[worldName];
 
 				areaEffectData.Add(worldName, new AreaEffectData(
-					radius: (int)((Single)dict[nameof(AreaEffectData.radius)]))
-				);
+					radius: (int)(Single)dict[nameof(AreaEffectData.radius)]
+				));
 			}
 
 			return areaEffectData;

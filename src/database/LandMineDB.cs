@@ -28,11 +28,7 @@ namespace Game.Database
 
 		private static Dictionary<string, LandMineData> landMineData;
 
-		static LandMineDB()
-		{
-			landMineData = LoadLandMineData("res://data/landMine.json");
-		}
-		public static void Init() { }
+		public static void Init() { landMineData = LoadLandMineData(PathManager.landMine); }
 		private static Dictionary<string, LandMineData> LoadLandMineData(string path)
 		{
 			File file = new File();

@@ -1,7 +1,7 @@
 using Game.Database;
 using Game.Actor.Doodads;
 using Game.Ui;
-using Game.Util;
+using Game.Sound;
 using Game.GameItem;
 using Godot;
 namespace Game.Actor
@@ -67,7 +67,7 @@ namespace Game.Actor
 				level = _level;
 				if (!fromSaveFile)
 				{
-					Globals.PlaySound("level_up", this, new Speaker());
+					SoundPlayer.INSTANCE.PlaySound("level_up");
 				}
 				if (level > Stats.MAX_LEVEL)
 				{

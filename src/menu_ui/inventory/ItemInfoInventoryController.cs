@@ -3,6 +3,7 @@ using Game.GameItem;
 using Game.Database;
 using Game.Factory;
 using Game.Quest;
+using Game.Sound;
 using Godot;
 namespace Game.Ui
 {
@@ -84,7 +85,7 @@ namespace Game.Ui
 					sndName = "drink";
 					break;
 			}
-			Globals.PlaySound(sndName, this, speaker);
+			SoundPlayer.INSTANCE.PlaySound(sndName);
 
 			// eat up or drink up
 			new ItemFactory().MakeCommodity(player, pickableWorldName).Start();
@@ -137,7 +138,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.PlaySound(ItemDB.GetItemData(pickableWorldName).material + "_off", this, speaker);
+				SoundPlayer.INSTANCE.PlaySound(ItemDB.GetItemData(pickableWorldName).material + "_off");
 				// equip focused item
 				EquipItem(true, pickableWorldName);
 			}
@@ -153,13 +154,13 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.PlaySound("inventory_unequip", this, speaker);
+				SoundPlayer.INSTANCE.PlaySound("inventory_unequip");
 				EquipItem(false, pickableWorldName);
 			}
 		}
 		public void _OnDropPressed()
 		{
-			Globals.PlaySound("click2", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("click2");
 
 			RouteConnections(nameof(_OnDropConfirm));
 			GetNode<Control>("s").Hide();
@@ -171,7 +172,7 @@ namespace Game.Ui
 		{
 			foreach (string sndName in new string[] { "click2", "inventory_drop" })
 			{
-				Globals.PlaySound(sndName, this, speaker);
+				SoundPlayer.INSTANCE.PlaySound(sndName);
 			}
 
 			// remove from inventory

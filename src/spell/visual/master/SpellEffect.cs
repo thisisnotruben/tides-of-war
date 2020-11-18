@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Actor;
+using Game.Sound;
 using Game.Database;
 using Godot;
 namespace Game.Ability
@@ -15,6 +16,7 @@ namespace Game.Ability
 		private Sprite light;
 		private Node2D idleParticles, explodeParticles;
 		private string sound;
+		private AudioStreamPlayer2D player2D;
 
 		private delegate void Routine();
 		private Routine onTimeOut;
@@ -27,6 +29,7 @@ namespace Game.Ability
 			light = GetNode<Sprite>("light");
 			idleParticles = GetNode<Node2D>("idle");
 			explodeParticles = GetNode<Node2D>("explode");
+			player2D = GetNode<AudioStreamPlayer2D>("snd");
 
 			foreach (Node2D node2D in idleParticles.GetChildren())
 			{
@@ -150,7 +153,7 @@ namespace Game.Ability
 		public void _OnTimerTimeout() { onTimeOut?.Invoke(); }
 		public void OnHit()
 		{
-			Globals.PlaySound(sound, this, new Util.Speaker2D());
+			SoundPlayer.INSTANCE.PlaySound(sound, player2D);
 
 			tween.InterpolateProperty(this, ":scale", new Vector2(0.75f, 0.75f),
 				Vector2.One, 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);

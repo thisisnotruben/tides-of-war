@@ -24,23 +24,24 @@ namespace Game.Database
 			NW_I = 1484
 		}
 		private static readonly collNavTile[] collNavTileID;
-		private const string DB_PATH = "res://data/collNav.json";
-		private static Dictionary<Ordinal, int[,]> graph = new Dictionary<Ordinal, int[,]>();
+		private static Dictionary<Ordinal, int[,]> graph;
 
 		static CollNavDB()
 		{
 			collNavTileID = new[] { collNavTile.PASS, collNavTile.BLOCK,
 				collNavTile.NW, collNavTile.N, collNavTile.NE_O, collNavTile.W, collNavTile.E, collNavTile.SW, collNavTile.S, collNavTile.SE_O,
 				collNavTile.SE_I, collNavTile.SW_I, collNavTile.NE_I, collNavTile.NW_I };
-			LoadCollNavData();
 		}
-		public static void Init() { }
-		private static void LoadCollNavData()
+		public static void Init() { graph = LoadCollNavData(PathManager.collNav); }
+		private static Dictionary<Ordinal, int[,]> LoadCollNavData(string path)
 		{
 			File file = new File();
-			file.Open(DB_PATH, File.ModeFlags.Read);
+			file.Open(path, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
+
+			Dictionary<Ordinal, int[,]> graph = new Dictionary<Ordinal, int[,]>();
+
 			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 
 			int i, j;
@@ -60,6 +61,7 @@ namespace Game.Database
 				}
 				graph.Add((Ordinal)Enum.Parse(typeof(Ordinal), ordinalDir), matrix);
 			}
+			return graph;
 		}
 		public static bool CanConnect(collNavTile from, collNavTile to, Ordinal ordinal)
 		{

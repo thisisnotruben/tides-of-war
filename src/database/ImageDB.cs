@@ -26,16 +26,16 @@ namespace Game.Database
 			}
 		}
 		private static Dictionary<string, ImageData> imageData = new Dictionary<string, ImageData>();
-		private const string DB_PATH = "res://data/image.json";
 
-		static ImageDB() { LoadImageData(); }
-		public static void Init() { }
-		private static void LoadImageData()
+		public static void Init() { LoadImageData(PathManager.image); }
+		private static Dictionary<string, ImageData> LoadImageData(string path)
 		{
 			File file = new File();
-			file.Open(DB_PATH, File.ModeFlags.Read);
+			file.Open(path, File.ModeFlags.Read);
 			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
 			file.Close();
+
+			Dictionary<string, ImageData> imageData = new Dictionary<string, ImageData>();
 
 			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
 			int moving, dying, attacking;
@@ -59,6 +59,7 @@ namespace Game.Database
 					melee: (bool)dict[nameof(ImageData.melee)]
 				));
 			}
+			return imageData;
 		}
 		public static ImageData GetImageData(string imageName) { return imageData[imageName]; }
 	}

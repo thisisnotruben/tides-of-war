@@ -50,17 +50,16 @@ namespace Game.Database
 				this.rotate = rotate;
 			}
 		}
-		private static readonly Dictionary<string, SpellData> spellData;
-		private static readonly Dictionary<string, SpellMissileData> spellMissileData;
-		private static readonly Dictionary<string, PackedScene> spellEffectData;
+		private static Dictionary<string, SpellData> spellData;
+		private static Dictionary<string, SpellMissileData> spellMissileData;
+		private static Dictionary<string, PackedScene> spellEffectData;
 
-		static SpellDB()
+		public static void Init()
 		{
-			spellData = LoadSpellData("res://data/spell.json");
-			spellMissileData = LoadSpellMissileData("res://data/missileSpell.json");
-			spellEffectData = LoadSpellEffects("res://src/spell/visual/");
+			spellData = LoadSpellData(PathManager.spell);
+			spellMissileData = LoadSpellMissileData(PathManager.missileSpell);
+			spellEffectData = LoadSpellEffects(PathManager.spellEffectDir);
 		}
-		public static void Init() { }
 		private static Dictionary<string, SpellData> LoadSpellData(string path)
 		{
 			File file = new File();

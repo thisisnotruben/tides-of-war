@@ -3,6 +3,7 @@ using Game.Actor;
 using Game.Loot;
 using Game.Database;
 using Game.Quest;
+using Game.Sound;
 namespace Game.Ui
 {
 	public class MainMenuController : GameMenu
@@ -118,7 +119,7 @@ namespace Game.Ui
 		}
 		public void _OnResumePressed()
 		{
-			Globals.PlaySound("click2", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("click2");
 			Hide();
 		}
 		public void _OnInventoryPressed() { Transition(inventoryController); }
@@ -134,7 +135,7 @@ namespace Game.Ui
 		public void _OnExitGamePressed() { GetTree().Quit(); }
 		public void _OnExitMenuPressed()
 		{
-			Globals.PlaySound("click0", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("click0");
 			GetTree().Paused = false;
 			SceneLoaderController.Init().SetScene(
 				(string)ProjectSettings.GetSetting("application/run/main_scene"),
@@ -142,7 +143,7 @@ namespace Game.Ui
 		}
 		private void Transition(Control scene)
 		{
-			Globals.PlaySound("click1", this, speaker);
+			SoundPlayer.INSTANCE.PlaySound("click1");
 			main.Hide();
 			scene.Show();
 		}
