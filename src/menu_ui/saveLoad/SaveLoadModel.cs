@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using Game.Database;
 using Godot;
 namespace Game.Ui
 {
 	public class SaveLoadModel : Node
 	{
-		public const string DEFAULT_SAVE_FILE_NAME = "Slot {0}",
-			SAVE_PATH = "res://data/save/{0}.json";
+		public const string DEFAULT_SAVE_FILE_NAME = "Slot {0}";
 		public const int MAX_SAVE_FILES = 8;
 		private static Dictionary<int, string> saveFileNames = new Dictionary<int, string>();
 		private static readonly File file = new File();
@@ -16,12 +16,13 @@ namespace Game.Ui
 			{
 				saveFileNames.Add(i, string.Format(DEFAULT_SAVE_FILE_NAME, i));
 			}
-			LoadSavedFileNames();
+			// TODO
+			// LoadSavedFileNames();
 		}
 		public static void LoadSavedFileNames()
 		{
 			Directory directory = new Directory();
-			string savePathDir = SAVE_PATH.GetBaseDir();
+			string savePathDir = PathManager.savePath.GetBaseDir();
 
 			// open dir and read files
 			directory.Open(savePathDir);
@@ -30,10 +31,13 @@ namespace Game.Ui
 
 			while (!fileName.Empty())
 			{
-				file.Open(savePathDir.PlusFile(fileName), File.ModeFlags.Read);
-				saveFileNames[fileName.BaseName().ToInt()] =
-					(string)((Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result)["saveTime"];
-				file.Close();
+				if (fileName.Extension().Equals(PathManager.dataExt))
+				{
+					file.Open(savePathDir.PlusFile(fileName), File.ModeFlags.Read);
+					saveFileNames[fileName.BaseName().ToInt()] =
+						(string)((Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result)["saveTime"];
+					file.Close();
+				}
 				fileName = directory.GetNext();
 			}
 		}
@@ -65,7 +69,7 @@ namespace Game.Ui
 			}
 
 			// save to file
-			file.Open(string.Format(SAVE_PATH, index), File.ModeFlags.Write);
+			file.Open(string.Format(PathManager.savePath, index), File.ModeFlags.Write);
 			file.StoreString(JSON.Print(masterSave, "\t", true));
 			file.Close();
 
@@ -73,7 +77,7 @@ namespace Game.Ui
 		}
 		public void LoadGame(int index)
 		{
-			string loadPath = string.Format(SAVE_PATH, index);
+			string loadPath = string.Format(PathManager.savePath, index);
 			if (!file.FileExists(loadPath))
 			{
 				return;
@@ -108,16 +112,13 @@ namespace Game.Ui
 		public static void DeleteSaveFile(int index)
 		{
 			Directory directory = new Directory();
-			string deletePath = string.Format(SAVE_PATH, index);
+			string deletePath = string.Format(PathManager.savePath, index);
 			if (directory.FileExists(deletePath))
 			{
 				directory.Remove(deletePath);
 				saveFileNames[index] = string.Format(DEFAULT_SAVE_FILE_NAME, index);
 			}
 		}
-		public static string GetSaveFileName(int index)
-		{
-			return saveFileNames[index];
-		}
+		public static string GetSaveFileName(int index) { return saveFileNames[index]; }
 	}
 }

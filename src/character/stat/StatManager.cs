@@ -24,8 +24,8 @@ namespace Game.Actor.Stat
 		{
 			this.character = character;
 			multiplier = Stats.GetMultiplier(
-				(UnitDB.HasUnitData(character.Name))
-				? UnitDB.GetUnitData(character.Name).img.Split('-')[0] // character race
+				UnitDB.Instance.HasData(character.Name)
+				? UnitDB.Instance.GetData(character.Name).img.Split('-')[0] // character race
 				: character.Name); // is player
 
 			stamina = new Stamina(this);

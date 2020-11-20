@@ -27,24 +27,25 @@ namespace Game.Sound
 		}
 		private static void LoadSoundLibrary(string path)
 		{
-			string importExt = ".import";
-
 			Directory directory = new Directory();
 			directory.Open(path);
 			directory.ListDirBegin(true, true);
 
-			string resourceName = directory.GetNext();
-			string resourcePath;
+			string resourceName = directory.GetNext(),
+				resourcePath;
 
-			// recursively loop through directory for sound files
 			while (!resourceName.Empty())
 			{
+				// Android workaround for actually the loading sounds
+				resourceName = resourceName.Replace("." + PathManager.importExt, string.Empty);
+
 				resourcePath = path.PlusFile(resourceName);
 				if (directory.CurrentIsDir())
 				{
 					LoadSoundLibrary(resourcePath);
 				}
-				else if (!resourcePath.Contains(importExt))
+				else if (!resourceName.Extension().Equals(PathManager.importExt)
+				&& !library.ContainsKey(resourceName.BaseName()))
 				{
 					library.Add(resourceName.BaseName(), (AudioStream)GD.Load(resourcePath));
 				}

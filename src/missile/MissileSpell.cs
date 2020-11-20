@@ -15,9 +15,9 @@ namespace Game.Projectile
 			timer = GetNode<Timer>("timer");
 
 			// can't add in Init due to this section needing nodes
-			if (!spellWorldName.Equals(string.Empty) && SpellDB.HasSpellMissile(spellWorldName))
+			if (!spellWorldName.Equals(string.Empty) && MissileSpellDB.Instance.HasData(spellWorldName))
 			{
-				SpellDB.SpellMissileData spellMissileData = SpellDB.GetSpellMissileData(spellWorldName);
+				MissileSpellDB.SpellMissileData spellMissileData = MissileSpellDB.Instance.GetData(spellWorldName);
 				img.Texture = spellMissileData.img;
 				hitboxBody.Shape = spellMissileData.hitBox;
 			}
@@ -28,9 +28,9 @@ namespace Game.Projectile
 
 			Init(character, target);
 
-			if (SpellDB.HasSpellMissile(spellWorldName))
+			if (MissileSpellDB.Instance.HasData(spellWorldName))
 			{
-				SpellDB.SpellMissileData spellMissileData = SpellDB.GetSpellMissileData(spellWorldName);
+				MissileSpellDB.SpellMissileData spellMissileData = MissileSpellDB.Instance.GetData(spellWorldName);
 
 				moveBehavior = (float delta) =>
 				{
@@ -43,10 +43,10 @@ namespace Game.Projectile
 				};
 			}
 
-			if (SpellDB.HasSpellEffect(spellWorldName))
+			if (SpellEffectDB.Instance.HasData(spellWorldName))
 			{
-				SpellEffect spellEffect = SpellDB.GetSpellEffect(
-					SpellDB.GetSpellData(spellWorldName).spellEffect);
+				SpellEffect spellEffect = (SpellEffect)SpellEffectDB.Instance.GetData(
+					SpellDB.Instance.GetData(spellWorldName).spellEffect).Instance();
 
 				spellEffect.Init(target, spellWorldName, this);
 				Connect(nameof(OnHit), spellEffect, nameof(SpellEffect.OnHit));

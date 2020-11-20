@@ -26,21 +26,21 @@ namespace Game.Actor.State
 		private void RevertState()
 		{
 			fsm.ChangeState(
-				(UnitDB.GetUnitData(character.Name).path.Length > 0)
+				UnitDB.Instance.GetData(character.Name).path.Length > 0
 				? FSM.State.NPC_MOVE_ROAM
 				: FSM.State.NPC_MOVE_RETURN);
 		}
 		public static bool OutOfPursuitRange(Character character, Character target)
 		{
-			if (UnitDB.GetUnitData(character.Name).path.Length > 0)
+			if (UnitDB.Instance.GetData(character.Name).path.Length > 0)
 			{
 				// if the closest waypoint the target is > FLEE_DISTANCE
-				return (from waypoint in UnitDB.GetUnitData(character.Name).path
+				return (from waypoint in UnitDB.Instance.GetData(character.Name).path
 						select target.GlobalPosition.DistanceTo(waypoint)).Min()
 						> Stats.FLEE_DISTANCE;
 			}
 			return character.GlobalPosition.DistanceTo(
-				UnitDB.GetUnitData(character.Name).spawnPos) > Stats.FLEE_DISTANCE;
+				UnitDB.Instance.GetData(character.Name).spawnPos) > Stats.FLEE_DISTANCE;
 		}
 		protected override void OnMovePointFinished()
 		{

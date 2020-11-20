@@ -1,9 +1,8 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 namespace Game.Database
 {
-	public static class LandMineDB
+	public class LandMineDB : AbstractDB<LandMineDB.LandMineData>
 	{
 		public class LandMineData
 		{
@@ -26,29 +25,21 @@ namespace Game.Database
 			}
 		}
 
-		private static Dictionary<string, LandMineData> landMineData;
+		public static readonly LandMineDB Instance = new LandMineDB();
 
-		public static void Init() { landMineData = LoadLandMineData(PathManager.landMine); }
-		private static Dictionary<string, LandMineData> LoadLandMineData(string path)
+		public LandMineDB() : base(PathManager.landMine) { }
+		public override void LoadData(string path)
 		{
-			File file = new File();
-			file.Open(path, File.ModeFlags.Read);
-			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
-			file.Close();
-
-			Dictionary<string, LandMineData> landMineData = new Dictionary<string, LandMineData>();
-
-			string filePath = "res://asset/img/missile-spell/{0}.tres";
-			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);
 			foreach (string worldName in rawDict.Keys)
 			{
 				dict = (Godot.Collections.Dictionary)rawDict[worldName];
 
-				landMineData.Add(worldName, new LandMineData(
+				data.Add(worldName, new LandMineData(
 					hitBox: dict[nameof(LandMineData.hitBox)] == null ? null
-						: GD.Load<Shape2D>(string.Format(filePath, (string)dict[nameof(LandMineData.hitBox)])),
+						: GD.Load<Shape2D>(string.Format(PathManager.assetMissileSpellPath, (string)dict[nameof(LandMineData.hitBox)])),
 					img: dict[nameof(LandMineData.img)] == null ? null
-						: GD.Load<Texture>(string.Format(filePath, (string)dict[nameof(LandMineData.img)])),
+						: GD.Load<Texture>(string.Format(PathManager.assetMissileSpellPath, (string)dict[nameof(LandMineData.img)])),
 					sound: (string)dict[nameof(LandMineData.sound)],
 					minDamage: (int)(Single)dict[nameof(LandMineData.minDamage)],
 					maxDamage: (int)(Single)dict[nameof(LandMineData.maxDamage)],
@@ -57,10 +48,6 @@ namespace Game.Database
 					radius: (int)(Single)dict[nameof(LandMineData.radius)]
 				));
 			}
-
-			return landMineData;
 		}
-		public static bool HasLandMineData(string worldName) { return landMineData.ContainsKey(worldName); }
-		public static LandMineData GetLandMineData(string worldName) { return landMineData[worldName]; }
 	}
 }

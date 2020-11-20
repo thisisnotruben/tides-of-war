@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using System;
 using Godot;
 namespace Game.Database
 {
-	public static class ItemDB
+	public class ItemDB : AbstractDB<ItemDB.ItemData>
 	{
 		public enum ItemType { WEAPON, ARMOR, POTION, FOOD, MISC }
 		public class ItemData
@@ -28,23 +27,17 @@ namespace Game.Database
 			}
 		}
 
-		private static Dictionary<string, ItemData> itemData = new Dictionary<string, ItemData>();
+		public static readonly ItemDB Instance = new ItemDB();
 
-		public static void Init() { LoadItemData(PathManager.item); }
-		private static void LoadItemData(string path)
+		public ItemDB() : base(PathManager.item) { }
+		public override void LoadData(string path)
 		{
-			File file = new File();
-			file.Open(path, File.ModeFlags.Read);
-			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
-			file.Close();
-
-			Godot.Collections.Dictionary dict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);
 			foreach (string itemName in rawDict.Keys)
 			{
 				dict = (Godot.Collections.Dictionary)rawDict[itemName];
 
-				// add to cache
-				itemData.Add(itemName, new ItemData(
+				data.Add(itemName, new ItemData(
 					type: (ItemType)Enum.Parse(typeof(ItemType), (string)dict[nameof(ItemData.type)]),
 					icon: IconDB.GetIcon((int)(Single)dict[nameof(ItemData.icon)]),
 					level: (int)(Single)dict[nameof(ItemData.level)],
@@ -57,7 +50,5 @@ namespace Game.Database
 				));
 			}
 		}
-		public static bool HasItem(string nameCheck) { return itemData.ContainsKey(nameCheck); }
-		public static ItemData GetItemData(string worldName) { return itemData[worldName]; }
 	}
 }

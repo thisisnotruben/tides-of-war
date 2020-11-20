@@ -34,12 +34,12 @@ namespace Game.Actor.State
 		}
 		private void GetReturnPath()
 		{
-			path = Map.Map.map.getAPath(character.GlobalPosition, UnitDB.GetUnitData(character.Name).spawnPos);
+			path = Map.Map.map.getAPath(character.GlobalPosition, UnitDB.Instance.GetData(character.Name).spawnPos);
 		}
 		private bool IsAtSpawnPos()
 		{
 			return Map.Map.map.GetDirection(
-				character.GlobalPosition, UnitDB.GetUnitData(character.Name).spawnPos).Equals(Vector2.Zero);
+				character.GlobalPosition, UnitDB.Instance.GetData(character.Name).spawnPos).Equals(Vector2.Zero);
 		}
 	}
 }

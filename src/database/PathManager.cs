@@ -3,6 +3,9 @@ namespace Game.Database
 	public static class PathManager
 	{
 		public const string
+			dataExt = "json",
+			sceneExt = "tscn",
+			importExt = "import",
 			areaEffect = "res://data/areaEffect.json",
 			collNav = "res://data/collNav.json",
 			image = "res://data/image.json",
@@ -15,9 +18,11 @@ namespace Game.Database
 			spellEffectDir = "res://src/spell/visual/",
 			questDir = "res://data/quest/",
 			sndDir = "res://asset/snd/",
-			// format with map name
+
 			unitDataTemplate = "res://data/{0}/{0}.json",
 			contentDataTemplate = "res://data/{0}/{0}_content.json",
-			sceneMapPath = "res://src/map/{0}.tscn";
+			sceneMapPath = "res://src/map/{0}.tscn",
+			savePath = "res://data/save/{0}.json",
+			assetMissileSpellPath = "res://asset/img/missile-spell/{0}.tres";
 	}
 }

@@ -1,5 +1,4 @@
 using Game.Database;
-using Game.Quest;
 using Godot;
 namespace Game.Ui
 {
@@ -14,14 +13,7 @@ namespace Game.Ui
 		{
 			// load all static data when loaded
 			// since this is the entry point to the game
-			AreaEffectDB.Init();
-			CollNavDB.Init();
-			ImageDB.Init();
-			LandMineDB.Init();
-			ModUseDB.Init();
-			ItemDB.Init();
-			SpellDB.Init();
-			QuestMaster.Init();
+			SpellEffectDB.Init();
 		}
 		public override void _Ready()
 		{

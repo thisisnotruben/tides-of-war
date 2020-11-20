@@ -68,11 +68,11 @@ namespace Game.Ui
 			Directory directory = new Directory();
 			if (directory.FileExists(unitDataPath))
 			{
-				UnitDB.LoadUnitData(unitDataPath);
+				UnitDB.Instance.LoadData(unitDataPath);
 			}
 			if (directory.FileExists(contentDataPath))
 			{
-				ContentDB.LoadContentData(contentDataPath);
+				ContentDB.Instance.LoadData(contentDataPath);
 			}
 			currentScene.Hide();
 			CallDeferred(nameof(DeferredSetScene), scenePath, currentScene);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Godot;
 namespace Game.Database
 {
-	public static class QuestDB
+	public class QuestDB : AbstractDB<QuestDB.QuestData>
 	{
 		public enum QuestType : byte { TALK, KILL, COLLECT, LEARN }
 
@@ -63,18 +63,15 @@ namespace Game.Database
 			}
 		}
 
-		public static Dictionary<string, QuestData> LoadQuestData(string path)
+		public static readonly QuestDB Instance = new QuestDB();
+
+		public override void LoadData(string path)
 		{
-			File file = new File();
-			file.Open(path, File.ModeFlags.Read);
-			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
-			file.Close();
-
-			Dictionary<string, QuestData> questData = new Dictionary<string, QuestData>();
-
-			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result,
+			Godot.Collections.Dictionary rawDict = LoadJson(path),
 				dict, objectivesDict, objective, extraContentDict;
+
 			Dictionary<string, ObjectiveData> objectives;
+
 			foreach (string questName in rawDict.Keys)
 			{
 				dict = (Godot.Collections.Dictionary)rawDict[questName];
@@ -98,7 +95,7 @@ namespace Game.Database
 					));
 				}
 
-				questData.Add(questName, new QuestData(
+				data.Add(questName, new QuestData(
 					questName: questName,
 					nextQuest: ContentDB.GetWorldNames((Godot.Collections.Array)dict[nameof(QuestData.nextQuest)]),
 					reward: ContentDB.GetWorldNames((Godot.Collections.Array)dict[nameof(QuestData.reward)]),
@@ -113,7 +110,6 @@ namespace Game.Database
 					objectives: objectives
 				));
 			}
-			return questData;
 		}
 	}
 }

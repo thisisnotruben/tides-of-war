@@ -15,15 +15,15 @@ namespace Game.Quest
 			directory.Open(PathManager.questDir);
 			directory.ListDirBegin(true, true);
 
-			string resourceName = directory.GetNext(),
-				ext = "json";
+			string resourceName = directory.GetNext();
 
 			Dictionary<string, QuestDB.QuestData> questData;
 			while (!resourceName.Empty())
 			{
-				if (resourceName.Extension().Equals(ext))
+				if (resourceName.Extension().Equals(PathManager.dataExt))
 				{
-					questData = QuestDB.LoadQuestData(PathManager.questDir.PlusFile(resourceName));
+					QuestDB.Instance.LoadData(PathManager.questDir.PlusFile(resourceName));
+					questData = QuestDB.Instance.data;
 					foreach (string questName in questData.Keys)
 					{
 						quests.Add(new WorldQuest(questData[questName]));
@@ -33,7 +33,6 @@ namespace Game.Quest
 			}
 			directory.ListDirEnd();
 		}
-		public static void Init() { }
 		private static bool TryGetQuestByName(string questName, out WorldQuest worldQuest)
 		{
 			foreach (WorldQuest q in quests)

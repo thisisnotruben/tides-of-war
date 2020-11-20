@@ -34,9 +34,9 @@ namespace Game.Factory
 					spell = new Volley();
 					break;
 				default:
-					if (SpellDB.HasSpell(worldName))
+					if (SpellDB.Instance.HasData(worldName))
 					{
-						spell = AreaEffectDB.HasAreaEffect(worldName)
+						spell = AreaEffectDB.Instance.HasData(worldName)
 							? (SpellAreaEffect)SceneDB.spellAreaEffect.Instance()
 							: new Spell();
 					}

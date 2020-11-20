@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System;
-using Godot;
 namespace Game.Database
 {
-	public static class ContentDB
+	public class ContentDB : AbstractDB<ContentDB.ContentData>
 	{
 		public class ContentData
 		{
@@ -25,24 +23,19 @@ namespace Game.Database
 				this.merchandise = merchandise;
 			}
 		}
-		private static Dictionary<string, ContentData> contentData = new Dictionary<string, ContentData>();
 
-		public static void LoadContentData(string path)
+		public static readonly ContentDB Instance = new ContentDB();
+
+		public override void LoadData(string path)
 		{
-			// clear out cached database for switching between maps
-			contentData.Clear();
-			// load & parse data
-			File file = new File();
-			file.Open(path, File.ModeFlags.Read);
-			JSONParseResult jSONParseResult = JSON.Parse(file.GetAsText());
-			file.Close();
+			data.Clear();
 
-			Godot.Collections.Dictionary contentDict, rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			Godot.Collections.Dictionary contentDict, rawDict = LoadJson(path);
 			foreach (string characterName in rawDict.Keys)
 			{
 				contentDict = (Godot.Collections.Dictionary)rawDict[characterName];
 
-				contentData.Add(characterName, new ContentData(
+				data.Add(characterName, new ContentData(
 					level: (int)(Single)contentDict[nameof(ContentData.level)],
 					healerCost: (int)(Single)contentDict[nameof(ContentData.healerCost)],
 					enemy: (bool)contentDict[nameof(ContentData.enemy)],
@@ -63,7 +56,5 @@ namespace Game.Database
 			}
 			return worldNames;
 		}
-		public static ContentData GetContentData(string editorName) { return contentData[editorName]; }
-		public static bool HasContent(string nameCheck) { return contentData.ContainsKey(nameCheck); }
 	}
 }

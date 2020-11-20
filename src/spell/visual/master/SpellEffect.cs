@@ -41,7 +41,7 @@ namespace Game.Ability
 		}
 		public void Init(Character character, string spellWorldName, Node attachTo)
 		{
-			sound = SpellDB.GetSpellData(spellWorldName).sound;
+			sound = SpellDB.Instance.GetData(spellWorldName).sound;
 
 			attachTo.AddChild(this);
 			Owner = attachTo;
@@ -127,7 +127,8 @@ namespace Game.Ability
 				case NameDB.Spell.CONCUSSIVE_SHOT:
 					// remember, bash effect can change and this with it
 					string bashName = NameDB.Spell.BASH;
-					SpellEffect bashEffect = SpellDB.GetSpellEffect(SpellDB.GetSpellData(bashName).spellEffect);
+					SpellEffect bashEffect = (SpellEffect)SpellEffectDB.Instance.GetData(
+						SpellDB.Instance.GetData(bashName).spellEffect).Instance();
 					bashEffect.Init(character, bashName, character);
 
 					polyBehavior.Push(() =>

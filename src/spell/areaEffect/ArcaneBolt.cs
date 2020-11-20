@@ -13,7 +13,8 @@ namespace Game.Ability
 			{
 				base.StartAreaEffect(character);
 
-				SpellEffect spellEffect = SpellDB.GetSpellEffect(SpellDB.GetSpellData(worldName).spellEffect);
+				SpellEffect spellEffect = (SpellEffect)SpellEffectDB.Instance.GetData(
+					SpellDB.Instance.GetData(worldName).spellEffect).Instance();
 				spellEffect.Init(character, worldName, character);
 				spellEffect.OnHit();
 			}

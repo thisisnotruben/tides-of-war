@@ -30,42 +30,42 @@ namespace Game.GameItem
 			modifiers = CreateModifiers();
 			return this;
 		}
-		private static ModUseDB.ModifierNode[] GetModifiers(string worldName)
+		private static ModDB.ModifierNode[] GetModifiers(string worldName)
 		{
-			ModUseDB.Modifiers m = ModUseDB.HasMod(worldName)
-				? ModUseDB.GetMod(worldName)
+			ModDB.Modifiers m = ModDB.Instance.HasData(worldName)
+				? ModDB.Instance.GetData(worldName)
 				: null;
 
 			return m == null
-				? new ModUseDB.ModifierNode[] { }
-				: new ModUseDB.ModifierNode[] { m.stamina, m.intellect, m.agility, m.hpMax,
+				? new ModDB.ModifierNode[] { }
+				: new ModDB.ModifierNode[] { m.stamina, m.intellect, m.agility, m.hpMax,
 				m.manaMax, m.maxDamage, m.minDamage, m.regenTime, m.armor, m.weaponRange, m.weaponSpeed };
 		}
 		public static string GetDescription(string worldName)
 		{
-			int duration = ModUseDB.HasMod(worldName)
-				? ModUseDB.GetMod(worldName).durationSec
+			int duration = ModDB.Instance.HasData(worldName)
+				? ModDB.Instance.GetData(worldName).durationSec
 				: 0,
 			coolDown, level;
 
 			string blurb;
-			if (SpellDB.HasSpell(worldName))
+			if (SpellDB.Instance.HasData(worldName))
 			{
-				SpellDB.SpellData spellData = SpellDB.GetSpellData(worldName);
+				SpellDB.SpellData spellData = SpellDB.Instance.GetData(worldName);
 				coolDown = spellData.coolDown;
 				level = spellData.level;
 				blurb = spellData.blurb;
 			}
 			else
 			{
-				ItemDB.ItemData itemData = ItemDB.GetItemData(worldName);
+				ItemDB.ItemData itemData = ItemDB.Instance.GetData(worldName);
 				coolDown = itemData.coolDown;
 				level = itemData.level;
 				blurb = itemData.blurb;
 			}
 
 			// statement lambda for getting representational data from modifiers nodes
-			Func<ModUseDB.ModifierNode[], string[], string> GetModifierDescriptions = (m, n) =>
+			Func<ModDB.ModifierNode[], string[], string> GetModifierDescriptions = (m, n) =>
 			{
 				string description = "";
 				int value;
@@ -113,12 +113,12 @@ namespace Game.GameItem
 				text += $"Duration: {duration} sec.\n" + modText;
 			}
 
-			if (ModUseDB.HasUse(worldName))
+			if (UseDB.Instance.HasData(worldName))
 			{
-				ModUseDB.Use use = ModUseDB.GetUse(worldName);
+				UseDB.Use use = UseDB.Instance.GetData(worldName);
 				// set use text
 				modText = GetModifierDescriptions(
-					new ModUseDB.ModifierNode[] { use.hp, use.mana, use.damage },
+					new ModDB.ModifierNode[] { use.hp, use.mana, use.damage },
 					new string[] { "Hp", "Mana", "Damage" });
 
 				if (!modText.Empty())
@@ -138,7 +138,7 @@ namespace Game.GameItem
 		private Dictionary<CharacterStat, StatModifier> CreateModifiers()
 		{
 			Dictionary<CharacterStat, StatModifier> modifierDict = new Dictionary<CharacterStat, StatModifier>();
-			ModUseDB.ModifierNode[] mods = GetModifiers(worldName);
+			ModDB.ModifierNode[] mods = GetModifiers(worldName);
 
 			StatManager s = character.stats;
 			// array in the same order as in 'GetModifiers;
@@ -204,7 +204,7 @@ namespace Game.GameItem
 			}
 			return true;
 		}
-		public virtual void StartUse(ModUseDB.Use use, int durationSec)
+		public virtual void StartUse(UseDB.Use use, int durationSec)
 		{
 			if (use.hp.value != 0)
 			{
@@ -232,7 +232,7 @@ namespace Game.GameItem
 				useTimer.Start();
 			}
 		}
-		public void OnUseTimeout(ModUseDB.Use use, int durationSec)
+		public void OnUseTimeout(UseDB.Use use, int durationSec)
 		{
 			if (++useCount < durationSec / use.repeatSec)
 			{
@@ -250,12 +250,12 @@ namespace Game.GameItem
 				return;
 			}
 
-			int duration = ModUseDB.HasMod(worldName)
-				? ModUseDB.GetMod(worldName).durationSec
+			int duration = ModDB.Instance.HasData(worldName)
+				? ModDB.Instance.GetData(worldName).durationSec
 				: 0,
-			coolDown = SpellDB.HasSpell(worldName)
-				? SpellDB.GetSpellData(worldName).coolDown
-				: ItemDB.GetItemData(worldName).coolDown;
+			coolDown = SpellDB.Instance.HasData(worldName)
+				? SpellDB.Instance.GetData(worldName).coolDown
+				: ItemDB.Instance.GetData(worldName).coolDown;
 
 			AddCooldown(character.GetPath(), worldName, coolDown);
 
@@ -264,9 +264,9 @@ namespace Game.GameItem
 				stat.AddModifier(modifiers[stat]);
 			}
 
-			if (ModUseDB.HasUse(worldName))
+			if (UseDB.Instance.HasData(worldName))
 			{
-				StartUse(ModUseDB.GetUse(worldName), duration);
+				StartUse(UseDB.Instance.GetData(worldName), duration);
 			}
 
 			if (duration > 0)

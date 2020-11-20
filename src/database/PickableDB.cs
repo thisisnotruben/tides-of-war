@@ -5,21 +5,21 @@ namespace Game.Database
 	{
 		public static int GetStackSize(string worldName)
 		{
-			return (SpellDB.HasSpell(worldName))
-				? SpellDB.GetSpellData(worldName).stackSize
-				: ItemDB.GetItemData(worldName).stackSize;
+			return SpellDB.Instance.HasData(worldName)
+				? SpellDB.Instance.GetData(worldName).stackSize
+				: ItemDB.Instance.GetData(worldName).stackSize;
 		}
 		public static Texture GetIcon(string worldName)
 		{
-			return (SpellDB.HasSpell(worldName))
-				? SpellDB.GetSpellData(worldName).icon
-				: ItemDB.GetItemData(worldName).icon;
+			return SpellDB.Instance.HasData(worldName)
+				? SpellDB.Instance.GetData(worldName).icon
+				: ItemDB.Instance.GetData(worldName).icon;
 		}
 		public static int GetGoldCost(string worldName)
 		{
-			return (SpellDB.HasSpell(worldName))
-				? SpellDB.GetSpellData(worldName).goldCost
-				: ItemDB.GetItemData(worldName).goldCost;
+			return SpellDB.Instance.HasData(worldName)
+				? SpellDB.Instance.GetData(worldName).goldCost
+				: ItemDB.Instance.GetData(worldName).goldCost;
 		}
 	}
 }

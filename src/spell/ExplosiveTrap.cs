@@ -8,7 +8,7 @@ namespace Game.Ability
 		{
 			base.Start();
 
-			LandMineDB.LandMineData landMineData = LandMineDB.GetLandMineData(worldName);
+			LandMineDB.LandMineData landMineData = LandMineDB.Instance.GetData(worldName);
 
 			LandMine landMine = (LandMine)SceneDB.landMine.Instance();
 			landMine.Init(character, landMineData.maxDamage, landMineData.maxDamage,

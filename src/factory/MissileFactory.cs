@@ -9,7 +9,7 @@ namespace Game.Factory
 		{
 			Missile missile;
 
-			if (SpellDB.HasSpellMissile(spellName))
+			if (MissileSpellDB.Instance.HasData(spellName))
 			{
 				switch (spellName)
 				{

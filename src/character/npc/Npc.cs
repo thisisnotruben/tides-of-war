@@ -11,16 +11,16 @@ namespace Game.Actor
 		{
 			base._Ready();
 			unitFocus = GetNode<Node2D>("unitFocus");
-			UnitDB.UnitData unitData = UnitDB.GetUnitData(Name);
+			UnitDB.UnitData unitData = UnitDB.Instance.GetData(Name);
 			enemy = unitData.enemy;
 			level = unitData.level;
 			if (!unitData.name.Empty())
 			{
 				worldName = unitData.name;
 			}
-			if (ContentDB.HasContent(Name))
+			if (ContentDB.Instance.HasData(Name))
 			{
-				ContentDB.ContentData contentData = ContentDB.GetContentData(Name);
+				ContentDB.ContentData contentData = ContentDB.Instance.GetData(Name);
 				enemy = contentData.enemy;
 				level = contentData.level;
 			}

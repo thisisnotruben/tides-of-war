@@ -53,10 +53,10 @@ namespace Game.Ui
 
 			// decide which buttons to show
 			string[] showBttns = { };
-			if (!player.dead && itemList != null && ItemDB.HasItem(pickableWorldName))
+			if (!player.dead && itemList != null && ItemDB.Instance.HasData(pickableWorldName))
 			{
 				showBttns = new string[] { "drop", "" };
-				ItemDB.ItemType itemType = ItemDB.GetItemData(pickableWorldName).type;
+				ItemDB.ItemType itemType = ItemDB.Instance.GetData(pickableWorldName).type;
 				switch (itemType)
 				{
 					case ItemDB.ItemType.FOOD:

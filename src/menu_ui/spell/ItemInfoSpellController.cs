@@ -23,7 +23,7 @@ namespace Game.Ui
 		public void _OnCastPressed()
 		{
 			bool showPopup = false;
-			SpellDB.SpellData spellData = SpellDB.GetSpellData(pickableWorldName);
+			SpellDB.SpellData spellData = SpellDB.Instance.GetData(pickableWorldName);
 			Label popupErrLabel = popupController.GetNode<Label>("m/error/label");
 
 			if (player.mana >= spellData.manaCost)

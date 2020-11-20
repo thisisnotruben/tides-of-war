@@ -49,7 +49,7 @@ namespace Game.Ui
 		}
 		public void _OnItemEquipped(string worldName, bool on)
 		{
-			ItemDB.ItemData itemData = ItemDB.GetItemData(worldName);
+			ItemDB.ItemData itemData = ItemDB.Instance.GetData(worldName);
 
 			GetNode<TextureRect>(
 				(itemData.type == ItemDB.ItemType.ARMOR)

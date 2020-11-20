@@ -65,7 +65,7 @@ namespace Game.Ui
 		public void _OnTransaction(string CommodityName, int goldAmount, bool bought)
 		{
 			// called from ItemInfo when player buys/sells
-			bool isSpell = SpellDB.HasSpell(CommodityName);
+			bool isSpell = SpellDB.Instance.HasData(CommodityName);
 			if (bought)
 			{
 				if (isSpell)
@@ -118,10 +118,10 @@ namespace Game.Ui
 		}
 		public void _OnMerchantNodeDraw()
 		{
-			ContentDB.ContentData contentData = ContentDB.GetContentData(merchant.Name);
+			ContentDB.ContentData contentData = ContentDB.Instance.GetData(merchant.Name);
 
 			Globals.soundPlayer.PlaySound(
-				SpellDB.HasSpell(contentData.merchandise[0])
+				SpellDB.Instance.HasData(contentData.merchandise[0])
 				? NameDB.UI.TURN_PAGE
 				: NameDB.UI.MERCHANT_OPEN
 			);
@@ -144,7 +144,7 @@ namespace Game.Ui
 
 			// called from the slots in the merchant view
 			string CommodityName = merchantStore.GetCommodity(slotIndex);
-			bool isSpell = SpellDB.HasSpell(CommodityName);
+			bool isSpell = SpellDB.Instance.HasData(CommodityName);
 			bool alreadyHave = false;
 
 			if (isSpell)
@@ -155,7 +155,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(Database.ItemDB.GetItemData(CommodityName).material, true);
+				Globals.soundPlayer.PlaySound(ItemDB.Instance.GetData(CommodityName).material, true);
 			}
 
 			// show item details and switch view
@@ -174,7 +174,7 @@ namespace Game.Ui
 			// display to what merchant is selling
 			merchantSlots.ClearSlots();
 			DisplayItems(merchant.worldName,
-				ContentDB.GetContentData(merchant.Name).merchandise);
+				ContentDB.Instance.GetData(merchant.Name).merchandise);
 		}
 		public void _OnInventoryPressed()
 		{

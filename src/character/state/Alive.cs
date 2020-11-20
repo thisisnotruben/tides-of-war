@@ -55,8 +55,8 @@ namespace Game.Actor.State
 				(otherHitBox.Owner as Npc)?._OnCharacterEnteredSight(character.hitBox);
 			}
 
-			fsm.ChangeState(UnitDB.HasUnitData(character.Name)
-				&& UnitDB.GetUnitData(character.Name).path.Length > 0
+			fsm.ChangeState(UnitDB.Instance.HasData(character.Name)
+				&& UnitDB.Instance.GetData(character.Name).path.Length > 0
 				? FSM.State.NPC_MOVE_ROAM
 				: FSM.State.IDLE);
 		}

@@ -28,7 +28,7 @@ namespace Game.Ui
 		private void EquipItem(bool on, string worldName)
 		{
 			Item item = (Item)new ItemFactory().MakeCommodity(player, worldName);
-			switch (ItemDB.GetItemData(worldName).type)
+			switch (ItemDB.Instance.GetData(worldName).type)
 			{
 				case ItemDB.ItemType.WEAPON:
 					// add back to inventory
@@ -66,7 +66,7 @@ namespace Game.Ui
 		{
 			string sndName = NameDB.UI.CLICK2;
 
-			switch (ItemDB.GetItemData(pickableWorldName).type)
+			switch (ItemDB.Instance.GetData(pickableWorldName).type)
 			{
 				case ItemDB.ItemType.FOOD:
 					sndName = NameDB.UI.EAT;
@@ -96,7 +96,7 @@ namespace Game.Ui
 		}
 		public void _OnEquipPressed()
 		{
-			ItemDB.ItemType itemType = ItemDB.GetItemData(pickableWorldName).type;
+			ItemDB.ItemType itemType = ItemDB.Instance.GetData(pickableWorldName).type;
 			Item playerWeapon = player.weapon;
 			Item playerArmor = player.vest;
 			bool inventoryFull = false;
@@ -137,7 +137,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(ItemDB.GetItemData(pickableWorldName).material, false);
+				Globals.soundPlayer.PlaySound(ItemDB.Instance.GetData(pickableWorldName).material, false);
 				// equip focused item
 				EquipItem(true, pickableWorldName);
 			}
@@ -187,7 +187,7 @@ namespace Game.Ui
 			treasureChest.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
 
 			QuestMaster.CheckQuests(pickableWorldName,
-				SpellDB.HasSpell(pickableWorldName)
+				SpellDB.Instance.HasData(pickableWorldName)
 					? QuestDB.QuestType.LEARN
 					: QuestDB.QuestType.COLLECT,
 				false);
