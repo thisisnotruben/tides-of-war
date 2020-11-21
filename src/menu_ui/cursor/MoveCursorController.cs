@@ -5,7 +5,7 @@ namespace Game.Ui
 	{
 		public void AddToMap(Vector2 globalTilePosition)
 		{
-			Map.Map.map.GetNode("ground").AddChild(this);
+			Map.Map.map.AddGChild(this);
 			GlobalPosition = globalTilePosition;
 		}
 		public void _OnAnimFinished(string AnimName) { Delete(); }

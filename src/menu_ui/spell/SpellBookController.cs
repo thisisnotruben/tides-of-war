@@ -9,9 +9,13 @@ namespace Game.Ui
 		private SlotGridController spellSlots;
 		private ItemInfoSpellController itemInfoSpellController;
 		private PopupController popupController;
+		private Control mainContent;
+		protected Label hpHeader, manaHeader;
 
 		public override void _Ready()
 		{
+			mainContent = GetNode<Control>("s");
+
 			popupController = GetNode<PopupController>("popup");
 			popupController.Connect("hide", this, nameof(_OnSpellBookNodeHide));
 
@@ -27,6 +31,9 @@ namespace Game.Ui
 				slot.button.Connect("pressed", this, nameof(_OnSpellBookIndexSelected),
 					new Godot.Collections.Array() { slot.GetIndex() });
 			}
+
+			hpHeader = GetNode<Label>("s/v/m/v/playerHpHeader");
+			manaHeader = GetNode<Label>("s/v/m/v/playerManaHeader");
 		}
 		public void _OnSpellBookNodeDraw()
 		{
@@ -39,13 +46,13 @@ namespace Game.Ui
 			}
 
 			// fill hp/mana headers
-			GetNode<Label>("s/v/m/v/playerHpHeader").Text = $"Health: {player.hp} / {player.stats.hpMax.valueI}";
-			GetNode<Label>("s/v/m/v/playerManaHeader").Text = $"Mana: {player.mana} / {player.stats.manaMax.valueI}";
+			hpHeader.Text = $"Health: {player.hp} / {player.stats.hpMax.valueI}";
+			manaHeader.Text = $"Mana: {player.mana} / {player.stats.manaMax.valueI}";
 		}
 		public void _OnSpellBookNodeHide()
 		{
 			popupController.Hide();
-			GetNode<Control>("s").Show();
+			mainContent.Show();
 		}
 		public void _OnSpellBookIndexSelected(int slotIndex)
 		{
@@ -56,7 +63,7 @@ namespace Game.Ui
 			}
 
 			Globals.soundPlayer.PlaySound(NameDB.UI.SPELL_SELECT);
-			GetNode<Control>("s").Hide();
+			mainContent.Hide();
 
 			itemInfoSpellController.selectedSlotIdx = slotIndex;
 			itemInfoSpellController.Display(spellBook.GetCommodity(slotIndex), true);

@@ -2,11 +2,13 @@ using Game.Actor;
 using Game.GameItem;
 namespace Game.Factory
 {
-	public class ItemFactory : CommodityFactory
+	public class ItemFactory : Factory<Item>
 	{
-		protected override Commodity CreateCommodity(Character character, string worldName)
+		protected override Item Create(Character character, string worldName)
 		{
-			return new Item().Init(character, worldName);
+			Item item = new Item();
+			item.Init(character, worldName);
+			return item;
 		}
 	}
 }

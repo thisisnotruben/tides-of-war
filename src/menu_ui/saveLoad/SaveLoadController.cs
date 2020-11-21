@@ -13,7 +13,7 @@ namespace Game.Ui
 			AddChild(saveLoadModel);
 			popupController = GetNode<PopupController>("popup");
 			popupController.Connect("hide", this, nameof(_OnSaveLoadNodeHide));
-			popupController.GetNode<BaseButton>("m/save_load/save").Connect("pressed", this, nameof(_OnSavePressed));
+			popupController.saveBttn.Connect("pressed", this, nameof(_OnSavePressed));
 			SetLabels();
 		}
 		private void SaveGame()
@@ -38,7 +38,7 @@ namespace Game.Ui
 		}
 		protected void RouteConnections(string toMethod)
 		{
-			BaseButton yesBttn = popupController.GetNode<BaseButton>("m/yes_no/yes");
+			BaseButton yesBttn = popupController.yesBttn;
 			string signal = "pressed";
 			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
 			{
@@ -53,30 +53,30 @@ namespace Game.Ui
 		}
 		public void _OnPopupHide()
 		{
-			popupController.GetNode<Control>("m/save_load/delete").Hide();
-			popupController.GetNode<Control>("m/save_load/save").Hide();
-			popupController.GetNode<Control>("m/save_load/load").Hide();
+			popupController.deleteBttn.Hide();
+			popupController.saveBttn.Hide();
+			popupController.loadBttn.Hide();
 		}
 		public void _OnSlotPressed(int index)
 		{
 			this.index = index + 1;
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 			GetNode<Control>("v").Hide();
-			popupController.GetNode<Control>("m/save_load/save").Show();
+			popupController.saveBttn.Show();
 			if (!GetLabel(index).Text.Equals($"Slot {index + 1}"))
 			{
-				popupController.GetNode<Control>("m/save_load/load").Show();
-				popupController.GetNode<Control>("m/save_load/delete").Show();
+				popupController.loadBttn.Show();
+				popupController.deleteBttn.Show();
 			}
-			popupController.GetNode<Control>("m/save_load").Show();
+			popupController.saveLoadView.Show();
 			popupController.Show();
 		}
 		public void _OnDeletePressed()
 		{
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
 			RouteConnections(nameof(_OnDeleteConfirm));
-			popupController.GetNode<Label>("m/yes_no/label").Text = "Delete?";
-			popupController.GetNode<Control>("m/yes_no").Show();
+			popupController.yesNoLabel.Text = "Delete?";
+			popupController.yesNoView.Show();
 			popupController.Show();
 		}
 		public void _OnDeleteConfirm()
@@ -95,8 +95,8 @@ namespace Game.Ui
 			else
 			{
 				RouteConnections(nameof(_OnOverwriteConfirm));
-				popupController.GetNode<Label>("m/yes_no/label").Text = "Overwrite?";
-				popupController.GetNode<Control>("m/yes_no").Show();
+				popupController.yesNoLabel.Text = "Overwrite?";
+				popupController.yesNoView.Show();
 			}
 		}
 		public void _OnOverwriteConfirm()

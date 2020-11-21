@@ -8,15 +8,8 @@ namespace Game.Map.Doodads
 	{
 		public override void _Ready()
 		{
-			if (!IsConnected("area_entered", this, nameof(_OnPlayerEntered)))
-			{
-				Connect("area_entered", this, nameof(_OnPlayerEntered));
-			}
-
-			if (!IsConnected("area_exited", this, nameof(_OnPlayerExited)))
-			{
-				Connect("area_exited", this, nameof(_OnPlayerExited));
-			}
+			Globals.TryLinkSignal(this, "area_entered", this, nameof(_OnPlayerEntered), true);
+			Globals.TryLinkSignal(this, "area_exited", this, nameof(_OnPlayerExited), true);
 		}
 		public void _OnPlayerEntered(Area2D area)
 		{

@@ -8,26 +8,20 @@ namespace Game.Ui
 {
 	public class ItemInfoInventoryController : ItemInfoController
 	{
-		[Signal]
-		public delegate void ItemEquipped(string worldName, bool on);
-		[Signal]
-		public delegate void RefreshSlots();
+		[Signal] public delegate void ItemEquipped(string worldName, bool on);
+		[Signal] public delegate void RefreshSlots();
 
 		public override void _Ready()
 		{
 			base._Ready();
-			GetNode<BaseButton>("s/h/buttons/use")
-				.Connect("pressed", this, nameof(_OnUsePressed));
-			GetNode<BaseButton>("s/h/buttons/equip")
-				.Connect("pressed", this, nameof(_OnEquipPressed));
-			GetNode<BaseButton>("s/h/buttons/unequip")
-				.Connect("pressed", this, nameof(_OnUnequipPressed));
-			GetNode<BaseButton>("s/h/buttons/drop")
-				.Connect("pressed", this, nameof(_OnDropPressed));
+			useBttn.Connect("pressed", this, nameof(_OnUsePressed));
+			equipBttn.Connect("pressed", this, nameof(_OnEquipPressed));
+			unequipBttn.Connect("pressed", this, nameof(_OnUnequipPressed));
+			dropBttn.Connect("pressed", this, nameof(_OnDropPressed));
 		}
 		private void EquipItem(bool on, string worldName)
 		{
-			Item item = (Item)new ItemFactory().MakeCommodity(player, worldName);
+			Item item = new ItemFactory().Make(player, worldName);
 			switch (ItemDB.Instance.GetData(worldName).type)
 			{
 				case ItemDB.ItemType.WEAPON:
@@ -37,7 +31,7 @@ namespace Game.Ui
 						itemList.AddCommodity(player.weapon.worldName);
 					}
 
-					player.weapon = (on) ? item : null;
+					player.weapon = on ? item : null;
 					break;
 				case ItemDB.ItemType.ARMOR:
 					// add back to inventory
@@ -46,7 +40,7 @@ namespace Game.Ui
 						itemList.AddCommodity(player.vest.worldName);
 					}
 
-					player.vest = (on) ? item : null;
+					player.vest = on ? item : null;
 					break;
 				default:
 					return;
@@ -73,9 +67,9 @@ namespace Game.Ui
 					// cannot eat in combat
 					if (player.attacking)
 					{
-						GetNode<Control>("s").Hide();
-						popupController.GetNode<Label>("m/error/label").Text = "Cannot Eat\nIn Combat!";
-						popupController.GetNode<Control>("m/error").Show();
+						mainContent.Hide();
+						popupController.errorLabel.Text = "Cannot Eat\nIn Combat!";
+						popupController.errorView.Show();
 						popupController.Show();
 						return;
 					}
@@ -87,7 +81,7 @@ namespace Game.Ui
 			Globals.soundPlayer.PlaySound(sndName);
 
 			// eat up or drink up
-			new ItemFactory().MakeCommodity(player, pickableWorldName).Start();
+			new ItemFactory().Make(player, pickableWorldName).Start();
 			// remove from inventory
 			itemList.RemoveCommodity(pickableWorldName);
 
@@ -104,11 +98,8 @@ namespace Game.Ui
 			// unequip weapon if any to equip focused weapon
 			if (itemType == ItemDB.ItemType.WEAPON && playerWeapon != null)
 			{
-				if (itemList.IsFull(playerWeapon.worldName))
-				{
-					inventoryFull = true;
-				}
-				else
+				inventoryFull = itemList.IsFull(playerWeapon.worldName);
+				if (!inventoryFull)
 				{
 					EquipItem(false, playerWeapon.worldName);
 				}
@@ -117,11 +108,8 @@ namespace Game.Ui
 			// unequip armor if any to equip focused armor
 			if (itemType == ItemDB.ItemType.ARMOR && playerArmor != null)
 			{
-				if (itemList.IsFull(playerArmor.worldName))
-				{
-					inventoryFull = true;
-				}
-				else
+				inventoryFull = itemList.IsFull(playerArmor.worldName);
+				if (!inventoryFull)
 				{
 					EquipItem(false, playerArmor.worldName);
 				}
@@ -130,9 +118,9 @@ namespace Game.Ui
 			if (inventoryFull)
 			{
 				// inventory full
-				GetNode<Control>("s").Hide();
-				popupController.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
-				popupController.GetNode<Control>("m/error").Show();
+				mainContent.Hide();
+				popupController.errorLabel.Text = "Inventory\nFull!";
+				popupController.errorView.Show();
 				popupController.Show();
 			}
 			else
@@ -146,9 +134,9 @@ namespace Game.Ui
 		{
 			if (itemList.IsFull(pickableWorldName))
 			{
-				GetNode<Control>("s").Hide();
-				popupController.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
-				popupController.GetNode<Control>("m/error").Show();
+				mainContent.Hide();
+				popupController.errorLabel.Text = "Inventory\nFull!";
+				popupController.errorView.Show();
 				popupController.Show();
 			}
 			else
@@ -162,9 +150,9 @@ namespace Game.Ui
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
 
 			RouteConnections(nameof(_OnDropConfirm));
-			GetNode<Control>("s").Hide();
-			popupController.GetNode<Label>("m/yes_no/label").Text = "Drop?";
-			popupController.GetNode<Control>("m/yes_no").Show();
+			mainContent.Hide();
+			popupController.yesNoLabel.Text = "Drop?";
+			popupController.yesNoView.Show();
 			popupController.Show();
 		}
 		public void _OnDropConfirm()

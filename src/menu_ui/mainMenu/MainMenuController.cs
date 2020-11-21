@@ -32,10 +32,8 @@ namespace Game.Ui
 
 			popupController = GetNode<PopupController>("background/margin/popup");
 			PopupController.mainMenuController = this;
-			popupController.GetNode<BaseButton>("m/exit/exit_game")
-				.Connect("pressed", this, nameof(_OnExitGamePressed));
-			popupController.GetNode<BaseButton>("m/exit/exit_menu")
-				.Connect("pressed", this, nameof(_OnExitMenuPressed));
+			popupController.exitGameBttn.Connect("pressed", this, nameof(_OnExitGamePressed));
+			popupController.exitMenuBttn.Connect("pressed", this, nameof(_OnExitMenuPressed));
 
 			spellBookController = GetNode<SpellBookController>("background/margin/spell_book");
 			spellBookController.Connect("hide", this, nameof(_OnMainMenuHide));
@@ -87,8 +85,8 @@ namespace Game.Ui
 			{
 				if (playerSpellBook.IsFull(lootChest.commodityWorldName))
 				{
-					popupController.GetNode<Label>("m/error/label").Text = "Spell Book\nFull!";
-					popupController.GetNode<Control>("m/error").Show();
+					popupController.errorLabel.Text = "Spell Book\nFull!";
+					popupController.errorView.Show();
 					popupController.Show();
 				}
 				else
@@ -102,8 +100,8 @@ namespace Game.Ui
 			{
 				if (playerInventory.IsFull(lootChest.commodityWorldName))
 				{
-					popupController.GetNode<Label>("m/error/label").Text = "Inventory\nFull!";
-					popupController.GetNode<Control>("m/error").Show();
+					popupController.errorLabel.Text = "Inventory\nFull!";
+					popupController.errorView.Show();
 					popupController.Show();
 				}
 				else
@@ -127,7 +125,7 @@ namespace Game.Ui
 		public void _OnSaveLoadPressed() { Transition(saveLoadController); }
 		public void _OnExitPressed()
 		{
-			popupController.GetNode<Control>("m/exit").Show();
+			popupController.exitView.Show();
 			Transition(popupController);
 		}
 		public void _OnExitGamePressed() { GetTree().Quit(); }

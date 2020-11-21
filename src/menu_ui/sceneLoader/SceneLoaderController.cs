@@ -17,11 +17,7 @@ namespace Game.Ui
 			progressBar = GetNode<Range>("progress_bar/m/v/bar");
 			SetProcess(false);
 		}
-		public static SceneLoaderController Init()
-		{
-			PackedScene sceneLoaderScene = (PackedScene)GD.Load("res://src/menu_ui/sceneLoader/SceneLoaderView.tscn");
-			return (SceneLoaderController)sceneLoaderScene.Instance();
-		}
+		public static SceneLoaderController Init() { return (SceneLoaderController)SceneDB.sceneLoader.Instance(); }
 		private void SetTransitions()
 		{
 			if (playerState.Count > 0)

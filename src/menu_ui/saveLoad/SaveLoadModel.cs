@@ -35,7 +35,7 @@ namespace Game.Ui
 				{
 					file.Open(savePathDir.PlusFile(fileName), File.ModeFlags.Read);
 					saveFileNames[fileName.BaseName().ToInt()] =
-						(string)((Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result)["saveTime"];
+						(string)((Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result)[NameDB.SaveTag.TIME];
 					file.Close();
 				}
 				fileName = directory.GetNext();
@@ -56,12 +56,14 @@ namespace Game.Ui
 			// create master save and add all components
 			Godot.Collections.Dictionary masterSave = new Godot.Collections.Dictionary()
 			{
-				{"map", Map.Map.map.Filename},
-				{"saveTime", saveTime}
+				{NameDB.SaveTag.MAP, Map.Map.map.Filename},
+				{NameDB.SaveTag.TIME, saveTime}
 			};
+
+			ISerializable saveNode;
 			foreach (Node node in GetTree().GetNodesInGroup(Globals.SAVE_GROUP))
 			{
-				ISerializable saveNode = node as ISerializable;
+				saveNode = node as ISerializable;
 				if (saveNode != null)
 				{
 					masterSave[node.GetPath()] = saveNode.Serialize();
@@ -93,7 +95,7 @@ namespace Game.Ui
 			CanvasItem recentScene = root.GetChild(root.GetChildren().Count - 1) as CanvasItem;
 			if (recentScene != null)
 			{
-				SceneLoaderController.Init().SetScene((string)payload["map"], recentScene);
+				SceneLoaderController.Init().SetScene((string)payload[NameDB.SaveTag.MAP], recentScene);
 			}
 
 			// load data
@@ -101,11 +103,7 @@ namespace Game.Ui
 			{
 				if (HasNode(nodePath))
 				{
-					ISerializable serializadNode = GetNode(nodePath) as ISerializable;
-					if (serializadNode != null)
-					{
-						serializadNode.Deserialize((Godot.Collections.Dictionary)payload[nodePath]);
-					}
+					(GetNode(nodePath) as ISerializable)?.Deserialize((Godot.Collections.Dictionary)payload[nodePath]);
 				}
 			}
 		}

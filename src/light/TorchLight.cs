@@ -3,60 +3,73 @@ namespace Game.Light
 {
 	public class TorchLight : GameLight
 	{
-		private Light2D light;
-		private VisibilityNotifier2D visibility;
+		public const float MAX_BRIGHT = 1.0f,
+			MIN_BRIGHT = 0.8f;
+
+		protected AnimationPlayer anim;
+		protected Tween tween;
+		protected Light2D light;
+		protected VisibilityNotifier2D visibility;
 
 		public override void _Ready()
 		{
 			base._Ready();
+			anim = GetNode<AnimationPlayer>("anim");
+			tween = GetNode<Tween>("tween");
 			light = GetNode<Light2D>("light");
 			visibility = GetNode<VisibilityNotifier2D>("visibility");
+
+			Globals.TryLinkSignal(visibility, "screen_entered", this, nameof(Start), true);
+			Globals.TryLinkSignal(visibility, "screen_exited", this, nameof(Stop), true);
 		}
-		public override void SetIntensity(bool full, float min = 0.8f, float max = 1.0f)
+		public override void SetIntensity(bool maxBrightness)
 		{
-			float choice = (full) ? max : min;
-			// TODO
-			// if (visibility.IsOnScreen())
-			// {
-			// 	Tween tween = GetNode<Tween>("tween");
-			// 	tween.InterpolateProperty(light, "energy", light.Energy,
-			// 		choice, 1.0f, Tween.TransitionType.Linear, Tween.EaseType.In);
-			// 	tween.Start();
-			// }
-			// else
-			// {
-			light.Energy = choice;
-			// }
+			float brightness = maxBrightness ? MAX_BRIGHT : MIN_BRIGHT;
+
+			if (visibility.IsOnScreen())
+			{
+				tween.InterpolateProperty(light, "energy", light.Energy,
+					brightness, 1.0f, Tween.TransitionType.Linear, Tween.EaseType.In);
+				tween.Start();
+			}
+			else
+			{
+				light.Energy = brightness;
+			}
 		}
 		public override void Start()
 		{
-			if (visibility.IsOnScreen())
+			if (!visibility.IsOnScreen())
 			{
-				GetNode<AnimationPlayer>("anim").Play("torch");
-				light.Enabled = true;
-				foreach (Node node in GetChildren())
+				return;
+			}
+
+			anim.Play("torch");
+			light.Enabled = true;
+			foreach (Node node in GetChildren())
+			{
+				Emit(node, true);
+				foreach (Node childNode in node.GetChildren())
 				{
-					Emit(node, true);
-					foreach (Node childNode in node.GetChildren())
-					{
-						Emit(childNode, true);
-					}
+					Emit(childNode, true);
 				}
 			}
 		}
 		public override void Stop()
 		{
-			if (!visibility.IsOnScreen())
+			if (visibility.IsOnScreen())
 			{
-				GetNode<AnimationPlayer>("anim").Stop();
-				light.Enabled = false;
-				foreach (Node node in GetChildren())
+				return;
+			}
+
+			anim.Stop();
+			light.Enabled = false;
+			foreach (Node node in GetChildren())
+			{
+				Emit(node, false);
+				foreach (Node childNode in node.GetChildren())
 				{
-					Emit(node, false);
-					foreach (Node childNode in node.GetChildren())
-					{
-						Emit(childNode, false);
-					}
+					Emit(childNode, false);
 				}
 			}
 		}

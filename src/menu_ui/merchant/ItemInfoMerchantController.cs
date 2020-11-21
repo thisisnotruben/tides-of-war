@@ -5,17 +5,17 @@ namespace Game.Ui
 	public class ItemInfoMerchantController : ItemInfoController
 	{
 		public InventoryModel playerSpellBook;
-		public bool isBuying = false;
-		[Signal]
-		public delegate void OnTransaction(string pickableWorldName, int goldAmount, bool bought);
+		public bool isBuying;
+
+		[Signal] public delegate void OnTransaction(string pickableWorldName, int goldAmount, bool bought);
 
 		public override void _Ready()
 		{
 			base._Ready();
-			GetNode<BaseButton>("s/h/buttons/buy")
-				.Connect("pressed", this, nameof(_OnBuyPressed));
-			GetNode<BaseButton>("s/h/buttons/sell")
-				.Connect("pressed", this, nameof(_OnSellPressed));
+
+			buyBttn.Connect("pressed", this, nameof(_OnBuyPressed));
+			sellBttn.Connect("pressed", this, nameof(_OnSellPressed));
+
 			BaseButton addToHudBttn = GetNode<BaseButton>("s/v/c/v/add_to_hud");
 			addToHudBttn.Disconnect("button_down", this, nameof(_OnSlotMoved));
 			addToHudBttn.Disconnect("button_up", this, nameof(_OnSlotMoved));
@@ -36,44 +36,43 @@ namespace Game.Ui
 		}
 		public void Display(string pickableWorldName, bool allowMove, bool buy, bool alreadyHave)
 		{
-			// call overloaded method
 			Display(pickableWorldName, allowMove);
 
 			// set which buttons to show accordingly
-			GetNode<Label>("s/h/buttons/buy/label").Text = SpellDB.Instance.HasData(pickableWorldName) ? "Train" : "Buy";
-			HideExcept((alreadyHave) ? new string[] { } : new string[] { (buy) ? "buy" : "sell" });
+			buyBttn.Text = SpellDB.Instance.HasData(pickableWorldName) ? "Train" : "Buy";
+			HideExcept(alreadyHave ? new Control[] { } : new Control[] { buy ? buyBttn : sellBttn });
 		}
 		public void _OnBuyPressed()
 		{
 			RouteConnections(nameof(_OnBuyConfirm));
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
-			GetNode<Control>("s").Hide();
+			mainContent.Hide();
 			if (SpellDB.Instance.HasData(pickableWorldName)
 			&& player.level < SpellDB.Instance.GetData(pickableWorldName).level)
 			{
-				popupController.GetNode<Label>("m/error/label").Text = "Can't Learn\nThis Yet!";
-				popupController.GetNode<Control>("m/error").Show();
+				popupController.errorLabel.Text = "Can't Learn\nThis Yet!";
+				popupController.errorView.Show();
 
 			}
 			else if (PickableDB.GetGoldCost(pickableWorldName) < player.gold)
 			{
-				popupController.GetNode<Label>("m/yes_no/label").Text = (SpellDB.Instance.HasData(pickableWorldName)) ? "Learn?" : "Buy?";
-				popupController.GetNode<Control>("m/yes_no").Show();
+				popupController.yesNoLabel.Text = SpellDB.Instance.HasData(pickableWorldName) ? "Learn?" : "Buy?";
+				popupController.yesNoView.Show();
 			}
 			else
 			{
-				popupController.GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
-				popupController.GetNode<Control>("m/error").Show();
+				popupController.errorLabel.Text = "Not Enough\nGold!";
+				popupController.errorView.Show();
 			}
 			popupController.Show();
 		}
 		public void _OnBuyConfirm()
 		{
 			Globals.soundPlayer.PlaySound(NameDB.UI.SELL_BUY);
-			if (popupController.GetNode<Label>("m/yes_no/label").Text.Equals("Learn?"))
+			if (popupController.yesNoLabel.Text.Equals("Learn?"))
 			{
 				Globals.soundPlayer.PlaySound(NameDB.UI.LEARN_SPELL);
-				GetNode<Control>("s/h/buttons/buy").Hide();
+				buyBttn.Hide();
 			}
 			EmitSignal(nameof(OnTransaction),
 				pickableWorldName, -PickableDB.GetGoldCost(pickableWorldName), true);
@@ -83,9 +82,9 @@ namespace Game.Ui
 		{
 			RouteConnections(nameof(_OnSellConfirm));
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
-			GetNode<Control>("s").Hide();
-			popupController.GetNode<Label>("m/yes_no/label").Text = "Sell?";
-			popupController.GetNode<Control>("m/yes_no").Show();
+			mainContent.Hide();
+			popupController.yesNoLabel.Text = "Sell?";
+			popupController.yesNoView.Show();
 			popupController.Show();
 		}
 		public void _OnSellConfirm()

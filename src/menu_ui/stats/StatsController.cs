@@ -3,13 +3,17 @@ namespace Game.Ui
 {
 	public class StatsController : GameMenu
 	{
-		private ItemInfoController itemInfoController;
+		protected ItemInfoController itemInfoController;
+		protected RichTextLabel textLabel;
 
 		public override void _Ready()
 		{
 			itemInfoController = GetNode<ItemInfoController>("item_info");
 			itemInfoController.itemList = null;
 			itemInfoController.Connect("hide", this, nameof(Show));
+
+			textLabel = GetNode<RichTextLabel>("s/v/c/label");
+
 			BaseButton addToHudBttn = itemInfoController.GetNode<BaseButton>("s/v/c/v/add_to_hud");
 			addToHudBttn.Disconnect("button_up", itemInfoController, nameof(ItemInfoController._OnSlotMoved));
 			addToHudBttn.Disconnect("button_down", itemInfoController, nameof(ItemInfoController._OnSlotMoved));
@@ -17,7 +21,7 @@ namespace Game.Ui
 		}
 		public void _OnStatsNodeDraw()
 		{
-			GetNode<RichTextLabel>("s/v/c/label").BbcodeText =
+			textLabel.BbcodeText =
 				$"Name: {player.worldName}\n" +
 				$"Health: {player.hp} / {player.stats.hpMax.valueI}\n" +
 				$"Mana: {player.mana} / {player.stats.manaMax.valueI}\n" +
@@ -34,7 +38,7 @@ namespace Game.Ui
 		}
 		public void _OnEquippedSlotMoved(string nodePath, bool down)
 		{
-			float scale = (down) ? 0.8f : 1.0f;
+			float scale = down ? 0.8f : 1.0f;
 			GetNode<Control>(nodePath).RectScale = new Vector2(scale, scale);
 		}
 		public void _OnEquippedSlotPressed(bool weapon)

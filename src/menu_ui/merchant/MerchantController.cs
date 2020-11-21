@@ -7,7 +7,7 @@ namespace Game.Ui
 	public class MerchantController : GameMenu
 	{
 		private readonly InventoryModel merchantStore = new InventoryModel();
-		private Control merchantContent;
+		private Control mainContent;
 		private Label header;
 		private Label subHeader;
 		private Control toInventoryBttn;
@@ -30,23 +30,20 @@ namespace Game.Ui
 
 		public override void _Ready()
 		{
-			merchantContent = GetNode<Control>("s");
+			mainContent = GetNode<Control>("s");
 
-			header = merchantContent.GetNode<Label>("v/header");
-			subHeader = merchantContent.GetNode<Label>("v/sub_header");
+			header = mainContent.GetNode<Label>("v/header");
+			subHeader = mainContent.GetNode<Label>("v/sub_header");
 
-			toInventoryBttn = merchantContent.GetNode<Control>("buttons/inventory");
-			toMerchantBttn = merchantContent.GetNode<Control>("buttons/merchant");
+			toInventoryBttn = mainContent.GetNode<Control>("buttons/inventory");
+			toMerchantBttn = mainContent.GetNode<Control>("buttons/merchant");
 
-			merchantSlots = merchantContent.GetNode<SlotGridController>("v/c/SlotGrid");
+			merchantSlots = mainContent.GetNode<SlotGridController>("v/c/SlotGrid");
 
 			popupController = GetNode<PopupController>("popup");
 			popupController.Connect("hide", this, nameof(_OnMerchantNodeHide));
-			foreach (string nodePath in new string[] { "m/error/okay", "m/repair/back" })
-			{
-				popupController.GetNode<BaseButton>(nodePath).Connect(
-					"pressed", this, nameof(_OnMerchantNodeHide));
-			}
+			popupController.okayBttn.Connect("pressed", this, nameof(_OnMerchantNodeHide));
+			popupController.repairBackBttn.Connect("pressed", this, nameof(_OnMerchantNodeHide));
 
 			// connect slot events
 			foreach (SlotController slot in merchantSlots.GetSlots())
@@ -132,7 +129,7 @@ namespace Game.Ui
 		{
 			Globals.soundPlayer.PlaySound(NameDB.UI.MERCHANT_CLOSE);
 			popupController.Hide();
-			merchantContent.Show();
+			mainContent.Show();
 		}
 		public void OnMerchantSlotSelected(int slotIndex)
 		{
@@ -159,7 +156,7 @@ namespace Game.Ui
 			}
 
 			// show item details and switch view
-			merchantContent.Hide();
+			mainContent.Hide();
 			itemInfoMerchantController.selectedSlotIdx = slotIndex;
 			itemInfoMerchantController.Display(CommodityName, true,
 				!header.Text.Equals("Inventory"), alreadyHave);

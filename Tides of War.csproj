@@ -80,12 +80,12 @@
     <Compile Include="src\global\ISerializable.cs" />
     <Compile Include="src\global\Stats.cs" />
     <Compile Include="src\global\WorldObject.cs" />
-    <Compile Include="src\factory\CommodityFactory.cs" />
+    <Compile Include="src\factory\Factory.cs" />
     <Compile Include="src\factory\ItemFactory.cs" />
     <Compile Include="src\factory\SpellFactory.cs" />
     <Compile Include="src\item\Item.cs" />
     <Compile Include="src\item\TreasureChest.cs" />
-    <Compile Include="src\map\doodads\DayTime.cs" />
+    <Compile Include="src\map\doodads\WorldClock.cs" />
     <Compile Include="src\map\doodads\TransitionZone.cs" />
     <Compile Include="src\map\Map.cs" />
     <Compile Include="src\menu_ui\about\AboutController.cs" />

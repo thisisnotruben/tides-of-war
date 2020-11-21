@@ -32,7 +32,7 @@ namespace Game.Ui
 		{
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK0);
 			SceneLoaderController.rootNode = GetTree().Root;
-			SceneLoaderController.Init().SetScene("res://src/map/zone_1.tscn", this);
+			SceneLoaderController.Init().SetScene(string.Format(PathManager.sceneMapPath, "zone_2"), this);
 		}
 		public void _OnLoadPressed() { Transition(saveLoadController); }
 		public void _OnAboutPressed() { Transition(aboutController); }

@@ -8,23 +8,23 @@ namespace Game.Ui
 		public override void _Ready()
 		{
 			base._Ready();
-			GetNode<BaseButton>("s/h/buttons/cast")
-				.Connect("pressed", this, nameof(_OnCastPressed));
+			castBttn.Connect("pressed", this, nameof(_OnCastPressed));
 		}
 		public override void Display(string pickableWorldName, bool allowMove)
 		{
 			base.Display(pickableWorldName, allowMove);
 
 			// disaply cast option if spell not cooling down and player not dead
-			HideExcept((Commodity.IsCoolingDown(player.GetPath(), pickableWorldName) || player.dead)
-				? new string[] { }
-				: new string[] { "cast" });
+			HideExcept(
+				Commodity.IsCoolingDown(player.GetPath(), pickableWorldName) || player.dead
+					? new Control[] { }
+					: new Control[] { castBttn });
 		}
 		public void _OnCastPressed()
 		{
 			bool showPopup = false;
 			SpellDB.SpellData spellData = SpellDB.Instance.GetData(pickableWorldName);
-			Label popupErrLabel = popupController.GetNode<Label>("m/error/label");
+			Label popupErrLabel = popupController.errorLabel;
 
 			if (player.mana >= spellData.manaCost)
 			{
@@ -58,8 +58,8 @@ namespace Game.Ui
 
 			if (showPopup)
 			{
-				GetNode<Control>("s").Hide();
-				popupController.GetNode<Control>("m/error").Show();
+				mainContent.Hide();
+				popupController.errorView.Show();
 				popupController.Show();
 			}
 			else

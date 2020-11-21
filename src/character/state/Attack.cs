@@ -119,7 +119,7 @@ namespace Game.Actor.State
 			}
 			else
 			{
-				Missile missile = MissileFactory.CreateMissile(character, spell?.worldName ?? string.Empty);
+				Missile missile = new MissileFactory().Make(character, spell?.worldName ?? string.Empty);
 
 				if (spell == null)
 				{
@@ -269,10 +269,7 @@ namespace Game.Actor.State
 			}
 			else if (character.target?.dead ?? true)
 			{
-				if (character?.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)) ?? false)
-				{
-					character.Disconnect(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked));
-				}
+				Globals.TryLinkSignal(character, nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked), false);
 				character.target = null;
 
 				FSM.State state;
@@ -341,8 +338,7 @@ namespace Game.Actor.State
 
 				if (spells.Any())
 				{
-					spell = (Spell)new SpellFactory().MakeCommodity(
-						character, spells.ElementAt(rand.Next(spells.Count())));
+					spell = new SpellFactory().Make(character, spells.ElementAt(rand.Next(spells.Count())));
 
 					switch (spellType)
 					{

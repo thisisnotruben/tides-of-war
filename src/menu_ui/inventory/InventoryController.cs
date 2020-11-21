@@ -8,9 +8,12 @@ namespace Game.Ui
 		public readonly InventoryModel inventory = new InventoryModel();
 		private SlotGridController inventorySlots;
 		private ItemInfoInventoryController itemInfoInventoryController;
+		protected Control mainContent;
 
 		public override void _Ready()
 		{
+			mainContent = GetNode<Control>("s");
+
 			inventorySlots = GetNode<SlotGridController>("s/v/c/SlotGrid");
 			Connect("draw", this, nameof(_OnInventoryControllerDraw));
 
@@ -45,7 +48,7 @@ namespace Game.Ui
 		{
 			Globals.soundPlayer.PlaySound(NameDB.UI.MERCHANT_CLOSE);
 			itemInfoInventoryController.Hide();
-			GetNode<Control>("s").Show();
+			mainContent.Show();
 		}
 		public void _OnItemEquipped(string worldName, bool on)
 		{
@@ -66,14 +69,14 @@ namespace Game.Ui
 			}
 
 			Globals.soundPlayer.PlaySound(NameDB.UI.INVENTORY_OPEN);
-			GetNode<Control>("s").Hide();
+			mainContent.Hide();
 
 			itemInfoInventoryController.selectedSlotIdx = slotIndex;
 			itemInfoInventoryController.Display(inventory.GetCommodity(slotIndex), true);
 		}
 		public void _OnEquippedSlotMoved(string nodePath, bool down)
 		{
-			GetNode<Control>(nodePath).RectScale = (down) ? new Vector2(0.8f, 0.8f) : new Vector2(1.0f, 1.0f);
+			GetNode<Control>(nodePath).RectScale = (down) ? new Vector2(0.8f, 0.8f) : Vector2.One;
 		}
 		public void _OnEquippedSlotPressed(bool weapon)
 		{

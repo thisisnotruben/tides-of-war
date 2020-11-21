@@ -126,11 +126,11 @@ namespace Game.Actor
 
 			if (!weaponName.Equals(string.Empty))
 			{
-				weapon = (Item)itemFactory.MakeCommodity(this, weaponName);
+				weapon = itemFactory.Make(this, weaponName);
 			}
 			if (!armorName.Equals(string.Empty))
 			{
-				vest = (Item)itemFactory.MakeCommodity(this, armorName);
+				vest = itemFactory.Make(this, armorName);
 			}
 
 			// misc

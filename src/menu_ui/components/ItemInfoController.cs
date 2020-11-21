@@ -10,52 +10,61 @@ namespace Game.Ui
 		public int selectedSlotIdx;
 		protected PopupController popupController;
 		protected string pickableWorldName;
+		protected Control mainContent;
+		protected Button castBttn, useBttn, buyBttn, sellBttn, equipBttn, unequipBttn, dropBttn, backBttn;
+		protected TextureButton leftbttn, rightBttn;
 
 		public override void _Ready()
 		{
 			// connect popup events
 			popupController = GetNode<PopupController>("popup");
-			popupController.GetNode<BaseButton>("m/add_to_slot/clear_slot")
-				.Connect("pressed", this, nameof(_OnClearSlotPressed));
-			popupController.GetNode<BaseButton>("m/add_to_slot/back")
-				.Connect("pressed", this, nameof(_OnAddToHudBack));
+			popupController.clearSlot.Connect("pressed", this, nameof(_OnClearSlotPressed));
+			popupController.addToSlotBackBttn.Connect("pressed", this, nameof(_OnAddToHudBack));
 			popupController.Connect("hide", this, nameof(_OnItemInfoNodeHide));
-			for (int i = 1; i <= 4; i++)
-			{
-				popupController.GetNode($"m/add_to_slot/slot_{i}").Connect("pressed",
-					this, nameof(_OnAddToHudConfirm), new Godot.Collections.Array() { i });
-			}
+			popupController.addToHudSlotBttns.ForEach(b => b.Connect("pressed",
+				this, nameof(_OnAddToHudConfirm), new Godot.Collections.Array() { b.GetIndex() + 1 })
+			);
+
+			mainContent = GetNode<Control>("s");
+
+			castBttn = GetNode<Button>("s/h/buttons/cast");
+			useBttn = GetNode<Button>("s/h/buttons/use");
+			buyBttn = GetNode<Button>("s/h/buttons/buy");
+			sellBttn = GetNode<Button>("s/h/buttons/sell");
+			equipBttn = GetNode<Button>("s/h/buttons/equip");
+			unequipBttn = GetNode<Button>("s/h/buttons/unequip");
+			dropBttn = GetNode<Button>("s/h/buttons/drop");
+			backBttn = GetNode<Button>("s/h/buttons/back");
+
+			leftbttn = GetNode<TextureButton>("s/h/left");
+			rightBttn = GetNode<TextureButton>("s/h/right");
 		}
 		public virtual void Display(string pickableWorldName, bool allowMove)
 		{
 			this.pickableWorldName = pickableWorldName;
 
-			// set arrow move constraints
-			TextureButton left = GetNode<TextureButton>("s/h/left");
-			TextureButton right = GetNode<TextureButton>("s/h/right");
-
 			// itemList != null due to player traversing through shortcuts
 			if (allowMove && itemList != null)
 			{
 				// disable left button if at first item
-				left.Disabled = selectedSlotIdx == 0;
+				leftbttn.Disabled = selectedSlotIdx == 0;
 				// disable right button if at last time
-				right.Disabled = selectedSlotIdx == itemList.count - 1;
+				rightBttn.Disabled = selectedSlotIdx == itemList.count - 1;
 
-				left.Show();
-				right.Show();
+				leftbttn.Show();
+				rightBttn.Show();
 			}
 			else
 			{
-				left.Hide();
-				right.Hide();
+				leftbttn.Hide();
+				rightBttn.Hide();
 			}
 
 			// decide which buttons to show
-			string[] showBttns = { };
+			Control[] showBttns = { };
 			if (!player.dead && itemList != null && ItemDB.Instance.HasData(pickableWorldName))
 			{
-				showBttns = new string[] { "drop", "" };
+				showBttns = new Control[] { dropBttn, null };
 				ItemDB.ItemType itemType = ItemDB.Instance.GetData(pickableWorldName).type;
 				switch (itemType)
 				{
@@ -63,14 +72,13 @@ namespace Game.Ui
 					case ItemDB.ItemType.POTION:
 						if (!Commodity.IsCoolingDown(player.GetPath(), pickableWorldName))
 						{
-							showBttns[1] = "use";
-							GetNode<Label>("s/h/buttons/use/label").Text =
-								(itemType == ItemDB.ItemType.FOOD) ? "Eat" : "Drink";
+							showBttns[1] = useBttn;
+							useBttn.Text = itemType == ItemDB.ItemType.FOOD ? "Eat" : "Drink";
 						}
 						break;
 					case ItemDB.ItemType.WEAPON:
 					case ItemDB.ItemType.ARMOR:
-						showBttns[1] = "equip";
+						showBttns[1] = equipBttn;
 						break;
 				}
 			}
@@ -83,17 +91,18 @@ namespace Game.Ui
 
 			Show();
 		}
-		protected void HideExcept(params string[] nodesToShow)
+		protected void HideExcept(params Control[] nodesToShow)
 		{
 			foreach (Control node in GetNode("s/h/buttons").GetChildren())
 			{
-				node.Visible = nodesToShow.Contains(node.Name) || node.Name.Equals("back");
+				node.Visible = nodesToShow.Contains(node) || node == backBttn;
 			}
 		}
 		protected void RouteConnections(string toMethod)
 		{
-			BaseButton yesBttn = popupController.GetNode<BaseButton>("m/yes_no/yes");
+			BaseButton yesBttn = popupController.yesBttn;
 			string signal = "pressed";
+
 			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
 			{
 				yesBttn.Disconnect(signal, this, (string)connectionPacket["method"]);
@@ -103,18 +112,17 @@ namespace Game.Ui
 		public void _OnItemInfoNodeHide()
 		{
 			popupController.Hide();
-			GetNode<Control>("s").Show();
+			mainContent.Show();
 		}
 		public void _OnSlotMoved(string nodePath, bool down)
 		{
-			GetNode<Control>(nodePath).RectScale =
-				(down) ? new Vector2(0.8f, 0.8f) : new Vector2(1.0f, 1.0f);
+			GetNode<Control>(nodePath).RectScale = down ? new Vector2(0.8f, 0.8f) : Vector2.One;
 		}
 		public void _OnAddToHudPressed()
 		{
 			// TODO
 			// Globals.PlaySound("click2", this, speaker);
-			// GetNode<Control>("s").Hide();
+			// mainContent.Hide();
 			// int count = 1;
 			// popupController.GetNode<Control>("m/add_to_slot/clear_slot").Hide();
 			// foreach (SlotController itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
@@ -125,7 +133,7 @@ namespace Game.Ui
 			// 	if (tween.IsActive())
 			// 	{
 			// 		tween.SetActive(false);
-			// 		colorRect.RectScale = new Vector2(1.0f, 1.0f);
+			// 		colorRect.RectScale = Vector2.One;
 			// 	}
 			// 	colorRect.Color = new Color(1.0f, 1.0f, 0.0f, 0.75f);
 			// 	label.Text = count.ToString();

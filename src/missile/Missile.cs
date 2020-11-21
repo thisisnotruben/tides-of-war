@@ -65,10 +65,10 @@ namespace Game.Projectile
 				anim.Play("missileFade");
 			}
 		}
-		public virtual void OnMissileFadeFinished(string animName) { Delete(); }
+		public virtual void OnMissileFadeFinished(string animName) { Delete(); } // connected from scene
 		protected void Delete()
 		{
-			SetProcess(false);
+			SetPhysicsProcess(false);
 			tween.RemoveAll();
 			QueueFree();
 		}

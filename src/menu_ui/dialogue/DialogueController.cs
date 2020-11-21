@@ -11,7 +11,7 @@ namespace Game.Ui
 		private MerchantController merchantController;
 		private Label header, subHeader;
 		private RichTextLabel dialogue;
-		private Control dialogueContent, heal, buy;
+		private Control mainContent, heal, buy;
 
 		private Npc npc;
 		private WorldQuest worldQuest;
@@ -24,13 +24,13 @@ namespace Game.Ui
 			merchantController = GetNode<MerchantController>("merchant");
 			merchantController.Connect("hide", this, nameof(_OnDialogueHide));
 
-			dialogueContent = GetNode<Control>("s");
-			header = dialogueContent.GetNode<Label>("control/header");
-			subHeader = dialogueContent.GetNode<Label>("control/sub_header");
-			dialogue = dialogueContent.GetNode<RichTextLabel>("s/text");
+			mainContent = GetNode<Control>("s");
+			header = mainContent.GetNode<Label>("control/header");
+			subHeader = mainContent.GetNode<Label>("control/sub_header");
+			dialogue = mainContent.GetNode<RichTextLabel>("s/text");
 
-			heal = dialogueContent.GetNode<Control>("s/v/heal");
-			buy = dialogueContent.GetNode<Control>("s/v/buy");
+			heal = mainContent.GetNode<Control>("s/v/heal");
+			buy = mainContent.GetNode<Control>("s/v/buy");
 		}
 		public void Init(InventoryModel playerInventory, InventoryModel playerSpellBook)
 		{
@@ -108,7 +108,7 @@ namespace Game.Ui
 			// provides a reset of all views
 			popupController.Hide();
 			merchantController.Hide();
-			dialogueContent.Show();
+			mainContent.Show();
 		}
 		public void _OnHealPressed()
 		{
@@ -116,9 +116,9 @@ namespace Game.Ui
 			if (healerCost > player.gold)
 			{
 				// too expensive for player
-				dialogueContent.Hide();
-				popupController.GetNode<Label>("m/error/label").Text = "Not Enough\nGold!";
-				popupController.GetNode<Control>("m/error").Show();
+				mainContent.Hide();
+				popupController.errorLabel.Text = "Not Enough\nGold!";
+				popupController.errorView.Show();
 				popupController.Show();
 			}
 			else
@@ -142,7 +142,7 @@ namespace Game.Ui
 				ContentDB.Instance.GetData(npc.Name).merchandise);
 
 			// switch to merchant view
-			dialogueContent.Hide();
+			mainContent.Hide();
 			merchantController.Show();
 		}
 		public void _OnAcceptPressed()

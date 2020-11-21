@@ -5,28 +5,28 @@ namespace Game.Ui
 	public class QuestLogController : GameMenu
 	{
 		private PopupController popupController;
+		protected Control mainContent;
 
 		public override void _Ready()
 		{
+			mainContent = GetNode<Control>("s");
+
 			popupController = GetNode<PopupController>("popup");
-			popupController.GetNode<BaseButton>("m/filter_options/all")
-				.Connect("pressed", this, nameof(_OnAllPressed));
-			popupController.GetNode<BaseButton>("m/filter_options/active")
-				.Connect("pressed", this, nameof(_OnActivePressed));
-			popupController.GetNode<BaseButton>("m/filter_options/completed")
-				.Connect("pressed", this, nameof(_OnCompletedPressed));
+			popupController.allBttn.Connect("pressed", this, nameof(_OnAllPressed));
+			popupController.activeBttn.Connect("pressed", this, nameof(_OnActivePressed));
+			popupController.completedBttn.Connect("pressed", this, nameof(_OnCompletedPressed));
 			popupController.Connect("hide", this, nameof(_OnQuestLogNodeHide));
 		}
 		public void _OnQuestLogNodeHide()
 		{
-			GetNode<Control>("s").Show();
+			mainContent.Show();
 			popupController.Hide();
 		}
 		public void _OnFilterPressed()
 		{
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
-			GetNode<Control>("s").Hide();
-			popupController.GetNode<Control>("m/filter_options").Show();
+			mainContent.Hide();
+			popupController.filterView.Show();
 			popupController.Show();
 		}
 		public void _OnAllPressed()

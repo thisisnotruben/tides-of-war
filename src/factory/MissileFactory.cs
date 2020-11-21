@@ -3,36 +3,26 @@ using Game.Actor;
 using Game.Projectile;
 namespace Game.Factory
 {
-	public static class MissileFactory
+	public class MissileFactory : Factory<Missile>
 	{
-		public static Missile CreateMissile(Character character, string spellName)
+		protected override Missile Create(Character character, string spellName)
 		{
 			Missile missile;
 
 			if (MissileSpellDB.Instance.HasData(spellName))
 			{
-				switch (spellName)
+				missile = spellName switch
 				{
-					case NameDB.Spell.METEOR:
-						missile = (MissileSpellOrbital)SceneDB.missileSpelOrbital.Instance();
-						break;
-					default:
-						missile = (MissileSpell)SceneDB.missileSpell.Instance();
-						break;
-				}
+					NameDB.Spell.METEOR => (MissileSpellOrbital)SceneDB.missileSpelOrbital.Instance(),
+					_ => (MissileSpell)SceneDB.missileSpell.Instance()
+				};
 				((MissileSpell)missile).Init(character, character.target, spellName);
 			}
 			else
 			{
-				missile = CreateMissile(character);
+				missile = (Missile)SceneDB.missile.Instance();
+				missile.Init(character, character.target);
 			}
-
-			return missile;
-		}
-		public static Missile CreateMissile(Character character)
-		{
-			Missile missile = (Missile)SceneDB.missile.Instance();
-			missile.Init(character, character.target);
 			return missile;
 		}
 	}

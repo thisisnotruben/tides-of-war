@@ -9,7 +9,7 @@ namespace Game.Util
 		private PackedScene npcScene = GD.Load<PackedScene>("res://src/character/npc/npc.tscn"),
 			playerScene = GD.Load<PackedScene>("res://src/character/player/player.tscn"),
 			transitionScene = GD.Load<PackedScene>("res://src/map/doodads/TransitionZone.tscn"),
-			dayTimeScene = GD.Load<PackedScene>("res://src/map/doodads/DayTime.tscn"),
+			worldClockScene = GD.Load<PackedScene>("res://src/map/doodads/WorldClock.tscn"),
 			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn");
 
 		private static readonly Vector2 CELL_SIZE = new Vector2(16.0f, 16.0f),
@@ -50,11 +50,11 @@ namespace Game.Util
 				meta = map.GetNode<Node2D>("meta"),
 				collNav = map.GetNode<Node2D>("meta/coll_nav");
 
-			// add dayTime scene
-			Node dayTime = dayTimeScene.Instance();
-			map.AddChild(dayTime);
-			dayTime.Owner = map;
-			map.MoveChild(dayTime, 0);
+			// add worldClock scene
+			Node worldClock = worldClockScene.Instance();
+			map.AddChild(worldClock);
+			worldClock.Owner = map;
+			map.MoveChild(worldClock, 0);
 
 			// add veil scene
 			Node2D veil = (Node2D)veilScene.Instance();

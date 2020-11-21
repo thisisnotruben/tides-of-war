@@ -64,11 +64,11 @@ namespace Game.Actor
 			if (obj is Node2D)
 			{
 				Node2D node2Obj = (Node2D)obj;
-				if (!node2Obj.Scale.Equals(new Vector2(1.0f, 1.0f)))
+				if (!node2Obj.Scale.Equals(Vector2.One))
 				{
 					// Reverts to original scale when unit is clicked on
 					tween.InterpolateProperty(node2Obj, nodePath, node2Obj.Scale,
-						new Vector2(1.0f, 1.0f), 0.5f, Tween.TransitionType.Cubic, Tween.EaseType.Out);
+						Vector2.One, 0.5f, Tween.TransitionType.Cubic, Tween.EaseType.Out);
 					tween.Start();
 				}
 			}
