@@ -16,8 +16,7 @@ namespace Game.Ui
 		private SpellBookController spellBookController;
 		private DialogueController dialogueController;
 		private PopupController popupController;
-		private InventoryModel playerInventory;
-		private InventoryModel playerSpellBook;
+		public InventoryModel playerInventory, playerSpellBook;
 
 		public override void _Ready()
 		{

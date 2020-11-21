@@ -31,7 +31,7 @@ namespace Game.Actor.State
 				return;
 			}
 
-			character.anim.Connect("animation_finished", this, nameof(OnAttackAnimationFinished));
+			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(OnAttackAnimationFinished), true);
 			character.regenTimer.Stop();
 			AttackStart();
 
@@ -39,13 +39,8 @@ namespace Game.Actor.State
 		}
 		public override void Exit()
 		{
-			if (!character.anim.IsConnected("animation_finished", this, nameof(OnAttackAnimationFinished)))
-			{
-				return;
-			}
-
 			timer.Stop();
-			character.anim.Disconnect("animation_finished", this, nameof(OnAttackAnimationFinished));
+			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(OnAttackAnimationFinished), false);
 			character.anim.Stop();
 			character.regenTimer.Start();
 
@@ -124,14 +119,32 @@ namespace Game.Actor.State
 			}
 			else
 			{
-				// TODO: make constants
-				Globals.soundPlayer.PlaySoundRandomized("bow");
-
 				Missile missile = MissileFactory.CreateMissile(character, spell?.worldName ?? string.Empty);
 
-				if (spell != null && !(missile is MissileSpell) && SpellEffectDB.Instance.HasData(spell.worldName))
+				if (spell == null)
 				{
-					InstancSpellEffect(spell.worldName, character.target);
+					// TODO: make constants
+					Globals.soundPlayer.PlaySoundRandomized("bow", character.player2D);
+				}
+				else
+				{
+					if (!(missile is MissileSpell) && SpellEffectDB.Instance.HasData(spell.worldName))
+					{
+						InstancSpellEffect(spell.worldName, character.target);
+					}
+					if (MissileSpellDB.Instance.HasData(spell.worldName))
+					{
+						string spellSound = MissileSpellDB.Instance.GetData(spell.worldName).sound;
+						if (spellSound.Equals(string.Empty))
+						{
+							// TODO: make constants
+							Globals.soundPlayer.PlaySoundRandomized("bow", character.player2D);
+						}
+						else
+						{
+							Globals.soundPlayer.PlaySound(spellSound, character.player2D);
+						}
+					}
 				}
 
 				// sync missile to attack
@@ -223,7 +236,16 @@ namespace Game.Actor.State
 				spell?.Start();
 			}
 
-			Globals.soundPlayer.PlaySoundRandomized(soundName);
+			if (spell != null)
+			{
+				string spellSound = SpellDB.Instance.GetData(spell.worldName).sound;
+				if (!spellSound.Equals(string.Empty))
+				{
+					soundName = spellSound;
+				}
+			}
+
+			Globals.soundPlayer.PlaySoundRandomized(soundName, character.player2D);
 
 			if (character is Player || target is Player)
 			{

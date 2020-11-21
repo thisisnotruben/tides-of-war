@@ -3,7 +3,7 @@ namespace Game.Database
 {
 	public class UseDB : AbstractDB<UseDB.Use>
 	{
-		public class Use
+		public class Use : Godot.Object
 		{
 			public readonly int totalSec, repeatSec;
 			public readonly ModDB.ModifierNode hp, mana, damage;

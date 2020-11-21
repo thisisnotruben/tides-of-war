@@ -6,7 +6,7 @@ namespace Game.Ui
 {
 	public class MenuHandlerController : GameMenu
 	{
-		private MainMenuController mainMenuController;
+		public MainMenuController mainMenuController;
 		private HudControlController hudControlController;
 
 		public override void _Ready()
@@ -18,14 +18,8 @@ namespace Game.Ui
 			hudControlController.ConnectButtons(this, nameof(_OnHudPausePressed),
 				nameof(_OnHudSpellBookPressed), nameof(_OnHudPausePressed));
 		}
-		public void _OnMainMenuDraw()
-		{
-			hudControlController.Hide();
-		}
-		public void _OnMainMenuHide()
-		{
-			hudControlController.Show();
-		}
+		public void _OnMainMenuDraw() { hudControlController.Hide(); }
+		public void _OnMainMenuHide() { hudControlController.Show(); }
 		public void _OnHudPausePressed()
 		{
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK5);

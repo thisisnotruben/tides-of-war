@@ -27,7 +27,7 @@ namespace Game.Ui
 			if (playerState.Count > 0)
 			{
 				Vector2 spawnLoc = Map.Map.map.GetNode<Node2D>("meta/transitions/" + playerState["_mapName"]).GlobalPosition;
-				playerState[nameof(Player.GlobalPosition)] = new Godot.Collections.Array() { spawnLoc[0], spawnLoc[1] };
+				playerState[NameDB.SaveTag.POSITION] = new Godot.Collections.Array() { spawnLoc[0], spawnLoc[1] };
 				playerState.Remove("_mapName");
 				Player.player.Deserialize(playerState);
 			}
@@ -56,7 +56,8 @@ namespace Game.Ui
 
 			if (transition && currentScene is Map.Map)
 			{
-				playerState = Player.player.Serialize();
+				// TODO
+				// playerState = Player.player.Serialize();
 				playerState.Add("_mapName", Map.Map.map.Name);
 			}
 

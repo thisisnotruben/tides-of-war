@@ -53,7 +53,7 @@ namespace Game.Sound
 			}
 			directory.ListDirEnd();
 		}
-		public void PlaySoundRandomized(string soundName)
+		public void PlaySoundRandomized(string soundName, AudioStreamPlayer2D player2D)
 		{
 			IEnumerable<string> soundNames =
 				from sound in library.Keys
@@ -62,7 +62,7 @@ namespace Game.Sound
 
 			if (soundNames.Any())
 			{
-				PlaySound(soundNames.ElementAt(rand.Next(soundNames.Count())));
+				PlaySound(soundNames.ElementAt(rand.Next(soundNames.Count())), player2D);
 			}
 		}
 		public void PlaySound(string soundName, bool on) { PlaySound(soundName + (on ? "_on" : "_off")); }

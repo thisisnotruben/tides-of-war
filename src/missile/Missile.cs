@@ -1,8 +1,9 @@
 using Game.Actor;
 using Godot;
+using Game.Database;
 namespace Game.Projectile
 {
-	public class Missile : Node2D
+	public class Missile : Node2D, ISerializable
 	{
 		protected Tween tween;
 		protected AnimationPlayer anim;
@@ -10,14 +11,13 @@ namespace Game.Projectile
 		protected Area2D hitbox, targetHitBox;
 		protected CollisionShape2D hitboxBody;
 
-		protected Character character;
+		protected Character character, target;
 		protected Vector2 spawnPos;
 		protected bool hit;
 
 		[Signal] public delegate void OnHit();
 		protected delegate void MoveBehavior(float delta);
-		protected MoveBehavior moveBehavior;
-		protected MoveBehavior moveMissile;
+		protected MoveBehavior moveBehavior, moveMissile;
 
 		public override void _Ready()
 		{
@@ -30,6 +30,7 @@ namespace Game.Projectile
 		public virtual void Init(Character character, Character target)
 		{
 			this.character = character;
+			this.target = target;
 			targetHitBox = target.hitBox;
 
 			spawnPos = GlobalPosition = character.missileSpawnPos.GlobalPosition;
@@ -70,6 +71,21 @@ namespace Game.Projectile
 			SetProcess(false);
 			tween.RemoveAll();
 			QueueFree();
+		}
+		public virtual Godot.Collections.Dictionary Serialize()
+		{
+			return new Godot.Collections.Dictionary()
+			{
+				{NameDB.SaveTag.POSITION, new Godot.Collections.Array() { GlobalPosition.x, GlobalPosition.y }},
+				{NameDB.SaveTag.SPAWN_POSITION, new Godot.Collections.Array() { spawnPos.x,spawnPos.y }},
+				{NameDB.SaveTag.CHARACTER, character?.GetPath() ?? string.Empty},
+				{NameDB.SaveTag.TARGET, target?.GetPath() ?? string.Empty},
+				{NameDB.SaveTag.HIT, hit}
+			};
+		}
+		public virtual void Deserialize(Godot.Collections.Dictionary payload)
+		{
+			// TODO
 		}
 	}
 }

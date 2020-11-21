@@ -11,20 +11,24 @@ namespace Game.Actor
 		{
 			base._Ready();
 			unitFocus = GetNode<Node2D>("unitFocus");
-			UnitDB.UnitData unitData = UnitDB.Instance.GetData(Name);
-			enemy = unitData.enemy;
-			level = unitData.level;
-			if (!unitData.name.Empty())
+
+			if (UnitDB.Instance.HasData(Name))
 			{
-				worldName = unitData.name;
+				UnitDB.UnitData unitData = UnitDB.Instance.GetData(Name);
+				enemy = unitData.enemy;
+				level = unitData.level;
+				if (!unitData.name.Empty())
+				{
+					worldName = unitData.name;
+				}
+				if (ContentDB.Instance.HasData(Name))
+				{
+					ContentDB.ContentData contentData = ContentDB.Instance.GetData(Name);
+					enemy = contentData.enemy;
+					level = contentData.level;
+				}
+				SetImg(unitData.img);
 			}
-			if (ContentDB.Instance.HasData(Name))
-			{
-				ContentDB.ContentData contentData = ContentDB.Instance.GetData(Name);
-				enemy = contentData.enemy;
-				level = contentData.level;
-			}
-			SetImg(unitData.img);
 		}
 		public void _OnCharacterEnteredSight(Area2D area2D)
 		{

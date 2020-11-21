@@ -53,5 +53,17 @@ namespace Game.Projectile
 			}
 		}
 		public override void OnMissileFadeFinished(string animName) { timer.Start(); }
+		public override Godot.Collections.Dictionary Serialize()
+		{
+			Godot.Collections.Dictionary payload = base.Serialize();
+			payload[NameDB.SaveTag.SPELL] = spellWorldName;
+
+			return payload;
+		}
+		public override void Deserialize(Godot.Collections.Dictionary payload)
+		{
+			base.Deserialize(payload);
+			// TODO
+		}
 	}
 }

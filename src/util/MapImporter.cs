@@ -4,160 +4,162 @@ namespace Game.Util
 {
 	public class MapImporter : Node
 	{
+		private string targetDummyPath = "res://src/character/npc/target_dummy/{0}.tscn",
+			lightPath = "res://src/light/{0}.tscn";
+		private PackedScene npcScene = GD.Load<PackedScene>("res://src/character/npc/npc.tscn"),
+			playerScene = GD.Load<PackedScene>("res://src/character/player/player.tscn"),
+			transitionScene = GD.Load<PackedScene>("res://src/map/doodads/TransitionZone.tscn"),
+			dayTimeScene = GD.Load<PackedScene>("res://src/map/doodads/DayTime.tscn"),
+			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn");
+
 		private static readonly Vector2 CELL_SIZE = new Vector2(16.0f, 16.0f),
 			HALF_CELL_SIZE = CELL_SIZE / 2.0f,
 			OFFSET = new Vector2(0.0f, -CELL_SIZE.y);
 
-		public string scenePath;
-		private TileMap tileMap;
-		private ColorRect colorRect;
+		private Node2D map;
+		private TileMap zed;
 		private Label label;
 		[Signal] public delegate void SendScenePath(string scenePath);
 
 		public override void _Ready()
 		{
-			colorRect = GetNode<ColorRect>(nameof(ColorRect));
-			label = GetNode<Label>("label");
-			Connect(nameof(SendScenePath), GetNode(nameof(ColorRect)), "set_map_script");
+			label = GetChild<Label>(2);
+			Connect(nameof(SendScenePath), GetChild(0), "set_map_script");
 		}
 		public void _OnQuit() { GetTree().Quit(); }
 		public void ImportMap(string scenePath)
 		{
-			this.scenePath = scenePath;
 			EmitSignal(nameof(SendScenePath), scenePath);
-			PackedScene packedScene = (PackedScene)GD.Load(scenePath);
+			PackedScene packedScene = GD.Load<PackedScene>(scenePath);
 			Godot.Error code = CheckMap(packedScene);
 			label.Text = $"Error code for ({scenePath}): {code}";
 		}
 		private Godot.Error CheckMap(PackedScene mapToImport)
 		{
-			Node2D map = (Node2D)mapToImport.Instance();
-			tileMap = map.GetNode<TileMap>("zed/z1");
+			map = (Node2D)mapToImport.Instance();
 			map.GlobalPosition = new Vector2(0.0f, CELL_SIZE.y);
 
+			zed = map.GetNode<TileMap>("zed/z1");
+			Node2D characters = map.GetNode<Node2D>("zed/characters"),
+				transitions = map.GetNode<Node2D>("meta/transitions"),
+				transitionsZones = map.GetNode<Node2D>("meta/transitionZones"),
+				targetDummys = map.GetNode<Node2D>("zed/target_dummys"),
+				lights = map.GetNode<Node2D>("meta/lights"),
+				graveSites = map.GetNode<Node2D>("meta/gravesites"),
+				paths = map.GetNode<Node2D>("meta/paths"),
+				meta = map.GetNode<Node2D>("meta"),
+				collNav = map.GetNode<Node2D>("meta/coll_nav");
+
 			// add dayTime scene
-			PackedScene dayTimeScene = (PackedScene)GD.Load("res://src/map/doodads/DayTime.tscn");
 			Node dayTime = dayTimeScene.Instance();
 			map.AddChild(dayTime);
 			dayTime.Owner = map;
+			map.MoveChild(dayTime, 0);
 
-			// add death scene
-			PackedScene veilScene = (PackedScene)GD.Load("res://src/map/doodads/VeilFog.tscn");
+			// add veil scene
 			Node2D veil = (Node2D)veilScene.Instance();
 			map.AddChild(veil);
 			veil.Owner = map;
+			map.MoveChild(veil, 1);
 			veil.Hide();
 
-			// center gravesites on map to cell
-			foreach (Node2D node2D in map.GetNode("meta/gravesites").GetChildren())
-			{
-				node2D.GlobalPosition = GetCenterPos(node2D.GlobalPosition);
-				node2D.AddToGroup("gravesite", true);
-			}
-
-			SetUnits(map);
-			SetTargetDummys(map);
-			SetLights(map);
-			SetTransitions(map);
+			SetUnits(characters, transitions);
+			SetTargetDummys(targetDummys);
+			SetLights(lights);
+			SetTransitions(transitionsZones, transitions);
 			TreeUseMaterial(map);
 
-			// delete now useless nodes 
-			foreach (String nodePath in new String[] { "zed/characters", "zed/target_dummys", "meta/paths", "meta/lights" })
+			// center gravesites on map to cell
+			foreach (Node2D node2D in graveSites.GetChildren())
 			{
-				map.GetNode(nodePath).Owner = null;
-				map.GetNode(nodePath).QueueFree();
+				node2D.GlobalPosition = GetCenterPos(node2D.GlobalPosition);
+				node2D.AddToGroup(Globals.GRAVE_GROUP, true);
+			}
+
+			// delete now useless nodes 
+			foreach (Node node in new Node[] { characters, targetDummys, paths, lights })
+			{
+				node.Owner = null;
+				node.QueueFree();
 			}
 
 			// set node options
-			map.GetNode<TileMap>("meta/coll_nav").Modulate = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-			tileMap.CellYSort = true;
-			tileMap.CellTileOrigin = TileMap.TileOrigin.TopLeft;
+			collNav.Modulate = new Color("80ffffff");
+			zed.CellYSort = true;
+			zed.CellTileOrigin = TileMap.TileOrigin.TopLeft;
 
 			// shuffle scene tree
-			map.GetNode<Node2D>("meta").Hide();
-			map.GetNode("meta").MoveChild(map.GetNode("meta/coll_nav"), 0);
-			map.MoveChild(map.GetNode("day_time"), 0);
-			map.MoveChild(map.GetNode("veil_fog"), 1);
-			foreach (Node node in tileMap.GetChildren())
-			{
-				if (node.Name.Contains("player"))
-				{
-					tileMap.MoveChild(node, 0);
-					break;
-				}
-			}
+			meta.MoveChild(collNav, 0);
+			meta.Hide();
 
 			// save map
 			PackedScene packedScene = new PackedScene();
 			packedScene.Pack(map);
 			return ResourceSaver.Save(map.Filename, packedScene);
 		}
-		private void SetTargetDummys(Node map)
-		{
-			foreach (Node2D node in map.GetNode("zed/target_dummys").GetChildren())
-			{
-				string targetDummyBaseName = node.Name.Split("-")[1];
-				PackedScene scene = (PackedScene)GD.Load($"res://src/character/npc/target_dummy/{targetDummyBaseName}.tscn");
-				Node2D character = (Node2D)scene.Instance();
-				character.Name = node.Name;
-				map.GetNode("zed/z1").AddChild(character);
-				character.Owner = map;
-				character.GlobalPosition = GetCenterPos(node.GlobalPosition);
-			}
-		}
-		private void SetUnits(Node map)
+		private void SetUnits(Node characters, Node transitions)
 		{
 			// spawn npc's
-			string scenePath = "res://src/character/npc/npc.tscn";
-			foreach (Node2D node in map.GetNode("zed/characters").GetChildren())
+			Node2D character;
+			foreach (Node2D node in characters.GetChildren())
 			{
-				PackedScene scene = (PackedScene)GD.Load(scenePath);
-				Node2D character = (Node2D)scene.Instance();
-				character.Name = node.Name;
-				map.GetNode("zed/z1").AddChild(character);
+				character = (Node2D)npcScene.Instance();
+				zed.AddChild(character);
 				character.Owner = map;
+				character.Name = node.Name;
 				character.GlobalPosition = GetCenterPos(node.GlobalPosition);
 			}
+
 			// spawn player
-			PackedScene playerScene = (PackedScene)GD.Load("res://src/character/player/player.tscn");
-			Node2D player = (Node2D)playerScene.Instance();
-			player.Name = "player";
-			map.GetNode("zed/z1").AddChild(player);
-			player.Owner = map;
-			string playerSpawnName;
-			switch (map.Name)
+			string playerSpawnName = map.Name switch
 			{
-				case "zone_1":
-					playerSpawnName = "zone_2";
-					break;
-				case "zone_2":
-					playerSpawnName = "zone_3";
-					break;
-				case "zone_3":
-					playerSpawnName = "zone_5";
-					break;
-				case "zone_4":
-					playerSpawnName = "game_start";
-					break;
-				case "zone_5":
-					playerSpawnName = "zone_4";
-					break;
-				default:
-					playerSpawnName = "opps";
-					break;
-			}
-			player.GlobalPosition = GetCenterPos(
-				map.GetNode<Node2D>("meta/transitions/" + playerSpawnName).GlobalPosition);
+				"zone_1" => "zone_2",
+				"zone_2" => "zone_3",
+				"zone_3" => "zone_5",
+				"zone_5" => "zone_4",
+				_ => "playerSpawn"
+			};
+
+			character = (Node2D)playerScene.Instance();
+			zed.AddChild(character);
+			character.Owner = map;
+			character.Name = "player";
+			character.GlobalPosition = GetCenterPos(transitions.GetNode<Node2D>(playerSpawnName).GlobalPosition);
+
+			zed.MoveChild(character, 0);
 		}
-		private void SetLights(Node map)
+		private void SetTargetDummys(Node targetDummys)
 		{
-			string resourcePath = "res://src/light/{0}.tscn";
-			foreach (Node2D node in map.GetNode("meta/lights").GetChildren())
+			PackedScene scene;
+			Node2D character;
+			foreach (Node2D node in targetDummys.GetChildren())
 			{
-				string parsedName = node.Name.Split("-")[1];
-				PackedScene lightScene = (PackedScene)GD.Load(String.Format(resourcePath, parsedName));
-				Node2D light = (Node2D)lightScene.Instance();
-				Vector2 pos = node.GlobalPosition;
+				scene = GD.Load<PackedScene>(string.Format(targetDummyPath, GetParsedName(node.Name)));
+
+				character = (Node2D)scene.Instance();
+				zed.AddChild(character);
+				character.Owner = map;
+				character.Name = node.Name;
+				character.GlobalPosition = GetCenterPos(node.GlobalPosition);
+			}
+		}
+		private void SetLights(Node lights)
+		{
+			string parsedName;
+			PackedScene lightScene;
+			Node2D light;
+			Vector2 pos;
+			foreach (Node2D node in lights.GetChildren())
+			{
+				parsedName = GetParsedName(node.Name);
+				lightScene = GD.Load<PackedScene>(String.Format(lightPath, parsedName));
+
+				light = (Node2D)lightScene.Instance();
+				zed.AddChild(light);
+				light.Owner = map;
+				light.Name = node.Name;
+
+				pos = node.GlobalPosition;
 				pos.x += HALF_CELL_SIZE.x;
 				pos.y -= CELL_SIZE.y;
 				if (parsedName.Contains("pit"))
@@ -165,35 +167,34 @@ namespace Game.Util
 					pos.y -= HALF_CELL_SIZE.y;
 				}
 				light.GlobalPosition = pos;
-				map.GetNode("zed/z1").AddChild(light);
-				light.Owner = map;
-				light.Name = node.Name;
 			}
 		}
-		private void SetTransitions(Node map)
+		private void SetTransitions(Node transitionZones, Node transitions)
 		{
-			string resourcePath = "res://src/map/doodads/TransitionZone.tscn";
-			Node2D transitions = (Node2D)map.GetNode("meta/transitionZones");
-			foreach (Node2D node2D in transitions.GetChildren())
+			Node2D transition;
+			string transitionName;
+			Node collisionLayer;
+			foreach (Node2D node2D in transitionZones.GetChildren())
 			{
-				// load and set transition scene
-				PackedScene transitionScene = (PackedScene)GD.Load(resourcePath);
-				Node2D transitionNode = (Node2D)transitionScene.Instance();
-				transitions.AddChild(transitionNode);
-				transitionNode.Owner = map;
-				string transitionName = node2D.Name;
+				transition = (Node2D)transitionScene.Instance();
+				transitionZones.AddChild(transition);
+				transition.Owner = map;
+
+				transitionName = node2D.Name;
 				node2D.Name = transitionName + "-DELETE";
-				transitionNode.Name = transitionName;
-				transitionNode.GlobalPosition = new Vector2(node2D.GlobalPosition.x, node2D.GlobalPosition.y - CELL_SIZE.y);
-				// remove collision layer from tiled node and set
-				// it to node with script for detection purposes
-				Node collisionLayer = node2D.GetChild(0);
+				transition.Name = transitionName;
+
+				transition.GlobalPosition = new Vector2(node2D.GlobalPosition.x, node2D.GlobalPosition.y - CELL_SIZE.y);
+
+				// remove collision layer from tiled node and set it to node with script for detection purposes
+				collisionLayer = node2D.GetChild(0);
 				node2D.RemoveChild(collisionLayer);
-				transitionNode.AddChild(collisionLayer);
-				collisionLayer.Owner = map;
 				node2D.Owner = null;
+				transition.AddChild(collisionLayer);
+				collisionLayer.Owner = map;
 			}
-			foreach (Node2D node2D in map.GetNode("meta/transitions").GetChildren())
+
+			foreach (Node2D node2D in transitions.GetChildren())
 			{
 				node2D.GlobalPosition = GetCenterPos(node2D.GlobalPosition);
 			}
@@ -211,9 +212,10 @@ namespace Game.Util
 				}
 			}
 		}
+		private string GetParsedName(string name) { return name.Split("-")[1]; }
 		private Vector2 GetCenterPos(Vector2 worldPosition)
 		{
-			return tileMap.MapToWorld(tileMap.WorldToMap(worldPosition + OFFSET)) + HALF_CELL_SIZE;
+			return zed.MapToWorld(zed.WorldToMap(worldPosition + OFFSET)) + HALF_CELL_SIZE;
 		}
 	}
 }

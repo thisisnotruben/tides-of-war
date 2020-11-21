@@ -9,12 +9,14 @@ namespace Game.Database
 			public readonly Shape2D hitBox;
 			public readonly Texture img;
 			public readonly Boolean rotate;
+			public readonly string sound;
 
-			public SpellMissileData(Shape2D hitBox, Texture img, bool rotate)
+			public SpellMissileData(Shape2D hitBox, Texture img, bool rotate, string sound)
 			{
 				this.hitBox = hitBox;
 				this.img = img;
 				this.rotate = rotate;
+				this.sound = sound;
 			}
 		}
 
@@ -33,7 +35,8 @@ namespace Game.Database
 					hitBox: (Shape2D)GD.Load(string.Format(filePath, (string)dict[nameof(SpellMissileData.hitBox)])),
 					img: dict[nameof(SpellMissileData.img)] == null ? null
 						: GD.Load<Texture>(string.Format(filePath, (string)dict[nameof(SpellMissileData.img)])),
-					rotate: (bool)dict[nameof(SpellMissileData.rotate)]
+					rotate: (bool)dict[nameof(SpellMissileData.rotate)],
+					sound: (string)dict[nameof(SpellMissileData.sound)]
 				));
 			}
 		}

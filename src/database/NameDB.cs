@@ -75,5 +75,30 @@ namespace Game.Database
 				WOOD_OFF = "wood_off",
 				WOOD_ON = "wood_on";
 		}
+		public static class SaveTag
+		{
+			public const string
+				POSITION = "position",
+				INVENTORY = "inventory",
+				SPELL_BOOK = "spellBook",
+				GOLD = "gold",
+				WEAPON = "weapon",
+				ARMOR = "armor",
+				XP = "xp",
+				LEVEL = "level",
+				HP = "hp",
+				MANA = "mana",
+				TARGET = "target",
+				TALKED_TO = "talkedTo",
+				NAME = "name",
+				SPAWN_POSITION = "spawnPosition",
+				CHARACTER = "character",
+				HIT = "hit",
+				SPELL = "spell",
+				ARMING = "arming",
+				TIME_LEFT = "timeLeft",
+				COOLDOWNS = "coolDowns",
+				IMG_FRAME = "imgFrame";
+		}
 	}
 }

@@ -21,11 +21,11 @@ namespace Game.Actor.State
 		}
 		public override void Start()
 		{
-			character.anim.Connect("animation_finished", this, nameof(DieEnd));
+			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(DieEnd), true);
 			character.regenTimer.Stop();
 			DieStart();
 		}
-		public override void Exit() { character.anim.Disconnect("animation_finished", this, nameof(DieEnd)); }
+		public override void Exit() { Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(DieEnd), false); }
 		public override void OnAttacked(Character whosAttacking) { ClearOnAttackedSignals(whosAttacking); }
 		public override void UnhandledInput(InputEvent @event) { }
 		private void DieStart()
@@ -88,7 +88,7 @@ namespace Game.Actor.State
 
 				// spawn to nearest graveyard
 				Dictionary<int, Vector2> graveSites = new Dictionary<int, Vector2>();
-				foreach (Node2D graveyard in GetTree().GetNodesInGroup("gravesite"))
+				foreach (Node2D graveyard in GetTree().GetNodesInGroup(Globals.GRAVE_GROUP))
 				{
 					graveSites[Map.Map.map.getAPath(character.GlobalPosition, graveyard.GlobalPosition).Count] = graveyard.GlobalPosition;
 				}

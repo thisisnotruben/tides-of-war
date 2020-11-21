@@ -6,8 +6,9 @@ using Game.Actor.Stat;
 using Godot;
 namespace Game.GameItem
 {
-	public class Commodity : WorldObject
+	public class Commodity : WorldObject, ISerializable
 	{
+		// characterNodePath: commodityName: timeLeft
 		private static readonly Dictionary<NodePath, Dictionary<string, SceneTreeTimer>> cooldowns =
 			new Dictionary<NodePath, Dictionary<string, SceneTreeTimer>>();
 
@@ -281,6 +282,44 @@ namespace Game.GameItem
 			foreach (CharacterStat stat in modifiers.Keys)
 			{
 				stat.RemoveModifier(modifiers[stat]);
+			}
+		}
+		public Godot.Collections.Dictionary Serialize()
+		{
+			// TODO
+			// cooldowns
+			Godot.Collections.Dictionary savedCooldowns = new Godot.Collections.Dictionary();
+			foreach (NodePath nodePath in cooldowns.Keys)
+			{
+				savedCooldowns[nodePath.ToString()] = new Godot.Collections.Dictionary<string, float>();
+				foreach (string commodityName in cooldowns[nodePath].Keys)
+				{
+					savedCooldowns[commodityName] = cooldowns[nodePath][commodityName].TimeLeft;
+				}
+			}
+
+			return new Godot.Collections.Dictionary()
+			{
+				{NameDB.SaveTag.COOLDOWNS, savedCooldowns}
+			};
+		}
+		public void Deserialize(Godot.Collections.Dictionary payload)
+		{
+			// TODO
+			// cooldowns
+			NodePath characterNodePath;
+			Godot.Collections.Dictionary savedCooldowns = (Godot.Collections.Dictionary)payload[NameDB.SaveTag.COOLDOWNS];
+			Godot.Collections.Dictionary<string, float> specificCooldowns;
+
+			foreach (string nodePath in savedCooldowns.Keys)
+			{
+				characterNodePath = new NodePath(nodePath);
+				specificCooldowns = (Godot.Collections.Dictionary<string, float>)savedCooldowns[nodePath];
+
+				foreach (string commodityName in specificCooldowns.Keys)
+				{
+					AddCooldown(characterNodePath, commodityName, specificCooldowns[commodityName]);
+				}
 			}
 		}
 	}

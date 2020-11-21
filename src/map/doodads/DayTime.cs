@@ -19,7 +19,7 @@ namespace Game.Map.Doodads
 		}
 		public void _OnTimerTimeout()
 		{
-			anim.Play(ANIM_NAME, -1.0f, (dayLight) ? 1.0f : -1.0f, !dayLight);
+			anim.Play(ANIM_NAME, -1.0f, dayLight ? 1.0f : -1.0f, !dayLight);
 			dayLight = !dayLight;
 		}
 		public void _OnAnimFinished(string animName)
@@ -29,7 +29,7 @@ namespace Game.Map.Doodads
 		}
 		public void TriggerLights()
 		{
-			foreach (GameLight light in GameLight.GetLights())
+			foreach (GameLight light in GetTree().GetNodesInGroup(Globals.LIGHT_GROUP))
 			{
 				light.SetIntensity(!dayLight);
 			}

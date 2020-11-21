@@ -9,6 +9,7 @@ namespace Game.Projectile
 		public override void Init(Character character, Character target)
 		{
 			this.character = character;
+			this.target = target;
 			targetHitBox = target.hitBox;
 
 			Transform2D ctrans = character.GetCanvasTransform();

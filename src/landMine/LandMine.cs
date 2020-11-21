@@ -1,10 +1,11 @@
 using Game.Actor;
 using Game.Actor.Doodads;
+using Game.Database;
 using Godot;
 using System;
 namespace Game.Mine
 {
-	public class LandMine : Node2D, ICombustible
+	public class LandMine : WorldObject, ICombustible, ISerializable
 	{
 		private Area2D blastCircle, body;
 		private Timer timer;
@@ -16,6 +17,7 @@ namespace Game.Mine
 		private float timeToDetonationSec = 1.0f;
 		private bool arming, exploded;
 		private int minDamage, maxDamage;
+		private string soundName = string.Empty;
 
 		public override void _Ready()
 		{
@@ -27,12 +29,16 @@ namespace Game.Mine
 			body = img.GetNode<Area2D>("body");
 			player2D = img.GetNode<AudioStreamPlayer2D>("snd");
 		}
-		public void Init(Character exludedCharacter, int minDamage, int maxDamage, float armDelaySec = -1.0f, float timeToDetonationSec = -1.0f)
+		public void Init(string worldName, Character exludedCharacter)
 		{
+			LandMineDB.LandMineData landMineData = LandMineDB.Instance.GetData(worldName);
+
+			this.worldName = worldName;
 			this.exludedCharacter = exludedCharacter;
-			this.timeToDetonationSec = timeToDetonationSec;
-			this.minDamage = minDamage;
-			this.maxDamage = maxDamage;
+			this.timeToDetonationSec = landMineData.timeToDetSec;
+			this.minDamage = landMineData.minDamage;
+			this.maxDamage = landMineData.maxDamage;
+			soundName = landMineData.sound;
 
 			Map.Map.map.AddZChild(this);
 			GlobalPosition = Map.Map.map.GetGridPosition(exludedCharacter.GlobalPosition);
@@ -42,10 +48,10 @@ namespace Game.Mine
 			body.Monitorable = true;
 			body.Monitoring = true;
 
-			if (armDelaySec > 0.0f)
+			if (landMineData.armDelaySec > 0.0f)
 			{
 				arming = true;
-				timer.WaitTime = armDelaySec;
+				timer.WaitTime = landMineData.armDelaySec;
 				timer.Start();
 			}
 			else if (timeToDetonationSec > 0.0f)
@@ -98,7 +104,7 @@ namespace Game.Mine
 			exploded = true;
 			int damage = new Random().Next(minDamage, maxDamage + 1);
 
-			Globals.soundPlayer.PlaySound("TODO", player2D);
+			Globals.soundPlayer.PlaySound(soundName, player2D);
 
 			Particles2D particles2D;
 			foreach (Node node in explodeParticles.GetChildren())
@@ -136,6 +142,28 @@ namespace Game.Mine
 			timer.Stop();
 			timer.WaitTime = 5.0f;
 			timer.Start();
+		}
+		public Godot.Collections.Dictionary Serialize()
+		{
+			return new Godot.Collections.Dictionary()
+			{
+				{NameDB.SaveTag.NAME, worldName},
+				{NameDB.SaveTag.CHARACTER, exludedCharacter?.GetPath() ?? string.Empty},
+				{NameDB.SaveTag.ARMING, arming},
+				{NameDB.SaveTag.HIT, exploded},
+				{NameDB.SaveTag.TIME_LEFT, timer.TimeLeft},
+				{NameDB.SaveTag.POSITION, new Godot.Collections.Array<float>() {GlobalPosition.x, GlobalPosition.y}}
+			};
+		}
+		public void Deserialize(Godot.Collections.Dictionary payload)
+		{
+			// TODO
+			Godot.Collections.Array<float> posArray = (Godot.Collections.Array<float>)payload[NameDB.SaveTag.POSITION];
+			GlobalPosition = new Vector2(posArray[0], posArray[1]);
+
+			arming = (bool)payload[NameDB.SaveTag.ARMING];
+			exploded = (bool)payload[NameDB.SaveTag.HIT];
+			timer.WaitTime = (float)payload[NameDB.SaveTag.TIME_LEFT];
 		}
 	}
 }

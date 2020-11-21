@@ -11,8 +11,7 @@ namespace Game.Ability
 			LandMineDB.LandMineData landMineData = LandMineDB.Instance.GetData(worldName);
 
 			LandMine landMine = (LandMine)SceneDB.landMine.Instance();
-			landMine.Init(character, landMineData.maxDamage, landMineData.maxDamage,
-				landMineData.armDelaySec, landMineData.timeToDetSec);
+			landMine.Init(worldName, character);
 		}
 	}
 }

@@ -415,7 +415,7 @@
 		"ignoreArmor": false,
 		"requiresTarget": false,
 		"spellEffect": "MeteorEffect",
-		"sound": "",
+		"sound": "explosion",
 		"characterAnim": "casting",
 		"manaCost": 0
 	}

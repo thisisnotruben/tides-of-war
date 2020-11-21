@@ -1,6 +1,7 @@
 using Game.Database;
 using Godot;
 using System.Collections.Generic;
+using System;
 using Game.Ui;
 namespace Game.Quest
 {
@@ -73,29 +74,36 @@ namespace Game.Quest
 		public bool HasCharacterPath(NodePath characterPath) { return charactersTalkedTo.Contains(characterPath); }
 		public Godot.Collections.Dictionary Serialize()
 		{
-			Godot.Collections.Dictionary payload = new Godot.Collections.Dictionary();
 			Godot.Collections.Array charactersPaths = new Godot.Collections.Array();
+			charactersTalkedTo.ForEach(p => charactersPaths.Add(p.ToString()));
+
+			Godot.Collections.Dictionary payload = new Godot.Collections.Dictionary()
+			{
+				{NameDB.SaveTag.NAME, quest.questName},
+				{NameDB.SaveTag.TALKED_TO, charactersPaths}
+			};
 
 			foreach (string objectiveName in objectives.Keys)
 			{
-				payload.Add(objectiveName, objectives[objectiveName]);
+				payload[objectiveName] = objectives[objectiveName];
 			}
-
-			charactersTalkedTo.ForEach(p => charactersPaths.Add(p.ToString()));
-			payload.Add("talkedTo", charactersPaths);
 
 			return payload;
 		}
 		public void Deserialize(Godot.Collections.Dictionary payload)
 		{
-			foreach (string objectiveName in payload.Keys)
-			{
-				objectives[objectiveName] = (int)payload[objectiveName];
-			}
-
-			foreach (string characterPath in (Godot.Collections.Array)payload["talkedTo"])
+			string characterPathKey = NameDB.SaveTag.TALKED_TO;
+			foreach (string characterPath in (Godot.Collections.Array)payload[characterPathKey])
 			{
 				charactersTalkedTo.Add(new NodePath(characterPath));
+			}
+
+			payload.Remove(characterPathKey);
+			payload.Remove(NameDB.SaveTag.NAME);
+
+			foreach (string objectiveName in payload.Keys)
+			{
+				objectives[objectiveName] = (int)(Single)payload[objectiveName];
 			}
 		}
 	}

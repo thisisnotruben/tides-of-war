@@ -117,40 +117,13 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="target_dummy" groups=[
-"character",
-] instance=ExtResource( 1 )]
-use_parent_material = true
+[node name="target_dummy" instance=ExtResource( 1 )]
 
-[node name="anim" parent="." index="1"]
+[node name="anim" parent="." index="2"]
 anims/attacking = SubResource( 1 )
 anims/casting = SubResource( 2 )
 anims/dying = SubResource( 3 )
 anims/moving = SubResource( 4 )
 
-[node name="ray" parent="." index="6"]
-enabled = true
-exclude_parent = false
-cast_to = Vector2( 18, 0 )
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="img" parent="." index="7"]
+[node name="img" parent="." index="5"]
 texture = ExtResource( 2 )
-
-[node name="missile" parent="img" index="0"]
-position = Vector2( 0, 0 )
-
-[node name="sight" parent="." index="9"]
-monitorable = false
-collision_layer = 0
-collision_mask = 2
-
-[node name="distance" parent="sight" index="0"]
-visible = true
-
-[node name="visible" parent="." index="10"]
-position = Vector2( 0, 0 )
-[connection signal="timeout" from="regenTimer" to="." method="_OnRegenTimerTimeout"]
-[connection signal="tween_completed" from="tween" to="." method="_OnTweenCompleted"]

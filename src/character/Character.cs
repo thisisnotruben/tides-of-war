@@ -20,6 +20,7 @@ namespace Game.Actor
 		public AnimationPlayer anim;
 		public Area2D hitBox, sight;
 		public Camera2D camera { get; protected set; }
+		public AudioStreamPlayer2D player2D { get; protected set; }
 
 		public bool enemy { get; protected set; }
 		public bool dead { get { return fsm.IsDead(); } }
@@ -115,6 +116,7 @@ namespace Game.Actor
 			head = GetNode<Position2D>("head");
 			missileSpawnPos = img.GetNode<Position2D>("missile");
 			combatTextHandler = img.GetNode<CombatTextHandler>("CombatTextHandler");
+			player2D = img.GetNode<AudioStreamPlayer2D>("snd");
 			camera = GetNode<Camera2D>("camera");
 			fsm = GetNode<FSM>("fsm");
 			hitBox = GetNode<Area2D>("area");
@@ -203,19 +205,36 @@ namespace Game.Actor
 				footStep.GlobalPosition = stepPos;
 			}
 		}
-		public virtual void Deserialize(Godot.Collections.Dictionary payload)
-		{
-			// set global position
-			Godot.Collections.Array globalPositionArray = (Godot.Collections.Array)payload["GlobalPosition"];
-			Vector2 globalPosition = new Vector2((float)globalPositionArray[0], (float)globalPositionArray[1]);
-			GlobalPosition = Map.Map.map.GetGridPosition(globalPosition);
-		}
 		public virtual Godot.Collections.Dictionary Serialize()
 		{
 			return new Godot.Collections.Dictionary()
 			{
-				{"GlobalPosition", new Godot.Collections.Array(){GlobalPosition.x, GlobalPosition.y}}
+				{NameDB.SaveTag.POSITION, new Godot.Collections.Array<float>(){GlobalPosition.x, GlobalPosition.y}},
+				{NameDB.SaveTag.LEVEL, level},
+				{NameDB.SaveTag.HP, hp},
+				{NameDB.SaveTag.MANA, mana},
+				{NameDB.SaveTag.TARGET, target?.GetPath() ?? string.Empty},
+				{NameDB.SaveTag.IMG_FRAME, img.Frame}
 			};
+		}
+		public virtual void Deserialize(Godot.Collections.Dictionary payload)
+		{
+			// set global position
+			Godot.Collections.Array posArray = (Godot.Collections.Array)payload[NameDB.SaveTag.POSITION];
+			GlobalPosition = new Vector2((float)posArray[0], (float)posArray[1]);
+			return; // TODO
+
+			level = (int)payload[NameDB.SaveTag.LEVEL];
+			hp = (int)payload[NameDB.SaveTag.HP];
+			mana = (int)payload[NameDB.SaveTag.MANA];
+			img.Frame = (int)payload[NameDB.SaveTag.IMG_FRAME];
+
+			// set target
+			string targetPath = (string)payload[NameDB.SaveTag.TARGET];
+			if (GetTree().Root.HasNode(targetPath))
+			{
+				target = GetNode<Character>(targetPath);
+			}
 		}
 	}
 }

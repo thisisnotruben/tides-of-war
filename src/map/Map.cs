@@ -203,7 +203,9 @@ namespace Game.Map
 		}
 		public Vector2 GetGridPosition(Vector2 worldPosition)
 		{
-			return aStar.GetPointPosition(GetPointIndex(collNav.WorldToMap(worldPosition)));
+			worldPosition = collNav.WorldToMap(worldPosition);
+			int pointIndex = GetPointIndex(worldPosition);
+			return aStar.HasPoint(pointIndex) ? aStar.GetPointPosition(pointIndex) : worldPosition;
 		}
 		public bool IsValidMove(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
 		{

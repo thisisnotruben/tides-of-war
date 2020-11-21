@@ -63,9 +63,7 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 40, 40 )
 
-[node name="character" type="Node2D" groups=[
-"character",
-]]
+[node name="character" type="Node2D"]
 use_parent_material = true
 script = ExtResource( 2 )
 __meta__ = {
@@ -107,6 +105,8 @@ use_parent_material = true
 [node name="CombatTextHandler" parent="img" instance=ExtResource( 4 )]
 
 [node name="missile" type="Position2D" parent="img"]
+
+[node name="snd" type="AudioStreamPlayer2D" parent="img"]
 
 [node name="area" type="Area2D" parent="."]
 monitoring = false
