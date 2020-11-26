@@ -1,25 +1,16 @@
-# dirs
-data/
-
-# hidden dirs
 .import/
-.vscode/
 .mono/
+.vscode/
 
-# tiled ext
-*.tsx
-*.tmx
-# asset ext
-*.import
-*.wav.import
 *.png
 *.ttf
 *.wav
 *.ogg
-# data ext
-*.xml
-*.json
+*.tmx
+*.tsx
+*.import
+*.translation
 
-# include these for the README
-!icon.png
+export_presets.cfg
 !screenshots/*.png
+!icon.png

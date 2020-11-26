@@ -1,0 +1,1135 @@
+{
+	"293-aberration": {
+		"name": "",
+		"img": "aberration-0",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1608,
+			264
+		]
+	},
+	"296-aberration": {
+		"name": "",
+		"img": "aberration-3",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1544,
+			168
+		]
+	},
+	"297-aberration": {
+		"name": "",
+		"img": "aberration-3",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1752,
+			408
+		]
+	},
+	"298-minotaur": {
+		"name": "",
+		"img": "minotaur-13",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1512,
+			296
+		]
+	},
+	"302-aberration": {
+		"name": "",
+		"img": "aberration-0",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1896,
+			472
+		]
+	},
+	"307-oliphant": {
+		"name": "",
+		"img": "oliphant-10",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1528,
+			1704
+		]
+	},
+	"309-oliphant": {
+		"name": "",
+		"img": "oliphant-10",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1384,
+			1704
+		]
+	},
+	"316-oliphant": {
+		"name": "",
+		"img": "oliphant-4",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1864,
+			1432
+		]
+	},
+	"317-oliphant": {
+		"name": "",
+		"img": "oliphant-6",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1816,
+			1496
+		]
+	},
+	"318-oliphant": {
+		"name": "",
+		"img": "oliphant-9",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1656,
+			1496
+		]
+	},
+	"319-oliphant": {
+		"name": "",
+		"img": "oliphant-8",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1944,
+			1576
+		]
+	},
+	"321-oliphant": {
+		"name": "",
+		"img": "oliphant-5",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1896,
+			1320
+		]
+	},
+	"332-oliphant": {
+		"name": "",
+		"img": "oliphant-20",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			968,
+			1304
+		]
+	},
+	"333-oliphant": {
+		"name": "",
+		"img": "oliphant-20",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1032,
+			1384
+		]
+	},
+	"335-oliphant": {
+		"name": "",
+		"img": "oliphant-17",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1192,
+			1272
+		]
+	},
+	"344-oliphant": {
+		"name": "",
+		"img": "oliphant-8",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1640,
+			952
+		]
+	},
+	"350-oliphant": {
+		"name": "",
+		"img": "oliphant-18",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1320,
+			1208
+		]
+	},
+	"351-oliphant": {
+		"name": "",
+		"img": "oliphant-18",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1608,
+			1208
+		]
+	},
+	"352-oliphant": {
+		"name": "",
+		"img": "oliphant-1",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1480,
+			1128
+		]
+	},
+	"355-oliphant": {
+		"name": "",
+		"img": "oliphant-7",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1240,
+			1448
+		]
+	},
+	"357-oliphant": {
+		"name": "",
+		"img": "oliphant-9",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1208,
+			1464
+		]
+	},
+	"358-oliphant": {
+		"name": "",
+		"img": "oliphant-19",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1336,
+			1720
+		]
+	},
+	"359-oliphant": {
+		"name": "",
+		"img": "oliphant-19",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1592,
+			1720
+		]
+	},
+	"361-oliphant": {
+		"name": "",
+		"img": "oliphant-19",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1736,
+			1160
+		]
+	},
+	"362-oliphant": {
+		"name": "",
+		"img": "oliphant-19",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1800,
+			1208
+		]
+	},
+	"363-oliphant": {
+		"name": "",
+		"img": "oliphant-14",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1784,
+			1576
+		]
+	},
+	"365-oliphant": {
+		"name": "",
+		"img": "oliphant-9",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1320,
+			1000
+		]
+	},
+	"366-oliphant": {
+		"name": "",
+		"img": "oliphant-8",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1288,
+			1016
+		]
+	},
+	"367-oliphant": {
+		"name": "",
+		"img": "oliphant-1",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1832,
+			968
+		]
+	},
+	"368-oliphant": {
+		"name": "",
+		"img": "oliphant-21",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1816,
+			1000
+		]
+	},
+	"369-oliphant": {
+		"name": "",
+		"img": "oliphant-22",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1896,
+			1000
+		]
+	},
+	"370-oliphant": {
+		"name": "",
+		"img": "oliphant-23",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1880,
+			968
+		]
+	},
+	"375-oliphant": {
+		"name": "",
+		"img": "oliphant-2",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1720,
+			1320
+		]
+	},
+	"380-oliphant": {
+		"name": "",
+		"img": "oliphant-10",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1128,
+			1320
+		]
+	},
+	"392-finfolk": {
+		"name": "",
+		"img": "finfolk-10",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			200,
+			1960
+		]
+	},
+	"393-finfolk": {
+		"name": "",
+		"img": "finfolk-3",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			392,
+			2024
+		]
+	},
+	"394-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			120,
+			2008
+		]
+	},
+	"397-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			728,
+			1704
+		]
+	},
+	"399-finfolk": {
+		"name": "",
+		"img": "finfolk-5",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			680,
+			1784
+		]
+	},
+	"401-finfolk": {
+		"name": "",
+		"img": "finfolk-1",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			680,
+			1960
+		]
+	},
+	"402-finfolk": {
+		"name": "",
+		"img": "finfolk-8",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			472,
+			1848
+		]
+	},
+	"404-finfolk": {
+		"name": "",
+		"img": "finfolk-11",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			456,
+			1992
+		]
+	},
+	"405-finfolk": {
+		"name": "",
+		"img": "finfolk-7",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			104,
+			1944
+		]
+	},
+	"407-finfolk": {
+		"name": "",
+		"img": "finfolk-6",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			248,
+			1784
+		]
+	},
+	"411-finfolk": {
+		"name": "",
+		"img": "finfolk-14",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			408,
+			1816
+		]
+	},
+	"412-finfolk": {
+		"name": "",
+		"img": "finfolk-13",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			776,
+			1864
+		]
+	},
+	"413-finfolk": {
+		"name": "",
+		"img": "finfolk-12",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			72,
+			1800
+		]
+	},
+	"414-oliphant": {
+		"name": "",
+		"img": "oliphant-0",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1800,
+			1848
+		]
+	},
+	"415-oliphant": {
+		"name": "",
+		"img": "oliphant-0",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1944,
+			1848
+		]
+	},
+	"429-oliphant": {
+		"name": "",
+		"img": "oliphant-21",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1896,
+			1944
+		]
+	},
+	"441-human": {
+		"name": "",
+		"img": "human-28",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			232,
+			1016
+		]
+	},
+	"442-human": {
+		"name": "",
+		"img": "human-28",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			168,
+			1064
+		]
+	},
+	"445-human": {
+		"name": "",
+		"img": "human-25",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			280,
+			1048
+		]
+	},
+	"446-human": {
+		"name": "",
+		"img": "human-25",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			216,
+			1112
+		]
+	},
+	"447-human": {
+		"name": "",
+		"img": "human-27",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			88,
+			968
+		]
+	},
+	"448-human": {
+		"name": "",
+		"img": "human-7",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			200,
+			904
+		]
+	},
+	"449-human": {
+		"name": "",
+		"img": "human-26",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			72,
+			1048
+		]
+	},
+	"450-human": {
+		"name": "",
+		"img": "human-26",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			104,
+			1112
+		]
+	},
+	"451-human": {
+		"name": "",
+		"img": "human-25",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			280,
+			936
+		]
+	},
+	"456-human": {
+		"name": "",
+		"img": "human-18",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			344,
+			472
+		]
+	},
+	"457-human": {
+		"name": "",
+		"img": "human-18",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			696,
+			440
+		]
+	},
+	"458-human": {
+		"name": "",
+		"img": "human-24",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			984,
+			456
+		]
+	},
+	"460-human": {
+		"name": "",
+		"img": "human-24",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			472,
+			216
+		]
+	},
+	"467-human": {
+		"name": "",
+		"img": "human-23",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			888,
+			344
+		]
+	},
+	"468-human": {
+		"name": "",
+		"img": "human-20",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			904,
+			600
+		]
+	},
+	"470-human": {
+		"name": "",
+		"img": "human-15",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			616,
+			168
+		]
+	},
+	"472-human": {
+		"name": "",
+		"img": "human-22",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			776,
+			248
+		]
+	},
+	"474-human": {
+		"name": "",
+		"img": "human-4",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			184,
+			424
+		]
+	},
+	"475-human": {
+		"name": "",
+		"img": "human-4",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			408,
+			552
+		]
+	},
+	"476-human": {
+		"name": "",
+		"img": "human-4",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			584,
+			520
+		]
+	},
+	"477-human": {
+		"name": "",
+		"img": "human-23",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			712,
+			600
+		]
+	},
+	"478-human": {
+		"name": "",
+		"img": "human-18",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			216,
+			280
+		]
+	},
+	"479-human": {
+		"name": "",
+		"img": "human-15",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			360,
+			344
+		]
+	},
+	"480-human": {
+		"name": "",
+		"img": "human-20",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			264,
+			664
+		]
+	},
+	"481-human": {
+		"name": "",
+		"img": "human-21",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			856,
+			200
+		]
+	},
+	"488-oliphant": {
+		"name": "",
+		"img": "oliphant-10",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1352,
+			200
+		]
+	},
+	"490-oliphant": {
+		"name": "",
+		"img": "oliphant-15",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1288,
+			280
+		]
+	},
+	"491-oliphant": {
+		"name": "",
+		"img": "oliphant-20",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1752,
+			728
+		]
+	},
+	"495-oliphant": {
+		"name": "",
+		"img": "oliphant-0",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1624,
+			664
+		]
+	},
+	"497-oliphant": {
+		"name": "",
+		"img": "oliphant-15",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1400,
+			504
+		]
+	},
+	"501-aberration": {
+		"name": "",
+		"img": "aberration-0",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1816,
+			312
+		]
+	},
+	"509-oliphant": {
+		"name": "",
+		"img": "oliphant-19",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1352,
+			536
+		]
+	},
+	"510-oliphant": {
+		"name": "",
+		"img": "oliphant-18",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1512,
+			648
+		]
+	},
+	"511-oliphant": {
+		"name": "",
+		"img": "oliphant-12",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1464,
+			664
+		]
+	},
+	"514-oliphant": {
+		"name": "",
+		"img": "oliphant-12",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1320,
+			392
+		]
+	},
+	"515-oliphant": {
+		"name": "",
+		"img": "oliphant-3",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1304,
+			632
+		]
+	},
+	"516-oliphant": {
+		"name": "",
+		"img": "oliphant-3",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1368,
+			680
+		]
+	},
+	"521-minotaur": {
+		"name": "",
+		"img": "minotaur-13",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1672,
+			472
+		]
+	},
+	"526-human": {
+		"name": "",
+		"img": "human-20",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			600,
+			616
+		]
+	},
+	"559-treant": {
+		"name": "",
+		"img": "treant-1",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			920,
+			1704
+		]
+	},
+	"560-treant": {
+		"name": "",
+		"img": "treant-4",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1000,
+			1576
+		]
+	},
+	"562-treant": {
+		"name": "",
+		"img": "treant-2",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			776,
+			1544
+		]
+	},
+	"563-treant": {
+		"name": "",
+		"img": "treant-3",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			984,
+			1992
+		]
+	},
+	"564-treant": {
+		"name": "",
+		"img": "treant-0",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			440,
+			1352
+		]
+	},
+	"565-treant": {
+		"name": "",
+		"img": "treant-3",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			72,
+			1352
+		]
+	},
+	"566-treant": {
+		"name": "",
+		"img": "treant-2",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			168,
+			1496
+		]
+	},
+	"567-treant": {
+		"name": "",
+		"img": "treant-0",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			536,
+			1144
+		]
+	},
+	"569-treant": {
+		"name": "",
+		"img": "treant-3",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			648,
+			952
+		]
+	},
+	"570-treant": {
+		"name": "",
+		"img": "treant-1",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			872,
+			840
+		]
+	},
+	"573-treant": {
+		"name": "",
+		"img": "treant-3",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1160,
+			856
+		]
+	},
+	"576-treant": {
+		"name": "",
+		"img": "treant-6",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1448,
+			136
+		]
+	},
+	"578-treant": {
+		"name": "",
+		"img": "treant-5",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1624,
+			360
+		]
+	},
+	"580-treant": {
+		"name": "",
+		"img": "treant-6",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			1832,
+			568
+		]
+	}
+}

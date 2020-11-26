@@ -40,7 +40,7 @@ namespace Game.Map
 			veilFog.Emitting = on;
 			if (on)
 			{
-				Material = (ShaderMaterial)GD.Load("res://asset/img/map/veil.tres");
+				Material = GD.Load<ShaderMaterial>("res://asset/img/map/veil.tres");
 				veilFog.Show();
 			}
 			else

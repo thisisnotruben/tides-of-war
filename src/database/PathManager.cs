@@ -2,6 +2,7 @@ namespace Game.Database
 {
 	public static class PathManager
 	{
+		public static readonly string[] randdomSndDirs = new string[] { "combat", "spell" };
 		public const string
 			dataExt = "json",
 			sceneExt = "tscn",
@@ -18,11 +19,11 @@ namespace Game.Database
 			spellEffectDir = "res://src/spell/visual/",
 			questDir = "res://data/quest/",
 			sndDir = "res://asset/snd/",
-
+			startScene = "res://src/menu_ui/startMenu/StartMenuView.tscn",
 			unitDataTemplate = "res://data/{0}/{0}.json",
 			contentDataTemplate = "res://data/{0}/{0}_content.json",
 			sceneMapPath = "res://src/map/{0}.tscn",
-			savePath = "res://data/save/{0}.json",
+			savePath = "user://data/save/{0}.json",
 			assetMissileSpellPath = "res://asset/img/missile-spell/{0}.tres";
 	}
 }

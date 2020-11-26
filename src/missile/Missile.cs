@@ -76,16 +76,34 @@ namespace Game.Projectile
 		{
 			return new Godot.Collections.Dictionary()
 			{
-				{NameDB.SaveTag.POSITION, new Godot.Collections.Array() { GlobalPosition.x, GlobalPosition.y }},
-				{NameDB.SaveTag.SPAWN_POSITION, new Godot.Collections.Array() { spawnPos.x,spawnPos.y }},
 				{NameDB.SaveTag.CHARACTER, character?.GetPath() ?? string.Empty},
 				{NameDB.SaveTag.TARGET, target?.GetPath() ?? string.Empty},
-				{NameDB.SaveTag.HIT, hit}
+				{NameDB.SaveTag.HIT, hit},
+				{NameDB.SaveTag.SPAWN_POSITION, new Godot.Collections.Array() { spawnPos.x,spawnPos.y }},
+				{NameDB.SaveTag.POSITION, new Godot.Collections.Array() { GlobalPosition.x, GlobalPosition.y }}
 			};
 		}
 		public virtual void Deserialize(Godot.Collections.Dictionary payload)
 		{
+			string characterPath = (string)payload[NameDB.SaveTag.CHARACTER],
+				targetPath = (string)payload[NameDB.SaveTag.TARGET];
+
+			if ((bool)payload[NameDB.SaveTag.HIT] || !HasNode(characterPath) || !HasNode(targetPath))
+			{
+				Delete();
+			}
+
+			Init(GetNode<Character>(characterPath), GetNode<Character>(targetPath));
+
+			Godot.Collections.Array pos = (Godot.Collections.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
+			spawnPos = new Vector2((float)pos[0], (float)pos[1]);
+		}
+		public virtual void LoadMissile(Godot.Collections.Dictionary payload)
+		{
 			// TODO
+			Deserialize(payload);
+			Godot.Collections.Array pos = (Godot.Collections.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
+			GlobalPosition = new Vector2((float)pos[0], (float)pos[1]);
 		}
 	}
 }

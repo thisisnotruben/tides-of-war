@@ -135,7 +135,7 @@ namespace Game.Actor
 			ImageDB.ImageData imageData = ImageDB.Instance.GetData(imgName);
 
 			// set sprite
-			Texture imgTexture = (Texture)GD.Load($"res://asset/img/character/{imgName}.png");
+			Texture imgTexture = GD.Load<Texture>($"res://asset/img/character/{imgName}.png");
 			img.Texture = imgTexture;
 			img.Hframes = imageData.total;
 			img.Position = new Vector2(0.0f, -imgTexture.GetHeight() / 2.0f);
@@ -165,7 +165,7 @@ namespace Game.Actor
 			animRes.TrackSetKeyValue(0, 1, imageData.moving + 3);
 
 			// center nodes based sprite
-			Texture hitBoxTexture = (Texture)GD.Load($"res://asset/img/character/resource/bodies/body-{imageData.body}.tres");
+			Texture hitBoxTexture = GD.Load<Texture>($"res://asset/img/character/resource/bodies/body-{imageData.body}.tres");
 			TouchScreenButton select = GetNode<TouchScreenButton>("select");
 			Node2D sightDistance = sight.GetNode<Node2D>("distance"),
 				areaBody = hitBox.GetNode<Node2D>("body");

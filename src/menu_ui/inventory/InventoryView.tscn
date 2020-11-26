@@ -113,7 +113,6 @@ theme = ExtResource( 10 )
 [node name="SlotGrid" parent="s/v/c" instance=ExtResource( 3 )]
 margin_left = 80.0
 margin_right = 640.0
-theme = ExtResource( 10 )
 
 [node name="buttons" type="VBoxContainer" parent="s"]
 margin_top = 996.0
@@ -135,12 +134,5 @@ text = "Back"
 
 [node name="item_info" parent="." instance=ExtResource( 2 )]
 visible = false
-theme = ExtResource( 10 )
 script = ExtResource( 8 )
-[connection signal="button_down" from="s/v/slots/weapon" to="." method="_OnEquippedSlotMoved" binds= [ "s/v/slots/weapon/m/icon", true ]]
-[connection signal="button_up" from="s/v/slots/weapon" to="." method="_OnEquippedSlotMoved" binds= [ "s/v/slots/weapon/m/icon", false ]]
-[connection signal="pressed" from="s/v/slots/weapon" to="." method="_OnEquippedSlotPressed" binds= [ true ]]
-[connection signal="button_down" from="s/v/slots/armor" to="." method="_OnEquippedSlotMoved" binds= [ "s/v/slots/armor/m/icon", true ]]
-[connection signal="button_up" from="s/v/slots/armor" to="." method="_OnEquippedSlotMoved" binds= [ "s/v/slots/armor/m/icon", false ]]
-[connection signal="pressed" from="s/v/slots/armor" to="." method="_OnEquippedSlotPressed" binds= [ false ]]
 [connection signal="pressed" from="s/buttons/back" to="." method="_OnBackPressed"]

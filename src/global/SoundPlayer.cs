@@ -34,9 +34,12 @@ namespace Game.Sound
 			string resourceName = directory.GetNext(),
 				resourcePath;
 
+			AudioStream audioStream;
+			AudioStreamRandomPitch audioStreamRandomPitch;
+
 			while (!resourceName.Empty())
 			{
-				// Android workaround for actually the loading sounds
+				// Android workaround for actually loading the sounds
 				resourceName = resourceName.Replace("." + PathManager.importExt, string.Empty);
 
 				resourcePath = path.PlusFile(resourceName);
@@ -47,7 +50,16 @@ namespace Game.Sound
 				else if (!resourceName.Extension().Equals(PathManager.importExt)
 				&& !library.ContainsKey(resourceName.BaseName()))
 				{
-					library.Add(resourceName.BaseName(), (AudioStream)GD.Load(resourcePath));
+					audioStream = GD.Load<AudioStream>(resourcePath);
+					if (PathManager.randdomSndDirs.Contains(path.GetFile()))
+					{
+						audioStreamRandomPitch = new AudioStreamRandomPitch();
+						audioStreamRandomPitch.AudioStream = audioStream;
+						audioStreamRandomPitch.RandomPitch = 1.15f;
+						audioStream = audioStreamRandomPitch;
+					}
+
+					library.Add(resourceName.BaseName(), audioStream);
 				}
 				resourceName = directory.GetNext();
 			}

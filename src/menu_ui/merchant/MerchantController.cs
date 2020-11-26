@@ -59,38 +59,41 @@ namespace Game.Ui
 				this, nameof(_OnTransaction));
 			itemInfoMerchantController.itemList = merchantStore;
 		}
-		public void _OnTransaction(string CommodityName, int goldAmount, bool bought)
+		public void _OnTransaction(string commodityName, int goldAmount, bool bought)
 		{
 			// called from ItemInfo when player buys/sells
-			bool isSpell = SpellDB.Instance.HasData(CommodityName);
+			bool isSpell = SpellDB.Instance.HasData(commodityName);
 			if (bought)
 			{
 				if (isSpell)
 				{
-					playerSpellBook.AddCommodity(CommodityName);
+					playerSpellBook.AddCommodity(commodityName);
 				}
 				else
 				{
-					playerInventory.AddCommodity(CommodityName);
+					playerInventory.AddCommodity(commodityName);
 				}
 			}
 			else
 			{
 				if (isSpell)
 				{
-					playerSpellBook.RemoveCommodity(CommodityName);
+					playerSpellBook.RemoveCommodity(commodityName);
+					CheckHudSlots(playerSpellBook, commodityName);
 				}
 				else
 				{
-					playerInventory.RemoveCommodity(CommodityName);
+					playerInventory.RemoveCommodity(commodityName);
+					CheckHudSlots(playerInventory, commodityName);
 				}
 			}
 
-			QuestMaster.CheckQuests(CommodityName,
+			QuestMaster.CheckQuests(commodityName,
 				isSpell
 					? QuestDB.QuestType.LEARN
 					: QuestDB.QuestType.COLLECT,
-				bought);
+				bought
+			);
 
 			// add/sub gold
 			player.gold += goldAmount;
@@ -117,8 +120,7 @@ namespace Game.Ui
 		{
 			ContentDB.ContentData contentData = ContentDB.Instance.GetData(merchant.Name);
 
-			Globals.soundPlayer.PlaySound(
-				SpellDB.Instance.HasData(contentData.merchandise[0])
+			PlaySound(SpellDB.Instance.HasData(contentData.merchandise[0])
 				? NameDB.UI.TURN_PAGE
 				: NameDB.UI.MERCHANT_OPEN
 			);
@@ -127,7 +129,7 @@ namespace Game.Ui
 		}
 		public void _OnMerchantNodeHide()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.MERCHANT_CLOSE);
+			PlaySound(NameDB.UI.MERCHANT_CLOSE);
 			popupController.Hide();
 			mainContent.Show();
 		}
@@ -146,8 +148,8 @@ namespace Game.Ui
 
 			if (isSpell)
 			{
-				Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
-				Globals.soundPlayer.PlaySound(NameDB.UI.SPELL_SELECT);
+				PlaySound(NameDB.UI.CLICK1);
+				PlaySound(NameDB.UI.SPELL_SELECT);
 				alreadyHave = playerSpellBook.HasItem(CommodityName);
 			}
 			else
@@ -164,7 +166,7 @@ namespace Game.Ui
 		public void _OnMerchantPressed()
 		{
 			// switches to what the merchant is selling view
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
+			PlaySound(NameDB.UI.CLICK1);
 			toInventoryBttn.Show();
 			toMerchantBttn.Hide();
 
@@ -176,7 +178,7 @@ namespace Game.Ui
 		public void _OnInventoryPressed()
 		{
 			// switches to what the player is selling view
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
+			PlaySound(NameDB.UI.CLICK1);
 			toInventoryBttn.Hide();
 			toMerchantBttn.Show();
 

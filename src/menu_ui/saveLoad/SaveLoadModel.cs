@@ -23,6 +23,10 @@ namespace Game.Ui
 		{
 			Directory directory = new Directory();
 			string savePathDir = PathManager.savePath.GetBaseDir();
+			if (!directory.DirExists(savePathDir))
+			{
+				return;
+			}
 
 			// open dir and read files
 			directory.Open(savePathDir);
@@ -71,6 +75,13 @@ namespace Game.Ui
 			}
 
 			// save to file
+			Directory directory = new Directory();
+			string savePathDir = PathManager.savePath.GetBaseDir();
+			if (!directory.DirExists(savePathDir))
+			{
+				directory.MakeDirRecursive(savePathDir);
+			}
+
 			file.Open(string.Format(PathManager.savePath, index), File.ModeFlags.Write);
 			file.StoreString(JSON.Print(masterSave, "\t", true));
 			file.Close();

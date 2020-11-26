@@ -6,7 +6,6 @@
 [ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=4]
 [ext_resource path="res://asset/img/missile-spell/precise_shot.tres" type="Texture" id=5]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 resource_name = "color_ramp"
@@ -54,7 +53,7 @@ color_ramp = ExtResource( 5 )
 [node name="precise_shot" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 
 [node name="smoke" type="Particles2D" parent="idle" index="0"]

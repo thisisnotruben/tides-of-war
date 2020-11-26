@@ -60,7 +60,7 @@ namespace Game.Ui
 		{
 			string sndName = NameDB.UI.CLICK2;
 
-			switch (ItemDB.Instance.GetData(pickableWorldName).type)
+			switch (ItemDB.Instance.GetData(commodityWorldName).type)
 			{
 				case ItemDB.ItemType.FOOD:
 					sndName = NameDB.UI.EAT;
@@ -68,9 +68,7 @@ namespace Game.Ui
 					if (player.attacking)
 					{
 						mainContent.Hide();
-						popupController.errorLabel.Text = "Cannot Eat\nIn Combat!";
-						popupController.errorView.Show();
-						popupController.Show();
+						popupController.ShowError("Cannot Eat\nIn Combat!");
 						return;
 					}
 					break;
@@ -78,21 +76,22 @@ namespace Game.Ui
 					sndName = NameDB.UI.DRINK;
 					break;
 			}
-			Globals.soundPlayer.PlaySound(sndName);
+			PlaySound(sndName);
 
 			// eat up or drink up
-			new ItemFactory().Make(player, pickableWorldName).Start();
+			new ItemFactory().Make(player, commodityWorldName).Start();
 			// remove from inventory
-			itemList.RemoveCommodity(pickableWorldName);
+			itemList.RemoveCommodity(commodityWorldName);
+			CheckHudSlots(itemList, commodityWorldName);
 
 			EmitSignal(nameof(RefreshSlots));
 			Hide();
 		}
 		public void _OnEquipPressed()
 		{
-			ItemDB.ItemType itemType = ItemDB.Instance.GetData(pickableWorldName).type;
-			Item playerWeapon = player.weapon;
-			Item playerArmor = player.vest;
+			ItemDB.ItemType itemType = ItemDB.Instance.GetData(commodityWorldName).type;
+			Item playerWeapon = player.weapon,
+				playerArmor = player.vest;
 			bool inventoryFull = false;
 
 			// unequip weapon if any to equip focused weapon
@@ -117,56 +116,50 @@ namespace Game.Ui
 
 			if (inventoryFull)
 			{
-				// inventory full
 				mainContent.Hide();
-				popupController.errorLabel.Text = "Inventory\nFull!";
-				popupController.errorView.Show();
-				popupController.Show();
+				popupController.ShowError("Inventory\nFull!");
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(ItemDB.Instance.GetData(pickableWorldName).material, false);
-				// equip focused item
-				EquipItem(true, pickableWorldName);
+				Globals.soundPlayer.PlaySound(ItemDB.Instance.GetData(commodityWorldName).material, false);
+				EquipItem(true, commodityWorldName);
+				Hide();
 			}
 		}
 		public void _OnUnequipPressed()
 		{
-			if (itemList.IsFull(pickableWorldName))
+			if (itemList.IsFull(commodityWorldName))
 			{
 				mainContent.Hide();
-				popupController.errorLabel.Text = "Inventory\nFull!";
-				popupController.errorView.Show();
-				popupController.Show();
+				popupController.ShowError("Inventory\nFull!");
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(NameDB.UI.INVENTORY_UNEQUIP);
-				EquipItem(false, pickableWorldName);
+				PlaySound(NameDB.UI.INVENTORY_UNEQUIP);
+				EquipItem(false, commodityWorldName);
 			}
 		}
 		public void _OnDropPressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			PlaySound(NameDB.UI.CLICK2);
 
 			RouteConnections(nameof(_OnDropConfirm));
 			mainContent.Hide();
-			popupController.yesNoLabel.Text = "Drop?";
-			popupController.yesNoView.Show();
-			popupController.Show();
+			popupController.ShowConfirm("Drop?");
 		}
 		public void _OnDropConfirm()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
-			Globals.soundPlayer.PlaySound(NameDB.UI.INVENTORY_DROP);
+			PlaySound(NameDB.UI.CLICK2);
+			PlaySound(NameDB.UI.INVENTORY_DROP);
 
 			// remove from inventory
-			itemList.RemoveCommodity(pickableWorldName);
+			itemList.RemoveCommodity(commodityWorldName);
+			CheckHudSlots(itemList, commodityWorldName);
 			EmitSignal(nameof(RefreshSlots));
 
 			// instance treasure chest
 			TreasureChest treasureChest = (TreasureChest)SceneDB.treasureChest.Instance();
-			treasureChest.Init(pickableWorldName);
+			treasureChest.Init(commodityWorldName);
 
 			// place treasure chest in map
 			Map.Map map = Map.Map.map;
@@ -174,11 +167,12 @@ namespace Game.Ui
 			treasureChest.Owner = map;
 			treasureChest.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
 
-			QuestMaster.CheckQuests(pickableWorldName,
-				SpellDB.Instance.HasData(pickableWorldName)
+			QuestMaster.CheckQuests(commodityWorldName,
+				SpellDB.Instance.HasData(commodityWorldName)
 					? QuestDB.QuestType.LEARN
 					: QuestDB.QuestType.COLLECT,
-				false);
+				false
+			);
 
 			Hide();
 		}

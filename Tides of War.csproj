@@ -98,6 +98,7 @@
     <Compile Include="src\menu_ui\handler\MenuHandlerController.cs" />
     <Compile Include="src\menu_ui\hud\CharacterStatusController.cs" />
     <Compile Include="src\menu_ui\hud\HudControlController.cs" />
+    <Compile Include="src\menu_ui\hud\HudSlotController.cs" />
     <Compile Include="src\menu_ui\inventory\InventoryController.cs" />
     <Compile Include="src\menu_ui\inventory\InventoryModel.cs" />
     <Compile Include="src\menu_ui\mainMenu\MainMenuController.cs" />

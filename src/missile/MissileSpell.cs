@@ -57,13 +57,24 @@ namespace Game.Projectile
 		{
 			Godot.Collections.Dictionary payload = base.Serialize();
 			payload[NameDB.SaveTag.SPELL] = spellWorldName;
-
 			return payload;
 		}
 		public override void Deserialize(Godot.Collections.Dictionary payload)
 		{
-			base.Deserialize(payload);
-			// TODO
+			// the same code as parent class, except for the Init call
+
+			string characterPath = (string)payload[NameDB.SaveTag.CHARACTER],
+				targetPath = (string)payload[NameDB.SaveTag.TARGET];
+
+			if ((bool)payload[NameDB.SaveTag.HIT] || !HasNode(characterPath) || !HasNode(targetPath))
+			{
+				Delete();
+			}
+
+			Init(GetNode<Character>(characterPath), GetNode<Character>(targetPath), (string)payload[NameDB.SaveTag.SPELL]);
+
+			Godot.Collections.Array pos = (Godot.Collections.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
+			spawnPos = new Vector2((float)pos[0], (float)pos[1]);
 		}
 	}
 }

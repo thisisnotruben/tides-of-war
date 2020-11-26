@@ -32,7 +32,7 @@ namespace Game.Database
 				dict = (Godot.Collections.Dictionary)rawDict[spellName];
 
 				data.Add(spellName, new SpellMissileData(
-					hitBox: (Shape2D)GD.Load(string.Format(filePath, (string)dict[nameof(SpellMissileData.hitBox)])),
+					hitBox: GD.Load<Shape2D>(string.Format(filePath, (string)dict[nameof(SpellMissileData.hitBox)])),
 					img: dict[nameof(SpellMissileData.img)] == null ? null
 						: GD.Load<Texture>(string.Format(filePath, (string)dict[nameof(SpellMissileData.img)])),
 					rotate: (bool)dict[nameof(SpellMissileData.rotate)],

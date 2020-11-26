@@ -1,0 +1,20 @@
+{
+	"Explosive arrow": {
+		"radius": 16
+	},
+	"Explosive trap": {
+		"radius": 16
+	},
+	"Intimidating Shout": {
+		"radius": 16
+	},
+	"Meteor": {
+		"radius": 16
+	},
+	"Stomp": {
+		"radius": 16
+	},
+	"Arcane bolt": {
+		"radius": 16
+	}
+}

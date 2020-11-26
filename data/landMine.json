@@ -1,0 +1,12 @@
+{
+	"Explosive trap": {
+		"hitBox": "LandMineHitBox",
+		"img": "LandMine",
+		"sound": "explosion",
+		"minDamage": 0,
+		"maxDamage": 10,
+		"armDelaySec": 5,
+		"timeToDetSec": 3,
+		"radius": 16
+	}
+}

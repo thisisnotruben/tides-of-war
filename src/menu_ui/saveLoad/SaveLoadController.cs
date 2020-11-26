@@ -60,7 +60,7 @@ namespace Game.Ui
 		public void _OnSlotPressed(int index)
 		{
 			this.index = index + 1;
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			PlaySound(NameDB.UI.CLICK2);
 			GetNode<Control>("v").Hide();
 			popupController.saveBttn.Show();
 			if (!GetLabel(index).Text.Equals($"Slot {index + 1}"))
@@ -73,11 +73,9 @@ namespace Game.Ui
 		}
 		public void _OnDeletePressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
+			PlaySound(NameDB.UI.CLICK1);
 			RouteConnections(nameof(_OnDeleteConfirm));
-			popupController.yesNoLabel.Text = "Delete?";
-			popupController.yesNoView.Show();
-			popupController.Show();
+			popupController.ShowConfirm("Delete?");
 		}
 		public void _OnDeleteConfirm()
 		{
@@ -87,7 +85,7 @@ namespace Game.Ui
 		}
 		public void _OnSavePressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
+			PlaySound(NameDB.UI.CLICK1);
 			if (GetLabel(index).Text.Contains("Slot"))
 			{
 				_OnOverwriteConfirm();
@@ -95,8 +93,7 @@ namespace Game.Ui
 			else
 			{
 				RouteConnections(nameof(_OnOverwriteConfirm));
-				popupController.yesNoLabel.Text = "Overwrite?";
-				popupController.yesNoView.Show();
+				popupController.ShowConfirm("Overwrite?");
 			}
 		}
 		public void _OnOverwriteConfirm()
@@ -106,7 +103,7 @@ namespace Game.Ui
 		}
 		public void _OnLoadPressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK0);
+			PlaySound(NameDB.UI.CLICK0);
 			saveLoadModel.LoadGame(index);
 			Hide();
 		}

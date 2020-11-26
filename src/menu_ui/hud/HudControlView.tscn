@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/menu_ui/hud/HudControlController.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/ui/on_screen_button.tres" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://asset/img/ui/menu.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/ui/map.tres" type="Texture" id=6]
 [ext_resource path="res://src/menu_ui/hud/CharacterStatusView.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/menu_ui/hud/HudSlotController.cs" type="Script" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -134,42 +135,49 @@ __meta__ = {
 [node name="1" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="2" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 margin_left = 114.0
 margin_right = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="3" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 margin_left = 228.0
 margin_right = 340.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="4" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 margin_left = 342.0
 margin_right = 454.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="5" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 margin_left = 456.0
 margin_right = 568.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="6" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 margin_left = 570.0
 margin_right = 682.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="7" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 margin_top = 114.0
 margin_bottom = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="8" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 margin_left = 114.0
@@ -178,6 +186,7 @@ margin_right = 226.0
 margin_bottom = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="9" parent="split/background/margin/split/center/actionBar" instance=ExtResource( 4 )]
 margin_left = 228.0
@@ -186,6 +195,7 @@ margin_right = 340.0
 margin_bottom = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
+script = ExtResource( 8 )
 
 [node name="miniMap" type="TextureRect" parent="split/background/margin/split/center/actionBar"]
 margin_left = 342.0

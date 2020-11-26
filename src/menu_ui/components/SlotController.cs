@@ -5,12 +5,14 @@ namespace Game.Ui
 {
 	public class SlotController : Control
 	{
-		private Tween tween;
-		private ColorRect cooldownOverlay;
-		private Label coolDownText, stackCount;
-		private TextureRect icon;
-		private BaseButton _button;
+		protected Tween tween;
+		protected ColorRect cooldownOverlay;
+		protected Label coolDownText, stackCount;
+		protected TextureRect icon;
+		protected BaseButton _button;
 		public BaseButton button { get { return _button; } }
+		protected bool coolDownActive;
+		protected string commodityWorldName;
 
 		public override void _Ready()
 		{
@@ -26,7 +28,7 @@ namespace Game.Ui
 		}
 		public void Display(string worldName, int currentStack)
 		{
-			// display stack count and icon
+			commodityWorldName = worldName;
 			icon.Texture = PickableDB.GetIcon(worldName);
 			stackCount.Text = currentStack.ToString();
 			stackCount.Visible = currentStack > 1;
@@ -34,33 +36,29 @@ namespace Game.Ui
 		public void ClearDisplay()
 		{
 			icon.Texture = null;
-			stackCount.Text = "0";
-			stackCount.Hide();
-			coolDownText.Hide();
-			cooldownOverlay.Hide();
+			stackCount.Text = commodityWorldName = string.Empty;
+			cooldownOverlay.Visible = coolDownText.Visible = stackCount.Visible = coolDownActive = false;
 			tween.RemoveAll();
 		}
 		public void SetCooldown(float time)
 		{
-			if (time == 0.0f)
+			if ((int)time <= 0)
 			{
 				return;
 			}
 
-			coolDownText.Show();
-			cooldownOverlay.Show();
+			tween.RemoveAll();
+			cooldownOverlay.Visible = coolDownText.Visible = coolDownActive = true;
 
 			tween.InterpolateMethod(this, nameof(SetCooldownText),
 				time, 0.0f, time,
 				Tween.TransitionType.Linear, Tween.EaseType.In);
 			tween.Start();
 		}
-		public void OnTweenCompleted(Godot.Object gObject, NodePath key)
-		{
-			coolDownText.Hide();
-			cooldownOverlay.Hide();
-		}
-		public void OnButtonChanged(bool down) { icon.RectScale = (down) ? new Vector2(0.8f, 0.8f) : Vector2.One; }
-		private void SetCooldownText(float time) { coolDownText.Text = Math.Round(time, 0).ToString(); }
+		public bool HasCommodity(string worldName) { return !commodityWorldName.Empty() && worldName.Equals(commodityWorldName); }
+		public bool IsAvailable() { return icon.Texture == null; }
+		public void OnTweenCompleted(Godot.Object gObject, NodePath key) { cooldownOverlay.Visible = coolDownText.Visible = false; }
+		public void OnButtonChanged(bool down) { icon.RectScale = down ? new Vector2(0.8f, 0.8f) : Vector2.One; }
+		protected void SetCooldownText(float time) { coolDownText.Text = Math.Round(time, 0).ToString(); }
 	}
 }

@@ -10,21 +10,20 @@ namespace Game.Ui
 			base._Ready();
 			castBttn.Connect("pressed", this, nameof(_OnCastPressed));
 		}
-		public override void Display(string pickableWorldName, bool allowMove)
+		public override void Display(string commodityWorldName, bool allowMove)
 		{
-			base.Display(pickableWorldName, allowMove);
+			base.Display(commodityWorldName, allowMove);
 
 			// disaply cast option if spell not cooling down and player not dead
 			HideExcept(
-				Commodity.IsCoolingDown(player.GetPath(), pickableWorldName) || player.dead
+				Commodity.IsCoolingDown(player.GetPath(), commodityWorldName) || player.dead
 					? new Control[] { }
 					: new Control[] { castBttn });
 		}
 		public void _OnCastPressed()
 		{
-			bool showPopup = false;
-			SpellDB.SpellData spellData = SpellDB.Instance.GetData(pickableWorldName);
-			Label popupErrLabel = popupController.errorLabel;
+			string errorText = string.Empty;
+			SpellDB.SpellData spellData = SpellDB.Instance.GetData(commodityWorldName);
 
 			if (player.mana >= spellData.manaCost)
 			{
@@ -32,39 +31,34 @@ namespace Game.Ui
 				{
 					if (player.target == null)
 					{
-						popupErrLabel.Text = "Target\nRequired!";
-						showPopup = true;
+						errorText = "Target\nRequired!";
 					}
 					else
 					{
 						if (!player.target.enemy)
 						{
-							popupErrLabel.Text = "Invalid\nTarget!";
-							showPopup = true;
+							errorText = "Invalid\nTarget!";
 						}
 						else if (player.pos.DistanceTo(player.target.pos) > spellData.range && spellData.range > 0)
 						{
-							popupErrLabel.Text = "Target Not\nIn Range!";
-							showPopup = true;
+							errorText = "Target Not\nIn Range!";
 						}
 					}
 				}
 			}
 			else
 			{
-				popupErrLabel.Text = "Not Enough\nMana!";
-				showPopup = true;
+				errorText = "Not Enough\nMana!";
 			}
 
-			if (showPopup)
+			if (!errorText.Equals(string.Empty))
 			{
 				mainContent.Hide();
-				popupController.errorView.Show();
-				popupController.Show();
+				popupController.ShowError(errorText);
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+				PlaySound(NameDB.UI.CLICK2);
 				// TODO: actually cast spell here
 				Hide();
 			}

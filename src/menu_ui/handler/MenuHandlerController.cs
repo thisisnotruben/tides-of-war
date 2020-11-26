@@ -17,17 +17,27 @@ namespace Game.Ui
 			hudControlController = GetNode<HudControlController>("c/hud");
 			hudControlController.ConnectButtons(this, nameof(_OnHudPausePressed),
 				nameof(_OnHudSpellBookPressed), nameof(_OnHudPausePressed));
+
+			mainMenuController.inventoryController.itemInfoInventoryController
+				.popupController.addToSlotView.Connect("draw", this, nameof(_OnMainMenuHide));
+			mainMenuController.inventoryController.itemInfoInventoryController
+				.popupController.addToSlotView.Connect("hide", this, nameof(_OnMainMenuDraw));
+
+			mainMenuController.statsController.itemInfoController
+				.popupController.addToSlotView.Connect("draw", this, nameof(_OnMainMenuHide));
+			mainMenuController.statsController.itemInfoController
+				.popupController.addToSlotView.Connect("hide", this, nameof(_OnMainMenuDraw));
 		}
 		public void _OnMainMenuDraw() { hudControlController.Hide(); }
 		public void _OnMainMenuHide() { hudControlController.Show(); }
 		public void _OnHudPausePressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK5);
+			PlaySound(NameDB.UI.CLICK5);
 			mainMenuController.Show();
 		}
 		public void _OnHudSpellBookPressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK5);
+			PlaySound(NameDB.UI.CLICK5);
 			mainMenuController.ShowSpellBook();
 		}
 		public void ConnectPlayerToHud(Player player)

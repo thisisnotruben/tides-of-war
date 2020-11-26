@@ -62,7 +62,7 @@ namespace Game.Ui
 				return;
 			}
 
-			Globals.soundPlayer.PlaySound(NameDB.UI.SPELL_SELECT);
+			PlaySound(NameDB.UI.SPELL_SELECT);
 			mainContent.Hide();
 
 			itemInfoSpellController.selectedSlotIdx = slotIndex;
@@ -70,7 +70,7 @@ namespace Game.Ui
 		}
 		public override void _OnBackPressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.SPELL_BOOK_CLOSE);
+			PlaySound(NameDB.UI.SPELL_BOOK_CLOSE);
 			Hide();
 		}
 	}

@@ -38,8 +38,8 @@ namespace Game.Ui
 				case Error.FileEof:
 					PackedScene packedScene = (PackedScene)mapLoader.GetResource();
 					cache.Add(mapLoader.GetResource().ResourcePath, packedScene);
-					Node scene = packedScene.Instance();
-					rootNode.AddChild(scene);
+					rootNode.AddChild(packedScene.Instance());
+
 					SetTransitions();
 					SetProcess(false);
 					QueueFree();
@@ -71,10 +71,11 @@ namespace Game.Ui
 			{
 				ContentDB.Instance.LoadData(contentDataPath);
 			}
+
 			currentScene.Hide();
-			CallDeferred(nameof(DeferredSetScene), scenePath, currentScene);
+			CallDeferred(nameof(SetSceneDeferred), scenePath, currentScene);
 		}
-		private void DeferredSetScene(string scenePath, CanvasItem currentScene)
+		private void SetSceneDeferred(string scenePath, CanvasItem currentScene)
 		{
 			currentScene.Free();
 			if (cache.ContainsKey(scenePath))
@@ -86,8 +87,8 @@ namespace Game.Ui
 			else
 			{
 				mapLoader = ResourceLoader.LoadInteractive(scenePath);
+				SetProcess(true);
 			}
-			SetProcess(true);
 		}
 	}
 }

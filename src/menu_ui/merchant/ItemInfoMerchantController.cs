@@ -7,7 +7,7 @@ namespace Game.Ui
 		public InventoryModel playerSpellBook;
 		public bool isBuying;
 
-		[Signal] public delegate void OnTransaction(string pickableWorldName, int goldAmount, bool bought);
+		[Signal] public delegate void OnTransaction(string commodityWorldName, int goldAmount, bool bought);
 
 		public override void _Ready()
 		{
@@ -16,14 +16,13 @@ namespace Game.Ui
 			buyBttn.Connect("pressed", this, nameof(_OnBuyPressed));
 			sellBttn.Connect("pressed", this, nameof(_OnSellPressed));
 
-			BaseButton addToHudBttn = GetNode<BaseButton>("s/v/c/v/add_to_hud");
-			addToHudBttn.Disconnect("button_down", this, nameof(_OnSlotMoved));
-			addToHudBttn.Disconnect("button_up", this, nameof(_OnSlotMoved));
-			addToHudBttn.Disconnect("pressed", this, nameof(_OnAddToHudPressed));
+			addToHudBttn.Disconnect("button_down", this, nameof(OnSlotMoved));
+			addToHudBttn.Disconnect("button_up", this, nameof(OnSlotMoved));
+			addToHudBttn.Disconnect("pressed", this, nameof(OnAddToHudPressed));
 		}
 		public override void _OnMovePressed(int by)
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			PlaySound(NameDB.UI.CLICK2);
 
 			// get next commodity when pressing arrows
 			selectedSlotIdx += by;
@@ -34,64 +33,56 @@ namespace Game.Ui
 
 			Display(nextCommodityWorldName, true, isBuying, playerHaveSpell);
 		}
-		public void Display(string pickableWorldName, bool allowMove, bool buy, bool alreadyHave)
+		public void Display(string commodityWorldName, bool allowMove, bool buy, bool alreadyHave)
 		{
-			Display(pickableWorldName, allowMove);
+			Display(commodityWorldName, allowMove);
 
 			// set which buttons to show accordingly
-			buyBttn.Text = SpellDB.Instance.HasData(pickableWorldName) ? "Train" : "Buy";
+			buyBttn.Text = SpellDB.Instance.HasData(commodityWorldName) ? "Train" : "Buy";
 			HideExcept(alreadyHave ? new Control[] { } : new Control[] { buy ? buyBttn : sellBttn });
 		}
 		public void _OnBuyPressed()
 		{
 			RouteConnections(nameof(_OnBuyConfirm));
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
-			if (SpellDB.Instance.HasData(pickableWorldName)
-			&& player.level < SpellDB.Instance.GetData(pickableWorldName).level)
+			if (SpellDB.Instance.HasData(commodityWorldName)
+			&& player.level < SpellDB.Instance.GetData(commodityWorldName).level)
 			{
-				popupController.errorLabel.Text = "Can't Learn\nThis Yet!";
-				popupController.errorView.Show();
+				popupController.ShowError("Can't Learn\nThis Yet!");
 
 			}
-			else if (PickableDB.GetGoldCost(pickableWorldName) < player.gold)
+			else if (PickableDB.GetGoldCost(commodityWorldName) < player.gold)
 			{
-				popupController.yesNoLabel.Text = SpellDB.Instance.HasData(pickableWorldName) ? "Learn?" : "Buy?";
-				popupController.yesNoView.Show();
+				popupController.ShowConfirm(SpellDB.Instance.HasData(commodityWorldName) ? "Learn?" : "Buy?");
 			}
 			else
 			{
-				popupController.errorLabel.Text = "Not Enough\nGold!";
-				popupController.errorView.Show();
+				popupController.ShowError("Not Enough\nGold!");
 			}
-			popupController.Show();
 		}
 		public void _OnBuyConfirm()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.SELL_BUY);
+			PlaySound(NameDB.UI.SELL_BUY);
 			if (popupController.yesNoLabel.Text.Equals("Learn?"))
 			{
-				Globals.soundPlayer.PlaySound(NameDB.UI.LEARN_SPELL);
+				PlaySound(NameDB.UI.LEARN_SPELL);
 				buyBttn.Hide();
 			}
-			EmitSignal(nameof(OnTransaction),
-				pickableWorldName, -PickableDB.GetGoldCost(pickableWorldName), true);
+			EmitSignal(nameof(OnTransaction), commodityWorldName, -PickableDB.GetGoldCost(commodityWorldName), true);
 			popupController.Hide();
 		}
 		public void _OnSellPressed()
 		{
 			RouteConnections(nameof(_OnSellConfirm));
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
-			popupController.yesNoLabel.Text = "Sell?";
-			popupController.yesNoView.Show();
-			popupController.Show();
+			popupController.ShowConfirm("Sell?");
 		}
 		public void _OnSellConfirm()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.SELL_BUY);
-			EmitSignal(nameof(OnTransaction),
-				pickableWorldName, PickableDB.GetGoldCost(pickableWorldName), false);
+			PlaySound(NameDB.UI.SELL_BUY);
+			EmitSignal(nameof(OnTransaction), commodityWorldName, PickableDB.GetGoldCost(commodityWorldName), false);
 			Hide();
 		}
 	}

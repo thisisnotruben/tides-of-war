@@ -1,0 +1,410 @@
+{
+	"Intimidating Shout": {
+		"durationSec": 5,
+		"stamina": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"intellect": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"agility": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"hpMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"manaMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"maxDamage": {
+			"type": "PERCENT_MUL",
+			"value": -20
+		},
+		"minDamage": {
+			"type": "PERCENT_MUL",
+			"value": -20
+		},
+		"regenTime": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"armor": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponRange": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponSpeed": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"moveSpeed": {
+			"type": "FLAT",
+			"value": 0
+		}
+	},
+	"Fortify": {
+		"durationSec": 60,
+		"stamina": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"intellect": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"agility": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"hpMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"manaMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"maxDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"minDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"regenTime": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"armor": {
+			"type": "PERCENT_MUL",
+			"value": 25
+		},
+		"weaponRange": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponSpeed": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"moveSpeed": {
+			"type": "FLAT",
+			"value": 0
+		}
+	},
+	"Frenzy": {
+		"durationSec": 120,
+		"stamina": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"intellect": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"agility": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"hpMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"manaMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"maxDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"minDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"regenTime": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"armor": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponRange": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponSpeed": {
+			"type": "PERCENT_MUL",
+			"value": 50
+		},
+		"moveSpeed": {
+			"type": "PERCENT_MUL",
+			"value": 25
+		}
+	},
+	"Concussive shot": {
+		"durationSec": 10,
+		"stamina": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"intellect": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"agility": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"hpMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"manaMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"maxDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"minDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"regenTime": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"armor": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponRange": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponSpeed": {
+			"type": "PERCENT_MUL",
+			"value": -50
+		},
+		"moveSpeed": {
+			"type": "PERCENT_MUL",
+			"value": -50
+		}
+	},
+	"Sniper shot": {
+		"durationSec": 0,
+		"stamina": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"intellect": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"agility": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"hpMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"manaMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"maxDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"minDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"regenTime": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"armor": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponRange": {
+			"type": "PERCENT_MUL",
+			"value": 25
+		},
+		"weaponSpeed": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"moveSpeed": {
+			"type": "FLAT",
+			"value": 0
+		}
+	},
+	"Frost bolt": {
+		"durationSec": 10,
+		"stamina": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"intellect": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"agility": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"hpMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"manaMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"maxDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"minDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"regenTime": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"armor": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponRange": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponSpeed": {
+			"type": "PERCENT_MUL",
+			"value": -30
+		},
+		"moveSpeed": {
+			"type": "PERCENT_MUL",
+			"value": -30
+		}
+	},
+	"Haste": {
+		"durationSec": 10,
+		"stamina": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"intellect": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"agility": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"hpMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"manaMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"maxDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"minDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"regenTime": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"armor": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponRange": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponSpeed": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"moveSpeed": {
+			"type": "PERCENT_MUL",
+			"value": 50
+		}
+	},
+	"Slow": {
+		"durationSec": 15,
+		"stamina": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"intellect": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"agility": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"hpMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"manaMax": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"maxDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"minDamage": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"regenTime": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"armor": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponRange": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"weaponSpeed": {
+			"type": "PERCENT_MUL",
+			"value": -50
+		},
+		"moveSpeed": {
+			"type": "PERCENT_MUL",
+			"value": -50
+		}
+	}
+}

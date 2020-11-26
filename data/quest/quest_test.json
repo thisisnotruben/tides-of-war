@@ -1,0 +1,39 @@
+{
+	"myQuest": {
+		"nextQuest": [],
+		"reward": [
+			"Corrupted Sword",
+			"Ripe Watermelon"
+		],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_5/zed/z1/245-minotaur",
+		"questCompleter": "/root/zone_2/zed/z1/307-oliphant",
+		"available": "available dialogue",
+		"active": "active dialogue",
+		"completed": "completed dialogue",
+		"delivered": "delivered dialogue",
+		"objectives": {
+			"296-aberration": {
+				"keepWorldObject": false,
+				"questType": "KILL",
+				"amount": 1,
+				"extraContent": {
+					"dialogue": "",
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"aberration": {
+				"keepWorldObject": false,
+				"questType": "KILL",
+				"amount": 6,
+				"extraContent": {
+					"dialogue": "",
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	}
+}

@@ -8,24 +8,35 @@ namespace Game.Ui
 	{
 		public InventoryModel itemList;
 		public int selectedSlotIdx;
-		protected PopupController popupController;
-		protected string pickableWorldName;
+		public PopupController popupController;
+		protected string commodityWorldName;
 		protected Control mainContent;
-		protected Button castBttn, useBttn, buyBttn, sellBttn, equipBttn, unequipBttn, dropBttn, backBttn;
 		protected TextureButton leftbttn, rightBttn;
+		protected TextureRect commodityIcon;
+		public Button castBttn, useBttn, buyBttn, sellBttn, equipBttn, unequipBttn, dropBttn, backBttn;
+		public TextureButton addToHudBttn;
 
 		public override void _Ready()
 		{
 			// connect popup events
 			popupController = GetNode<PopupController>("popup");
 			popupController.clearSlot.Connect("pressed", this, nameof(_OnClearSlotPressed));
-			popupController.addToSlotBackBttn.Connect("pressed", this, nameof(_OnAddToHudBack));
+			popupController.Connect("hide", this, nameof(_OnAddToHudBack));
 			popupController.Connect("hide", this, nameof(_OnItemInfoNodeHide));
 			popupController.addToHudSlotBttns.ForEach(b => b.Connect("pressed",
 				this, nameof(_OnAddToHudConfirm), new Godot.Collections.Array() { b.GetIndex() + 1 })
 			);
 
 			mainContent = GetNode<Control>("s");
+
+			addToHudBttn = GetNode<TextureButton>("s/v/c/v/add_to_hud");
+			commodityIcon = addToHudBttn.GetNode<TextureRect>("m/icon");
+
+			addToHudBttn.Connect("pressed", this, nameof(OnAddToHudPressed));
+			addToHudBttn.Connect("button_down", this, nameof(OnSlotMoved),
+				new Godot.Collections.Array() { addToHudBttn, true });
+			addToHudBttn.Connect("button_up", this, nameof(OnSlotMoved),
+				new Godot.Collections.Array() { addToHudBttn, false });
 
 			castBttn = GetNode<Button>("s/h/buttons/cast");
 			useBttn = GetNode<Button>("s/h/buttons/use");
@@ -39,9 +50,9 @@ namespace Game.Ui
 			leftbttn = GetNode<TextureButton>("s/h/left");
 			rightBttn = GetNode<TextureButton>("s/h/right");
 		}
-		public virtual void Display(string pickableWorldName, bool allowMove)
+		public virtual void Display(string commodityWorldName, bool allowMove)
 		{
-			this.pickableWorldName = pickableWorldName;
+			this.commodityWorldName = commodityWorldName;
 
 			// itemList != null due to player traversing through shortcuts
 			if (allowMove && itemList != null)
@@ -62,15 +73,15 @@ namespace Game.Ui
 
 			// decide which buttons to show
 			Control[] showBttns = { };
-			if (!player.dead && itemList != null && ItemDB.Instance.HasData(pickableWorldName))
+			if (!player.dead && itemList != null && ItemDB.Instance.HasData(commodityWorldName))
 			{
 				showBttns = new Control[] { dropBttn, null };
-				ItemDB.ItemType itemType = ItemDB.Instance.GetData(pickableWorldName).type;
+				ItemDB.ItemType itemType = ItemDB.Instance.GetData(commodityWorldName).type;
 				switch (itemType)
 				{
 					case ItemDB.ItemType.FOOD:
 					case ItemDB.ItemType.POTION:
-						if (!Commodity.IsCoolingDown(player.GetPath(), pickableWorldName))
+						if (!Commodity.IsCoolingDown(player.GetPath(), commodityWorldName))
 						{
 							showBttns[1] = useBttn;
 							useBttn.Text = itemType == ItemDB.ItemType.FOOD ? "Eat" : "Drink";
@@ -85,10 +96,9 @@ namespace Game.Ui
 
 			// set presentation
 			HideExcept(showBttns);
-			GetNode<Label>("s/v/header").Text = pickableWorldName;
-			GetNode<TextureRect>("s/v/c/v/add_to_hud/m/icon").Texture = PickableDB.GetIcon(pickableWorldName);
-			GetNode<RichTextLabel>("s/v/c/v/m/info_text").BbcodeText = Commodity.GetDescription(pickableWorldName);
-
+			GetNode<Label>("s/v/header").Text = commodityWorldName;
+			commodityIcon.Texture = PickableDB.GetIcon(commodityWorldName);
+			GetNode<RichTextLabel>("s/v/c/v/m/info_text").BbcodeText = Commodity.GetDescription(commodityWorldName);
 			Show();
 		}
 		protected void HideExcept(params Control[] nodesToShow)
@@ -114,126 +124,64 @@ namespace Game.Ui
 			popupController.Hide();
 			mainContent.Show();
 		}
-		public void _OnSlotMoved(string nodePath, bool down)
+		public void OnAddToHudPressed()
 		{
-			GetNode<Control>(nodePath).RectScale = down ? new Vector2(0.8f, 0.8f) : Vector2.One;
-		}
-		public void _OnAddToHudPressed()
-		{
-			// TODO
-			// Globals.PlaySound("click2", this, speaker);
-			// mainContent.Hide();
-			// int count = 1;
-			// popupController.GetNode<Control>("m/add_to_slot/clear_slot").Hide();
-			// foreach (SlotController itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-			// {
-			// 	Tween tween = itemSlot.GetNode<Tween>("tween");
-			// 	ColorRect colorRect = itemSlot.GetNode<ColorRect>("m/icon/overlay");
-			// 	Label label = itemSlot.GetNode<Label>("m/label");
-			// 	if (tween.IsActive())
-			// 	{
-			// 		tween.SetActive(false);
-			// 		colorRect.RectScale = Vector2.One;
-			// 	}
-			// 	colorRect.Color = new Color(1.0f, 1.0f, 0.0f, 0.75f);
-			// 	label.Text = count.ToString();
-			// 	label.Show();
-			// 	if (!itemSlot.GetItem().Empty() && itemSlot.GetItem().Equals(pickableWorldName))
-			// 	{
-			// 		popupController.GetNode<Control>("m/add_to_slot/clear_slot").Show();
-			// 	}
-			// 	count++;
-			// }
-			// popupController.GetNode<Control>("m/add_to_slot").Show();
-			// popupController.Show();
+			PlaySound(NameDB.UI.CLICK2);
+			mainContent.Hide();
+			popupController.clearSlot.Hide();
+
+			int count = 1;
+			HudSlotController hudControlController;
+			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
+			{
+				hudControlController = node as HudSlotController;
+				if (hudControlController?.HasCommodity(commodityWorldName) ?? false)
+				{
+					popupController.clearSlot.Show();
+				}
+				hudControlController?.ShowAddToHudDisplay((count++).ToString());
+			}
+			popupController.addToSlotView.Show();
+			popupController.Show();
 		}
 		public void _OnAddToHudConfirm(int index)
 		{
-			// TODO
-			// int amounttt = -1;
-			// ItemSlot buttonFrom = null;
-			// ItemSlot buttonTo = null;
-			// Hide();
-			// Globals.PlaySound("click1", this, speaker);
-			// foreach (ItemSlot shortcut in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-			// {
-			// 	Tween itemSlotTween = shortcut.GetNode<Tween>("tween");
-			// 	shortcut.GetNode<ColorRect>("m/icon/overlay").Color = new Color(0.0f, 0.0f, 0.0f, 0.75f);
-			// 	shortcut.GetNode<Control>("m/label").Hide();
-			// 	itemSlotTween.SetActive(true);
-			// 	itemSlotTween.ResumeAll();
-			// 	if (!shortcut.GetItem().Empty() && shortcut.GetItem().Equals(pickableWorldName))
-			// 	{
-			// 		amounttt = shortcut.GetItemStack().Count;
-			// 		shortcut.SetItem(null, false, true, false);
-			// 	}
-			// 	if (shortcut.Name.Equals(index.ToString()))
-			// 	{
-			// 		buttonTo = shortcut;
-			// 		if (shortcut.GetItem() != null)
-			// 		{
-			// 			shortcut.SetItem(null, false, true, false);
-			// 		}
-			// 		string weaponWorldName = (player.weapon == null) ? "" : player.weapon.worldName;
-			// 		string armorWorldName = (player.vest == null) ? "" : player.vest.worldName;
-			// 		if (weaponWorldName.Equals(pickableWorldName))
-			// 		{
-			// 			shortcut.SetItem(weaponWorldName, false, false, false);
-			// 		}
-			// 		else if (armorWorldName.Equals(pickableWorldName))
-			// 		{
-			// 			shortcut.SetItem(armorWorldName, false, false, false);
-			// 		}
-			// 		else
-			// 		{
-			// 			ItemSlot itemSlot = itemList.GetItemSlot(pickableWorldName);
-			// 			List<string> pickableStack = itemSlot.GetItemStack();
-			// 			buttonFrom = itemSlot;
-			// 			if (amounttt == -1)
-			// 			{
-			// 				amounttt = pickableStack.Count;
-			// 			}
-			// 			for (int i = 0; i < amounttt; i++)
-			// 			{
-			// 				shortcut.SetItem(pickableStack[i]);
-			// 			}
-			// 		}
-			// 	}
-			// }
-			// if (buttonFrom != null && buttonTo != null)
-			// {
-			// 	foreach (Godot.Collections.Dictionary link in buttonFrom.GetSignalConnectionList(nameof(ItemSlot.SyncSlot)))
-			// 	{
-			// 		buttonFrom.Disconnect(nameof(ItemSlot.SyncSlot), (Godot.Object)link["target"], nameof(ItemSlot._OnSyncShortcut));
-			// 	}
-			// 	buttonFrom.Connect(nameof(ItemSlot.SyncSlot), buttonTo, nameof(ItemSlot._OnSyncShortcut));
-			// 	if (buttonFrom.IsCoolingDown())
-			// 	{
-			// 		buttonTo.CoolDown(buttonFrom.GetItem(), buttonFrom.GetCoolDownInitialTime(), buttonFrom.GetCoolDownTimeLeft());
-			// 	}
-			// }
+			PlaySound(NameDB.UI.CLICK1);
+			Hide();
+
+			HudSlotController hudSlotController;
+			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
+			{
+				hudSlotController = node as HudSlotController;
+				if (hudSlotController?.Name.Equals(index.ToString()) ?? false)
+				{
+					hudSlotController.Display(commodityWorldName, player.GetPath(), itemList);
+
+					// TODO: connect pressed events to some form of action
+
+					return;
+				}
+			}
 		}
 		public void _OnAddToHudBack()
 		{
-			foreach (SlotController itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
+			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
 			{
-				Tween tween = itemSlot.GetNode<Tween>("tween");
-				tween.SetActive(true);
-				tween.ResumeAll();
-				itemSlot.GetNode<ColorRect>("m/icon/overlay").Color = new Color(0.0f, 0.0f, 0.0f, 0.75f);
-				itemSlot.GetNode<Control>("m/label").Hide();
+				(node as HudSlotController)?.RevertAddToHudDisplay();
 			}
 		}
 		public void _OnClearSlotPressed()
 		{
-			// TODO
-			// foreach (SlotController itemSlot in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-			// {
-			// 	if (itemSlot.GetItem() != null && itemSlot.GetItem().Equals(pickableWorldName))
-			// 	{
-			// 		itemSlot.SetItem(null, false, true, false);
-			// 	}
-			// }
+			HudSlotController hudSlotController;
+			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
+			{
+				hudSlotController = node as HudSlotController;
+				if (hudSlotController?.HasCommodity(commodityWorldName) ?? false)
+				{
+					hudSlotController.ClearDisplay();
+					break;
+				}
+			}
 			popupController.Hide();
 		}
 		public void _OnInfoTextDraw()
@@ -243,7 +191,7 @@ namespace Game.Ui
 		}
 		public virtual void _OnMovePressed(int by)
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			PlaySound(NameDB.UI.CLICK2);
 			// update selection and display
 			selectedSlotIdx += by;
 			Display(itemList.GetCommodity(selectedSlotIdx), true);

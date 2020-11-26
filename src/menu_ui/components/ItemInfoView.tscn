@@ -214,9 +214,6 @@ stretch_mode = 5
 
 [node name="popup" parent="." instance=ExtResource( 14 )]
 [connection signal="hide" from="." to="." method="_OnItemInfoNodeHide"]
-[connection signal="button_down" from="s/v/c/v/add_to_hud" to="." method="_OnSlotMoved" binds= [ "s/v/c/v/add_to_hud/m/icon", true ]]
-[connection signal="button_up" from="s/v/c/v/add_to_hud" to="." method="_OnSlotMoved" binds= [ "s/v/c/v/add_to_hud/m/icon", false ]]
-[connection signal="pressed" from="s/v/c/v/add_to_hud" to="." method="_OnAddToHudPressed"]
 [connection signal="draw" from="s/v/c/v/m/info_text" to="." method="_OnInfoTextDraw"]
 [connection signal="pressed" from="s/h/left" to="." method="_OnMovePressed" binds= [ -1 ]]
 [connection signal="pressed" from="s/h/buttons/back" to="." method="_OnBackPressed"]

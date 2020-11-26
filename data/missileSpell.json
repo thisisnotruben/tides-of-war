@@ -1,0 +1,80 @@
+{
+	"Fireball": {
+		"hitBox": "SpellHitBox",
+		"img": null,
+		"rotate": false,
+		"sound": "fireball_cast"
+	},
+	"Shadow bolt": {
+		"hitBox": "SpellHitBox",
+		"img": null,
+		"rotate": false,
+		"sound": "shadow_bolt_cast"
+	},
+	"Frost bolt": {
+		"hitBox": "SpellHitBox",
+		"img": null,
+		"rotate": true,
+		"sound": "frost_bolt_cast"
+	},
+	"Siphon mana": {
+		"hitBox": "SpellHitBox",
+		"img": null,
+		"rotate": false,
+		"sound": ""
+	},
+	"Piercing shot": {
+		"hitBox": "ArrowHitBox",
+		"img": "arrow_big1",
+		"rotate": true,
+		"sound": ""
+	},
+	"Concussive shot": {
+		"hitBox": "ArrowHitBox",
+		"img": "arrow_big2",
+		"rotate": true,
+		"sound": ""
+	},
+	"Explosive arrow": {
+		"hitBox": "ArrowHitBox",
+		"img": "arrow_big3",
+		"rotate": true,
+		"sound": ""
+	},
+	"Searing arrow": {
+		"hitBox": "ArrowHitBox",
+		"img": "arrow_big0",
+		"rotate": true,
+		"sound": ""
+	},
+	"Stinging shot": {
+		"hitBox": "ArrowHitBox",
+		"img": "arrow_big0",
+		"rotate": true,
+		"sound": ""
+	},
+	"Precise shot": {
+		"hitBox": "ArrowHitBox",
+		"img": "arrow_big0",
+		"rotate": true,
+		"sound": ""
+	},
+	"Sniper shot": {
+		"hitBox": "ArrowHitBox",
+		"img": "arrow_big0",
+		"rotate": true,
+		"sound": ""
+	},
+	"Arcane bolt": {
+		"hitBox": "SpellHitBox",
+		"img": null,
+		"rotate": false,
+		"sound": "arcane_bolt_cast"
+	},
+	"Meteor": {
+		"hitBox": "SpellHitBox",
+		"img": null,
+		"rotate": false,
+		"sound": ""
+	}
+}

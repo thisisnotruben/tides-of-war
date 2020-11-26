@@ -7,12 +7,16 @@ namespace Game.Ui
 	{
 		public readonly InventoryModel inventory = new InventoryModel();
 		private SlotGridController inventorySlots;
-		private ItemInfoInventoryController itemInfoInventoryController;
+		public ItemInfoInventoryController itemInfoInventoryController;
 		protected Control mainContent;
+		protected TextureRect weaponIcon, armorIcon;
 
 		public override void _Ready()
 		{
 			mainContent = GetNode<Control>("s");
+
+			weaponIcon = GetNode<TextureRect>("s/v/slots/weapon/m/icon");
+			armorIcon = GetNode<TextureRect>("s/v/slots/armor/m/icon");
 
 			inventorySlots = GetNode<SlotGridController>("s/v/c/SlotGrid");
 			Connect("draw", this, nameof(_OnInventoryControllerDraw));
@@ -33,6 +37,25 @@ namespace Game.Ui
 			// refresh slots whenever an item is dropped from inventory
 			itemInfoInventoryController.Connect(nameof(ItemInfoInventoryController.RefreshSlots),
 				this, nameof(RefreshSlots));
+
+			TextureButton weaponSlot = GetNode<TextureButton>("s/v/slots/weapon"),
+				armorSlot = GetNode<TextureButton>("s/v/slots/armor");
+
+			weaponSlot.Connect("pressed", this, nameof(_OnEquippedSlotPressed),
+				new Godot.Collections.Array() { true });
+			armorSlot.Connect("pressed", this, nameof(_OnEquippedSlotPressed),
+				new Godot.Collections.Array() { false });
+
+			// connect button effects
+			weaponSlot.Connect("button_down", this, nameof(OnSlotMoved),
+				new Godot.Collections.Array() { weaponSlot, true });
+			armorSlot.Connect("button_down", this, nameof(OnSlotMoved),
+				new Godot.Collections.Array() { armorSlot, true });
+
+			weaponSlot.Connect("button_up", this, nameof(OnSlotMoved),
+				new Godot.Collections.Array() { weaponSlot, false });
+			armorSlot.Connect("button_up", this, nameof(OnSlotMoved),
+				new Godot.Collections.Array() { armorSlot, false });
 		}
 		public void _OnInventoryControllerDraw() { RefreshSlots(); }
 		public void RefreshSlots()
@@ -46,19 +69,17 @@ namespace Game.Ui
 		}
 		public void _OnInventoryControllerHide()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.MERCHANT_CLOSE);
+			PlaySound(NameDB.UI.MERCHANT_CLOSE);
 			itemInfoInventoryController.Hide();
 			mainContent.Show();
 		}
 		public void _OnItemEquipped(string worldName, bool on)
 		{
 			ItemDB.ItemData itemData = ItemDB.Instance.GetData(worldName);
-
-			GetNode<TextureRect>(
-				(itemData.type == ItemDB.ItemType.ARMOR)
-				? "s/v/slots/armor/m/icon"
-				: "s/v/slots/weapon/m/icon")
-					.Texture = (on) ? itemData.icon : null;
+			(itemData.type == ItemDB.ItemType.ARMOR
+				? armorIcon
+				: weaponIcon
+			).Texture = on ? itemData.icon : null;
 		}
 		public void _OnInventoryIndexSelected(int slotIndex)
 		{
@@ -68,21 +89,20 @@ namespace Game.Ui
 				return;
 			}
 
-			Globals.soundPlayer.PlaySound(NameDB.UI.INVENTORY_OPEN);
+			PlaySound(NameDB.UI.INVENTORY_OPEN);
 			mainContent.Hide();
 
 			itemInfoInventoryController.selectedSlotIdx = slotIndex;
 			itemInfoInventoryController.Display(inventory.GetCommodity(slotIndex), true);
 		}
-		public void _OnEquippedSlotMoved(string nodePath, bool down)
-		{
-			GetNode<Control>(nodePath).RectScale = (down) ? new Vector2(0.8f, 0.8f) : Vector2.One;
-		}
 		public void _OnEquippedSlotPressed(bool weapon)
 		{
 			if ((weapon && player.weapon != null) || (!weapon && player.vest != null))
 			{
-				itemInfoInventoryController.Display((weapon) ? player.weapon.worldName : player.vest.worldName, false);
+				mainContent.Hide();
+				itemInfoInventoryController.Display(weapon ? player.weapon.worldName : player.vest.worldName, false);
+				itemInfoInventoryController.equipBttn.Hide();
+				itemInfoInventoryController.unequipBttn.Show();
 			}
 		}
 	}

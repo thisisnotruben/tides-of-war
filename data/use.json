@@ -1,0 +1,354 @@
+{
+	"Devastate": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 10
+		}
+	},
+	"Divine heal": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "PERCENT_MUL",
+			"value": 25
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "FLAT",
+			"value": 0
+		}
+	},
+	"Cleave": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 18
+		}
+	},
+	"Bash": {
+		"totalSec": 5,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 10
+		}
+	},
+	"Hemorrhage": {
+		"totalSec": 60,
+		"repeatSec": 12,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "FLAT",
+			"value": 5
+		}
+	},
+	"Stomp": {
+		"totalSec": 3,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "FLAT",
+			"value": 10
+		}
+	},
+	"Overpower": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 15
+		}
+	},
+	"Frenzy": {
+		"totalSec": 120,
+		"repeatSec": 5,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "FLAT",
+			"value": 5
+		}
+	},
+	"Searing arrow": {
+		"totalSec": 75,
+		"repeatSec": 15,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "FLAT",
+			"value": 5
+		}
+	},
+	"Concussive shot": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 10
+		}
+	},
+	"Piercing shot": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 10
+		}
+	},
+	"Stinging shot": {
+		"totalSec": 30,
+		"repeatSec": 2,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 20
+		}
+	},
+	"Explosive arrow": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "FLAT",
+			"value": 10
+		}
+	},
+	"Precise shot": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 15
+		}
+	},
+	"Sniper shot": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 15
+		}
+	},
+	"Volley": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 5
+		}
+	},
+	"Fireball": {
+		"totalSec": 30,
+		"repeatSec": 10,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "FLAT",
+			"value": 10
+		}
+	},
+	"Shadow bolt": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 12
+		}
+	},
+	"Frost bolt": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 10
+		}
+	},
+	"Arcane bolt": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 12
+		}
+	},
+	"Mind blast": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 20
+		}
+	},
+	"Meteor": {
+		"totalSec": 0,
+		"repeatSec": 0,
+		"hp": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"mana": {
+			"type": "FLAT",
+			"value": 0
+		},
+		"damage": {
+			"type": "PERCENT_MUL",
+			"value": 20
+		}
+	}
+}

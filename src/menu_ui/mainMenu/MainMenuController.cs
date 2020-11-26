@@ -7,13 +7,15 @@ namespace Game.Ui
 {
 	public class MainMenuController : GameMenu
 	{
-		private Control main;
-		private InventoryController inventoryController;
-		private StatsController statsController;
+		private Control main, background;
+		private ColorRect overlay;
+
+		public InventoryController inventoryController;
+		public StatsController statsController;
 		private QuestLogController questLogController;
 		private AboutController aboutController;
 		private SaveLoadController saveLoadController;
-		private SpellBookController spellBookController;
+		public SpellBookController spellBookController;
 		private DialogueController dialogueController;
 		private PopupController popupController;
 		public InventoryModel playerInventory, playerSpellBook;
@@ -30,8 +32,8 @@ namespace Game.Ui
 			aboutController = GetNode<AboutController>("background/margin/about");
 			saveLoadController = GetNode<SaveLoadController>("background/margin/save_load");
 
-			popupController = GetNode<PopupController>("background/margin/popup");
 			PopupController.mainMenuController = this;
+			popupController = GetNode<PopupController>("background/margin/popup");
 			popupController.exitGameBttn.Connect("pressed", this, nameof(_OnExitGamePressed));
 			popupController.exitMenuBttn.Connect("pressed", this, nameof(_OnExitMenuPressed));
 
@@ -49,10 +51,13 @@ namespace Game.Ui
 			{
 				node.Connect("hide", this, nameof(_OnWindowClosed));
 			}
+
+			background = GetNode<Control>("background");
+			overlay = GetNode<ColorRect>("overlay");
 		}
 		public void _OnWindowClosed() { main.Show(); }
-		public void _OnMainMenuDraw() { GetTree().Paused = true; }
-		public void _OnMainMenuHide()
+		public void _OnMainMenuDraw() { GetTree().Paused = true; } // connected from scene
+		public void _OnMainMenuHide() // connected from scene
 		{
 			Hide();
 			GetTree().Paused = false;
@@ -68,9 +73,12 @@ namespace Game.Ui
 		public void ShowBackground(bool show)
 		{
 			Color transparent = new Color("00ffffff");
-			GetNode<Control>("background").SelfModulate =
-				(show) ? new Color("ffffff") : transparent;
-			GetNode<ColorRect>("overlay").Color = (show) ? new Color("6e6e6e") : transparent;
+			background.SelfModulate = show
+				? new Color("ffffff")
+				: transparent;
+			overlay.Color = show
+				? new Color("6e6e6e")
+				: transparent;
 		}
 		public void NpcInteract(Npc npc)
 		{
@@ -85,9 +93,7 @@ namespace Game.Ui
 			{
 				if (playerSpellBook.IsFull(lootChest.commodityWorldName))
 				{
-					popupController.errorLabel.Text = "Spell Book\nFull!";
-					popupController.errorView.Show();
-					popupController.Show();
+					popupController.ShowError("Spell Book\nFull!");
 				}
 				else
 				{
@@ -100,9 +106,7 @@ namespace Game.Ui
 			{
 				if (playerInventory.IsFull(lootChest.commodityWorldName))
 				{
-					popupController.errorLabel.Text = "Inventory\nFull!";
-					popupController.errorView.Show();
-					popupController.Show();
+					popupController.ShowError("Inventory\nFull!");
 				}
 				else
 				{
@@ -115,7 +119,7 @@ namespace Game.Ui
 		}
 		public void _OnResumePressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			PlaySound(NameDB.UI.CLICK2);
 			Hide();
 		}
 		public void _OnInventoryPressed() { Transition(inventoryController); }
@@ -131,15 +135,13 @@ namespace Game.Ui
 		public void _OnExitGamePressed() { GetTree().Quit(); }
 		public void _OnExitMenuPressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK0);
+			PlaySound(NameDB.UI.CLICK0);
 			GetTree().Paused = false;
-			SceneLoaderController.Init().SetScene(
-				(string)ProjectSettings.GetSetting("application/run/main_scene"),
-				Map.Map.map);
+			SceneLoaderController.Init().SetScene(PathManager.startScene, Map.Map.map);
 		}
 		private void Transition(Control scene)
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
+			PlaySound(NameDB.UI.CLICK1);
 			main.Hide();
 			scene.Show();
 		}

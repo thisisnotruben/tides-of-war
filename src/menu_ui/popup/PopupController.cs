@@ -25,6 +25,7 @@ namespace Game.Ui
 			loadBttn = saveLoadView.GetNode<Button>("load");
 
 			yesNoView = GetNode<Control>("m/yes_no");
+			yesNoLabel = yesNoView.GetNode<Label>("label");
 			yesBttn = yesNoView.GetNode<Button>("yes");
 			noBttn = yesNoView.GetNode<Button>("no");
 
@@ -66,7 +67,7 @@ namespace Game.Ui
 				control.Hide();
 			}
 		}
-		public void _OnErrorDraw() { Globals.soundPlayer.PlaySound(NameDB.UI.CLICK6); }
+		public void _OnErrorDraw() { PlaySound(NameDB.UI.CLICK6); }
 		public void _OnMResized() { GetNode<Control>("bg").RectMinSize = GetNode<Control>("m").RectSize; }
 		public void _OnRepairDraw()
 		{
@@ -80,9 +81,21 @@ namespace Game.Ui
 			}
 			if (shown > 4)
 			{
-				GetNode<TextureRect>("bg").Texture = (Texture)GD.Load("res://asset/img/ui/grey2_bg.tres");
+				GetNode<TextureRect>("bg").Texture = GD.Load<Texture>("res://asset/img/ui/grey2_bg.tres");
 			}
 		}
-		public void _OnRepairHide() { GetNode<TextureRect>("bg").Texture = (Texture)GD.Load("res://asset/img/ui/grey3_bg.tres"); }
+		public void _OnRepairHide() { GetNode<TextureRect>("bg").Texture = GD.Load<Texture>("res://asset/img/ui/grey3_bg.tres"); }
+		public void ShowError(string errorText)
+		{
+			errorLabel.Text = errorText;
+			errorView.Show();
+			Show();
+		}
+		public void ShowConfirm(string confirmText)
+		{
+			yesNoLabel.Text = confirmText;
+			yesNoView.Show();
+			Show();
+		}
 	}
 }

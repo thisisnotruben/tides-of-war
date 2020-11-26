@@ -3,8 +3,8 @@ namespace Game.Ui
 {
 	public class HudControlController : GameMenu
 	{
-		private static Texture normal = (Texture)GD.Load("res://asset/img/ui/on_screen_button_pressed.tres"),
-			pressed = (Texture)GD.Load("res://asset/img/ui/on_screen_button.tres");
+		private static Texture normal = GD.Load<Texture>("res://asset/img/ui/on_screen_button_pressed.tres"),
+			pressed = GD.Load<Texture>("res://asset/img/ui/on_screen_button.tres");
 
 		private Control targetContainer;
 		private BaseButton pause, spellBook, miniMap;
@@ -20,36 +20,30 @@ namespace Game.Ui
 			targetStatus.Connect("visibility_changed", this, nameof(_OnTargetStatusVisibilityChanged));
 			targetContainer.GetNode<BaseButton>("clearTarget").Connect("pressed", this, nameof(ClearTargetStatus));
 
-			// action bar
-			pause = GetNode<BaseButton>("split/background/margin/split/center/actionBar/pause/icon");
-			spellBook = GetNode<BaseButton>("split/background/margin/split/center/actionBar/spellBook/icon");
-			miniMap = GetNode<BaseButton>("split/background/margin/split/center/actionBar/miniMap/icon");
+			Node actionBar = GetNode("split/background/margin/split/center/actionBar");
+			pause = actionBar.GetNode<BaseButton>("pause/icon");
+			spellBook = actionBar.GetNode<BaseButton>("spellBook/icon");
+			miniMap = actionBar.GetNode<BaseButton>("miniMap/icon");
 
 			pause.Connect("button_down", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { pause.GetPath(), true });
+				new Godot.Collections.Array() { pause, true });
 			spellBook.Connect("button_down", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { spellBook.GetPath(), true });
+				new Godot.Collections.Array() { spellBook, true });
 			miniMap.Connect("button_down", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { miniMap.GetPath(), true });
+				new Godot.Collections.Array() { miniMap, true });
 
 			pause.Connect("button_up", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { pause.GetPath(), false });
+				new Godot.Collections.Array() { pause, false });
 			spellBook.Connect("button_up", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { spellBook.GetPath(), false });
+				new Godot.Collections.Array() { spellBook, false });
 			miniMap.Connect("button_up", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { miniMap.GetPath(), false });
+				new Godot.Collections.Array() { miniMap, false });
 		}
 		public void ConnectButtons(Node master, string miniMapMethod, string spellBookMethod, string pauseMethod)
 		{
 			pause.Connect("pressed", master, pauseMethod);
 			spellBook.Connect("pressed", master, spellBookMethod);
 			miniMap.Connect("pressed", master, miniMapMethod);
-		}
-		public void OnSlotMoved(string nodePath, bool down)
-		{
-			Control icon = GetNode<Control>(nodePath);
-			icon.RectScale = down ? new Vector2(0.8f, 0.8f) : Vector2.One;
-			((TextureRect)icon.GetParent()).Texture = down ? pressed : normal;
 		}
 		public void _OnTargetStatusVisibilityChanged() { targetContainer.Visible = targetStatus.Visible; }
 		public void ClearTargetStatus()

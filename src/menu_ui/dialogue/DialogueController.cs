@@ -102,7 +102,7 @@ namespace Game.Ui
 			}
 			QuestMaster.CheckQuests(npc.GetPath(), npc.worldName, QuestDB.QuestType.TALK);
 		}
-		public void _OnDialogueDraw() { Globals.soundPlayer.PlaySound(NameDB.UI.TURN_PAGE); }
+		public void _OnDialogueDraw() { PlaySound(NameDB.UI.TURN_PAGE); }
 		public void _OnDialogueHide()
 		{
 			// provides a reset of all views
@@ -117,13 +117,11 @@ namespace Game.Ui
 			{
 				// too expensive for player
 				mainContent.Hide();
-				popupController.errorLabel.Text = "Not Enough\nGold!";
-				popupController.errorView.Show();
-				popupController.Show();
+				popupController.ShowError("Not Enough\nGold!");
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(NameDB.UI.SELL_BUY);
+				PlaySound(NameDB.UI.SELL_BUY);
 
 				// player gives gold
 				player.gold -= healerCost;
@@ -151,7 +149,7 @@ namespace Game.Ui
 			{
 				return;
 			}
-			Globals.soundPlayer.PlaySound(NameDB.UI.QUEST_ACCEPT);
+			PlaySound(NameDB.UI.QUEST_ACCEPT);
 			QuestMaster.ActivateQuest(worldQuest.quest.questName);
 		}
 		public void _OnFinishPressed()
@@ -160,7 +158,7 @@ namespace Game.Ui
 			{
 				return;
 			}
-			Globals.soundPlayer.PlaySound(NameDB.UI.QUEST_FINISH);
+			PlaySound(NameDB.UI.QUEST_FINISH);
 			QuestMaster.CompleteQuest(worldQuest.quest.questName);
 			player.gold += worldQuest.quest.goldReward;
 			player.SpawnCombatText($"+{worldQuest.quest.goldReward}", CombatText.TextType.GOLD);

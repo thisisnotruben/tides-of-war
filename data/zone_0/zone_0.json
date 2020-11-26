@@ -1,0 +1,281 @@
+{
+	"4-Trainer": {
+		"name": "Trainer",
+		"img": "oliphant-1",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			232,
+			168
+		]
+	},
+	"6-Quest Giver": {
+		"name": "Quest Giver",
+		"img": "orc-8",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			296,
+			216
+		]
+	},
+	"10-Merchant": {
+		"name": "Merchant",
+		"img": "human-2",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			184,
+			168
+		]
+	},
+	"11-warthog": {
+		"name": "",
+		"img": "warthog-3",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			440,
+			344
+		]
+	},
+	"13-warthog": {
+		"name": "",
+		"img": "warthog-0",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			456,
+			408
+		]
+	},
+	"14-warthog": {
+		"name": "",
+		"img": "warthog-5",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			376,
+			456
+		]
+	},
+	"16-warthog": {
+		"name": "",
+		"img": "warthog-4",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			264,
+			472
+		]
+	},
+	"18-robot": {
+		"name": "",
+		"img": "robot-3",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			72,
+			376
+		]
+	},
+	"20-robot": {
+		"name": "",
+		"img": "robot-0",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			104,
+			456
+		]
+	},
+	"21-robot": {
+		"name": "",
+		"img": "robot-2",
+		"enemy": false,
+		"level": 1,
+		"path": [
+			[
+				200,
+				360
+			],
+			[
+				136,
+				312
+			],
+			[
+				184,
+				264
+			],
+			[
+				232,
+				264
+			],
+			[
+				264,
+				232
+			],
+			[
+				264,
+				200
+			],
+			[
+				200,
+				200
+			],
+			[
+				152,
+				168
+			],
+			[
+				136,
+				184
+			],
+			[
+				184,
+				216
+			],
+			[
+				184,
+				232
+			],
+			[
+				120,
+				296
+			],
+			[
+				56,
+				296
+			],
+			[
+				8,
+				312
+			],
+			[
+				8,
+				328
+			],
+			[
+				24,
+				328
+			],
+			[
+				88,
+				344
+			],
+			[
+				136,
+				360
+			],
+			[
+				168,
+				376
+			],
+			[
+				200,
+				376
+			]
+		],
+		"spawnPos": [
+			200,
+			360
+		]
+	},
+	"26-orc": {
+		"name": "",
+		"img": "orc-2",
+		"enemy": true,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			360,
+			312
+		]
+	},
+	"33-treant": {
+		"name": "",
+		"img": "treant-2",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			376,
+			72
+		]
+	},
+	"38-treant": {
+		"name": "",
+		"img": "treant-1",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			344,
+			104
+		]
+	},
+	"39-treant": {
+		"name": "",
+		"img": "treant-3",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			440,
+			88
+		]
+	},
+	"43-critter": {
+		"name": "",
+		"img": "critter-25",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			456,
+			120
+		]
+	},
+	"45-critter": {
+		"name": "",
+		"img": "critter-4",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			120,
+			200
+		]
+	},
+	"47-robot": {
+		"name": "",
+		"img": "robot-1",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			152,
+			232
+		]
+	},
+	"50-human": {
+		"name": "",
+		"img": "human-27",
+		"enemy": false,
+		"level": 1,
+		"path": [],
+		"spawnPos": [
+			296,
+			120
+		]
+	}
+}

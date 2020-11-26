@@ -20,7 +20,7 @@ namespace Game.Ui
 			// string miniMapPath = $"res://asset/img/map/{mapName}.png";
 			// if (new Directory().FileExists(miniMapPath))
 			// {
-			// 	GetNode<Sprite>("map").Texture = (Texture)GD.Load(miniMapPath);
+			// 	GetNode<Sprite>("map").Texture = GD.Load<Texture>(miniMapPath);
 			// }
 		}
 		public override void _Process(float delta)
