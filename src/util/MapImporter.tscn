@@ -83,7 +83,7 @@ anchor_bottom = 0.5
 margin_left = -188.0
 margin_top = -240.0
 margin_right = 188.0
-margin_bottom = 240.0
+margin_bottom = 249.0
 theme = ExtResource( 5 )
 custom_constants/separation = 8
 __meta__ = {
@@ -91,9 +91,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="button_0" type="Button" parent="v_box_container"]
+[node name="button" type="Button" parent="v_box_container"]
 margin_right = 376.0
-margin_bottom = 61.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 3 )
+text = "Make Tileset"
+
+[node name="button_0" type="Button" parent="v_box_container"]
+margin_top = 59.0
+margin_right = 376.0
+margin_bottom = 113.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
@@ -101,9 +108,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Zone 0"
 
 [node name="button_1" type="Button" parent="v_box_container"]
-margin_top = 69.0
+margin_top = 121.0
 margin_right = 376.0
-margin_bottom = 131.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
@@ -111,9 +118,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Zone 1"
 
 [node name="button_2" type="Button" parent="v_box_container"]
-margin_top = 139.0
+margin_top = 184.0
 margin_right = 376.0
-margin_bottom = 201.0
+margin_bottom = 238.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
@@ -121,9 +128,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Zone 2"
 
 [node name="button_3" type="Button" parent="v_box_container"]
-margin_top = 209.0
+margin_top = 246.0
 margin_right = 376.0
-margin_bottom = 270.0
+margin_bottom = 301.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
@@ -131,9 +138,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Zone 3"
 
 [node name="button_4" type="Button" parent="v_box_container"]
-margin_top = 278.0
+margin_top = 309.0
 margin_right = 376.0
-margin_bottom = 340.0
+margin_bottom = 363.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
@@ -141,9 +148,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Zone 4"
 
 [node name="button_5" type="Button" parent="v_box_container"]
-margin_top = 348.0
+margin_top = 371.0
 margin_right = 376.0
-margin_bottom = 410.0
+margin_bottom = 426.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
@@ -151,14 +158,15 @@ custom_fonts/font = ExtResource( 3 )
 text = "Zone 5"
 
 [node name="button_6" type="Button" parent="v_box_container"]
-margin_top = 418.0
+margin_top = 434.0
 margin_right = 376.0
-margin_bottom = 480.0
+margin_bottom = 489.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Quit"
+[connection signal="pressed" from="v_box_container/button" to="." method="MakeTileset"]
 [connection signal="pressed" from="v_box_container/button_0" to="." method="ImportMap" binds= [ "res://src/map/zone_0.tscn" ]]
 [connection signal="pressed" from="v_box_container/button_1" to="." method="ImportMap" binds= [ "res://src/map/zone_1.tscn" ]]
 [connection signal="pressed" from="v_box_container/button_2" to="." method="ImportMap" binds= [ "res://src/map/zone_2.tscn" ]]

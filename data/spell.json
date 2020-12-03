@@ -310,7 +310,7 @@
 		"ignoreArmor": false,
 		"requiresTarget": true,
 		"spellEffect": "FrostBoltEffect",
-		"sound": "Elemental - Ice Impact_1",
+		"sound": "frost_bolt_hit",
 		"characterAnim": "attacking",
 		"manaCost": 0
 	},

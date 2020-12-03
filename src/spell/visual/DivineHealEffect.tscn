@@ -5,7 +5,8 @@
 [ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=3]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=4]
 [ext_resource path="res://asset/img/missile-spell/divine_heal.png" type="Texture" id=5]
-[ext_resource path="res://asset/img/missile-spell/divine_heal.tres" type="Texture" id=6]
+[ext_resource path="res://asset/img/missile-spell/gradient/divine_heal.tres" type="Texture" id=6]
+
 
 
 [sub_resource type="ShaderMaterial" id=1]

@@ -1,7 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://asset/img/light/torch_post_gold.tres" type="Texture" id=1]
+[ext_resource path="res://asset/img/light/atlas/torch_post_gold.tres" type="Texture" id=1]
 [ext_resource path="res://src/light/torch_post.tscn" type="PackedScene" id=2]
+
+
+
 
 [node name="light" instance=ExtResource( 2 )]
 texture = ExtResource( 1 )

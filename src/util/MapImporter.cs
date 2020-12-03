@@ -4,17 +4,39 @@ namespace Game.Util
 {
 	public class MapImporter : Node
 	{
-		private string targetDummyPath = "res://src/character/npc/target_dummy/{0}.tscn",
-			lightPath = "res://src/light/{0}.tscn";
+		private const int LIGHT_MASK_PASS = 0b_00000_00000_00000_00001,
+			LIGHT_MASK_SHADOW = 0b_00000_00000_00000_00010;
+
+		private static readonly Vector2 CELL_SIZE = new Vector2(16.0f, 16.0f),
+			HALF_CELL_SIZE = CELL_SIZE / 2.0f,
+			OFFSET = new Vector2(0.0f, -CELL_SIZE.y);
+
+		private const string targetDummyPath = "res://src/character/npc/target_dummy/{0}.tscn",
+			lightPath = "res://src/light/{0}.tscn",
+			lightOccluderPath = "res://asset/img/light/occluder/{0}.tres",
+			tilesetPath = "res://asset/img/map/tilesets/{0}.png",
+			worldTilesetPath = "res://asset/img/map/worldTileset.tres",
+			occluderDataPath = "res://data/importer/lightOccluders.json",
+			animDataPath = "res://data/importer/terrainAnim.json",
+			animatedTilesetPath = "res://asset/img/map/tilesets_animated/{0}.tres";
+
+		private readonly string[] tileAtlases = new string[]
+		{
+			string.Format(tilesetPath, "terrain"),
+			string.Format(tilesetPath, "trees"),
+			string.Format(tilesetPath, "walls"),
+			string.Format(tilesetPath, "tiles"),
+			string.Format(tilesetPath, "tiles_32"),
+			string.Format(tilesetPath, "misc"),
+			string.Format(tilesetPath, "misc_32"),
+			string.Format(tilesetPath, "buildings")
+		};
+
 		private PackedScene npcScene = GD.Load<PackedScene>("res://src/character/npc/npc.tscn"),
 			playerScene = GD.Load<PackedScene>("res://src/character/player/player.tscn"),
 			transitionScene = GD.Load<PackedScene>("res://src/map/doodads/TransitionZone.tscn"),
 			worldClockScene = GD.Load<PackedScene>("res://src/map/doodads/WorldClock.tscn"),
 			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn");
-
-		private static readonly Vector2 CELL_SIZE = new Vector2(16.0f, 16.0f),
-			HALF_CELL_SIZE = CELL_SIZE / 2.0f,
-			OFFSET = new Vector2(0.0f, -CELL_SIZE.y);
 
 		private Node2D map;
 		private TileMap zed;
@@ -76,7 +98,7 @@ namespace Game.Util
 				node2D.AddToGroup(Globals.GRAVE_GROUP, true);
 			}
 
-			// delete now useless nodes 
+			// delete now useless nodes
 			foreach (Node node in new Node[] { characters, targetDummys, paths, lights })
 			{
 				node.Owner = null;
@@ -91,6 +113,8 @@ namespace Game.Util
 			// shuffle scene tree
 			meta.MoveChild(collNav, 0);
 			meta.Hide();
+
+			SetWorldTileset();
 
 			// save map
 			PackedScene packedScene = new PackedScene();
@@ -199,6 +223,33 @@ namespace Game.Util
 				node2D.GlobalPosition = GetCenterPos(node2D.GlobalPosition);
 			}
 		}
+		private void SetWorldTileset()
+		{
+			TileMap tileMap;
+			TileSet worldTileset = GD.Load<TileSet>(worldTilesetPath);
+			bool isGround;
+
+			foreach (Node group in map.GetChildren())
+			{
+				isGround = group.Name.Equals("ground");
+
+				foreach (Node layer in group.GetChildren())
+				{
+					tileMap = layer as TileMap;
+					if (tileMap != null)
+					{
+						tileMap.TileSet = worldTileset;
+
+						tileMap.LightMask = isGround
+							? LIGHT_MASK_SHADOW
+							: LIGHT_MASK_PASS;
+						tileMap.OccluderLightMask = isGround
+							? LIGHT_MASK_PASS
+							: LIGHT_MASK_SHADOW;
+					}
+				}
+			}
+		}
 		private void TreeUseMaterial(Node root)
 		{
 			// used for when 'veil' has taken effect
@@ -216,6 +267,83 @@ namespace Game.Util
 		private Vector2 GetCenterPos(Vector2 worldPosition)
 		{
 			return zed.MapToWorld(zed.WorldToMap(worldPosition + OFFSET)) + HALF_CELL_SIZE;
+		}
+		private void MakeTileset()
+		{
+			TileSet tileSet = new TileSet();
+
+			Texture img, tex;
+			OccluderPolygon2D occluderPolygon2D;
+			Rect2 rect2;
+			int i, j, k = 1, cellHeight;
+			string tileID;
+
+			File file = new File();
+
+			// occluder data
+			file.Open(occluderDataPath, File.ModeFlags.Read);
+			Godot.Collections.Dictionary occluderData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
+			file.Close();
+
+			// anim data
+			file.Open(animDataPath, File.ModeFlags.Read);
+			Godot.Collections.Dictionary terrrainAnimData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
+			file.Close();
+
+			foreach (string imgPath in tileAtlases)
+			{
+				cellHeight = Is32Tileset(imgPath) ? 32 : (int)CELL_SIZE.y;
+				img = GD.Load<Texture>(imgPath);
+
+				for (i = 0; i < img.GetHeight(); i += cellHeight)
+				{
+					for (j = 0; j < img.GetWidth(); j += (int)CELL_SIZE.x)
+					{
+						tileID = k.ToString();
+						if (terrrainAnimData.Contains(tileID))
+						{
+							tex = GD.Load<Texture>(string.Format(animatedTilesetPath, (string)terrrainAnimData[tileID]));
+							rect2 = new Rect2(Vector2.Zero, CELL_SIZE);
+						}
+						else
+						{
+							tex = img;
+							rect2 = new Rect2(j, i, CELL_SIZE.x, cellHeight);
+						}
+
+						tileSet.CreateTile(k);
+						tileSet.TileSetTexture(k, tex);
+						tileSet.TileSetRegion(k, rect2);
+						tileSet.TileSetTextureOffset(k, new Vector2(0.0f, -cellHeight));
+
+						if (occluderData.Contains(tileID))
+						{
+							occluderPolygon2D = GD.Load<OccluderPolygon2D>(string.Format(lightOccluderPath, (string)occluderData[tileID]));
+							occluderPolygon2D.ResourceLocalToScene = true;
+
+							tileSet.TileSetLightOccluder(k, occluderPolygon2D);
+						}
+						k++;
+					}
+				}
+			}
+			ResourceSaver.Save(worldTilesetPath, tileSet);
+
+			label.Text = $"Tileset made at: {worldTilesetPath}";
+		}
+		private bool Is32Tileset(string imgPath)
+		{
+			switch (imgPath.BaseName().GetFile())
+			{
+				case "trees":
+				case "walls":
+				case "tiles_32":
+				case "misc_32":
+				case "buildings":
+					return true;
+				default:
+					return false;
+			}
 		}
 	}
 }

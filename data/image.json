@@ -917,7 +917,7 @@
 		"weaponMaterial": "metal",
 		"swing": "swing_medium",
 		"body": "warthog",
-		"melee": false
+		"melee": true
 	},
 	"warthog-2": {
 		"moving": 3,
@@ -927,7 +927,7 @@
 		"weaponMaterial": "metal",
 		"swing": "swing_medium",
 		"body": "warthog",
-		"melee": false
+		"melee": true
 	},
 	"warthog-3": {
 		"moving": 3,

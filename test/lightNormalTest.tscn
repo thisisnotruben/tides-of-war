@@ -1,0 +1,161 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://asset/img/light/lightOther.png" type="Texture" id=1]
+[ext_resource path="res://test/trees-normal-base.png" type="Texture" id=2]
+[ext_resource path="res://asset/img/light/occluder/forest_stump_1.tres" type="OccluderPolygon2D" id=3]
+[ext_resource path="res://test/zone_4.png" type="Texture" id=4]
+[ext_resource path="res://asset/img/map/tilesets/trees.png" type="Texture" id=5]
+[ext_resource path="res://asset/img/light/occluder/forest_stump_0.tres" type="OccluderPolygon2D" id=6]
+[ext_resource path="res://asset/img/character/human-10.png" type="Texture" id=7]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 208, 320, 48, 64 )
+
+[node name="node2D" type="Node2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="map" type="Sprite" parent="."]
+show_behind_parent = true
+light_mask = 2
+texture = ExtResource( 4 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="trees" type="Node2D" parent="map"]
+
+[node name="ySort" type="YSort" parent="map/trees"]
+position = Vector2( 1110.84, 1160.41 )
+
+[node name="tree" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( -56.84, -38.41 )
+texture = ExtResource( 2 )
+offset = Vector2( 8, -32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lightOccluder2D" type="LightOccluder2D" parent="map/trees/ySort/tree"]
+light_mask = 2
+occluder = ExtResource( 3 )
+light_mask = 2
+
+[node name="tree2" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( 41.1599, -24.4128 )
+texture = ExtResource( 2 )
+offset = Vector2( 8, -32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lightOccluder2D" type="LightOccluder2D" parent="map/trees/ySort/tree2"]
+light_mask = 2
+occluder = ExtResource( 3 )
+light_mask = 2
+
+[node name="tree3" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( 26.16, 20.59 )
+texture = ExtResource( 2 )
+offset = Vector2( 8, -32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lightOccluder2D" type="LightOccluder2D" parent="map/trees/ySort/tree3"]
+light_mask = 2
+occluder = ExtResource( 3 )
+light_mask = 2
+
+[node name="tree6" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( -102.84, -29.41 )
+texture = ExtResource( 2 )
+offset = Vector2( 8, -32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lightOccluder2D" type="LightOccluder2D" parent="map/trees/ySort/tree6"]
+light_mask = 2
+occluder = ExtResource( 3 )
+light_mask = 2
+
+[node name="tree8" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( -3.83998, -39.41 )
+texture = ExtResource( 2 )
+offset = Vector2( 8, -32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lightOccluder2D" type="LightOccluder2D" parent="map/trees/ySort/tree8"]
+light_mask = 2
+occluder = ExtResource( 3 )
+light_mask = 2
+
+[node name="tree4" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( -22.84, 35.59 )
+texture = ExtResource( 2 )
+offset = Vector2( 8, -32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lightOccluder2D" type="LightOccluder2D" parent="map/trees/ySort/tree4"]
+light_mask = 2
+occluder = ExtResource( 3 )
+light_mask = 2
+
+[node name="tree5" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( -72.84, 20.59 )
+texture = ExtResource( 2 )
+offset = Vector2( 8, -32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lightOccluder2D" type="LightOccluder2D" parent="map/trees/ySort/tree5"]
+light_mask = 2
+occluder = ExtResource( 3 )
+light_mask = 2
+
+[node name="tree7" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( 0, -88.413 )
+texture = SubResource( 1 )
+offset = Vector2( 8, -32 )
+
+[node name="lightOccluder2D" type="LightOccluder2D" parent="map/trees/ySort/tree7"]
+light_mask = 2
+occluder = ExtResource( 6 )
+light_mask = 2
+
+[node name="human-10" type="Sprite" parent="map/trees/ySort"]
+position = Vector2( -65.84, -66.41 )
+texture = ExtResource( 7 )
+hframes = 17
+
+[node name="canvasModulate" type="CanvasModulate" parent="map"]
+position = Vector2( 1022.84, 1047.41 )
+color = Color( 0.34902, 0.34902, 0.34902, 1 )
+
+[node name="camera2D" type="Camera2D" parent="map"]
+position = Vector2( 1077, 1139 )
+current = true
+zoom = Vector2( 0.2, 0.2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="light2D" type="Light2D" parent="map/camera2D"]
+position = Vector2( 0.266113, -1.58459 )
+texture = ExtResource( 1 )
+texture_scale = 0.2
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_gradient_length = 2.5
+shadow_filter = 5
+shadow_filter_smooth = 14.0
+shadow_item_cull_mask = 2

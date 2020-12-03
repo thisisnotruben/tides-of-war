@@ -151,6 +151,7 @@ namespace Game.Actor
 			stats.Recalculate();
 
 			// set sprite animation key-frames
+			// TODO
 			Animation animRes = anim.GetAnimation("attacking");
 			animRes.TrackSetKeyValue(0, 0, imageData.moving + imageData.dying);
 			animRes.TrackSetKeyValue(0, 1, imageData.total - 1);

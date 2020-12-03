@@ -4,63 +4,13 @@
 [ext_resource path="res://src/character/Character.cs" type="Script" id=2]
 [ext_resource path="res://asset/img/character/resource/animations/attacking.tres" type="Animation" id=3]
 [ext_resource path="res://src/character/doodads/CombatTextHandler.tscn" type="PackedScene" id=4]
+[ext_resource path="res://asset/img/character/resource/animations/moving.tres" type="Animation" id=5]
+[ext_resource path="res://asset/img/character/resource/animations/casting.tres" type="Animation" id=6]
 [ext_resource path="res://src/character/state/FSM.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Animation" id=1]
-resource_name = "casting"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/path = NodePath("img:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 3, 5 ]
-}
+[sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="Animation" id=2]
-resource_name = "moving"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("img:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0, 3 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.4, 0.7, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"values": [ {
-"args": [ false ],
-"method": "_OnFootStep"
-}, {
-"args": [ true ],
-"method": "_OnFootStep"
-}, {
-"args": [ false ],
-"method": "_OnFootStep"
-} ]
-}
-
-[sub_resource type="RectangleShape2D" id=3]
-
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
 
 [node name="character" type="Node2D"]
@@ -79,9 +29,9 @@ __meta__ = {
 [node name="anim" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
 anims/attacking = ExtResource( 3 )
-anims/casting = SubResource( 1 )
+anims/casting = ExtResource( 6 )
 anims/dying = ExtResource( 1 )
-anims/moving = SubResource( 2 )
+anims/moving = ExtResource( 5 )
 
 [node name="head" type="Position2D" parent="."]
 
@@ -114,7 +64,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="body" type="CollisionShape2D" parent="area"]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="sight" type="Area2D" parent="."]
 monitorable = false
@@ -122,7 +72,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="distance" type="CollisionShape2D" parent="sight"]
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="visible" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -80, -80, 160, 160 )

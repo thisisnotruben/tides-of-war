@@ -8,5 +8,3 @@ void fragment(){
 	vec3 grayscale = vec3(dot(tex.rgb, vec3(brightness)));
 	COLOR = vec4(grayscale * color, tex.a);
 }
-
-

@@ -13,7 +13,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0, 3 ]
+"values": [ 0, 2 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -22,13 +22,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4, 0.7, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ false ],
-"method": "_OnFootStep"
-}, {
-"args": [ true ],
 "method": "_OnFootStep"
 }, {
 "args": [ false ],

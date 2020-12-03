@@ -1,87 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/character/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/player/Player.cs" type="Script" id=2]
 [ext_resource path="res://src/menu_ui/handler/MenuHandlerView.tscn" type="PackedScene" id=3]
 
-[sub_resource type="Animation" id=1]
-resource_local_to_scene = true
-resource_name = "attacking"
-length = 1.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("img:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 10, 16 ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_local_to_scene = true
-resource_name = "casting"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/path = NodePath("img:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 3, 5 ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_local_to_scene = true
-resource_name = "moving"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("img:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0, 3 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.4, 0.7, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"values": [ {
-"args": [ false ],
-"method": "_OnFootStep"
-}, {
-"args": [ true ],
-"method": "_OnFootStep"
-}, {
-"args": [ false ],
-"method": "_OnFootStep"
-} ]
-}
-
 [node name="player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-
-[node name="anim" parent="." index="2"]
-anims/attacking = SubResource( 1 )
-anims/casting = SubResource( 2 )
-anims/moving = SubResource( 3 )
 
 [node name="camera" parent="." index="4"]
 current = true
