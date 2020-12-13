@@ -1,5 +1,5 @@
-using System;
 using Godot;
+using System;
 namespace Game.Util
 {
 	public class MapImporter : Node
@@ -275,8 +275,11 @@ namespace Game.Util
 			Texture img, tex;
 			OccluderPolygon2D occluderPolygon2D;
 			Rect2 rect2;
-			int i, j, k = 1, cellHeight;
-			string tileID;
+			Vector2 offset, pos;
+			Godot.Collections.Array posArray, templatePoints;
+			Vector2[] polygon;
+			int i, j, k = 1, cellHeight, z, l;
+			string gid;
 
 			File file = new File();
 
@@ -293,16 +296,17 @@ namespace Game.Util
 			foreach (string imgPath in tileAtlases)
 			{
 				cellHeight = Is32Tileset(imgPath) ? 32 : (int)CELL_SIZE.y;
+				offset = new Vector2(0.0f, -cellHeight);
 				img = GD.Load<Texture>(imgPath);
 
 				for (i = 0; i < img.GetHeight(); i += cellHeight)
 				{
 					for (j = 0; j < img.GetWidth(); j += (int)CELL_SIZE.x)
 					{
-						tileID = k.ToString();
-						if (terrrainAnimData.Contains(tileID))
+						gid = k.ToString();
+						if (terrrainAnimData.Contains(gid))
 						{
-							tex = GD.Load<Texture>(string.Format(animatedTilesetPath, (string)terrrainAnimData[tileID]));
+							tex = GD.Load<Texture>(string.Format(animatedTilesetPath, (string)terrrainAnimData[gid]));
 							rect2 = new Rect2(Vector2.Zero, CELL_SIZE);
 						}
 						else
@@ -314,13 +318,26 @@ namespace Game.Util
 						tileSet.CreateTile(k);
 						tileSet.TileSetTexture(k, tex);
 						tileSet.TileSetRegion(k, rect2);
-						tileSet.TileSetTextureOffset(k, new Vector2(0.0f, -cellHeight));
+						tileSet.TileSetTextureOffset(k, offset);
 
-						if (occluderData.Contains(tileID))
+						if (occluderData.Contains(gid))
 						{
-							occluderPolygon2D = GD.Load<OccluderPolygon2D>(string.Format(lightOccluderPath, (string)occluderData[tileID]));
-							occluderPolygon2D.ResourceLocalToScene = true;
+							// make occluder
+							posArray = (Godot.Collections.Array)((Godot.Collections.Dictionary)occluderData[gid])["pos"];
+							pos = new Vector2((float)posArray[0], (float)posArray[1] - cellHeight);
 
+							templatePoints = (Godot.Collections.Array)occluderData[
+								(string)((Godot.Collections.Dictionary)occluderData[gid])["templateName"]];
+
+							polygon = new Vector2[templatePoints.Count / 2];
+							for (z = 0, l = 0; l < templatePoints.Count; l += 2, z++)
+							{
+								polygon[z] = pos + new Vector2((float)templatePoints[l], (float)templatePoints[l + 1]);
+							}
+
+							// set occluder
+							occluderPolygon2D = new OccluderPolygon2D();
+							occluderPolygon2D.Polygon = polygon;
 							tileSet.TileSetLightOccluder(k, occluderPolygon2D);
 						}
 						k++;

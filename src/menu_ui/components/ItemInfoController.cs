@@ -73,10 +73,10 @@ namespace Game.Ui
 
 			// decide which buttons to show
 			Control[] showBttns = { };
-			if (!player.dead && itemList != null && ItemDB.Instance.HasData(commodityWorldName))
+			if (!player.dead && itemList != null && Globals.itemDB.HasData(commodityWorldName))
 			{
 				showBttns = new Control[] { dropBttn, null };
-				ItemDB.ItemType itemType = ItemDB.Instance.GetData(commodityWorldName).type;
+				ItemDB.ItemType itemType = Globals.itemDB.GetData(commodityWorldName).type;
 				switch (itemType)
 				{
 					case ItemDB.ItemType.FOOD:

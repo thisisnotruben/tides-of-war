@@ -35,9 +35,7 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly SpellDB Instance = new SpellDB();
-
-		public SpellDB() : base(PathManager.spell) { }
+		public SpellDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);

@@ -3,11 +3,7 @@ namespace Game.Database
 {
 	public class SpellEffectDB : AbstractDB<PackedScene>
 	{
-
-		public static readonly SpellEffectDB Instance = new SpellEffectDB();
-		public static void Init() { }
-
-		public SpellEffectDB() : base(PathManager.spellEffectDir) { }
+		public SpellEffectDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Directory directory = new Directory();
@@ -42,8 +38,8 @@ namespace Game.Database
 		}
 		public override bool HasData(string dataName)
 		{
-			return SpellDB.Instance.HasData(dataName)
-				? data.ContainsKey(SpellDB.Instance.GetData(dataName).spellEffect)
+			return Globals.spellDB.HasData(dataName)
+				? data.ContainsKey(Globals.spellDB.GetData(dataName).spellEffect)
 				: false;
 		}
 	}

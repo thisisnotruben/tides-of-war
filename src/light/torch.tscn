@@ -40,7 +40,6 @@ shadow_item_cull_mask = 2
 position = Vector2( 0, -10 )
 
 [node name="visibility" type="VisibilityNotifier2D" parent="."]
-visible = false
 position = Vector2( 0, -6 )
 rect = Rect2( -72, -72, 144, 144 )
 __meta__ = {

@@ -27,9 +27,7 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly ItemDB Instance = new ItemDB();
-
-		public ItemDB() : base(PathManager.item) { }
+		public ItemDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);

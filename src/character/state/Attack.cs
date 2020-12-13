@@ -58,7 +58,7 @@ namespace Game.Actor.State
 			TryGetSpell(out spell, character);
 			if (spell != null)
 			{
-				switch (SpellDB.Instance.GetData(spell.worldName).type)
+				switch (Globals.spellDB.GetData(spell.worldName).type)
 				{
 					case SpellDB.SpellTypes.MOD_FRIENDLY:
 					case SpellDB.SpellTypes.MOD_HOSTILE:
@@ -97,7 +97,7 @@ namespace Game.Actor.State
 
 			character.anim.Play(
 				spell != null
-				? SpellDB.Instance.GetData(spell.worldName).characterAnim
+				? Globals.spellDB.GetData(spell.worldName).characterAnim
 				: "attacking",
 				-1.0f, character.stats.animSpeed.value);
 		}
@@ -110,7 +110,7 @@ namespace Game.Actor.State
 
 			if (GetImageData(character).melee)
 			{
-				if (spell != null && SpellEffectDB.Instance.HasData(spell.worldName))
+				if (spell != null && Globals.spellEffectDB.HasData(spell.worldName))
 				{
 					InstancSpellEffect(spell.worldName, character.target);
 				}
@@ -128,13 +128,13 @@ namespace Game.Actor.State
 				}
 				else
 				{
-					if (!(missile is MissileSpell) && SpellEffectDB.Instance.HasData(spell.worldName))
+					if (!(missile is MissileSpell) && Globals.spellEffectDB.HasData(spell.worldName))
 					{
 						InstancSpellEffect(spell.worldName, character.target);
 					}
-					if (MissileSpellDB.Instance.HasData(spell.worldName))
+					if (Globals.missileSpellDB.HasData(spell.worldName))
 					{
-						string spellSound = MissileSpellDB.Instance.GetData(spell.worldName).sound;
+						string spellSound = Globals.missileSpellDB.GetData(spell.worldName).sound;
 						if (spellSound.Equals(string.Empty))
 						{
 							// TODO: make constants
@@ -179,7 +179,7 @@ namespace Game.Actor.State
 					? Stats.AttackTableType.MELEE
 					: Stats.AttackTableType.RANGED];
 			bool ignoreArmor = spell == null ? false
-				: SpellDB.Instance.GetData(spell.worldName).ignoreArmor;
+				: Globals.spellDB.GetData(spell.worldName).ignoreArmor;
 
 			string soundName = imageData.weapon;
 			CombatText.TextType hitType;
@@ -238,7 +238,7 @@ namespace Game.Actor.State
 
 			if (spell != null)
 			{
-				string spellSound = SpellDB.Instance.GetData(spell.worldName).sound;
+				string spellSound = Globals.spellDB.GetData(spell.worldName).sound;
 				if (!spellSound.Equals(string.Empty))
 				{
 					soundName = spellSound;
@@ -275,7 +275,7 @@ namespace Game.Actor.State
 				FSM.State state;
 				if (character is Npc)
 				{
-					state = UnitDB.Instance.HasData(character.Name) && UnitDB.Instance.GetData(character.Name).path.Length > 0
+					state = Globals.unitDB.HasData(character.Name) && Globals.unitDB.GetData(character.Name).path.Length > 0
 						? FSM.State.NPC_MOVE_ROAM
 						: FSM.State.NPC_MOVE_RETURN;
 				}
@@ -305,14 +305,14 @@ namespace Game.Actor.State
 			// TODO: need to have a chance table on when a spell can be casted
 			if (50 >= rand.Next(1, 101)
 			&& character is Npc
-			&& ContentDB.Instance.HasData(character.worldName)
-			&& ContentDB.Instance.GetData(character.worldName).spells.Length > 0)
+			&& Globals.contentDB.HasData(character.worldName)
+			&& Globals.contentDB.GetData(character.worldName).spells.Length > 0)
 			{
 
-				string[] characterSpells = ContentDB.Instance.GetData(character.worldName).spells;
+				string[] characterSpells = Globals.contentDB.GetData(character.worldName).spells;
 				IEnumerable<SpellDB.SpellTypes> characterSpellTypes =
 					from spellName in characterSpells
-					select SpellDB.Instance.GetData(spellName).type;
+					select Globals.spellDB.GetData(spellName).type;
 
 				Array spellTypes = Enum.GetValues(typeof(SpellDB.SpellTypes));
 				SpellDB.SpellTypes spellType;
@@ -324,7 +324,7 @@ namespace Game.Actor.State
 				} while (!characterSpellTypes.Contains(spellType));
 
 				spells = from spellName in characterSpells
-						 where SpellDB.Instance.GetData(spellName).type.Equals(spellType)
+						 where Globals.spellDB.GetData(spellName).type.Equals(spellType)
 						 select spellName;
 
 				if (spellType.Equals(SpellDB.SpellTypes.HIT_HOSTILE))
@@ -332,7 +332,7 @@ namespace Game.Actor.State
 					// select only spells within range
 					spells =
 						from spellName in spells
-						where SpellDB.Instance.GetData(spellName).range >= character.pos.DistanceTo(character.target.pos)
+						where Globals.spellDB.GetData(spellName).range >= character.pos.DistanceTo(character.target.pos)
 						select spellName;
 				}
 
@@ -357,12 +357,12 @@ namespace Game.Actor.State
 		}
 		private static ImageDB.ImageData GetImageData(Character character)
 		{
-			return ImageDB.Instance.GetData(character.img.Texture.ResourcePath.GetFile().BaseName());
+			return Globals.imageDB.GetData(character.img.Texture.ResourcePath.GetFile().BaseName());
 		}
 		private static void InstancSpellEffect(string spellName, Character target)
 		{
-			SpellEffect spellEffect = (SpellEffect)SpellEffectDB.Instance.GetData(
-				SpellDB.Instance.GetData(spellName).spellEffect).Instance();
+			SpellEffect spellEffect = (SpellEffect)Globals.spellEffectDB.GetData(
+				Globals.spellDB.GetData(spellName).spellEffect).Instance();
 
 			spellEffect.Init(target, spellName, target);
 			spellEffect.OnHit();

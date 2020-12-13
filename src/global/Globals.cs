@@ -1,5 +1,6 @@
 using Godot;
 using Game.Sound;
+using Game.Database;
 namespace Game
 {
 	public class Globals : Node
@@ -8,7 +9,21 @@ namespace Game
 			SAVE_GROUP = "save",
 			LIGHT_GROUP = "light",
 			GRAVE_GROUP = "graveSite";
+
 		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
+
+		public static readonly AreaEffectDB areaEffectDB = new AreaEffectDB(PathManager.areaEffect);
+		public static readonly ContentDB contentDB = new ContentDB();
+		public static readonly ImageDB imageDB = new ImageDB(PathManager.image);
+		public static readonly ItemDB itemDB = new ItemDB(PathManager.item);
+		public static readonly LandMineDB landMineDB = new LandMineDB(PathManager.landMine);
+		public static readonly MissileSpellDB missileSpellDB = new MissileSpellDB(PathManager.missileSpell);
+		public static readonly ModDB modDB = new ModDB(PathManager.modifier);
+		public static readonly QuestDB questDB = new QuestDB();
+		public static readonly SpellDB spellDB = new SpellDB(PathManager.spell);
+		public static readonly SpellEffectDB spellEffectDB = new SpellEffectDB(PathManager.spellEffectDir);
+		public static readonly UnitDB unitDB = new UnitDB();
+		public static readonly UseDB useDB = new UseDB(PathManager.use);
 
 		public override void _Ready() { AddChild(soundPlayer); }
 

@@ -18,9 +18,7 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly UseDB Instance = new UseDB();
-
-		public UseDB() : base(PathManager.use) { }
+		public UseDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);

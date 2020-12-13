@@ -16,8 +16,8 @@ namespace Game.Factory
 				NameDB.Spell.SIPHON_MANA => new SiphonMana(),
 				NameDB.Spell.STOMP => (Stomp)SceneDB.stompAreaEffect.Instance(),
 				NameDB.Spell.VOLLEY => new Volley(),
-				_ => SpellDB.Instance.HasData(worldName)
-					? AreaEffectDB.Instance.HasData(worldName)
+				_ => Globals.spellDB.HasData(worldName)
+					? Globals.areaEffectDB.HasData(worldName)
 						? (SpellAreaEffect)SceneDB.spellAreaEffect.Instance()
 						: new Spell()
 					: null

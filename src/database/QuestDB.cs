@@ -63,8 +63,6 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly QuestDB Instance = new QuestDB();
-
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary rawDict = LoadJson(path),

@@ -13,9 +13,7 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly AreaEffectDB Instance = new AreaEffectDB();
-
-		public AreaEffectDB() : base(PathManager.areaEffect) { }
+		public AreaEffectDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);

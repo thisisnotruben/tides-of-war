@@ -25,9 +25,7 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly LandMineDB Instance = new LandMineDB();
-
-		public LandMineDB() : base(PathManager.landMine) { }
+		public LandMineDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);

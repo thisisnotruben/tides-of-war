@@ -28,7 +28,7 @@ namespace Game.Ui
 			selectedSlotIdx += by;
 			string nextCommodityWorldName = itemList.GetCommodity(selectedSlotIdx);
 
-			bool playerHaveSpell = SpellDB.Instance.HasData(nextCommodityWorldName)
+			bool playerHaveSpell = Globals.spellDB.HasData(nextCommodityWorldName)
 				&& playerSpellBook.HasItem(nextCommodityWorldName);
 
 			Display(nextCommodityWorldName, true, isBuying, playerHaveSpell);
@@ -38,7 +38,7 @@ namespace Game.Ui
 			Display(commodityWorldName, allowMove);
 
 			// set which buttons to show accordingly
-			buyBttn.Text = SpellDB.Instance.HasData(commodityWorldName) ? "Train" : "Buy";
+			buyBttn.Text = Globals.spellDB.HasData(commodityWorldName) ? "Train" : "Buy";
 			HideExcept(alreadyHave ? new Control[] { } : new Control[] { buy ? buyBttn : sellBttn });
 		}
 		public void _OnBuyPressed()
@@ -46,15 +46,15 @@ namespace Game.Ui
 			RouteConnections(nameof(_OnBuyConfirm));
 			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
-			if (SpellDB.Instance.HasData(commodityWorldName)
-			&& player.level < SpellDB.Instance.GetData(commodityWorldName).level)
+			if (Globals.spellDB.HasData(commodityWorldName)
+			&& player.level < Globals.spellDB.GetData(commodityWorldName).level)
 			{
 				popupController.ShowError("Can't Learn\nThis Yet!");
 
 			}
 			else if (PickableDB.GetGoldCost(commodityWorldName) < player.gold)
 			{
-				popupController.ShowConfirm(SpellDB.Instance.HasData(commodityWorldName) ? "Learn?" : "Buy?");
+				popupController.ShowConfirm(Globals.spellDB.HasData(commodityWorldName) ? "Learn?" : "Buy?");
 			}
 			else
 			{

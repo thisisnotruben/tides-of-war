@@ -45,9 +45,9 @@ namespace Game.Ui
 
 			header.Text = npc.worldName;
 
-			if (ContentDB.Instance.HasData(npc.Name))
+			if (Globals.contentDB.HasData(npc.Name))
 			{
-				ContentDB.ContentData contentData = ContentDB.Instance.GetData(npc.Name);
+				ContentDB.ContentData contentData = Globals.contentDB.GetData(npc.Name);
 
 				subHeader.Text = "Healer cost: " + contentData.healerCost;
 				dialogue.BbcodeText = contentData.dialogue;
@@ -112,7 +112,7 @@ namespace Game.Ui
 		}
 		public void _OnHealPressed()
 		{
-			int healerCost = ContentDB.Instance.GetData(npc.Name).healerCost;
+			int healerCost = Globals.contentDB.GetData(npc.Name).healerCost;
 			if (healerCost > player.gold)
 			{
 				// too expensive for player
@@ -137,7 +137,7 @@ namespace Game.Ui
 		{
 			// called for when user wants to buy
 			merchantController.DisplayItems(npc.worldName,
-				ContentDB.Instance.GetData(npc.Name).merchandise);
+				Globals.contentDB.GetData(npc.Name).merchandise);
 
 			// switch to merchant view
 			mainContent.Hide();

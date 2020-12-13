@@ -22,8 +22,8 @@ namespace Game.Quest
 			{
 				if (resourceName.Extension().Equals(PathManager.dataExt))
 				{
-					QuestDB.Instance.LoadData(PathManager.questDir.PlusFile(resourceName));
-					questData = QuestDB.Instance.data;
+					Globals.questDB.LoadData(PathManager.questDir.PlusFile(resourceName));
+					questData = Globals.questDB.data;
 					foreach (string questName in questData.Keys)
 					{
 						quests.Add(new WorldQuest(questData[questName]));

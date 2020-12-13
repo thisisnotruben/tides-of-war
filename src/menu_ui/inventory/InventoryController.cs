@@ -75,7 +75,7 @@ namespace Game.Ui
 		}
 		public void _OnItemEquipped(string worldName, bool on)
 		{
-			ItemDB.ItemData itemData = ItemDB.Instance.GetData(worldName);
+			ItemDB.ItemData itemData = Globals.itemDB.GetData(worldName);
 			(itemData.type == ItemDB.ItemType.ARMOR
 				? armorIcon
 				: weaponIcon

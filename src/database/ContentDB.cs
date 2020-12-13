@@ -24,8 +24,6 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly ContentDB Instance = new ContentDB();
-
 		public override void LoadData(string path)
 		{
 			data.Clear();

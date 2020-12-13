@@ -132,7 +132,7 @@ namespace Game.Actor
 		}
 		protected void SetImg(string imgName)
 		{
-			ImageDB.ImageData imageData = ImageDB.Instance.GetData(imgName);
+			ImageDB.ImageData imageData = Globals.imageDB.GetData(imgName);
 
 			// set sprite
 			Texture imgTexture = GD.Load<Texture>($"res://asset/img/character/{imgName}.png");
@@ -142,7 +142,7 @@ namespace Game.Actor
 
 			// set multiplier
 			stats.multiplier = Stats.GetMultiplier(
-				UnitDB.Instance.HasData(Name)
+				Globals.unitDB.HasData(Name)
 				? imgName.Split('-')[0] // character race
 				: Name); // is player
 

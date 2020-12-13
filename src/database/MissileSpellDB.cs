@@ -19,10 +19,7 @@ namespace Game.Database
 				this.sound = sound;
 			}
 		}
-
-		public static readonly MissileSpellDB Instance = new MissileSpellDB();
-
-		public MissileSpellDB() : base(PathManager.missileSpell) { }
+		public MissileSpellDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);

@@ -43,9 +43,7 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly ModDB Instance = new ModDB();
-
-		public ModDB() : base(PathManager.modifier) { }
+		public ModDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);

@@ -64,7 +64,7 @@ namespace Game.Ui
 			}
 
 			bool interactable = !npc.enemy &&
-				(ContentDB.Instance.HasData(npc.Name) || QuestMaster.HasQuestOrQuestExtraContent(npc.worldName, npc.GetPath()))
+				(Globals.contentDB.HasData(npc.Name) || QuestMaster.HasQuestOrQuestExtraContent(npc.worldName, npc.GetPath()))
 				&& 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
 
 			if (hudControlController.targetStatus.IsCharacterConnected(npc))

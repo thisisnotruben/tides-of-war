@@ -59,7 +59,7 @@ namespace Game.Actor.State
 
 			// call when map has finished loading
 			CallDeferred(nameof(SetState),
-				UnitDB.Instance.HasData(characterEditorName) && UnitDB.Instance.GetData(characterEditorName).path.Length > 0
+				Globals.unitDB.HasData(characterEditorName) && Globals.unitDB.GetData(characterEditorName).path.Length > 0
 				? State.NPC_MOVE_ROAM
 				: State.IDLE);
 		}
@@ -99,8 +99,8 @@ namespace Game.Actor.State
 					lastState = State.IDLE_DEAD;
 					break;
 				case State.ALIVE:
-					lastState = UnitDB.Instance.HasData(characterEditorName)
-						&& UnitDB.Instance.GetData(characterEditorName).path.Length > 0
+					lastState = Globals.unitDB.HasData(characterEditorName)
+						&& Globals.unitDB.GetData(characterEditorName).path.Length > 0
 						? State.NPC_MOVE_ROAM
 						: State.IDLE;
 					break;

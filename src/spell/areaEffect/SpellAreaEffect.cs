@@ -15,10 +15,10 @@ namespace Game.Ability
 
 			area = GetNode<Area2D>("area");
 
-			if (AreaEffectDB.Instance.HasData(worldName))
+			if (Globals.areaEffectDB.HasData(worldName))
 			{
 				CollisionShape2D sight = area.GetChild<CollisionShape2D>(0);
-				((CircleShape2D)sight.Shape).Radius = AreaEffectDB.Instance.GetData(worldName).radius;
+				((CircleShape2D)sight.Shape).Radius = Globals.areaEffectDB.GetData(worldName).radius;
 			}
 		}
 		public override void Start()

@@ -31,7 +31,7 @@ namespace Game.Mine
 		}
 		public void Init(string worldName, Character exludedCharacter)
 		{
-			LandMineDB.LandMineData landMineData = LandMineDB.Instance.GetData(worldName);
+			LandMineDB.LandMineData landMineData = Globals.landMineDB.GetData(worldName);
 
 			this.worldName = worldName;
 			this.exludedCharacter = exludedCharacter;

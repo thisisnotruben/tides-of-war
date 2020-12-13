@@ -9,12 +9,6 @@ namespace Game.Ui
 		private PopupController popupController;
 		private Control main;
 
-		static StartMenuController()
-		{
-			// load all static data when loaded
-			// since this is the entry point to the game
-			SpellEffectDB.Init();
-		}
 		public override void _Ready()
 		{
 			GameMenu.player = null;

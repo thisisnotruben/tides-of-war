@@ -23,7 +23,6 @@ namespace Game.Database
 			}
 		}
 
-		public static readonly UnitDB Instance = new UnitDB();
 
 		public override void LoadData(string path)
 		{

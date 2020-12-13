@@ -23,7 +23,7 @@ namespace Game.Ui
 		public void _OnCastPressed()
 		{
 			string errorText = string.Empty;
-			SpellDB.SpellData spellData = SpellDB.Instance.GetData(commodityWorldName);
+			SpellDB.SpellData spellData = Globals.spellDB.GetData(commodityWorldName);
 
 			if (player.mana >= spellData.manaCost)
 			{

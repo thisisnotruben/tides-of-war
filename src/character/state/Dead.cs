@@ -105,7 +105,7 @@ namespace Game.Actor.State
 				{
 					AddToGroup(Globals.SAVE_GROUP);
 				}
-				character.GlobalPosition = UnitDB.Instance.GetData(character.Name).spawnPos;
+				character.GlobalPosition = Globals.unitDB.GetData(character.Name).spawnPos;
 
 				// set spawn timer
 				timer.WaitTime = new Random().Next(60, 241);

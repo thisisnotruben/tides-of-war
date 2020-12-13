@@ -23,9 +23,8 @@ namespace Game.Database
 				this.melee = melee;
 			}
 		}
-		public static readonly ImageDB Instance = new ImageDB();
 
-		public ImageDB() : base(PathManager.image) { }
+		public ImageDB(string path) : base(path) { }
 		public override void LoadData(string path)
 		{
 			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);

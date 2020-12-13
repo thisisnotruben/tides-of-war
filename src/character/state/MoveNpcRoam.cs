@@ -14,7 +14,7 @@ namespace Game.Actor.State
 			base.Start();
 			if (waypoints.Count == 0)
 			{
-				Vector2[] unitPath = UnitDB.Instance.GetData(character.Name).path;
+				Vector2[] unitPath = Globals.unitDB.GetData(character.Name).path;
 
 				// in the special circumstance the unit went on to another state
 				// when waypoints.Count == 0
@@ -73,7 +73,7 @@ namespace Game.Actor.State
 		}
 		private void SetWaypoints()
 		{
-			Vector2[] mapPatrolPath = UnitDB.Instance.GetData(character.Name).path;
+			Vector2[] mapPatrolPath = Globals.unitDB.GetData(character.Name).path;
 
 			reversePath = !reversePath;
 			if (reversePath)

@@ -89,7 +89,7 @@ namespace Game.Ui
 		}
 		public void LootInteract(TreasureChest lootChest)
 		{
-			if (SpellDB.Instance.HasData(lootChest.commodityWorldName))
+			if (Globals.spellDB.HasData(lootChest.commodityWorldName))
 			{
 				if (playerSpellBook.IsFull(lootChest.commodityWorldName))
 				{

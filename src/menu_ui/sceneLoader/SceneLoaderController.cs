@@ -65,11 +65,11 @@ namespace Game.Ui
 			Directory directory = new Directory();
 			if (directory.FileExists(unitDataPath))
 			{
-				UnitDB.Instance.LoadData(unitDataPath);
+				Globals.unitDB.LoadData(unitDataPath);
 			}
 			if (directory.FileExists(contentDataPath))
 			{
-				ContentDB.Instance.LoadData(contentDataPath);
+				Globals.contentDB.LoadData(contentDataPath);
 			}
 
 			currentScene.Hide();
