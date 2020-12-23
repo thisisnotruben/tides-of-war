@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://asset/img/character/resource/animations/dying.tres" type="Animation" id=1]
 [ext_resource path="res://src/character/Character.cs" type="Script" id=2]
 [ext_resource path="res://asset/img/character/resource/animations/attacking.tres" type="Animation" id=3]
 [ext_resource path="res://src/character/doodads/CombatTextHandler.tscn" type="PackedScene" id=4]
-[ext_resource path="res://asset/img/character/resource/animations/moving.tres" type="Animation" id=5]
-[ext_resource path="res://asset/img/character/resource/animations/casting.tres" type="Animation" id=6]
+[ext_resource path="res://asset/img/character/resource/animations/casting.tres" type="Animation" id=5]
+[ext_resource path="res://asset/img/character/resource/animations/moving.tres" type="Animation" id=6]
 [ext_resource path="res://src/character/state/FSM.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/character/CharacterCamera.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -14,7 +15,6 @@
 extents = Vector2( 40, 40 )
 
 [node name="character" type="Node2D"]
-use_parent_material = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -29,25 +29,13 @@ __meta__ = {
 [node name="anim" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
 anims/attacking = ExtResource( 3 )
-anims/casting = ExtResource( 6 )
+anims/casting = ExtResource( 5 )
 anims/dying = ExtResource( 1 )
-anims/moving = ExtResource( 5 )
+anims/moving = ExtResource( 6 )
 
 [node name="head" type="Position2D" parent="."]
 
-[node name="camera" type="Camera2D" parent="."]
-zoom = Vector2( 0.175, 0.175 )
-process_mode = 0
-limit_smoothed = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 3.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-editor_draw_drag_margin = true
+[node name="camera" parent="." instance=ExtResource( 8 )]
 
 [node name="img" type="Sprite" parent="."]
 use_parent_material = true
@@ -59,6 +47,7 @@ use_parent_material = true
 [node name="snd" type="AudioStreamPlayer2D" parent="img"]
 
 [node name="area" type="Area2D" parent="."]
+visible = false
 monitoring = false
 collision_layer = 2
 collision_mask = 0
@@ -67,6 +56,7 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="sight" type="Area2D" parent="."]
+visible = false
 monitorable = false
 collision_layer = 0
 collision_mask = 2
@@ -75,6 +65,7 @@ collision_mask = 2
 shape = SubResource( 2 )
 
 [node name="visible" type="VisibilityEnabler2D" parent="."]
+visible = false
 rect = Rect2( -80, -80, 160, 160 )
 process_parent = true
 

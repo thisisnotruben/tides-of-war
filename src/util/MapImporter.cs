@@ -1,7 +1,10 @@
 using Godot;
+using GC = Godot.Collections;
+using Game.Light;
 using System;
 namespace Game.Util
 {
+	[Tool]
 	public class MapImporter : Node
 	{
 		private const int LIGHT_MASK_PASS = 0b_00000_00000_00000_00001,
@@ -11,14 +14,18 @@ namespace Game.Util
 			HALF_CELL_SIZE = CELL_SIZE / 2.0f,
 			OFFSET = new Vector2(0.0f, -CELL_SIZE.y);
 
-		private const string targetDummyPath = "res://src/character/npc/target_dummy/{0}.tscn",
+		private const string targetDummyPath = "res://src/character/npc/targetDummy/{0}.tscn",
 			lightPath = "res://src/light/{0}.tscn",
-			lightOccluderPath = "res://asset/img/light/occluder/{0}.tres",
 			tilesetPath = "res://asset/img/map/tilesets/{0}.png",
 			worldTilesetPath = "res://asset/img/map/worldTileset.tres",
-			occluderDataPath = "res://data/importer/lightOccluders.json",
-			animDataPath = "res://data/importer/terrainAnim.json",
-			animatedTilesetPath = "res://asset/img/map/tilesets_animated/{0}.tres";
+			occluderDataPath = "res://data/importer/tilesetLightOccluders.json",
+			animDataPath = "res://data/importer/tilesetAnimations.json",
+			shaderDataPath = "res://data/importer/tilesetShaders.json",
+			lightPosPath = "res://data/importer/tilesetLightPos.json",
+			animatedTilesetPath = "res://asset/img/map/tilesets_animated/{0}.tres",
+			assetMapDir = "res://asset/img/map/",
+			srcMapDir = "res://src/map/",
+			lightGradientDir = "res://asset/img/light/gradient/";
 
 		private readonly string[] tileAtlases = new string[]
 		{
@@ -36,7 +43,9 @@ namespace Game.Util
 			playerScene = GD.Load<PackedScene>("res://src/character/player/player.tscn"),
 			transitionScene = GD.Load<PackedScene>("res://src/map/doodads/TransitionZone.tscn"),
 			worldClockScene = GD.Load<PackedScene>("res://src/map/doodads/WorldClock.tscn"),
-			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn");
+			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn"),
+			lightScene = GD.Load<PackedScene>("res://src/light/light.tscn"),
+			lightSource = GD.Load<PackedScene>("res://src/light/lightSource.tscn");
 
 		private Node2D map;
 		private TileMap zed;
@@ -49,6 +58,24 @@ namespace Game.Util
 			Connect(nameof(SendScenePath), GetChild(0), "set_map_script");
 		}
 		public void _OnQuit() { GetTree().Quit(); }
+		public void ExportAllMaps()
+		{
+			Directory directory = new Directory();
+			directory.Open(srcMapDir);
+			directory.ListDirBegin(true, true);
+
+			string filename = directory.GetNext();
+			while (!filename.Empty())
+			{
+				if (filename.Contains("zone"))
+				{
+					GD.Print("Importing: " + srcMapDir.PlusFile(filename));
+					ImportMap(srcMapDir.PlusFile(filename));
+				}
+				filename = directory.GetNext();
+			}
+			directory.ListDirEnd();
+		}
 		public void ImportMap(string scenePath)
 		{
 			EmitSignal(nameof(SendScenePath), scenePath);
@@ -61,35 +88,48 @@ namespace Game.Util
 			map = (Node2D)mapToImport.Instance();
 			map.GlobalPosition = new Vector2(0.0f, CELL_SIZE.y);
 
-			zed = map.GetNode<TileMap>("zed/z1");
-			Node2D characters = map.GetNode<Node2D>("zed/characters"),
-				transitions = map.GetNode<Node2D>("meta/transitions"),
-				transitionsZones = map.GetNode<Node2D>("meta/transitionZones"),
-				targetDummys = map.GetNode<Node2D>("zed/target_dummys"),
-				lights = map.GetNode<Node2D>("meta/lights"),
-				graveSites = map.GetNode<Node2D>("meta/gravesites"),
-				paths = map.GetNode<Node2D>("meta/paths"),
-				meta = map.GetNode<Node2D>("meta"),
-				collNav = map.GetNode<Node2D>("meta/coll_nav");
+			Node2D meta = map.GetNode<Node2D>("meta"),
+				zedGroup = map.GetNode<Node2D>("zed"),
+				targetDummys = zedGroup.GetNode<Node2D>("target_dummys"),
+				characters = zedGroup.GetNode<Node2D>("characters"),
+				transitionsZones = meta.GetNode<Node2D>("transitionZones"),
+				lights = meta.GetNode<Node2D>("lights"),
+				graveSites = meta.GetNode<Node2D>("gravesites"),
+				transitions = meta.GetNode<Node2D>("transitions"),
+				paths = meta.GetNode<Node2D>("paths"),
+				collNav = meta.GetNode<Node2D>("coll_nav"),
+				lightSpace = meta.GetNode<Node2D>("lightSpace");
+
+			zed = zedGroup.GetNode<TileMap>("z1");
+
+			// add worldEnvironment
+			WorldEnvironment worldEnvironment = new WorldEnvironment();
+			map.AddChild(worldEnvironment, true);
+			map.MoveChild(worldEnvironment, 0);
+			worldEnvironment.Owner = map;
 
 			// add worldClock scene
 			Node worldClock = worldClockScene.Instance();
 			map.AddChild(worldClock);
+			map.MoveChild(worldClock, 1);
 			worldClock.Owner = map;
-			map.MoveChild(worldClock, 0);
 
 			// add veil scene
 			Node2D veil = (Node2D)veilScene.Instance();
 			map.AddChild(veil);
+			map.MoveChild(veil, 2);
 			veil.Owner = map;
-			map.MoveChild(veil, 1);
 			veil.Hide();
+
+			zedGroup.MoveChild(characters, 0);
+			zedGroup.MoveChild(targetDummys, 1);
 
 			SetUnits(characters, transitions);
 			SetTargetDummys(targetDummys);
-			SetLights(lights);
+			SetLights(zedGroup, lights, lightSpace);
+			SetShaderData();
 			SetTransitions(transitionsZones, transitions);
-			TreeUseMaterial(map);
+			SetWorldTileset();
 
 			// center gravesites on map to cell
 			foreach (Node2D node2D in graveSites.GetChildren())
@@ -99,7 +139,7 @@ namespace Game.Util
 			}
 
 			// delete now useless nodes
-			foreach (Node node in new Node[] { characters, targetDummys, paths, lights })
+			foreach (Node node in new Node[] { characters, targetDummys, paths, lights, lightSpace })
 			{
 				node.Owner = null;
 				node.QueueFree();
@@ -113,8 +153,6 @@ namespace Game.Util
 			// shuffle scene tree
 			meta.MoveChild(collNav, 0);
 			meta.Hide();
-
-			SetWorldTileset();
 
 			// save map
 			PackedScene packedScene = new PackedScene();
@@ -167,7 +205,7 @@ namespace Game.Util
 				character.GlobalPosition = GetCenterPos(node.GlobalPosition);
 			}
 		}
-		private void SetLights(Node lights)
+		private void SetLights(Node2D zedGroup, Node lights, Node lightSpace)
 		{
 			string parsedName;
 			PackedScene lightScene;
@@ -191,6 +229,89 @@ namespace Game.Util
 					pos.y -= HALF_CELL_SIZE.y;
 				}
 				light.GlobalPosition = pos;
+			}
+			SetTileLights(zedGroup);
+			SetLightSpace(zedGroup, lightSpace);
+		}
+		private void SetTileLights(Node2D zedGroup)
+		{
+			File file = new File();
+			file.Open(lightPosPath, File.ModeFlags.Read);
+			GC.Dictionary lightPos = (GC.Dictionary)JSON.Parse(file.GetAsText()).Result;
+			file.Close();
+
+			TileMap tileMap;
+			Node2D light;
+			GC.Array pos;
+			string tileID;
+			int drawIndex;
+			foreach (Node2D node2D in zedGroup.GetChildren())
+			{
+				tileMap = node2D as TileMap;
+				if (tileMap == null)
+				{
+					continue;
+				}
+
+				foreach (Vector2 cellPos in tileMap.GetUsedCells())
+				{
+					tileID = tileMap.GetCellv(cellPos).ToString();
+					if (!lightPos.Contains(tileID))
+					{
+						continue;
+					}
+
+					light = (Node2D)lightScene.Instance();
+
+					drawIndex = tileMap.GetIndex() + 1;
+					(drawIndex > zedGroup.GetChildCount() - 1
+						? zedGroup
+						: zedGroup.GetChild(drawIndex)
+					).AddChild(light, true);
+					light.Owner = map;
+
+					pos = (GC.Array)lightPos[tileID];
+					light.GlobalPosition = tileMap.MapToWorld(cellPos)
+						+ tileMap.TileSet.TileGetTextureOffset(tileID.ToInt())
+						+ new Vector2((float)pos[0], (float)pos[1]);
+				}
+			}
+		}
+		private void SetLightSpace(Node zedGroup, Node lightSpace)
+		{
+			string lightID;
+			bool isConnectedLight = false;
+			Light2D light2D;
+			Vector2 offset;
+			Action<Node, Node2D> addLightSpace = (Node parent, Node2D source) =>
+			{
+				light2D = (Light2D)lightSource.Instance();
+				parent.AddChild(light2D);
+				light2D.Owner = map;
+
+				light2D.TextureScale = GetParsedName(source.Name).ToFloat() / light2D.Texture.GetWidth();
+				// in tiled, objects's origin is in bottom left, this transforms to center origin
+				offset = light2D.Texture.GetSize() * light2D.TextureScale / 2.0f;
+				offset.y *= -1.0f;
+				light2D.GlobalPosition = GetCenterPos(source.GlobalPosition + offset);
+			};
+
+			foreach (Node2D light in lightSpace.GetChildren())
+			{
+				lightID = light.Name.Split("-")[0];
+				foreach (Node2D zedLight in zed.GetChildren())
+				{
+					if (lightID.Equals(zedLight.Name.Split("-")[0]))
+					{
+						addLightSpace(zedLight, light);
+						isConnectedLight = true;
+						break;
+					}
+				}
+				if (!isConnectedLight)
+				{
+					addLightSpace(zedGroup, light);
+				}
 			}
 		}
 		private void SetTransitions(Node transitionZones, Node transitions)
@@ -223,6 +344,47 @@ namespace Game.Util
 				node2D.GlobalPosition = GetCenterPos(node2D.GlobalPosition);
 			}
 		}
+		private void SetShaderData()
+		{
+			File file = new File();
+			file.Open(shaderDataPath, File.ModeFlags.Read);
+			GC.Dictionary shaderData = (GC.Dictionary)JSON.Parse(file.GetAsText()).Result;
+			file.Close();
+
+			GC.Dictionary<string, string> worldObjectShaderData = new GC.Dictionary<string, string>();
+			foreach (string key in shaderData.Keys)
+			{
+				if (key.Contains(map.Name))
+				{
+					worldObjectShaderData.Add(GetParsedName(key), (string)shaderData[key]);
+				}
+			}
+
+			string node2DID;
+			ShaderMaterial shaderMaterial;
+			LightSource lightSource;
+			foreach (Node2D node2D in zed.GetChildren())
+			{
+				node2DID = node2D.Name.Split("-")[0];
+				if (worldObjectShaderData.ContainsKey(node2DID))
+				{
+					shaderMaterial = GD.Load<ShaderMaterial>(assetMapDir.PlusFile(worldObjectShaderData[node2DID] + "WorldObject.tres"));
+					node2D.Material = shaderMaterial;
+					node2D.Modulate = (Color)shaderMaterial.GetShaderParam("color");
+
+					// set light's color to same modulate if any
+					foreach (Node node in node2D.GetChildren())
+					{
+						lightSource = node as LightSource;
+						if (lightSource != null)
+						{
+							lightSource.Color = node2D.Modulate;
+							lightSource.gradient = GD.Load<Gradient>(lightGradientDir.PlusFile(worldObjectShaderData[node2DID] + "Light.tres"));
+						}
+					}
+				}
+			}
+		}
 		private void SetWorldTileset()
 		{
 			TileMap tileMap;
@@ -250,19 +412,6 @@ namespace Game.Util
 				}
 			}
 		}
-		private void TreeUseMaterial(Node root)
-		{
-			// used for when 'veil' has taken effect
-			foreach (Node node in root.GetChildren())
-			{
-				Node2D node2D = node as Node2D;
-				if (node2D != null)
-				{
-					node2D.UseParentMaterial = true;
-					TreeUseMaterial(node);
-				}
-			}
-		}
 		private string GetParsedName(string name) { return name.Split("-")[1]; }
 		private Vector2 GetCenterPos(Vector2 worldPosition)
 		{
@@ -276,7 +425,7 @@ namespace Game.Util
 			OccluderPolygon2D occluderPolygon2D;
 			Rect2 rect2;
 			Vector2 offset, pos;
-			Godot.Collections.Array posArray, templatePoints;
+			GC.Array posArray, templatePoints;
 			Vector2[] polygon;
 			int i, j, k = 1, cellHeight, z, l;
 			string gid;
@@ -285,12 +434,17 @@ namespace Game.Util
 
 			// occluder data
 			file.Open(occluderDataPath, File.ModeFlags.Read);
-			Godot.Collections.Dictionary occluderData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
+			GC.Dictionary occluderData = (GC.Dictionary)JSON.Parse(file.GetAsText()).Result;
 			file.Close();
 
 			// anim data
 			file.Open(animDataPath, File.ModeFlags.Read);
-			Godot.Collections.Dictionary terrrainAnimData = (Godot.Collections.Dictionary)JSON.Parse(file.GetAsText()).Result;
+			GC.Dictionary terrrainAnimData = (GC.Dictionary)JSON.Parse(file.GetAsText()).Result;
+			file.Close();
+
+			// shader data
+			file.Open(shaderDataPath, File.ModeFlags.Read);
+			GC.Dictionary shaderData = (GC.Dictionary)JSON.Parse(file.GetAsText()).Result;
 			file.Close();
 
 			foreach (string imgPath in tileAtlases)
@@ -306,7 +460,7 @@ namespace Game.Util
 						gid = k.ToString();
 						if (terrrainAnimData.Contains(gid))
 						{
-							tex = GD.Load<Texture>(string.Format(animatedTilesetPath, (string)terrrainAnimData[gid]));
+							tex = GD.Load<Texture>(string.Format(animatedTilesetPath, terrrainAnimData[gid]));
 							rect2 = new Rect2(Vector2.Zero, CELL_SIZE);
 						}
 						else
@@ -323,11 +477,11 @@ namespace Game.Util
 						if (occluderData.Contains(gid))
 						{
 							// make occluder
-							posArray = (Godot.Collections.Array)((Godot.Collections.Dictionary)occluderData[gid])["pos"];
+							posArray = (GC.Array)((GC.Dictionary)occluderData[gid])["pos"];
 							pos = new Vector2((float)posArray[0], (float)posArray[1] - cellHeight);
 
-							templatePoints = (Godot.Collections.Array)occluderData[
-								(string)((Godot.Collections.Dictionary)occluderData[gid])["templateName"]];
+							templatePoints = (GC.Array)occluderData[
+								(string)((GC.Dictionary)occluderData[gid])["templateName"]];
 
 							polygon = new Vector2[templatePoints.Count / 2];
 							for (z = 0, l = 0; l < templatePoints.Count; l += 2, z++)
@@ -340,6 +494,14 @@ namespace Game.Util
 							occluderPolygon2D.Polygon = polygon;
 							tileSet.TileSetLightOccluder(k, occluderPolygon2D);
 						}
+
+						if (shaderData.Contains(gid))
+						{
+							tileSet.TileSetMaterial(k, GD.Load<ShaderMaterial>(
+								assetMapDir.PlusFile((string)shaderData[gid] + ".tres"))
+							);
+						}
+
 						k++;
 					}
 				}

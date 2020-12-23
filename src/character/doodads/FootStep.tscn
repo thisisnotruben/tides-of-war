@@ -3,7 +3,6 @@
 [ext_resource path="res://src/character/doodads/FootStep.cs" type="Script" id=1]
 
 [node name="FootStep" type="Node2D"]
-use_parent_material = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true

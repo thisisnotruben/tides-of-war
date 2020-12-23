@@ -1,12 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
 [ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=2]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=3]
-[ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=4]
+[ext_resource path="res://asset/img/light/fireScale.tres" type="Texture" id=4]
 [ext_resource path="res://asset/img/missile-spell/gradient/frost_bolt.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/missile-spell/bolt.png" type="Texture" id=6]
-
 
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -31,6 +30,12 @@ orbit_velocity_random = 0.0
 scale = 2.0
 scale_curve = ExtResource( 4 )
 color = Color( 0.592157, 0.858824, 1, 0.498039 )
+
+[sub_resource type="CanvasItemMaterial" id=9]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
@@ -83,7 +88,7 @@ color_ramp = ExtResource( 5 )
 [node name="frost_bolt" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 
 [node name="smoke" type="Particles2D" parent="idle" index="0"]
@@ -96,6 +101,8 @@ local_coords = false
 process_material = SubResource( 2 )
 
 [node name="bolt" type="Particles2D" parent="idle" index="1"]
+material = SubResource( 9 )
+use_parent_material = true
 position = Vector2( -1, -1 )
 amount = 1
 preprocess = 10.0
@@ -103,9 +110,10 @@ process_material = SubResource( 3 )
 texture = ExtResource( 6 )
 
 [node name="ice" type="Particles2D" parent="idle" index="2"]
+visible = false
 use_parent_material = true
 rotation = 3.14159
-amount = 24
+amount = 16
 lifetime = 0.5
 preprocess = 10.0
 local_coords = false

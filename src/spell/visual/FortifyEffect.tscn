@@ -7,8 +7,6 @@
 [ext_resource path="res://asset/img/missile-spell/line2.png" type="Texture" id=5]
 [ext_resource path="res://asset/img/missile-spell/gradient/fortify.tres" type="Texture" id=6]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 resource_name = "color_ramp"
@@ -53,24 +51,25 @@ orbit_velocity_random = 0.0
 script = ExtResource( 2 )
 fadeLight = false
 
-[node name="timer" parent="." index="0"]
+[node name="timer" parent="." index="1"]
 wait_time = 2.5
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 position = Vector2( 0, -8 )
 
-[node name="explode" parent="." index="4"]
+[node name="explode" parent="." index="5"]
 position = Vector2( 0, -8 )
 
 [node name="floaters2" type="Particles2D" parent="explode" index="0"]
 modulate = Color( 1, 1, 1, 0.35 )
+use_parent_material = true
 amount = 16
 preprocess = 5.0
 process_material = SubResource( 2 )
 
 [node name="floaters" type="Particles2D" parent="explode" index="1"]
-visible = false
+use_parent_material = true
 amount = 32
 preprocess = 5.0
 process_material = SubResource( 3 )

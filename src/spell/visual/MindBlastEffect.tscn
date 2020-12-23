@@ -1,10 +1,11 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
-[ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=2]
+[ext_resource path="res://asset/img/light/fireGradient.tres" type="Texture" id=2]
 [ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=3]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=4]
-[ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=5]
+[ext_resource path="res://asset/img/light/fireScale.tres" type="Texture" id=5]
+
 
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -49,7 +50,7 @@ color_ramp = SubResource( 4 )
 [node name="mind_blast" instance=ExtResource( 4 )]
 script = ExtResource( 3 )
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 visible = false
 material = SubResource( 1 )
 
@@ -60,6 +61,7 @@ explosiveness = 0.7
 process_material = SubResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="explode" index="1"]
+use_parent_material = true
 emitting = false
 amount = 24
 one_shot = true

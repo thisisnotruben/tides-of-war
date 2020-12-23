@@ -15,7 +15,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 5 )
-color = Color( 1, 0.752941, 0.796078, 1 )
+color = Color( 0.27451, 0.196078, 0.0509804, 1 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true,
@@ -97,80 +97,91 @@ margin_bottom = 51.0
 custom_fonts/font = ExtResource( 3 )
 text = "Make Tileset"
 
-[node name="button_0" type="Button" parent="v_box_container"]
+[node name="exportAllMaps" type="Button" parent="v_box_container"]
 margin_top = 59.0
 margin_right = 376.0
-margin_bottom = 113.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 5 )
+custom_fonts/font = ExtResource( 3 )
+text = "Export All Maps"
+
+[node name="zone0" type="Button" parent="v_box_container"]
+margin_top = 118.0
+margin_right = 376.0
+margin_bottom = 169.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 0"
 
-[node name="button_1" type="Button" parent="v_box_container"]
-margin_top = 121.0
+[node name="zone1" type="Button" parent="v_box_container"]
+margin_top = 177.0
 margin_right = 376.0
-margin_bottom = 176.0
+margin_bottom = 228.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 1"
 
-[node name="button_2" type="Button" parent="v_box_container"]
-margin_top = 184.0
+[node name="zone2" type="Button" parent="v_box_container"]
+margin_top = 236.0
 margin_right = 376.0
-margin_bottom = 238.0
+margin_bottom = 287.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 2"
 
-[node name="button_3" type="Button" parent="v_box_container"]
-margin_top = 246.0
+[node name="zone3" type="Button" parent="v_box_container"]
+margin_top = 295.0
 margin_right = 376.0
-margin_bottom = 301.0
+margin_bottom = 346.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 3"
 
-[node name="button_4" type="Button" parent="v_box_container"]
-margin_top = 309.0
+[node name="zone4" type="Button" parent="v_box_container"]
+margin_top = 354.0
 margin_right = 376.0
-margin_bottom = 363.0
+margin_bottom = 405.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 4"
 
-[node name="button_5" type="Button" parent="v_box_container"]
-margin_top = 371.0
+[node name="zone5" type="Button" parent="v_box_container"]
+margin_top = 413.0
 margin_right = 376.0
-margin_bottom = 426.0
+margin_bottom = 464.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Zone 5"
 
-[node name="button_6" type="Button" parent="v_box_container"]
-margin_top = 434.0
+[node name="zone6" type="Button" parent="v_box_container"]
+margin_top = 472.0
 margin_right = 376.0
-margin_bottom = 489.0
+margin_bottom = 523.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Quit"
 [connection signal="pressed" from="v_box_container/button" to="." method="MakeTileset"]
-[connection signal="pressed" from="v_box_container/button_0" to="." method="ImportMap" binds= [ "res://src/map/zone_0.tscn" ]]
-[connection signal="pressed" from="v_box_container/button_1" to="." method="ImportMap" binds= [ "res://src/map/zone_1.tscn" ]]
-[connection signal="pressed" from="v_box_container/button_2" to="." method="ImportMap" binds= [ "res://src/map/zone_2.tscn" ]]
-[connection signal="pressed" from="v_box_container/button_3" to="." method="ImportMap" binds= [ "res://src/map/zone_3.tscn" ]]
-[connection signal="pressed" from="v_box_container/button_4" to="." method="ImportMap" binds= [ "res://src/map/zone_4.tscn" ]]
-[connection signal="pressed" from="v_box_container/button_5" to="." method="ImportMap" binds= [ "res://src/map/zone_5.tscn" ]]
-[connection signal="pressed" from="v_box_container/button_6" to="." method="_OnQuit"]
+[connection signal="pressed" from="v_box_container/exportAllMaps" to="." method="ExportAllMaps"]
+[connection signal="pressed" from="v_box_container/zone0" to="." method="ImportMap" binds= [ "res://src/map/zone_0.tscn" ]]
+[connection signal="pressed" from="v_box_container/zone1" to="." method="ImportMap" binds= [ "res://src/map/zone_1.tscn" ]]
+[connection signal="pressed" from="v_box_container/zone2" to="." method="ImportMap" binds= [ "res://src/map/zone_2.tscn" ]]
+[connection signal="pressed" from="v_box_container/zone3" to="." method="ImportMap" binds= [ "res://src/map/zone_3.tscn" ]]
+[connection signal="pressed" from="v_box_container/zone4" to="." method="ImportMap" binds= [ "res://src/map/zone_4.tscn" ]]
+[connection signal="pressed" from="v_box_container/zone5" to="." method="ImportMap" binds= [ "res://src/map/zone_5.tscn" ]]
+[connection signal="pressed" from="v_box_container/zone6" to="." method="_OnQuit"]

@@ -4,7 +4,7 @@
 [ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=2]
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=4]
 [ext_resource path="res://asset/img/missile-spell/gradient/arcane_bolt.tres" type="Texture" id=5]
-[ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=6]
+[ext_resource path="res://asset/img/light/fireScale.tres" type="Texture" id=6]
 [ext_resource path="res://asset/img/missile-spell/ball1.png" type="Texture" id=7]
 
 
@@ -25,7 +25,7 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 8.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 2.0
+scale = 1.5
 scale_curve = ExtResource( 6 )
 color_ramp = ExtResource( 5 )
 
@@ -106,12 +106,13 @@ color_ramp = ExtResource( 5 )
 script = ExtResource( 2 )
 lightFadeDelay = 2.0
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 scale = Vector2( 0.15, 0.15 )
 
 [node name="smoke" type="Particles2D" parent="idle" index="0"]
-modulate = Color( 1, 1, 1, 0.5 )
+modulate = Color( 1, 1, 1, 0.501961 )
+use_parent_material = true
 amount = 24
 preprocess = 20.0
 speed_scale = 1.2
@@ -119,6 +120,7 @@ local_coords = false
 process_material = SubResource( 2 )
 
 [node name="bolt" type="Particles2D" parent="idle" index="1"]
+use_parent_material = true
 amount = 1
 lifetime = 0.5
 preprocess = 20.0
@@ -127,13 +129,15 @@ process_material = SubResource( 3 )
 texture = ExtResource( 7 )
 
 [node name="trail" type="Particles2D" parent="idle" index="2"]
-amount = 48
+use_parent_material = true
+amount = 24
 preprocess = 20.0
 speed_scale = 1.2
 local_coords = false
 process_material = SubResource( 4 )
 
 [node name="lightning" type="Particles2D" parent="idle" index="3"]
+use_parent_material = true
 amount = 32
 preprocess = 20.0
 speed_scale = 1.2
@@ -141,6 +145,7 @@ process_material = SubResource( 5 )
 
 [node name="smoke" type="Particles2D" parent="explode" index="0"]
 modulate = Color( 1, 1, 1, 0.5 )
+use_parent_material = true
 emitting = false
 amount = 24
 lifetime = 1.75
@@ -152,6 +157,7 @@ local_coords = false
 process_material = SubResource( 6 )
 
 [node name="trail" type="Particles2D" parent="explode" index="1"]
+use_parent_material = true
 emitting = false
 amount = 48
 lifetime = 1.75
@@ -163,6 +169,7 @@ local_coords = false
 process_material = SubResource( 7 )
 
 [node name="lightning" type="Particles2D" parent="explode" index="2"]
+use_parent_material = true
 emitting = false
 amount = 45
 lifetime = 1.75

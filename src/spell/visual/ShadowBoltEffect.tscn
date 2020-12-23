@@ -3,10 +3,9 @@
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
 [ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=2]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=3]
-[ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=4]
+[ext_resource path="res://asset/img/light/fireScale.tres" type="Texture" id=4]
 [ext_resource path="res://asset/img/missile-spell/ball1.png" type="Texture" id=5]
 [ext_resource path="res://asset/img/missile-spell/gradient/shadow_bolt.tres" type="Texture" id=6]
-
 
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -82,7 +81,7 @@ color = Color( 0.0823529, 0.0823529, 0.0823529, 0.5 )
 [node name="shadow_bolt" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 
 [node name="shadow_bolt" type="Particles2D" parent="idle" index="0"]
@@ -96,6 +95,7 @@ process_material = SubResource( 4 )
 
 [node name="bolt" type="Particles2D" parent="idle" index="1"]
 show_behind_parent = true
+use_parent_material = true
 rotation = -1.5708
 amount = 1
 lifetime = 0.5
@@ -113,7 +113,6 @@ process_material = SubResource( 6 )
 
 [node name="smoke" type="Particles2D" parent="idle" index="3"]
 show_behind_parent = true
-use_parent_material = true
 rotation = 3.14159
 amount = 64
 lifetime = 2.0
@@ -144,7 +143,6 @@ process_material = SubResource( 6 )
 
 [node name="smoke" type="Particles2D" parent="explode" index="2"]
 show_behind_parent = true
-use_parent_material = true
 rotation = 3.14159
 emitting = false
 amount = 64

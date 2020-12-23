@@ -17,5 +17,9 @@ namespace Game.Database
 			stompAreaEffect = GD.Load<PackedScene>("res://src/spell/areaEffect/Stomp.tscn"),
 			arcaneBoltAreaEffect = GD.Load<PackedScene>("res://src/spell/areaEffect/ArcaneBolt.tscn"),
 			sceneLoader = GD.Load<PackedScene>("res://src/menu_ui/sceneLoader/SceneLoaderView.tscn");
+
+		public static readonly Resource
+			ghostMaterial = GD.Load<ShaderMaterial>("res://asset/img/map/ghost.tres"),
+			ghostShader = GD.Load<Shader>("res://asset/img/map/ghost.shader");
 	}
 }

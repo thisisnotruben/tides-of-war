@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
-[ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=2]
+[ext_resource path="res://asset/img/light/fireGradient.tres" type="Texture" id=2]
 [ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=3]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=4]
 
@@ -36,11 +36,12 @@ color_ramp = SubResource( 3 )
 [node name="cleave" instance=ExtResource( 4 )]
 script = ExtResource( 3 )
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 visible = false
 material = SubResource( 1 )
 
 [node name="blood" type="Particles2D" parent="explode" index="0"]
+use_parent_material = true
 rotation = -1.5708
 emitting = false
 amount = 16

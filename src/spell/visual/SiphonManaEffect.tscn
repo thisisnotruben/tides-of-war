@@ -6,8 +6,6 @@
 [ext_resource path="res://asset/img/missile-spell/line2.png" type="Texture" id=4]
 [ext_resource path="res://asset/img/missile-spell/gradient/siphon_mana.tres" type="Texture" id=5]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 resource_name = "color_ramp"
@@ -54,11 +52,12 @@ color_ramp = ExtResource( 5 )
 script = ExtResource( 2 )
 lightFadeDelay = 1.0
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="persistant" type="Particles2D" parent="idle" index="0"]
+use_parent_material = true
 amount = 32
 lifetime = 0.6
 preprocess = 10.0
@@ -67,6 +66,7 @@ process_material = SubResource( 2 )
 texture = ExtResource( 4 )
 
 [node name="bolt" type="Particles2D" parent="idle" index="1"]
+use_parent_material = true
 amount = 1
 lifetime = 0.5
 preprocess = 10.0
@@ -74,6 +74,7 @@ process_material = SubResource( 3 )
 texture = SubResource( 4 )
 
 [node name="explosion" type="Particles2D" parent="explode" index="0"]
+use_parent_material = true
 emitting = false
 amount = 32
 one_shot = true

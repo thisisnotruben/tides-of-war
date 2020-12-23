@@ -3,7 +3,7 @@
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
 [ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=2]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=3]
-[ext_resource path="res://asset/img/light/fire_scale.tres" type="Texture" id=4]
+[ext_resource path="res://asset/img/light/fireScale.tres" type="Texture" id=4]
 [ext_resource path="res://asset/img/missile-spell/gradient/precise_shot.tres" type="Texture" id=5]
 
 
@@ -58,7 +58,6 @@ script = ExtResource( 2 )
 material = SubResource( 1 )
 
 [node name="smoke" type="Particles2D" parent="idle" index="0"]
-use_parent_material = true
 rotation = 3.14159
 amount = 32
 lifetime = 2.0
@@ -67,6 +66,7 @@ local_coords = false
 process_material = SubResource( 4 )
 
 [node name="pers1" type="Particles2D" parent="idle" index="1"]
+use_parent_material = true
 rotation = -1.5708
 amount = 64
 lifetime = 2.0
@@ -75,7 +75,6 @@ local_coords = false
 process_material = SubResource( 5 )
 
 [node name="smoke2" type="Particles2D" parent="explode" index="0"]
-use_parent_material = true
 rotation = 3.14159
 emitting = false
 amount = 32
@@ -86,6 +85,7 @@ local_coords = false
 process_material = SubResource( 4 )
 
 [node name="explode" type="Particles2D" parent="explode" index="1"]
+use_parent_material = true
 rotation = -1.5708
 emitting = false
 amount = 64

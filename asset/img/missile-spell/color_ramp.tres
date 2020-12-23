@@ -1,7 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
-[ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=2]
+[ext_resource path="res://asset/img/light/fireGradient.tres" type="Texture" id=2]
+
 
 [resource]
 resource_local_to_scene = true

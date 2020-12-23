@@ -130,7 +130,6 @@ hframes = 3
 frame = 2
 
 [node name="glitter" type="Particles2D" parent="img"]
-use_parent_material = true
 position = Vector2( 0, -12 )
 amount = 12
 explosiveness = 0.25

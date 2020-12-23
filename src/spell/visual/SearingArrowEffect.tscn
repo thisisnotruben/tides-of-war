@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
-[ext_resource path="res://asset/img/light/fire_gradient.tres" type="Texture" id=2]
+[ext_resource path="res://asset/img/light/fireGradient.tres" type="Texture" id=2]
 [ext_resource path="res://src/spell/visual/FireballEffect.tscn" type="PackedScene" id=3]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -17,12 +18,11 @@ shader_param/gradient = ExtResource( 2 )
 [node name="searing_arrow" instance=ExtResource( 3 )]
 playSound = true
 
-[node name="timer" parent="." index="0"]
+[node name="timer" parent="." index="1"]
 wait_time = 2.0
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 
 [node name="bolt" parent="idle" index="1"]
 visible = false
-use_parent_material = true

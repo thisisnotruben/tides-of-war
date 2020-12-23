@@ -85,6 +85,7 @@ namespace Game.Actor.State
 
 				// set map death effects
 				Map.Map.map.SetVeil(true);
+				character.camera.SetEffect(CharacterCamera.Effect.DEATH);
 
 				// spawn to nearest graveyard
 				Dictionary<int, Vector2> graveSites = new Dictionary<int, Vector2>();

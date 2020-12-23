@@ -43,6 +43,7 @@ namespace Game.Actor.Doodads
 
 			// revive
 			Map.Map.map.SetVeil(false);
+			deceasedPlayer.camera.ResetEffects();
 			deceasedPlayer.state = FSM.State.ALIVE;
 
 			// fade out tomb and delete

@@ -6,7 +6,6 @@
 [ext_resource path="res://asset/img/missile-spell/gradient/bash.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/missile-spell/cross.png" type="Texture" id=6]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
@@ -37,7 +36,7 @@ color = Color( 0, 1, 1, 1 )
 script = ExtResource( 2 )
 fadeLight = false
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 position = Vector2( 0, -3.5 )
 scale = Vector2( 0.08, 0.08 )

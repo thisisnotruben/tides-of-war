@@ -19,7 +19,7 @@ namespace Game.Actor
 		public Position2D head, missileSpawnPos;
 		public AnimationPlayer anim;
 		public Area2D hitBox, sight;
-		public Camera2D camera { get; protected set; }
+		public CharacterCamera camera { get; protected set; }
 		public AudioStreamPlayer2D player2D { get; protected set; }
 
 		public bool enemy { get; protected set; }
@@ -117,7 +117,7 @@ namespace Game.Actor
 			missileSpawnPos = img.GetNode<Position2D>("missile");
 			combatTextHandler = img.GetNode<CombatTextHandler>("CombatTextHandler");
 			player2D = img.GetNode<AudioStreamPlayer2D>("snd");
-			camera = GetNode<Camera2D>("camera");
+			camera = GetNode<CharacterCamera>("camera");
 			fsm = GetNode<FSM>("fsm");
 			hitBox = GetNode<Area2D>("area");
 			sight = GetNode<Area2D>("sight");
@@ -151,7 +151,6 @@ namespace Game.Actor
 			stats.Recalculate();
 
 			// set sprite animation key-frames
-			// TODO
 			Animation animRes = anim.GetAnimation("attacking");
 			animRes.TrackSetKeyValue(0, 0, imageData.moving + imageData.dying);
 			animRes.TrackSetKeyValue(0, 1, imageData.total - 1);

@@ -7,8 +7,6 @@
 [ext_resource path="res://asset/img/missile-spell/divine_heal.png" type="Texture" id=5]
 [ext_resource path="res://asset/img/missile-spell/gradient/divine_heal.tres" type="Texture" id=6]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 resource_name = "color_ramp"
@@ -29,7 +27,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 color_ramp = ExtResource( 6 )
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id=5]
 light_mode = 1
 
 [sub_resource type="ParticlesMaterial" id=4]
@@ -43,24 +41,25 @@ orbit_velocity_random = 0.0
 [node name="divine_heal" instance=ExtResource( 4 )]
 script = ExtResource( 3 )
 
-[node name="timer" parent="." index="0"]
+[node name="timer" parent="." index="1"]
 wait_time = 1.5
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 material = SubResource( 1 )
 position = Vector2( 0, -8 )
 
-[node name="explode" parent="." index="4"]
+[node name="explode" parent="." index="5"]
 position = Vector2( 0, -8 )
 
 [node name="divine_heal_flakes" type="Particles2D" parent="explode" index="0"]
+use_parent_material = true
 amount = 16
 preprocess = 5.0
 process_material = SubResource( 2 )
 texture = ExtResource( 2 )
 
 [node name="cross" type="Particles2D" parent="explode" index="1"]
-material = SubResource( 3 )
+material = SubResource( 5 )
 amount = 1
 preprocess = 5.0
 process_material = SubResource( 4 )

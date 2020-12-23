@@ -35,20 +35,7 @@ namespace Game.Map
 		}
 		public void AddGChild(Node node) { ground.AddChild(node); }
 		public void AddZChild(Node node) { zed.AddChild(node); }
-		public void SetVeil(bool on)
-		{
-			veilFog.Emitting = on;
-			if (on)
-			{
-				Material = GD.Load<ShaderMaterial>("res://asset/img/map/veil.tres");
-				veilFog.Show();
-			}
-			else
-			{
-				Material = null;
-				veilFog.Hide();
-			}
-		}
+		public void SetVeil(bool on) { veilFog.Visible = veilFog.Emitting = on; }
 		private void SetCharacterCameraLimits()
 		{
 			Camera2D camera2D;

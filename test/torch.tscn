@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/light/TorchLight.cs" type="Script" id=1]
+[ext_resource path="res://asset/img/light/light.png" type="Texture" id=2]
+[ext_resource path="res://asset/img/light/fireTorch.tres" type="Texture" id=3]
+[ext_resource path="res://asset/img/light/fireLight.tres" type="Animation" id=4]
+[ext_resource path="res://src/light/fire.tscn" type="PackedScene" id=5]
+
+[node name="light" type="Sprite"]
+texture = ExtResource( 3 )
+offset = Vector2( -0.5, -7 )
+hframes = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "torch"
+anims/torch = ExtResource( 4 )
+
+[node name="tween" type="Tween" parent="."]
+
+[node name="light" type="Light2D" parent="."]
+position = Vector2( 0, -7 )
+texture = ExtResource( 2 )
+texture_scale = 0.2
+color = Color( 0.982353, 0.821569, 0.596078, 1 )
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_gradient_length = 2.5
+shadow_filter = 5
+shadow_filter_smooth = 14.0
+shadow_item_cull_mask = 2
+
+[node name="fire" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -10 )
+
+[node name="visibility" type="VisibilityNotifier2D" parent="."]
+visible = false
+position = Vector2( 0, -6 )
+rect = Rect2( -72, -72, 144, 144 )
+__meta__ = {
+"_editor_description_": ""
+}

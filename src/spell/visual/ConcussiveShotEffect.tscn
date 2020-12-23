@@ -5,8 +5,6 @@
 [ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=3]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=4]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
@@ -31,7 +29,7 @@ script = ExtResource( 3 )
 lightFadeDelay = 0.75
 playSound = true
 
-[node name="light" parent="." index="2"]
+[node name="light" parent="." index="3"]
 visible = false
 material = SubResource( 1 )
 scale = Vector2( 0.15, 0.15 )
