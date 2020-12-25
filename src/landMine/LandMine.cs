@@ -2,6 +2,7 @@ using Game.Actor;
 using Game.Actor.Doodads;
 using Game.Database;
 using Godot;
+using GC = Godot.Collections;
 using System;
 namespace Game.Mine
 {
@@ -143,22 +144,22 @@ namespace Game.Mine
 			timer.WaitTime = 5.0f;
 			timer.Start();
 		}
-		public Godot.Collections.Dictionary Serialize()
+		public GC.Dictionary Serialize()
 		{
-			return new Godot.Collections.Dictionary()
+			return new GC.Dictionary()
 			{
 				{NameDB.SaveTag.NAME, worldName},
 				{NameDB.SaveTag.CHARACTER, exludedCharacter?.GetPath() ?? string.Empty},
 				{NameDB.SaveTag.ARMING, arming},
 				{NameDB.SaveTag.HIT, exploded},
 				{NameDB.SaveTag.TIME_LEFT, timer.TimeLeft},
-				{NameDB.SaveTag.POSITION, new Godot.Collections.Array<float>() {GlobalPosition.x, GlobalPosition.y}}
+				{NameDB.SaveTag.POSITION, new GC.Array<float>() {GlobalPosition.x, GlobalPosition.y}}
 			};
 		}
-		public void Deserialize(Godot.Collections.Dictionary payload)
+		public void Deserialize(GC.Dictionary payload)
 		{
 			// TODO
-			Godot.Collections.Array<float> posArray = (Godot.Collections.Array<float>)payload[NameDB.SaveTag.POSITION];
+			GC.Array<float> posArray = (GC.Array<float>)payload[NameDB.SaveTag.POSITION];
 			GlobalPosition = new Vector2(posArray[0], posArray[1]);
 
 			arming = (bool)payload[NameDB.SaveTag.ARMING];

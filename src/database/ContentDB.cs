@@ -1,4 +1,5 @@
 using System;
+using GC = Godot.Collections;
 namespace Game.Database
 {
 	public class ContentDB : AbstractDB<ContentDB.ContentData>
@@ -28,10 +29,10 @@ namespace Game.Database
 		{
 			data.Clear();
 
-			Godot.Collections.Dictionary contentDict, rawDict = LoadJson(path);
+			GC.Dictionary contentDict, rawDict = LoadJson(path);
 			foreach (string characterName in rawDict.Keys)
 			{
-				contentDict = (Godot.Collections.Dictionary)rawDict[characterName];
+				contentDict = (GC.Dictionary)rawDict[characterName];
 
 				data.Add(characterName, new ContentData(
 					level: (int)(Single)contentDict[nameof(ContentData.level)],
@@ -39,13 +40,13 @@ namespace Game.Database
 					enemy: (bool)contentDict[nameof(ContentData.enemy)],
 					healer: (bool)contentDict[nameof(ContentData.healer)],
 					dialogue: (string)contentDict[nameof(ContentData.dialogue)],
-					drops: GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentData.drops)]),
-					spells: GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentData.spells)]),
-					merchandise: GetWorldNames((Godot.Collections.Array)contentDict[nameof(ContentData.merchandise)])
+					drops: GetWorldNames((GC.Array)contentDict[nameof(ContentData.drops)]),
+					spells: GetWorldNames((GC.Array)contentDict[nameof(ContentData.spells)]),
+					merchandise: GetWorldNames((GC.Array)contentDict[nameof(ContentData.merchandise)])
 				));
 			}
 		}
-		public static string[] GetWorldNames(Godot.Collections.Array inArray)
+		public static string[] GetWorldNames(GC.Array inArray)
 		{
 			string[] worldNames = new String[inArray.Count];
 			for (int i = 0; i < worldNames.Length; i++)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=1]
 [ext_resource path="res://asset/img/missile-spell/color_ramp.tres" type="Material" id=2]
-[ext_resource path="res://asset/img/light/light.png" type="Texture" id=3]
+[ext_resource path="res://asset/img/light/lightSpellEffect.png" type="Texture" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -11,6 +12,7 @@ blend_mode = 1
 
 [node name="effect_template" type="Node2D"]
 material = SubResource( 1 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -25,7 +27,7 @@ one_shot = true
 
 [node name="light" type="Sprite" parent="."]
 material = ExtResource( 2 )
-scale = Vector2( 0.125, 0.125 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
 [node name="idle" type="Node2D" parent="."]

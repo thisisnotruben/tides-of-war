@@ -4,6 +4,7 @@ using Game.Database;
 using Game.Actor;
 using Game.Actor.Stat;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.GameItem
 {
 	public class Commodity : WorldObject, ISerializable
@@ -193,7 +194,7 @@ namespace Game.GameItem
 
 			SceneTreeTimer cooldown = character.GetTree().CreateTimer(cooldownSec, false);
 			cooldown.Connect("timeout", this, nameof(OnCooldownTimeout),
-				new Godot.Collections.Array() { character.GetPath(), worldName });
+				new GC.Array() { character.GetPath(), worldName });
 
 			if (cooldowns.ContainsKey(rootNodePath))
 			{
@@ -229,7 +230,7 @@ namespace Game.GameItem
 			{
 				useTimer.WaitTime = use.repeatSec;
 				useTimer.Connect("timeout", this, nameof(OnUseTimeout),
-					new Godot.Collections.Array() { use, durationSec });
+					new GC.Array() { use, durationSec });
 				useTimer.Start();
 			}
 		}
@@ -284,37 +285,37 @@ namespace Game.GameItem
 				stat.RemoveModifier(modifiers[stat]);
 			}
 		}
-		public Godot.Collections.Dictionary Serialize()
+		public GC.Dictionary Serialize()
 		{
 			// TODO
 			// cooldowns
-			Godot.Collections.Dictionary savedCooldowns = new Godot.Collections.Dictionary();
+			GC.Dictionary savedCooldowns = new GC.Dictionary();
 			foreach (NodePath nodePath in cooldowns.Keys)
 			{
-				savedCooldowns[nodePath.ToString()] = new Godot.Collections.Dictionary<string, float>();
+				savedCooldowns[nodePath.ToString()] = new GC.Dictionary<string, float>();
 				foreach (string commodityName in cooldowns[nodePath].Keys)
 				{
 					savedCooldowns[commodityName] = cooldowns[nodePath][commodityName].TimeLeft;
 				}
 			}
 
-			return new Godot.Collections.Dictionary()
+			return new GC.Dictionary()
 			{
 				{NameDB.SaveTag.COOLDOWNS, savedCooldowns}
 			};
 		}
-		public void Deserialize(Godot.Collections.Dictionary payload)
+		public void Deserialize(GC.Dictionary payload)
 		{
 			// TODO
 			// cooldowns
 			NodePath characterNodePath;
-			Godot.Collections.Dictionary savedCooldowns = (Godot.Collections.Dictionary)payload[NameDB.SaveTag.COOLDOWNS];
-			Godot.Collections.Dictionary<string, float> specificCooldowns;
+			GC.Dictionary savedCooldowns = (GC.Dictionary)payload[NameDB.SaveTag.COOLDOWNS];
+			GC.Dictionary<string, float> specificCooldowns;
 
 			foreach (string nodePath in savedCooldowns.Keys)
 			{
 				characterNodePath = new NodePath(nodePath);
-				specificCooldowns = (Godot.Collections.Dictionary<string, float>)savedCooldowns[nodePath];
+				specificCooldowns = (GC.Dictionary<string, float>)savedCooldowns[nodePath];
 
 				foreach (string commodityName in specificCooldowns.Keys)
 				{

@@ -79,6 +79,7 @@ namespace Game.Database
 		{
 			public const string
 				POSITION = "position",
+				ANIM_POSITION = "animPosition",
 				INVENTORY = "inventory",
 				SPELL_BOOK = "spellBook",
 				GOLD = "gold",
@@ -101,7 +102,8 @@ namespace Game.Database
 				COOLDOWNS = "coolDowns",
 				IMG_FRAME = "imgFrame",
 				MAP = "map",
-				DAY_LIGHT = "dayLight";
+				DAY_LIGHT = "dayLight",
+				STATE = "state";
 		}
 	}
 }

@@ -10,5 +10,9 @@ ground_curve = 0.01
 sun_energy = 16.0
 
 [resource]
-background_mode = 2
+background_mode = 4
 background_sky = SubResource( 1 )
+glow_enabled = true
+glow_strength = 0.9
+glow_blend_mode = 1
+glow_bicubic_upscale = true

@@ -22,7 +22,6 @@ func start_tween():
 	if next == 0:
 		direction *= -1
 
-	printt(current_index, next, gradient.colors.size())
 	tween.interpolate_property(self, "color",
 		gradient.colors[current_index], gradient.colors[next],
 		speed, Tween.TRANS_LINEAR, Tween.EASE_IN)

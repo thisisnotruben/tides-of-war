@@ -4,6 +4,7 @@ using Game.Ui;
 using Game.GameItem;
 using Game.Factory;
 using Godot;
+using GC = Godot.Collections;
 using System;
 namespace Game.Actor
 {
@@ -77,12 +78,12 @@ namespace Game.Actor
 				}
 			}
 		}
-		public override Godot.Collections.Dictionary Serialize()
+		public override GC.Dictionary Serialize()
 		{
-			Godot.Collections.Dictionary payload = base.Serialize();
+			GC.Dictionary payload = base.Serialize();
 
 			// inventory
-			Godot.Collections.Array<string> commodities = new Godot.Collections.Array<string>();
+			GC.Array<string> commodities = new GC.Array<string>();
 			menu.mainMenuController.playerInventory.GetCommodities().ForEach(c => commodities.Add(c));
 			payload[NameDB.SaveTag.INVENTORY] = commodities;
 
@@ -101,20 +102,20 @@ namespace Game.Actor
 
 			return payload;
 		}
-		public override void Deserialize(Godot.Collections.Dictionary payload)
+		public override void Deserialize(GC.Dictionary payload)
 		{
 			base.Deserialize(payload);
 
 			return; // TODO
 
 			// inventory
-			foreach (string itemName in (Godot.Collections.Array)payload[NameDB.SaveTag.INVENTORY])
+			foreach (string itemName in (GC.Array)payload[NameDB.SaveTag.INVENTORY])
 			{
 				menu.mainMenuController.playerInventory.AddCommodity(itemName);
 			}
 
 			// spellBook
-			foreach (string spellName in (Godot.Collections.Array)payload[NameDB.SaveTag.SPELL_BOOK])
+			foreach (string spellName in (GC.Array)payload[NameDB.SaveTag.SPELL_BOOK])
 			{
 				menu.mainMenuController.playerSpellBook.AddCommodity(spellName);
 			}

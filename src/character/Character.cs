@@ -3,6 +3,7 @@ using Game.Actor.Doodads;
 using Game.Actor.State;
 using Game.Actor.Stat;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Actor
 {
 	public abstract class Character : WorldObject, ISerializable
@@ -205,29 +206,33 @@ namespace Game.Actor
 				footStep.GlobalPosition = stepPos;
 			}
 		}
-		public virtual Godot.Collections.Dictionary Serialize()
+		public virtual GC.Dictionary Serialize()
 		{
-			return new Godot.Collections.Dictionary()
+			return new GC.Dictionary()
 			{
-				{NameDB.SaveTag.POSITION, new Godot.Collections.Array<float>(){GlobalPosition.x, GlobalPosition.y}},
+				{NameDB.SaveTag.POSITION, new GC.Array<float>(){GlobalPosition.x, GlobalPosition.y}},
 				{NameDB.SaveTag.LEVEL, level},
 				{NameDB.SaveTag.HP, hp},
 				{NameDB.SaveTag.MANA, mana},
-				{NameDB.SaveTag.TARGET, target?.GetPath() ?? string.Empty},
-				{NameDB.SaveTag.IMG_FRAME, img.Frame}
+				{NameDB.SaveTag.STATE, state},
+				{NameDB.SaveTag.ANIM_POSITION, anim.CurrentAnimationPosition},
+				{NameDB.SaveTag.TIME_LEFT, regenTimer.TimeLeft},
+				{NameDB.SaveTag.TARGET, target?.GetPath() ?? string.Empty}
 			};
 		}
-		public virtual void Deserialize(Godot.Collections.Dictionary payload)
+		public virtual void Deserialize(GC.Dictionary payload)
 		{
 			// set global position
-			Godot.Collections.Array posArray = (Godot.Collections.Array)payload[NameDB.SaveTag.POSITION];
+			GC.Array posArray = (GC.Array)payload[NameDB.SaveTag.POSITION];
 			GlobalPosition = new Vector2((float)posArray[0], (float)posArray[1]);
-			return; // TODO
 
+			return; // TODO
 			level = (int)payload[NameDB.SaveTag.LEVEL];
 			hp = (int)payload[NameDB.SaveTag.HP];
 			mana = (int)payload[NameDB.SaveTag.MANA];
-			img.Frame = (int)payload[NameDB.SaveTag.IMG_FRAME];
+			state = (FSM.State)payload[NameDB.SaveTag.STATE];
+			anim.Seek((float)payload[NameDB.SaveTag.ANIM_POSITION]);
+			regenTimer.WaitTime = (float)payload[NameDB.SaveTag.TIME_LEFT];
 
 			// set target
 			string targetPath = (string)payload[NameDB.SaveTag.TARGET];

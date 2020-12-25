@@ -91,9 +91,7 @@
     <Compile Include="src\item\TreasureChest.cs" />
     <Compile Include="src\landMine\ICombustible.cs" />
     <Compile Include="src\landMine\LandMine.cs" />
-    <Compile Include="src\light\GameLight.cs" />
     <Compile Include="src\light\LightSource.cs" />
-    <Compile Include="src\light\TorchLight.cs" />
     <Compile Include="src\map\Map.cs" />
     <Compile Include="src\map\doodads\TransitionZone.cs" />
     <Compile Include="src\map\doodads\WorldClock.cs" />

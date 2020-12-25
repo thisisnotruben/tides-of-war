@@ -1,6 +1,7 @@
 using Game.Light;
 using Game.Database;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Map.Doodads
 {
 	public class WorldClock : Timer, ISerializable
@@ -29,21 +30,21 @@ namespace Game.Map.Doodads
 		}
 		public void TriggerLights() // called from animation
 		{
-			foreach (GameLight light in GetTree().GetNodesInGroup(Globals.LIGHT_GROUP))
+			foreach (Node light in GetTree().GetNodesInGroup(Globals.LIGHT_GROUP))
 			{
-				light.SetIntensity(!dayLight);
+				(light as LightSource)?.DimLight(!dayLight);
 			}
 		}
-		public Godot.Collections.Dictionary Serialize()
+		public GC.Dictionary Serialize()
 		{
-			return new Godot.Collections.Dictionary()
+			return new GC.Dictionary()
 			{
 				{NameDB.SaveTag.DAY_LIGHT, dayLight},
 				{NameDB.SaveTag.TIME_LEFT, TimeLeft},
 				{NameDB.SaveTag.POSITION, anim.CurrentAnimationPosition}
 			};
 		}
-		public void Deserialize(Godot.Collections.Dictionary payload)
+		public void Deserialize(GC.Dictionary payload)
 		{
 			dayLight = (bool)payload[NameDB.SaveTag.DAY_LIGHT];
 			float timeLeft = (float)payload[NameDB.SaveTag.TIME_LEFT],

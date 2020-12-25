@@ -4,7 +4,6 @@ using Game.Light;
 using System;
 namespace Game.Util
 {
-	[Tool]
 	public class MapImporter : Node
 	{
 		private const int LIGHT_MASK_PASS = 0b_00000_00000_00000_00001,
@@ -22,6 +21,7 @@ namespace Game.Util
 			animDataPath = "res://data/importer/tilesetAnimations.json",
 			shaderDataPath = "res://data/importer/tilesetShaders.json",
 			lightPosPath = "res://data/importer/tilesetLightPos.json",
+			lightSpaceGradientPath = "res://data/importer/lightSpaceGradient.json",
 			animatedTilesetPath = "res://asset/img/map/tilesets_animated/{0}.tres",
 			assetMapDir = "res://asset/img/map/",
 			srcMapDir = "res://src/map/",
@@ -46,6 +46,8 @@ namespace Game.Util
 			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn"),
 			lightScene = GD.Load<PackedScene>("res://src/light/light.tscn"),
 			lightSource = GD.Load<PackedScene>("res://src/light/lightSource.tscn");
+
+		private Resource environment = GD.Load<Godot.Environment>("res://default_env.tres");
 
 		private Node2D map;
 		private TileMap zed;
@@ -104,6 +106,7 @@ namespace Game.Util
 
 			// add worldEnvironment
 			WorldEnvironment worldEnvironment = new WorldEnvironment();
+			worldEnvironment.Environment = (Godot.Environment)environment;
 			map.AddChild(worldEnvironment, true);
 			map.MoveChild(worldEnvironment, 0);
 			worldEnvironment.Owner = map;
@@ -240,6 +243,10 @@ namespace Game.Util
 			GC.Dictionary lightPos = (GC.Dictionary)JSON.Parse(file.GetAsText()).Result;
 			file.Close();
 
+			file.Open(shaderDataPath, File.ModeFlags.Read);
+			GC.Dictionary shaderData = (GC.Dictionary)JSON.Parse(file.GetAsText()).Result;
+			file.Close();
+
 			TileMap tileMap;
 			Node2D light;
 			GC.Array pos;
@@ -274,6 +281,15 @@ namespace Game.Util
 					light.GlobalPosition = tileMap.MapToWorld(cellPos)
 						+ tileMap.TileSet.TileGetTextureOffset(tileID.ToInt())
 						+ new Vector2((float)pos[0], (float)pos[1]);
+
+					if (map.Name.Equals("zone_2") && shaderData.Contains(tileID))
+					{
+						// using the '*WorldObject.tres' for this, has
+						// the shader already set in vs. tileset resource.
+						light.Modulate = (Color)GD.Load<ShaderMaterial>(
+							assetMapDir.PlusFile(shaderData[tileID] + "WorldObject.tres")
+						).GetShaderParam("color");
+					}
 				}
 			}
 		}
@@ -281,11 +297,17 @@ namespace Game.Util
 		{
 			string lightID;
 			bool isConnectedLight = false;
-			Light2D light2D;
+			LightSource light2D;
 			Vector2 offset;
+
+			File file = new File();
+			file.Open(lightSpaceGradientPath, File.ModeFlags.Read);
+			GC.Dictionary lightGradientData = (GC.Dictionary)((GC.Dictionary)JSON.Parse(file.GetAsText()).Result)[map.Name];
+			file.Close();
+
 			Action<Node, Node2D> addLightSpace = (Node parent, Node2D source) =>
 			{
-				light2D = (Light2D)lightSource.Instance();
+				light2D = (LightSource)lightSource.Instance();
 				parent.AddChild(light2D);
 				light2D.Owner = map;
 
@@ -294,6 +316,12 @@ namespace Game.Util
 				offset = light2D.Texture.GetSize() * light2D.TextureScale / 2.0f;
 				offset.y *= -1.0f;
 				light2D.GlobalPosition = GetCenterPos(source.GlobalPosition + offset);
+
+				string lightName = source.Name.Split("-")[0];
+				if (lightGradientData.Contains(lightName))
+				{
+					light2D.gradient = GD.Load<Gradient>(lightGradientDir.PlusFile(lightGradientData[lightName] + ".tres"));
+				}
 			};
 
 			foreach (Node2D light in lightSpace.GetChildren())

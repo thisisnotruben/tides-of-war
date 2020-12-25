@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Database
 {
 	public class UnitDB : AbstractDB<UnitDB.UnitData>
@@ -28,21 +29,21 @@ namespace Game.Database
 		{
 			data.Clear();
 
-			Godot.Collections.Dictionary dict, rawDict = LoadJson(path);
-			Godot.Collections.Array spawnPos, rawPath;
+			GC.Dictionary dict, rawDict = LoadJson(path);
+			GC.Array spawnPos, rawPath;
 			int i;
 			Vector2[] unitPath;
 
 			foreach (string itemName in rawDict.Keys)
 			{
-				dict = (Godot.Collections.Dictionary)rawDict[itemName];
+				dict = (GC.Dictionary)rawDict[itemName];
 
-				spawnPos = (Godot.Collections.Array)dict[nameof(UnitData.spawnPos)];
+				spawnPos = (GC.Array)dict[nameof(UnitData.spawnPos)];
 
-				rawPath = (Godot.Collections.Array)(dict[nameof(UnitData.path)]);
+				rawPath = (GC.Array)(dict[nameof(UnitData.path)]);
 				unitPath = new Vector2[rawPath.Count];
 				i = 0;
-				foreach (Godot.Collections.Array vectorNode in rawPath)
+				foreach (GC.Array vectorNode in rawPath)
 				{
 					unitPath[i++] = new Vector2((float)vectorNode[0], (float)vectorNode[1]);
 				}

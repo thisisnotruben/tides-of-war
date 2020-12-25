@@ -13,6 +13,7 @@ __meta__ = {
 }
 
 [node name="sprite" type="Sprite" parent="."]
+use_parent_material = true
 position = Vector2( 0, -16 )
 texture = SubResource( 1 )
 

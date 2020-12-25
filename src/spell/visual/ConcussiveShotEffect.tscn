@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
 [ext_resource path="res://asset/img/missile-spell/gradient/bash.tres" type="Texture" id=2]
-[ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=3]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -25,7 +24,6 @@ orbit_velocity_random = 0.0
 color = Color( 0, 0.768627, 0.768627, 1 )
 
 [node name="concussive_shot" instance=ExtResource( 4 )]
-script = ExtResource( 3 )
 lightFadeDelay = 0.75
 playSound = true
 

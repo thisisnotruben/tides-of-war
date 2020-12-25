@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
-[ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=2]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://asset/img/missile-spell/fortify.png" type="Texture" id=4]
 [ext_resource path="res://asset/img/missile-spell/line2.png" type="Texture" id=5]
@@ -48,7 +47,6 @@ orbit_velocity = 1.0
 orbit_velocity_random = 0.0
 
 [node name="fortify" instance=ExtResource( 3 )]
-script = ExtResource( 2 )
 fadeLight = false
 
 [node name="timer" parent="." index="1"]

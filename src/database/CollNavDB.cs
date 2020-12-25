@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Database
 {
 	public static class CollNavDB
@@ -41,18 +42,18 @@ namespace Game.Database
 
 			Dictionary<Ordinal, int[,]> graph = new Dictionary<Ordinal, int[,]>();
 
-			Godot.Collections.Dictionary rawDict = (Godot.Collections.Dictionary)jSONParseResult.Result;
+			GC.Dictionary rawDict = (GC.Dictionary)jSONParseResult.Result;
 
 			int i, j;
 			int[,] matrix;
-			Godot.Collections.Array rawMatrix, rawRow;
+			GC.Array rawMatrix, rawRow;
 			foreach (string ordinalDir in rawDict.Keys)
 			{
-				rawMatrix = (Godot.Collections.Array)rawDict[ordinalDir];
+				rawMatrix = (GC.Array)rawDict[ordinalDir];
 				matrix = new int[rawMatrix.Count, rawMatrix.Count];
 				for (i = 0; i < rawMatrix.Count; i++)
 				{
-					rawRow = (Godot.Collections.Array)rawMatrix[i];
+					rawRow = (GC.Array)rawMatrix[i];
 					for (j = 0; j < rawMatrix.Count; j++)
 					{
 						matrix[i, j] = (int)(Single)rawRow[j];

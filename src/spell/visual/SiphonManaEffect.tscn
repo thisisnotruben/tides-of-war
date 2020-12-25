@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
-[ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=2]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://asset/img/missile-spell/line2.png" type="Texture" id=4]
 [ext_resource path="res://asset/img/missile-spell/gradient/siphon_mana.tres" type="Texture" id=5]
@@ -49,7 +48,6 @@ orbit_velocity_random = 0.0
 color_ramp = ExtResource( 5 )
 
 [node name="siphon_mana" instance=ExtResource( 3 )]
-script = ExtResource( 2 )
 lightFadeDelay = 1.0
 
 [node name="light" parent="." index="3"]

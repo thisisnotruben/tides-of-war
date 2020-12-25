@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Database
 {
 	public class QuestDB : AbstractDB<QuestDB.QuestData>
@@ -65,21 +66,21 @@ namespace Game.Database
 
 		public override void LoadData(string path)
 		{
-			Godot.Collections.Dictionary rawDict = LoadJson(path),
+			GC.Dictionary rawDict = LoadJson(path),
 				dict, objectivesDict, objective, extraContentDict;
 
 			Dictionary<string, ObjectiveData> objectives;
 
 			foreach (string questName in rawDict.Keys)
 			{
-				dict = (Godot.Collections.Dictionary)rawDict[questName];
+				dict = (GC.Dictionary)rawDict[questName];
 				objectives = new Dictionary<string, ObjectiveData>();
-				objectivesDict = (Godot.Collections.Dictionary)dict[nameof(QuestData.objectives)];
+				objectivesDict = (GC.Dictionary)dict[nameof(QuestData.objectives)];
 
 				foreach (string objectiveName in objectivesDict.Keys)
 				{
-					objective = (Godot.Collections.Dictionary)objectivesDict[objectiveName];
-					extraContentDict = (Godot.Collections.Dictionary)objective[nameof(ObjectiveData.extraContent)];
+					objective = (GC.Dictionary)objectivesDict[objectiveName];
+					extraContentDict = (GC.Dictionary)objective[nameof(ObjectiveData.extraContent)];
 
 					objectives.Add(objectiveName, new ObjectiveData(
 						keepWorldObject: (bool)objective[nameof(ObjectiveData.keepWorldObject)],
@@ -95,8 +96,8 @@ namespace Game.Database
 
 				data.Add(questName, new QuestData(
 					questName: questName,
-					nextQuest: ContentDB.GetWorldNames((Godot.Collections.Array)dict[nameof(QuestData.nextQuest)]),
-					reward: ContentDB.GetWorldNames((Godot.Collections.Array)dict[nameof(QuestData.reward)]),
+					nextQuest: ContentDB.GetWorldNames((GC.Array)dict[nameof(QuestData.nextQuest)]),
+					reward: ContentDB.GetWorldNames((GC.Array)dict[nameof(QuestData.reward)]),
 					keepRewardItems: (bool)dict[nameof(QuestData.keepRewardItems)],
 					goldReward: (int)(Single)dict[nameof(QuestData.goldReward)],
 					questGiver: new NodePath((string)dict[nameof(QuestData.questGiver)]),

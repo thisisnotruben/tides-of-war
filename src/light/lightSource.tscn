@@ -7,6 +7,7 @@
 [node name="light2D" type="Light2D"]
 texture = ExtResource( 1 )
 color = Color( 0.972549, 0.764706, 0.658824, 1 )
+energy = 0.75
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_gradient_length = 2.5

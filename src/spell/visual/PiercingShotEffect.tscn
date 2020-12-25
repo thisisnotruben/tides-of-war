@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=1]
 [ext_resource path="res://asset/img/light/fireGradient.tres" type="Texture" id=2]
-[ext_resource path="res://src/spell/visual/master/SpellEffect.cs" type="Script" id=3]
 [ext_resource path="res://src/spell/visual/master/SpellEffectTemplate.tscn" type="PackedScene" id=4]
-
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -16,13 +14,13 @@ shader_param/energy = 1.0
 shader_param/scale = Vector2( 0.9, 1 )
 shader_param/gradient = ExtResource( 2 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0.921569, 0.921569, 0.921569, 1, 1, 1, 1, 0.25 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -30,10 +28,9 @@ initial_velocity = 16.0
 angular_velocity = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 3 )
 
 [node name="piercing_shot" instance=ExtResource( 4 )]
-script = ExtResource( 3 )
 
 [node name="light" parent="." index="3"]
 visible = false
@@ -46,4 +43,4 @@ amount = 32
 lifetime = 0.4
 one_shot = true
 explosiveness = 0.75
-process_material = SubResource( 2 )
+process_material = SubResource( 4 )
