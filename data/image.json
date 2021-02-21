@@ -549,7 +549,7 @@
 		"body": "finfolk",
 		"melee": true
 	},
-	"minotaur-0": {
+	"ino": {
 		"moving": 3,
 		"dying": 7,
 		"attacking": 7,
@@ -2167,6 +2167,56 @@
 		"weaponMaterial": "metal",
 		"swing": "swing_medium",
 		"body": "orc",
+		"melee": true
+	},
+	"minotaur-21": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_large",
+		"body": "minotaur",
+		"melee": true
+	},
+	"minotaur-22": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_large",
+		"body": "minotaur",
+		"melee": true
+	},
+	"minotaur-23": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_large",
+		"body": "minotaur",
+		"melee": true
+	},
+	"minotaur-24": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_large",
+		"body": "minotaur",
+		"melee": true
+	},
+	"minotaur-25": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_large",
+		"body": "minotaur",
 		"melee": true
 	}
 }

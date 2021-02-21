@@ -1,3 +1,4 @@
+using Godot;
 using Game.Actor;
 using Game.Quest;
 using Game.Loot;
@@ -8,6 +9,7 @@ namespace Game.Ui
 	{
 		public MainMenuController mainMenuController;
 		private HudControlController hudControlController;
+		private Tween tween = new Tween();
 
 		public override void _Ready()
 		{
@@ -27,6 +29,8 @@ namespace Game.Ui
 				.popupController.addToSlotView.Connect("draw", this, nameof(_OnMainMenuHide));
 			mainMenuController.statsController.itemInfoController
 				.popupController.addToSlotView.Connect("hide", this, nameof(_OnMainMenuDraw));
+
+			AddChild(tween);
 		}
 		public void _OnMainMenuDraw() { hudControlController.Hide(); }
 		public void _OnMainMenuHide() { hudControlController.Show(); }
@@ -66,6 +70,20 @@ namespace Game.Ui
 			bool interactable = !npc.enemy &&
 				(Globals.contentDB.HasData(npc.Name) || QuestMaster.HasQuestOrQuestExtraContent(npc.worldName, npc.GetPath()))
 				&& 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
+
+			// center camera to midpoint between player and npc and zoom
+			tween.InterpolateProperty(player.camera, "zoom", player.camera.Zoom,
+				interactable ? new Vector2(0.145f, 0.145f) : new Vector2(0.175f, 0.175f),
+				0.5f, Tween.TransitionType.Linear, Tween.EaseType.In);
+			tween.Start();
+			if (interactable)
+			{
+				player.camera.GlobalPosition += (npc.pos - player.pos).Normalized() * npc.pos.DistanceTo(player.pos) / 2.0f;
+			}
+			else
+			{
+				player.camera.Position = Vector2.Zero;
+			}
 
 			if (hudControlController.targetStatus.IsCharacterConnected(npc))
 			{

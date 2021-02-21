@@ -1,0 +1,111 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://test/panel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=3]
+[ext_resource path="res://test/menuEntry.tscn" type="PackedScene" id=4]
+
+[node name="control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="colorRect" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -315.0
+margin_top = 1.18921
+margin_right = 315.0
+margin_bottom = 635.189
+
+[node name="marginContainer2" type="MarginContainer" parent="colorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 34
+custom_constants/margin_top = 34
+custom_constants/margin_left = 34
+custom_constants/margin_bottom = 34
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vBoxContainer" type="VBoxContainer" parent="colorRect/marginContainer2"]
+margin_left = 34.0
+margin_top = 34.0
+margin_right = 596.0
+margin_bottom = 600.0
+
+[node name="scrollContainer" type="ScrollContainer" parent="colorRect/marginContainer2/vBoxContainer"]
+margin_right = 562.0
+margin_bottom = 380.0
+rect_min_size = Vector2( 520, 380 )
+
+[node name="vBoxContainer" type="VBoxContainer" parent="colorRect/marginContainer2/vBoxContainer/scrollContainer"]
+margin_bottom = 308.0
+
+[node name="control" parent="colorRect/marginContainer2/vBoxContainer/scrollContainer/vBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_bottom = 100.0
+
+[node name="control2" parent="colorRect/marginContainer2/vBoxContainer/scrollContainer/vBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 104.0
+margin_bottom = 204.0
+
+[node name="control3" parent="colorRect/marginContainer2/vBoxContainer/scrollContainer/vBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 208.0
+margin_bottom = 308.0
+
+[node name="buttons" type="HBoxContainer" parent="colorRect/marginContainer2/vBoxContainer"]
+margin_top = 384.0
+margin_right = 562.0
+margin_bottom = 548.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="vBoxContainer" type="VBoxContainer" parent="colorRect/marginContainer2/vBoxContainer/buttons"]
+margin_left = 25.0
+margin_right = 265.0
+margin_bottom = 164.0
+
+[node name="button" type="Button" parent="colorRect/marginContainer2/vBoxContainer/buttons/vBoxContainer"]
+margin_right = 240.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 240, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Spells"
+
+[node name="button2" type="Button" parent="colorRect/marginContainer2/vBoxContainer/buttons/vBoxContainer"]
+margin_top = 84.0
+margin_right = 240.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 240, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Inventory"
+
+[node name="centerContainer" type="CenterContainer" parent="colorRect/marginContainer2/vBoxContainer/buttons"]
+margin_left = 297.0
+margin_right = 537.0
+margin_bottom = 164.0
+
+[node name="closeButton" type="Button" parent="colorRect/marginContainer2/vBoxContainer/buttons/centerContainer"]
+margin_top = 42.0
+margin_right = 240.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 240, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "   Close   "

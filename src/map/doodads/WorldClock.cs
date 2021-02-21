@@ -32,7 +32,7 @@ namespace Game.Map.Doodads
 		{
 			foreach (Node light in GetTree().GetNodesInGroup(Globals.LIGHT_GROUP))
 			{
-				(light as LightSource)?.DimLight(!dayLight);
+				(light as LightSource)?.DimLight(dayLight);
 			}
 		}
 		public GC.Dictionary Serialize()

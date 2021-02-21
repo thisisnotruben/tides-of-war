@@ -35,7 +35,6 @@ rect = Rect2( -10, -10, 16, 16 )
 [node name="animatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -0.052557 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 offset = Vector2( 2, -3 )
 
@@ -43,7 +42,6 @@ offset = Vector2( 2, -3 )
 material = SubResource( 4 )
 position = Vector2( 0, -0.052557 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 offset = Vector2( 2, -3 )
 

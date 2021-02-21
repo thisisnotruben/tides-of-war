@@ -31,15 +31,10 @@ namespace Game.Actor.State
 		public void OnPlayerWantsToMove(bool wantsToMove) { this.wantsToMove = wantsToMove; }
 		public override void UnhandledInput(InputEvent @event)
 		{
-			if (!(@event is InputEventScreenTouch))
+			if (@event is InputEventScreenTouch && @event.IsPressed())
 			{
-				return;
+				GetPathWay();
 			}
-			else if (!@event.IsPressed() || @event.IsEcho())
-			{
-				return;
-			}
-			GetPathWay();
 		}
 		public void GetPathWay()
 		{
@@ -55,6 +50,7 @@ namespace Game.Actor.State
 				moving = false;
 			}
 
+			ResetPoint();
 			path = Map.Map.map.getAPath(character.GlobalPosition, desiredPosition);
 			MoveTo(path);
 

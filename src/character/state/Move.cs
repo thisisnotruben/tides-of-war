@@ -20,7 +20,10 @@ namespace Game.Actor.State
 			get { return _path; }
 			set
 			{
-				ResetPoint();
+				while (reservedPath.Count > 0)
+				{
+					ResetPoint();
+				}
 				_path = value;
 			}
 		}
@@ -50,6 +53,7 @@ namespace Game.Actor.State
 			{
 				if (fsm.IsMoving())
 				{
+					// we don't want to give up our space when in 'idle'
 					Map.Map.map.OccupyCell(reservedPath.Peek(), false);
 				}
 				reservedPath.Dequeue();

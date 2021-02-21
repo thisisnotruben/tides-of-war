@@ -1,1 +1,3909 @@
-{}
+{
+	"2-Stanmore": {
+		"name": "Stanmore",
+		"img": "human-12",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1976,
+			168
+		]
+	},
+	"6-Footman": {
+		"name": "Footman",
+		"img": "human-6",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1928,
+			216
+		]
+	},
+	"7-Footman": {
+		"name": "Footman",
+		"img": "human-6",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1928,
+			168
+		]
+	},
+	"9-Peasant": {
+		"name": "Peasant",
+		"img": "human-0",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1800,
+			344
+		]
+	},
+	"10-Peasant": {
+		"name": "Peasant",
+		"img": "human-5",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1832,
+			344
+		]
+	},
+	"11-Peasant": {
+		"name": "Peasant",
+		"img": "human-11",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1912,
+			328
+		]
+	},
+	"12-Dobbs": {
+		"name": "Dobbs",
+		"img": "human-12",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1896,
+			440
+		]
+	},
+	"14-Armond": {
+		"name": "Armond",
+		"img": "human-15",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1784,
+			168
+		]
+	},
+	"16-Sarina": {
+		"name": "Sarina",
+		"img": "human-8",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1432,
+			424
+		]
+	},
+	"17-Peasant": {
+		"name": "Peasant",
+		"img": "human-17",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1400,
+			408
+		]
+	},
+	"18-Solomon": {
+		"name": "Solomon",
+		"img": "human-12",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1384,
+			424
+		]
+	},
+	"19-Peasant": {
+		"name": "Peasant",
+		"img": "human-16",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1400,
+			440
+		]
+	},
+	"20-Swordsman": {
+		"name": "Swordsman",
+		"img": "human-4",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1640,
+			504
+		]
+	},
+	"21-Swordsman": {
+		"name": "Swordsman",
+		"img": "human-4",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1528,
+			504
+		]
+	},
+	"24-Footman": {
+		"name": "Footman",
+		"img": "human-7",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1720,
+			248
+		]
+	},
+	"25-Footman": {
+		"name": "Footman",
+		"img": "human-7",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1464,
+			248
+		]
+	},
+	"27-Peasant": {
+		"name": "Peasant",
+		"img": "human-11",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1160,
+			408
+		]
+	},
+	"28-Peasant": {
+		"name": "Peasant",
+		"img": "human-13",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1176,
+			392
+		]
+	},
+	"36-Assassin": {
+		"name": "Assassin",
+		"img": "human-10",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1384,
+			136
+		]
+	},
+	"37-Assassin": {
+		"name": "Assassin",
+		"img": "human-10",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1432,
+			168
+		]
+	},
+	"39-Landon": {
+		"name": "Landon",
+		"img": "human-15",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1432,
+			104
+		]
+	},
+	"40-Kassidy": {
+		"name": "Kassidy",
+		"img": "human-9",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1096,
+			200
+		]
+	},
+	"41-Ranger": {
+		"name": "Ranger",
+		"img": "human-14",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			920,
+			312
+		]
+	},
+	"42-Ranger": {
+		"name": "Ranger",
+		"img": "human-14",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			952,
+			248
+		]
+	},
+	"50-Amaury": {
+		"name": "Amaury",
+		"img": "human-6",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1048,
+			328
+		]
+	},
+	"52-Jameson": {
+		"name": "Jameson",
+		"img": "human-0",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1016,
+			280
+		]
+	},
+	"53-Cherrelle": {
+		"name": "Cherrelle",
+		"img": "human-17",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1112,
+			216
+		]
+	},
+	"54-Hawel": {
+		"name": "Hawel",
+		"img": "human-13",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1000,
+			200
+		]
+	},
+	"59-Denton": {
+		"name": "Denton",
+		"img": "human-2",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1864,
+			440
+		]
+	},
+	"61-Roswald": {
+		"name": "Roswald",
+		"img": "human-7",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1752,
+				408
+			],
+			[
+				1768,
+				392
+			],
+			[
+				1784,
+				376
+			],
+			[
+				1816,
+				376
+			],
+			[
+				1848,
+				376
+			],
+			[
+				1848,
+				360
+			],
+			[
+				1928,
+				360
+			]
+		],
+		"spawnPos": [
+			1752,
+			408
+		]
+	},
+	"66-Edvard": {
+		"name": "Edvard",
+		"img": "human-0",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1928,
+				712
+			],
+			[
+				1864,
+				728
+			],
+			[
+				1880,
+				760
+			],
+			[
+				1896,
+				760
+			],
+			[
+				1912,
+				744
+			],
+			[
+				1960,
+				712
+			]
+		],
+		"spawnPos": [
+			1928,
+			712
+		]
+	},
+	"67-Farmer": {
+		"name": "Farmer",
+		"img": "human-12",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1848,
+				600
+			],
+			[
+				1768,
+				600
+			],
+			[
+				1784,
+				632
+			],
+			[
+				1832,
+				664
+			],
+			[
+				1848,
+				632
+			]
+		],
+		"spawnPos": [
+			1848,
+			600
+		]
+	},
+	"68-Farmer": {
+		"name": "Farmer",
+		"img": "human-17",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1944,
+			568
+		]
+	},
+	"69-Elaine": {
+		"name": "Elaine",
+		"img": "human-5",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1960,
+			696
+		]
+	},
+	"74-Gehrt": {
+		"name": "Gehrt",
+		"img": "human-11",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1208,
+				840
+			],
+			[
+				1240,
+				808
+			],
+			[
+				1288,
+				808
+			],
+			[
+				1320,
+				840
+			],
+			[
+				1368,
+				856
+			],
+			[
+				1368,
+				904
+			],
+			[
+				1336,
+				936
+			],
+			[
+				1336,
+				952
+			],
+			[
+				1304,
+				968
+			],
+			[
+				1272,
+				968
+			],
+			[
+				1272,
+				952
+			],
+			[
+				1304,
+				920
+			],
+			[
+				1256,
+				920
+			],
+			[
+				1224,
+				952
+			],
+			[
+				1192,
+				920
+			],
+			[
+				1192,
+				888
+			]
+		],
+		"spawnPos": [
+			1208,
+			840
+		]
+	},
+	"75-Harden": {
+		"name": "Harden",
+		"img": "human-13",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1048,
+			1416
+		]
+	},
+	"79-Ranger": {
+		"name": "Ranger",
+		"img": "human-14",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1080,
+			1272
+		]
+	},
+	"80-Ranger": {
+		"name": "Ranger",
+		"img": "human-14",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			792,
+			1272
+		]
+	},
+	"81-Ranger": {
+		"name": "Ranger",
+		"img": "human-14",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			792,
+			1528
+		]
+	},
+	"82-Ranger": {
+		"name": "Ranger",
+		"img": "human-14",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1080,
+			1528
+		]
+	},
+	"83-Farmer": {
+		"name": "Farmer",
+		"img": "human-0",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				872,
+				1448
+			],
+			[
+				872,
+				1464
+			],
+			[
+				856,
+				1496
+			],
+			[
+				840,
+				1496
+			],
+			[
+				824,
+				1480
+			],
+			[
+				824,
+				1464
+			],
+			[
+				840,
+				1448
+			]
+		],
+		"spawnPos": [
+			872,
+			1448
+		]
+	},
+	"84-Peasant": {
+		"name": "Peasant",
+		"img": "human-2",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1000,
+				1448
+			],
+			[
+				1000,
+				1400
+			],
+			[
+				968,
+				1400
+			],
+			[
+				968,
+				1352
+			],
+			[
+				920,
+				1352
+			],
+			[
+				920,
+				1336
+			],
+			[
+				856,
+				1336
+			],
+			[
+				856,
+				1352
+			],
+			[
+				904,
+				1384
+			],
+			[
+				936,
+				1384
+			],
+			[
+				936,
+				1416
+			],
+			[
+				936,
+				1496
+			],
+			[
+				952,
+				1512
+			],
+			[
+				1000,
+				1512
+			]
+		],
+		"spawnPos": [
+			1000,
+			1448
+		]
+	},
+	"85-Marietta": {
+		"name": "Marietta",
+		"img": "human-8",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			920,
+			1320
+		]
+	},
+	"86-Farmer": {
+		"name": "Farmer",
+		"img": "human-11",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			840,
+			1432
+		]
+	},
+	"87-Tyree": {
+		"name": "Tyree",
+		"img": "human-3",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			968,
+			1320
+		]
+	},
+	"97-human": {
+		"name": "",
+		"img": "human-14",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			120,
+			1544
+		]
+	},
+	"99-Footman": {
+		"name": "Footman",
+		"img": "human-6",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			184,
+			1096
+		]
+	},
+	"100-Footman": {
+		"name": "Footman",
+		"img": "human-6",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			232,
+			1048
+		]
+	},
+	"101-Waltkins": {
+		"name": "Waltkins",
+		"img": "human-3",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			152,
+			1032
+		]
+	},
+	"103-Thaddeus": {
+		"name": "Thaddeus",
+		"img": "human-15",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			40,
+			936
+		]
+	},
+	"104-Sambrose": {
+		"name": "Sambrose",
+		"img": "human-0",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			56,
+			1112
+		]
+	},
+	"107-Marlo": {
+		"name": "Marlo",
+		"img": "human-10",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			680,
+			1912
+		]
+	},
+	"108-human": {
+		"name": "",
+		"img": "human-10",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				648,
+				1992
+			],
+			[
+				664,
+				1992
+			],
+			[
+				680,
+				2008
+			],
+			[
+				680,
+				2024
+			],
+			[
+				664,
+				2024
+			],
+			[
+				648,
+				2040
+			],
+			[
+				600,
+				2040
+			],
+			[
+				632,
+				2040
+			],
+			[
+				632,
+				2024
+			],
+			[
+				616,
+				2008
+			]
+		],
+		"spawnPos": [
+			648,
+			1992
+		]
+	},
+	"109-human": {
+		"name": "",
+		"img": "human-10",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			904,
+			1848
+		]
+	},
+	"110-human": {
+		"name": "",
+		"img": "human-10",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1048,
+			1800
+		]
+	},
+	"111-human": {
+		"name": "",
+		"img": "human-10",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1176,
+				1896
+			],
+			[
+				1192,
+				1912
+			],
+			[
+				1192,
+				1944
+			],
+			[
+				1176,
+				1960
+			],
+			[
+				1144,
+				1960
+			],
+			[
+				1112,
+				1976
+			],
+			[
+				1048,
+				1976
+			],
+			[
+				1032,
+				1944
+			]
+		],
+		"spawnPos": [
+			1176,
+			1896
+		]
+	},
+	"112-human": {
+		"name": "",
+		"img": "human-10",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				888,
+				1992
+			],
+			[
+				840,
+				1992
+			],
+			[
+				808,
+				2024
+			],
+			[
+				776,
+				2024
+			],
+			[
+				744,
+				1992
+			],
+			[
+				760,
+				1976
+			],
+			[
+				776,
+				1976
+			]
+		],
+		"spawnPos": [
+			888,
+			1992
+		]
+	},
+	"114-human": {
+		"name": "",
+		"img": "human-1",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			744,
+			1912
+		]
+	},
+	"115-human": {
+		"name": "",
+		"img": "human-1",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			920,
+			1768
+		]
+	},
+	"117-human": {
+		"name": "",
+		"img": "human-1",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				904,
+				1928
+			],
+			[
+				936,
+				1928
+			],
+			[
+				968,
+				1928
+			],
+			[
+				1000,
+				1896
+			],
+			[
+				1016,
+				1912
+			],
+			[
+				1048,
+				1928
+			]
+		],
+		"spawnPos": [
+			904,
+			1928
+		]
+	},
+	"118-human": {
+		"name": "",
+		"img": "human-1",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				664,
+				1832
+			],
+			[
+				680,
+				1816
+			],
+			[
+				680,
+				1768
+			],
+			[
+				696,
+				1752
+			],
+			[
+				728,
+				1752
+			],
+			[
+				728,
+				1736
+			],
+			[
+				760,
+				1736
+			],
+			[
+				776,
+				1720
+			],
+			[
+				808,
+				1688
+			],
+			[
+				856,
+				1736
+			],
+			[
+				872,
+				1720
+			],
+			[
+				904,
+				1704
+			],
+			[
+				888,
+				1688
+			],
+			[
+				888,
+				1672
+			],
+			[
+				856,
+				1688
+			],
+			[
+				840,
+				1672
+			],
+			[
+				792,
+				1672
+			],
+			[
+				776,
+				1688
+			],
+			[
+				744,
+				1672
+			],
+			[
+				712,
+				1704
+			],
+			[
+				664,
+				1736
+			],
+			[
+				584,
+				1800
+			],
+			[
+				552,
+				1800
+			],
+			[
+				520,
+				1832
+			],
+			[
+				520,
+				1848
+			],
+			[
+				568,
+				1896
+			]
+		],
+		"spawnPos": [
+			664,
+			1832
+		]
+	},
+	"119-human": {
+		"name": "",
+		"img": "human-1",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1112,
+				1800
+			],
+			[
+				1080,
+				1832
+			],
+			[
+				1048,
+				1864
+			],
+			[
+				1016,
+				1864
+			],
+			[
+				984,
+				1832
+			],
+			[
+				936,
+				1864
+			]
+		],
+		"spawnPos": [
+			1112,
+			1800
+		]
+	},
+	"121-Crayer": {
+		"name": "Crayer",
+		"img": "human-13",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1576,
+			1400
+		]
+	},
+	"122-critter": {
+		"name": "",
+		"img": "critter-4",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1800,
+				552
+			],
+			[
+				1832,
+				552
+			],
+			[
+				1832,
+				536
+			],
+			[
+				1784,
+				536
+			],
+			[
+				1784,
+				520
+			],
+			[
+				1736,
+				520
+			],
+			[
+				1784,
+				568
+			]
+		],
+		"spawnPos": [
+			1800,
+			552
+		]
+	},
+	"124-critter": {
+		"name": "",
+		"img": "critter-4",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1912,
+				824
+			],
+			[
+				1896,
+				840
+			],
+			[
+				1864,
+				840
+			],
+			[
+				1848,
+				824
+			],
+			[
+				1816,
+				824
+			],
+			[
+				1800,
+				840
+			],
+			[
+				1832,
+				872
+			]
+		],
+		"spawnPos": [
+			1912,
+			824
+		]
+	},
+	"126-critter": {
+		"name": "",
+		"img": "critter-6",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1672,
+				1960
+			],
+			[
+				1720,
+				1912
+			],
+			[
+				1720,
+				1880
+			],
+			[
+				1768,
+				1848
+			],
+			[
+				1784,
+				1800
+			]
+		],
+		"spawnPos": [
+			1672,
+			1960
+		]
+	},
+	"127-critter": {
+		"name": "",
+		"img": "critter-6",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1784,
+				1544
+			],
+			[
+				1832,
+				1560
+			],
+			[
+				1832,
+				1592
+			],
+			[
+				1800,
+				1592
+			],
+			[
+				1768,
+				1576
+			],
+			[
+				1784,
+				1560
+			]
+		],
+		"spawnPos": [
+			1784,
+			1544
+		]
+	},
+	"128-critter": {
+		"name": "",
+		"img": "critter-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1880,
+				1688
+			],
+			[
+				1880,
+				1720
+			],
+			[
+				1848,
+				1720
+			],
+			[
+				1832,
+				1736
+			],
+			[
+				1832,
+				1768
+			],
+			[
+				1800,
+				1784
+			],
+			[
+				1800,
+				1816
+			]
+		],
+		"spawnPos": [
+			1880,
+			1688
+		]
+	},
+	"129-critter": {
+		"name": "",
+		"img": "critter-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1768,
+				1672
+			],
+			[
+				1784,
+				1688
+			],
+			[
+				1784,
+				1704
+			],
+			[
+				1768,
+				1720
+			],
+			[
+				1736,
+				1704
+			],
+			[
+				1752,
+				1688
+			]
+		],
+		"spawnPos": [
+			1768,
+			1672
+		]
+	},
+	"130-critter": {
+		"name": "",
+		"img": "critter-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1496,
+				1880
+			],
+			[
+				1480,
+				1896
+			],
+			[
+				1448,
+				1912
+			],
+			[
+				1464,
+				1944
+			],
+			[
+				1480,
+				1944
+			],
+			[
+				1496,
+				1928
+			],
+			[
+				1512,
+				1928
+			],
+			[
+				1528,
+				1944
+			],
+			[
+				1528,
+				1912
+			],
+			[
+				1512,
+				1896
+			]
+		],
+		"spawnPos": [
+			1496,
+			1880
+		]
+	},
+	"132-critter": {
+		"name": "",
+		"img": "critter-6",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1624,
+				1736
+			],
+			[
+				1656,
+				1752
+			],
+			[
+				1688,
+				1736
+			],
+			[
+				1672,
+				1704
+			],
+			[
+				1640,
+				1704
+			]
+		],
+		"spawnPos": [
+			1624,
+			1736
+		]
+	},
+	"133-critter": {
+		"name": "",
+		"img": "critter-6",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1912,
+				1624
+			],
+			[
+				1912,
+				1592
+			],
+			[
+				1944,
+				1560
+			],
+			[
+				1960,
+				1528
+			],
+			[
+				1960,
+				1496
+			]
+		],
+		"spawnPos": [
+			1912,
+			1624
+		]
+	},
+	"134-critter": {
+		"name": "",
+		"img": "critter-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1848,
+				1464
+			],
+			[
+				1880,
+				1432
+			],
+			[
+				1912,
+				1400
+			],
+			[
+				1944,
+				1432
+			],
+			[
+				1944,
+				1464
+			],
+			[
+				1912,
+				1496
+			],
+			[
+				1912,
+				1528
+			]
+		],
+		"spawnPos": [
+			1848,
+			1464
+		]
+	},
+	"135-critter": {
+		"name": "",
+		"img": "critter-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1672,
+				1848
+			],
+			[
+				1656,
+				1832
+			],
+			[
+				1624,
+				1816
+			],
+			[
+				1608,
+				1832
+			],
+			[
+				1592,
+				1832
+			],
+			[
+				1592,
+				1848
+			],
+			[
+				1592,
+				1880
+			],
+			[
+				1624,
+				1880
+			]
+		],
+		"spawnPos": [
+			1672,
+			1848
+		]
+	},
+	"137-critter": {
+		"name": "",
+		"img": "critter-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1608,
+				1592
+			],
+			[
+				1624,
+				1608
+			],
+			[
+				1624,
+				1624
+			],
+			[
+				1608,
+				1640
+			],
+			[
+				1576,
+				1640
+			],
+			[
+				1560,
+				1656
+			]
+		],
+		"spawnPos": [
+			1608,
+			1592
+		]
+	},
+	"138-critter": {
+		"name": "",
+		"img": "critter-6",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1432,
+				1768
+			],
+			[
+				1464,
+				1768
+			],
+			[
+				1480,
+				1752
+			],
+			[
+				1496,
+				1752
+			],
+			[
+				1512,
+				1768
+			],
+			[
+				1512,
+				1784
+			],
+			[
+				1496,
+				1800
+			],
+			[
+				1464,
+				1800
+			],
+			[
+				1448,
+				1800
+			],
+			[
+				1432,
+				1784
+			]
+		],
+		"spawnPos": [
+			1432,
+			1768
+		]
+	},
+	"143-critter": {
+		"name": "",
+		"img": "critter-12",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				632,
+				1240
+			],
+			[
+				616,
+				1240
+			],
+			[
+				616,
+				1208
+			],
+			[
+				584,
+				1176
+			],
+			[
+				552,
+				1176
+			],
+			[
+				536,
+				1192
+			],
+			[
+				520,
+				1208
+			],
+			[
+				552,
+				1240
+			],
+			[
+				584,
+				1240
+			],
+			[
+				584,
+				1224
+			],
+			[
+				568,
+				1208
+			]
+		],
+		"spawnPos": [
+			632,
+			1240
+		]
+	},
+	"144-critter": {
+		"name": "",
+		"img": "critter-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				632,
+				1512
+			],
+			[
+				600,
+				1544
+			],
+			[
+				600,
+				1576
+			],
+			[
+				552,
+				1576
+			],
+			[
+				520,
+				1608
+			],
+			[
+				488,
+				1576
+			],
+			[
+				456,
+				1544
+			],
+			[
+				488,
+				1544
+			],
+			[
+				520,
+				1512
+			],
+			[
+				552,
+				1512
+			],
+			[
+				568,
+				1496
+			]
+		],
+		"spawnPos": [
+			632,
+			1512
+		]
+	},
+	"145-critter": {
+		"name": "",
+		"img": "critter-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				280,
+				1288
+			],
+			[
+				328,
+				1336
+			],
+			[
+				376,
+				1384
+			],
+			[
+				376,
+				1416
+			],
+			[
+				360,
+				1432
+			],
+			[
+				280,
+				1432
+			],
+			[
+				280,
+				1400
+			],
+			[
+				312,
+				1368
+			],
+			[
+				264,
+				1320
+			]
+		],
+		"spawnPos": [
+			280,
+			1288
+		]
+	},
+	"160-Nogugh": {
+		"name": "Nogugh",
+		"img": "orc-9",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			248,
+			1944
+		]
+	},
+	"161-Peon": {
+		"name": "Peon",
+		"img": "orc-8",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			136,
+			1928
+		]
+	},
+	"162-Peon": {
+		"name": "Peon",
+		"img": "orc-0",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			200,
+			1880
+		]
+	},
+	"164-Grunt": {
+		"name": "Grunt",
+		"img": "orc-4",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			136,
+			1816
+		]
+	},
+	"165-Grunt": {
+		"name": "Grunt",
+		"img": "orc-4",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			232,
+			1816
+		]
+	},
+	"167-critter": {
+		"name": "",
+		"img": "critter-9",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				616,
+				1372
+			],
+			[
+				584,
+				1356
+			],
+			[
+				552,
+				1356
+			],
+			[
+				552,
+				1324
+			],
+			[
+				536,
+				1308
+			],
+			[
+				600,
+				1308
+			],
+			[
+				632,
+				1340
+			]
+		],
+		"spawnPos": [
+			616,
+			1372
+		]
+	},
+	"168-critter": {
+		"name": "",
+		"img": "critter-5",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				392,
+				1384
+			],
+			[
+				424,
+				1352
+			],
+			[
+				456,
+				1320
+			],
+			[
+				504,
+				1320
+			],
+			[
+				504,
+				1288
+			],
+			[
+				536,
+				1272
+			],
+			[
+				536,
+				1240
+			],
+			[
+				488,
+				1240
+			],
+			[
+				456,
+				1240
+			],
+			[
+				456,
+				1272
+			],
+			[
+				440,
+				1272
+			],
+			[
+				408,
+				1304
+			],
+			[
+				376,
+				1320
+			]
+		],
+		"spawnPos": [
+			392,
+			1384
+		]
+	},
+	"169-critter": {
+		"name": "",
+		"img": "critter-9",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				264,
+				1464
+			],
+			[
+				216,
+				1416
+			],
+			[
+				264,
+				1368
+			],
+			[
+				200,
+				1368
+			],
+			[
+				184,
+				1352
+			],
+			[
+				184,
+				1336
+			],
+			[
+				152,
+				1304
+			],
+			[
+				168,
+				1288
+			],
+			[
+				200,
+				1288
+			],
+			[
+				232,
+				1320
+			]
+		],
+		"spawnPos": [
+			264,
+			1464
+		]
+	},
+	"170-critter": {
+		"name": "",
+		"img": "critter-9",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				504,
+				1112
+			],
+			[
+				504,
+				1160
+			],
+			[
+				472,
+				1192
+			],
+			[
+				440,
+				1192
+			],
+			[
+				424,
+				1176
+			],
+			[
+				408,
+				1176
+			],
+			[
+				392,
+				1160
+			],
+			[
+				424,
+				1128
+			],
+			[
+				440,
+				1112
+			],
+			[
+				472,
+				1112
+			]
+		],
+		"spawnPos": [
+			504,
+			1112
+		]
+	},
+	"172-finfolk": {
+		"name": "",
+		"img": "finfolk-1",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				664,
+				808
+			],
+			[
+				696,
+				776
+			],
+			[
+				712,
+				792
+			],
+			[
+				712,
+				808
+			],
+			[
+				680,
+				808
+			],
+			[
+				680,
+				824
+			],
+			[
+				664,
+				840
+			],
+			[
+				632,
+				808
+			]
+		],
+		"spawnPos": [
+			664,
+			808
+		]
+	},
+	"173-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				616,
+				904
+			],
+			[
+				632,
+				920
+			],
+			[
+				632,
+				936
+			],
+			[
+				600,
+				936
+			],
+			[
+				568,
+				904
+			],
+			[
+				568,
+				872
+			],
+			[
+				616,
+				872
+			]
+		],
+		"spawnPos": [
+			616,
+			904
+		]
+	},
+	"174-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			584,
+			728
+		]
+	},
+	"176-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			552,
+			600
+		]
+	},
+	"177-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				504,
+				680
+			],
+			[
+				536,
+				664
+			],
+			[
+				568,
+				664
+			],
+			[
+				600,
+				632
+			],
+			[
+				504,
+				632
+			]
+		],
+		"spawnPos": [
+			504,
+			680
+		]
+	},
+	"178-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				760,
+				664
+			],
+			[
+				792,
+				664
+			],
+			[
+				792,
+				648
+			],
+			[
+				824,
+				616
+			]
+		],
+		"spawnPos": [
+			760,
+			664
+		]
+	},
+	"179-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			840,
+			680
+		]
+	},
+	"180-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				536,
+				824
+			],
+			[
+				552,
+				840
+			],
+			[
+				584,
+				840
+			],
+			[
+				600,
+				824
+			],
+			[
+				584,
+				808
+			],
+			[
+				584,
+				792
+			],
+			[
+				552,
+				792
+			]
+		],
+		"spawnPos": [
+			536,
+			824
+		]
+	},
+	"181-finfolk": {
+		"name": "",
+		"img": "finfolk-1",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				456,
+				808
+			],
+			[
+				456,
+				776
+			],
+			[
+				488,
+				760
+			],
+			[
+				504,
+				776
+			],
+			[
+				520,
+				760
+			]
+		],
+		"spawnPos": [
+			456,
+			808
+		]
+	},
+	"182-finfolk": {
+		"name": "",
+		"img": "finfolk-1",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			600,
+			504
+		]
+	},
+	"184-finfolk": {
+		"name": "",
+		"img": "finfolk-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				472,
+				552
+			],
+			[
+				440,
+				584
+			],
+			[
+				408,
+				552
+			],
+			[
+				440,
+				520
+			],
+			[
+				440,
+				504
+			],
+			[
+				488,
+				504
+			],
+			[
+				488,
+				520
+			]
+		],
+		"spawnPos": [
+			472,
+			552
+		]
+	},
+	"185-finfolk": {
+		"name": "",
+		"img": "finfolk-1",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				520,
+				904
+			],
+			[
+				488,
+				920
+			],
+			[
+				520,
+				952
+			],
+			[
+				536,
+				968
+			],
+			[
+				568,
+				952
+			],
+			[
+				568,
+				936
+			]
+		],
+		"spawnPos": [
+			520,
+			904
+		]
+	},
+	"194-critter": {
+		"name": "",
+		"img": "critter-12",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				376,
+				1096
+			],
+			[
+				344,
+				1128
+			],
+			[
+				344,
+				1160
+			],
+			[
+				328,
+				1176
+			],
+			[
+				280,
+				1176
+			],
+			[
+				280,
+				1224
+			],
+			[
+				248,
+				1256
+			],
+			[
+				200,
+				1256
+			],
+			[
+				136,
+				1256
+			],
+			[
+				136,
+				1288
+			]
+		],
+		"spawnPos": [
+			376,
+			1096
+		]
+	},
+	"197-critter": {
+		"name": "",
+		"img": "critter-12",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				440,
+				1624
+			],
+			[
+				408,
+				1656
+			],
+			[
+				376,
+				1672
+			],
+			[
+				344,
+				1672
+			],
+			[
+				312,
+				1640
+			],
+			[
+				376,
+				1608
+			],
+			[
+				408,
+				1576
+			],
+			[
+				408,
+				1528
+			],
+			[
+				408,
+				1464
+			],
+			[
+				456,
+				1464
+			],
+			[
+				488,
+				1496
+			],
+			[
+				440,
+				1528
+			]
+		],
+		"spawnPos": [
+			440,
+			1624
+		]
+	},
+	"198-critter": {
+		"name": "",
+		"img": "critter-5",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				280,
+				1576
+			],
+			[
+				280,
+				1512
+			],
+			[
+				328,
+				1464
+			],
+			[
+				360,
+				1464
+			],
+			[
+				360,
+				1544
+			],
+			[
+				296,
+				1608
+			]
+		],
+		"spawnPos": [
+			280,
+			1576
+		]
+	},
+	"207-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1080,
+				1080
+			],
+			[
+				1112,
+				1112
+			],
+			[
+				1128,
+				1096
+			],
+			[
+				1176,
+				1096
+			],
+			[
+				1160,
+				1128
+			],
+			[
+				1160,
+				1160
+			],
+			[
+				1176,
+				1176
+			],
+			[
+				1080,
+				1176
+			],
+			[
+				1048,
+				1160
+			],
+			[
+				1032,
+				1128
+			],
+			[
+				984,
+				1128
+			],
+			[
+				968,
+				1144
+			],
+			[
+				936,
+				1176
+			],
+			[
+				952,
+				1192
+			]
+		],
+		"spawnPos": [
+			1080,
+			1080
+		]
+	},
+	"211-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1336,
+				1080
+			],
+			[
+				1304,
+				1112
+			],
+			[
+				1320,
+				1128
+			],
+			[
+				1320,
+				1144
+			],
+			[
+				1288,
+				1160
+			]
+		],
+		"spawnPos": [
+			1336,
+			1080
+		]
+	},
+	"212-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1448,
+				1016
+			],
+			[
+				1496,
+				1032
+			],
+			[
+				1528,
+				1000
+			],
+			[
+				1560,
+				1032
+			],
+			[
+				1560,
+				1064
+			],
+			[
+				1512,
+				1112
+			]
+		],
+		"spawnPos": [
+			1448,
+			1016
+		]
+	},
+	"213-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1672,
+				936
+			],
+			[
+				1672,
+				904
+			],
+			[
+				1640,
+				872
+			],
+			[
+				1576,
+				872
+			],
+			[
+				1544,
+				904
+			],
+			[
+				1592,
+				952
+			],
+			[
+				1592,
+				984
+			],
+			[
+				1624,
+				1016
+			]
+		],
+		"spawnPos": [
+			1672,
+			936
+		]
+	},
+	"217-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1576,
+				808
+			],
+			[
+				1624,
+				760
+			],
+			[
+				1560,
+				728
+			],
+			[
+				1464,
+				728
+			],
+			[
+				1432,
+				760
+			],
+			[
+				1416,
+				760
+			],
+			[
+				1400,
+				728
+			]
+		],
+		"spawnPos": [
+			1576,
+			808
+		]
+	},
+	"218-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1144,
+				728
+			],
+			[
+				1112,
+				696
+			],
+			[
+				1080,
+				696
+			],
+			[
+				1016,
+				664
+			]
+		],
+		"spawnPos": [
+			1144,
+			728
+		]
+	},
+	"219-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1256,
+				600
+			],
+			[
+				1288,
+				600
+			],
+			[
+				1304,
+				584
+			],
+			[
+				1304,
+				552
+			],
+			[
+				1272,
+				536
+			],
+			[
+				1224,
+				536
+			],
+			[
+				1192,
+				568
+			]
+		],
+		"spawnPos": [
+			1256,
+			600
+		]
+	},
+	"220-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1016,
+				616
+			],
+			[
+				1048,
+				584
+			],
+			[
+				1048,
+				552
+			],
+			[
+				1000,
+				520
+			],
+			[
+				952,
+				520
+			],
+			[
+				920,
+				552
+			],
+			[
+				888,
+				552
+			]
+		],
+		"spawnPos": [
+			1016,
+			616
+		]
+	},
+	"221-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				856,
+				440
+			],
+			[
+				888,
+				408
+			],
+			[
+				824,
+				408
+			],
+			[
+				776,
+				456
+			],
+			[
+				776,
+				488
+			],
+			[
+				808,
+				488
+			],
+			[
+				824,
+				472
+			]
+		],
+		"spawnPos": [
+			856,
+			440
+		]
+	},
+	"222-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1384,
+				1272
+			],
+			[
+				1432,
+				1224
+			],
+			[
+				1480,
+				1240
+			],
+			[
+				1496,
+				1272
+			],
+			[
+				1480,
+				1288
+			],
+			[
+				1432,
+				1304
+			]
+		],
+		"spawnPos": [
+			1384,
+			1272
+		]
+	},
+	"223-critter": {
+		"name": "",
+		"img": "critter-12",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1752,
+				1096
+			],
+			[
+				1752,
+				1032
+			],
+			[
+				1720,
+				1000
+			],
+			[
+				1704,
+				1016
+			],
+			[
+				1704,
+				1064
+			],
+			[
+				1688,
+				1080
+			],
+			[
+				1720,
+				1112
+			]
+		],
+		"spawnPos": [
+			1752,
+			1096
+		]
+	},
+	"224-critter": {
+		"name": "",
+		"img": "critter-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1672,
+				1208
+			],
+			[
+				1656,
+				1224
+			],
+			[
+				1624,
+				1240
+			],
+			[
+				1608,
+				1256
+			],
+			[
+				1624,
+				1256
+			],
+			[
+				1624,
+				1272
+			],
+			[
+				1640,
+				1272
+			],
+			[
+				1640,
+				1304
+			],
+			[
+				1608,
+				1304
+			],
+			[
+				1592,
+				1272
+			],
+			[
+				1592,
+				1256
+			],
+			[
+				1576,
+				1224
+			]
+		],
+		"spawnPos": [
+			1672,
+			1208
+		]
+	},
+	"227-critter": {
+		"name": "",
+		"img": "critter-9",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1736,
+				1352
+			],
+			[
+				1720,
+				1336
+			],
+			[
+				1704,
+				1320
+			],
+			[
+				1736,
+				1288
+			],
+			[
+				1720,
+				1272
+			],
+			[
+				1720,
+				1240
+			],
+			[
+				1672,
+				1272
+			],
+			[
+				1672,
+				1320
+			],
+			[
+				1656,
+				1336
+			]
+		],
+		"spawnPos": [
+			1736,
+			1352
+		]
+	},
+	"230-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1352,
+				1416
+			],
+			[
+				1304,
+				1416
+			],
+			[
+				1272,
+				1448
+			],
+			[
+				1272,
+				1480
+			],
+			[
+				1304,
+				1496
+			],
+			[
+				1320,
+				1512
+			],
+			[
+				1368,
+				1512
+			],
+			[
+				1400,
+				1480
+			],
+			[
+				1432,
+				1480
+			],
+			[
+				1464,
+				1512
+			],
+			[
+				1464,
+				1544
+			],
+			[
+				1432,
+				1544
+			],
+			[
+				1416,
+				1528
+			]
+		],
+		"spawnPos": [
+			1352,
+			1416
+		]
+	},
+	"231-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1224,
+				1672
+			],
+			[
+				1256,
+				1704
+			],
+			[
+				1288,
+				1704
+			],
+			[
+				1320,
+				1736
+			],
+			[
+				1336,
+				1752
+			],
+			[
+				1352,
+				1784
+			],
+			[
+				1352,
+				1816
+			],
+			[
+				1336,
+				1832
+			],
+			[
+				1320,
+				1848
+			],
+			[
+				1288,
+				1816
+			],
+			[
+				1256,
+				1816
+			],
+			[
+				1256,
+				1784
+			],
+			[
+				1256,
+				1752
+			],
+			[
+				1224,
+				1752
+			],
+			[
+				1160,
+				1704
+			],
+			[
+				1144,
+				1688
+			],
+			[
+				1144,
+				1656
+			]
+		],
+		"spawnPos": [
+			1224,
+			1672
+		]
+	},
+	"233-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				296,
+				776
+			],
+			[
+				264,
+				808
+			],
+			[
+				312,
+				856
+			],
+			[
+				392,
+				856
+			],
+			[
+				392,
+				888
+			],
+			[
+				360,
+				920
+			],
+			[
+				312,
+				920
+			]
+		],
+		"spawnPos": [
+			296,
+			776
+		]
+	},
+	"234-critter": {
+		"name": "",
+		"img": "critter-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				168,
+				600
+			],
+			[
+				200,
+				568
+			],
+			[
+				248,
+				568
+			],
+			[
+				296,
+				568
+			],
+			[
+				328,
+				600
+			],
+			[
+				328,
+				632
+			],
+			[
+				296,
+				664
+			],
+			[
+				248,
+				696
+			],
+			[
+				200,
+				696
+			],
+			[
+				168,
+				760
+			],
+			[
+				136,
+				760
+			],
+			[
+				136,
+				664
+			],
+			[
+				184,
+				616
+			]
+		],
+		"spawnPos": [
+			168,
+			600
+		]
+	},
+	"238-gnoll": {
+		"name": "",
+		"img": "gnoll-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			200,
+			328
+		]
+	},
+	"239-gnoll": {
+		"name": "",
+		"img": "gnoll-4",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			424,
+			408
+		]
+	},
+	"240-gnoll": {
+		"name": "",
+		"img": "gnoll-5",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			296,
+			280
+		]
+	},
+	"241-gnoll": {
+		"name": "",
+		"img": "gnoll-9",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				264,
+				296
+			],
+			[
+				248,
+				296
+			],
+			[
+				248,
+				264
+			],
+			[
+				232,
+				248
+			],
+			[
+				184,
+				248
+			],
+			[
+				168,
+				264
+			],
+			[
+				168,
+				296
+			]
+		],
+		"spawnPos": [
+			264,
+			296
+		]
+	},
+	"242-gnoll": {
+		"name": "",
+		"img": "gnoll-1",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				552,
+				296
+			],
+			[
+				552,
+				328
+			],
+			[
+				520,
+				360
+			],
+			[
+				456,
+				360
+			],
+			[
+				424,
+				344
+			]
+		],
+		"spawnPos": [
+			552,
+			296
+		]
+	},
+	"243-gnoll": {
+		"name": "",
+		"img": "gnoll-2",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			648,
+			344
+		]
+	},
+	"244-gnoll": {
+		"name": "",
+		"img": "gnoll-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			632,
+			184
+		]
+	},
+	"245-gnoll": {
+		"name": "",
+		"img": "gnoll-3",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			568,
+			184
+		]
+	},
+	"246-Bruiseclaw": {
+		"name": "Bruiseclaw",
+		"img": "gnoll-8",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			600,
+			200
+		]
+	},
+	"248-gnoll": {
+		"name": "",
+		"img": "gnoll-9",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				376,
+				216
+			],
+			[
+				408,
+				248
+			],
+			[
+				440,
+				216
+			],
+			[
+				456,
+				216
+			],
+			[
+				488,
+				248
+			],
+			[
+				504,
+				248
+			],
+			[
+				504,
+				216
+			]
+		],
+		"spawnPos": [
+			376,
+			216
+		]
+	},
+	"249-gnoll": {
+		"name": "",
+		"img": "gnoll-9",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				120,
+				440
+			],
+			[
+				152,
+				408
+			],
+			[
+				184,
+				408
+			],
+			[
+				216,
+				440
+			],
+			[
+				216,
+				472
+			]
+		],
+		"spawnPos": [
+			120,
+			440
+		]
+	},
+	"250-gnoll": {
+		"name": "",
+		"img": "gnoll-0",
+		"enemy": true,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				664,
+				264
+			],
+			[
+				696,
+				296
+			],
+			[
+				728,
+				296
+			],
+			[
+				744,
+				264
+			],
+			[
+				712,
+				232
+			],
+			[
+				744,
+				200
+			],
+			[
+				760,
+				184
+			],
+			[
+				776,
+				200
+			]
+		],
+		"spawnPos": [
+			664,
+			264
+		]
+	},
+	"259-Norwell": {
+		"name": "Norwell",
+		"img": "human-2",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1128,
+				936
+			],
+			[
+				1160,
+				904
+			],
+			[
+				1144,
+				888
+			],
+			[
+				1144,
+				872
+			],
+			[
+				1160,
+				856
+			],
+			[
+				1176,
+				840
+			],
+			[
+				1208,
+				872
+			]
+		],
+		"spawnPos": [
+			1128,
+			936
+		]
+	},
+	"261-Arndell": {
+		"name": "Arndell",
+		"img": "human-0",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			328,
+			184
+		]
+	},
+	"264-Chapman": {
+		"name": "Chapman",
+		"img": "human-3",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1592,
+			248
+		]
+	},
+	"266-Augustus": {
+		"name": "Augustus",
+		"img": "human-15",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [],
+		"spawnPos": [
+			1288,
+			296
+		]
+	},
+	"345-Footman": {
+		"name": "Footman",
+		"img": "human-6",
+		"enemy": false,
+		"level": 1,
+		"dialogue": "",
+		"path": [
+			[
+				1880,
+				216
+			],
+			[
+				1784,
+				216
+			],
+			[
+				1784,
+				280
+			],
+			[
+				1432,
+				280
+			],
+			[
+				1432,
+				328
+			],
+			[
+				1176,
+				328
+			]
+		],
+		"spawnPos": [
+			1880,
+			216
+		]
+	}
+}

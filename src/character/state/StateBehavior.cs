@@ -17,22 +17,14 @@ namespace Game.Actor.State
 		public abstract void Exit();
 		public virtual void UnhandledInput(InputEvent @event)
 		{
-			if (!(@event is InputEventScreenTouch))
-			{
-				return;
-			}
-			else if (!@event.IsPressed() || @event.IsEcho())
-			{
-				return;
-			}
-
-			if (Map.Map.map.IsValidMove(character.GlobalPosition, character.GetGlobalMousePosition()))
+			if (@event is InputEventScreenTouch && @event.IsPressed()
+			&& Map.Map.map.IsValidMove(character.GlobalPosition, character.GetGlobalMousePosition()))
 			{
 				EmitSignal(nameof(PlayerWantsToMove), true);
 				// any valid move overrides any state from player
-				fsm.ChangeState((fsm.IsDead())
-					? FSM.State.PLAYER_MOVE_DEAD
-					: FSM.State.PLAYER_MOVE);
+				fsm.ChangeState(fsm.IsDead()
+							? FSM.State.PLAYER_MOVE_DEAD
+							: FSM.State.PLAYER_MOVE);
 			}
 		}
 		public virtual void OnAttacked(Character whosAttacking)

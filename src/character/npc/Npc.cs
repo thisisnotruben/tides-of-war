@@ -5,12 +5,9 @@ namespace Game.Actor
 {
 	public class Npc : Character
 	{
-		public Node2D unitFocus { get; private set; }
-
 		public override void _Ready()
 		{
 			base._Ready();
-			unitFocus = GetNode<Node2D>("unitFocus");
 
 			if (Globals.unitDB.HasData(Name))
 			{
@@ -20,12 +17,6 @@ namespace Game.Actor
 				if (!unitData.name.Empty())
 				{
 					worldName = unitData.name;
-				}
-				if (Globals.contentDB.HasData(Name))
-				{
-					ContentDB.ContentData contentData = Globals.contentDB.GetData(Name);
-					enemy = contentData.enemy;
-					level = contentData.level;
 				}
 				SetImg(unitData.img);
 			}

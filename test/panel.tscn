@@ -1,0 +1,53 @@
+[gd_scene format=2]
+
+[node name="colorRect" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+margin_bottom = -779.0
+color = Color( 0.466667, 0.309804, 0.164706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="marginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="colorRect2" type="ColorRect" parent="marginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 696.0
+margin_bottom = 485.0
+color = Color( 0.709804, 0.552941, 0.407843, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="marginContainer2" type="MarginContainer" parent="marginContainer/colorRect2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="colorRect2" type="ColorRect" parent="marginContainer/colorRect2/marginContainer2"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 664.0
+margin_bottom = 453.0
+color = Color( 0.643137, 0.447059, 0.27451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -20,7 +20,6 @@ namespace Game.Actor
 		public Position2D head, missileSpawnPos;
 		public AnimationPlayer anim;
 		public Area2D hitBox, sight;
-		public CharacterCamera camera { get; protected set; }
 		public AudioStreamPlayer2D player2D { get; protected set; }
 
 		public bool enemy { get; protected set; }
@@ -118,7 +117,6 @@ namespace Game.Actor
 			missileSpawnPos = img.GetNode<Position2D>("missile");
 			combatTextHandler = img.GetNode<CombatTextHandler>("CombatTextHandler");
 			player2D = img.GetNode<AudioStreamPlayer2D>("snd");
-			camera = GetNode<CharacterCamera>("camera");
 			fsm = GetNode<FSM>("fsm");
 			hitBox = GetNode<Area2D>("area");
 			sight = GetNode<Area2D>("sight");
@@ -131,7 +129,7 @@ namespace Game.Actor
 			hp = stats.hpMax.valueI;
 			mana = stats.manaMax.valueI;
 		}
-		protected void SetImg(string imgName)
+		protected virtual void SetImg(string imgName)
 		{
 			ImageDB.ImageData imageData = Globals.imageDB.GetData(imgName);
 
@@ -174,7 +172,6 @@ namespace Game.Actor
 			select.Normal = hitBoxTexture;
 			head.Position = new Vector2(0.0f, -hitBoxTexture.GetHeight());
 			areaBody.Position = new Vector2(0.0f, -hitBoxTexture.GetHeight() / 2.0f);
-			camera.Position = new Vector2(0.0f, hitBoxTexture.GetHeight() / 2.0f);
 			select.Position = new Vector2(-hitBoxTexture.GetWidth() / 2.0f, -hitBoxTexture.GetHeight());
 			sightDistance.Position = areaBody.Position;
 		}

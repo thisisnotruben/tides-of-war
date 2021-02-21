@@ -6,19 +6,15 @@ namespace Game.Database
 	{
 		public class ContentData
 		{
-			public readonly int level, healerCost;
-			public readonly bool enemy, healer;
-			public readonly string dialogue;
+			public readonly bool healer;
+			public readonly int healerCost;
 			public readonly string[] drops, spells, merchandise;
 
-			public ContentData(int level, int healerCost, bool enemy, bool healer,
-			string dialogue, string[] drops, string[] spells, string[] merchandise)
+			public ContentData(int healerCost, bool healer,
+			string[] drops, string[] spells, string[] merchandise)
 			{
-				this.level = level;
 				this.healerCost = healerCost;
-				this.enemy = enemy;
 				this.healer = healer;
-				this.dialogue = dialogue;
 				this.drops = drops;
 				this.spells = spells;
 				this.merchandise = merchandise;
@@ -35,11 +31,8 @@ namespace Game.Database
 				contentDict = (GC.Dictionary)rawDict[characterName];
 
 				data.Add(characterName, new ContentData(
-					level: (int)(Single)contentDict[nameof(ContentData.level)],
 					healerCost: (int)(Single)contentDict[nameof(ContentData.healerCost)],
-					enemy: (bool)contentDict[nameof(ContentData.enemy)],
 					healer: (bool)contentDict[nameof(ContentData.healer)],
-					dialogue: (string)contentDict[nameof(ContentData.dialogue)],
 					drops: GetWorldNames((GC.Array)contentDict[nameof(ContentData.drops)]),
 					spells: GetWorldNames((GC.Array)contentDict[nameof(ContentData.spells)]),
 					merchandise: GetWorldNames((GC.Array)contentDict[nameof(ContentData.merchandise)])

@@ -30,7 +30,6 @@ public class CharacterStatusController : Control
 			nameHeader.Text = character.worldName;
 
 			characterFocused = character;
-			(character as Npc)?.unitFocus.Show();
 			Show();
 		}
 	}
@@ -40,7 +39,6 @@ public class CharacterStatusController : Control
 		{
 			characterFocused.Disconnect(nameof(Character.UpdateHudHealthStatus), this, nameof(UpdateHealth));
 			characterFocused.Disconnect(nameof(Character.UpdateHudManaStatus), this, nameof(UpdateMana));
-			(characterFocused as Npc)?.unitFocus.Hide();
 		}
 		characterFocused = null;
 		Visible = show;

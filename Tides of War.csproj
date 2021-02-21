@@ -20,7 +20,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\character\Character.cs" />
-    <Compile Include="src\character\CharacterCamera.cs" />
+    <Compile Include="src\character\player\CharacterCamera.cs" />
     <Compile Include="src\character\doodads\BuffAnim.cs" />
     <Compile Include="src\character\doodads\CombatText.cs" />
     <Compile Include="src\character\doodads\CombatTextHandler.cs" />

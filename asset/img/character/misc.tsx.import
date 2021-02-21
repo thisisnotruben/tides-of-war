@@ -2,11 +2,13 @@
 
 importer="vnen.tiled_tileset_importer"
 type="TileSet"
-valid=false
+path="res://.import/misc.tsx-665e381c9bdabdb74fad390412f12f06.res"
 
 [deps]
 
 source_file="res://asset/img/character/misc.tsx"
+dest_files=[ "res://.import/misc.tsx-665e381c9bdabdb74fad390412f12f06.res" ]
+
 [params]
 
 custom_properties=true

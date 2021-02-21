@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://asset/img/character/resource/animations/dying.tres" type="Animation" id=1]
 [ext_resource path="res://src/character/Character.cs" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://asset/img/character/resource/animations/casting.tres" type="Animation" id=5]
 [ext_resource path="res://asset/img/character/resource/animations/moving.tres" type="Animation" id=6]
 [ext_resource path="res://src/character/state/FSM.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/character/CharacterCamera.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -34,8 +33,6 @@ anims/dying = ExtResource( 1 )
 anims/moving = ExtResource( 6 )
 
 [node name="head" type="Position2D" parent="."]
-
-[node name="camera" parent="." instance=ExtResource( 8 )]
 
 [node name="img" type="Sprite" parent="."]
 use_parent_material = true
@@ -67,7 +64,6 @@ shape = SubResource( 2 )
 [node name="visible" type="VisibilityEnabler2D" parent="."]
 visible = false
 rect = Rect2( -80, -80, 160, 160 )
-process_parent = true
 
 [node name="select" type="TouchScreenButton" parent="."]
 modulate = Color( 1, 1, 1, 0 )

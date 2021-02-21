@@ -11,7 +11,10 @@ namespace Game.Actor.State
 			Map.Map.map.OccupyCell(character.GlobalPosition, true);
 
 			// for player to check surrounding areas
-			(character as Player)?.OnAttacked(character.target);
+			if (character.target?.enemy ?? false)
+			{
+				(character as Player)?.OnAttacked(character.target);
+			}
 		}
 		public override void Exit() { Map.Map.map.OccupyCell(character.GlobalPosition, false); }
 	}

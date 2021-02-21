@@ -22,6 +22,7 @@ namespace Game.Util
 			shaderDataPath = "res://data/importer/tilesetShaders.json",
 			lightPosPath = "res://data/importer/tilesetLightPos.json",
 			lightSpaceGradientPath = "res://data/importer/lightSpaceGradient.json",
+			usedGidDataPath = "res://data/importer/usedGid.json",
 			animatedTilesetPath = "res://asset/img/map/tilesets_animated/{0}.tres",
 			assetMapDir = "res://asset/img/map/",
 			srcMapDir = "res://src/map/",
@@ -47,7 +48,7 @@ namespace Game.Util
 			lightScene = GD.Load<PackedScene>("res://src/light/light.tscn"),
 			lightSource = GD.Load<PackedScene>("res://src/light/lightSource.tscn");
 
-		private Resource environment = GD.Load<Godot.Environment>("res://default_env.tres");
+		private Resource environment = GD.Load<Godot.Environment>("res://2d_env.tres");
 
 		private Node2D map;
 		private TileMap zed;
@@ -178,9 +179,9 @@ namespace Game.Util
 			// spawn player
 			string playerSpawnName = map.Name switch
 			{
-				"zone_1" => "zone_2",
-				"zone_2" => "zone_3",
-				"zone_3" => "zone_5",
+				"zone_2" => "zone_1",
+				"zone_3" => "zone_2",
+				"zone_4" => "zone_3",
 				"zone_5" => "zone_4",
 				_ => "playerSpawn"
 			};
@@ -455,7 +456,7 @@ namespace Game.Util
 			Vector2 offset, pos;
 			GC.Array posArray, templatePoints;
 			Vector2[] polygon;
-			int i, j, k = 1, cellHeight, z, l;
+			int i, j, k = 0, cellHeight, z, l;
 			string gid;
 
 			File file = new File();
@@ -475,6 +476,11 @@ namespace Game.Util
 			GC.Dictionary shaderData = (GC.Dictionary)JSON.Parse(file.GetAsText()).Result;
 			file.Close();
 
+			// used gid data
+			file.Open(usedGidDataPath, File.ModeFlags.Read);
+			GC.Array usedGidData = (GC.Array)JSON.Parse(file.GetAsText()).Result;
+			file.Close();
+
 			foreach (string imgPath in tileAtlases)
 			{
 				cellHeight = Is32Tileset(imgPath) ? 32 : (int)CELL_SIZE.y;
@@ -485,6 +491,11 @@ namespace Game.Util
 				{
 					for (j = 0; j < img.GetWidth(); j += (int)CELL_SIZE.x)
 					{
+						if (!usedGidData.Contains((float)++k))
+						{
+							continue;
+						}
+
 						gid = k.ToString();
 						if (terrrainAnimData.Contains(gid))
 						{
@@ -529,8 +540,6 @@ namespace Game.Util
 								assetMapDir.PlusFile((string)shaderData[gid] + ".tres"))
 							);
 						}
-
-						k++;
 					}
 				}
 			}

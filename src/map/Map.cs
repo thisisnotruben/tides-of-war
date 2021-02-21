@@ -31,33 +31,20 @@ namespace Game.Map
 			mapSize = collNav.GetUsedRect().Size;
 			MakeNav();
 			SetVeilSize();
-			SetCharacterCameraLimits();
+			SetCameraLimits(Player.player.camera);
 		}
 		public void AddGChild(Node node) { ground.AddChild(node); }
 		public void AddZChild(Node node) { zed.AddChild(node); }
 		public void SetVeil(bool on) { veilFog.Visible = veilFog.Emitting = on; }
-		private void SetCharacterCameraLimits()
+		private void SetCameraLimits(Camera2D camera2D)
 		{
-			Camera2D camera2D;
-			Rect2 mapBorders;
-			Vector2 mapCellSize;
-
-			foreach (Node node in zed.GetChildren())
-			{
-				camera2D = (node as Character)?.camera;
-				if (camera2D == null)
-				{
-					continue;
-				}
-
-				mapBorders = collNav.GetUsedRect();
-				mapCellSize = collNav.CellSize;
-				camera2D.LimitLeft = (int)(mapBorders.Position.x * mapCellSize.x);
-				camera2D.LimitRight = (int)(mapBorders.End.x * mapCellSize.x);
-				camera2D.LimitTop = (int)(mapBorders.Position.y * mapCellSize.y);
-				// +68 for hud size
-				camera2D.LimitBottom = (int)(mapBorders.End.y * mapCellSize.y) + 68;
-			}
+			Rect2 mapBorders = collNav.GetUsedRect();
+			Vector2 mapCellSize = collNav.CellSize;
+			camera2D.LimitLeft = (int)(mapBorders.Position.x * mapCellSize.x);
+			camera2D.LimitRight = (int)(mapBorders.End.x * mapCellSize.x);
+			camera2D.LimitTop = (int)(mapBorders.Position.y * mapCellSize.y);
+			// +68 for hud size
+			camera2D.LimitBottom = (int)(mapBorders.End.y * mapCellSize.y) + 68;
 		}
 		private void SetVeilSize()
 		{

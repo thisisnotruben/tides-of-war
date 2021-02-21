@@ -4,6 +4,7 @@
 		"img": "oliphant-1",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			232,
@@ -15,6 +16,7 @@
 		"img": "orc-8",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			296,
@@ -26,6 +28,7 @@
 		"img": "human-2",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			184,
@@ -37,6 +40,7 @@
 		"img": "warthog-3",
 		"enemy": true,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			440,
@@ -48,6 +52,7 @@
 		"img": "warthog-0",
 		"enemy": true,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			456,
@@ -59,6 +64,7 @@
 		"img": "warthog-5",
 		"enemy": true,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			376,
@@ -70,6 +76,7 @@
 		"img": "warthog-4",
 		"enemy": true,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			264,
@@ -81,6 +88,7 @@
 		"img": "robot-3",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			72,
@@ -92,6 +100,7 @@
 		"img": "robot-0",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			104,
@@ -103,6 +112,7 @@
 		"img": "robot-2",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [
 			[
 				200,
@@ -195,6 +205,7 @@
 		"img": "orc-2",
 		"enemy": true,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			360,
@@ -206,6 +217,7 @@
 		"img": "treant-2",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			376,
@@ -217,6 +229,7 @@
 		"img": "treant-1",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			344,
@@ -228,6 +241,7 @@
 		"img": "treant-3",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			440,
@@ -239,6 +253,7 @@
 		"img": "critter-25",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			456,
@@ -250,6 +265,7 @@
 		"img": "critter-4",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			120,
@@ -261,6 +277,7 @@
 		"img": "robot-1",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			152,
@@ -272,6 +289,7 @@
 		"img": "human-27",
 		"enemy": false,
 		"level": 1,
+		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			296,

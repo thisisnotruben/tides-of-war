@@ -50,7 +50,7 @@ namespace Game.Ui
 				ContentDB.ContentData contentData = Globals.contentDB.GetData(npc.Name);
 
 				subHeader.Text = "Healer cost: " + contentData.healerCost;
-				dialogue.BbcodeText = contentData.dialogue;
+				// dialogue.BbcodeText = contentData.dialogue; TODO
 
 				subHeader.Visible = player.hp < player.stats.hpMax.valueI;
 				heal.Visible = subHeader.Visible;

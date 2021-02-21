@@ -13,6 +13,7 @@ namespace Game.Actor
 		public static Player player;
 
 		public MenuHandlerController menu { get; private set; }
+		public CharacterCamera camera { get; protected set; }
 		public int xp { get; private set; }
 		public int gold;
 
@@ -45,10 +46,20 @@ namespace Game.Actor
 			GameMenu.player = this;
 			gold = 10_000;
 			// level = Stats.MAX_LEVEL;
+
+			camera = GetNode<CharacterCamera>("camera");
 			SetImg("human-20");
+
 			menu = GetNode<MenuHandlerController>("in_game_menu");
 			menu.ConnectPlayerToHud(this);
 			AddToGroup(Globals.SAVE_GROUP);
+		}
+		protected override void SetImg(string imgName)
+		{
+			base.SetImg(imgName);
+			Vector2 cameraPos = hitBox.GetNode<Node2D>("body").Position;
+			cameraPos.y = Math.Abs(cameraPos.y);
+			camera.Position = cameraPos;
 		}
 		public override void _UnhandledInput(InputEvent @event) { fsm.UnhandledInput(@event); }
 		public void SetXP(int addedXP, bool showLabel = true, bool fromSaveFile = false)
