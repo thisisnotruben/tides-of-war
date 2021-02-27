@@ -1,68 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=1]
-[ext_resource path="res://asset/img/font/mago1_48.tres" type="DynamicFont" id=2]
-[ext_resource path="res://asset/img/icon/icons.png" type="Texture" id=3]
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
-region = Rect2( 112, 320, 16, 16 )
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=1]
 
 [node name="control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 13.0145
+margin_top = 58.3535
+margin_right = 13.0145
+margin_bottom = 58.3535
 rect_min_size = Vector2( 0, 100 )
 theme = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="colorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-color = Color( 0.317647, 0.337255, 0.4, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="marginContainer" type="MarginContainer" parent="colorRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="hBoxContainer" type="HBoxContainer" parent="colorRect/marginContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 712.0
-margin_bottom = 1272.0
-custom_constants/separation = 16
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="textureRect" type="TextureRect" parent="colorRect/marginContainer/hBoxContainer"]
-margin_right = 80.0
-margin_bottom = 1264.0
-rect_min_size = Vector2( 80, 80 )
-texture = SubResource( 1 )
-stretch_mode = 6
-
-[node name="label" type="Label" parent="colorRect/marginContainer/hBoxContainer"]
-margin_left = 96.0
-margin_top = 613.0
-margin_right = 189.0
-margin_bottom = 651.0
-custom_fonts/font = ExtResource( 2 )
-text = "Muffin"
 __meta__ = {
 "_edit_use_anchors_": false
 }

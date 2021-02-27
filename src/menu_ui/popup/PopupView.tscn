@@ -1,13 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/menu_ui/popup/PopupController.cs" type="Script" id=1]
-[ext_resource path="res://asset/img/ui/grey3_bg.tres" type="Texture" id=2]
 [ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=5]
 [ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=7]
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=8]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=8]
 
 [node name="PopupView" type="CenterContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 8 )
@@ -17,16 +15,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bg" type="TextureRect" parent="."]
+[node name="panel" type="Panel" parent="."]
 margin_left = 360.0
 margin_top = 640.0
 margin_right = 360.0
 margin_bottom = 640.0
-theme = ExtResource( 8 )
-texture = ExtResource( 2 )
-expand = true
 
-[node name="m" type="MarginContainer" parent="."]
+[node name="marginContainer" type="MarginContainer" parent="."]
 margin_left = 310.0
 margin_top = 590.0
 margin_right = 410.0
@@ -36,8 +31,11 @@ custom_constants/margin_right = 50
 custom_constants/margin_top = 50
 custom_constants/margin_left = 50
 custom_constants/margin_bottom = 50
+__meta__ = {
+"_editor_description_": ""
+}
 
-[node name="save_load" type="VBoxContainer" parent="m"]
+[node name="save_load" type="VBoxContainer" parent="marginContainer"]
 visible = false
 margin_left = 50.0
 margin_top = 50.0
@@ -46,14 +44,14 @@ margin_bottom = 510.0
 theme = ExtResource( 8 )
 alignment = 1
 
-[node name="delete" type="Button" parent="m/save_load"]
+[node name="delete" type="Button" parent="marginContainer/save_load"]
 margin_right = 336.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Delete"
 
-[node name="save" type="Button" parent="m/save_load"]
+[node name="save" type="Button" parent="marginContainer/save_load"]
 margin_top = 116.0
 margin_right = 336.0
 margin_bottom = 228.0
@@ -61,7 +59,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Save"
 
-[node name="load" type="Button" parent="m/save_load"]
+[node name="load" type="Button" parent="marginContainer/save_load"]
 margin_top = 232.0
 margin_right = 336.0
 margin_bottom = 344.0
@@ -69,7 +67,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Load"
 
-[node name="back" type="Button" parent="m/save_load"]
+[node name="back" type="Button" parent="marginContainer/save_load"]
 margin_top = 348.0
 margin_right = 336.0
 margin_bottom = 460.0
@@ -77,7 +75,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Back"
 
-[node name="yes_no" type="VBoxContainer" parent="m"]
+[node name="yes_no" type="VBoxContainer" parent="marginContainer"]
 visible = false
 margin_left = 50.0
 margin_top = 50.0
@@ -87,31 +85,31 @@ theme = ExtResource( 8 )
 custom_constants/separation = 5
 alignment = 1
 
-[node name="label" type="Label" parent="m/yes_no"]
+[node name="label" type="Label" parent="marginContainer/yes_no"]
 margin_right = 336.0
-margin_bottom = 114.0
+margin_bottom = 226.0
 size_flags_vertical = 3
 theme = ExtResource( 8 )
 text = "Buy?"
 align = 1
 
-[node name="yes" type="Button" parent="m/yes_no"]
-margin_top = 119.0
+[node name="yes" type="Button" parent="marginContainer/yes_no"]
+margin_top = 231.0
 margin_right = 336.0
-margin_bottom = 231.0
+margin_bottom = 343.0
 rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Yes"
 
-[node name="no" type="Button" parent="m/yes_no"]
-margin_top = 236.0
+[node name="no" type="Button" parent="marginContainer/yes_no"]
+margin_top = 348.0
 margin_right = 336.0
-margin_bottom = 348.0
+margin_bottom = 460.0
 rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "No"
 
-[node name="error" type="VBoxContainer" parent="m"]
+[node name="error" type="VBoxContainer" parent="marginContainer"]
 visible = false
 margin_left = 50.0
 margin_top = 50.0
@@ -120,7 +118,7 @@ margin_bottom = 321.0
 theme = ExtResource( 8 )
 alignment = 1
 
-[node name="label" type="Label" parent="m/error"]
+[node name="label" type="Label" parent="marginContainer/error"]
 margin_right = 336.0
 margin_bottom = 155.0
 size_flags_vertical = 3
@@ -131,7 +129,7 @@ Full!"
 align = 1
 valign = 2
 
-[node name="okay" type="Button" parent="m/error"]
+[node name="okay" type="Button" parent="marginContainer/error"]
 margin_top = 159.0
 margin_right = 336.0
 margin_bottom = 271.0
@@ -139,7 +137,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Okay"
 
-[node name="exit" type="VBoxContainer" parent="m"]
+[node name="exit" type="VBoxContainer" parent="marginContainer"]
 visible = false
 margin_left = 50.0
 margin_top = 50.0
@@ -148,14 +146,14 @@ margin_bottom = 394.0
 theme = ExtResource( 8 )
 alignment = 1
 
-[node name="exit_game" type="Button" parent="m/exit"]
+[node name="exit_game" type="Button" parent="marginContainer/exit"]
 margin_right = 336.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Exit Game"
 
-[node name="exit_menu" type="Button" parent="m/exit"]
+[node name="exit_menu" type="Button" parent="marginContainer/exit"]
 margin_top = 116.0
 margin_right = 336.0
 margin_bottom = 228.0
@@ -163,7 +161,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "To Menu"
 
-[node name="back" type="Button" parent="m/exit"]
+[node name="back" type="Button" parent="marginContainer/exit"]
 margin_top = 232.0
 margin_right = 336.0
 margin_bottom = 344.0
@@ -171,7 +169,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Back"
 
-[node name="filter_options" type="VBoxContainer" parent="m"]
+[node name="filter_options" type="VBoxContainer" parent="marginContainer"]
 visible = false
 margin_left = 50.0
 margin_top = 50.0
@@ -180,14 +178,14 @@ margin_bottom = 510.0
 theme = ExtResource( 8 )
 alignment = 1
 
-[node name="all" type="Button" parent="m/filter_options"]
+[node name="all" type="Button" parent="marginContainer/filter_options"]
 margin_right = 336.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "All"
 
-[node name="active" type="Button" parent="m/filter_options"]
+[node name="active" type="Button" parent="marginContainer/filter_options"]
 margin_top = 116.0
 margin_right = 336.0
 margin_bottom = 228.0
@@ -195,7 +193,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Active"
 
-[node name="completed" type="Button" parent="m/filter_options"]
+[node name="completed" type="Button" parent="marginContainer/filter_options"]
 margin_top = 232.0
 margin_right = 336.0
 margin_bottom = 344.0
@@ -203,7 +201,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Completed"
 
-[node name="back" type="Button" parent="m/filter_options"]
+[node name="back" type="Button" parent="marginContainer/filter_options"]
 margin_top = 348.0
 margin_right = 336.0
 margin_bottom = 460.0
@@ -211,7 +209,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Back"
 
-[node name="add_to_slot" type="VBoxContainer" parent="m"]
+[node name="add_to_slot" type="VBoxContainer" parent="marginContainer"]
 visible = false
 margin_left = 50.0
 margin_top = 50.0
@@ -220,14 +218,14 @@ margin_bottom = 742.0
 theme = ExtResource( 8 )
 alignment = 1
 
-[node name="slot_1" type="Button" parent="m/add_to_slot"]
+[node name="slot_1" type="Button" parent="marginContainer/add_to_slot"]
 margin_right = 336.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Slot 1"
 
-[node name="slot_2" type="Button" parent="m/add_to_slot"]
+[node name="slot_2" type="Button" parent="marginContainer/add_to_slot"]
 margin_top = 116.0
 margin_right = 336.0
 margin_bottom = 228.0
@@ -235,7 +233,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Slot 2"
 
-[node name="slot_3" type="Button" parent="m/add_to_slot"]
+[node name="slot_3" type="Button" parent="marginContainer/add_to_slot"]
 margin_top = 232.0
 margin_right = 336.0
 margin_bottom = 344.0
@@ -243,7 +241,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Slot 3"
 
-[node name="slot_4" type="Button" parent="m/add_to_slot"]
+[node name="slot_4" type="Button" parent="marginContainer/add_to_slot"]
 margin_top = 348.0
 margin_right = 336.0
 margin_bottom = 460.0
@@ -251,7 +249,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Slot 4"
 
-[node name="clear_slot" type="Button" parent="m/add_to_slot"]
+[node name="clear_slot" type="Button" parent="marginContainer/add_to_slot"]
 margin_top = 464.0
 margin_right = 336.0
 margin_bottom = 576.0
@@ -259,7 +257,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Clear Slot"
 
-[node name="back" type="Button" parent="m/add_to_slot"]
+[node name="back" type="Button" parent="marginContainer/add_to_slot"]
 margin_top = 580.0
 margin_right = 336.0
 margin_bottom = 692.0
@@ -267,7 +265,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Back"
 
-[node name="repair" type="VBoxContainer" parent="m"]
+[node name="repair" type="VBoxContainer" parent="marginContainer"]
 visible = false
 margin_left = 50.0
 margin_top = 50.0
@@ -276,7 +274,7 @@ margin_bottom = 780.0
 theme = ExtResource( 8 )
 alignment = 1
 
-[node name="header" type="Label" parent="m/repair"]
+[node name="header" type="Label" parent="marginContainer/repair"]
 margin_right = 336.0
 margin_bottom = 64.0
 size_flags_vertical = 3
@@ -286,7 +284,7 @@ text = "--Cost--"
 align = 1
 valign = 2
 
-[node name="label" type="Label" parent="m/repair"]
+[node name="label" type="Label" parent="marginContainer/repair"]
 margin_top = 68.0
 margin_right = 336.0
 margin_bottom = 266.0
@@ -298,7 +296,7 @@ Armor: 20
 All: 60"
 valign = 2
 
-[node name="repair_all" type="Button" parent="m/repair"]
+[node name="repair_all" type="Button" parent="marginContainer/repair"]
 margin_top = 270.0
 margin_right = 336.0
 margin_bottom = 382.0
@@ -306,7 +304,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "All"
 
-[node name="repair_weapon" type="Button" parent="m/repair"]
+[node name="repair_weapon" type="Button" parent="marginContainer/repair"]
 margin_top = 386.0
 margin_right = 336.0
 margin_bottom = 498.0
@@ -314,7 +312,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Weapon"
 
-[node name="repair_armor" type="Button" parent="m/repair"]
+[node name="repair_armor" type="Button" parent="marginContainer/repair"]
 margin_top = 502.0
 margin_right = 336.0
 margin_bottom = 614.0
@@ -322,23 +320,19 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Armor"
 
-[node name="back" type="Button" parent="m/repair"]
+[node name="back" type="Button" parent="marginContainer/repair"]
 margin_top = 618.0
 margin_right = 336.0
 margin_bottom = 730.0
 rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Back"
-[connection signal="draw" from="." to="." method="_OnPopupDraw"]
-[connection signal="hide" from="." to="." method="_OnPopupHide"]
-[connection signal="resized" from="m" to="." method="_OnMResized"]
-[connection signal="pressed" from="m/save_load/back" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="m/yes_no/no" to="." method="_OnBackPressed"]
-[connection signal="draw" from="m/error" to="." method="_OnErrorDraw"]
-[connection signal="pressed" from="m/error/okay" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="m/exit/back" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="m/filter_options/back" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="m/add_to_slot/back" to="." method="_OnBackPressed"]
-[connection signal="draw" from="m/repair" to="." method="_OnRepairDraw"]
-[connection signal="hide" from="m/repair" to="." method="_OnRepairHide"]
-[connection signal="pressed" from="m/repair/back" to="." method="_OnBackPressed"]
+[connection signal="hide" from="." to="." method="OnHide"]
+[connection signal="resized" from="marginContainer" to="." method="OnResized"]
+[connection signal="pressed" from="marginContainer/save_load/back" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="marginContainer/yes_no/no" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="marginContainer/error/okay" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="marginContainer/exit/back" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="marginContainer/filter_options/back" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="marginContainer/add_to_slot/back" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="marginContainer/repair/back" to="." method="_OnBackPressed"]

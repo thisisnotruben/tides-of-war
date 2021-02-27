@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://asset/img/font/mago1_144.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu_ui/about/AboutView.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/menu_ui/saveLoad/SaveLoadView.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/menu_ui/startMenu/StartMenuController.cs" type="Script" id=4]
-[ext_resource path="res://asset/img/ui/grey2_bg.tres" type="Texture" id=6]
+[ext_resource path="res://src/menu_ui/main/StartMenuController.cs" type="Script" id=4]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=10]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=10]
 
 [node name="start_menu" type="Control"]
 anchor_right = 1.0
@@ -17,11 +16,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="bg" type="ColorRect" parent="."]
+[node name="bg" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 10 )
-color = Color( 0, 0, 0, 0.264706 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="list_of_menus" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -35,14 +36,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bg" type="TextureRect" parent="list_of_menus"]
+[node name="bg" type="ColorRect" parent="list_of_menus"]
 margin_left = 50.0
 margin_top = 50.0
 margin_right = 670.0
 margin_bottom = 1230.0
 theme = ExtResource( 10 )
-texture = ExtResource( 6 )
-expand = true
+color = Color( 0.14902, 0.14902, 0.14902, 1 )
 
 [node name="m" type="MarginContainer" parent="list_of_menus"]
 margin_left = 50.0
@@ -71,16 +71,17 @@ __meta__ = {
 
 [node name="label" type="Label" parent="list_of_menus/m/main_menu/v"]
 margin_right = 520.0
-margin_bottom = 231.0
+margin_bottom = 181.0
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 text = "Tides of
 War"
 align = 1
 valign = 1
 
 [node name="newGame" type="Button" parent="list_of_menus/m/main_menu/v"]
-margin_top = 235.0
+margin_top = 185.0
 margin_right = 520.0
-margin_bottom = 400.0
+margin_bottom = 360.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 10 )
@@ -91,9 +92,9 @@ __meta__ = {
 }
 
 [node name="load" type="Button" parent="list_of_menus/m/main_menu/v"]
-margin_top = 404.0
+margin_top = 364.0
 margin_right = 520.0
-margin_bottom = 570.0
+margin_bottom = 540.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 10 )
@@ -104,9 +105,9 @@ __meta__ = {
 }
 
 [node name="settings" type="Button" parent="list_of_menus/m/main_menu/v"]
-margin_top = 574.0
+margin_top = 544.0
 margin_right = 520.0
-margin_bottom = 740.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 10 )
@@ -117,9 +118,9 @@ __meta__ = {
 }
 
 [node name="about" type="Button" parent="list_of_menus/m/main_menu/v"]
-margin_top = 744.0
+margin_top = 724.0
 margin_right = 520.0
-margin_bottom = 910.0
+margin_bottom = 900.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 10 )
@@ -130,7 +131,7 @@ __meta__ = {
 }
 
 [node name="exit" type="Button" parent="list_of_menus/m/main_menu/v"]
-margin_top = 914.0
+margin_top = 904.0
 margin_right = 520.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
@@ -155,6 +156,24 @@ margin_bottom = 1130.0
 visible = false
 text = "Load Game"
 
+[node name="s" parent="list_of_menus/m/save_load/v" index="1"]
+margin_top = 0.0
+margin_right = 520.0
+margin_bottom = 1080.0
+
+[node name="c" parent="list_of_menus/m/save_load/v/s" index="0"]
+margin_right = 520.0
+
+[node name="g" parent="list_of_menus/m/save_load/v/s/c" index="0"]
+margin_left = 107.0
+margin_right = 413.0
+
+[node name="back" parent="list_of_menus/m/save_load/v/s" index="1"]
+margin_left = 92.0
+margin_top = 908.0
+margin_right = 428.0
+margin_bottom = 1020.0
+
 [node name="about" parent="list_of_menus/m" instance=ExtResource( 2 )]
 visible = false
 anchor_right = 0.0
@@ -165,6 +184,7 @@ margin_right = 570.0
 margin_bottom = 1130.0
 
 [node name="popup" parent="." instance=ExtResource( 7 )]
+visible = false
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/newGame" to="." method="_OnNewGamePressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/load" to="." method="_OnLoadPressed"]
 [connection signal="pressed" from="list_of_menus/m/main_menu/v/about" to="." method="_OnAboutPressed"]

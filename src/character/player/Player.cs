@@ -12,7 +12,7 @@ namespace Game.Actor
 	{
 		public static Player player;
 
-		public MenuHandlerController menu { get; private set; }
+		public MenuMasterController menu { get; private set; }
 		public CharacterCamera camera { get; protected set; }
 		public int xp { get; private set; }
 		public int gold;
@@ -50,7 +50,7 @@ namespace Game.Actor
 			camera = GetNode<CharacterCamera>("camera");
 			SetImg("human-20");
 
-			menu = GetNode<MenuHandlerController>("in_game_menu");
+			menu = GetNode<MenuMasterController>("menu");
 			menu.ConnectPlayerToHud(this);
 			AddToGroup(Globals.SAVE_GROUP);
 		}
@@ -95,12 +95,12 @@ namespace Game.Actor
 
 			// inventory
 			GC.Array<string> commodities = new GC.Array<string>();
-			menu.mainMenuController.playerInventory.GetCommodities().ForEach(c => commodities.Add(c));
+			menu.gameMenu.playerInventory.GetCommodities().ForEach(c => commodities.Add(c));
 			payload[NameDB.SaveTag.INVENTORY] = commodities;
 
 			// spellBook
 			commodities.Clear();
-			menu.mainMenuController.playerSpellBook.GetCommodities().ForEach(c => commodities.Add(c));
+			menu.gameMenu.playerSpellBook.GetCommodities().ForEach(c => commodities.Add(c));
 			payload[NameDB.SaveTag.SPELL_BOOK] = commodities;
 
 			// weapon & armor
@@ -122,13 +122,13 @@ namespace Game.Actor
 			// inventory
 			foreach (string itemName in (GC.Array)payload[NameDB.SaveTag.INVENTORY])
 			{
-				menu.mainMenuController.playerInventory.AddCommodity(itemName);
+				menu.gameMenu.playerInventory.AddCommodity(itemName);
 			}
 
 			// spellBook
 			foreach (string spellName in (GC.Array)payload[NameDB.SaveTag.SPELL_BOOK])
 			{
-				menu.mainMenuController.playerSpellBook.AddCommodity(spellName);
+				menu.gameMenu.playerSpellBook.AddCommodity(spellName);
 			}
 
 			// weapon & armor

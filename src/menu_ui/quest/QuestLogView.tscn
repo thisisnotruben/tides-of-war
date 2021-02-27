@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/menu_ui/quest/QuestLogController.cs" type="Script" id=2]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=7]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=7]
 
 [node name="QuestLogView" type="Control"]
 anchor_right = 1.0
@@ -13,71 +13,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="s" type="VSplitContainer" parent="."]
+[node name="v" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 7 )
-custom_constants/separation = 0
-collapsed = true
-
-[node name="v" type="VBoxContainer" parent="s"]
-margin_right = 720.0
-margin_bottom = 916.0
-theme = ExtResource( 7 )
 custom_constants/separation = 35
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="header" type="Label" parent="s/v"]
+[node name="filter" type="Button" parent="v"]
 margin_right = 720.0
-margin_bottom = 114.0
-theme = ExtResource( 7 )
-text = "Quest Log"
-align = 1
-autowrap = true
-
-[node name="filter" type="Button" parent="s/v"]
-margin_left = 192.0
-margin_top = 149.0
-margin_right = 528.0
-margin_bottom = 261.0
-rect_min_size = Vector2( 336, 112 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource( 7 )
+margin_bottom = 92.0
 text = "Filter"
 
-[node name="s" type="ScrollContainer" parent="s/v"]
-margin_top = 296.0
+[node name="quest_nodes" type="VBoxContainer" parent="v"]
+margin_top = 127.0
 margin_right = 720.0
-margin_bottom = 916.0
-rect_min_size = Vector2( 620, 620 )
-theme = ExtResource( 7 )
-scroll_horizontal_enabled = false
-
-[node name="quest_nodes" type="VBoxContainer" parent="s/v/s"]
+margin_bottom = 127.0
 theme = ExtResource( 7 )
 custom_constants/separation = 20
 
-[node name="buttons" type="VBoxContainer" parent="s"]
-margin_top = 924.0
-margin_right = 720.0
-margin_bottom = 1280.0
-size_flags_vertical = 3
-theme = ExtResource( 7 )
-alignment = 2
-
-[node name="button" type="Button" parent="s/buttons"]
-margin_left = 192.0
-margin_top = 244.0
-margin_right = 528.0
-margin_bottom = 356.0
-rect_min_size = Vector2( 336, 112 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource( 7 )
-text = "Back"
-
 [node name="popup" parent="." instance=ExtResource( 5 )]
-theme = ExtResource( 7 )
 [connection signal="hide" from="." to="." method="_OnQuestLogNodeHide"]
-[connection signal="pressed" from="s/v/filter" to="." method="_OnFilterPressed"]
-[connection signal="pressed" from="s/buttons/button" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="v/filter" to="." method="_OnFilterPressed"]

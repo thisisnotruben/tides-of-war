@@ -13,12 +13,8 @@ namespace Game.Ui
 		{
 			base._Ready();
 
-			buyBttn.Connect("pressed", this, nameof(_OnBuyPressed));
-			sellBttn.Connect("pressed", this, nameof(_OnSellPressed));
-
-			addToHudBttn.Disconnect("button_down", this, nameof(OnSlotMoved));
-			addToHudBttn.Disconnect("button_up", this, nameof(OnSlotMoved));
-			addToHudBttn.Disconnect("pressed", this, nameof(OnAddToHudPressed));
+			buyBttn.Connect("pressed", this, nameof(OnBuyPressed));
+			sellBttn.Connect("pressed", this, nameof(OnSellPressed));
 		}
 		public override void _OnMovePressed(int by)
 		{
@@ -38,12 +34,12 @@ namespace Game.Ui
 			Display(commodityWorldName, allowMove);
 
 			// set which buttons to show accordingly
-			buyBttn.Text = Globals.spellDB.HasData(commodityWorldName) ? "Train" : "Buy";
+			buyBttn.Text = Globals.spellDB.HasData(commodityWorldName) ? "Learn" : "Buy";
 			HideExcept(alreadyHave ? new Control[] { } : new Control[] { buy ? buyBttn : sellBttn });
 		}
-		public void _OnBuyPressed()
+		private void OnBuyPressed()
 		{
-			RouteConnections(nameof(_OnBuyConfirm));
+			RouteConnections(nameof(OnBuyConfirm));
 			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
 			if (Globals.spellDB.HasData(commodityWorldName)
@@ -61,7 +57,7 @@ namespace Game.Ui
 				popupController.ShowError("Not Enough\nGold!");
 			}
 		}
-		public void _OnBuyConfirm()
+		private void OnBuyConfirm()
 		{
 			PlaySound(NameDB.UI.SELL_BUY);
 			if (popupController.yesNoLabel.Text.Equals("Learn?"))
@@ -72,14 +68,14 @@ namespace Game.Ui
 			EmitSignal(nameof(OnTransaction), commodityWorldName, -PickableDB.GetGoldCost(commodityWorldName), true);
 			popupController.Hide();
 		}
-		public void _OnSellPressed()
+		private void OnSellPressed()
 		{
 			RouteConnections(nameof(_OnSellConfirm));
 			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
 			popupController.ShowConfirm("Sell?");
 		}
-		public void _OnSellConfirm()
+		private void _OnSellConfirm()
 		{
 			PlaySound(NameDB.UI.SELL_BUY);
 			EmitSignal(nameof(OnTransaction), commodityWorldName, PickableDB.GetGoldCost(commodityWorldName), false);

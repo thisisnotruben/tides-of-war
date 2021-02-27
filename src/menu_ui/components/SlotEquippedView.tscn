@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=1]
+
+[node name="weapon" type="Button"]
+margin_left = 140.0
+margin_right = 284.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 128, 128 )
+theme = ExtResource( 1 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="m" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 12
+custom_constants/margin_top = 12
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="TextureRect" parent="m"]
+show_behind_parent = true
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 132.0
+margin_bottom = 132.0
+rect_pivot_offset = Vector2( 84, 84 )
+expand = true

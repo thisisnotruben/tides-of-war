@@ -103,7 +103,7 @@
     <Compile Include="src\menu_ui\components\SlotGridController.cs" />
     <Compile Include="src\menu_ui\cursor\MoveCursorController.cs" />
     <Compile Include="src\menu_ui\dialogue\DialogueController.cs" />
-    <Compile Include="src\menu_ui\handler\MenuHandlerController.cs" />
+    <Compile Include="src\menu_ui\main\MenuMasterController.cs" />
     <Compile Include="src\menu_ui\hud\CharacterStatusController.cs" />
     <Compile Include="src\menu_ui\hud\HudControlController.cs" />
     <Compile Include="src\menu_ui\hud\HudSlotController.cs" />
@@ -122,7 +122,7 @@
     <Compile Include="src\menu_ui\sceneLoader\SceneLoaderController.cs" />
     <Compile Include="src\menu_ui\spell\ItemInfoSpellController.cs" />
     <Compile Include="src\menu_ui\spell\SpellBookController.cs" />
-    <Compile Include="src\menu_ui\startMenu\StartMenuController.cs" />
+    <Compile Include="src\menu_ui\main\StartMenuController.cs" />
     <Compile Include="src\menu_ui\stats\StatsController.cs" />
     <Compile Include="src\missile\Missile.cs" />
     <Compile Include="src\missile\MissileSpell.cs" />

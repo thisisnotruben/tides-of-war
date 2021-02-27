@@ -2,10 +2,10 @@
 
 [ext_resource path="res://src/menu_ui/components/ItemInfoView.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/menu_ui/components/SlotGrid.tscn" type="PackedScene" id=3]
-[ext_resource path="res://asset/img/ui/black_bg_icon.tres" type="Texture" id=7]
+[ext_resource path="res://src/menu_ui/components/SlotEquippedView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/menu_ui/inventory/ItemInfoInventoryController.cs" type="Script" id=8]
 [ext_resource path="res://src/menu_ui/inventory/InventoryController.cs" type="Script" id=9]
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=10]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=10]
 
 [node name="InventoryView" type="Control"]
 anchor_right = 1.0
@@ -19,7 +19,6 @@ __meta__ = {
 [node name="s" type="VSplitContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 10 )
 collapsed = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -27,112 +26,44 @@ __meta__ = {
 
 [node name="v" type="VBoxContainer" parent="s"]
 margin_right = 720.0
-margin_bottom = 984.0
-theme = ExtResource( 10 )
-custom_constants/separation = 55
-
-[node name="header" type="Label" parent="s/v"]
-margin_right = 720.0
-margin_bottom = 114.0
-theme = ExtResource( 10 )
-text = "Inventory"
-align = 1
-valign = 1
+margin_bottom = 1280.0
+custom_constants/separation = 8
 
 [node name="slots" type="HBoxContainer" parent="s/v"]
-margin_top = 169.0
 margin_right = 720.0
-margin_bottom = 369.0
-theme = ExtResource( 10 )
+margin_bottom = 128.0
 custom_constants/separation = 120
 alignment = 1
-
-[node name="weapon" type="TextureButton" parent="s/v/slots"]
-margin_left = 100.0
-margin_right = 300.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 200, 200 )
-theme = ExtResource( 10 )
-texture_normal = ExtResource( 7 )
-expand = true
-
-[node name="m" type="MarginContainer" parent="s/v/slots/weapon"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_constants/margin_right = 16
-custom_constants/margin_top = 16
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 16
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
-[node name="icon" type="TextureRect" parent="s/v/slots/weapon/m"]
-show_behind_parent = true
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 184.0
-margin_bottom = 184.0
-rect_pivot_offset = Vector2( 84, 84 )
-expand = true
+[node name="weapon" parent="s/v/slots" instance=ExtResource( 4 )]
+margin_left = 172.0
+margin_right = 300.0
+margin_bottom = 128.0
+theme = null
 
-[node name="armor" type="TextureButton" parent="s/v/slots"]
+[node name="armor" parent="s/v/slots" instance=ExtResource( 4 )]
 margin_left = 420.0
-margin_right = 620.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 200, 200 )
-theme = ExtResource( 10 )
-texture_normal = ExtResource( 7 )
-expand = true
-
-[node name="m" type="MarginContainer" parent="s/v/slots/armor"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_constants/margin_right = 16
-custom_constants/margin_top = 16
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 16
-
-[node name="icon" type="TextureRect" parent="s/v/slots/armor/m"]
-show_behind_parent = true
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 184.0
-margin_bottom = 184.0
-rect_pivot_offset = Vector2( 84, 84 )
-expand = true
+margin_right = 548.0
+margin_bottom = 128.0
+theme = null
 
 [node name="c" type="CenterContainer" parent="s/v"]
-margin_top = 424.0
+margin_top = 136.0
 margin_right = 720.0
-margin_bottom = 984.0
-theme = ExtResource( 10 )
+margin_bottom = 696.0
 
 [node name="SlotGrid" parent="s/v/c" instance=ExtResource( 3 )]
 margin_left = 80.0
 margin_right = 640.0
+theme = null
 
-[node name="buttons" type="VBoxContainer" parent="s"]
-margin_top = 996.0
-margin_right = 720.0
-margin_bottom = 1280.0
-theme = ExtResource( 10 )
-alignment = 2
-
-[node name="back" type="Button" parent="s/buttons"]
-margin_left = 192.0
-margin_top = 172.0
-margin_right = 528.0
-margin_bottom = 284.0
-rect_min_size = Vector2( 336, 112 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource( 10 )
-text = "Back"
-
-[node name="item_info" parent="." instance=ExtResource( 2 )]
+[node name="itemInfo" parent="." instance=ExtResource( 2 )]
 visible = false
+theme = null
 script = ExtResource( 8 )
-[connection signal="pressed" from="s/buttons/back" to="." method="_OnBackPressed"]
+[connection signal="draw" from="." to="." method="OnDraw"]
+[connection signal="pressed" from="s/v/slots/weapon" to="." method="OnEquippedSlotPressed" binds= [ true ]]
+[connection signal="pressed" from="s/v/slots/armor" to="." method="OnEquippedSlotPressed" binds= [ false ]]

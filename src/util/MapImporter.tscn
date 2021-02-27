@@ -3,7 +3,8 @@
 [ext_resource path="res://src/util/MapImporter.cs" type="Script" id=1]
 [ext_resource path="res://src/util/MapImporter.gd" type="Script" id=2]
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=3]
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=5]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=5]
+
 
 [node name="map_importer" type="Node"]
 script = ExtResource( 1 )

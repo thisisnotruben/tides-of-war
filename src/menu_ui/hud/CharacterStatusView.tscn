@@ -3,7 +3,7 @@
 [ext_resource path="res://asset/img/font/mago1_48.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu_ui/hud/CharacterStatusController.cs" type="Script" id=2]
 [ext_resource path="res://asset/img/ui/progressBarBg.tres" type="Texture" id=3]
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=4]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=4]
 [ext_resource path="res://asset/img/ui/progressBarFg.tres" type="Texture" id=5]
 [ext_resource path="res://asset/img/ui/grey_button.tres" type="Texture" id=6]
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=7]
@@ -53,6 +53,7 @@ margin_right = 346.0
 margin_bottom = 51.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.14902, 0.14902, 0.14902, 1 )
 text = "Unit Name"
 align = 1
 valign = 1

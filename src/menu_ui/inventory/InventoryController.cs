@@ -7,58 +7,36 @@ namespace Game.Ui
 	{
 		public readonly InventoryModel inventory = new InventoryModel();
 		private SlotGridController inventorySlots;
-		public ItemInfoInventoryController itemInfoInventoryController;
+		public ItemInfoInventoryController inventoryItemInfo;
 		protected Control mainContent;
 		protected TextureRect weaponIcon, armorIcon;
 
 		public override void _Ready()
 		{
-			mainContent = GetNode<Control>("s");
+			mainContent = GetChild<Control>(0);
 
 			weaponIcon = GetNode<TextureRect>("s/v/slots/weapon/m/icon");
 			armorIcon = GetNode<TextureRect>("s/v/slots/armor/m/icon");
 
 			inventorySlots = GetNode<SlotGridController>("s/v/c/SlotGrid");
-			Connect("draw", this, nameof(_OnInventoryControllerDraw));
 
-			itemInfoInventoryController = GetNode<ItemInfoInventoryController>("item_info");
-			itemInfoInventoryController.itemList = inventory;
-			itemInfoInventoryController.Connect("hide", this, nameof(_OnInventoryControllerHide));
-			itemInfoInventoryController.Connect(nameof(ItemInfoInventoryController.ItemEquipped),
-				this, nameof(_OnItemEquipped));
+			inventoryItemInfo = GetChild<ItemInfoInventoryController>(1);
+			inventoryItemInfo.itemList = inventory;
+			inventoryItemInfo.Connect("hide", this, nameof(OnInventoryControllerHide));
+			inventoryItemInfo.Connect(nameof(ItemInfoInventoryController.ItemEquipped), this, nameof(OnItemEquipped));
 
 			// connect slot events
 			foreach (SlotController slot in inventorySlots.GetSlots())
 			{
-				slot.button.Connect("pressed", this, nameof(_OnInventoryIndexSelected),
+				slot.button.Connect("pressed", this, nameof(OnInventoryIndexSelected),
 					new Godot.Collections.Array() { slot.GetIndex() });
 			}
 
 			// refresh slots whenever an item is dropped from inventory
-			itemInfoInventoryController.Connect(nameof(ItemInfoInventoryController.RefreshSlots),
-				this, nameof(RefreshSlots));
-
-			TextureButton weaponSlot = GetNode<TextureButton>("s/v/slots/weapon"),
-				armorSlot = GetNode<TextureButton>("s/v/slots/armor");
-
-			weaponSlot.Connect("pressed", this, nameof(_OnEquippedSlotPressed),
-				new Godot.Collections.Array() { true });
-			armorSlot.Connect("pressed", this, nameof(_OnEquippedSlotPressed),
-				new Godot.Collections.Array() { false });
-
-			// connect button effects
-			weaponSlot.Connect("button_down", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { weaponSlot, true });
-			armorSlot.Connect("button_down", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { armorSlot, true });
-
-			weaponSlot.Connect("button_up", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { weaponSlot, false });
-			armorSlot.Connect("button_up", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { armorSlot, false });
+			inventoryItemInfo.Connect(nameof(ItemInfoInventoryController.RefreshSlots), this, nameof(RefreshSlots));
 		}
-		public void _OnInventoryControllerDraw() { RefreshSlots(); }
-		public void RefreshSlots()
+		private void OnDraw() { RefreshSlots(); }
+		private void RefreshSlots()
 		{
 			inventorySlots.ClearSlots();
 			for (int i = 0; i < inventory.count; i++)
@@ -67,13 +45,13 @@ namespace Game.Ui
 					Commodity.GetCoolDown(player.GetPath(), inventory.GetCommodity(i)));
 			}
 		}
-		public void _OnInventoryControllerHide()
+		private void OnInventoryControllerHide()
 		{
 			PlaySound(NameDB.UI.MERCHANT_CLOSE);
-			itemInfoInventoryController.Hide();
+			inventoryItemInfo.Hide();
 			mainContent.Show();
 		}
-		public void _OnItemEquipped(string worldName, bool on)
+		private void OnItemEquipped(string worldName, bool on)
 		{
 			ItemDB.ItemData itemData = Globals.itemDB.GetData(worldName);
 			(itemData.type == ItemDB.ItemType.ARMOR
@@ -81,7 +59,7 @@ namespace Game.Ui
 				: weaponIcon
 			).Texture = on ? itemData.icon : null;
 		}
-		public void _OnInventoryIndexSelected(int slotIndex)
+		private void OnInventoryIndexSelected(int slotIndex)
 		{
 			// don't want to click on an empty slot
 			if (slotIndex >= inventory.count)
@@ -92,17 +70,17 @@ namespace Game.Ui
 			PlaySound(NameDB.UI.INVENTORY_OPEN);
 			mainContent.Hide();
 
-			itemInfoInventoryController.selectedSlotIdx = slotIndex;
-			itemInfoInventoryController.Display(inventory.GetCommodity(slotIndex), true);
+			inventoryItemInfo.selectedSlotIdx = slotIndex;
+			inventoryItemInfo.Display(inventory.GetCommodity(slotIndex), true);
 		}
-		public void _OnEquippedSlotPressed(bool weapon)
+		private void OnEquippedSlotPressed(bool weapon)
 		{
-			if ((weapon && player.weapon != null) || (!weapon && player.vest != null))
+			if ((weapon && player?.weapon != null) || (!weapon && player?.vest != null))
 			{
 				mainContent.Hide();
-				itemInfoInventoryController.Display(weapon ? player.weapon.worldName : player.vest.worldName, false);
-				itemInfoInventoryController.equipBttn.Hide();
-				itemInfoInventoryController.unequipBttn.Show();
+				inventoryItemInfo.Display(weapon ? player.weapon.worldName : player.vest.worldName, false);
+				inventoryItemInfo.equipBttn.Hide();
+				inventoryItemInfo.unequipBttn.Show();
 			}
 		}
 	}

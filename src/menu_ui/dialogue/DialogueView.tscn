@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=2]
-[ext_resource path="res://src/menu_ui/merchant/MerchantView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=6]
 [ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=8]
 [ext_resource path="res://src/menu_ui/dialogue/DialogueController.cs" type="Script" id=9]
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=10]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=10]
 
 [node name="DialogueView" type="Control"]
 anchor_right = 1.0
@@ -21,158 +20,112 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 10 )
 collapsed = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="control" type="VBoxContainer" parent="s"]
+[node name="vBoxContainer" type="VBoxContainer" parent="s"]
 margin_right = 720.0
-margin_bottom = 114.0
-theme = ExtResource( 10 )
-
-[node name="header" type="Label" parent="s/control"]
-margin_right = 720.0
-margin_bottom = 114.0
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-text = "Unit Name"
-align = 1
-autowrap = true
+margin_bottom = 1176.0
+size_flags_vertical = 3
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="sub_header" type="Label" parent="s/control"]
-visible = false
-margin_top = 93.0
+[node name="header" type="Label" parent="s/vBoxContainer"]
 margin_right = 720.0
-margin_bottom = 182.0
+margin_bottom = 114.0
 size_flags_vertical = 1
-theme = ExtResource( 10 )
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="subHeader" type="Label" parent="s/vBoxContainer"]
+margin_top = 114.0
+margin_right = 720.0
+margin_bottom = 165.0
+size_flags_vertical = 1
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 align = 1
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="s" type="VSplitContainer" parent="s"]
-margin_top = 126.0
+[node name="text" type="RichTextLabel" parent="s/vBoxContainer"]
+margin_top = 165.0
 margin_right = 720.0
-margin_bottom = 1280.0
+margin_bottom = 1176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 10 )
-collapsed = true
-
-[node name="text" type="RichTextLabel" parent="s/s"]
-margin_right = 720.0
-margin_bottom = 1030.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource( 10 )
 custom_fonts/bold_font = ExtResource( 8 )
 custom_fonts/normal_font = ExtResource( 2 )
-custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_colors/default_color = Color( 0.8, 0.8, 0.8, 1 )
 custom_constants/table_vseparation = 0
 custom_constants/table_hseparation = 0
 custom_constants/line_separation = 0
 bbcode_enabled = true
 scroll_active = false
-
-[node name="v" type="VBoxContainer" parent="s/s"]
-margin_top = 1042.0
-margin_right = 720.0
-margin_bottom = 1154.0
-theme = ExtResource( 10 )
-alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="heal" type="Button" parent="s/s/v"]
+[node name="hBoxContainer" type="HBoxContainer" parent="s"]
+margin_top = 1188.0
+margin_right = 720.0
+margin_bottom = 1280.0
+
+[node name="heal" type="Button" parent="s/hBoxContainer"]
 visible = false
-margin_left = 191.0
-margin_top = -1.0
-margin_right = 527.0
-margin_bottom = 111.0
-rect_min_size = Vector2( 336, 112 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource( 10 )
+margin_right = 358.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
 text = "Heal"
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="buy" type="Button" parent="s/s/v"]
+[node name="accept" type="Button" parent="s/hBoxContainer"]
 visible = false
-margin_left = 191.0
-margin_top = 115.0
-margin_right = 527.0
-margin_bottom = 227.0
-rect_min_size = Vector2( 336, 112 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource( 10 )
-text = "Buy"
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="accept" type="Button" parent="s/s/v"]
-visible = false
-margin_left = 191.0
-margin_top = 231.0
-margin_right = 527.0
-margin_bottom = 343.0
-rect_min_size = Vector2( 336, 112 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource( 10 )
+margin_left = 241.0
+margin_right = 478.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
 text = "Accept"
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="finish" type="Button" parent="s/s/v"]
+[node name="finish" type="Button" parent="s/hBoxContainer"]
 visible = false
-margin_left = 191.0
-margin_top = 347.0
-margin_right = 527.0
-margin_bottom = 459.0
-rect_min_size = Vector2( 336, 112 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource( 10 )
-text = "Complete"
+margin_left = 362.0
+margin_right = 720.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+text = "Finish"
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="back" type="Button" parent="s/s/v"]
-margin_left = 192.0
-margin_right = 528.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 336, 112 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource( 10 )
-text = "Back"
+[node name="close" type="Button" parent="s/hBoxContainer"]
+margin_right = 720.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+text = "Close"
 __meta__ = {
 "_editor_description_": ""
 }
-
-[node name="merchant" parent="." instance=ExtResource( 4 )]
-visible = false
 
 [node name="popup" parent="." instance=ExtResource( 6 )]
-[connection signal="draw" from="." to="." method="_OnDialogueDraw"]
-[connection signal="hide" from="." to="." method="_OnDialogueHide"]
-[connection signal="pressed" from="s/s/v/heal" to="." method="_OnHealPressed"]
-[connection signal="pressed" from="s/s/v/buy" to="." method="_OnBuyPressed"]
-[connection signal="pressed" from="s/s/v/accept" to="." method="_OnAcceptPressed"]
-[connection signal="pressed" from="s/s/v/finish" to="." method="_OnFinishPressed"]
-[connection signal="pressed" from="s/s/v/back" to="." method="_OnBackPressed"]
+theme = null
+[connection signal="hide" from="." to="." method="OnHide"]
+[connection signal="pressed" from="s/hBoxContainer/heal" to="." method="OnHealPressed"]
+[connection signal="pressed" from="s/hBoxContainer/accept" to="." method="OnAcceptPressed"]
+[connection signal="pressed" from="s/hBoxContainer/finish" to="." method="OnFinishPressed"]

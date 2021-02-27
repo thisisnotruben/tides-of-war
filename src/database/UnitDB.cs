@@ -9,21 +9,23 @@ namespace Game.Database
 		{
 			public readonly string name, img;
 			public readonly bool enemy;
-			public readonly Vector2 spawnPos;
-			public readonly Vector2[] path;
 			public readonly int level;
+			public readonly string dialogue;
+			public readonly Vector2[] path;
+			public readonly Vector2 spawnPos;
 
-			public UnitData(string name, string img, bool enemy, Vector2 spawnPos, Vector2[] path, int level)
+			public UnitData(string name, string img, bool enemy,
+			int level, string dialogue, Vector2[] path, Vector2 spawnPos)
 			{
 				this.name = name;
 				this.img = img;
 				this.enemy = enemy;
-				this.spawnPos = spawnPos;
-				this.path = path;
 				this.level = level;
+				this.dialogue = dialogue;
+				this.path = path;
+				this.spawnPos = spawnPos;
 			}
 		}
-
 
 		public override void LoadData(string path)
 		{
@@ -52,9 +54,10 @@ namespace Game.Database
 					name: (string)dict[nameof(UnitData.name)],
 					img: (string)dict[nameof(UnitData.img)],
 					enemy: (bool)dict[nameof(UnitData.enemy)],
-					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1]),
+					level: (int)(Single)dict[nameof(UnitData.level)],
+					dialogue: (string)dict[nameof(UnitData.dialogue)],
 					path: unitPath,
-					level: (int)(Single)dict[nameof(UnitData.level)]
+					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1])
 				));
 			}
 		}

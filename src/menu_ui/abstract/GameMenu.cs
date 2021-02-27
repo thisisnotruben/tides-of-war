@@ -1,8 +1,6 @@
 using Godot;
 using Game.Actor;
 using Game.Database;
-using Game.GameItem;
-using System.Linq;
 namespace Game.Ui
 {
 	public abstract class GameMenu : Control
@@ -10,7 +8,6 @@ namespace Game.Ui
 		public static Player player;
 
 		public void PlaySound(string soundName) { Globals.soundPlayer.PlaySound(soundName); }
-		public void OnSlotMoved(Control control, bool down) { control.RectScale = down ? new Vector2(0.8f, 0.8f) : Vector2.One; }
 		public void CheckHudSlots(InventoryModel inventoryModel, string commodityWorldName)
 		{
 			HudSlotController hudSlotController;

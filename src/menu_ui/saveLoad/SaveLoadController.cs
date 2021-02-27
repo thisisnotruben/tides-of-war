@@ -5,15 +5,19 @@ namespace Game.Ui
 	public class SaveLoadController : GameMenu
 	{
 		private readonly SaveLoadModel saveLoadModel = new SaveLoadModel();
-		private PopupController popupController;
+		private Control main;
+		private PopupController popup;
 		private int index;
 
 		public override void _Ready()
 		{
+			main = GetChild<Control>(0);
+
+			popup = GetChild<PopupController>(1);
+			popup.Connect("hide", this, nameof(OnHide));
+			popup.saveBttn.Connect("pressed", this, nameof(OnSavePressed));
+
 			AddChild(saveLoadModel);
-			popupController = GetNode<PopupController>("popup");
-			popupController.Connect("hide", this, nameof(_OnSaveLoadNodeHide));
-			popupController.saveBttn.Connect("pressed", this, nameof(_OnSavePressed));
 			SetLabels();
 		}
 		private void SaveGame()
@@ -21,24 +25,22 @@ namespace Game.Ui
 			saveLoadModel.SaveGame(index);
 			GetLabel(index - 1).Text = SaveLoadModel.GetSaveFileName(index);
 		}
-		private Label GetLabel(int index) { return GetNode<Label>($"v/s/c/g/slot_label_{index}"); }
+		private Label GetLabel(int index) { return main.GetChild(0).GetNode<Label>("slot_label_" + index); }
 		private void SetLabels()
 		{
-
 			int labelIdx = 1;
-			foreach (Node node in GetNode<Node>("v/s/c/g").GetChildren())
+			foreach (Node node in main.GetChild(0).GetChildren())
 			{
-				Label label = node as Label;
-				if (label != null)
+				if (node as Label != null)
 				{
 					GetLabel(labelIdx - 1).Text = SaveLoadModel.GetSaveFileName(labelIdx);
 					labelIdx++;
 				}
 			}
 		}
-		protected void RouteConnections(string toMethod)
+		private void RouteConnection(string toMethod)
 		{
-			BaseButton yesBttn = popupController.yesBttn;
+			BaseButton yesBttn = popup.yesBttn;
 			string signal = "pressed";
 			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
 			{
@@ -46,66 +48,54 @@ namespace Game.Ui
 			}
 			yesBttn.Connect(signal, this, toMethod);
 		}
-		public void _OnSaveLoadNodeHide()
+		private void OnHide()
 		{
-			popupController.Hide();
-			GetNode<Control>("v").Show();
+			popup.Hide();
+			main.Show();
 		}
-		public void _OnPopupHide()
-		{
-			popupController.deleteBttn.Hide();
-			popupController.saveBttn.Hide();
-			popupController.loadBttn.Hide();
-		}
-		public void _OnSlotPressed(int index)
+		private void OnPopupHide() { popup.deleteBttn.Visible = popup.saveBttn.Visible = popup.loadBttn.Visible = false; }
+		private void OnSlotPressed(int index)
 		{
 			this.index = index + 1;
 			PlaySound(NameDB.UI.CLICK2);
-			GetNode<Control>("v").Hide();
-			popupController.saveBttn.Show();
-			if (!GetLabel(index).Text.Equals($"Slot {index + 1}"))
-			{
-				popupController.loadBttn.Show();
-				popupController.deleteBttn.Show();
-			}
-			popupController.saveLoadView.Show();
-			popupController.Show();
+			main.Hide();
+			popup.loadBttn.Visible = popup.deleteBttn.Visible = !GetLabel(index).Text.Equals($"Slot {index + 1}");
+			popup.Visible = popup.saveLoadView.Visible = popup.saveBttn.Visible = true;
 		}
-		public void _OnDeletePressed()
+		private void OnDeletePressed()
 		{
 			PlaySound(NameDB.UI.CLICK1);
-			RouteConnections(nameof(_OnDeleteConfirm));
-			popupController.ShowConfirm("Delete?");
+			RouteConnection(nameof(OnDeleteConfirm));
+			popup.ShowConfirm("Delete?");
 		}
-		public void _OnDeleteConfirm()
+		private void OnDeleteConfirm()
 		{
 			SaveLoadModel.DeleteSaveFile(index);
 			GetLabel(index).Text = SaveLoadModel.GetSaveFileName(index);
-			_OnSaveLoadNodeHide();
+			OnHide();
 		}
-		public void _OnSavePressed()
+		private void OnSavePressed()
 		{
 			PlaySound(NameDB.UI.CLICK1);
 			if (GetLabel(index).Text.Contains("Slot"))
 			{
-				_OnOverwriteConfirm();
+				OnSaveConfirm();
 			}
 			else
 			{
-				RouteConnections(nameof(_OnOverwriteConfirm));
-				popupController.ShowConfirm("Overwrite?");
+				RouteConnection(nameof(OnSaveConfirm));
+				popup.ShowConfirm("Overwrite?");
 			}
 		}
-		public void _OnOverwriteConfirm()
+		private void OnSaveConfirm()
 		{
-			_OnSaveLoadNodeHide();
 			SaveGame();
+			OnHide();
 		}
-		public void _OnLoadPressed()
+		private void OnLoadPressed()
 		{
 			PlaySound(NameDB.UI.CLICK0);
 			saveLoadModel.LoadGame(index);
-			Hide();
 		}
 	}
 }

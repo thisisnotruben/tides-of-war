@@ -9,7 +9,7 @@ namespace Game.Ui
 
 		public override void _Ready()
 		{
-			mainContent = GetNode<Control>("s");
+			mainContent = GetChild<Control>(0);
 
 			popupController = GetNode<PopupController>("popup");
 			popupController.allBttn.Connect("pressed", this, nameof(_OnAllPressed));

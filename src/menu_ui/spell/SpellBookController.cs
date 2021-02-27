@@ -5,37 +5,32 @@ namespace Game.Ui
 {
 	public class SpellBookController : GameMenu
 	{
-		public InventoryModel spellBook = new InventoryModel();
+		public readonly InventoryModel spellBook = new InventoryModel();
 		private SlotGridController spellSlots;
-		private ItemInfoSpellController itemInfoSpellController;
-		private PopupController popupController;
+		private ItemInfoSpellController spellInfo;
+		private PopupController popup;
 		private Control mainContent;
-		protected Label hpHeader, manaHeader;
 
 		public override void _Ready()
 		{
-			mainContent = GetNode<Control>("s");
+			mainContent = GetChild<Control>(0);
+			spellSlots = mainContent.GetChild<SlotGridController>(0);
 
-			popupController = GetNode<PopupController>("popup");
-			popupController.Connect("hide", this, nameof(_OnSpellBookNodeHide));
+			spellInfo = GetChild<ItemInfoSpellController>(1);
+			spellInfo.itemList = spellBook;
+			spellInfo.backBttn.Connect("pressed", this, nameof(OnItemInfoBackPressed));
 
-			itemInfoSpellController = GetNode<ItemInfoSpellController>("itemInfo");
-			itemInfoSpellController.itemList = spellBook;
-			itemInfoSpellController.Connect("hide", this, nameof(_OnSpellBookNodeHide));
-
-			spellSlots = GetNode<SlotGridController>("s/v/c/InventoryGridView");
+			popup = GetChild<PopupController>(2);
+			popup.Connect("hide", this, nameof(OnHide));
 
 			// connect slot events
 			foreach (SlotController slot in spellSlots.GetSlots())
 			{
-				slot.button.Connect("pressed", this, nameof(_OnSpellBookIndexSelected),
+				slot.button.Connect("pressed", this, nameof(OnSpellBookIndexSelected),
 					new Godot.Collections.Array() { slot.GetIndex() });
 			}
-
-			hpHeader = GetNode<Label>("s/v/m/v/playerHpHeader");
-			manaHeader = GetNode<Label>("s/v/m/v/playerManaHeader");
 		}
-		public void _OnSpellBookNodeDraw()
+		private void OnDraw()
 		{
 			// display slots
 			spellSlots.ClearSlots();
@@ -44,17 +39,10 @@ namespace Game.Ui
 				spellSlots.DisplaySlot(i, spellBook.GetCommodity(i), spellBook.GetCommodityStack(i),
 					Commodity.GetCoolDown(player.GetPath(), spellBook.GetCommodity(i)));
 			}
-
-			// fill hp/mana headers
-			hpHeader.Text = $"Health: {player.hp} / {player.stats.hpMax.valueI}";
-			manaHeader.Text = $"Mana: {player.mana} / {player.stats.manaMax.valueI}";
 		}
-		public void _OnSpellBookNodeHide()
-		{
-			popupController.Hide();
-			mainContent.Show();
-		}
-		public void _OnSpellBookIndexSelected(int slotIndex)
+		private void OnHide() { popup.Hide(); }
+		private void OnItemInfoBackPressed() { mainContent.Show(); }
+		private void OnSpellBookIndexSelected(int slotIndex)
 		{
 			// don't want to click on an empty slot
 			if (slotIndex >= spellBook.count)
@@ -65,13 +53,8 @@ namespace Game.Ui
 			PlaySound(NameDB.UI.SPELL_SELECT);
 			mainContent.Hide();
 
-			itemInfoSpellController.selectedSlotIdx = slotIndex;
-			itemInfoSpellController.Display(spellBook.GetCommodity(slotIndex), true);
-		}
-		public override void _OnBackPressed()
-		{
-			PlaySound(NameDB.UI.SPELL_BOOK_CLOSE);
-			Hide();
+			spellInfo.selectedSlotIdx = slotIndex;
+			spellInfo.Display(spellBook.GetCommodity(slotIndex), true);
 		}
 	}
 }

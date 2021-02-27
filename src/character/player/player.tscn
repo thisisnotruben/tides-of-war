@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/character/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/player/Player.cs" type="Script" id=2]
-[ext_resource path="res://src/menu_ui/handler/MenuHandlerView.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/menu_ui/main/menuMasterView.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/character/player/characterCamera.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
@@ -114,7 +114,7 @@ anims/moving = SubResource( 4 )
 collision_layer = 18
 collision_mask = 2
 
-[node name="in_game_menu" parent="." index="9" instance=ExtResource( 3 )]
-
-[node name="camera" parent="." index="10" instance=ExtResource( 4 )]
+[node name="camera" parent="." index="9" instance=ExtResource( 4 )]
 current = true
+
+[node name="menu" parent="." index="10" instance=ExtResource( 3 )]

@@ -14,10 +14,10 @@ namespace Game.Ui
 		public override void _Ready()
 		{
 			base._Ready();
-			useBttn.Connect("pressed", this, nameof(_OnUsePressed));
-			equipBttn.Connect("pressed", this, nameof(_OnEquipPressed));
-			unequipBttn.Connect("pressed", this, nameof(_OnUnequipPressed));
-			dropBttn.Connect("pressed", this, nameof(_OnDropPressed));
+			useBttn.Connect("pressed", this, nameof(OnUsePressed));
+			equipBttn.Connect("pressed", this, nameof(OnEquipPressed));
+			unequipBttn.Connect("pressed", this, nameof(OnUnequipPressed));
+			dropBttn.Connect("pressed", this, nameof(OnDropPressed));
 		}
 		private void EquipItem(bool on, string worldName)
 		{
@@ -49,14 +49,10 @@ namespace Game.Ui
 			{
 				itemList.RemoveCommodity(worldName);
 			}
-			else
-			{
-				itemList.AddCommodity(worldName);
-			}
 			EmitSignal(nameof(RefreshSlots));
 			EmitSignal(nameof(ItemEquipped), worldName, on);
 		}
-		public void _OnUsePressed()
+		private void OnUsePressed()
 		{
 			string sndName = NameDB.UI.CLICK2;
 
@@ -87,7 +83,7 @@ namespace Game.Ui
 			EmitSignal(nameof(RefreshSlots));
 			Hide();
 		}
-		public void _OnEquipPressed()
+		private void OnEquipPressed()
 		{
 			ItemDB.ItemType itemType = Globals.itemDB.GetData(commodityWorldName).type;
 			Item playerWeapon = player.weapon,
@@ -126,7 +122,7 @@ namespace Game.Ui
 				Hide();
 			}
 		}
-		public void _OnUnequipPressed()
+		private void OnUnequipPressed()
 		{
 			if (itemList.IsFull(commodityWorldName))
 			{
@@ -137,22 +133,23 @@ namespace Game.Ui
 			{
 				PlaySound(NameDB.UI.INVENTORY_UNEQUIP);
 				EquipItem(false, commodityWorldName);
+				Hide();
 			}
 		}
-		public void _OnDropPressed()
+		private void OnDropPressed()
 		{
 			PlaySound(NameDB.UI.CLICK2);
 
-			RouteConnections(nameof(_OnDropConfirm));
+			RouteConnections(nameof(OnDropConfirm));
 			mainContent.Hide();
 			popupController.ShowConfirm("Drop?");
 		}
-		public void _OnDropConfirm()
+		private void OnDropConfirm()
 		{
 			PlaySound(NameDB.UI.CLICK2);
 			PlaySound(NameDB.UI.INVENTORY_DROP);
 
-			// remove from inventory
+			EquipItem(false, commodityWorldName); // just in case if it's equipped
 			itemList.RemoveCommodity(commodityWorldName);
 			CheckHudSlots(itemList, commodityWorldName);
 			EmitSignal(nameof(RefreshSlots));

@@ -6,15 +6,13 @@ namespace Game.Ui
 {
 	public class MerchantController : GameMenu
 	{
-		private readonly InventoryModel merchantStore = new InventoryModel();
+		private readonly InventoryModel store = new InventoryModel();
 		private Control mainContent;
 		private Label header;
-		private Label subHeader;
-		private Control toInventoryBttn;
-		private Control toMerchantBttn;
-		private PopupController popupController;
-		private ItemInfoMerchantController itemInfoMerchantController;
-		private SlotGridController merchantSlots;
+		private Button buySellButton;
+		private PopupController popup;
+		private ItemInfoMerchantController storeItemInfo;
+		private SlotGridController storeSlots;
 		private InventoryModel _playerSpellBook;
 		public InventoryModel playerSpellBook
 		{
@@ -22,70 +20,65 @@ namespace Game.Ui
 			set
 			{
 				_playerSpellBook = value;
-				itemInfoMerchantController.playerSpellBook = value;
+				storeItemInfo.playerSpellBook = value;
 			}
 		}
 		public InventoryModel playerInventory;
-		public Npc merchant;
+		private Npc _merchant;
+		public Npc merchant
+		{
+			get { return _merchant; }
+			set
+			{
+				_merchant = value;
+				// resets store
+				store.Clear();
+				storeSlots.ClearSlots();
+				buySellButton.Text = "Sell";
+				storeItemInfo.Visible = popup.Visible = buySellButton.Pressed = false;
+				mainContent.Show();
+				if (value != null)
+				{
+					DisplayItems(Globals.contentDB.GetData(value.Name).merchandise);
+				}
+			}
+		}
 
 		public override void _Ready()
 		{
-			mainContent = GetNode<Control>("s");
-
-			header = mainContent.GetNode<Label>("v/header");
-			subHeader = mainContent.GetNode<Label>("v/sub_header");
-
-			toInventoryBttn = mainContent.GetNode<Control>("buttons/inventory");
-			toMerchantBttn = mainContent.GetNode<Control>("buttons/merchant");
-
-			merchantSlots = mainContent.GetNode<SlotGridController>("v/c/SlotGrid");
-
-			popupController = GetNode<PopupController>("popup");
-			popupController.Connect("hide", this, nameof(_OnMerchantNodeHide));
-			popupController.okayBttn.Connect("pressed", this, nameof(_OnMerchantNodeHide));
-			popupController.repairBackBttn.Connect("pressed", this, nameof(_OnMerchantNodeHide));
-
-			// connect slot events
-			foreach (SlotController slot in merchantSlots.GetSlots())
+			mainContent = GetChild<Control>(0);
+			header = mainContent.GetChild<Label>(0);
+			storeSlots = mainContent.GetNode<SlotGridController>("c/SlotGrid");
+			buySellButton = mainContent.GetChild<Button>(2);
+			buySellButton.Connect("toggled", this, nameof(OnBuySellToggled));
+			foreach (SlotController slot in storeSlots.GetSlots())
 			{
-				slot.button.Connect("pressed", this, nameof(OnMerchantSlotSelected),
+				slot.button.Connect("pressed", this, nameof(OnStoreSlotSelected),
 					new Godot.Collections.Array() { slot.GetIndex() });
 			}
 
-			// set itemInfo view events
-			itemInfoMerchantController = GetNode<ItemInfoMerchantController>("item_info");
-			itemInfoMerchantController.Connect("hide", this, nameof(_OnMerchantNodeHide));
-			itemInfoMerchantController.Connect(nameof(ItemInfoMerchantController.OnTransaction),
-				this, nameof(_OnTransaction));
-			itemInfoMerchantController.itemList = merchantStore;
+			storeItemInfo = GetChild<ItemInfoMerchantController>(1);
+			storeItemInfo.backBttn.Connect("pressed", this, nameof(OnItemStoreInfoBackPressed));
+			storeItemInfo.Connect(nameof(ItemInfoMerchantController.OnTransaction), this, nameof(OnTransaction));
+			storeItemInfo.itemList = store;
+
+			popup = GetChild<PopupController>(2);
+			popup.Connect("hide", this, nameof(OnHide));
+			popup.okayBttn.Connect("pressed", this, nameof(OnHide));
+			popup.repairBackBttn.Connect("pressed", this, nameof(OnHide));
 		}
-		public void _OnTransaction(string commodityName, int goldAmount, bool bought)
+		private void OnTransaction(string commodityName, int goldAmount, bool bought)
 		{
 			// called from ItemInfo when player buys/sells
 			bool isSpell = Globals.spellDB.HasData(commodityName);
 			if (bought)
 			{
-				if (isSpell)
-				{
-					playerSpellBook.AddCommodity(commodityName);
-				}
-				else
-				{
-					playerInventory.AddCommodity(commodityName);
-				}
+				(isSpell ? playerSpellBook : playerInventory).AddCommodity(commodityName);
 			}
 			else
 			{
-				if (isSpell)
-				{
-					playerSpellBook.RemoveCommodity(commodityName);
-					CheckHudSlots(playerSpellBook, commodityName);
-				}
-				else
-				{
-					playerInventory.RemoveCommodity(commodityName);
-					CheckHudSlots(playerInventory, commodityName);
-				}
+				(isSpell ? playerSpellBook : playerInventory).RemoveCommodity(commodityName);
+				CheckHudSlots(isSpell ? playerSpellBook : playerInventory, commodityName);
 			}
 
 			QuestMaster.CheckQuests(commodityName,
@@ -97,54 +90,39 @@ namespace Game.Ui
 
 			// add/sub gold
 			player.gold += goldAmount;
-			subHeader.Text = "Gold: " + player.gold;
+			header.Text = "Gold: " + player.gold;
 		}
-		public void DisplayItems(string header, params string[] commodityNames)
+		private void DisplayItems(params string[] commodityNames)
 		{
-			this.header.Text = header;
-			itemInfoMerchantController.isBuying = !header.Equals("Inventory");
+			storeItemInfo.isBuying = !buySellButton.Pressed;
 
 			// add commodities to merchant model/view
 			int i;
 			for (i = 0; i < commodityNames.Length; i++)
 			{
-				merchantStore.AddCommodity(commodityNames[i]);
+				store.AddCommodity(commodityNames[i]);
 			}
-			for (i = 0; i < merchantStore.count; i++)
+			for (i = 0; i < store.count; i++)
 			{
 				// cannot be in same loop due to inplace-sorting && stacking
-				merchantSlots.DisplaySlot(i, merchantStore.GetCommodity(i), merchantStore.GetCommodityStack(i));
+				storeSlots.DisplaySlot(i, store.GetCommodity(i), store.GetCommodityStack(i));
 			}
 		}
-		public void _OnMerchantNodeDraw()
-		{
-			ContentDB.ContentData contentData = Globals.contentDB.GetData(merchant.Name);
-
-			PlaySound(Globals.spellDB.HasData(contentData.merchandise[0])
-				? NameDB.UI.TURN_PAGE
-				: NameDB.UI.MERCHANT_OPEN
-			);
-
-			subHeader.Text = "Gold: " + player.gold;
-		}
-		public void _OnMerchantNodeHide()
-		{
-			PlaySound(NameDB.UI.MERCHANT_CLOSE);
-			popupController.Hide();
-			mainContent.Show();
-		}
-		public void OnMerchantSlotSelected(int slotIndex)
+		private void OnDraw() { header.Text = "Gold: " + (player?.gold ?? 0); }
+		private void OnHide() { popup.Hide(); }
+		private void OnItemStoreInfoBackPressed() { mainContent.Show(); }
+		private void OnStoreSlotSelected(int slotIndex)
 		{
 			// don't want to click on an empty slot
-			if (slotIndex >= merchantStore.count)
+			if (slotIndex >= store.count)
 			{
 				return;
 			}
 
 			// called from the slots in the merchant view
-			string CommodityName = merchantStore.GetCommodity(slotIndex);
-			bool isSpell = Globals.spellDB.HasData(CommodityName);
-			bool alreadyHave = false;
+			string CommodityName = store.GetCommodity(slotIndex);
+			bool isSpell = Globals.spellDB.HasData(CommodityName),
+				alreadyHave = false;
 
 			if (isSpell)
 			{
@@ -159,38 +137,23 @@ namespace Game.Ui
 
 			// show item details and switch view
 			mainContent.Hide();
-			itemInfoMerchantController.selectedSlotIdx = slotIndex;
-			itemInfoMerchantController.Display(CommodityName, true,
-				!header.Text.Equals("Inventory"), alreadyHave);
+			storeItemInfo.selectedSlotIdx = slotIndex;
+			storeItemInfo.Display(CommodityName, true, !buySellButton.Pressed, alreadyHave);
 		}
-		public void _OnMerchantPressed()
+		private void OnBuySellToggled(bool buttonPressed)
 		{
-			// switches to what the merchant is selling view
 			PlaySound(NameDB.UI.CLICK1);
-			toInventoryBttn.Show();
-			toMerchantBttn.Hide();
-
-			// display to what merchant is selling
-			merchantSlots.ClearSlots();
-			DisplayItems(merchant.worldName,
-				Globals.contentDB.GetData(merchant.Name).merchandise);
-		}
-		public void _OnInventoryPressed()
-		{
-			// switches to what the player is selling view
-			PlaySound(NameDB.UI.CLICK1);
-			toInventoryBttn.Hide();
-			toMerchantBttn.Show();
-
-			// display to what player is selling
-			merchantSlots.ClearSlots();
-			DisplayItems("Inventory", playerInventory.GetCommodities().ToArray());
-		}
-		public override void _OnBackPressed()
-		{
-			base._OnBackPressed();
-			merchantStore.Clear();
-			merchantSlots.ClearSlots();
+			buySellButton.Text = buttonPressed ? "Buy" : "Sell";
+			storeSlots.ClearSlots();
+			store.Clear();
+			if (player != null && merchant != null)
+			{
+				DisplayItems(
+					buttonPressed
+						? playerInventory.GetCommodities().ToArray()
+						: Globals.contentDB.GetData(merchant.Name).merchandise
+				);
+			}
 		}
 	}
 }

@@ -8,40 +8,39 @@ namespace Game.Ui
 	public class DialogueController : GameMenu
 	{
 		private PopupController popupController;
-		private MerchantController merchantController;
 		private Label header, subHeader;
-		private RichTextLabel dialogue;
-		private Control mainContent, heal, buy;
+		private RichTextLabel richTextLabel;
+		private Control mainContent, heal;
 
-		private Npc npc;
 		private WorldQuest worldQuest;
+		private Npc _npc;
+		public Npc npc
+		{
+			get { return _npc; }
+			set
+			{
+				_npc = value;
+				Display(value);
+			}
+		}
 
 		public override void _Ready()
 		{
-			popupController = GetNode<PopupController>("popup");
-			popupController.Connect("hide", this, nameof(_OnDialogueHide));
+			mainContent = GetChild<Control>(0);
+			header = mainContent.GetNode<Label>("vBoxContainer/header");
+			subHeader = mainContent.GetNode<Label>("vBoxContainer/subHeader");
+			richTextLabel = mainContent.GetNode<RichTextLabel>("vBoxContainer/text");
+			heal = mainContent.GetNode<Control>("hBoxContainer/heal");
 
-			merchantController = GetNode<MerchantController>("merchant");
-			merchantController.Connect("hide", this, nameof(_OnDialogueHide));
-
-			mainContent = GetNode<Control>("s");
-			header = mainContent.GetNode<Label>("control/header");
-			subHeader = mainContent.GetNode<Label>("control/sub_header");
-			dialogue = mainContent.GetNode<RichTextLabel>("s/text");
-
-			heal = mainContent.GetNode<Control>("s/v/heal");
-			buy = mainContent.GetNode<Control>("s/v/buy");
+			popupController = GetChild<PopupController>(1);
+			popupController.Connect("hide", this, nameof(OnHide));
 		}
-		public void Init(InventoryModel playerInventory, InventoryModel playerSpellBook)
+		private void Display(Npc npc)
 		{
-			// merchant needs reference to player inventory/spells
-			merchantController.playerInventory = playerInventory;
-			merchantController.playerSpellBook = playerSpellBook;
-		}
-		public void Display(Npc npc)
-		{
-			this.npc = npc;
-			merchantController.merchant = npc;
+			if (npc == null)
+			{
+				return;
+			}
 
 			header.Text = npc.worldName;
 
@@ -50,35 +49,31 @@ namespace Game.Ui
 				ContentDB.ContentData contentData = Globals.contentDB.GetData(npc.Name);
 
 				subHeader.Text = "Healer cost: " + contentData.healerCost;
-				// dialogue.BbcodeText = contentData.dialogue; TODO
+				// richTextLabel.BbcodeText = contentData.dialogue; TODO
 
-				subHeader.Visible = player.hp < player.stats.hpMax.valueI;
-				heal.Visible = subHeader.Visible;
-				buy.Visible = contentData.merchandise.Length > 0;
+				heal.Visible = subHeader.Visible = player.hp < player.stats.hpMax.valueI;
 			}
 			else
 			{
-				subHeader.Hide();
-				heal.Hide();
-				buy.Hide();
+				subHeader.Visible = heal.Visible = false;
 			}
 
 			if (QuestMaster.TryGetQuest(npc.GetPath(), out worldQuest, true) && worldQuest.IsCompleted())
 			{
-				dialogue.Text = worldQuest.quest.completed;
+				richTextLabel.Text = worldQuest.quest.completed;
 			}
 			else if (QuestMaster.TryGetQuest(npc.GetPath(), out worldQuest))
 			{
 				switch (worldQuest.status)
 				{
 					case QuestMaster.QuestStatus.ACTIVE:
-						dialogue.Text = worldQuest.quest.active;
+						richTextLabel.Text = worldQuest.quest.active;
 						break;
 					case QuestMaster.QuestStatus.AVAILABLE:
-						dialogue.Text = worldQuest.quest.available;
+						richTextLabel.Text = worldQuest.quest.available;
 						break;
 					case QuestMaster.QuestStatus.COMPLETED:
-						dialogue.Text = worldQuest.quest.delivered;
+						richTextLabel.Text = worldQuest.quest.delivered;
 						break;
 				}
 			}
@@ -88,7 +83,7 @@ namespace Game.Ui
 			{
 				if (!extraContentData.dialogue.Empty())
 				{
-					dialogue.BbcodeText = extraContentData.dialogue;
+					richTextLabel.BbcodeText = extraContentData.dialogue;
 				}
 
 				if (!QuestMaster.HasTalkedTo(npc.GetPath(), npc.worldName, extraContentData))
@@ -102,66 +97,44 @@ namespace Game.Ui
 			}
 			QuestMaster.CheckQuests(npc.GetPath(), npc.worldName, QuestDB.QuestType.TALK);
 		}
-		public void _OnDialogueDraw() { PlaySound(NameDB.UI.TURN_PAGE); }
-		public void _OnDialogueHide()
+		private void OnHide()
 		{
-			// provides a reset of all views
 			popupController.Hide();
-			merchantController.Hide();
 			mainContent.Show();
 		}
-		public void _OnHealPressed()
+		public void OnHealPressed()
 		{
 			int healerCost = Globals.contentDB.GetData(npc.Name).healerCost;
 			if (healerCost > player.gold)
 			{
-				// too expensive for player
 				mainContent.Hide();
 				popupController.ShowError("Not Enough\nGold!");
 			}
 			else
 			{
 				PlaySound(NameDB.UI.SELL_BUY);
-
-				// player gives gold
 				player.gold -= healerCost;
-				// set player health to full
 				player.hp = player.stats.hpMax.valueI;
-
-				// hide label/buttons since already healed
-				subHeader.Hide();
-				heal.Hide();
+				subHeader.Visible = heal.Visible = false;
 			}
 		}
-		public void _OnBuyPressed()
+		public void OnAcceptPressed()
 		{
-			// called for when user wants to buy
-			merchantController.DisplayItems(npc.worldName,
-				Globals.contentDB.GetData(npc.Name).merchandise);
-
-			// switch to merchant view
-			mainContent.Hide();
-			merchantController.Show();
-		}
-		public void _OnAcceptPressed()
-		{
-			if (worldQuest == null)
+			if (worldQuest != null)
 			{
-				return;
+				PlaySound(NameDB.UI.QUEST_ACCEPT);
+				QuestMaster.ActivateQuest(worldQuest.quest.questName);
 			}
-			PlaySound(NameDB.UI.QUEST_ACCEPT);
-			QuestMaster.ActivateQuest(worldQuest.quest.questName);
 		}
-		public void _OnFinishPressed()
+		public void OnFinishPressed()
 		{
-			if (!worldQuest?.IsCompleted() ?? true)
+			if (worldQuest?.IsCompleted() ?? false)
 			{
-				return;
+				PlaySound(NameDB.UI.QUEST_FINISH);
+				QuestMaster.CompleteQuest(worldQuest.quest.questName);
+				player.gold += worldQuest.quest.goldReward;
+				player.SpawnCombatText($"+{worldQuest.quest.goldReward}", CombatText.TextType.GOLD);
 			}
-			PlaySound(NameDB.UI.QUEST_FINISH);
-			QuestMaster.CompleteQuest(worldQuest.quest.questName);
-			player.gold += worldQuest.quest.goldReward;
-			player.SpawnCombatText($"+{worldQuest.quest.goldReward}", CombatText.TextType.GOLD);
 		}
 	}
 }

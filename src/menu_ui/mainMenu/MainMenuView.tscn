@@ -9,12 +9,11 @@
 [ext_resource path="res://src/menu_ui/quest/QuestLogView.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/menu_ui/about/AboutView.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/menu_ui/saveLoad/SaveLoadView.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/menu_ui/spell/SpellBookView.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/menu_ui/spell/SkillBookView.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/menu_ui/dialogue/DialogueView.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/menu_ui/ToWTheme.tres" type="Theme" id=14]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=14]
 
 [node name="MainMenuView" type="Control"]
-visible = false
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,18 +23,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="overlay" type="ColorRect" parent="."]
+[node name="overlay" type="Panel" parent="."]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 14 )
-color = Color( 0.431373, 0.431373, 0.431373, 1 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
+"_edit_use_anchors_": false
 }
 
 [node name="background" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 14 )

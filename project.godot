@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tides of War"
-run/main_scene="res://src/menu_ui/startMenu/StartMenuView.tscn"
+run/main_scene="res://src/menu_ui/main/StartMenuView.tscn"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 config/auto_accept_quit=false
@@ -141,6 +141,7 @@ pointing/emulate_touch_from_mouse=true
 
 [mono]
 
+debugger_agent/wait_for_debugger=true
 debugger_agent/wait_timeout=10000
 
 [node]

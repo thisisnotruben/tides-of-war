@@ -5,8 +5,6 @@ namespace Game.Ui
 {
 	public class PopupController : GameMenu
 	{
-		public static MainMenuController mainMenuController;
-
 		public Control saveLoadView, yesNoView, errorView, exitView, filterView,
 			addToSlotView, repairSlotView;
 		public Label yesNoLabel, errorLabel;
@@ -19,25 +17,27 @@ namespace Game.Ui
 		{
 			base._Ready();
 
-			saveLoadView = GetNode<Control>("m/save_load");
+			Control popupContainer = GetChild<Control>(1);
+
+			saveLoadView = popupContainer.GetNode<Control>("save_load");
 			deleteBttn = saveLoadView.GetNode<Button>("delete");
 			saveBttn = saveLoadView.GetNode<Button>("save");
 			loadBttn = saveLoadView.GetNode<Button>("load");
 
-			yesNoView = GetNode<Control>("m/yes_no");
+			yesNoView = popupContainer.GetNode<Control>("yes_no");
 			yesNoLabel = yesNoView.GetNode<Label>("label");
 			yesBttn = yesNoView.GetNode<Button>("yes");
 			noBttn = yesNoView.GetNode<Button>("no");
 
-			errorView = GetNode<Control>("m/error");
+			errorView = popupContainer.GetNode<Control>("error");
 			errorLabel = errorView.GetNode<Label>("label");
 			okayBttn = errorView.GetNode<Button>("okay");
 
-			exitView = GetNode<Control>("m/exit");
+			exitView = popupContainer.GetNode<Control>("exit");
 			exitGameBttn = exitView.GetNode<Button>("exit_game");
 			exitMenuBttn = exitView.GetNode<Button>("exit_menu");
 
-			addToSlotView = GetNode<Control>("m/add_to_slot");
+			addToSlotView = popupContainer.GetNode<Control>("add_to_slot");
 			Button button;
 			foreach (Control control in addToSlotView.GetChildren())
 			{
@@ -50,52 +50,32 @@ namespace Game.Ui
 			clearSlot = addToSlotView.GetNode<Button>("clear_slot");
 			addToSlotBackBttn = addToSlotView.GetNode<Button>("back");
 
-			filterView = GetNode<Control>("m/filter_options");
+			filterView = popupContainer.GetNode<Control>("filter_options");
 			allBttn = filterView.GetNode<Button>("all");
 			activeBttn = filterView.GetNode<Button>("active");
 			completedBttn = filterView.GetNode<Button>("completed");
 
-			repairSlotView = GetNode<Control>("m/repair");
+			repairSlotView = popupContainer.GetNode<Control>("repair");
 			repairBackBttn = repairSlotView.GetNode<Button>("back");
 		}
-		public void _OnPopupDraw() { mainMenuController?.ShowBackground(false); }
-		public void _OnPopupHide()
+		public void OnResized() { GetChild<Control>(0).RectMinSize = GetChild<Control>(1).RectSize; }
+		public void OnHide()
 		{
-			mainMenuController?.ShowBackground(true);
-			foreach (Control control in GetNode("m").GetChildren())
+			foreach (Control control in GetChild(1).GetChildren())
 			{
 				control.Hide();
 			}
 		}
-		public void _OnErrorDraw() { PlaySound(NameDB.UI.CLICK6); }
-		public void _OnMResized() { GetNode<Control>("bg").RectMinSize = GetNode<Control>("m").RectSize; }
-		public void _OnRepairDraw()
-		{
-			int shown = 0;
-			foreach (Control node in GetNode("m/repair").GetChildren())
-			{
-				if (node.Visible)
-				{
-					shown++;
-				}
-			}
-			if (shown > 4)
-			{
-				GetNode<TextureRect>("bg").Texture = GD.Load<Texture>("res://asset/img/ui/grey2_bg.tres");
-			}
-		}
-		public void _OnRepairHide() { GetNode<TextureRect>("bg").Texture = GD.Load<Texture>("res://asset/img/ui/grey3_bg.tres"); }
 		public void ShowError(string errorText)
 		{
+			PlaySound(NameDB.UI.CLICK6);
 			errorLabel.Text = errorText;
-			errorView.Show();
-			Show();
+			Visible = errorView.Visible = true;
 		}
 		public void ShowConfirm(string confirmText)
 		{
 			yesNoLabel.Text = confirmText;
-			yesNoView.Show();
-			Show();
+			Visible = yesNoView.Visible = true;
 		}
 	}
 }

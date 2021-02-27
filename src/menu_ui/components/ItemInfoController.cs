@@ -9,46 +9,46 @@ namespace Game.Ui
 		public InventoryModel itemList;
 		public int selectedSlotIdx;
 		public PopupController popupController;
+		protected Label header;
+		protected RichTextLabel richTextLabel;
 		protected string commodityWorldName;
-		protected Control mainContent;
+		protected Control mainContent, buttonContainer;
 		protected TextureButton leftbttn, rightBttn;
 		protected TextureRect commodityIcon;
 		public Button castBttn, useBttn, buyBttn, sellBttn, equipBttn, unequipBttn, dropBttn, backBttn;
-		public TextureButton addToHudBttn;
+		public Button addToHudBttn;
 
 		public override void _Ready()
 		{
-			// connect popup events
-			popupController = GetNode<PopupController>("popup");
-			popupController.clearSlot.Connect("pressed", this, nameof(_OnClearSlotPressed));
-			popupController.Connect("hide", this, nameof(_OnAddToHudBack));
-			popupController.Connect("hide", this, nameof(_OnItemInfoNodeHide));
-			popupController.addToHudSlotBttns.ForEach(b => b.Connect("pressed",
-				this, nameof(_OnAddToHudConfirm), new Godot.Collections.Array() { b.GetIndex() + 1 })
-			);
+			mainContent = GetChild<Control>(0);
 
-			mainContent = GetNode<Control>("s");
-
-			addToHudBttn = GetNode<TextureButton>("s/v/c/v/add_to_hud");
+			header = GetNode<Label>("s/vBoxContainer/header");
+			addToHudBttn = GetNode<Button>("s/vBoxContainer/add_to_hud");
 			commodityIcon = addToHudBttn.GetNode<TextureRect>("m/icon");
+			richTextLabel = GetNode<RichTextLabel>("s/vBoxContainer/richTextLabel");
 
-			addToHudBttn.Connect("pressed", this, nameof(OnAddToHudPressed));
-			addToHudBttn.Connect("button_down", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { addToHudBttn, true });
-			addToHudBttn.Connect("button_up", this, nameof(OnSlotMoved),
-				new Godot.Collections.Array() { addToHudBttn, false });
+			buttonContainer = GetNode<Control>("s/hBoxContainer/gridContainer");
+			buttonContainer.Connect("sort_children", this, nameof(OnButtonContainerSort));
+			castBttn = buttonContainer.GetNode<Button>("cast");
+			useBttn = buttonContainer.GetNode<Button>("use");
+			buyBttn = buttonContainer.GetNode<Button>("buy");
+			sellBttn = buttonContainer.GetNode<Button>("sell");
+			equipBttn = buttonContainer.GetNode<Button>("equip");
+			unequipBttn = buttonContainer.GetNode<Button>("unequip");
+			dropBttn = buttonContainer.GetNode<Button>("drop");
+			backBttn = buttonContainer.GetNode<Button>("back");
 
-			castBttn = GetNode<Button>("s/h/buttons/cast");
-			useBttn = GetNode<Button>("s/h/buttons/use");
-			buyBttn = GetNode<Button>("s/h/buttons/buy");
-			sellBttn = GetNode<Button>("s/h/buttons/sell");
-			equipBttn = GetNode<Button>("s/h/buttons/equip");
-			unequipBttn = GetNode<Button>("s/h/buttons/unequip");
-			dropBttn = GetNode<Button>("s/h/buttons/drop");
-			backBttn = GetNode<Button>("s/h/buttons/back");
+			leftbttn = GetNode<TextureButton>("s/hBoxContainer/left");
+			rightBttn = GetNode<TextureButton>("s/hBoxContainer/right");
 
-			leftbttn = GetNode<TextureButton>("s/h/left");
-			rightBttn = GetNode<TextureButton>("s/h/right");
+			// connect popup events
+			popupController = GetChild<PopupController>(1);
+			popupController.clearSlot.Connect("pressed", this, nameof(OnClearSlotPressed));
+			popupController.Connect("hide", this, nameof(OnAddToHudBack));
+			popupController.Connect("hide", this, nameof(OnHide));
+			popupController.addToHudSlotBttns.ForEach(b => b.Connect("pressed",
+				this, nameof(OnAddToHudConfirm), new Godot.Collections.Array() { b.GetIndex() + 1 })
+			);
 		}
 		public virtual void Display(string commodityWorldName, bool allowMove)
 		{
@@ -96,14 +96,14 @@ namespace Game.Ui
 
 			// set presentation
 			HideExcept(showBttns);
-			GetNode<Label>("s/v/header").Text = commodityWorldName;
+			header.Text = commodityWorldName;
 			commodityIcon.Texture = PickableDB.GetIcon(commodityWorldName);
-			GetNode<RichTextLabel>("s/v/c/v/m/info_text").BbcodeText = Commodity.GetDescription(commodityWorldName);
+			richTextLabel.BbcodeText = Commodity.GetDescription(commodityWorldName);
 			Show();
 		}
 		protected void HideExcept(params Control[] nodesToShow)
 		{
-			foreach (Control node in GetNode("s/h/buttons").GetChildren())
+			foreach (Control node in GetNode("s/hBoxContainer/gridContainer").GetChildren())
 			{
 				node.Visible = nodesToShow.Contains(node) || node == backBttn;
 			}
@@ -119,12 +119,12 @@ namespace Game.Ui
 			}
 			yesBttn.Connect(signal, this, toMethod);
 		}
-		public void _OnItemInfoNodeHide()
+		private void OnHide()
 		{
 			popupController.Hide();
 			mainContent.Show();
 		}
-		public void OnAddToHudPressed()
+		private void OnAddToHudPressed()
 		{
 			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
@@ -144,7 +144,7 @@ namespace Game.Ui
 			popupController.addToSlotView.Show();
 			popupController.Show();
 		}
-		public void _OnAddToHudConfirm(int index)
+		private void OnAddToHudConfirm(int index)
 		{
 			PlaySound(NameDB.UI.CLICK1);
 			Hide();
@@ -163,14 +163,14 @@ namespace Game.Ui
 				}
 			}
 		}
-		public void _OnAddToHudBack()
+		private void OnAddToHudBack()
 		{
 			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
 			{
 				(node as HudSlotController)?.RevertAddToHudDisplay();
 			}
 		}
-		public void _OnClearSlotPressed()
+		private void OnClearSlotPressed()
 		{
 			HudSlotController hudSlotController;
 			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
@@ -184,17 +184,28 @@ namespace Game.Ui
 			}
 			popupController.Hide();
 		}
-		public void _OnInfoTextDraw()
-		{
-			Vector2 correctSize = GetNode<Control>("s/v/c/v/m").GetRect().Size;
-			GetNode<RichTextLabel>("s/v/c/v/m/info_text").RectMinSize = correctSize;
-		}
 		public virtual void _OnMovePressed(int by)
 		{
 			PlaySound(NameDB.UI.CLICK2);
 			// update selection and display
 			selectedSlotIdx += by;
 			Display(itemList.GetCommodity(selectedSlotIdx), true);
+		}
+		private void OnButtonContainerSort()
+		{
+			int visible = 0;
+			foreach (Control button in buttonContainer.GetChildren())
+			{
+				if (button.Visible)
+				{
+					visible++;
+				}
+			}
+			if (visible % 2 == 1)
+			{
+				Control lastButton = buttonContainer.GetChild<Control>(buttonContainer.GetChildCount() - 1);
+				lastButton.RectSize = new Vector2(buttonContainer.RectSize.x, lastButton.RectSize.y);
+			}
 		}
 	}
 }

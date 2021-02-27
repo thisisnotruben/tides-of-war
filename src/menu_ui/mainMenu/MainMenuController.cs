@@ -7,93 +7,85 @@ namespace Game.Ui
 {
 	public class MainMenuController : GameMenu
 	{
-		private Control main, background;
-		private ColorRect overlay;
-
-		public InventoryController inventoryController;
-		public StatsController statsController;
-		private QuestLogController questLogController;
-		private AboutController aboutController;
-		private SaveLoadController saveLoadController;
-		public SpellBookController spellBookController;
-		private DialogueController dialogueController;
-		private PopupController popupController;
 		public InventoryModel playerInventory, playerSpellBook;
+		private TabContainer playerMenu, npcMenu;
+		private DialogueController npcDialogue;
+		private MerchantController store;
+		private PopupController popup;
 
 		public override void _Ready()
 		{
-			main = GetNode<Control>("background/margin/main");
+			playerMenu = GetChild<TabContainer>(0);
+			playerInventory = playerMenu.GetNode<InventoryController>("Inventory/InventoryView").inventory;
+			playerSpellBook = playerMenu.GetNode<SpellBookController>("Skills/SkillBookView").spellBook;
 
-			inventoryController = GetNode<InventoryController>("background/margin/inventory");
-			playerInventory = inventoryController.inventory;
+			npcMenu = GetChild<TabContainer>(1);
+			npcDialogue = npcMenu.GetNode<DialogueController>("Dialogue/DialogueView");
+			store = npcMenu.GetNode<MerchantController>("Store/merchantView");
+			store.playerInventory = playerInventory;
+			store.playerSpellBook = playerSpellBook;
 
-			statsController = GetNode<StatsController>("background/margin/stats");
-			questLogController = GetNode<QuestLogController>("background/margin/quest_log");
-			aboutController = GetNode<AboutController>("background/margin/about");
-			saveLoadController = GetNode<SaveLoadController>("background/margin/save_load");
+			popup = GetChild<PopupController>(2);
+			popup.exitGameBttn.Connect("pressed", this, nameof(OnExitGamePressed));
+			popup.exitMenuBttn.Connect("pressed", this, nameof(OnExitMenuPressed));
 
-			PopupController.mainMenuController = this;
-			popupController = GetNode<PopupController>("background/margin/popup");
-			popupController.exitGameBttn.Connect("pressed", this, nameof(_OnExitGamePressed));
-			popupController.exitMenuBttn.Connect("pressed", this, nameof(_OnExitMenuPressed));
-
-			spellBookController = GetNode<SpellBookController>("background/margin/spell_book");
-			spellBookController.Connect("hide", this, nameof(_OnMainMenuHide));
-			playerSpellBook = spellBookController.spellBook;
-
-			dialogueController = GetNode<DialogueController>("background/margin/dialogue");
-			dialogueController.Connect("hide", this, nameof(_OnMainMenuHide));
-			dialogueController.Init(playerInventory, playerSpellBook);
-
-			// route hide events
-			foreach (Control node in new Control[] { inventoryController, statsController,
-			questLogController, aboutController, saveLoadController, popupController })
+			string[] textureNames = new string[] { "chest", "power", "person", "flag", "save", "gear" };
+			int i;
+			for (i = 0; i < playerMenu.GetChildCount(); i++)
 			{
-				node.Connect("hide", this, nameof(_OnWindowClosed));
+				playerMenu.SetTabTitle(i, string.Empty);
+				playerMenu.SetTabIcon(i, GD.Load<Texture>($"res://asset/img/ui/{textureNames[i]}.png"));
 			}
-
-			background = GetNode<Control>("background");
-			overlay = GetNode<ColorRect>("overlay");
+			textureNames = new string[] { "chat", "chest" };
+			for (i = 0; i < npcMenu.GetChildCount(); i++)
+			{
+				npcMenu.SetTabTitle(i, string.Empty);
+				npcMenu.SetTabIcon(i, GD.Load<Texture>($"res://asset/img/ui/{textureNames[i]}.png"));
+			}
 		}
-		public void _OnWindowClosed() { main.Show(); }
-		public void _OnMainMenuDraw() { GetTree().Paused = true; } // connected from scene
-		public void _OnMainMenuHide() // connected from scene
+		private void OnVisibilityChanged()
 		{
-			Hide();
+			GetTree().Paused = Visible;
+			// resets view
+			if (!Visible)
+			{
+				playerMenu.Show();
+				npcMenu.Hide();
+			}
+		}
+		private void OnTabChanged(int index) { PlaySound(NameDB.UI.CLICK1); }
+		private void OnExitPressed() { popup.exitView.Show(); }
+		private void OnExitGamePressed() { GetTree().Quit(); }
+		private void OnExitMenuPressed()
+		{
+			PlaySound(NameDB.UI.CLICK0);
 			GetTree().Paused = false;
-			main.Show();
-			popupController.Hide();
+			SceneLoaderController.Init().SetScene(PathManager.startScene, Map.Map.map);
 		}
-		public void ShowSpellBook()
+		public bool NpcInteract(Npc npc)
 		{
-			main.Hide();
-			spellBookController.Show();
-			Show();
-		}
-		public void ShowBackground(bool show)
-		{
-			Color transparent = new Color("00ffffff");
-			background.SelfModulate = show
-				? new Color("ffffff")
-				: transparent;
-			overlay.Color = show
-				? new Color("6e6e6e")
-				: transparent;
-		}
-		public void NpcInteract(Npc npc)
-		{
-			main.Hide();
-			dialogueController.Show();
-			dialogueController.Display(npc);
-			Show();
+			store.Visible = Globals.contentDB.HasData(npc.Name)
+				&& Globals.contentDB.GetData(npc.Name).merchandise.Length > 0;
+			npcDialogue.Visible = !Globals.unitDB.GetData(npc.Name).dialogue.Empty();
+
+			Visible = npcMenu.Visible = store.Visible || npcDialogue.Visible;
+			npcDialogue.npc = store.merchant = npc;
+			playerMenu.Visible = !Visible;
+
+			return Visible;
 		}
 		public void LootInteract(TreasureChest lootChest)
 		{
+			if (player.dead)
+			{
+				return;
+			}
+
 			if (Globals.spellDB.HasData(lootChest.commodityWorldName))
 			{
 				if (playerSpellBook.IsFull(lootChest.commodityWorldName))
 				{
-					popupController.ShowError("Spell Book\nFull!");
+					popup.ShowError("Spell Book\nFull!");
 				}
 				else
 				{
@@ -106,7 +98,7 @@ namespace Game.Ui
 			{
 				if (playerInventory.IsFull(lootChest.commodityWorldName))
 				{
-					popupController.ShowError("Inventory\nFull!");
+					popup.ShowError("Inventory\nFull!");
 				}
 				else
 				{
@@ -115,35 +107,6 @@ namespace Game.Ui
 					lootChest.Collect();
 				}
 			}
-
-		}
-		public void _OnResumePressed()
-		{
-			PlaySound(NameDB.UI.CLICK2);
-			Hide();
-		}
-		public void _OnInventoryPressed() { Transition(inventoryController); }
-		public void _OnStatsPressed() { Transition(statsController); }
-		public void _OnQuestLogPressed() { Transition(questLogController); }
-		public void _OnAboutPressed() { Transition(aboutController); }
-		public void _OnSaveLoadPressed() { Transition(saveLoadController); }
-		public void _OnExitPressed()
-		{
-			popupController.exitView.Show();
-			Transition(popupController);
-		}
-		public void _OnExitGamePressed() { GetTree().Quit(); }
-		public void _OnExitMenuPressed()
-		{
-			PlaySound(NameDB.UI.CLICK0);
-			GetTree().Paused = false;
-			SceneLoaderController.Init().SetScene(PathManager.startScene, Map.Map.map);
-		}
-		private void Transition(Control scene)
-		{
-			PlaySound(NameDB.UI.CLICK1);
-			main.Hide();
-			scene.Show();
 		}
 	}
 }
