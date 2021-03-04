@@ -1,17 +1,13 @@
 using Godot;
 using Game.Database;
-using System.Collections.Generic;
 namespace Game.Ui
 {
 	public class PopupController : GameMenu
 	{
-		public Control saveLoadView, yesNoView, errorView, exitView, filterView,
-			addToSlotView, repairSlotView;
+		public Control saveLoadView, yesNoView, errorView, exitView, filterView, repairSlotView;
 		public Label yesNoLabel, errorLabel;
 		public Button deleteBttn, saveBttn, loadBttn, yesBttn, noBttn, okayBttn,
-			exitGameBttn, exitMenuBttn, allBttn, activeBttn, completedBttn, clearSlot, addToSlotBackBttn,
-			repairBackBttn;
-		public readonly List<Button> addToHudSlotBttns = new List<Button>();
+			exitGameBttn, exitMenuBttn, allBttn, activeBttn, completedBttn, repairBackBttn;
 
 		public override void _Ready()
 		{
@@ -36,19 +32,6 @@ namespace Game.Ui
 			exitView = popupContainer.GetNode<Control>("exit");
 			exitGameBttn = exitView.GetNode<Button>("exit_game");
 			exitMenuBttn = exitView.GetNode<Button>("exit_menu");
-
-			addToSlotView = popupContainer.GetNode<Control>("add_to_slot");
-			Button button;
-			foreach (Control control in addToSlotView.GetChildren())
-			{
-				button = control as Button;
-				if (button != null && button.Name.Contains("slot_"))
-				{
-					addToHudSlotBttns.Add(button);
-				}
-			}
-			clearSlot = addToSlotView.GetNode<Button>("clear_slot");
-			addToSlotBackBttn = addToSlotView.GetNode<Button>("back");
 
 			filterView = popupContainer.GetNode<Control>("filter_options");
 			allBttn = filterView.GetNode<Button>("all");

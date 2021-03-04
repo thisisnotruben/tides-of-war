@@ -8,7 +8,7 @@ namespace Game.Ui
 		public override void _Ready()
 		{
 			base._Ready();
-			castBttn.Connect("pressed", this, nameof(_OnCastPressed));
+			castBttn.Connect("pressed", this, nameof(OnCastPressed));
 		}
 		public override void Display(string commodityWorldName, bool allowMove)
 		{
@@ -20,7 +20,7 @@ namespace Game.Ui
 					? new Control[] { }
 					: new Control[] { castBttn });
 		}
-		public void _OnCastPressed()
+		public void OnCastPressed()
 		{
 			string errorText = string.Empty;
 			SpellDB.SpellData spellData = Globals.spellDB.GetData(commodityWorldName);
@@ -54,7 +54,7 @@ namespace Game.Ui
 			if (!errorText.Equals(string.Empty))
 			{
 				mainContent.Hide();
-				popupController.ShowError(errorText);
+				popup.ShowError(errorText);
 			}
 			else
 			{

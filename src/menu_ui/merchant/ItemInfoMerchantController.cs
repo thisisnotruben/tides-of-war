@@ -21,8 +21,10 @@ namespace Game.Ui
 			PlaySound(NameDB.UI.CLICK2);
 
 			// get next commodity when pressing arrows
-			selectedSlotIdx += by;
-			string nextCommodityWorldName = itemList.GetCommodity(selectedSlotIdx);
+			selectedSlotIdx = slotGridController.GetNextSlot(selectedSlotIdx, by > 0);
+
+			string nextCommodityWorldName = inventoryModel.GetCommodity(
+				slotGridController.GetSlotToModelIndex(selectedSlotIdx));
 
 			bool playerHaveSpell = Globals.spellDB.HasData(nextCommodityWorldName)
 				&& playerSpellBook.HasItem(nextCommodityWorldName);
@@ -45,35 +47,35 @@ namespace Game.Ui
 			if (Globals.spellDB.HasData(commodityWorldName)
 			&& player.level < Globals.spellDB.GetData(commodityWorldName).level)
 			{
-				popupController.ShowError("Can't Learn\nThis Yet!");
+				popup.ShowError("Can't Learn\nThis Yet!");
 
 			}
 			else if (PickableDB.GetGoldCost(commodityWorldName) < player.gold)
 			{
-				popupController.ShowConfirm(Globals.spellDB.HasData(commodityWorldName) ? "Learn?" : "Buy?");
+				popup.ShowConfirm(Globals.spellDB.HasData(commodityWorldName) ? "Learn?" : "Buy?");
 			}
 			else
 			{
-				popupController.ShowError("Not Enough\nGold!");
+				popup.ShowError("Not Enough\nGold!");
 			}
 		}
 		private void OnBuyConfirm()
 		{
 			PlaySound(NameDB.UI.SELL_BUY);
-			if (popupController.yesNoLabel.Text.Equals("Learn?"))
+			if (popup.yesNoLabel.Text.Equals("Learn?"))
 			{
 				PlaySound(NameDB.UI.LEARN_SPELL);
 				buyBttn.Hide();
 			}
 			EmitSignal(nameof(OnTransaction), commodityWorldName, -PickableDB.GetGoldCost(commodityWorldName), true);
-			popupController.Hide();
+			popup.Hide();
 		}
 		private void OnSellPressed()
 		{
 			RouteConnections(nameof(_OnSellConfirm));
 			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
-			popupController.ShowConfirm("Sell?");
+			popup.ShowConfirm("Sell?");
 		}
 		private void _OnSellConfirm()
 		{

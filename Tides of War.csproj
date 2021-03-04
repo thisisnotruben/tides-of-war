@@ -100,13 +100,15 @@
     <Compile Include="src\menu_ui\abstract\GameMenu.cs" />
     <Compile Include="src\menu_ui\components\ItemInfoController.cs" />
     <Compile Include="src\menu_ui\components\SlotController.cs" />
+    <Compile Include="src\menu_ui\components\SlotDrag.cs" />
     <Compile Include="src\menu_ui\components\SlotGridController.cs" />
     <Compile Include="src\menu_ui\cursor\MoveCursorController.cs" />
     <Compile Include="src\menu_ui\dialogue\DialogueController.cs" />
+    <Compile Include="src\menu_ui\hud\ItemInfoHudController.cs" />
+    <Compile Include="src\menu_ui\hud\ItemInfoHudSpellController.cs" />
     <Compile Include="src\menu_ui\main\MenuMasterController.cs" />
     <Compile Include="src\menu_ui\hud\CharacterStatusController.cs" />
     <Compile Include="src\menu_ui\hud\HudControlController.cs" />
-    <Compile Include="src\menu_ui\hud\HudSlotController.cs" />
     <Compile Include="src\menu_ui\inventory\InventoryController.cs" />
     <Compile Include="src\menu_ui\inventory\InventoryModel.cs" />
     <Compile Include="src\menu_ui\inventory\ItemInfoInventoryController.cs" />

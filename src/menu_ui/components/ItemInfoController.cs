@@ -6,9 +6,10 @@ namespace Game.Ui
 {
 	public class ItemInfoController : GameMenu
 	{
-		public InventoryModel itemList;
+		public InventoryModel inventoryModel;
+		public SlotGridController slotGridController;
 		public int selectedSlotIdx;
-		public PopupController popupController;
+		public PopupController popup;
 		protected Label header;
 		protected RichTextLabel richTextLabel;
 		protected string commodityWorldName;
@@ -16,15 +17,13 @@ namespace Game.Ui
 		protected TextureButton leftbttn, rightBttn;
 		protected TextureRect commodityIcon;
 		public Button castBttn, useBttn, buyBttn, sellBttn, equipBttn, unequipBttn, dropBttn, backBttn;
-		public Button addToHudBttn;
 
 		public override void _Ready()
 		{
 			mainContent = GetChild<Control>(0);
 
 			header = GetNode<Label>("s/vBoxContainer/header");
-			addToHudBttn = GetNode<Button>("s/vBoxContainer/add_to_hud");
-			commodityIcon = addToHudBttn.GetNode<TextureRect>("m/icon");
+			commodityIcon = GetNode<TextureRect>("s/vBoxContainer/icon/m/icon");
 			richTextLabel = GetNode<RichTextLabel>("s/vBoxContainer/richTextLabel");
 
 			buttonContainer = GetNode<Control>("s/hBoxContainer/gridContainer");
@@ -42,38 +41,30 @@ namespace Game.Ui
 			rightBttn = GetNode<TextureButton>("s/hBoxContainer/right");
 
 			// connect popup events
-			popupController = GetChild<PopupController>(1);
-			popupController.clearSlot.Connect("pressed", this, nameof(OnClearSlotPressed));
-			popupController.Connect("hide", this, nameof(OnAddToHudBack));
-			popupController.Connect("hide", this, nameof(OnHide));
-			popupController.addToHudSlotBttns.ForEach(b => b.Connect("pressed",
-				this, nameof(OnAddToHudConfirm), new Godot.Collections.Array() { b.GetIndex() + 1 })
-			);
+			popup = GetChild<PopupController>(1);
+			popup.Connect("hide", this, nameof(OnHide));
 		}
 		public virtual void Display(string commodityWorldName, bool allowMove)
 		{
 			this.commodityWorldName = commodityWorldName;
 
-			// itemList != null due to player traversing through shortcuts
-			if (allowMove && itemList != null)
+			// inventoryModel != null due to player traversing through shortcuts
+			if (allowMove && inventoryModel != null)
 			{
-				// disable left button if at first item
-				leftbttn.Disabled = selectedSlotIdx == 0;
-				// disable right button if at last time
-				rightBttn.Disabled = selectedSlotIdx == itemList.count - 1;
-
-				leftbttn.Show();
-				rightBttn.Show();
+				leftbttn.Disabled = !slotGridController.IsSlotUsed(
+					slotGridController.GetNextSlot(selectedSlotIdx, false));
+				rightBttn.Disabled = !slotGridController.IsSlotUsed(
+					slotGridController.GetNextSlot(selectedSlotIdx, true));
+				leftbttn.Visible = rightBttn.Visible = true;
 			}
 			else
 			{
-				leftbttn.Hide();
-				rightBttn.Hide();
+				leftbttn.Visible = rightBttn.Visible = false;
 			}
 
 			// decide which buttons to show
 			Control[] showBttns = { };
-			if (!player.dead && itemList != null && Globals.itemDB.HasData(commodityWorldName))
+			if (!player.dead && inventoryModel != null && Globals.itemDB.HasData(commodityWorldName))
 			{
 				showBttns = new Control[] { dropBttn, null };
 				ItemDB.ItemType itemType = Globals.itemDB.GetData(commodityWorldName).type;
@@ -110,7 +101,7 @@ namespace Game.Ui
 		}
 		protected void RouteConnections(string toMethod)
 		{
-			BaseButton yesBttn = popupController.yesBttn;
+			BaseButton yesBttn = popup.yesBttn;
 			string signal = "pressed";
 
 			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
@@ -119,77 +110,19 @@ namespace Game.Ui
 			}
 			yesBttn.Connect(signal, this, toMethod);
 		}
-		private void OnHide()
+		protected virtual void OnHide()
 		{
-			popupController.Hide();
+			popup.Hide();
 			mainContent.Show();
-		}
-		private void OnAddToHudPressed()
-		{
-			PlaySound(NameDB.UI.CLICK2);
-			mainContent.Hide();
-			popupController.clearSlot.Hide();
-
-			int count = 1;
-			HudSlotController hudControlController;
-			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-			{
-				hudControlController = node as HudSlotController;
-				if (hudControlController?.HasCommodity(commodityWorldName) ?? false)
-				{
-					popupController.clearSlot.Show();
-				}
-				hudControlController?.ShowAddToHudDisplay((count++).ToString());
-			}
-			popupController.addToSlotView.Show();
-			popupController.Show();
-		}
-		private void OnAddToHudConfirm(int index)
-		{
-			PlaySound(NameDB.UI.CLICK1);
-			Hide();
-
-			HudSlotController hudSlotController;
-			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-			{
-				hudSlotController = node as HudSlotController;
-				if (hudSlotController?.Name.Equals(index.ToString()) ?? false)
-				{
-					hudSlotController.Display(commodityWorldName, player.GetPath(), itemList);
-
-					// TODO: connect pressed events to some form of action
-
-					return;
-				}
-			}
-		}
-		private void OnAddToHudBack()
-		{
-			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-			{
-				(node as HudSlotController)?.RevertAddToHudDisplay();
-			}
-		}
-		private void OnClearSlotPressed()
-		{
-			HudSlotController hudSlotController;
-			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
-			{
-				hudSlotController = node as HudSlotController;
-				if (hudSlotController?.HasCommodity(commodityWorldName) ?? false)
-				{
-					hudSlotController.ClearDisplay();
-					break;
-				}
-			}
-			popupController.Hide();
 		}
 		public virtual void _OnMovePressed(int by)
 		{
 			PlaySound(NameDB.UI.CLICK2);
 			// update selection and display
-			selectedSlotIdx += by;
-			Display(itemList.GetCommodity(selectedSlotIdx), true);
+			selectedSlotIdx = slotGridController.GetNextSlot(selectedSlotIdx, by > 0);
+			Display(inventoryModel.GetCommodity(
+				slotGridController.GetSlotToModelIndex(selectedSlotIdx))
+				, true);
 		}
 		private void OnButtonContainerSort()
 		{

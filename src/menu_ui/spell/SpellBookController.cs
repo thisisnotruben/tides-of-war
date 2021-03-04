@@ -6,7 +6,7 @@ namespace Game.Ui
 	public class SpellBookController : GameMenu
 	{
 		public readonly InventoryModel spellBook = new InventoryModel();
-		private SlotGridController spellSlots;
+		public SlotGridController spellSlots;
 		private ItemInfoSpellController spellInfo;
 		private PopupController popup;
 		private Control mainContent;
@@ -17,7 +17,8 @@ namespace Game.Ui
 			spellSlots = mainContent.GetChild<SlotGridController>(0);
 
 			spellInfo = GetChild<ItemInfoSpellController>(1);
-			spellInfo.itemList = spellBook;
+			spellInfo.inventoryModel = spellBook;
+			spellInfo.slotGridController = spellSlots;
 			spellInfo.backBttn.Connect("pressed", this, nameof(OnItemInfoBackPressed));
 
 			popup = GetChild<PopupController>(2);
@@ -32,20 +33,27 @@ namespace Game.Ui
 		}
 		private void OnDraw()
 		{
-			// display slots
-			spellSlots.ClearSlots();
 			for (int i = 0; i < spellBook.count; i++)
 			{
-				spellSlots.DisplaySlot(i, spellBook.GetCommodity(i), spellBook.GetCommodityStack(i),
-					Commodity.GetCoolDown(player.GetPath(), spellBook.GetCommodity(i)));
+				if (!spellSlots.IsModelSlotUsed(i))
+				{
+					spellSlots.DisplaySlot(
+						spellSlots.GetNextSlot(-1, true, false),
+						i,
+						spellBook.GetCommodity(i),
+						spellBook.GetCommodityStack(i),
+						Commodity.GetCoolDown(player.GetPath(), spellBook.GetCommodity(i))
+					);
+				}
 			}
+			spellSlots.RefreshSlots(spellBook);
 		}
 		private void OnHide() { popup.Hide(); }
 		private void OnItemInfoBackPressed() { mainContent.Show(); }
 		private void OnSpellBookIndexSelected(int slotIndex)
 		{
 			// don't want to click on an empty slot
-			if (slotIndex >= spellBook.count)
+			if (!spellSlots.IsSlotUsed(slotIndex))
 			{
 				return;
 			}
@@ -54,7 +62,7 @@ namespace Game.Ui
 			mainContent.Hide();
 
 			spellInfo.selectedSlotIdx = slotIndex;
-			spellInfo.Display(spellBook.GetCommodity(slotIndex), true);
+			spellInfo.Display(spellBook.GetCommodity(spellSlots.GetSlotToModelIndex(slotIndex)), true);
 		}
 	}
 }

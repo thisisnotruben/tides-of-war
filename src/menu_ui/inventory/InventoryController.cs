@@ -6,7 +6,7 @@ namespace Game.Ui
 	public class InventoryController : GameMenu
 	{
 		public readonly InventoryModel inventory = new InventoryModel();
-		private SlotGridController inventorySlots;
+		public SlotGridController inventorySlots;
 		public ItemInfoInventoryController inventoryItemInfo;
 		protected Control mainContent;
 		protected TextureRect weaponIcon, armorIcon;
@@ -21,9 +21,9 @@ namespace Game.Ui
 			inventorySlots = GetNode<SlotGridController>("s/v/c/SlotGrid");
 
 			inventoryItemInfo = GetChild<ItemInfoInventoryController>(1);
-			inventoryItemInfo.itemList = inventory;
+			inventoryItemInfo.inventoryModel = inventory;
+			inventoryItemInfo.slotGridController = inventorySlots;
 			inventoryItemInfo.Connect("hide", this, nameof(OnInventoryControllerHide));
-			inventoryItemInfo.Connect(nameof(ItemInfoInventoryController.ItemEquipped), this, nameof(OnItemEquipped));
 
 			// connect slot events
 			foreach (SlotController slot in inventorySlots.GetSlots())
@@ -38,12 +38,30 @@ namespace Game.Ui
 		private void OnDraw() { RefreshSlots(); }
 		private void RefreshSlots()
 		{
-			inventorySlots.ClearSlots();
+			Item playerWeapon = player.weapon,
+				playerArmor = player.vest;
+
+			weaponIcon.Texture = playerWeapon == null
+				? null
+				: Globals.itemDB.GetData(playerWeapon.worldName).icon;
+			armorIcon.Texture = playerArmor == null
+				? null
+				: Globals.itemDB.GetData(playerArmor.worldName).icon;
+
 			for (int i = 0; i < inventory.count; i++)
 			{
-				inventorySlots.DisplaySlot(i, inventory.GetCommodity(i), inventory.GetCommodityStack(i),
-					Commodity.GetCoolDown(player.GetPath(), inventory.GetCommodity(i)));
+				if (!inventorySlots.IsModelSlotUsed(i))
+				{
+					inventorySlots.DisplaySlot(
+						inventorySlots.GetNextSlot(-1, true, false),
+						i,
+						inventory.GetCommodity(i),
+						inventory.GetCommodityStack(i),
+						Commodity.GetCoolDown(player.GetPath(), inventory.GetCommodity(i))
+					);
+				}
 			}
+			inventorySlots.RefreshSlots(inventory);
 		}
 		private void OnInventoryControllerHide()
 		{
@@ -51,18 +69,10 @@ namespace Game.Ui
 			inventoryItemInfo.Hide();
 			mainContent.Show();
 		}
-		private void OnItemEquipped(string worldName, bool on)
-		{
-			ItemDB.ItemData itemData = Globals.itemDB.GetData(worldName);
-			(itemData.type == ItemDB.ItemType.ARMOR
-				? armorIcon
-				: weaponIcon
-			).Texture = on ? itemData.icon : null;
-		}
 		private void OnInventoryIndexSelected(int slotIndex)
 		{
 			// don't want to click on an empty slot
-			if (slotIndex >= inventory.count)
+			if (!inventorySlots.IsSlotUsed(slotIndex))
 			{
 				return;
 			}
@@ -71,7 +81,10 @@ namespace Game.Ui
 			mainContent.Hide();
 
 			inventoryItemInfo.selectedSlotIdx = slotIndex;
-			inventoryItemInfo.Display(inventory.GetCommodity(slotIndex), true);
+			inventoryItemInfo.Display(
+				inventory.GetCommodity(inventorySlots.GetSlotToModelIndex(slotIndex))
+				, true
+			);
 		}
 		private void OnEquippedSlotPressed(bool weapon)
 		{
@@ -79,8 +92,6 @@ namespace Game.Ui
 			{
 				mainContent.Hide();
 				inventoryItemInfo.Display(weapon ? player.weapon.worldName : player.vest.worldName, false);
-				inventoryItemInfo.equipBttn.Hide();
-				inventoryItemInfo.unequipBttn.Show();
 			}
 		}
 	}

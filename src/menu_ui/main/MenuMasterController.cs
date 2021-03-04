@@ -1,3 +1,4 @@
+using Godot;
 using Game.Actor;
 using Game.Quest;
 using Game.Loot;
@@ -12,15 +13,26 @@ namespace Game.Ui
 		public override void _Ready()
 		{
 			gameMenu = GetNode<MainMenuController>("canvasLayer/split/gameMenu");
-			hud = GetNode<HudControlController>("canvasLayer/split/hud");
 
+			hud = GetNode<HudControlController>("canvasLayer/split/hud");
 			hud.pause.Connect("toggled", this, nameof(OnHudPausePressed));
+
+			CanvasItem hudMenuContainer = GetNode<CanvasItem>("canvasLayer/split/tabContainer");
+
+			ItemInfoHudController itemInfoHudController = hudMenuContainer.GetNode<ItemInfoHudController>("Inventory/itemInfo");
+			itemInfoHudController.inventoryModel = gameMenu.playerInventory;
+			itemInfoHudController.slotGridController = gameMenu.GetNode<InventoryController>("playerMenu/Inventory/InventoryView").inventorySlots;
+
+			ItemInfoHudSpellController infoHudSpellController = hudMenuContainer.GetNode<ItemInfoHudSpellController>("Spells/itemInfo");
+			infoHudSpellController.inventoryModel = gameMenu.playerSpellBook;
+			infoHudSpellController.slotGridController = gameMenu.GetNode<SpellBookController>("playerMenu/Skills/SkillBookView").spellSlots;
+
+			itemInfoHudController.tabContainer = infoHudSpellController.tabContainer = hudMenuContainer;
 		}
 		public void OnHudPausePressed(bool toggled)
 		{
 			PlaySound(NameDB.UI.CLICK5);
 			gameMenu.Visible = toggled;
-
 		}
 		public void ConnectPlayerToHud(Player player) { hud.playerStatus.ConnectCharacterStatusAndUpdate(player); }
 		public void SetTargetDisplay(Npc target)

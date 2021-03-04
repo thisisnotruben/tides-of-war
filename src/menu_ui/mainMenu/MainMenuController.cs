@@ -16,7 +16,9 @@ namespace Game.Ui
 		public override void _Ready()
 		{
 			playerMenu = GetChild<TabContainer>(0);
-			playerInventory = playerMenu.GetNode<InventoryController>("Inventory/InventoryView").inventory;
+
+			InventoryController inventoryController = playerMenu.GetNode<InventoryController>("Inventory/InventoryView");
+			playerInventory = inventoryController.inventory;
 			playerSpellBook = playerMenu.GetNode<SpellBookController>("Skills/SkillBookView").spellBook;
 
 			npcMenu = GetChild<TabContainer>(1);
@@ -24,6 +26,7 @@ namespace Game.Ui
 			store = npcMenu.GetNode<MerchantController>("Store/merchantView");
 			store.playerInventory = playerInventory;
 			store.playerSpellBook = playerSpellBook;
+			store.playerInventoryGridController = inventoryController.inventorySlots;
 
 			popup = GetChild<PopupController>(2);
 			popup.exitGameBttn.Connect("pressed", this, nameof(OnExitGamePressed));

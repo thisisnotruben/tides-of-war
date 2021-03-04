@@ -8,7 +8,6 @@ namespace Game.Ui
 {
 	public class ItemInfoInventoryController : ItemInfoController
 	{
-		[Signal] public delegate void ItemEquipped(string worldName, bool on);
 		[Signal] public delegate void RefreshSlots();
 
 		public override void _Ready()
@@ -19,6 +18,14 @@ namespace Game.Ui
 			unequipBttn.Connect("pressed", this, nameof(OnUnequipPressed));
 			dropBttn.Connect("pressed", this, nameof(OnDropPressed));
 		}
+		public override void Display(string commodityWorldName, bool allowMove)
+		{
+			base.Display(commodityWorldName, allowMove);
+
+			unequipBttn.Visible = (player.weapon?.worldName.Equals(commodityWorldName) ?? false)
+				|| (player.vest?.worldName.Equals(commodityWorldName) ?? false);
+			equipBttn.Visible = !unequipBttn.Visible;
+		}
 		private void EquipItem(bool on, string worldName)
 		{
 			Item item = new ItemFactory().Make(player, worldName);
@@ -28,7 +35,7 @@ namespace Game.Ui
 					// add back to inventory
 					if (!on && player.weapon != null)
 					{
-						itemList.AddCommodity(player.weapon.worldName);
+						inventoryModel.AddCommodity(player.weapon.worldName);
 					}
 
 					player.weapon = on ? item : null;
@@ -37,7 +44,7 @@ namespace Game.Ui
 					// add back to inventory
 					if (!on && player.vest != null)
 					{
-						itemList.AddCommodity(player.vest.worldName);
+						inventoryModel.AddCommodity(player.vest.worldName);
 					}
 
 					player.vest = on ? item : null;
@@ -47,12 +54,11 @@ namespace Game.Ui
 			}
 			if (on)
 			{
-				itemList.RemoveCommodity(worldName);
+				slotGridController.ClearSlot(inventoryModel.RemoveCommodity(worldName));
 			}
 			EmitSignal(nameof(RefreshSlots));
-			EmitSignal(nameof(ItemEquipped), worldName, on);
 		}
-		private void OnUsePressed()
+		protected void OnUsePressed()
 		{
 			string sndName = NameDB.UI.CLICK2;
 
@@ -64,7 +70,7 @@ namespace Game.Ui
 					if (player.attacking)
 					{
 						mainContent.Hide();
-						popupController.ShowError("Cannot Eat\nIn Combat!");
+						popup.ShowError("Cannot Eat\nIn Combat!");
 						return;
 					}
 					break;
@@ -77,8 +83,8 @@ namespace Game.Ui
 			// eat up or drink up
 			new ItemFactory().Make(player, commodityWorldName).Start();
 			// remove from inventory
-			itemList.RemoveCommodity(commodityWorldName);
-			CheckHudSlots(itemList, commodityWorldName);
+			slotGridController.ClearSlot(inventoryModel.RemoveCommodity(commodityWorldName));
+			CheckHudSlots(inventoryModel, commodityWorldName);
 
 			EmitSignal(nameof(RefreshSlots));
 			Hide();
@@ -93,7 +99,7 @@ namespace Game.Ui
 			// unequip weapon if any to equip focused weapon
 			if (itemType == ItemDB.ItemType.WEAPON && playerWeapon != null)
 			{
-				inventoryFull = itemList.IsFull(playerWeapon.worldName);
+				inventoryFull = inventoryModel.IsFull(playerWeapon.worldName);
 				if (!inventoryFull)
 				{
 					EquipItem(false, playerWeapon.worldName);
@@ -103,7 +109,7 @@ namespace Game.Ui
 			// unequip armor if any to equip focused armor
 			if (itemType == ItemDB.ItemType.ARMOR && playerArmor != null)
 			{
-				inventoryFull = itemList.IsFull(playerArmor.worldName);
+				inventoryFull = inventoryModel.IsFull(playerArmor.worldName);
 				if (!inventoryFull)
 				{
 					EquipItem(false, playerArmor.worldName);
@@ -113,7 +119,7 @@ namespace Game.Ui
 			if (inventoryFull)
 			{
 				mainContent.Hide();
-				popupController.ShowError("Inventory\nFull!");
+				popup.ShowError("Inventory\nFull!");
 			}
 			else
 			{
@@ -124,10 +130,10 @@ namespace Game.Ui
 		}
 		private void OnUnequipPressed()
 		{
-			if (itemList.IsFull(commodityWorldName))
+			if (inventoryModel.IsFull(commodityWorldName))
 			{
 				mainContent.Hide();
-				popupController.ShowError("Inventory\nFull!");
+				popup.ShowError("Inventory\nFull!");
 			}
 			else
 			{
@@ -142,7 +148,7 @@ namespace Game.Ui
 
 			RouteConnections(nameof(OnDropConfirm));
 			mainContent.Hide();
-			popupController.ShowConfirm("Drop?");
+			popup.ShowConfirm("Drop?");
 		}
 		private void OnDropConfirm()
 		{
@@ -150,8 +156,8 @@ namespace Game.Ui
 			PlaySound(NameDB.UI.INVENTORY_DROP);
 
 			EquipItem(false, commodityWorldName); // just in case if it's equipped
-			itemList.RemoveCommodity(commodityWorldName);
-			CheckHudSlots(itemList, commodityWorldName);
+			slotGridController.ClearSlot(inventoryModel.RemoveCommodity(commodityWorldName));
+			CheckHudSlots(inventoryModel, commodityWorldName);
 			EmitSignal(nameof(RefreshSlots));
 
 			// instance treasure chest

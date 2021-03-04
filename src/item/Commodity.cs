@@ -99,7 +99,7 @@ namespace Game.GameItem
 				return description;
 			};
 
-			string text = $"Name: {worldName}\nLevel: {level}\n";
+			string text = $"Level: {level}\n";
 			if (coolDown > 0)
 			{
 				text += $"Cooldown: {coolDown} sec.\n";

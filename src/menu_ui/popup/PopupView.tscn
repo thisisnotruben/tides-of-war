@@ -80,7 +80,7 @@ visible = false
 margin_left = 50.0
 margin_top = 50.0
 margin_right = 386.0
-margin_bottom = 398.0
+margin_bottom = 373.0
 theme = ExtResource( 8 )
 custom_constants/separation = 5
 alignment = 1
@@ -173,7 +173,7 @@ text = "Back"
 visible = false
 margin_left = 50.0
 margin_top = 50.0
-margin_right = 386.0
+margin_right = 388.0
 margin_bottom = 510.0
 theme = ExtResource( 8 )
 alignment = 1
@@ -205,62 +205,6 @@ text = "Completed"
 margin_top = 348.0
 margin_right = 336.0
 margin_bottom = 460.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Back"
-
-[node name="add_to_slot" type="VBoxContainer" parent="marginContainer"]
-visible = false
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 386.0
-margin_bottom = 742.0
-theme = ExtResource( 8 )
-alignment = 1
-
-[node name="slot_1" type="Button" parent="marginContainer/add_to_slot"]
-margin_right = 336.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Slot 1"
-
-[node name="slot_2" type="Button" parent="marginContainer/add_to_slot"]
-margin_top = 116.0
-margin_right = 336.0
-margin_bottom = 228.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Slot 2"
-
-[node name="slot_3" type="Button" parent="marginContainer/add_to_slot"]
-margin_top = 232.0
-margin_right = 336.0
-margin_bottom = 344.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Slot 3"
-
-[node name="slot_4" type="Button" parent="marginContainer/add_to_slot"]
-margin_top = 348.0
-margin_right = 336.0
-margin_bottom = 460.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Slot 4"
-
-[node name="clear_slot" type="Button" parent="marginContainer/add_to_slot"]
-margin_top = 464.0
-margin_right = 336.0
-margin_bottom = 576.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Clear Slot"
-
-[node name="back" type="Button" parent="marginContainer/add_to_slot"]
-margin_top = 580.0
-margin_right = 336.0
-margin_bottom = 692.0
 rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Back"
@@ -334,5 +278,4 @@ text = "Back"
 [connection signal="pressed" from="marginContainer/error/okay" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="marginContainer/exit/back" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="marginContainer/filter_options/back" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="marginContainer/add_to_slot/back" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="marginContainer/repair/back" to="." method="_OnBackPressed"]

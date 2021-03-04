@@ -4,27 +4,21 @@ namespace Game.Ui
 {
 	public class InventoryModel
 	{
-		public struct Slot
+		public class Slot
 		{
 			public string commodityName;
 			public int stackSize;
+
+			public Slot(string commodityName, int stackSize)
+			{
+				this.commodityName = commodityName;
+				this.stackSize = stackSize;
+			}
 		}
 		private List<Slot> slots = new List<Slot>();
 		public int count { get { return slots.Count; } }
 		public int maxSlots = 25;
 
-		private int SortSlots(Slot a, Slot b)
-		{
-			if (a.stackSize > b.stackSize)
-			{
-				return -1;
-			}
-			if (a.stackSize < b.stackSize)
-			{
-				return 1;
-			}
-			return 0;
-		}
 		public string GetCommodity(int index) { return slots[index].commodityName; }
 		public int GetCommodityStack(int index) { return slots[index].stackSize; }
 		public List<string> GetCommodities(bool stack = true)
@@ -63,47 +57,32 @@ namespace Game.Ui
 				if (slots[i].commodityName.Equals(commodityWorldName)
 				&& slots[i].stackSize < commodityStackSize)
 				{
-					// cannot modify struct slot directly in loop
-					Slot focusedSlot = slots[i];
-					focusedSlot.stackSize += 1;
-					slots[i] = focusedSlot;
-
-					slots.Sort(SortSlots);
+					slots[i].stackSize += 1;
 					return true;
 				}
 			}
 
-			// make new slot
-			Slot slot;
-			slot.commodityName = commodityWorldName;
-			slot.stackSize = 1;
-
-			// add slot
-			slots.Add(slot);
-			slots.Sort(SortSlots);
-
+			slots.Add(new Slot(commodityWorldName, 1));
 			return true;
 		}
-		public bool RemoveCommodity(string commodityName)
+		public int RemoveCommodity(string commodityName)
 		{
 			for (int i = 0; i < count; i++)
 			{
 				if (slots[i].commodityName.Equals(commodityName))
 				{
-					// cannot modify directly
-					Slot focusedSlot = slots[i];
-					focusedSlot.stackSize -= 1;
-					slots[i] = focusedSlot;
+					slots[i].stackSize -= 1;
 
 					// remove if stack depleted
 					if (slots[i].stackSize == 0)
 					{
 						slots.RemoveAt(i);
+						return i;
 					}
-					return true;
+					break;
 				}
 			}
-			return false;
+			return -1;
 		}
 		public void Clear() { slots.Clear(); }
 		public bool IsFull() { return maxSlots == count; }
