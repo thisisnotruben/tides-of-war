@@ -100,7 +100,7 @@ namespace Game.Projectile
 		}
 		public virtual void LoadMissile(Godot.Collections.Dictionary payload)
 		{
-			// TODO
+			// TODO: save
 			Deserialize(payload);
 			Godot.Collections.Array pos = (Godot.Collections.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
 			GlobalPosition = new Vector2((float)pos[0], (float)pos[1]);

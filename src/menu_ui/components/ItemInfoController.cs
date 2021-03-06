@@ -115,11 +115,11 @@ namespace Game.Ui
 			popup.Hide();
 			mainContent.Show();
 		}
-		public virtual void _OnMovePressed(int by)
+		public virtual void OnMovePressed(bool forward)
 		{
 			PlaySound(NameDB.UI.CLICK2);
 			// update selection and display
-			selectedSlotIdx = slotGridController.GetNextSlot(selectedSlotIdx, by > 0);
+			selectedSlotIdx = slotGridController.GetNextSlot(selectedSlotIdx, forward);
 			Display(inventoryModel.GetCommodity(
 				slotGridController.GetSlotToModelIndex(selectedSlotIdx))
 				, true);

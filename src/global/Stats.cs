@@ -17,7 +17,8 @@ namespace Game
 			MAX_LEVEL = 10,
 			FLEE_DISTANCE = 128,
 			XP_INTERVAL = 1_000,
-			MAX_XP = MAX_LEVEL * XP_INTERVAL;
+			MAX_XP = MAX_LEVEL * XP_INTERVAL,
+			CHANCE_NPC_SPELL = 50;
 
 		public const float
 			HP_MANA_RESPAWN_MIN_LIMIT = 0.3f,
@@ -100,7 +101,6 @@ namespace Game
 		{
 			return (int)Math.Round((6.0f * characterLevel + 24.0f + ((3.0 + characterLevel) * unitMultiplier)) * unitMultiplier * 0.05f);
 		}
-		// TODO
 		// public static int GetItemGoldWorth(int itemLevel, WorldObject.WorldTypes itemType, float itemDurability)
 		// {
 		// 	int gold = 3 * itemLevel + 4;
@@ -134,7 +134,6 @@ namespace Game
 		// CharacterStatsNode stats = UnitMake(itemLevel, MULTIPLIER);
 		// double minValue = -1.0;
 		// double maxValue = -1.0;
-		// TODO
 		// switch (itemSubType)
 		// {
 		// 	case Item.WorldTypes.HEALING:

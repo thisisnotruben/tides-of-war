@@ -16,12 +16,12 @@ namespace Game.Ui
 			buyBttn.Connect("pressed", this, nameof(OnBuyPressed));
 			sellBttn.Connect("pressed", this, nameof(OnSellPressed));
 		}
-		public override void _OnMovePressed(int by)
+		public override void OnMovePressed(bool forward)
 		{
 			PlaySound(NameDB.UI.CLICK2);
 
 			// get next commodity when pressing arrows
-			selectedSlotIdx = slotGridController.GetNextSlot(selectedSlotIdx, by > 0);
+			selectedSlotIdx = slotGridController.GetNextSlot(selectedSlotIdx, forward);
 
 			string nextCommodityWorldName = inventoryModel.GetCommodity(
 				slotGridController.GetSlotToModelIndex(selectedSlotIdx));

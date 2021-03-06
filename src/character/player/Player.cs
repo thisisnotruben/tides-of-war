@@ -117,7 +117,7 @@ namespace Game.Actor
 		{
 			base.Deserialize(payload);
 
-			return; // TODO
+			return; // TODO: save
 
 			// inventory
 			foreach (string itemName in (GC.Array)payload[NameDB.SaveTag.INVENTORY])

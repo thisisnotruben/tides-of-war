@@ -179,7 +179,9 @@ namespace Game.Map
 		{
 			worldPosition = collNav.WorldToMap(worldPosition);
 			int pointIndex = GetPointIndex(worldPosition);
-			return aStar.HasPoint(pointIndex) ? aStar.GetPointPosition(pointIndex) : worldPosition;
+			return aStar.HasPoint(pointIndex)
+				? aStar.GetPointPosition(pointIndex)
+				: collNav.MapToWorld(worldPosition) + HALF_CELL_SIZE;
 		}
 		public bool IsValidMove(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
 		{

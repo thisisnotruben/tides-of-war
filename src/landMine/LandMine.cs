@@ -124,7 +124,7 @@ namespace Game.Mine
 
 				if (character != null && character != exludedCharacter)
 				{
-					character.Harm(damage);
+					character.Harm(damage, GlobalPosition);
 					character.SpawnCombatText(damage.ToString(), CombatText.TextType.HIT);
 				}
 
@@ -158,7 +158,7 @@ namespace Game.Mine
 		}
 		public void Deserialize(GC.Dictionary payload)
 		{
-			// TODO
+			// TODO: save
 			GC.Array<float> posArray = (GC.Array<float>)payload[NameDB.SaveTag.POSITION];
 			GlobalPosition = new Vector2(posArray[0], posArray[1]);
 

@@ -46,7 +46,11 @@ namespace Game.Actor.State
 			character.img.Frame = 0;
 			path.Clear();
 		}
-		public override void OnAttacked(Character whosAttacking) { ClearOnAttackedSignals(whosAttacking); }
+		public override void OnAttacked(Character whosAttacking)
+		{
+			ClearOnAttackedSignals(whosAttacking);
+			character.regenTimer.Stop();
+		}
 		protected void ResetPoint()
 		{
 			if (reservedPath.Count > 0)

@@ -8,7 +8,7 @@ namespace Game.Ui
 	public class MainMenuController : GameMenu
 	{
 		public InventoryModel playerInventory, playerSpellBook;
-		private TabContainer playerMenu, npcMenu;
+		public TabContainer playerMenu, npcMenu;
 		private DialogueController npcDialogue;
 		private MerchantController store;
 		private PopupController popup;

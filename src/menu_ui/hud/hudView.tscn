@@ -70,6 +70,7 @@ margin_bottom = 127.0
 size_flags_horizontal = 3
 
 [node name="targetStatus" parent="margin/split/characterStatus/targetContainer" instance=ExtResource( 8 )]
+visible = false
 margin_right = 0.0
 margin_bottom = 0.0
 size_flags_horizontal = 3

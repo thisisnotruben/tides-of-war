@@ -222,7 +222,7 @@ namespace Game.GameItem
 			}
 			if (use.damage.value != 0)
 			{
-				character.Harm((int)use.damage.value);
+				character.Harm((int)use.damage.value, Vector2.Zero);
 			}
 
 			// iterate through use count
@@ -287,7 +287,7 @@ namespace Game.GameItem
 		}
 		public GC.Dictionary Serialize()
 		{
-			// TODO
+			// TODO: save
 			// cooldowns
 			GC.Dictionary savedCooldowns = new GC.Dictionary();
 			foreach (NodePath nodePath in cooldowns.Keys)
@@ -306,7 +306,7 @@ namespace Game.GameItem
 		}
 		public void Deserialize(GC.Dictionary payload)
 		{
-			// TODO
+			// TODO: save
 			// cooldowns
 			NodePath characterNodePath;
 			GC.Dictionary savedCooldowns = (GC.Dictionary)payload[NameDB.SaveTag.COOLDOWNS];

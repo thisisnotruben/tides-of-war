@@ -1,15 +1,22 @@
 using Godot;
 using Game.Database;
 using Game.GameItem;
+using Game.Factory;
+using Game.Ability;
 namespace Game.Ui
 {
 	public class ItemInfoSpellController : ItemInfoController
 	{
+		[Signal] public delegate void PlayerWantstoCast(Spell spell);
+		[Signal] public delegate void PlayerWantstoCastError(string errotText);
+
 		public override void _Ready()
 		{
 			base._Ready();
 			castBttn.Connect("pressed", this, nameof(OnCastPressed));
+			CallDeferred(nameof(InitSetPlayerCastSpell));
 		}
+		private void InitSetPlayerCastSpell() { player.fsm.InitSetPlayerCastSpell(this); }
 		public override void Display(string commodityWorldName, bool allowMove)
 		{
 			base.Display(commodityWorldName, allowMove);
@@ -25,12 +32,16 @@ namespace Game.Ui
 			string errorText = string.Empty;
 			SpellDB.SpellData spellData = Globals.spellDB.GetData(commodityWorldName);
 
-			if (player.mana >= spellData.manaCost)
+			if (Commodity.IsCoolingDown(player.GetPath(), commodityWorldName))
+			{
+				errorText = "Cooling\nDown!";
+			}
+			else if (player.mana >= spellData.manaCost)
 			{
 				if (spellData.requiresTarget)
 				{
 					if (player.target == null)
-					{
+				{
 						errorText = "Target\nRequired!";
 					}
 					else
@@ -55,12 +66,13 @@ namespace Game.Ui
 			{
 				mainContent.Hide();
 				popup.ShowError(errorText);
+				EmitSignal(nameof(PlayerWantstoCastError), errorText);
 			}
 			else
 			{
 				PlaySound(NameDB.UI.CLICK2);
-				// TODO: actually cast spell here
 				Hide();
+				EmitSignal(nameof(PlayerWantstoCast), new SpellFactory().Make(player, commodityWorldName));
 			}
 		}
 	}

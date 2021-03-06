@@ -4,6 +4,8 @@ using Game.Actor.State;
 using Game.Actor.Stat;
 using Godot;
 using GC = Godot.Collections;
+using System.Collections.Generic;
+
 namespace Game.Actor
 {
 	public abstract class Character : WorldObject, ISerializable
@@ -103,6 +105,7 @@ namespace Game.Actor
 		}
 
 		public Character target;
+		public readonly HashSet<ulong> pursuantUnitIds = new HashSet<ulong>();
 
 		[Signal] public delegate void UpdateHudHealthStatus(int currentValue, int maxValue);
 		[Signal] public delegate void UpdateHudManaStatus(int currentValue, int maxValue);
@@ -175,7 +178,7 @@ namespace Game.Actor
 			select.Position = new Vector2(-hitBoxTexture.GetWidth() / 2.0f, -hitBoxTexture.GetHeight());
 			sightDistance.Position = areaBody.Position;
 		}
-		public void Harm(int damage) { fsm.Harm(damage); }
+		public void Harm(int damage, Vector2 direction) { fsm.Harm(damage, direction); }
 		public void OnAttacked(Character whosAttacking) { fsm.OnAttacked(whosAttacking); }
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
@@ -184,9 +187,16 @@ namespace Game.Actor
 			combatText.Init(text, textType, img.Position);
 			combatTextHandler.AddCombatText(combatText);
 		}
+		public void RemovePursuantUnitId(ulong id)
+		{
+			pursuantUnitIds.Remove(id);
+			if (pursuantUnitIds.Count == 0)
+			{
+				regenTimer.Start();
+			}
+		}
 		public void _OnRegenTimerTimeout()
 		{
-			// fsm controls when regen timer is allowed
 			hp += stats.regenAmount.valueI;
 			mana += stats.regenAmount.valueI;
 		}
@@ -223,7 +233,7 @@ namespace Game.Actor
 			GC.Array posArray = (GC.Array)payload[NameDB.SaveTag.POSITION];
 			GlobalPosition = new Vector2((float)posArray[0], (float)posArray[1]);
 
-			return; // TODO
+			return; // TODO: save
 			level = (int)payload[NameDB.SaveTag.LEVEL];
 			hp = (int)payload[NameDB.SaveTag.HP];
 			mana = (int)payload[NameDB.SaveTag.MANA];

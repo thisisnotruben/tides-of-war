@@ -1,8 +1,9 @@
-using Game.Loot;
+using Game.Actor.Doodads;
 using Game.GameItem;
 using Game.Database;
 using Game.Factory;
 using Game.Quest;
+using Game.Loot;
 using Godot;
 namespace Game.Ui
 {
@@ -76,6 +77,7 @@ namespace Game.Ui
 					break;
 				case ItemDB.ItemType.POTION:
 					sndName = NameDB.UI.DRINK;
+					player.img.AddChild(((BuffAnim)SceneDB.buffAnimScene.Instance()).Init(commodityWorldName));
 					break;
 			}
 			PlaySound(sndName);

@@ -9,15 +9,21 @@ namespace Game.Ui
 	{
 		public MainMenuController gameMenu;
 		private HudControlController hud;
+		public HudPopupConfirmController confirmPopup;
+		public HudPopupErrorController errorPopup;
+		private CanvasItem hudMenuContainer;
 
 		public override void _Ready()
 		{
 			gameMenu = GetNode<MainMenuController>("canvasLayer/split/gameMenu");
 
+			confirmPopup = GetNode<HudPopupConfirmController>("canvasLayer/split/confirmPopup");
+			errorPopup = GetNode<HudPopupErrorController>("canvasLayer/split/errorPopup");
+
 			hud = GetNode<HudControlController>("canvasLayer/split/hud");
 			hud.pause.Connect("toggled", this, nameof(OnHudPausePressed));
 
-			CanvasItem hudMenuContainer = GetNode<CanvasItem>("canvasLayer/split/tabContainer");
+			hudMenuContainer = GetNode<CanvasItem>("canvasLayer/split/hudMenu");
 
 			ItemInfoHudController itemInfoHudController = hudMenuContainer.GetNode<ItemInfoHudController>("Inventory/itemInfo");
 			itemInfoHudController.inventoryModel = gameMenu.playerInventory;
@@ -28,11 +34,19 @@ namespace Game.Ui
 			infoHudSpellController.slotGridController = gameMenu.GetNode<SpellBookController>("playerMenu/Skills/SkillBookView").spellSlots;
 
 			itemInfoHudController.tabContainer = infoHudSpellController.tabContainer = hudMenuContainer;
+
+			infoHudSpellController.Connect(nameof(ItemInfoHudSpellController.PlayerWantstoCastError),
+				errorPopup, nameof(HudPopupErrorController.ShowError));
 		}
 		public void OnHudPausePressed(bool toggled)
 		{
 			PlaySound(NameDB.UI.CLICK5);
 			gameMenu.Visible = toggled;
+			if (toggled)
+			{
+				gameMenu.npcMenu.Visible = hudMenuContainer.Visible = confirmPopup.Visible = errorPopup.Visible = false;
+				gameMenu.playerMenu.Show();
+			}
 		}
 		public void ConnectPlayerToHud(Player player) { hud.playerStatus.ConnectCharacterStatusAndUpdate(player); }
 		public void SetTargetDisplay(Npc target)
@@ -62,7 +76,7 @@ namespace Game.Ui
 			{
 				if (interactable)
 				{
-					hud.pause.Pressed = gameMenu.NpcInteract(npc);
+					gameMenu.NpcInteract(npc);
 				}
 				else
 				{
@@ -76,7 +90,7 @@ namespace Game.Ui
 				// interact with npc
 				if (interactable)
 				{
-					hud.pause.Pressed = gameMenu.NpcInteract(npc);
+					gameMenu.NpcInteract(npc);
 				}
 				else
 				{

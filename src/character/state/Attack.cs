@@ -46,7 +46,11 @@ namespace Game.Actor.State
 
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
-		public override void OnAttacked(Character whosAttacking) { ClearOnAttackedSignals(whosAttacking); }
+		public override void OnAttacked(Character whosAttacking)
+		{
+			ClearOnAttackedSignals(whosAttacking);
+			character.regenTimer.Stop();
+		}
 		public void AttackStart()
 		{
 			if (!ValidTarget())
@@ -55,7 +59,18 @@ namespace Game.Actor.State
 			}
 
 			// get spell if any
-			TryGetSpell(out spell, character);
+			if (character is Player)
+			{
+				if (spell != null)
+				{
+					SetSpellNodeInTree(spell, character);
+				}
+			}
+			else
+			{
+				TryGetNpcSpell(out spell, character);
+			}
+
 			if (spell != null)
 			{
 				switch (Globals.spellDB.GetData(spell.worldName).type)
@@ -77,7 +92,6 @@ namespace Game.Actor.State
 			character.anim.Stop();
 			character.img.Frame = 0;
 
-			// TODO: add spell mod here or.... hmmm...
 			timer.WaitTime = character.stats.weaponSpeed.value;
 			timer.Start();
 		}
@@ -123,7 +137,6 @@ namespace Game.Actor.State
 
 				if (spell == null)
 				{
-					// TODO: make constants
 					Globals.soundPlayer.PlaySoundRandomized("bow", character.player2D);
 				}
 				else
@@ -137,7 +150,6 @@ namespace Game.Actor.State
 						string spellSound = Globals.missileSpellDB.GetData(spell.worldName).sound;
 						if (spellSound.Equals(string.Empty))
 						{
-							// TODO: make constants
 							Globals.soundPlayer.PlaySoundRandomized("bow", character.player2D);
 						}
 						else
@@ -201,16 +213,15 @@ namespace Game.Actor.State
 			}
 			else if (diceRoll <= attackTable.parry && imageData.melee == targetImageData.melee)
 			{
-				// TODO: make constants
 				if (imageData.weaponMaterial.Equals(targetImageData.weaponMaterial))
 				{
 					soundName = imageData.weaponMaterial.Equals("metal")
-						? "block_metal_metal"
-						: "block_wood_wood";
+						? NameDB.UI.BLOCK_METAL_METAL
+						: NameDB.UI.BLOCK_WOOD_WOOD;
 				}
 				else
 				{
-					soundName = "block_metal_wood";
+					soundName = NameDB.UI.BLOCK_METAL_WOOD;
 				}
 
 				hitType = CombatText.TextType.PARRY;
@@ -258,13 +269,14 @@ namespace Game.Actor.State
 			}
 			if (damage > 0)
 			{
-				target.Harm(damage);
+				target.Harm(damage, character.GlobalPosition);
 			}
 		}
 		private bool ValidTarget()
 		{
 			if (fsm.GetState() != FSM.State.ATTACK)
 			{
+				character.target?.RemovePursuantUnitId(character.GetInstanceId());
 				return false;
 			}
 			else if (character.target?.dead ?? true)
@@ -285,11 +297,13 @@ namespace Game.Actor.State
 					(character as Player)?.menu.ClearTarget();
 				}
 
+				character.target?.RemovePursuantUnitId(character.GetInstanceId());
 				fsm.ChangeState(state);
 				return false;
 			}
 			else if (character.pos.DistanceTo(character.target.pos) > character.stats.weaponRange.value)
 			{
+				character.target?.RemovePursuantUnitId(character.GetInstanceId());
 				fsm.ChangeState(
 					character is Npc
 					? FSM.State.NPC_MOVE_ATTACK
@@ -298,20 +312,24 @@ namespace Game.Actor.State
 			}
 			return true;
 		}
-		private static void TryGetSpell(out Spell spell, Character character)
+		public void SetPlayerSpell(Spell spell) { this.spell = spell; }
+		private static bool TryGetNpcSpell(out Spell spell, Character character)
 		{
 			Random rand = new Random();
 
-			// TODO: need to have a chance table on when a spell can be casted
-			if (50 >= rand.Next(1, 101)
-			&& character is Npc
-			&& Globals.contentDB.HasData(character.worldName)
-			&& Globals.contentDB.GetData(character.worldName).spells.Length > 0)
+			if (character is Npc
+			&& Stats.CHANCE_NPC_SPELL >= rand.Next(1, 101)
+			&& Globals.contentDB.HasData(character.worldName))
 			{
+				ContentDB.ContentData contentData = Globals.contentDB.GetData(character.worldName);
+				if (contentData.spells.Length == 0)
+				{
+					spell = null;
+					return false;
+				}
 
-				string[] characterSpells = Globals.contentDB.GetData(character.worldName).spells;
 				IEnumerable<SpellDB.SpellTypes> characterSpellTypes =
-					from spellName in characterSpells
+					from spellName in contentData.spells
 					select Globals.spellDB.GetData(spellName).type;
 
 				Array spellTypes = Enum.GetValues(typeof(SpellDB.SpellTypes));
@@ -323,7 +341,7 @@ namespace Game.Actor.State
 					spellType = (SpellDB.SpellTypes)spellTypes.GetValue(rand.Next(spellTypes.Length));
 				} while (!characterSpellTypes.Contains(spellType));
 
-				spells = from spellName in characterSpells
+				spells = from spellName in contentData.spells
 						 where Globals.spellDB.GetData(spellName).type.Equals(spellType)
 						 select spellName;
 
@@ -339,21 +357,26 @@ namespace Game.Actor.State
 				if (spells.Any())
 				{
 					spell = new SpellFactory().Make(character, spells.ElementAt(rand.Next(spells.Count())));
-
-					switch (spellType)
-					{
-						case SpellDB.SpellTypes.HIT_HOSTILE:
-							character.target.CallDeferred("add_child", spell);
-							break;
-						default:
-							// MOD_HOSTILE || MOD_FRIENDLY
-							character.CallDeferred("add_child", spell);
-							break;
-					}
-					return;
+					SetSpellNodeInTree(spell, character);
+					return true;
 				}
+
 			}
 			spell = null;
+			return false;
+		}
+		private static void SetSpellNodeInTree(Spell spell, Character character)
+		{
+			switch (Globals.spellDB.GetData(spell.worldName).type)
+			{
+				case SpellDB.SpellTypes.HIT_HOSTILE:
+					character.target.CallDeferred("add_child", spell);
+					break;
+				default:
+					// MOD_HOSTILE || MOD_FRIENDLY
+					character.CallDeferred("add_child", spell);
+					break;
+			}
 		}
 		private static ImageDB.ImageData GetImageData(Character character)
 		{

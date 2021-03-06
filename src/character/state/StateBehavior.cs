@@ -34,6 +34,9 @@ namespace Game.Actor.State
 				return;
 			}
 
+			character.regenTimer.Stop();
+			character.pursuantUnitIds.Add(whosAttacking.GetInstanceId());
+
 			if (character is Npc
 			&& character.target == null
 			&& !MoveNpcAttack.OutOfPursuitRange(character, whosAttacking))
@@ -59,6 +62,7 @@ namespace Game.Actor.State
 		}
 		protected void ClearOnAttackedSignals(Character whosAttacking)
 		{
+			character.pursuantUnitIds.Add(whosAttacking.GetInstanceId());
 			if (whosAttacking != null && character.target != whosAttacking
 			&& whosAttacking.IsConnected(nameof(Character.NotifyAttack), character, nameof(Character.OnAttacked)))
 			{

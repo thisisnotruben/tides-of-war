@@ -22,11 +22,9 @@ namespace Game.Actor.State
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
 		public void OnSetCastSpell(Spell spell) { this.spell = spell; }
-
-		public void OnCastFinished(string animName)
+		private void OnCastFinished(string animName)
 		{
-			// TODO: need to find a better way than the animation 
-			// finishing as it can be in a loop or part of the spell
+			spell?.Start();
 			fsm.RevertState();
 		}
 	}

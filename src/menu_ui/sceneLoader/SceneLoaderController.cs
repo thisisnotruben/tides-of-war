@@ -52,7 +52,7 @@ namespace Game.Ui
 
 			if (transition && currentScene is Map.Map)
 			{
-				// TODO
+				// TODO: save
 				// playerState = Player.player.Serialize();
 				playerState.Add("_mapName", Map.Map.map.Name);
 			}

@@ -43,14 +43,11 @@ namespace Game.Ui
 			}
 
 			header.Text = npc.worldName;
+			richTextLabel.BbcodeText = Globals.unitDB.GetData(npc.Name).dialogue;
 
 			if (Globals.contentDB.HasData(npc.Name))
 			{
-				ContentDB.ContentData contentData = Globals.contentDB.GetData(npc.Name);
-
-				subHeader.Text = "Healer cost: " + contentData.healerCost;
-				// richTextLabel.BbcodeText = contentData.dialogue; TODO
-
+				subHeader.Text = "Healer cost: " + Globals.contentDB.GetData(npc.Name).healerCost;
 				heal.Visible = subHeader.Visible = player.hp < player.stats.hpMax.valueI;
 			}
 			else

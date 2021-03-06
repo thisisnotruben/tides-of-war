@@ -137,12 +137,11 @@ namespace Game.Ui
 					? Player.player.menu.gameMenu.playerSpellBook
 					: Player.player.menu.gameMenu.playerInventory;
 
-				int legalAmount = PickableDB.GetStackSize(itemName),
-					amount = (from commodityName in inventoryModel.GetCommodities()
-							  where itemName.Equals(commodityName)
-							  select commodityName).Count();
-
-				stack = amount > legalAmount ? legalAmount : amount;
+				stack = PickableDB.GetStackSize(itemName) > 1
+					? (from commodityName in inventoryModel.GetCommodities()
+					   where itemName.Equals(commodityName)
+					   select commodityName).Count()
+					: 1;
 
 				// remove duplicates
 				if (slotFrom.hudSlot)

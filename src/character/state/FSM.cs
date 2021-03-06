@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Game.Database;
 using Godot;
+using Game.Ui;
 namespace Game.Actor.State
 {
 	public class FSM : Node
@@ -63,6 +63,11 @@ namespace Game.Actor.State
 				? State.NPC_MOVE_ROAM
 				: State.IDLE);
 		}
+		public void InitSetPlayerCastSpell(ItemInfoSpellController spellMenu)
+		{
+			spellMenu.Connect(nameof(ItemInfoSpellController.PlayerWantstoCast),
+				stateMap[State.ATTACK], nameof(Attack.SetPlayerSpell));
+		}
 		public void ChangeState(State state)
 		{
 			if (lockState)
@@ -98,14 +103,35 @@ namespace Game.Actor.State
 				case State.DEAD:
 					lastState = State.IDLE_DEAD;
 					break;
+
 				case State.ALIVE:
 					lastState = Globals.unitDB.HasData(characterEditorName)
 						&& Globals.unitDB.GetData(characterEditorName).path.Length > 0
 						? State.NPC_MOVE_ROAM
 						: State.IDLE;
 					break;
+
 				case State.STUN:
-					// TODO
+					lastState = State.IDLE;
+
+					// cycle through until you find a legal state
+					Stack<State> prevStates = new Stack<State>();
+					while (stateHistory.Count > 0)
+					{
+						prevStates.Push(stateHistory.Pop());
+						if (!IsDead() && prevStates.Peek() != State.PLAYER_MOVE_DEAD)
+						{
+							lastState = prevStates.Peek();
+							break;
+						}
+					}
+
+					// add states back to correct position
+					while (prevStates.Count > 0)
+					{
+						stateHistory.Push(prevStates.Pop());
+					}
+
 					break;
 			}
 
@@ -151,7 +177,7 @@ namespace Game.Actor.State
 		}
 		// * Delegated functions for state
 		public void OnAttacked(Character whosAttacking) { stateMap[GetState()].OnAttacked(whosAttacking); }
-		public void Harm(int damage) { (stateMap[GetState()] as TakeDamage)?.Harm(damage); }
+		public void Harm(int damage, Vector2 direction) { (stateMap[GetState()] as TakeDamage)?.Harm(damage, direction); }
 		public void UnhandledInput(InputEvent @event) { stateMap[GetState()].UnhandledInput(@event); }
 	}
 }

@@ -73,7 +73,10 @@ namespace Game.Database
 				SPELL_SELECT = "spell_select",
 				TURN_PAGE = "turn_page",
 				WOOD_OFF = "wood_off",
-				WOOD_ON = "wood_on";
+				WOOD_ON = "wood_on",
+				BLOCK_METAL_METAL = "block_metal_metal",
+				BLOCK_WOOD_WOOD = "block_wood_wood",
+				BLOCK_METAL_WOOD = "block_metal_wood";
 		}
 		public static class SaveTag
 		{

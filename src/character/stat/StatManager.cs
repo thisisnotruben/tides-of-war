@@ -1,7 +1,6 @@
-using Game.Database;
 namespace Game.Actor.Stat
 {
-	public class StatManager
+	public class StatManager : Godot.Object
 	{
 		protected Character character;
 		public int level { get { return character.level; } }
@@ -42,6 +41,9 @@ namespace Game.Actor.Stat
 			weaponRange = new CharacterStat(this); // baseValue set by 'Character.SetImg'
 			animSpeed = new CharacterStat(this, 1.0f);
 			weaponSpeed = new CharacterStat(this, 1.3f);
+
+			regenTime.Connect(nameof(RegenTime.OnValueChanged), this, nameof(OnRegenSet));
+			OnRegenSet(regenTime.value);
 		}
 		public void Recalculate()
 		{
@@ -51,5 +53,6 @@ namespace Game.Actor.Stat
 				stat.baseValue = stat.CalculateBaseValue();
 			}
 		}
+		private void OnRegenSet(float value) { character.regenTimer.WaitTime = value; }
 	}
 }

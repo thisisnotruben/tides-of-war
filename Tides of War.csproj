@@ -106,6 +106,8 @@
     <Compile Include="src\menu_ui\dialogue\DialogueController.cs" />
     <Compile Include="src\menu_ui\hud\ItemInfoHudController.cs" />
     <Compile Include="src\menu_ui\hud\ItemInfoHudSpellController.cs" />
+    <Compile Include="src\menu_ui\hud\HudPopupErrorController.cs" />
+    <Compile Include="src\menu_ui\hud\HudPopupConfirmController.cs" />
     <Compile Include="src\menu_ui\main\MenuMasterController.cs" />
     <Compile Include="src\menu_ui\hud\CharacterStatusController.cs" />
     <Compile Include="src\menu_ui\hud\HudControlController.cs" />

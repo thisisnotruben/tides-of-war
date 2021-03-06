@@ -1,6 +1,8 @@
 using Godot;
 using Game.Actor;
 using Game.Database;
+using Game.GameItem;
+using System.Linq;
 namespace Game.Ui
 {
 	public abstract class GameMenu : Control
@@ -18,8 +20,13 @@ namespace Game.Ui
 				{
 					if (inventoryModel.HasItem(commodityWorldName))
 					{
-						// TODO: update stack or cooldown if needed
-						// hudSlot.Display(commodityWorldName, 1);
+						hudSlot.Display(commodityWorldName,
+							PickableDB.GetStackSize(commodityWorldName) > 1
+							? (from commodityName in inventoryModel.GetCommodities()
+							   where commodityWorldName.Equals(commodityName)
+							   select commodityName).Count()
+							: 1);
+						hudSlot.SetCooldown(Commodity.GetCoolDown(player.GetPath(), commodityWorldName));
 					}
 					else
 					{

@@ -8,7 +8,6 @@ namespace Game.Ui
 			Map.Map.map.AddGChild(this);
 			GlobalPosition = globalTilePosition;
 		}
-		public void _OnAnimFinished(string AnimName) { Delete(); }
 		public void Delete() { QueueFree(); }
 	}
 }

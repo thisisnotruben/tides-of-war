@@ -1,5 +1,6 @@
 using Game.Actor.State;
 using Game.Database;
+using Game.Ui;
 using Godot;
 namespace Game.Actor.Doodads
 {
@@ -8,30 +9,35 @@ namespace Game.Actor.Doodads
 		private Player deceasedPlayer;
 		private Tween tween;
 		private Area2D sight;
+		private HudPopupConfirmController confirmPopup;
 
 		public override void _Ready()
 		{
-			tween = GetNode<Tween>("tween");
+			tween = GetChild<Tween>(0);
 			sight = GetNode<Area2D>("img/sight");
 		}
-		public void Init(Player deceasedPlayer)
+		public void Init(Player deceasedPlayer, HudPopupConfirmController confirmPopup)
 		{
 			this.deceasedPlayer = deceasedPlayer;
-			// TODO
-			// deceasedPlayer.menu.GetNode<BaseButton>("c/osb/m/cast").Connect("pressed", this, nameof(Revive));
-			// deceasedPlayer.menu.GetNode<Control>("c/osb/").SetPosition(new Vector2(0.0f, 180.0f));
-			// deceasedPlayer.menu.GetNode<Button>("c/osb/m/cast").Text = "Revive";
+			this.confirmPopup = confirmPopup;
 
-			// set on map correctly
 			GlobalPosition = Map.Map.map.GetGridPosition(deceasedPlayer.GlobalPosition);
 		}
-		public void OnTweenCompleted(Godot.Object gObject, NodePath key) { QueueFree(); }
-		public void _OnAreaEntered(Area2D area2D) { /* deceasedPlayer.menu.GetNode<CanvasItem>("c/osb").Show();  */}
+		public void OnTweenAllCompleted() { QueueFree(); }
+		public void _OnAreaEntered(Area2D area2D)
+		{
+			if (area2D.Owner == deceasedPlayer)
+			{
+				Globals.TryLinkSignal(confirmPopup.button, "pressed", this, nameof(Revive), true);
+				confirmPopup.ShowConfirm("Revive?");
+			}
+		}
 		public void _OnAreaExited(Area2D area2D)
 		{
 			if (area2D.Owner == deceasedPlayer)
 			{
-				// deceasedPlayer.menu.GetNode<CanvasItem>("c/osb").Hide();
+				Globals.TryLinkSignal(confirmPopup.button, "pressed", this, nameof(Revive), false);
+				confirmPopup.HideConfirm();
 			}
 		}
 		public void Revive()
@@ -40,7 +46,8 @@ namespace Game.Actor.Doodads
 
 			// hide button to avoid double click
 			sight.Monitoring = false;
-			// deceasedPlayer.menu.GetNode<CanvasItem>("c/osb").Hide();
+			Globals.TryLinkSignal(confirmPopup.button, "pressed", this, nameof(Revive), false);
+			confirmPopup.HideConfirm();
 
 			// revive
 			Map.Map.map.SetVeil(false);
@@ -48,8 +55,9 @@ namespace Game.Actor.Doodads
 			deceasedPlayer.state = FSM.State.ALIVE;
 
 			// fade out tomb and delete
-			tween.InterpolateProperty(this, ":modulate", Modulate,
-				new Color("00ffffff"), 0.75f, Tween.TransitionType.Circ, Tween.EaseType.Out);
+			tween.InterpolateProperty(this, "modulate",
+				Modulate, Color.ColorN("white", 0.0f),
+				0.75f, Tween.TransitionType.Circ, Tween.EaseType.Out);
 			tween.Start();
 		}
 	}

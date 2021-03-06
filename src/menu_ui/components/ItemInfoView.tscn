@@ -163,6 +163,6 @@ stretch_mode = 5
 [node name="popup" parent="." instance=ExtResource( 14 )]
 visible = false
 [connection signal="hide" from="." to="." method="OnHide"]
-[connection signal="pressed" from="s/hBoxContainer/left" to="." method="_OnMovePressed" binds= [ -1 ]]
+[connection signal="pressed" from="s/hBoxContainer/left" to="." method="OnMovePressed" binds= [ false ]]
 [connection signal="pressed" from="s/hBoxContainer/gridContainer/back" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="s/hBoxContainer/right" to="." method="_OnMovePressed" binds= [ 1 ]]
+[connection signal="pressed" from="s/hBoxContainer/right" to="." method="OnMovePressed" binds= [ true ]]

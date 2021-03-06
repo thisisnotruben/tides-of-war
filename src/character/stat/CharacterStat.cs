@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
+using Godot;
 namespace Game.Actor.Stat
 {
-	public class CharacterStat
+	public class CharacterStat : Godot.Object
 	{
+		[Signal] public delegate void OnValueChanged(float value);
+
 		public float baseValue;
 		public int valueI { get { return (int)(Math.Round(value)); } }
 		public float value
@@ -16,6 +19,7 @@ namespace Game.Actor.Stat
 					lastBaseValue = baseValue;
 					_value = CalculateFinalValue();
 					isDirty = false;
+					EmitSignal(nameof(OnValueChanged), _value);
 				}
 				return _value;
 			}
@@ -43,12 +47,14 @@ namespace Game.Actor.Stat
 			isDirty = true;
 			statModifiers.Add(statModifier);
 			statModifiers.Sort(CompareModifierOrder);
+			EmitSignal(nameof(OnValueChanged), value);
 		}
 		public bool RemoveModifier(StatModifier statModifier)
 		{
 			if (statModifiers.Remove(statModifier))
 			{
 				isDirty = true;
+				EmitSignal(nameof(OnValueChanged), value);
 				return true;
 			}
 			return false;
@@ -60,9 +66,9 @@ namespace Game.Actor.Stat
 			{
 				if (statModifiers[i].source == source)
 				{
-					isDirty = true;
-					didRemove = true;
+					isDirty = didRemove = true;
 					statModifiers.RemoveAt(i);
+					EmitSignal(nameof(OnValueChanged), value);
 				}
 			}
 			return didRemove;
