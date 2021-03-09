@@ -3,7 +3,7 @@ namespace Game.Ui
 {
 	public class HudControlController : GameMenu
 	{
-		private Control targetContainer;
+		public Control targetContainer;
 		public BaseButton pause;
 		public CharacterStatusController playerStatus, targetStatus;
 

@@ -142,10 +142,10 @@ margin_right = 688.0
 margin_bottom = 1177.0
 
 [node name="vBoxContainer" type="VBoxContainer" parent="playerMenu/Settings/centerContainer"]
-margin_left = 162.0
-margin_top = 462.0
-margin_right = 494.0
-margin_bottom = 682.0
+margin_left = 187.0
+margin_top = 474.0
+margin_right = 469.0
+margin_bottom = 670.0
 
 [node name="exitGame" type="Button" parent="playerMenu/Settings/centerContainer/vBoxContainer"]
 margin_right = 332.0

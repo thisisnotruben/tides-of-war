@@ -70,6 +70,7 @@ namespace Game.Ui
 			tween.RemoveAll();
 			cooldownOverlay.Visible = coolDownText.Visible = coolDownActive = true;
 
+			SetCooldownText(time);
 			tween.InterpolateMethod(this, nameof(SetCooldownText),
 				time, 0.0f, time,
 				Tween.TransitionType.Linear, Tween.EaseType.In);
@@ -77,7 +78,7 @@ namespace Game.Ui
 		}
 		public bool HasCommodity(string worldName) { return !commodityWorldName.Empty() && worldName.Equals(commodityWorldName); }
 		public bool IsAvailable() { return icon.Texture == null; }
-		public void OnTweenCompleted(Godot.Object gObject, NodePath key) { cooldownOverlay.Visible = coolDownText.Visible = false; }
+		public void OnTweenAllCompleted() { cooldownOverlay.Visible = coolDownText.Visible = false; }
 		public void OnButtonChanged(bool down) { icon.RectScale = down ? new Vector2(0.8f, 0.8f) : Vector2.One; }
 		protected void SetCooldownText(float time) { coolDownText.Text = Math.Round(time, 0).ToString(); }
 		public new object GetDragData(Vector2 position)

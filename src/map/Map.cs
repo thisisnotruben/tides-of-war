@@ -185,9 +185,10 @@ namespace Game.Map
 		}
 		public bool IsValidMove(Vector2 currentWorldPosition, Vector2 targetWorldPosition)
 		{
-			int pointIndex = GetPointIndex(collNav.WorldToMap(targetWorldPosition));
-			return aStar.HasPoint(pointIndex)
-				&& aStar.GetPointWeightScale(pointIndex) == ASTAR_NORMAL_WEIGHT
+			int targetPointIndex = GetPointIndex(collNav.WorldToMap(targetWorldPosition));
+			return aStar.HasPoint(GetPointIndex(collNav.WorldToMap(currentWorldPosition)))
+				&& aStar.HasPoint(targetPointIndex)
+				&& aStar.GetPointWeightScale(targetPointIndex) == ASTAR_NORMAL_WEIGHT
 				&& !GetDirection(currentWorldPosition, targetWorldPosition).Equals(Vector2.Zero);
 		}
 		public Vector2 GetDirection(Vector2 currentWorldPosition, Vector2 targetWorldPosition)

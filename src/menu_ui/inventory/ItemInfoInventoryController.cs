@@ -84,8 +84,14 @@ namespace Game.Ui
 
 			// eat up or drink up
 			new ItemFactory().Make(player, commodityWorldName).Start();
+
 			// remove from inventory
-			slotGridController.ClearSlot(inventoryModel.RemoveCommodity(commodityWorldName));
+			int modelIndex = inventoryModel.RemoveCommodity(commodityWorldName);
+			if (modelIndex != -1)
+			{
+				slotGridController.ClearSlot(modelIndex);
+			}
+
 			CheckHudSlots(inventoryModel, commodityWorldName);
 
 			EmitSignal(nameof(RefreshSlots));
@@ -158,7 +164,14 @@ namespace Game.Ui
 			PlaySound(NameDB.UI.INVENTORY_DROP);
 
 			EquipItem(false, commodityWorldName); // just in case if it's equipped
-			slotGridController.ClearSlot(inventoryModel.RemoveCommodity(commodityWorldName));
+
+			// remove from inventory
+			int modelIndex = inventoryModel.RemoveCommodity(commodityWorldName);
+			if (modelIndex != -1)
+			{
+				slotGridController.ClearSlot(modelIndex);
+			}
+
 			CheckHudSlots(inventoryModel, commodityWorldName);
 			EmitSignal(nameof(RefreshSlots));
 

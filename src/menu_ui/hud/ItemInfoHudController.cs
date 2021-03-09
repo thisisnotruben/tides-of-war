@@ -23,6 +23,11 @@ namespace Game.Ui
 			{
 				return;
 			}
+			else if (itemName.Equals(commodityWorldName))
+			{
+				OnClose();
+				return;
+			}
 
 			commodityWorldName = itemName;
 
@@ -47,12 +52,13 @@ namespace Game.Ui
 		protected override void OnHide()
 		{
 			base.OnHide();
+			commodityWorldName = string.Empty;
 			tabContainer.Visible = parent.Visible = false;
 		}
 		private void OnClose()
 		{
 			PlaySound(NameDB.UI.CLICK3);
-			tabContainer.Visible = parent.Visible = Visible = false;
+			Hide();
 		}
 	}
 }

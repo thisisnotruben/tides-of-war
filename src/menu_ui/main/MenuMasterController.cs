@@ -11,19 +11,22 @@ namespace Game.Ui
 		private HudControlController hud;
 		public HudPopupConfirmController confirmPopup;
 		public HudPopupErrorController errorPopup;
-		private CanvasItem hudMenuContainer;
+		private CanvasItem hudMenuContainer, menuContainer;
 
 		public override void _Ready()
 		{
-			gameMenu = GetNode<MainMenuController>("canvasLayer/split/gameMenu");
+			menuContainer = GetNode<CanvasItem>("canvasLayer/split");
+			gameMenu = menuContainer.GetChild<MainMenuController>(0);
 
-			confirmPopup = GetNode<HudPopupConfirmController>("canvasLayer/split/confirmPopup");
-			errorPopup = GetNode<HudPopupErrorController>("canvasLayer/split/errorPopup");
+			hudMenuContainer = menuContainer.GetChild<CanvasItem>(1);
+			hudMenuContainer.Connect("visibility_changed", this, nameof(OnHudMenuVisibilityChanged));
 
-			hud = GetNode<HudControlController>("canvasLayer/split/hud");
+			confirmPopup = menuContainer.GetChild<HudPopupConfirmController>(2);
+			errorPopup = menuContainer.GetChild<HudPopupErrorController>(3);
+
+			hud = menuContainer.GetChild<HudControlController>(4);
 			hud.pause.Connect("toggled", this, nameof(OnHudPausePressed));
-
-			hudMenuContainer = GetNode<CanvasItem>("canvasLayer/split/hudMenu");
+			hud.targetContainer.Connect("hide", this, nameof(OnNpcCloseHud));
 
 			ItemInfoHudController itemInfoHudController = hudMenuContainer.GetNode<ItemInfoHudController>("Inventory/itemInfo");
 			itemInfoHudController.inventoryModel = gameMenu.playerInventory;
@@ -38,14 +41,42 @@ namespace Game.Ui
 			infoHudSpellController.Connect(nameof(ItemInfoHudSpellController.PlayerWantstoCastError),
 				errorPopup, nameof(HudPopupErrorController.ShowError));
 		}
-		public void OnHudPausePressed(bool toggled)
+		private void OnHudPausePressed(bool toggled)
 		{
 			PlaySound(NameDB.UI.CLICK5);
 			gameMenu.Visible = toggled;
 			if (toggled)
 			{
-				gameMenu.npcMenu.Visible = hudMenuContainer.Visible = confirmPopup.Visible = errorPopup.Visible = false;
+				HideExceptMenu(gameMenu);
+				gameMenu.npcMenu.Hide();
 				gameMenu.playerMenu.Show();
+			}
+		}
+		private void OnHudMenuVisibilityChanged()
+		{
+			GetTree().Paused = hudMenuContainer.Visible;
+			if (hudMenuContainer.Visible)
+			{
+				HideExceptMenu(hudMenuContainer);
+			}
+		}
+		private void OnNpcCloseHud()
+		{
+			if (gameMenu.npcMenu.Visible)
+			{
+				HideExceptMenu(null);
+			}
+		}
+		private void HideExceptMenu(CanvasItem hideExcept)
+		{
+			CanvasItem menu;
+			foreach (Node node in menuContainer.GetChildren())
+			{
+				menu = node as CanvasItem;
+				if (menu != null && menu != hud && menu != hideExcept)
+				{
+					menu.Hide();
+				}
 			}
 		}
 		public void ConnectPlayerToHud(Player player) { hud.playerStatus.ConnectCharacterStatusAndUpdate(player); }
@@ -76,6 +107,7 @@ namespace Game.Ui
 			{
 				if (interactable)
 				{
+					HideExceptMenu(gameMenu);
 					gameMenu.NpcInteract(npc);
 				}
 				else
@@ -87,9 +119,9 @@ namespace Game.Ui
 			{
 				SetTargetDisplay(npc);
 
-				// interact with npc
 				if (interactable)
 				{
+					HideExceptMenu(gameMenu);
 					gameMenu.NpcInteract(npc);
 				}
 				else

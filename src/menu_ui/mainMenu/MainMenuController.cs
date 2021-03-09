@@ -65,7 +65,7 @@ namespace Game.Ui
 			GetTree().Paused = false;
 			SceneLoaderController.Init().SetScene(PathManager.startScene, Map.Map.map);
 		}
-		public bool NpcInteract(Npc npc)
+		public void NpcInteract(Npc npc)
 		{
 			store.Visible = Globals.contentDB.HasData(npc.Name)
 				&& Globals.contentDB.GetData(npc.Name).merchandise.Length > 0;
@@ -74,8 +74,6 @@ namespace Game.Ui
 			Visible = npcMenu.Visible = store.Visible || npcDialogue.Visible;
 			npcDialogue.npc = store.merchant = npc;
 			playerMenu.Visible = !Visible;
-
-			return Visible;
 		}
 		public void LootInteract(TreasureChest lootChest)
 		{

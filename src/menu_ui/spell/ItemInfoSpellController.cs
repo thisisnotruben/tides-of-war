@@ -32,7 +32,11 @@ namespace Game.Ui
 			string errorText = string.Empty;
 			SpellDB.SpellData spellData = Globals.spellDB.GetData(commodityWorldName);
 
-			if (Commodity.IsCoolingDown(player.GetPath(), commodityWorldName))
+			if (player.dead)
+			{
+				errorText = "Can't Cast\nWhile Dead!";
+			}
+			else if (Commodity.IsCoolingDown(player.GetPath(), commodityWorldName))
 			{
 				errorText = "Cooling\nDown!";
 			}
@@ -41,7 +45,7 @@ namespace Game.Ui
 				if (spellData.requiresTarget)
 				{
 					if (player.target == null)
-				{
+					{
 						errorText = "Target\nRequired!";
 					}
 					else
@@ -75,5 +79,6 @@ namespace Game.Ui
 				EmitSignal(nameof(PlayerWantstoCast), new SpellFactory().Make(player, commodityWorldName));
 			}
 		}
+		public void OnCasted(string spellName) { CheckHudSlots(inventoryModel, spellName); }
 	}
 }

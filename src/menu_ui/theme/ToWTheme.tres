@@ -2,7 +2,7 @@
 
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu_ui/theme/HudMenuTheme.tres" type="StyleBox" id=2]
-[ext_resource path="res://asset/img/font/mago1_96.tres" type="DynamicFont" id=3]
+[ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=3]
 [ext_resource path="res://asset/img/font/mago1_112.tres" type="DynamicFont" id=4]
 [ext_resource path="res://asset/img/font/mago1_16.tres" type="DynamicFont" id=7]
 [ext_resource path="res://asset/img/ui/progressBarBg.tres" type="Texture" id=8]

@@ -10,8 +10,8 @@ namespace Game.GameItem
 	public class Commodity : WorldObject, ISerializable
 	{
 		// characterNodePath: commodityName: timeLeft
-		private static readonly Dictionary<NodePath, Dictionary<string, SceneTreeTimer>> cooldowns =
-			new Dictionary<NodePath, Dictionary<string, SceneTreeTimer>>();
+		private static readonly Dictionary<string, Dictionary<string, SceneTreeTimer>> cooldowns =
+			new Dictionary<string, Dictionary<string, SceneTreeTimer>>();
 
 		private Dictionary<CharacterStat, StatModifier> modifiers;
 		protected Character character;
@@ -162,7 +162,7 @@ namespace Game.GameItem
 				? cooldowns[rootNodePath][worldName].TimeLeft
 				: 0.0f;
 		}
-		public static bool IsCoolingDown(NodePath rootNodePath, string worldName)
+		public static bool IsCoolingDown(string rootNodePath, string worldName)
 		{
 			if (cooldowns.ContainsKey(rootNodePath) && cooldowns[rootNodePath].ContainsKey(worldName))
 			{

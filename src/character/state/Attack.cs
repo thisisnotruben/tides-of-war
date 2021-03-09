@@ -11,6 +11,8 @@ namespace Game.Actor.State
 {
 	public class Attack : TakeDamage
 	{
+		[Signal] public delegate void SpellCasted(Spell spell);
+
 		private Timer timer = new Timer();
 		private Spell spell;
 
@@ -43,6 +45,7 @@ namespace Game.Actor.State
 			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(OnAttackAnimationFinished), false);
 			character.anim.Stop();
 			character.regenTimer.Start();
+			spell = null; // TODO: if player: play a 'spell cancel sound' if it wasn't null
 
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
@@ -124,9 +127,16 @@ namespace Game.Actor.State
 
 			if (GetImageData(character).melee)
 			{
-				if (spell != null && Globals.spellEffectDB.HasData(spell.worldName))
+				if (spell != null)
 				{
-					InstancSpellEffect(spell.worldName, character.target);
+					if (Globals.spellEffectDB.HasData(spell.worldName))
+					{
+						InstancSpellEffect(spell.worldName, character.target);
+					}
+
+					spell.AddCooldown(character.GetPath(), spell.worldName,
+						Globals.spellDB.GetData(spell.worldName).coolDown);
+					EmitSignal(nameof(SpellCasted), spell.worldName);
 				}
 
 				AttackHit(character, character.target, spell);
@@ -157,6 +167,10 @@ namespace Game.Actor.State
 							Globals.soundPlayer.PlaySound(spellSound, character.player2D);
 						}
 					}
+
+					spell.AddCooldown(character.GetPath(), spell.worldName,
+						Globals.spellDB.GetData(spell.worldName).coolDown);
+					EmitSignal(nameof(SpellCasted), spell.worldName);
 				}
 
 				// sync missile to attack

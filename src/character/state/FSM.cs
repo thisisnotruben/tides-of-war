@@ -67,6 +67,8 @@ namespace Game.Actor.State
 		{
 			spellMenu.Connect(nameof(ItemInfoSpellController.PlayerWantstoCast),
 				stateMap[State.ATTACK], nameof(Attack.SetPlayerSpell));
+			stateMap[State.ATTACK].Connect(nameof(Attack.SpellCasted), spellMenu,
+				nameof(ItemInfoSpellController.OnCasted));
 		}
 		public void ChangeState(State state)
 		{

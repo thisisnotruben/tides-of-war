@@ -19,6 +19,10 @@ __meta__ = {
 }
 
 [node name="tween" type="Tween" parent="."]
+pause_mode = 1
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="button" type="Button" parent="."]
 anchor_right = 1.0
@@ -109,6 +113,6 @@ max_lines_visible = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="tween_completed" from="tween" to="." method="OnTweenCompleted"]
+[connection signal="tween_all_completed" from="tween" to="." method="OnTweenAllCompleted"]
 [connection signal="button_down" from="button" to="." method="OnButtonChanged" binds= [ true ]]
 [connection signal="button_up" from="button" to="." method="OnButtonChanged" binds= [ false ]]
