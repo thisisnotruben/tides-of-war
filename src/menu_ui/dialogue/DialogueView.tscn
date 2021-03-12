@@ -27,7 +27,7 @@ __meta__ = {
 
 [node name="vBoxContainer" type="VBoxContainer" parent="s"]
 margin_right = 720.0
-margin_bottom = 1176.0
+margin_bottom = 1172.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 __meta__ = {
@@ -36,7 +36,7 @@ __meta__ = {
 
 [node name="header" type="Label" parent="s/vBoxContainer"]
 margin_right = 720.0
-margin_bottom = 114.0
+margin_bottom = 89.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 align = 1
@@ -47,9 +47,9 @@ __meta__ = {
 }
 
 [node name="subHeader" type="Label" parent="s/vBoxContainer"]
-margin_top = 114.0
+margin_top = 89.0
 margin_right = 720.0
-margin_bottom = 165.0
+margin_bottom = 140.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
@@ -60,9 +60,9 @@ __meta__ = {
 }
 
 [node name="text" type="RichTextLabel" parent="s/vBoxContainer"]
-margin_top = 165.0
+margin_top = 140.0
 margin_right = 720.0
-margin_bottom = 1176.0
+margin_bottom = 1172.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/bold_font = ExtResource( 8 )
@@ -78,7 +78,7 @@ __meta__ = {
 }
 
 [node name="hBoxContainer" type="HBoxContainer" parent="s"]
-margin_top = 1188.0
+margin_top = 1184.0
 margin_right = 720.0
 margin_bottom = 1280.0
 
@@ -116,7 +116,7 @@ __meta__ = {
 
 [node name="close" type="Button" parent="s/hBoxContainer"]
 margin_right = 720.0
-margin_bottom = 92.0
+margin_bottom = 96.0
 size_flags_horizontal = 3
 text = "Close"
 __meta__ = {

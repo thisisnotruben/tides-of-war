@@ -36,7 +36,7 @@ namespace Game.Ui
 			inventoryItemInfo.Connect(nameof(ItemInfoInventoryController.RefreshSlots), this, nameof(RefreshSlots));
 		}
 		private void OnDraw() { RefreshSlots(); }
-		private void RefreshSlots()
+		public void RefreshSlots()
 		{
 			Item playerWeapon = player.weapon,
 				playerArmor = player.vest;

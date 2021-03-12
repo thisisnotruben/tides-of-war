@@ -6,11 +6,12 @@ namespace Game.Ui
 {
 	public class MerchantController : GameMenu
 	{
+		[Signal] public delegate void OnTransactionMade(int modelIndex);
+
 		private readonly InventoryModel store = new InventoryModel();
 		private Control mainContent;
 		private Label header;
-		private Button buySellButton;
-		private PopupController popup;
+		public Button buySellButton, closeButton;
 		private ItemInfoMerchantController storeItemInfo;
 		public SlotGridController storeSlots, playerInventoryGridController;
 		private InventoryModel _playerSpellBook;
@@ -33,7 +34,7 @@ namespace Game.Ui
 				_merchant = value;
 				// resets store
 				buySellButton.Text = "Sell";
-				storeItemInfo.Visible = popup.Visible = buySellButton.Pressed = false;
+				storeItemInfo.Visible = buySellButton.Pressed = false;
 				mainContent.Show();
 				if (value != null)
 				{
@@ -47,7 +48,8 @@ namespace Game.Ui
 			mainContent = GetChild<Control>(0);
 			header = mainContent.GetChild<Label>(0);
 			storeSlots = mainContent.GetNode<SlotGridController>("c/SlotGrid");
-			buySellButton = mainContent.GetChild<Button>(2);
+			closeButton = mainContent.GetNode<Button>("gridContainer/close");
+			buySellButton = mainContent.GetNode<Button>("gridContainer/buySell");
 			buySellButton.Connect("toggled", this, nameof(OnBuySellToggled));
 			foreach (SlotController slot in storeSlots.GetSlots())
 			{
@@ -58,14 +60,10 @@ namespace Game.Ui
 
 			storeItemInfo = GetChild<ItemInfoMerchantController>(1);
 			storeItemInfo.backBttn.Connect("pressed", this, nameof(OnItemStoreInfoBackPressed));
+			storeItemInfo.Connect("hide", this, nameof(OnItemStoreInfoBackPressed));
 			storeItemInfo.Connect(nameof(ItemInfoMerchantController.OnTransaction), this, nameof(OnTransaction));
 			storeItemInfo.inventoryModel = store;
 			storeItemInfo.slotGridController = storeSlots;
-
-			popup = GetChild<PopupController>(2);
-			popup.Connect("hide", this, nameof(OnHide));
-			popup.okayBttn.Connect("pressed", this, nameof(OnHide));
-			popup.repairBackBttn.Connect("pressed", this, nameof(OnHide));
 		}
 		private void OnTransaction(string commodityName, int goldAmount, bool bought)
 		{
@@ -77,7 +75,20 @@ namespace Game.Ui
 			}
 			else
 			{
-				(isSpell ? playerSpellBook : playerInventory).RemoveCommodity(commodityName);
+				store.RemoveCommodity(commodityName);
+				if (isSpell)
+				{
+					playerSpellBook.RemoveCommodity(commodityName);
+				}
+				else
+				{
+					int modelIndex = playerInventory.RemoveCommodity(commodityName);
+					if (modelIndex != -1)
+					{
+						playerInventoryGridController.ClearSlot(modelIndex);
+						storeSlots.ClearSlot(modelIndex);
+					}
+				}
 			}
 
 			QuestMaster.CheckQuests(commodityName,
@@ -90,6 +101,7 @@ namespace Game.Ui
 			// add/sub gold
 			player.gold += goldAmount;
 			header.Text = "Gold: " + player.gold;
+			EmitSignal(nameof(OnTransactionMade));
 		}
 		private void DisplayItems(params string[] commodityNames)
 		{
@@ -128,7 +140,6 @@ namespace Game.Ui
 			}
 		}
 		private void OnDraw() { header.Text = "Gold: " + (player?.gold ?? 0); }
-		private void OnHide() { popup.Hide(); }
 		private void OnItemStoreInfoBackPressed() { mainContent.Show(); }
 		private void OnStoreSlotSelected(int slotIndex)
 		{

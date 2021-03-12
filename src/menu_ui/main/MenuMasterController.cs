@@ -12,11 +12,14 @@ namespace Game.Ui
 		public HudPopupConfirmController confirmPopup;
 		public HudPopupErrorController errorPopup;
 		private CanvasItem hudMenuContainer, menuContainer;
+		private SaveLoadModel saveLoadModel;
 
 		public override void _Ready()
 		{
 			menuContainer = GetNode<CanvasItem>("canvasLayer/split");
 			gameMenu = menuContainer.GetChild<MainMenuController>(0);
+
+			saveLoadModel = gameMenu.playerMenu.GetNode<SaveLoadController>("Save Load/SaveLoadView").saveLoadModel;
 
 			hudMenuContainer = menuContainer.GetChild<CanvasItem>(1);
 			hudMenuContainer.Connect("visibility_changed", this, nameof(OnHudMenuVisibilityChanged));
@@ -47,6 +50,9 @@ namespace Game.Ui
 			gameMenu.Visible = toggled;
 			if (toggled)
 			{
+				// just in case the player wants to save
+				saveLoadModel.SetCurrentGameImage();
+
 				HideExceptMenu(gameMenu);
 				gameMenu.npcMenu.Hide();
 				gameMenu.playerMenu.Show();

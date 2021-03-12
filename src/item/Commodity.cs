@@ -156,7 +156,7 @@ namespace Game.GameItem
 			}
 			return modifierDict;
 		}
-		public static float GetCoolDown(NodePath rootNodePath, string worldName)
+		public static float GetCoolDown(string rootNodePath, string worldName)
 		{
 			return IsCoolingDown(rootNodePath, worldName)
 				? cooldowns[rootNodePath][worldName].TimeLeft
@@ -169,12 +169,13 @@ namespace Game.GameItem
 				if (cooldowns[rootNodePath][worldName].TimeLeft == 0.0f)
 				{
 					cooldowns[rootNodePath].Remove(worldName);
+					return false;
 				}
 				return true;
 			}
 			return false;
 		}
-		public static void OnCooldownTimeout(NodePath rootNodePath, string worldName)
+		public static void OnCooldownTimeout(string rootNodePath, string worldName)
 		{
 			if (cooldowns.ContainsKey(rootNodePath) && cooldowns[rootNodePath].ContainsKey(worldName))
 			{
@@ -185,7 +186,7 @@ namespace Game.GameItem
 				}
 			}
 		}
-		public bool AddCooldown(NodePath rootNodePath, string worldName, float cooldownSec)
+		public bool AddCooldown(string rootNodePath, string worldName, float cooldownSec)
 		{
 			if (IsCoolingDown(rootNodePath, worldName))
 			{
@@ -259,7 +260,10 @@ namespace Game.GameItem
 				? Globals.spellDB.GetData(worldName).coolDown
 				: Globals.itemDB.GetData(worldName).coolDown;
 
-			AddCooldown(character.GetPath(), worldName, coolDown);
+			if (coolDown > 0)
+			{
+				AddCooldown(character.GetPath(), worldName, coolDown);
+			}
 
 			foreach (CharacterStat stat in modifiers.Keys)
 			{
@@ -288,9 +292,8 @@ namespace Game.GameItem
 		public GC.Dictionary Serialize()
 		{
 			// TODO: save
-			// cooldowns
 			GC.Dictionary savedCooldowns = new GC.Dictionary();
-			foreach (NodePath nodePath in cooldowns.Keys)
+			foreach (string nodePath in cooldowns.Keys)
 			{
 				savedCooldowns[nodePath.ToString()] = new GC.Dictionary<string, float>();
 				foreach (string commodityName in cooldowns[nodePath].Keys)
@@ -307,19 +310,16 @@ namespace Game.GameItem
 		public void Deserialize(GC.Dictionary payload)
 		{
 			// TODO: save
-			// cooldowns
-			NodePath characterNodePath;
 			GC.Dictionary savedCooldowns = (GC.Dictionary)payload[NameDB.SaveTag.COOLDOWNS];
 			GC.Dictionary<string, float> specificCooldowns;
 
 			foreach (string nodePath in savedCooldowns.Keys)
 			{
-				characterNodePath = new NodePath(nodePath);
 				specificCooldowns = (GC.Dictionary<string, float>)savedCooldowns[nodePath];
 
 				foreach (string commodityName in specificCooldowns.Keys)
 				{
-					AddCooldown(characterNodePath, commodityName, specificCooldowns[commodityName]);
+					AddCooldown(nodePath, commodityName, specificCooldowns[commodityName]);
 				}
 			}
 		}

@@ -23,9 +23,18 @@ namespace Game.Ui
 		{
 			base.Display(commodityWorldName, allowMove);
 
-			unequipBttn.Visible = (player.weapon?.worldName.Equals(commodityWorldName) ?? false)
-				|| (player.vest?.worldName.Equals(commodityWorldName) ?? false);
-			equipBttn.Visible = !unequipBttn.Visible;
+			switch (Globals.itemDB.GetData(commodityWorldName).type)
+			{
+				case ItemDB.ItemType.ARMOR:
+				case ItemDB.ItemType.WEAPON:
+					unequipBttn.Visible = (player.weapon?.worldName.Equals(commodityWorldName) ?? false)
+						|| (player.vest?.worldName.Equals(commodityWorldName) ?? false);
+					equipBttn.Visible = !unequipBttn.Visible;
+					break;
+				default:
+					unequipBttn.Visible = equipBttn.Visible = false;
+					break;
+			}
 		}
 		private void EquipItem(bool on, string worldName)
 		{

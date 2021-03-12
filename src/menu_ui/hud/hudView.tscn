@@ -90,7 +90,6 @@ margin_right = 688.0
 margin_bottom = 361.0
 
 [node name="actionBar" type="GridContainer" parent="margin/split/center"]
-pause_mode = 1
 margin_left = 3.0
 margin_right = 685.0
 margin_bottom = 226.0

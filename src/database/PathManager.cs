@@ -7,6 +7,7 @@ namespace Game.Database
 			dataExt = "json",
 			sceneExt = "tscn",
 			importExt = "import",
+			textureExt = "png",
 			areaEffect = "res://data/areaEffect.json",
 			collNav = "res://data/collNav.json",
 			image = "res://data/image.json",
@@ -23,7 +24,7 @@ namespace Game.Database
 			unitDataTemplate = "res://data/{0}/{0}.json",
 			contentDataTemplate = "res://data/{0}/{0}_content.json",
 			sceneMapPath = "res://src/map/{0}.tscn",
-			savePath = "user://data/save/{0}.json",
+			savePathDir = "user://data/save/",
 			assetMissileSpellPath = "res://asset/img/missile-spell/{0}.tres";
 	}
 }

@@ -9,8 +9,8 @@ namespace Game.Ui
 	{
 		public InventoryModel playerInventory, playerSpellBook;
 		public TabContainer playerMenu, npcMenu;
-		private DialogueController npcDialogue;
-		private MerchantController store;
+		public DialogueController npcDialogue;
+		public MerchantController store;
 		private PopupController popup;
 
 		public override void _Ready()
@@ -22,11 +22,18 @@ namespace Game.Ui
 			playerSpellBook = playerMenu.GetNode<SpellBookController>("Skills/SkillBookView").spellBook;
 
 			npcMenu = GetChild<TabContainer>(1);
+
 			npcDialogue = npcMenu.GetNode<DialogueController>("Dialogue/DialogueView");
+			npcDialogue.closeButton.Connect("pressed", this, nameof(_OnBackPressed));
+
 			store = npcMenu.GetNode<MerchantController>("Store/merchantView");
 			store.playerInventory = playerInventory;
 			store.playerSpellBook = playerSpellBook;
 			store.playerInventoryGridController = inventoryController.inventorySlots;
+
+			store.closeButton.Connect("pressed", this, nameof(_OnBackPressed));
+			store.Connect(nameof(MerchantController.OnTransactionMade), inventoryController,
+				nameof(InventoryController.RefreshSlots));
 
 			popup = GetChild<PopupController>(2);
 			popup.exitGameBttn.Connect("pressed", this, nameof(OnExitGamePressed));
@@ -67,12 +74,16 @@ namespace Game.Ui
 		}
 		public void NpcInteract(Npc npc)
 		{
-			store.Visible = Globals.contentDB.HasData(npc.Name)
-				&& Globals.contentDB.GetData(npc.Name).merchandise.Length > 0;
-			npcDialogue.Visible = !Globals.unitDB.GetData(npc.Name).dialogue.Empty();
+			bool showStoreMenu = Globals.contentDB.HasData(npc.Name)
+					&& Globals.contentDB.GetData(npc.Name).merchandise.Length > 0,
+			 showDialogueMenu = !Globals.unitDB.GetData(npc.Name).dialogue.Empty();
 
-			Visible = npcMenu.Visible = store.Visible || npcDialogue.Visible;
+			npcMenu.TabsVisible = showDialogueMenu && showStoreMenu;
+			npcMenu.CurrentTab = showDialogueMenu ? 0 : 1;
+
+			Visible = npcMenu.Visible = showStoreMenu || showStoreMenu;
 			npcDialogue.npc = store.merchant = npc;
+
 			playerMenu.Visible = !Visible;
 		}
 		public void LootInteract(TreasureChest lootChest)

@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/menu_ui/theme/HudMenuTheme.tres" type="StyleBox" id=1]
 [ext_resource path="res://asset/img/font/mago1_80.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/menu_ui/merchant/MerchantController.cs" type="Script" id=3]
 [ext_resource path="res://src/menu_ui/components/SlotGrid.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/menu_ui/merchant/ItemInfoMerchantController.cs" type="Script" id=8]
 [ext_resource path="res://src/menu_ui/components/ItemInfoView.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=10]
@@ -41,20 +40,24 @@ clip_text = true
 [node name="c" type="CenterContainer" parent="vBoxContainer"]
 margin_top = 72.0
 margin_right = 720.0
-margin_bottom = 1164.0
+margin_bottom = 1176.0
 size_flags_vertical = 3
 theme = ExtResource( 10 )
 
 [node name="SlotGrid" parent="vBoxContainer/c" instance=ExtResource( 4 )]
 margin_left = 80.0
-margin_top = 266.0
+margin_top = 272.0
 margin_right = 640.0
-margin_bottom = 826.0
+margin_bottom = 832.0
 
-[node name="buySell" type="Button" parent="vBoxContainer"]
-margin_top = 1172.0
+[node name="gridContainer" type="HBoxContainer" parent="vBoxContainer"]
+margin_top = 1184.0
 margin_right = 720.0
 margin_bottom = 1280.0
+
+[node name="buySell" type="Button" parent="vBoxContainer/gridContainer"]
+margin_right = 358.0
+margin_bottom = 96.0
 size_flags_horizontal = 3
 custom_styles/hover = ExtResource( 1 )
 custom_styles/pressed = ExtResource( 1 )
@@ -64,11 +67,19 @@ custom_styles/normal = ExtResource( 1 )
 toggle_mode = true
 text = "Sell"
 
+[node name="close" type="Button" parent="vBoxContainer/gridContainer"]
+margin_left = 362.0
+margin_right = 720.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 1 )
+custom_styles/normal = ExtResource( 1 )
+text = "Close"
+
 [node name="itemInfo" parent="." instance=ExtResource( 9 )]
 visible = false
 script = ExtResource( 8 )
-
-[node name="popup" parent="." instance=ExtResource( 6 )]
-visible = false
 [connection signal="draw" from="." to="." method="OnDraw"]
-[connection signal="hide" from="." to="." method="OnHide"]

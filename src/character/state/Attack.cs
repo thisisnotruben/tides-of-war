@@ -13,7 +13,7 @@ namespace Game.Actor.State
 	{
 		[Signal] public delegate void SpellCasted(Spell spell);
 
-		private Timer timer = new Timer();
+		private Timer timer;
 		private Spell spell;
 
 		[Signal] public delegate void CastSpell(Spell spell);
@@ -21,10 +21,9 @@ namespace Game.Actor.State
 		public override void _Ready()
 		{
 			base._Ready();
-
+			timer = GetChild<Timer>(0);
 			timer.Connect("timeout", this, nameof(OnAttackSpeedTimeout));
 			timer.OneShot = true;
-			AddChild(timer);
 		}
 		public override void Start()
 		{

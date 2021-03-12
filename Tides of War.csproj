@@ -121,6 +121,7 @@
     <Compile Include="src\menu_ui\popup\PopupController.cs" />
     <Compile Include="src\menu_ui\quest\QuestEntryController.cs" />
     <Compile Include="src\menu_ui\quest\QuestLogController.cs" />
+    <Compile Include="src\menu_ui\saveLoad\LoadEntryController.cs" />
     <Compile Include="src\menu_ui\saveLoad\SaveLoadController.cs" />
     <Compile Include="src\menu_ui\saveLoad\SaveLoadModel.cs" />
     <Compile Include="src\menu_ui\sceneLoader\SceneLoaderController.cs" />

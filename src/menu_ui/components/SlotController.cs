@@ -132,6 +132,8 @@ namespace Game.Ui
 			string itemName = (string)dropData["itemName"];
 			SlotController slotFrom = GetNode<SlotController>((NodePath)dropData["slotPath"]);
 
+			slotFrom.OnButtonChanged(false);
+
 			if (hudSlot)
 			{
 				InventoryModel inventoryModel = Globals.spellDB.HasData(itemName)

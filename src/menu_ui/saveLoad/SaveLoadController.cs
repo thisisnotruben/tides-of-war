@@ -4,39 +4,68 @@ namespace Game.Ui
 {
 	public class SaveLoadController : GameMenu
 	{
-		private readonly SaveLoadModel saveLoadModel = new SaveLoadModel();
-		private Control main;
+		public readonly SaveLoadModel saveLoadModel = new SaveLoadModel();
+		private Control main, entryList, focusedEntryOptions, saveBttn;
+		private Label label;
 		private PopupController popup;
-		private int index;
+		private LoadEntryController focusedEntry, popupEntry;
 
 		public override void _Ready()
 		{
 			main = GetChild<Control>(0);
+			label = main.GetChild<Label>(0);
+			entryList = main.GetNode<Control>("scrollContainer/entries");
+			saveBttn = main.GetChild<Control>(2);
 
-			popup = GetChild<PopupController>(1);
-			popup.Connect("hide", this, nameof(OnHide));
-			popup.saveBttn.Connect("pressed", this, nameof(OnSavePressed));
+			focusedEntryOptions = GetChild<Control>(1);
+			popupEntry = focusedEntryOptions.GetChild<LoadEntryController>(0);
+
+			popup = GetChild<PopupController>(2);
+			popup.Connect("hide", this, nameof(OnPopupHide));
 
 			AddChild(saveLoadModel);
-			SetLabels();
+			foreach (int i in SaveLoadModel.saveFileNames.Keys)
+			{
+				AddEntry(i);
+			}
 		}
 		private void SaveGame()
 		{
-			saveLoadModel.SaveGame(index);
-			GetLabel(index - 1).Text = SaveLoadModel.GetSaveFileName(index);
-		}
-		private Label GetLabel(int index) { return main.GetChild(0).GetNode<Label>("slot_label_" + index); }
-		private void SetLabels()
-		{
-			int labelIdx = 1;
-			foreach (Node node in main.GetChild(0).GetChildren())
+			int i;
+			if (focusedEntry != null)
 			{
-				if (node as Label != null)
+				i = focusedEntry.saveIndex;
+				saveLoadModel.SaveGame(i);
+				focusedEntry.Display(SaveLoadModel.saveFileIcons[i], SaveLoadModel.saveFileNames[i]);
+			}
+			else
+			{
+				i = saveLoadModel.SaveGame();
+				if (i != -1)
 				{
-					GetLabel(labelIdx - 1).Text = SaveLoadModel.GetSaveFileName(labelIdx);
-					labelIdx++;
+					AddEntry(i);
 				}
 			}
+		}
+		private void AddEntry(int i)
+		{
+			LoadEntryController loadEntry = (LoadEntryController)SceneDB.loadEntryScene.Instance();
+			loadEntry.saveIndex = i;
+
+			entryList.AddChild(loadEntry);
+			entryList.MoveChild(loadEntry, 0);
+
+			loadEntry.Display(SaveLoadModel.saveFileIcons[i], SaveLoadModel.saveFileNames[i]);
+			loadEntry.button.Connect("pressed", this, nameof(OnSaveSlotPressed),
+				new Godot.Collections.Array() { loadEntry });
+
+			SetDisplay();
+		}
+		private void SetDisplay()
+		{
+			int currentSaveCount = SaveLoadModel.saveFileNames.Count;
+			label.Text = string.Format("Slots {0}/{1} Used", currentSaveCount, SaveLoadModel.MAX_SAVES);
+			saveBttn.Visible = currentSaveCount < SaveLoadModel.MAX_SAVES;
 		}
 		private void RouteConnection(string toMethod)
 		{
@@ -50,39 +79,51 @@ namespace Game.Ui
 		}
 		private void OnHide()
 		{
-			popup.Hide();
+			focusedEntryOptions.Visible = popup.Visible = false;
 			main.Show();
+			focusedEntry = null;
 		}
-		private void OnPopupHide() { popup.deleteBttn.Visible = popup.saveBttn.Visible = popup.loadBttn.Visible = false; }
-		private void OnSlotPressed(int index)
+		private void OnFocusedEntryBack()
 		{
-			this.index = index + 1;
+			PlaySound(NameDB.UI.CLICK3);
+			OnHide();
+		}
+		private void OnPopupHide() { focusedEntryOptions.Show(); }
+		private void OnSaveSlotPressed(LoadEntryController focusedEntry)
+		{
+			this.focusedEntry = focusedEntry;
+
+			int i = focusedEntry.saveIndex;
+			popupEntry.Display(SaveLoadModel.saveFileIcons[i], SaveLoadModel.saveFileNames[i]);
+
 			PlaySound(NameDB.UI.CLICK2);
 			main.Hide();
-			popup.loadBttn.Visible = popup.deleteBttn.Visible = !GetLabel(index).Text.Equals($"Slot {index + 1}");
-			popup.Visible = popup.saveLoadView.Visible = popup.saveBttn.Visible = true;
+			focusedEntryOptions.Show();
 		}
 		private void OnDeletePressed()
 		{
 			PlaySound(NameDB.UI.CLICK1);
+			focusedEntryOptions.Hide();
 			RouteConnection(nameof(OnDeleteConfirm));
 			popup.ShowConfirm("Delete?");
 		}
 		private void OnDeleteConfirm()
 		{
-			SaveLoadModel.DeleteSaveFile(index);
-			GetLabel(index).Text = SaveLoadModel.GetSaveFileName(index);
+			saveLoadModel.DeleteSaveFile(focusedEntry.saveIndex);
+			focusedEntry.QueueFree();
 			OnHide();
+			SetDisplay();
 		}
 		private void OnSavePressed()
 		{
 			PlaySound(NameDB.UI.CLICK1);
-			if (GetLabel(index).Text.Contains("Slot"))
+			if (focusedEntry == null)
 			{
 				OnSaveConfirm();
 			}
 			else
 			{
+				focusedEntryOptions.Hide();
 				RouteConnection(nameof(OnSaveConfirm));
 				popup.ShowConfirm("Overwrite?");
 			}
@@ -95,7 +136,7 @@ namespace Game.Ui
 		private void OnLoadPressed()
 		{
 			PlaySound(NameDB.UI.CLICK0);
-			saveLoadModel.LoadGame(index);
+			saveLoadModel.LoadGame(focusedEntry.saveIndex);
 		}
 	}
 }

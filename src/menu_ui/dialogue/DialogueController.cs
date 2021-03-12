@@ -11,6 +11,7 @@ namespace Game.Ui
 		private Label header, subHeader;
 		private RichTextLabel richTextLabel;
 		private Control mainContent, heal;
+		public Button closeButton;
 
 		private WorldQuest worldQuest;
 		private Npc _npc;
@@ -31,6 +32,7 @@ namespace Game.Ui
 			subHeader = mainContent.GetNode<Label>("vBoxContainer/subHeader");
 			richTextLabel = mainContent.GetNode<RichTextLabel>("vBoxContainer/text");
 			heal = mainContent.GetNode<Control>("hBoxContainer/heal");
+			closeButton = mainContent.GetNode<Button>("hBoxContainer/close");
 
 			popupController = GetChild<PopupController>(1);
 			popupController.Connect("hide", this, nameof(OnHide));

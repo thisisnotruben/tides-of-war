@@ -4,7 +4,6 @@ namespace Game.Ui
 {
 	public class ItemInfoHudController : ItemInfoInventoryController
 	{
-		bool isConsumable;
 		public CanvasItem tabContainer, parent;
 
 		public override void _Ready()
@@ -36,14 +35,12 @@ namespace Game.Ui
 				case ItemDB.ItemType.FOOD:
 				case ItemDB.ItemType.POTION:
 					OnUsePressed();
-					isConsumable = true;
 					tabContainer.SelfModulate = Color.ColorN("white", 0.0f);
 					tabContainer.Visible = parent.Visible = Visible = popup.IsVisibleInTree();
 					break;
 
 				default:
 					Display(itemName, false);
-					isConsumable = false;
 					tabContainer.SelfModulate = Color.ColorN("white");
 					tabContainer.Visible = parent.Visible = Visible = true;
 					break;

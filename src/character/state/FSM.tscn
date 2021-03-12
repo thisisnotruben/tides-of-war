@@ -23,6 +23,9 @@ script = ExtResource( 10 )
 [node name="attack" type="Node" parent="."]
 script = ExtResource( 5 )
 
+[node name="timer" type="Timer" parent="attack"]
+one_shot = true
+
 [node name="alive" type="Node" parent="."]
 script = ExtResource( 3 )
 

@@ -4,21 +4,16 @@ namespace Game.Ui
 {
 	public class PopupController : GameMenu
 	{
-		public Control saveLoadView, yesNoView, errorView, exitView, filterView, repairSlotView;
+		public Control yesNoView, errorView, exitView, filterView;
 		public Label yesNoLabel, errorLabel;
-		public Button deleteBttn, saveBttn, loadBttn, yesBttn, noBttn, okayBttn,
-			exitGameBttn, exitMenuBttn, allBttn, activeBttn, completedBttn, repairBackBttn;
+		public Button yesBttn, noBttn, okayBttn, exitGameBttn,
+			exitMenuBttn, allBttn, activeBttn, completedBttn;
 
 		public override void _Ready()
 		{
 			base._Ready();
 
 			Control popupContainer = GetChild<Control>(1);
-
-			saveLoadView = popupContainer.GetNode<Control>("save_load");
-			deleteBttn = saveLoadView.GetNode<Button>("delete");
-			saveBttn = saveLoadView.GetNode<Button>("save");
-			loadBttn = saveLoadView.GetNode<Button>("load");
 
 			yesNoView = popupContainer.GetNode<Control>("yes_no");
 			yesNoLabel = yesNoView.GetNode<Label>("label");
@@ -37,9 +32,6 @@ namespace Game.Ui
 			allBttn = filterView.GetNode<Button>("all");
 			activeBttn = filterView.GetNode<Button>("active");
 			completedBttn = filterView.GetNode<Button>("completed");
-
-			repairSlotView = popupContainer.GetNode<Control>("repair");
-			repairBackBttn = repairSlotView.GetNode<Button>("back");
 		}
 		public void OnResized() { GetChild<Control>(0).RectMinSize = GetChild<Control>(1).RectSize; }
 		public void OnHide()
