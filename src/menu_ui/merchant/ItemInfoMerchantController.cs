@@ -13,6 +13,7 @@ namespace Game.Ui
 		{
 			base._Ready();
 
+			iconView.allowDrag = false;
 			buyBttn.Connect("pressed", this, nameof(OnBuyPressed));
 			sellBttn.Connect("pressed", this, nameof(OnSellPressed));
 		}

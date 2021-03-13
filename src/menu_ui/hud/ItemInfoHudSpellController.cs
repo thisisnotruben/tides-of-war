@@ -4,6 +4,7 @@ namespace Game.Ui
 	public class ItemInfoHudSpellController : ItemInfoSpellController
 	{
 		public CanvasItem tabContainer, parent;
+		public bool menuShown;
 
 		public override void _Ready()
 		{
@@ -16,7 +17,7 @@ namespace Game.Ui
 		}
 		private void OnHudSlotPressed(string itemName)
 		{
-			if (!Globals.spellDB.HasData(itemName))
+			if (menuShown || !Globals.spellDB.HasData(itemName))
 			{
 				return;
 			}
@@ -32,5 +33,6 @@ namespace Game.Ui
 			base.OnHide();
 			tabContainer.Visible = parent.Visible = false;
 		}
+		public void OnGameMenuVisibilityChanged(bool shown) { menuShown = shown; }
 	}
 }

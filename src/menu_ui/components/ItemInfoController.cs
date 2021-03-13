@@ -15,7 +15,7 @@ namespace Game.Ui
 		protected string commodityWorldName;
 		protected Control mainContent, buttonContainer;
 		protected TextureButton leftbttn, rightBttn;
-		protected TextureRect commodityIcon;
+		protected ItemInfoSlotController iconView;
 		public Button castBttn, useBttn, buyBttn, sellBttn, equipBttn, unequipBttn, dropBttn, backBttn;
 
 		public override void _Ready()
@@ -23,7 +23,7 @@ namespace Game.Ui
 			mainContent = GetChild<Control>(0);
 
 			header = GetNode<Label>("s/vBoxContainer/header");
-			commodityIcon = GetNode<TextureRect>("s/vBoxContainer/icon/m/icon");
+			iconView = GetNode<ItemInfoSlotController>("s/vBoxContainer/icon");
 			richTextLabel = GetNode<RichTextLabel>("s/vBoxContainer/richTextLabel");
 
 			buttonContainer = GetNode<Control>("s/hBoxContainer/gridContainer");
@@ -88,7 +88,7 @@ namespace Game.Ui
 			// set presentation
 			HideExcept(showBttns);
 			header.Text = commodityWorldName;
-			commodityIcon.Texture = PickableDB.GetIcon(commodityWorldName);
+			iconView.Display(commodityWorldName);
 			richTextLabel.BbcodeText = Commodity.GetDescription(commodityWorldName);
 			Show();
 		}

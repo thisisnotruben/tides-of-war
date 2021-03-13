@@ -1,4 +1,5 @@
 using Godot;
+using GC = Godot.Collections;
 using Game.Actor;
 using Game.Quest;
 using Game.Loot;
@@ -34,10 +35,14 @@ namespace Game.Ui
 			ItemInfoHudController itemInfoHudController = hudMenuContainer.GetNode<ItemInfoHudController>("Inventory/itemInfo");
 			itemInfoHudController.inventoryModel = gameMenu.playerInventory;
 			itemInfoHudController.slotGridController = gameMenu.GetNode<InventoryController>("playerMenu/Inventory/InventoryView").inventorySlots;
+			gameMenu.Connect("draw", itemInfoHudController, nameof(ItemInfoHudController.OnGameMenuVisibilityChanged), new GC.Array() { true });
+			gameMenu.Connect("hide", itemInfoHudController, nameof(ItemInfoHudController.OnGameMenuVisibilityChanged), new GC.Array() { false });
 
 			ItemInfoHudSpellController infoHudSpellController = hudMenuContainer.GetNode<ItemInfoHudSpellController>("Spells/itemInfo");
 			infoHudSpellController.inventoryModel = gameMenu.playerSpellBook;
 			infoHudSpellController.slotGridController = gameMenu.GetNode<SpellBookController>("playerMenu/Skills/SkillBookView").spellSlots;
+			gameMenu.Connect("draw", infoHudSpellController, nameof(ItemInfoHudSpellController.OnGameMenuVisibilityChanged), new GC.Array() { true });
+			gameMenu.Connect("hide", infoHudSpellController, nameof(ItemInfoHudSpellController.OnGameMenuVisibilityChanged), new GC.Array() { false });
 
 			itemInfoHudController.tabContainer = infoHudSpellController.tabContainer = hudMenuContainer;
 

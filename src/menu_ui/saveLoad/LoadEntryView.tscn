@@ -8,6 +8,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 224 )
+mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -17,6 +18,7 @@ __meta__ = {
 [node name="colorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 color = Color( 0.431373, 0.431373, 0.431373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,6 +27,7 @@ __meta__ = {
 [node name="marginContainer" type="MarginContainer" parent="colorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 custom_constants/margin_right = 32
 custom_constants/margin_top = 32
 custom_constants/margin_left = 32
@@ -38,32 +41,78 @@ margin_left = 32.0
 margin_top = 32.0
 margin_right = 688.0
 margin_bottom = 1248.0
+custom_constants/separation = 8
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="textureRect" type="TextureRect" parent="colorRect/marginContainer/hBoxContainer"]
-margin_right = 160.0
+[node name="colorRect" type="ColorRect" parent="colorRect/marginContainer/hBoxContainer"]
+margin_right = 259.0
 margin_bottom = 1216.0
-rect_min_size = Vector2( 160, 160 )
+mouse_filter = 1
+size_flags_horizontal = 3
+color = Color( 0.14902, 0.14902, 0.14902, 1 )
+
+[node name="marginContainer" type="MarginContainer" parent="colorRect/marginContainer/hBoxContainer/colorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="textureRect" type="TextureRect" parent="colorRect/marginContainer/hBoxContainer/colorRect/marginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 251.0
+margin_bottom = 1208.0
 expand = true
-stretch_mode = 6
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button" type="Button" parent="colorRect/marginContainer/hBoxContainer/colorRect/marginContainer/textureRect"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="label" type="Label" parent="colorRect/marginContainer/hBoxContainer"]
-margin_left = 164.0
+margin_left = 267.0
+margin_top = 582.0
 margin_right = 656.0
-margin_bottom = 1216.0
+margin_bottom = 633.0
+mouse_filter = 1
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
 custom_fonts/font = ExtResource( 3 )
 align = 1
 valign = 1
 clip_text = true
-max_lines_visible = 1
+max_lines_visible = 2
 
-[node name="button" type="Button" parent="colorRect/marginContainer"]
+[node name="colorRect" type="ColorRect" parent="colorRect/marginContainer/hBoxContainer/label"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color( 0.533333, 0.160784, 0.160784, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button" type="Button" parent="colorRect/marginContainer/hBoxContainer/label"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 688.0
-margin_bottom = 1248.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

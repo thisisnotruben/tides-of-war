@@ -99,6 +99,7 @@
     <Compile Include="src\menu_ui\about\AboutController.cs" />
     <Compile Include="src\menu_ui\abstract\GameMenu.cs" />
     <Compile Include="src\menu_ui\components\ItemInfoController.cs" />
+    <Compile Include="src\menu_ui\components\ItemInfoSlotController.cs" />
     <Compile Include="src\menu_ui\components\SlotController.cs" />
     <Compile Include="src\menu_ui\components\SlotDrag.cs" />
     <Compile Include="src\menu_ui\components\SlotGridController.cs" />

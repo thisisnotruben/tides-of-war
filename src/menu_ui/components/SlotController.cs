@@ -46,7 +46,7 @@ namespace Game.Ui
 			// default display
 			ClearDisplay();
 		}
-		public void Display(string worldName, int currentStack)
+		public void Display(string worldName, int currentStack = 1)
 		{
 			commodityWorldName = worldName;
 			icon.Texture = PickableDB.GetIcon(worldName);
@@ -79,7 +79,7 @@ namespace Game.Ui
 		public bool HasCommodity(string worldName) { return !commodityWorldName.Empty() && worldName.Equals(commodityWorldName); }
 		public bool IsAvailable() { return icon.Texture == null; }
 		public void OnTweenAllCompleted() { cooldownOverlay.Visible = coolDownText.Visible = false; }
-		public void OnButtonChanged(bool down) { icon.RectScale = down ? new Vector2(0.8f, 0.8f) : Vector2.One; }
+		public virtual void OnButtonChanged(bool down) { icon.RectScale = down ? new Vector2(0.8f, 0.8f) : Vector2.One; }
 		protected void SetCooldownText(float time) { coolDownText.Text = Math.Round(time, 0).ToString(); }
 		public new object GetDragData(Vector2 position)
 		{

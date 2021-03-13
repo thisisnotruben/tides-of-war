@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/menu_ui/components/SlotView.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/menu_ui/components/ItemInfoSlotController.cs" type="Script" id=2]
+
+[node name="slot" instance=ExtResource( 1 )]
+rect_min_size = Vector2( 176, 176 )
+size_flags_horizontal = 4
+script = ExtResource( 2 )
+
+[node name="styleAlias" type="Button" parent="." index="2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "for reason that style keeps on reverting to inherited default"
+}
+
+[node name="icon" parent="margin" index="0"]
+margin_right = 169.0
+margin_bottom = 169.0
+rect_pivot_offset = Vector2( 81, 81 )
+
+[node name="cooldownOverlay" parent="margin" index="1"]
+margin_right = 169.0
+margin_bottom = 169.0
+
+[node name="cooldownText" parent="margin" index="2"]
+margin_right = 169.0
+margin_bottom = 169.0

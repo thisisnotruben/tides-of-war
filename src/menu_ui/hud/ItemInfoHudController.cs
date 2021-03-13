@@ -5,6 +5,7 @@ namespace Game.Ui
 	public class ItemInfoHudController : ItemInfoInventoryController
 	{
 		public CanvasItem tabContainer, parent;
+		public bool menuShown;
 
 		public override void _Ready()
 		{
@@ -18,7 +19,7 @@ namespace Game.Ui
 		}
 		private void OnHudSlotPressed(string itemName)
 		{
-			if (!Globals.itemDB.HasData(itemName))
+			if (menuShown || !Globals.itemDB.HasData(itemName))
 			{
 				return;
 			}
@@ -57,5 +58,6 @@ namespace Game.Ui
 			PlaySound(NameDB.UI.CLICK3);
 			Hide();
 		}
+		public void OnGameMenuVisibilityChanged(bool shown) { menuShown = shown; }
 	}
 }

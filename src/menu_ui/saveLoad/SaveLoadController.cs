@@ -56,15 +56,19 @@ namespace Game.Ui
 			entryList.MoveChild(loadEntry, 0);
 
 			loadEntry.Display(SaveLoadModel.saveFileIcons[i], SaveLoadModel.saveFileNames[i]);
-			loadEntry.button.Connect("pressed", this, nameof(OnSaveSlotPressed),
-				new Godot.Collections.Array() { loadEntry });
+
+			foreach (BaseButton button in loadEntry.buttons)
+			{
+				button.Connect("pressed", this, nameof(OnSaveSlotPressed),
+					new Godot.Collections.Array() { loadEntry });
+			}
 
 			SetDisplay();
 		}
 		private void SetDisplay()
 		{
 			int currentSaveCount = SaveLoadModel.saveFileNames.Count;
-			label.Text = string.Format("Slots {0}/{1} Used", currentSaveCount, SaveLoadModel.MAX_SAVES);
+			label.Text = string.Format("{0}/{1} Slots Used", currentSaveCount, SaveLoadModel.MAX_SAVES);
 			saveBttn.Visible = currentSaveCount < SaveLoadModel.MAX_SAVES;
 		}
 		private void RouteConnection(string toMethod)
