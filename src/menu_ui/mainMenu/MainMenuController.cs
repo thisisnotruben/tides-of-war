@@ -18,8 +18,9 @@ namespace Game.Ui
 			playerMenu = GetChild<TabContainer>(0);
 
 			InventoryController inventoryController = playerMenu.GetNode<InventoryController>("Inventory/InventoryView");
+			SpellBookController spellBookController = playerMenu.GetNode<SpellBookController>("Skills/SkillBookView");
 			playerInventory = inventoryController.inventory;
-			playerSpellBook = playerMenu.GetNode<SpellBookController>("Skills/SkillBookView").spellBook;
+			playerSpellBook = spellBookController.spellBook;
 
 			npcMenu = GetChild<TabContainer>(1);
 
@@ -34,6 +35,8 @@ namespace Game.Ui
 			store.closeButton.Connect("pressed", this, nameof(_OnBackPressed));
 			store.Connect(nameof(MerchantController.OnTransactionMade), inventoryController,
 				nameof(InventoryController.RefreshSlots));
+			store.Connect(nameof(MerchantController.OnTransactionMade), spellBookController,
+				nameof(SpellBookController.RefreshSlots));
 
 			popup = GetChild<PopupController>(2);
 			popup.exitGameBttn.Connect("pressed", this, nameof(OnExitGamePressed));
@@ -69,7 +72,6 @@ namespace Game.Ui
 		private void OnExitMenuPressed()
 		{
 			PlaySound(NameDB.UI.CLICK0);
-			GetTree().Paused = false;
 			SceneLoaderController.Init().SetScene(PathManager.startScene, Map.Map.map);
 		}
 		public void NpcInteract(Npc npc)

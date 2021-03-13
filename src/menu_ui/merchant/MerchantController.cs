@@ -6,7 +6,7 @@ namespace Game.Ui
 {
 	public class MerchantController : GameMenu
 	{
-		[Signal] public delegate void OnTransactionMade(int modelIndex);
+		[Signal] public delegate void OnTransactionMade();
 
 		private readonly InventoryModel store = new InventoryModel();
 		private Control mainContent;

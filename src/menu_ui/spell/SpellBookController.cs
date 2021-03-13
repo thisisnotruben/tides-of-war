@@ -31,7 +31,8 @@ namespace Game.Ui
 					new Godot.Collections.Array() { slot.GetIndex() });
 			}
 		}
-		private void OnDraw()
+		private void OnDraw() { RefreshSlots(); }
+		public void RefreshSlots()
 		{
 			for (int i = 0; i < spellBook.count; i++)
 			{

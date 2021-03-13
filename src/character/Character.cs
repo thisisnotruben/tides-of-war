@@ -5,7 +5,6 @@ using Game.Actor.Stat;
 using Godot;
 using GC = Godot.Collections;
 using System.Collections.Generic;
-
 namespace Game.Actor
 {
 	public abstract class Character : WorldObject, ISerializable
@@ -217,35 +216,72 @@ namespace Game.Actor
 		{
 			return new GC.Dictionary()
 			{
-				{NameDB.SaveTag.POSITION, new GC.Array<float>(){GlobalPosition.x, GlobalPosition.y}},
+				{NameDB.SaveTag.POSITION, new GC.Array(){GlobalPosition.x, GlobalPosition.y}},
 				{NameDB.SaveTag.LEVEL, level},
 				{NameDB.SaveTag.HP, hp},
 				{NameDB.SaveTag.MANA, mana},
-				{NameDB.SaveTag.STATE, state},
-				{NameDB.SaveTag.ANIM_POSITION, anim.CurrentAnimationPosition},
 				{NameDB.SaveTag.TIME_LEFT, regenTimer.TimeLeft},
-				{NameDB.SaveTag.TARGET, target?.GetPath() ?? string.Empty}
+				{NameDB.SaveTag.TARGET, target?.Name ?? string.Empty},
+				{NameDB.SaveTag.STATE, state},
+				{NameDB.SaveTag.ANIM_POSITION, anim.CurrentAnimation != string.Empty ? anim.CurrentAnimationPosition : 0.0f}
 			};
 		}
 		public virtual void Deserialize(GC.Dictionary payload)
 		{
-			// set global position
-			GC.Array posArray = (GC.Array)payload[NameDB.SaveTag.POSITION];
-			GlobalPosition = new Vector2((float)posArray[0], (float)posArray[1]);
-
-			return; // TODO: save
-			level = (int)payload[NameDB.SaveTag.LEVEL];
-			hp = (int)payload[NameDB.SaveTag.HP];
-			mana = (int)payload[NameDB.SaveTag.MANA];
-			state = (FSM.State)payload[NameDB.SaveTag.STATE];
-			anim.Seek((float)payload[NameDB.SaveTag.ANIM_POSITION]);
-			regenTimer.WaitTime = (float)payload[NameDB.SaveTag.TIME_LEFT];
-
-			// set target
-			string targetPath = (string)payload[NameDB.SaveTag.TARGET];
-			if (GetTree().Root.HasNode(targetPath))
+			// set in no specific order
+			foreach (string key in payload.Keys)
 			{
-				target = GetNode<Character>(targetPath);
+				switch (key)
+				{
+					case NameDB.SaveTag.POSITION:
+						GC.Array posArray = (GC.Array)payload[key];
+						GlobalPosition = new Vector2((float)posArray[0], (float)posArray[1]);
+						break;
+
+					case NameDB.SaveTag.LEVEL:
+						level = payload[key].ToString().ToInt();
+						break;
+
+					case NameDB.SaveTag.HP:
+						hp = payload[key].ToString().ToInt();
+						break;
+
+					case NameDB.SaveTag.MANA:
+						mana = payload[key].ToString().ToInt();
+						break;
+
+					case NameDB.SaveTag.TIME_LEFT:
+						float timeLeft = (float)payload[key];
+						if (timeLeft > 0.0f)
+						{
+							regenTimer.WaitTime = timeLeft;
+						}
+						break;
+
+					case NameDB.SaveTag.TARGET:
+						string targetName = payload[key].ToString();
+						if (GetParent().HasNode(targetName))
+						{
+							target = GetParent().GetNode<Character>(targetName);
+						}
+						break;
+				}
+			}
+
+			// set in specific order
+			string k = NameDB.SaveTag.STATE;
+			if (payload.Contains(k))
+			{
+				state = (FSM.State)payload[k].ToString().ToInt();
+			}
+			k = NameDB.SaveTag.ANIM_POSITION;
+			if (payload.Contains(k))
+			{
+				float seek = (float)payload[k];
+				if (seek > 0.0f)
+				{
+					anim.Seek(seek);
+				}
 			}
 		}
 	}

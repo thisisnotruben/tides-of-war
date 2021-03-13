@@ -1,6 +1,7 @@
 using Game.Actor;
 using Godot;
 using Game.Database;
+using GC = Godot.Collections;
 namespace Game.Projectile
 {
 	public class Missile : Node2D, ISerializable
@@ -72,21 +73,28 @@ namespace Game.Projectile
 			tween.RemoveAll();
 			QueueFree();
 		}
-		public virtual Godot.Collections.Dictionary Serialize()
+		public virtual void LoadMissile(GC.Dictionary payload)
 		{
-			return new Godot.Collections.Dictionary()
+			// TODO: save
+			Deserialize(payload);
+			GC.Array pos = (GC.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
+			GlobalPosition = new Vector2((float)pos[0], (float)pos[1]);
+		}
+		public virtual GC.Dictionary Serialize()
+		{
+			return new GC.Dictionary()
 			{
-				{NameDB.SaveTag.CHARACTER, character?.GetPath() ?? string.Empty},
-				{NameDB.SaveTag.TARGET, target?.GetPath() ?? string.Empty},
+				{NameDB.SaveTag.CHARACTER, (character?.GetPath() ?? string.Empty).ToString()},
+				{NameDB.SaveTag.TARGET, (target?.GetPath() ?? string.Empty).ToString()},
 				{NameDB.SaveTag.HIT, hit},
-				{NameDB.SaveTag.SPAWN_POSITION, new Godot.Collections.Array() { spawnPos.x,spawnPos.y }},
-				{NameDB.SaveTag.POSITION, new Godot.Collections.Array() { GlobalPosition.x, GlobalPosition.y }}
+				{NameDB.SaveTag.SPAWN_POSITION, new GC.Array() { spawnPos.x,spawnPos.y }},
+				{NameDB.SaveTag.POSITION, new GC.Array() { GlobalPosition.x, GlobalPosition.y }}
 			};
 		}
-		public virtual void Deserialize(Godot.Collections.Dictionary payload)
+		public virtual void Deserialize(GC.Dictionary payload)
 		{
-			string characterPath = (string)payload[NameDB.SaveTag.CHARACTER],
-				targetPath = (string)payload[NameDB.SaveTag.TARGET];
+			string characterPath = payload[NameDB.SaveTag.CHARACTER].ToString(),
+				targetPath = payload[NameDB.SaveTag.TARGET].ToString();
 
 			if ((bool)payload[NameDB.SaveTag.HIT] || !HasNode(characterPath) || !HasNode(targetPath))
 			{
@@ -95,15 +103,8 @@ namespace Game.Projectile
 
 			Init(GetNode<Character>(characterPath), GetNode<Character>(targetPath));
 
-			Godot.Collections.Array pos = (Godot.Collections.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
+			GC.Array pos = (GC.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
 			spawnPos = new Vector2((float)pos[0], (float)pos[1]);
-		}
-		public virtual void LoadMissile(Godot.Collections.Dictionary payload)
-		{
-			// TODO: save
-			Deserialize(payload);
-			Godot.Collections.Array pos = (Godot.Collections.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
-			GlobalPosition = new Vector2((float)pos[0], (float)pos[1]);
 		}
 	}
 }

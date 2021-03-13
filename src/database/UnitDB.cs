@@ -1,4 +1,3 @@
-using System;
 using Godot;
 using GC = Godot.Collections;
 namespace Game.Database
@@ -51,11 +50,11 @@ namespace Game.Database
 				}
 
 				data.Add(itemName, new UnitData(
-					name: (string)dict[nameof(UnitData.name)],
-					img: (string)dict[nameof(UnitData.img)],
+					name: dict[nameof(UnitData.name)].ToString(),
+					img: dict[nameof(UnitData.img)].ToString(),
 					enemy: (bool)dict[nameof(UnitData.enemy)],
-					level: (int)(Single)dict[nameof(UnitData.level)],
-					dialogue: (string)dict[nameof(UnitData.dialogue)],
+					level: dict[nameof(UnitData.level)].ToString().ToInt(),
+					dialogue: dict[nameof(UnitData.dialogue)].ToString(),
 					path: unitPath,
 					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1])
 				));

@@ -94,14 +94,29 @@ namespace Game.Actor
 			GC.Dictionary payload = base.Serialize();
 
 			// inventory
-			GC.Array<string> commodities = new GC.Array<string>();
+			GC.Array commodities = new GC.Array();
 			menu.gameMenu.playerInventory.GetCommodities().ForEach(c => commodities.Add(c));
-			payload[NameDB.SaveTag.INVENTORY] = commodities;
+			payload[NameDB.SaveTag.INVENTORY] = commodities.Duplicate();
+			payload[NameDB.SaveTag.INVENTORY_SLOTS] = menu.inventorySlots.Serialize();
 
 			// spellBook
 			commodities.Clear();
 			menu.gameMenu.playerSpellBook.GetCommodities().ForEach(c => commodities.Add(c));
-			payload[NameDB.SaveTag.SPELL_BOOK] = commodities;
+			payload[NameDB.SaveTag.SPELL_BOOK] = commodities.Duplicate();
+			payload[NameDB.SaveTag.SPELL_BOOK_SLOTS] = menu.spellSlots.Serialize();
+
+			// hudSlots
+			GC.Dictionary hudSlots = new GC.Dictionary();
+			SlotController slot;
+			foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
+			{
+				slot = node as SlotController;
+				if (slot != null && !slot.IsAvailable())
+				{
+					hudSlots[node.Name] = slot.Serialize();
+				}
+			}
+			payload[NameDB.SaveTag.HUD_SLOTS] = hudSlots;
 
 			// weapon & armor
 			payload[NameDB.SaveTag.WEAPON] = weapon?.worldName ?? string.Empty;
@@ -117,37 +132,73 @@ namespace Game.Actor
 		{
 			base.Deserialize(payload);
 
-			return; // TODO: save
-
-			// inventory
-			foreach (string itemName in (GC.Array)payload[NameDB.SaveTag.INVENTORY])
-			{
-				menu.gameMenu.playerInventory.AddCommodity(itemName);
-			}
-
-			// spellBook
-			foreach (string spellName in (GC.Array)payload[NameDB.SaveTag.SPELL_BOOK])
-			{
-				menu.gameMenu.playerSpellBook.AddCommodity(spellName);
-			}
-
-			// weapon & armor
 			ItemFactory itemFactory = new ItemFactory();
-			string weaponName = (string)payload[NameDB.SaveTag.WEAPON],
-				armorName = (string)payload[NameDB.SaveTag.ARMOR];
 
-			if (!weaponName.Equals(string.Empty))
+			string k;
+			foreach (string key in payload.Keys)
 			{
-				weapon = itemFactory.Make(this, weaponName);
-			}
-			if (!armorName.Equals(string.Empty))
-			{
-				vest = itemFactory.Make(this, armorName);
-			}
+				switch (key)
+				{
+					case NameDB.SaveTag.INVENTORY:
+						foreach (string itemName in (GC.Array)payload[key])
+						{
+							menu.gameMenu.playerInventory.AddCommodity(itemName);
+						}
 
-			// misc
-			xp = (int)(Single)payload[NameDB.SaveTag.XP];
-			gold = (int)(Single)payload[NameDB.SaveTag.GOLD];
+						k = NameDB.SaveTag.INVENTORY_SLOTS;
+						if (payload.Contains(k))
+						{
+							menu.inventorySlots.Deserialize((GC.Dictionary)payload[k]);
+						}
+						break;
+
+					case NameDB.SaveTag.SPELL_BOOK:
+						foreach (string spellName in (GC.Array)payload[key])
+						{
+							menu.gameMenu.playerSpellBook.AddCommodity(spellName);
+						}
+
+						k = NameDB.SaveTag.SPELL_BOOK_SLOTS;
+						if (payload.Contains(k))
+						{
+							menu.spellSlots.Deserialize((GC.Dictionary)payload[k]);
+						}
+						break;
+
+					case NameDB.SaveTag.HUD_SLOTS:
+						GC.Dictionary packet = (GC.Dictionary)payload[key];
+						foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
+						{
+							if (packet.Contains(node.Name))
+							{
+								(node as ISerializable)?.Deserialize((GC.Dictionary)packet[node.Name]);
+							}
+						}
+						break;
+
+					case NameDB.SaveTag.WEAPON:
+						string weaponName = payload[key].ToString();
+						weapon = !weaponName.Equals(string.Empty)
+							? itemFactory.Make(this, weaponName)
+							: null;
+						break;
+
+					case NameDB.SaveTag.ARMOR:
+						string armorName = payload[key].ToString();
+						vest = !armorName.Equals(string.Empty)
+							? itemFactory.Make(this, armorName)
+							: null;
+						break;
+
+					case NameDB.SaveTag.XP:
+						xp = payload[key].ToString().ToInt();
+						break;
+
+					case NameDB.SaveTag.GOLD:
+						gold = payload[key].ToString().ToInt();
+						break;
+				}
+			}
 		}
 	}
 }

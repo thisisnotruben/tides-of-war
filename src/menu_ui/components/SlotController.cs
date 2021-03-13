@@ -7,7 +7,7 @@ using Game.GameItem;
 using Game.Actor;
 namespace Game.Ui
 {
-	public class SlotController : Control
+	public class SlotController : Control, ISerializable
 	{
 		[Signal] public delegate void OnSlotPressed(string itemName);
 		[Signal] public delegate void OnSlotDragMoved(string itemName, NodePath slotFrom, NodePath slotTo);
@@ -56,7 +56,8 @@ namespace Game.Ui
 		public void ClearDisplay()
 		{
 			icon.Texture = null;
-			stackCount.Text = commodityWorldName = string.Empty;
+			stackCount.Text = "1";
+			commodityWorldName = string.Empty;
 			cooldownOverlay.Visible = coolDownText.Visible = stackCount.Visible = coolDownActive = false;
 			tween.RemoveAll();
 		}
@@ -129,7 +130,7 @@ namespace Game.Ui
 			}
 
 			int stack = (int)dropData["stack"];
-			string itemName = (string)dropData["itemName"];
+			string itemName = dropData["itemName"].ToString();
 			SlotController slotFrom = GetNode<SlotController>((NodePath)dropData["slotPath"]);
 
 			slotFrom.OnButtonChanged(false);
@@ -180,5 +181,20 @@ namespace Game.Ui
 			}
 		}
 		public void _OnSlotPressed() { EmitSignal(nameof(OnSlotPressed), commodityWorldName); }
+		public GC.Dictionary Serialize()
+		{
+			return new GC.Dictionary()
+			{
+				{NameDB.SaveTag.NAME, commodityWorldName},
+				{NameDB.SaveTag.STACK, stackCount.Text.ToString().ToInt()},
+				{NameDB.SaveTag.COOLDOWNS, tween.Tell()}
+			};
+		}
+		public void Deserialize(GC.Dictionary payload)
+		{
+			Display(payload[NameDB.SaveTag.NAME].ToString(),
+				payload[NameDB.SaveTag.STACK].ToString().ToInt());
+			SetCooldown((float)payload[NameDB.SaveTag.COOLDOWNS]);
+		}
 	}
 }

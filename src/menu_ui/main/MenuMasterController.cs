@@ -12,6 +12,7 @@ namespace Game.Ui
 		private HudControlController hud;
 		public HudPopupConfirmController confirmPopup;
 		public HudPopupErrorController errorPopup;
+		public SlotGridController inventorySlots, spellSlots;
 		private CanvasItem hudMenuContainer, menuContainer;
 		private SaveLoadModel saveLoadModel;
 
@@ -19,6 +20,8 @@ namespace Game.Ui
 		{
 			menuContainer = GetNode<CanvasItem>("canvasLayer/split");
 			gameMenu = menuContainer.GetChild<MainMenuController>(0);
+			inventorySlots = gameMenu.GetNode<InventoryController>("playerMenu/Inventory/InventoryView").inventorySlots;
+			spellSlots = gameMenu.GetNode<SpellBookController>("playerMenu/Skills/SkillBookView").spellSlots;
 
 			saveLoadModel = gameMenu.playerMenu.GetNode<SaveLoadController>("Save Load/SaveLoadView").saveLoadModel;
 
@@ -34,13 +37,13 @@ namespace Game.Ui
 
 			ItemInfoHudController itemInfoHudController = hudMenuContainer.GetNode<ItemInfoHudController>("Inventory/itemInfo");
 			itemInfoHudController.inventoryModel = gameMenu.playerInventory;
-			itemInfoHudController.slotGridController = gameMenu.GetNode<InventoryController>("playerMenu/Inventory/InventoryView").inventorySlots;
+			itemInfoHudController.slotGridController = inventorySlots;
 			gameMenu.Connect("draw", itemInfoHudController, nameof(ItemInfoHudController.OnGameMenuVisibilityChanged), new GC.Array() { true });
 			gameMenu.Connect("hide", itemInfoHudController, nameof(ItemInfoHudController.OnGameMenuVisibilityChanged), new GC.Array() { false });
 
 			ItemInfoHudSpellController infoHudSpellController = hudMenuContainer.GetNode<ItemInfoHudSpellController>("Spells/itemInfo");
 			infoHudSpellController.inventoryModel = gameMenu.playerSpellBook;
-			infoHudSpellController.slotGridController = gameMenu.GetNode<SpellBookController>("playerMenu/Skills/SkillBookView").spellSlots;
+			infoHudSpellController.slotGridController = spellSlots;
 			gameMenu.Connect("draw", infoHudSpellController, nameof(ItemInfoHudSpellController.OnGameMenuVisibilityChanged), new GC.Array() { true });
 			gameMenu.Connect("hide", infoHudSpellController, nameof(ItemInfoHudSpellController.OnGameMenuVisibilityChanged), new GC.Array() { false });
 
@@ -130,19 +133,15 @@ namespace Game.Ui
 			{
 				SetTargetDisplay(npc);
 
-				if (interactable)
+				player.target = npc;
+				if (npc.enemy)
+				{
+					player.OnAttacked(npc);
+				}
+				else if (interactable)
 				{
 					HideExceptMenu(gameMenu);
 					gameMenu.NpcInteract(npc);
-				}
-				else
-				{
-					player.target = npc;
-					// checks to see if play can attack
-					if (npc.enemy)
-					{
-						player.OnAttacked(npc);
-					}
 				}
 			}
 		}

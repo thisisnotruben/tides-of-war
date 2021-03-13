@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using GC = Godot.Collections;
 using Game.Actor;
 using Game.Database;
 namespace Game.Ui
@@ -8,7 +9,8 @@ namespace Game.Ui
 	{
 		private ResourceInteractiveLoader mapLoader;
 		private Range progressBar;
-		private Godot.Collections.Dictionary playerState = new Godot.Collections.Dictionary();
+		private GC.Dictionary playerState = new GC.Dictionary(),
+			loadData = new GC.Dictionary();
 		private static Dictionary<string, PackedScene> cache = new Dictionary<string, PackedScene>();
 		public static Node rootNode;
 
@@ -18,15 +20,34 @@ namespace Game.Ui
 			SetProcess(false);
 		}
 		public static SceneLoaderController Init() { return (SceneLoaderController)SceneDB.sceneLoader.Instance(); }
-		private void SetTransitions()
+		private bool TrySetTransitions()
 		{
 			if (playerState.Count > 0)
 			{
 				Vector2 spawnLoc = Map.Map.map.GetNode<Node2D>("meta/transitions/" + playerState["_mapName"]).GlobalPosition;
-				playerState[NameDB.SaveTag.POSITION] = new Godot.Collections.Array() { spawnLoc[0], spawnLoc[1] };
+				playerState[NameDB.SaveTag.POSITION] = new GC.Array() { spawnLoc[0], spawnLoc[1] };
 				playerState.Remove("_mapName");
 				Player.player.Deserialize(playerState);
+				playerState.Clear();
+				return true;
 			}
+			return false;
+		}
+		private bool TrySetLoadData()
+		{
+			if (loadData.Count > 0)
+			{
+				foreach (string nodePath in loadData.Keys)
+				{
+					if (HasNode(nodePath))
+					{
+						(GetNode(nodePath) as ISerializable)?.Deserialize((GC.Dictionary)loadData[nodePath]);
+					}
+				}
+				loadData.Clear();
+				return true;
+			}
+			return false;
 		}
 		public override void _Process(float delta)
 		{
@@ -40,20 +61,25 @@ namespace Game.Ui
 					cache.Add(mapLoader.GetResource().ResourcePath, packedScene);
 					rootNode.AddChild(packedScene.Instance());
 
-					SetTransitions();
+					TrySetTransitions();
+					TrySetLoadData();
 					SetProcess(false);
 					QueueFree();
 					break;
 			}
 		}
-		public void SetScene(string scenePath, CanvasItem currentScene, bool transition = false)
+		public void SetScene(string scenePath, Node currentScene, GC.Dictionary payload)
+		{
+			loadData = payload;
+			SetScene(scenePath, currentScene);
+		}
+		public void SetScene(string scenePath, Node currentScene, bool transition = false)
 		{
 			rootNode.AddChild(this);
 
 			if (transition && currentScene is Map.Map)
 			{
-				// TODO: save
-				// playerState = Player.player.Serialize();
+				playerState = Player.player.Serialize();
 				playerState.Add("_mapName", Map.Map.map.Name);
 			}
 
@@ -72,16 +98,18 @@ namespace Game.Ui
 				Globals.contentDB.LoadData(contentDataPath);
 			}
 
-			currentScene.Hide();
+			(currentScene as CanvasItem)?.Hide();
 			CallDeferred(nameof(SetSceneDeferred), scenePath, currentScene);
 		}
 		private void SetSceneDeferred(string scenePath, CanvasItem currentScene)
 		{
 			currentScene.Free();
+			GetTree().Paused = false;
 			if (cache.ContainsKey(scenePath))
 			{
 				GetTree().ChangeSceneTo(cache[scenePath]);
-				CallDeferred(nameof(SetTransitions));
+				CallDeferred(nameof(TrySetTransitions));
+				CallDeferred(nameof(TrySetLoadData));
 				QueueFree();
 			}
 			else

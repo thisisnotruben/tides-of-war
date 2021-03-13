@@ -28,6 +28,7 @@ namespace Game.Ui
 			{
 				AddEntry(i);
 			}
+			SetDisplay();
 		}
 		private void SaveGame()
 		{
@@ -77,7 +78,7 @@ namespace Game.Ui
 			string signal = "pressed";
 			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
 			{
-				yesBttn.Disconnect(signal, this, (string)connectionPacket["method"]);
+				yesBttn.Disconnect(signal, this, connectionPacket["method"].ToString());
 			}
 			yesBttn.Connect(signal, this, toMethod);
 		}

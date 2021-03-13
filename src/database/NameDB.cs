@@ -84,7 +84,9 @@ namespace Game.Database
 				POSITION = "position",
 				ANIM_POSITION = "animPosition",
 				INVENTORY = "inventory",
+				INVENTORY_SLOTS = "inventorySlots",
 				SPELL_BOOK = "spellBook",
+				SPELL_BOOK_SLOTS = "spellBookSlots",
 				GOLD = "gold",
 				WEAPON = "weapon",
 				ARMOR = "armor",
@@ -106,7 +108,11 @@ namespace Game.Database
 				IMG_FRAME = "imgFrame",
 				MAP = "map",
 				DAY_LIGHT = "dayLight",
-				STATE = "state";
+				STATE = "state",
+				STACK = "stack",
+				INDEX = "index",
+				SLOT = "slot",
+				HUD_SLOTS = "hudSlots";
 		}
 	}
 }

@@ -56,7 +56,7 @@ namespace Game.Database
 					rawRow = (GC.Array)rawMatrix[i];
 					for (j = 0; j < rawMatrix.Count; j++)
 					{
-						matrix[i, j] = (int)(Single)rawRow[j];
+						matrix[i, j] = rawRow[j].ToString().ToInt();
 					}
 				}
 				graph.Add((Ordinal)Enum.Parse(typeof(Ordinal), ordinalDir), matrix);

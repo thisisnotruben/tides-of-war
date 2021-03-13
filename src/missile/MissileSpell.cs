@@ -63,15 +63,15 @@ namespace Game.Projectile
 		{
 			// the same code as parent class, except for the Init call
 
-			string characterPath = (string)payload[NameDB.SaveTag.CHARACTER],
-				targetPath = (string)payload[NameDB.SaveTag.TARGET];
+			string characterPath = payload[NameDB.SaveTag.CHARACTER].ToString(),
+				targetPath = payload[NameDB.SaveTag.TARGET].ToString();
 
 			if ((bool)payload[NameDB.SaveTag.HIT] || !HasNode(characterPath) || !HasNode(targetPath))
 			{
 				Delete();
 			}
 
-			Init(GetNode<Character>(characterPath), GetNode<Character>(targetPath), (string)payload[NameDB.SaveTag.SPELL]);
+			Init(GetNode<Character>(characterPath), GetNode<Character>(targetPath), payload[NameDB.SaveTag.SPELL].ToString());
 
 			Godot.Collections.Array pos = (Godot.Collections.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
 			spawnPos = new Vector2((float)pos[0], (float)pos[1]);

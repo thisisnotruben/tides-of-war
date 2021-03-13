@@ -1,5 +1,6 @@
 using System;
 using GC = Godot.Collections;
+using Godot;
 namespace Game.Database
 {
 	public class ContentDB : AbstractDB<ContentDB.ContentData>
@@ -31,7 +32,7 @@ namespace Game.Database
 				contentDict = (GC.Dictionary)rawDict[characterName];
 
 				data.Add(characterName, new ContentData(
-					healerCost: (int)(Single)contentDict[nameof(ContentData.healerCost)],
+					healerCost: contentDict[nameof(ContentData.healerCost)].ToString().ToInt(),
 					healer: (bool)contentDict[nameof(ContentData.healer)],
 					drops: GetWorldNames((GC.Array)contentDict[nameof(ContentData.drops)]),
 					spells: GetWorldNames((GC.Array)contentDict[nameof(ContentData.spells)]),
@@ -44,7 +45,7 @@ namespace Game.Database
 			string[] worldNames = new String[inArray.Count];
 			for (int i = 0; i < worldNames.Length; i++)
 			{
-				worldNames[i] = (string)inArray[i];
+				worldNames[i] = inArray[i].ToString();
 			}
 			return worldNames;
 		}

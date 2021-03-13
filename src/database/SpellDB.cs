@@ -44,20 +44,20 @@ namespace Game.Database
 				dict = (Godot.Collections.Dictionary)rawDict[spellName];
 
 				data.Add(spellName, new SpellData(
-					icon: IconDB.GetIcon((int)((Single)dict[nameof(SpellData.icon)])),
-					type: (SpellTypes)Enum.Parse(typeof(SpellTypes), (string)dict[nameof(SpellData.type)]),
-					level: (int)(Single)dict[nameof(SpellData.level)],
-					goldCost: (int)(Single)dict[nameof(SpellData.goldCost)],
-					blurb: (string)dict[nameof(SpellData.blurb)],
-					range: (int)(Single)dict[nameof(SpellData.range)],
-					coolDown: (int)(Single)dict[nameof(SpellData.coolDown)],
+					icon: IconDB.GetIcon(dict[nameof(SpellData.icon)].ToString().ToInt()),
+					type: (SpellTypes)Enum.Parse(typeof(SpellTypes), dict[nameof(SpellData.type)].ToString()),
+					level: dict[nameof(SpellData.level)].ToString().ToInt(),
+					goldCost: dict[nameof(SpellData.goldCost)].ToString().ToInt(),
+					blurb: dict[nameof(SpellData.blurb)].ToString(),
+					range: dict[nameof(SpellData.range)].ToString().ToInt(),
+					coolDown: dict[nameof(SpellData.coolDown)].ToString().ToInt(),
 					ignoreArmor: (bool)dict[nameof(SpellData.ignoreArmor)],
 					requiresTarget: (bool)dict[nameof(SpellData.requiresTarget)],
-					spellEffect: (string)dict[nameof(SpellData.spellEffect)],
-					sound: (string)dict[nameof(SpellData.sound)],
-					characterAnim: (string)dict[nameof(SpellData.characterAnim)],
+					spellEffect: dict[nameof(SpellData.spellEffect)].ToString(),
+					sound: dict[nameof(SpellData.sound)].ToString(),
+					characterAnim: dict[nameof(SpellData.characterAnim)].ToString(),
 					stackSize: 1,
-					manaCost: (int)(Single)dict[nameof(SpellData.manaCost)]
+					manaCost: dict[nameof(SpellData.manaCost)].ToString().ToInt()
 				));
 			}
 		}

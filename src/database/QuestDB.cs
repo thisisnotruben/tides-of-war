@@ -84,12 +84,12 @@ namespace Game.Database
 
 					objectives.Add(objectiveName, new ObjectiveData(
 						keepWorldObject: (bool)objective[nameof(ObjectiveData.keepWorldObject)],
-						questType: (QuestType)Enum.Parse(typeof(QuestType), (string)objective[nameof(ObjectiveData.questType)]),
-						amount: (int)(Single)objective[nameof(ObjectiveData.amount)],
+						questType: (QuestType)Enum.Parse(typeof(QuestType), objective[nameof(ObjectiveData.questType)].ToString()),
+						amount: objective[nameof(ObjectiveData.amount)].ToString().ToInt(),
 						extraContent: new ExtraContentData(
-							dialogue: (string)extraContentDict[nameof(ExtraContentData.dialogue)],
-							reward: (string)extraContentDict[nameof(ExtraContentData.reward)],
-							gold: (int)(Single)extraContentDict[nameof(ExtraContentData.gold)]
+							dialogue: extraContentDict[nameof(ExtraContentData.dialogue)].ToString(),
+							reward: extraContentDict[nameof(ExtraContentData.reward)].ToString(),
+							gold: extraContentDict[nameof(ExtraContentData.gold)].ToString().ToInt()
 						)
 					));
 				}
@@ -99,13 +99,13 @@ namespace Game.Database
 					nextQuest: ContentDB.GetWorldNames((GC.Array)dict[nameof(QuestData.nextQuest)]),
 					reward: ContentDB.GetWorldNames((GC.Array)dict[nameof(QuestData.reward)]),
 					keepRewardItems: (bool)dict[nameof(QuestData.keepRewardItems)],
-					goldReward: (int)(Single)dict[nameof(QuestData.goldReward)],
-					questGiver: new NodePath((string)dict[nameof(QuestData.questGiver)]),
-					questCompleter: new NodePath((string)dict[nameof(QuestData.questCompleter)]),
-					available: (string)dict[nameof(QuestData.available)],
-					active: (string)dict[nameof(QuestData.active)],
-					completed: (string)dict[nameof(QuestData.completed)],
-					delivered: (string)dict[nameof(QuestData.delivered)],
+					goldReward: dict[nameof(QuestData.goldReward)].ToString().ToInt(),
+					questGiver: new NodePath(dict[nameof(QuestData.questGiver)].ToString()),
+					questCompleter: new NodePath(dict[nameof(QuestData.questCompleter)].ToString()),
+					available: dict[nameof(QuestData.available)].ToString(),
+					active: dict[nameof(QuestData.active)].ToString(),
+					completed: dict[nameof(QuestData.completed)].ToString(),
+					delivered: dict[nameof(QuestData.delivered)].ToString(),
 					objectives: objectives
 				));
 			}

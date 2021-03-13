@@ -1,4 +1,4 @@
-using System;
+using Godot;
 namespace Game.Database
 {
 	public class AreaEffectDB : AbstractDB<AreaEffectDB.AreaEffectData>
@@ -22,7 +22,7 @@ namespace Game.Database
 				dict = (Godot.Collections.Dictionary)rawDict[worldName];
 
 				data.Add(worldName, new AreaEffectData(
-					radius: (int)(Single)dict[nameof(AreaEffectData.radius)]
+					radius: dict[nameof(AreaEffectData.radius)].ToString().ToInt()
 				));
 			}
 		}

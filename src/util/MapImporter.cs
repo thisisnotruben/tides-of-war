@@ -385,7 +385,7 @@ namespace Game.Util
 			{
 				if (key.Contains(map.Name))
 				{
-					worldObjectShaderData.Add(GetParsedName(key), (string)shaderData[key]);
+					worldObjectShaderData.Add(GetParsedName(key), shaderData[key].ToString());
 				}
 			}
 
@@ -519,8 +519,7 @@ namespace Game.Util
 							posArray = (GC.Array)((GC.Dictionary)occluderData[gid])["pos"];
 							pos = new Vector2((float)posArray[0], (float)posArray[1] - cellHeight);
 
-							templatePoints = (GC.Array)occluderData[
-								(string)((GC.Dictionary)occluderData[gid])["templateName"]];
+							templatePoints = (GC.Array)occluderData[((GC.Dictionary)occluderData[gid])["templateName"]];
 
 							polygon = new Vector2[templatePoints.Count / 2];
 							for (z = 0, l = 0; l < templatePoints.Count; l += 2, z++)
@@ -537,7 +536,7 @@ namespace Game.Util
 						if (shaderData.Contains(gid))
 						{
 							tileSet.TileSetMaterial(k, GD.Load<ShaderMaterial>(
-								assetMapDir.PlusFile((string)shaderData[gid] + ".tres"))
+								assetMapDir.PlusFile(shaderData[gid].ToString() + ".tres"))
 							);
 						}
 					}

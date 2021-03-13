@@ -149,18 +149,18 @@ namespace Game.Mine
 			return new GC.Dictionary()
 			{
 				{NameDB.SaveTag.NAME, worldName},
-				{NameDB.SaveTag.CHARACTER, exludedCharacter?.GetPath() ?? string.Empty},
+				{NameDB.SaveTag.CHARACTER, (exludedCharacter?.GetPath() ?? string.Empty).ToString()},
 				{NameDB.SaveTag.ARMING, arming},
 				{NameDB.SaveTag.HIT, exploded},
 				{NameDB.SaveTag.TIME_LEFT, timer.TimeLeft},
-				{NameDB.SaveTag.POSITION, new GC.Array<float>() {GlobalPosition.x, GlobalPosition.y}}
+				{NameDB.SaveTag.POSITION, new GC.Array() {GlobalPosition.x, GlobalPosition.y}}
 			};
 		}
 		public void Deserialize(GC.Dictionary payload)
 		{
 			// TODO: save
-			GC.Array<float> posArray = (GC.Array<float>)payload[NameDB.SaveTag.POSITION];
-			GlobalPosition = new Vector2(posArray[0], posArray[1]);
+			GC.Array posArray = (GC.Array)payload[NameDB.SaveTag.POSITION];
+			GlobalPosition = new Vector2((float)posArray[0], (float)posArray[1]);
 
 			arming = (bool)payload[NameDB.SaveTag.ARMING];
 			exploded = (bool)payload[NameDB.SaveTag.HIT];

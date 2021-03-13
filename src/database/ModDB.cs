@@ -1,5 +1,6 @@
 using Game.Actor.Stat;
 using System;
+using Godot;
 namespace Game.Database
 {
 	public class ModDB : AbstractDB<ModDB.Modifiers>
@@ -52,7 +53,7 @@ namespace Game.Database
 				dict = (Godot.Collections.Dictionary)rawDict[worldName];
 
 				data.Add(worldName, new Modifiers(
-					durationSec: (int)(Single)dict[nameof(Modifiers.durationSec)],
+					durationSec: dict[nameof(Modifiers.durationSec)].ToString().ToInt(),
 					stamina: GetModifier(dict, nameof(Modifiers.stamina)),
 					intellect: GetModifier(dict, nameof(Modifiers.intellect)),
 					agility: GetModifier(dict, nameof(Modifiers.agility)),
@@ -73,7 +74,7 @@ namespace Game.Database
 			Godot.Collections.Dictionary dict = (Godot.Collections.Dictionary)mainDict[attribute];
 
 			return new ModifierNode(
-				type: (StatModifier.StatModType)Enum.Parse(typeof(StatModifier.StatModType), (string)dict["type"]),
+				type: (StatModifier.StatModType)Enum.Parse(typeof(StatModifier.StatModType), dict["type"].ToString()),
 				value: (float)dict["value"]
 			);
 		}

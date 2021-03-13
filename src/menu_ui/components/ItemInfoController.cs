@@ -106,7 +106,7 @@ namespace Game.Ui
 
 			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
 			{
-				yesBttn.Disconnect(signal, this, (string)connectionPacket["method"]);
+				yesBttn.Disconnect(signal, this, connectionPacket["method"].ToString());
 			}
 			yesBttn.Connect(signal, this, toMethod);
 		}

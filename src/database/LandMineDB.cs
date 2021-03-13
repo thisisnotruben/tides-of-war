@@ -1,5 +1,4 @@
 using Godot;
-using System;
 namespace Game.Database
 {
 	public class LandMineDB : AbstractDB<LandMineDB.LandMineData>
@@ -35,15 +34,15 @@ namespace Game.Database
 
 				data.Add(worldName, new LandMineData(
 					hitBox: dict[nameof(LandMineData.hitBox)] == null ? null
-						: GD.Load<Shape2D>(string.Format(PathManager.assetMissileSpellPath, (string)dict[nameof(LandMineData.hitBox)])),
+						: GD.Load<Shape2D>(string.Format(PathManager.assetMissileSpellPath, dict[nameof(LandMineData.hitBox)])),
 					img: dict[nameof(LandMineData.img)] == null ? null
-						: GD.Load<Texture>(string.Format(PathManager.assetMissileSpellPath, (string)dict[nameof(LandMineData.img)])),
-					sound: (string)dict[nameof(LandMineData.sound)],
-					minDamage: (int)(Single)dict[nameof(LandMineData.minDamage)],
-					maxDamage: (int)(Single)dict[nameof(LandMineData.maxDamage)],
-					armDelaySec: (int)(Single)dict[nameof(LandMineData.armDelaySec)],
-					timeToDetSec: (int)(Single)dict[nameof(LandMineData.timeToDetSec)],
-					radius: (int)(Single)dict[nameof(LandMineData.radius)]
+						: GD.Load<Texture>(string.Format(PathManager.assetMissileSpellPath, dict[nameof(LandMineData.img)])),
+					sound: dict[nameof(LandMineData.sound)].ToString(),
+					minDamage: dict[nameof(LandMineData.minDamage)].ToString().ToInt(),
+					maxDamage: dict[nameof(LandMineData.maxDamage)].ToString().ToInt(),
+					armDelaySec: dict[nameof(LandMineData.armDelaySec)].ToString().ToInt(),
+					timeToDetSec: dict[nameof(LandMineData.timeToDetSec)].ToString().ToInt(),
+					radius: dict[nameof(LandMineData.radius)].ToString().ToInt()
 				));
 			}
 		}

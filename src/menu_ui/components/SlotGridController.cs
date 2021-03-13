@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using Godot;
+using GC = Godot.Collections;
 using Game.GameItem;
+using Game.Database;
 namespace Game.Ui
 {
-	public class SlotGridController : GameMenu
+	public class SlotGridController : GameMenu, ISerializable
 	{
 		private readonly List<SlotController> slots = new List<SlotController>();
 		private readonly Dictionary<int, int> slotModelMap = new Dictionary<int, int>();
@@ -93,6 +95,32 @@ namespace Game.Ui
 
 			slotModelMap[GetNode(slotTo).GetIndex()] = slotModelMap[slotIndexFrom];
 			slotModelMap.Remove(slotIndexFrom);
+		}
+		public GC.Dictionary Serialize()
+		{
+			GC.Dictionary payload = new GC.Dictionary();
+			foreach (int key in slotModelMap.Keys)
+			{
+				payload[key] = new GC.Dictionary()
+					{
+						{NameDB.SaveTag.INDEX, slotModelMap[key]},
+						{NameDB.SaveTag.SLOT, slots[key].Serialize()}
+					};
+			}
+			return payload;
+		}
+		public void Deserialize(GC.Dictionary payload)
+		{
+			GC.Dictionary packet;
+			int s;
+			foreach (string key in payload.Keys)
+			{
+				packet = (GC.Dictionary)payload[key];
+				s = key.ToInt();
+
+				slotModelMap[s] = packet[NameDB.SaveTag.INDEX].ToString().ToInt();
+				slots[s].Deserialize((GC.Dictionary)packet[NameDB.SaveTag.SLOT]);
+			}
 		}
 	}
 }

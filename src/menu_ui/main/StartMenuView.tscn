@@ -152,12 +152,6 @@ margin_top = 50.0
 margin_right = 570.0
 margin_bottom = 1130.0
 
-[node name="gridContainer" parent="list_of_menus/m/save_load/centerContainer" index="0"]
-margin_left = 120.0
-margin_top = 142.0
-margin_right = 400.0
-margin_bottom = 938.0
-
 [node name="about" parent="list_of_menus/m" instance=ExtResource( 2 )]
 visible = false
 anchor_right = 0.0

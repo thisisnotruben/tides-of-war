@@ -1,4 +1,4 @@
-using System;
+using Godot;
 namespace Game.Database
 {
 	public class UseDB : AbstractDB<UseDB.Use>
@@ -27,8 +27,8 @@ namespace Game.Database
 				dict = (Godot.Collections.Dictionary)rawDict[worldName];
 
 				data.Add(worldName, new Use(
-					totalSec: (int)(Single)dict[nameof(Use.totalSec)],
-					repeatSec: (int)(Single)dict[nameof(Use.repeatSec)],
+					totalSec: dict[nameof(Use.totalSec)].ToString().ToInt(),
+					repeatSec: dict[nameof(Use.repeatSec)].ToString().ToInt(),
 					hp: ModDB.GetModifier(dict, nameof(Use.hp)),
 					mana: ModDB.GetModifier(dict, nameof(Use.mana)),
 					damage: ModDB.GetModifier(dict, nameof(Use.damage))

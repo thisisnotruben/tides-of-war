@@ -1,7 +1,7 @@
 using Game.Database;
 using Godot;
+using GC = Godot.Collections;
 using System.Collections.Generic;
-using System;
 using Game.Ui;
 namespace Game.Quest
 {
@@ -72,12 +72,12 @@ namespace Game.Quest
 			}
 		}
 		public bool HasCharacterPath(NodePath characterPath) { return charactersTalkedTo.Contains(characterPath); }
-		public Godot.Collections.Dictionary Serialize()
+		public GC.Dictionary Serialize()
 		{
-			Godot.Collections.Array charactersPaths = new Godot.Collections.Array();
+			GC.Array charactersPaths = new GC.Array();
 			charactersTalkedTo.ForEach(p => charactersPaths.Add(p.ToString()));
 
-			Godot.Collections.Dictionary payload = new Godot.Collections.Dictionary()
+			GC.Dictionary payload = new GC.Dictionary()
 			{
 				{NameDB.SaveTag.NAME, quest.questName},
 				{NameDB.SaveTag.TALKED_TO, charactersPaths}
@@ -90,10 +90,10 @@ namespace Game.Quest
 
 			return payload;
 		}
-		public void Deserialize(Godot.Collections.Dictionary payload)
+		public void Deserialize(GC.Dictionary payload)
 		{
 			string characterPathKey = NameDB.SaveTag.TALKED_TO;
-			foreach (string characterPath in (Godot.Collections.Array)payload[characterPathKey])
+			foreach (string characterPath in (GC.Array)payload[characterPathKey])
 			{
 				charactersTalkedTo.Add(new NodePath(characterPath));
 			}
@@ -103,7 +103,7 @@ namespace Game.Quest
 
 			foreach (string objectiveName in payload.Keys)
 			{
-				objectives[objectiveName] = (int)(Single)payload[objectiveName];
+				objectives[objectiveName] = payload[objectiveName].ToString().ToInt();
 			}
 		}
 	}

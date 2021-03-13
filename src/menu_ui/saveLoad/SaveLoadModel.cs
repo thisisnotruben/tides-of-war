@@ -33,7 +33,7 @@ namespace Game.Ui
 					case PathManager.dataExt:
 						file.Open(savePathDir.PlusFile(fileName), File.ModeFlags.Read);
 						saveFileNames[fileName.BaseName().ToInt()] =
-							(string)((GC.Dictionary)JSON.Parse(file.GetAsText()).Result)[NameDB.SaveTag.TIME];
+							(((GC.Dictionary)JSON.Parse(file.GetAsText()).Result)[NameDB.SaveTag.TIME]).ToString();
 						file.Close();
 						break;
 					case PathManager.textureExt:
@@ -120,21 +120,10 @@ namespace Game.Ui
 			file.Close();
 
 			// set scene
-			Node root = GetTree().Root;
-			CanvasItem recentScene = root.GetChild(root.GetChildren().Count - 1) as CanvasItem;
-			if (recentScene != null)
-			{
-				SceneLoaderController.Init().SetScene((string)payload[NameDB.SaveTag.MAP], recentScene);
-			}
+			Node root = GetTree().Root,
+				recentScene = root.GetChild(root.GetChildren().Count - 1);
 
-			// load data
-			foreach (string nodePath in payload.Keys)
-			{
-				if (HasNode(nodePath))
-				{
-					(GetNode(nodePath) as ISerializable)?.Deserialize((GC.Dictionary)payload[nodePath]);
-				}
-			}
+			SceneLoaderController.Init().SetScene(payload[NameDB.SaveTag.MAP].ToString(), recentScene, payload);
 		}
 		public void DeleteSaveFile(int index)
 		{

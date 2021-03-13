@@ -1,4 +1,4 @@
-using System;
+using Godot;
 namespace Game.Database
 {
 	public class ImageDB : AbstractDB<ImageDB.ImageData>
@@ -33,19 +33,19 @@ namespace Game.Database
 			{
 				dict = (Godot.Collections.Dictionary)rawDict[imgName];
 
-				moving = (int)(Single)dict[nameof(ImageData.moving)];
-				dying = (int)(Single)dict[nameof(ImageData.dying)];
-				attacking = (int)(Single)dict[nameof(ImageData.attacking)];
+				moving = dict[nameof(ImageData.moving)].ToString().ToInt();
+				dying = dict[nameof(ImageData.dying)].ToString().ToInt();
+				attacking = dict[nameof(ImageData.attacking)].ToString().ToInt();
 
 				data.Add(imgName, new ImageData(
 					total: moving + dying + attacking,
 					moving: moving,
 					dying: dying,
 					attacking: attacking,
-					weapon: (string)dict[nameof(ImageData.weapon)],
-					weaponMaterial: (string)dict[nameof(ImageData.weaponMaterial)],
-					swing: (string)dict[nameof(ImageData.swing)],
-					body: (string)dict[nameof(ImageData.body)],
+					weapon: dict[nameof(ImageData.weapon)].ToString(),
+					weaponMaterial: dict[nameof(ImageData.weaponMaterial)].ToString(),
+					swing: dict[nameof(ImageData.swing)].ToString(),
+					body: dict[nameof(ImageData.body)].ToString(),
 					melee: (bool)dict[nameof(ImageData.melee)]
 				));
 			}
