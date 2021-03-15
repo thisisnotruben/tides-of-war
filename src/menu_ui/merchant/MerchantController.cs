@@ -13,7 +13,8 @@ namespace Game.Ui
 		private Label header;
 		public Button buySellButton, closeButton;
 		private ItemInfoMerchantController storeItemInfo;
-		public SlotGridController storeSlots, playerInventoryGridController;
+		public SlotGridController storeSlots, playerInventoryGridController,
+			playerSpellBookGridController;
 		private InventoryModel _playerSpellBook;
 		public InventoryModel playerSpellBook
 		{
@@ -38,7 +39,7 @@ namespace Game.Ui
 				mainContent.Show();
 				if (value != null)
 				{
-					DisplayItems(Globals.contentDB.GetData(value.Name).merchandise);
+					DisplayItemsNpc(Globals.contentDB.GetData(value.Name).merchandise);
 				}
 			}
 		}
@@ -65,7 +66,7 @@ namespace Game.Ui
 			storeItemInfo.inventoryModel = store;
 			storeItemInfo.slotGridController = storeSlots;
 		}
-		private void OnTransaction(string commodityName, int goldAmount, bool bought)
+		private void OnTransaction(string commodityName, int goldAmount, bool bought, int slotIndex)
 		{
 			// called from ItemInfo when player buys/sells
 			bool isSpell = Globals.spellDB.HasData(commodityName);
@@ -75,18 +76,19 @@ namespace Game.Ui
 			}
 			else
 			{
-				store.RemoveCommodity(commodityName);
+				store.RemoveCommodity(storeSlots.GetSlotToModelIndex(slotIndex));
 				if (isSpell)
 				{
 					playerSpellBook.RemoveCommodity(commodityName);
+					playerSpellBookGridController.ClearSlot(slotIndex);
+					storeSlots.ClearSlot(slotIndex);
 				}
 				else
 				{
-					int modelIndex = playerInventory.RemoveCommodity(commodityName);
-					if (modelIndex != -1)
+					if (playerInventory.RemoveCommodity(playerInventoryGridController.GetSlotToModelIndex(slotIndex)))
 					{
-						playerInventoryGridController.ClearSlot(modelIndex);
-						storeSlots.ClearSlot(modelIndex);
+						playerInventoryGridController.ClearSlot(slotIndex);
+						storeSlots.ClearSlot(slotIndex);
 					}
 				}
 			}
@@ -103,40 +105,36 @@ namespace Game.Ui
 			header.Text = "Gold: " + player.gold;
 			EmitSignal(nameof(OnTransactionMade));
 		}
-		private void DisplayItems(params string[] commodityNames)
+		private void DisplayItemsPlayer()
 		{
 			store.Clear();
 			storeSlots.ClearSlots();
-			storeItemInfo.isBuying = !buySellButton.Pressed;
+			storeItemInfo.isBuying = false;
 
-			// add commodities to merchant model/view
-			for (int i = 0; i < commodityNames.Length; i++)
+			for (int s = 0, m = 0; s < storeSlots.GetSlots().Count; s++)
+			{
+				if (s < playerInventory.count)
+				{
+					store.PushCommodity(playerInventory.GetCommodity(s),
+						playerInventory.GetCommodityStack(s));
+				}
+				if (playerInventoryGridController.IsSlotUsed(s))
+				{
+					m = playerInventoryGridController.GetSlotToModelIndex(s);
+					storeSlots.DisplaySlot(s, m, store.GetCommodity(m), store.GetCommodityStack(m));
+				}
+			}
+		}
+		private void DisplayItemsNpc(params string[] commodityNames)
+		{
+			store.Clear();
+			storeSlots.ClearSlots();
+			storeItemInfo.isBuying = true;
+
+			for (int i = 0; i < commodityNames.Length && i < storeSlots.GetSlots().Count; i++)
 			{
 				store.AddCommodity(commodityNames[i]);
-			}
-
-			// cannot be in same loop due to inplace-sorting && stacking
-			int m;
-			for (int s = 0; s < storeSlots.GetSlots().Count; s++)
-			{
-				m = s;
-				if (buySellButton.Pressed)
-				{
-					// mimic the look of player inventory
-					if (playerInventoryGridController.IsSlotUsed(s))
-					{
-						m = playerInventoryGridController.GetSlotToModelIndex(s);
-					}
-					else
-					{
-						continue;
-					}
-				}
-				else if (s >= store.count)
-				{
-					break;
-				}
-				storeSlots.DisplaySlot(s, m, store.GetCommodity(m), store.GetCommodityStack(m));
+				storeSlots.DisplaySlot(i, i, store.GetCommodity(i), store.GetCommodityStack(i));
 			}
 		}
 		private void OnDraw() { header.Text = "Gold: " + (player?.gold ?? 0); }
@@ -177,11 +175,14 @@ namespace Game.Ui
 			buySellButton.Text = buttonPressed ? "Buy" : "Sell";
 			if (player != null && merchant != null)
 			{
-				DisplayItems(
-					buttonPressed
-						? playerInventory.GetCommodities().ToArray()
-						: Globals.contentDB.GetData(merchant.Name).merchandise
-				);
+				if (buttonPressed)
+				{
+					DisplayItemsPlayer();
+				}
+				else
+				{
+					DisplayItemsNpc(Globals.contentDB.GetData(merchant.Name).merchandise);
+				}
 			}
 		}
 	}

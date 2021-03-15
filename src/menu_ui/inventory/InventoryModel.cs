@@ -65,6 +65,15 @@ namespace Game.Ui
 			slots.Add(new Slot(commodityWorldName, 1));
 			return true;
 		}
+		public bool PushCommodity(string commodityWorldName, int stack)
+		{
+			if (IsFull(commodityWorldName))
+			{
+				return false;
+			}
+			slots.Add(new Slot(commodityWorldName, stack));
+			return true;
+		}
 		public int RemoveCommodity(string commodityName)
 		{
 			for (int i = 0; i < count; i++)
@@ -83,6 +92,16 @@ namespace Game.Ui
 				}
 			}
 			return -1;
+		}
+		public bool RemoveCommodity(int index)
+		{
+			slots[index].stackSize -= 1;
+			if (slots[index].stackSize <= 0)
+			{
+				slots.RemoveAt(index);
+				return true;
+			}
+			return false;
 		}
 		public void Clear() { slots.Clear(); }
 		public bool IsFull() { return maxSlots == count; }

@@ -3,11 +3,12 @@ using Game.Database;
 using Game.GameItem;
 using Game.Factory;
 using Game.Ability;
+using Game.Actor.State;
 namespace Game.Ui
 {
 	public class ItemInfoSpellController : ItemInfoController
 	{
-		[Signal] public delegate void PlayerWantstoCast(Spell spell);
+		[Signal] public delegate void PlayerWantstoCast(Spell spell, bool requiresTarget);
 		[Signal] public delegate void PlayerWantstoCastError(string errotText);
 
 		public override void _Ready()
@@ -16,7 +17,10 @@ namespace Game.Ui
 			castBttn.Connect("pressed", this, nameof(OnCastPressed));
 			CallDeferred(nameof(InitSetPlayerCastSpell));
 		}
-		private void InitSetPlayerCastSpell() { player.fsm.InitSetPlayerCastSpell(this); }
+		private void InitSetPlayerCastSpell()
+		{
+			Connect(nameof(PlayerWantstoCast), player.fsm, nameof(FSM.OnPlayerWantsToCast));
+		}
 		public override void Display(string commodityWorldName, bool allowMove)
 		{
 			base.Display(commodityWorldName, allowMove);
@@ -76,7 +80,12 @@ namespace Game.Ui
 			{
 				PlaySound(NameDB.UI.CLICK2);
 				Hide();
-				EmitSignal(nameof(PlayerWantstoCast), new SpellFactory().Make(player, commodityWorldName));
+
+				Spell spell = new SpellFactory().Make(player, commodityWorldName);
+				spell.Connect(nameof(Spell.OnStarted), this, nameof(OnCasted));
+
+				EmitSignal(nameof(PlayerWantstoCast), spell,
+					Globals.spellDB.GetData(commodityWorldName).requiresTarget);
 			}
 		}
 		public void OnCasted(string spellName) { CheckHudSlots(inventoryModel, spellName); }

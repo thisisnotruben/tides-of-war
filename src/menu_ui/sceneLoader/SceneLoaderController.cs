@@ -3,6 +3,8 @@ using Godot;
 using GC = Godot.Collections;
 using Game.Actor;
 using Game.Database;
+using Game.Mine;
+using Game.Factory;
 namespace Game.Ui
 {
 	public class SceneLoaderController : Node
@@ -44,6 +46,32 @@ namespace Game.Ui
 						(GetNode(nodePath) as ISerializable)?.Deserialize((GC.Dictionary)loadData[nodePath]);
 					}
 				}
+
+				string characterPath;
+				foreach (GC.Dictionary landMineData in (GC.Array)loadData[NameDB.SaveTag.LAND_MINES])
+				{
+					characterPath = landMineData[NameDB.SaveTag.CHARACTER].ToString();
+					if (HasNode(characterPath))
+					{
+						((LandMine)SceneDB.landMine.Instance()).Init(
+							landMineData[NameDB.SaveTag.NAME].ToString(),
+							GetNode<Character>(characterPath), false).Deserialize(landMineData);
+					}
+				}
+
+				string targetPath;
+				MissileFactory missileFactory = new MissileFactory();
+				foreach (GC.Dictionary missileData in (GC.Array)loadData[NameDB.SaveTag.MISSILES])
+				{
+					characterPath = missileData[NameDB.SaveTag.CHARACTER].ToString();
+					targetPath = missileData[NameDB.SaveTag.TARGET].ToString();
+					if (HasNode(characterPath) && HasNode(targetPath))
+					{
+						missileFactory.Make(GetNode<Character>(characterPath), GetNode<Character>(targetPath),
+							missileData[NameDB.SaveTag.SPELL].ToString()).Deserialize(missileData);
+					}
+				}
+
 				loadData.Clear();
 				return true;
 			}

@@ -112,7 +112,10 @@ namespace Game.Database
 				STACK = "stack",
 				INDEX = "index",
 				SLOT = "slot",
-				HUD_SLOTS = "hudSlots";
+				HUD_SLOTS = "hudSlots",
+				LAND_MINES = "landMines",
+				MISSILES = "missiles",
+				VERSION = "version";
 		}
 	}
 }

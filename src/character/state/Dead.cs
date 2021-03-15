@@ -109,8 +109,7 @@ namespace Game.Actor.State
 				character.GlobalPosition = Globals.unitDB.GetData(character.Name).spawnPos;
 
 				// set spawn timer
-				timer.WaitTime = new Random().Next(60, 241);
-				timer.Start();
+				timer.Start(new Random().Next(60, 241));
 			}
 		}
 		private void OnNpcRespawn()

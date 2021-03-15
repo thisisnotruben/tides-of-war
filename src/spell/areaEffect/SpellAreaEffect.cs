@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Game.Actor;
-using Game.Database;
 using Godot;
 namespace Game.Ability
 {

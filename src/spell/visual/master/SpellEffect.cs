@@ -16,6 +16,7 @@ namespace Game.Ability
 		private Node2D idleParticles, explodeParticles;
 		private string sound;
 		private AudioStreamPlayer2D player2D;
+		private bool active;
 
 		private delegate void Routine();
 		private Routine onTimeOut;
@@ -39,7 +40,7 @@ namespace Game.Ability
 				node2D.UseParentMaterial = true;
 			}
 		}
-		public void Init(Character character, string spellWorldName, Node attachTo)
+		public SpellEffect Init(Character character, string spellWorldName, Node attachTo)
 		{
 			sound = Globals.spellDB.GetData(spellWorldName).sound;
 
@@ -143,6 +144,7 @@ namespace Game.Ability
 					AddBehavior(() => light.Show());
 					break;
 			}
+			return this;
 		}
 		private void AddBehavior(Routine routine) { polyBehavior.Push(routine); }
 		public void FadeLight()
@@ -153,6 +155,12 @@ namespace Game.Ability
 		public void _OnTimerTimeout() { onTimeOut?.Invoke(); }
 		public void OnHit()
 		{
+			if (active)
+			{
+				return;
+			}
+
+			active = true;
 			Globals.soundPlayer.PlaySound(sound, player2D);
 
 			tween.InterpolateProperty(this, ":scale", new Vector2(0.75f, 0.75f),

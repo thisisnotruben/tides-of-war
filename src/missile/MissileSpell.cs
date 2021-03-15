@@ -1,13 +1,16 @@
 using Game.Database;
 using Game.Ability;
 using Game.Actor;
+using Game.Factory;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Projectile
 {
 	public class MissileSpell : Missile
 	{
 		private Timer timer;
 		protected string spellWorldName = string.Empty;
+		protected SpellEffect spellEffect;
 
 		public override void _Ready()
 		{
@@ -22,7 +25,7 @@ namespace Game.Projectile
 				hitboxBody.Shape = spellMissileData.hitBox;
 			}
 		}
-		public virtual void Init(Character character, Character target, string spellWorldName)
+		public virtual Missile Init(Character character, Character target, string spellWorldName)
 		{
 			this.spellWorldName = spellWorldName ?? string.Empty;
 
@@ -45,36 +48,59 @@ namespace Game.Projectile
 
 			if (Globals.spellEffectDB.HasData(spellWorldName))
 			{
-				SpellEffect spellEffect = (SpellEffect)Globals.spellEffectDB.GetData(
-					Globals.spellDB.GetData(spellWorldName).spellEffect).Instance();
+				spellEffect = ((SpellEffect)Globals.spellEffectDB.GetData(
+					Globals.spellDB.GetData(spellWorldName).spellEffect).Instance()
+					).Init(target, spellWorldName, this);
 
-				spellEffect.Init(target, spellWorldName, this);
 				Connect(nameof(OnHit), spellEffect, nameof(SpellEffect.OnHit));
 			}
+
+			return this;
 		}
 		public override void OnMissileFadeFinished(string animName) { timer.Start(); }
-		public override Godot.Collections.Dictionary Serialize()
+		public override GC.Dictionary Serialize()
 		{
-			Godot.Collections.Dictionary payload = base.Serialize();
+			GC.Dictionary payload = base.Serialize();
+			payload[NameDB.SaveTag.TIME_LEFT] = timer.TimeLeft;
 			payload[NameDB.SaveTag.SPELL] = spellWorldName;
 			return payload;
 		}
-		public override void Deserialize(Godot.Collections.Dictionary payload)
+		public override void Deserialize(GC.Dictionary payload)
 		{
-			// the same code as parent class, except for the Init call
+			hit = (bool)payload[NameDB.SaveTag.HIT];
 
-			string characterPath = payload[NameDB.SaveTag.CHARACTER].ToString(),
-				targetPath = payload[NameDB.SaveTag.TARGET].ToString();
-
-			if ((bool)payload[NameDB.SaveTag.HIT] || !HasNode(characterPath) || !HasNode(targetPath))
-			{
-				Delete();
-			}
-
-			Init(GetNode<Character>(characterPath), GetNode<Character>(targetPath), payload[NameDB.SaveTag.SPELL].ToString());
-
-			Godot.Collections.Array pos = (Godot.Collections.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
+			GC.Array pos = (GC.Array)payload[NameDB.SaveTag.SPAWN_POSITION];
 			spawnPos = new Vector2((float)pos[0], (float)pos[1]);
+
+			pos = (GC.Array)payload[NameDB.SaveTag.POSITION];
+			GlobalPosition = new Vector2((float)pos[0], (float)pos[1]);
+
+			if (hit)
+			{
+				float timeLeft = (float)payload[NameDB.SaveTag.TIME_LEFT],
+					animLeft = (float)payload[NameDB.SaveTag.ANIM_POSITION];
+
+				if (animLeft > 0.0f)
+				{
+					spellEffect.OnHit();
+					anim.Play(ANIM_NAME);
+					anim.Seek(animLeft);
+				}
+				else if (timeLeft > 0.0f)
+				{
+					spellEffect.OnHit();
+					timer.Start(timeLeft);
+				}
+				else
+				{
+					Delete();
+				}
+			}
+			else
+			{
+				character.fsm.ConnectMissileHit(this, character, target,
+					new SpellFactory().Make(character, spellWorldName));
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@ namespace Game.Projectile
 	{
 		public const float SPEED = 40.0f;
 
-		public override void Init(Character character, Character target)
+		public override Missile Init(Character character, Character target)
 		{
 			this.character = character;
 			this.target = target;
@@ -21,6 +21,8 @@ namespace Game.Projectile
 
 			moveBehavior = (float delta) => GlobalPosition +=
 				GlobalPosition.DirectionTo(target.pos) * SPEED * delta;
+
+			return this;
 		}
 		public override void _Ready()
 		{

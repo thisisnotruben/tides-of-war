@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Game.Database;
+using Game.Mine;
+using Game.Projectile;
 using Godot;
 using GC = Godot.Collections;
 namespace Game.Ui
@@ -66,10 +68,13 @@ namespace Game.Ui
 				date["hour"], date["minute"], date["second"]);
 
 			// create master save and add all components
+			GC.Array landMinesToSave = new GC.Array(),
+				missilesToSave = new GC.Array();
 			GC.Dictionary masterSave = new GC.Dictionary()
 			{
 				{NameDB.SaveTag.MAP, Map.Map.map.Filename},
-				{NameDB.SaveTag.TIME, saveTime}
+				{NameDB.SaveTag.TIME, saveTime},
+				{NameDB.SaveTag.VERSION, 0.0f}
 			};
 
 			ISerializable saveNode;
@@ -78,9 +83,22 @@ namespace Game.Ui
 				saveNode = node as ISerializable;
 				if (saveNode != null)
 				{
-					masterSave[node.GetPath()] = saveNode.Serialize();
+					if (node is LandMine)
+					{
+						landMinesToSave.Add(saveNode.Serialize());
+					}
+					else if (node is Missile)
+					{
+						missilesToSave.Add(saveNode.Serialize());
+					}
+					else
+					{
+						masterSave[node.GetPath()] = saveNode.Serialize();
+					}
 				}
 			}
+			masterSave[NameDB.SaveTag.LAND_MINES] = landMinesToSave;
+			masterSave[NameDB.SaveTag.MISSILES] = missilesToSave;
 
 			// save to file
 			Directory directory = new Directory();

@@ -64,9 +64,16 @@ namespace Game.Ui
 			}
 			if (on)
 			{
-				slotGridController.ClearSlot(inventoryModel.RemoveCommodity(worldName));
+				RemoveFromInventory();
 			}
 			EmitSignal(nameof(RefreshSlots));
+		}
+		private void RemoveFromInventory()
+		{
+			if (inventoryModel.RemoveCommodity(slotGridController.GetSlotToModelIndex(selectedSlotIdx)))
+			{
+				slotGridController.ClearSlot(selectedSlotIdx);
+			}
 		}
 		protected void OnUsePressed()
 		{
@@ -93,14 +100,7 @@ namespace Game.Ui
 
 			// eat up or drink up
 			new ItemFactory().Make(player, commodityWorldName).Start();
-
-			// remove from inventory
-			int modelIndex = inventoryModel.RemoveCommodity(commodityWorldName);
-			if (modelIndex != -1)
-			{
-				slotGridController.ClearSlot(modelIndex);
-			}
-
+			RemoveFromInventory();
 			CheckHudSlots(inventoryModel, commodityWorldName);
 
 			EmitSignal(nameof(RefreshSlots));
@@ -174,12 +174,8 @@ namespace Game.Ui
 
 			EquipItem(false, commodityWorldName); // just in case if it's equipped
 
-			// remove from inventory
-			int modelIndex = inventoryModel.RemoveCommodity(commodityWorldName);
-			if (modelIndex != -1)
-			{
-				slotGridController.ClearSlot(modelIndex);
-			}
+			// TODO: index is never set, just = 0
+			RemoveFromInventory();
 
 			CheckHudSlots(inventoryModel, commodityWorldName);
 			EmitSignal(nameof(RefreshSlots));

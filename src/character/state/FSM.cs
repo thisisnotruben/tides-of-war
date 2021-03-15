@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Game.Ui;
+using Game.Ability;
+using Game.Projectile;
 namespace Game.Actor.State
 {
 	public class FSM : Node
@@ -55,7 +56,7 @@ namespace Game.Actor.State
 						stateMap[State.PLAYER_MOVE_DEAD], nameof(MovePlayerDead.OnPlayerWantsToMove));
 				}
 			}
-			stateMap[State.ATTACK].Connect(nameof(Attack.CastSpell), stateMap[State.CAST], nameof(Cast.OnSetCastSpell));
+			stateMap[State.ATTACK].Connect(nameof(Attack.CastSpell), stateMap[State.CAST], nameof(Cast.SetSpell));
 
 			// call when map has finished loading
 			CallDeferred(nameof(SetState),
@@ -63,12 +64,29 @@ namespace Game.Actor.State
 				? State.NPC_MOVE_ROAM
 				: State.IDLE);
 		}
-		public void InitSetPlayerCastSpell(ItemInfoSpellController spellMenu)
+		public void ConnectMissileHit(Missile missile, Character character, Character target, Spell spell = null)
 		{
-			spellMenu.Connect(nameof(ItemInfoSpellController.PlayerWantstoCast),
-				stateMap[State.ATTACK], nameof(Attack.SetPlayerSpell));
-			stateMap[State.ATTACK].Connect(nameof(Attack.SpellCasted), spellMenu,
-				nameof(ItemInfoSpellController.OnCasted));
+			missile.Connect(nameof(Missile.OnHit), stateMap[State.ATTACK], nameof(Attack.AttackHit),
+				new Godot.Collections.Array() { character, target, spell });
+		}
+		public void OnPlayerWantsToCast(Spell spell, bool requiresTarget)
+		{
+			State state;
+			if (requiresTarget)
+			{
+				state = State.ATTACK;
+				((Attack)stateMap[state]).SetPlayerSpell(spell);
+				if (state != GetState())
+				{
+					ChangeState(state);
+				}
+			}
+			else
+			{
+				state = State.CAST;
+				((Cast)stateMap[state]).SetSpell(spell);
+				ChangeState(state);
+			}
 		}
 		public void ChangeState(State state)
 		{

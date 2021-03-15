@@ -51,8 +51,6 @@ namespace Game.Actor.State
 			&& character.target == whosAttacking
 			&& character.pos.DistanceTo(whosAttacking.pos) <= character.stats.weaponRange.value)
 			{
-				character.target = whosAttacking;
-				((Player)character).menu.SetTargetDisplay(whosAttacking as Npc);
 				fsm.ChangeState(FSM.State.ATTACK);
 			}
 			else

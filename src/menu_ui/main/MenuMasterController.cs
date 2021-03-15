@@ -4,6 +4,7 @@ using Game.Actor;
 using Game.Quest;
 using Game.Loot;
 using Game.Database;
+using Game.Actor.State;
 namespace Game.Ui
 {
 	public class MenuMasterController : GameMenu
@@ -94,9 +95,9 @@ namespace Game.Ui
 			}
 		}
 		public void ConnectPlayerToHud(Player player) { hud.playerStatus.ConnectCharacterStatusAndUpdate(player); }
-		public void SetTargetDisplay(Npc target)
+		public void SetTargetDisplay(Character target)
 		{
-			if (!hud.targetStatus.IsCharacterConnected(target))
+			if (target != null && !hud.targetStatus.IsCharacterConnected(target))
 			{
 				hud.targetStatus.ConnectCharacterStatusAndUpdate(target);
 			}
@@ -134,9 +135,9 @@ namespace Game.Ui
 				SetTargetDisplay(npc);
 
 				player.target = npc;
-				if (npc.enemy)
+				if (npc.enemy && player.pos.DistanceTo(npc.pos) <= player.stats.weaponRange.value)
 				{
-					player.OnAttacked(npc);
+					player.state = FSM.State.ATTACK;
 				}
 				else if (interactable)
 				{

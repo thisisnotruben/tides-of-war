@@ -68,7 +68,8 @@ namespace Game.Ui
 				PlaySound(NameDB.UI.LEARN_SPELL);
 				buyBttn.Hide();
 			}
-			EmitSignal(nameof(OnTransaction), commodityWorldName, -PickableDB.GetGoldCost(commodityWorldName), true);
+			EmitSignal(nameof(OnTransaction), commodityWorldName,
+				-PickableDB.GetGoldCost(commodityWorldName), true, selectedSlotIdx);
 			popup.Hide();
 		}
 		private void OnSellPressed()
@@ -81,7 +82,8 @@ namespace Game.Ui
 		private void _OnSellConfirm()
 		{
 			PlaySound(NameDB.UI.SELL_BUY);
-			EmitSignal(nameof(OnTransaction), commodityWorldName, PickableDB.GetGoldCost(commodityWorldName), false);
+			EmitSignal(nameof(OnTransaction), commodityWorldName,
+				PickableDB.GetGoldCost(commodityWorldName), false, selectedSlotIdx);
 			Hide();
 		}
 	}

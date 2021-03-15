@@ -7,11 +7,7 @@ namespace Game.Ability
 		public override void Start()
 		{
 			base.Start();
-
-			LandMineDB.LandMineData landMineData = Globals.landMineDB.GetData(worldName);
-
-			LandMine landMine = (LandMine)SceneDB.landMine.Instance();
-			landMine.Init(worldName, character);
+			((LandMine)SceneDB.landMine.Instance()).Init(worldName, character);
 		}
 	}
 }

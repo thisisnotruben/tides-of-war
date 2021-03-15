@@ -9,6 +9,8 @@ namespace Game.GameItem
 {
 	public class Commodity : WorldObject, ISerializable
 	{
+		[Signal] public delegate void OnStarted(string worldName);
+
 		// characterNodePath: commodityName: timeLeft
 		private static readonly Dictionary<string, Dictionary<string, SceneTreeTimer>> cooldowns =
 			new Dictionary<string, Dictionary<string, SceneTreeTimer>>();
@@ -229,10 +231,9 @@ namespace Game.GameItem
 			// iterate through use count
 			if (useTimer.IsStopped() && use.repeatSec > 0)
 			{
-				useTimer.WaitTime = use.repeatSec;
 				useTimer.Connect("timeout", this, nameof(OnUseTimeout),
 					new GC.Array() { use, durationSec });
-				useTimer.Start();
+				useTimer.Start(use.repeatSec);
 			}
 		}
 		public void OnUseTimeout(UseDB.Use use, int durationSec)
@@ -278,9 +279,9 @@ namespace Game.GameItem
 			if (duration > 0)
 			{
 				// upon timeout, will exit
-				durTimer.WaitTime = duration;
-				durTimer.Start();
+				durTimer.Start(duration);
 			}
+			EmitSignal(nameof(OnStarted), worldName);
 		}
 		public virtual void Exit()
 		{

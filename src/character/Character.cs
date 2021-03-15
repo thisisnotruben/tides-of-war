@@ -223,7 +223,7 @@ namespace Game.Actor
 				{NameDB.SaveTag.TIME_LEFT, regenTimer.TimeLeft},
 				{NameDB.SaveTag.TARGET, target?.Name ?? string.Empty},
 				{NameDB.SaveTag.STATE, state},
-				{NameDB.SaveTag.ANIM_POSITION, anim.CurrentAnimation != string.Empty ? anim.CurrentAnimationPosition : 0.0f}
+				{NameDB.SaveTag.ANIM_POSITION, !anim.CurrentAnimation.Equals(string.Empty) ? anim.CurrentAnimationPosition : 0.0f}
 			};
 		}
 		public virtual void Deserialize(GC.Dictionary payload)

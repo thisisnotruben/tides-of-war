@@ -15,13 +15,14 @@ namespace Game.Actor.State
 
 			Map.Map.map.OccupyCell(character.GlobalPosition, true);
 			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(OnCastFinished), true);
+			character.anim.Play("casting", -1.0f, character.stats.animSpeed.value);
 		}
 		public override void Exit()
 		{
 			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(OnCastFinished), false);
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
-		public void OnSetCastSpell(Spell spell) { this.spell = spell; }
+		public void SetSpell(Spell spell) { this.spell = spell; }
 		private void OnCastFinished(string animName)
 		{
 			spell?.Start();

@@ -11,8 +11,6 @@ namespace Game.Actor.State
 {
 	public class Attack : TakeDamage
 	{
-		[Signal] public delegate void SpellCasted(Spell spell);
-
 		private Timer timer;
 		private Spell spell;
 
@@ -73,16 +71,11 @@ namespace Game.Actor.State
 				TryGetNpcSpell(out spell, character);
 			}
 
-			if (spell != null)
+			if (spell != null && !Globals.spellDB.GetData(spell.worldName).requiresTarget)
 			{
-				switch (Globals.spellDB.GetData(spell.worldName).type)
-				{
-					case SpellDB.SpellTypes.MOD_FRIENDLY:
-					case SpellDB.SpellTypes.MOD_HOSTILE:
-						EmitSignal(nameof(CastSpell), spell);
-						fsm.ChangeState(FSM.State.CAST);
-						return;
-				}
+				EmitSignal(nameof(CastSpell), spell);
+				fsm.ChangeState(FSM.State.CAST);
+				return;
 			}
 
 			if (!character.IsConnected(nameof(Character.NotifyAttack), character.target, nameof(Character.OnAttacked)))
@@ -94,8 +87,7 @@ namespace Game.Actor.State
 			character.anim.Stop();
 			character.img.Frame = 0;
 
-			timer.WaitTime = character.stats.weaponSpeed.value;
-			timer.Start();
+			timer.Start(character.stats.weaponSpeed.value);
 		}
 		private void OnAttackSpeedTimeout()
 		{
@@ -135,7 +127,6 @@ namespace Game.Actor.State
 
 					spell.AddCooldown(character.GetPath(), spell.worldName,
 						Globals.spellDB.GetData(spell.worldName).coolDown);
-					EmitSignal(nameof(SpellCasted), spell.worldName);
 				}
 
 				AttackHit(character, character.target, spell);
@@ -169,17 +160,9 @@ namespace Game.Actor.State
 
 					spell.AddCooldown(character.GetPath(), spell.worldName,
 						Globals.spellDB.GetData(spell.worldName).coolDown);
-					EmitSignal(nameof(SpellCasted), spell.worldName);
 				}
 
-				// sync missile to attack
-				missile.Connect(nameof(Missile.OnHit), this, nameof(AttackHit),
-					new Godot.Collections.Array() { character, character.target, spell });
-
-				// add to scene
-				Map.Map.map.AddZChild(missile);
-				missile.LookAt(character.target.pos);
-				missile.Owner = Map.Map.map;
+				fsm.ConnectMissileHit(missile, character, character.target, spell);
 			}
 			spell = null;
 
@@ -325,7 +308,11 @@ namespace Game.Actor.State
 			}
 			return true;
 		}
-		public void SetPlayerSpell(Spell spell) { this.spell = spell; }
+		public void SetPlayerSpell(Spell spell)
+		{
+			this.spell = spell;
+			AttackStart();
+		}
 		private static bool TryGetNpcSpell(out Spell spell, Character character)
 		{
 			Random rand = new Random();

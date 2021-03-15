@@ -5,25 +5,19 @@ namespace Game.Factory
 {
 	public class MissileFactory : Factory<Missile>
 	{
-		protected override Missile Create(Character character, string spellName)
+		protected override Missile Create(Character character, Character target, string spellName)
 		{
-			Missile missile;
-
-			if (Globals.missileSpellDB.HasData(spellName))
-			{
-				missile = spellName switch
+			return Globals.missileSpellDB.HasData(spellName)
+				? (spellName switch
 				{
 					NameDB.Spell.METEOR => (MissileSpellOrbital)SceneDB.missileSpelOrbital.Instance(),
 					_ => (MissileSpell)SceneDB.missileSpell.Instance()
-				};
-				((MissileSpell)missile).Init(character, character.target, spellName);
-			}
-			else
-			{
-				missile = (Missile)SceneDB.missile.Instance();
-				missile.Init(character, character.target);
-			}
-			return missile;
+				}).Init(character, target, spellName)
+				: ((Missile)SceneDB.missile.Instance()).Init(character, target);
+		}
+		protected override Missile Create(Character character, string worldName)
+		{
+			return Create(character, character.target, worldName);
 		}
 	}
 }

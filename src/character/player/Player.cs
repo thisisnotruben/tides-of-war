@@ -6,6 +6,7 @@ using Game.Factory;
 using Godot;
 using GC = Godot.Collections;
 using System;
+using System.Collections.Generic;
 namespace Game.Actor
 {
 	public class Player : Character
@@ -94,15 +95,23 @@ namespace Game.Actor
 			GC.Dictionary payload = base.Serialize();
 
 			// inventory
-			GC.Array commodities = new GC.Array();
-			menu.gameMenu.playerInventory.GetCommodities().ForEach(c => commodities.Add(c));
-			payload[NameDB.SaveTag.INVENTORY] = commodities.Duplicate();
+			GC.Dictionary inventory = new GC.Dictionary();
+			InventoryModel inventoryModel = menu.gameMenu.playerInventory;
+			for (int i = 0; i < inventoryModel.count; i++)
+			{
+				inventory[i] = new GC.Array()
+				{
+					 inventoryModel.GetCommodity(i),
+					 inventoryModel.GetCommodityStack(i)
+				};
+			}
+			payload[NameDB.SaveTag.INVENTORY] = inventory;
 			payload[NameDB.SaveTag.INVENTORY_SLOTS] = menu.inventorySlots.Serialize();
 
 			// spellBook
-			commodities.Clear();
+			GC.Array commodities = new GC.Array();
 			menu.gameMenu.playerSpellBook.GetCommodities().ForEach(c => commodities.Add(c));
-			payload[NameDB.SaveTag.SPELL_BOOK] = commodities.Duplicate();
+			payload[NameDB.SaveTag.SPELL_BOOK] = commodities;
 			payload[NameDB.SaveTag.SPELL_BOOK_SLOTS] = menu.spellSlots.Serialize();
 
 			// hudSlots
@@ -135,15 +144,28 @@ namespace Game.Actor
 			ItemFactory itemFactory = new ItemFactory();
 
 			string k;
+			GC.Dictionary packet;
 			foreach (string key in payload.Keys)
 			{
 				switch (key)
 				{
 					case NameDB.SaveTag.INVENTORY:
-						foreach (string itemName in (GC.Array)payload[key])
+						packet = (GC.Dictionary)payload[key];
+						List<string> indexes = new List<string>();
+						foreach (string index in packet.Keys)
 						{
-							menu.gameMenu.playerInventory.AddCommodity(itemName);
+							indexes.Add(index);
 						}
+						indexes.Sort();
+
+						InventoryModel inventoryModel = menu.gameMenu.playerInventory;
+						GC.Array package;
+						indexes.ForEach(i =>
+						{
+							package = (GC.Array)packet[i];
+							inventoryModel.PushCommodity(package[0].ToString(),
+								package[1].ToString().ToInt());
+						});
 
 						k = NameDB.SaveTag.INVENTORY_SLOTS;
 						if (payload.Contains(k))
@@ -166,7 +188,7 @@ namespace Game.Actor
 						break;
 
 					case NameDB.SaveTag.HUD_SLOTS:
-						GC.Dictionary packet = (GC.Dictionary)payload[key];
+						packet = (GC.Dictionary)payload[key];
 						foreach (Node node in GetTree().GetNodesInGroup(Globals.HUD_SHORTCUT_GROUP))
 						{
 							if (packet.Contains(node.Name))
@@ -199,6 +221,7 @@ namespace Game.Actor
 						break;
 				}
 			}
+			menu.SetTargetDisplay(target);
 		}
 	}
 }

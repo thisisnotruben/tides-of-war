@@ -413,7 +413,7 @@
 		"coolDown": 180,
 		"range": 64,
 		"ignoreArmor": false,
-		"requiresTarget": false,
+		"requiresTarget": true,
 		"spellEffect": "MeteorEffect",
 		"sound": "explosion",
 		"characterAnim": "casting",

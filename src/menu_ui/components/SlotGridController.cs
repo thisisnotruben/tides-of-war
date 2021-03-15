@@ -34,29 +34,20 @@ namespace Game.Ui
 			DisplaySlot(slotIndex, modelSlot, commodityName, currentStackSize);
 			slots[slotIndex].SetCooldown(coolDown);
 		}
-		public void ClearSlot(int m)
+		public void ClearSlot(int slotIndex)
 		{
-			int i = -1;
 			List<int> slotsTemp = new List<int>();
-
 			foreach (int s in slotModelMap.Keys)
 			{
-				if (slotModelMap[s] > m)
+				if (slotModelMap[s] > slotModelMap[slotIndex])
 				{
 					slotsTemp.Add(s);
 				}
-				else if (slotModelMap[s] == m)
-				{
-					i = s;
-				}
 			}
 
-			if (i >= 0)
-			{
-				slotsTemp.ForEach(s => slotModelMap[s]--);
-				slots[i].ClearDisplay();
-				slotModelMap.Remove(i);
-			}
+			slotsTemp.ForEach(s => slotModelMap[s]--);
+			slots[slotIndex].ClearDisplay();
+			slotModelMap.Remove(slotIndex);
 		}
 		public void ClearSlots()
 		{

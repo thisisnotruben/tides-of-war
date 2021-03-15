@@ -31,6 +31,7 @@ namespace Game.Ui
 			store.playerInventory = playerInventory;
 			store.playerSpellBook = playerSpellBook;
 			store.playerInventoryGridController = inventoryController.inventorySlots;
+			store.playerSpellBookGridController = spellBookController.spellSlots;
 
 			store.closeButton.Connect("pressed", this, nameof(_OnBackPressed));
 			store.Connect(nameof(MerchantController.OnTransactionMade), inventoryController,
