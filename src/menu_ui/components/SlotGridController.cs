@@ -7,6 +7,8 @@ namespace Game.Ui
 {
 	public class SlotGridController : GameMenu, ISerializable
 	{
+		[Signal] public delegate void UnhandledSlotMove(string itemName, NodePath slotFrom, NodePath slotTo);
+
 		private readonly List<SlotController> slots = new List<SlotController>();
 		private readonly Dictionary<int, int> slotModelMap = new Dictionary<int, int>();
 
@@ -24,7 +26,7 @@ namespace Game.Ui
 			}
 		}
 		public List<SlotController> GetSlots() { return slots; }
-		public void DisplaySlot(int slotIndex, int modelIndex, string commodityName, int currentStackSize)
+		public void DisplaySlot(int slotIndex, int modelIndex, string commodityName, int currentStackSize = 1)
 		{
 			slots[slotIndex].Display(commodityName, currentStackSize);
 			slotModelMap[slotIndex] = modelIndex;
@@ -83,9 +85,15 @@ namespace Game.Ui
 		private void OnSlotMove(string itemName, NodePath slotFrom, NodePath slotTo)
 		{
 			int slotIndexFrom = GetNode(slotFrom).GetIndex();
-
-			slotModelMap[GetNode(slotTo).GetIndex()] = slotModelMap[slotIndexFrom];
-			slotModelMap.Remove(slotIndexFrom);
+			if (slotModelMap.ContainsKey(slotIndexFrom))
+			{
+				slotModelMap[GetNode(slotTo).GetIndex()] = slotModelMap[slotIndexFrom];
+				slotModelMap.Remove(slotIndexFrom);
+			}
+			else // came from somewhere else like equipped slots
+			{
+				EmitSignal(nameof(UnhandledSlotMove), itemName, slotFrom, slotTo);
+			}
 		}
 		public GC.Dictionary Serialize()
 		{

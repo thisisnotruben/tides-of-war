@@ -42,11 +42,11 @@ namespace Game.Ui
 			}
 			return commodities;
 		}
-		public bool AddCommodity(string commodityWorldName)
+		public int AddCommodity(string commodityWorldName)
 		{
 			if (IsFull(commodityWorldName))
 			{
-				return false;
+				return -1;
 			}
 
 			int commodityStackSize = PickableDB.GetStackSize(commodityWorldName);
@@ -58,12 +58,12 @@ namespace Game.Ui
 				&& slots[i].stackSize < commodityStackSize)
 				{
 					slots[i].stackSize += 1;
-					return true;
+					return i;
 				}
 			}
 
 			slots.Add(new Slot(commodityWorldName, 1));
-			return true;
+			return count - 1;
 		}
 		public bool PushCommodity(string commodityWorldName, int stack)
 		{

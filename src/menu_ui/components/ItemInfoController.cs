@@ -8,11 +8,11 @@ namespace Game.Ui
 	{
 		public InventoryModel inventoryModel;
 		public SlotGridController slotGridController;
-		public int selectedSlotIdx;
+		public int selectedSlotIdx = -1;
 		public PopupController popup;
 		protected Label header;
 		protected RichTextLabel richTextLabel;
-		protected string commodityWorldName;
+		public string commodityWorldName;
 		protected Control mainContent, buttonContainer;
 		protected TextureButton leftbttn, rightBttn;
 		protected ItemInfoSlotController iconView;
@@ -42,7 +42,7 @@ namespace Game.Ui
 
 			// connect popup events
 			popup = GetChild<PopupController>(1);
-			popup.Connect("hide", this, nameof(OnHide));
+			popup.Connect("hide", this, nameof(OnPopupHide));
 		}
 		public virtual void Display(string commodityWorldName, bool allowMove)
 		{
@@ -114,7 +114,9 @@ namespace Game.Ui
 		{
 			popup.Hide();
 			mainContent.Show();
+			selectedSlotIdx = -1;
 		}
+		protected virtual void OnPopupHide() { mainContent.Show(); }
 		public virtual void OnMovePressed(bool forward)
 		{
 			PlaySound(NameDB.UI.CLICK2);

@@ -104,49 +104,49 @@ __meta__ = {
 [node name="1" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="2" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_left = 114.0
 margin_right = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="3" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_left = 228.0
 margin_right = 340.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="4" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_left = 342.0
 margin_right = 454.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="5" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_left = 456.0
 margin_right = 568.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="6" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_left = 570.0
 margin_right = 682.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="7" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_top = 114.0
 margin_bottom = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="8" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_left = 114.0
@@ -155,7 +155,7 @@ margin_right = 226.0
 margin_bottom = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="9" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_left = 228.0
@@ -164,7 +164,7 @@ margin_right = 340.0
 margin_bottom = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="10" parent="margin/split/center/actionBar" instance=ExtResource( 1 )]
 margin_left = 342.0
@@ -173,7 +173,7 @@ margin_right = 454.0
 margin_bottom = 226.0
 rect_min_size = Vector2( 112, 112 )
 mouse_filter = 1
-hudSlot = true
+slotType = 1
 
 [node name="miniMap" type="Button" parent="margin/split/center/actionBar"]
 margin_left = 456.0

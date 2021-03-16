@@ -109,7 +109,7 @@ namespace Game.Projectile
 				if (animLeft > 0.0f)
 				{
 					anim.Play(ANIM_NAME);
-					anim.Seek(animLeft);
+					anim.Seek(animLeft, true);
 				}
 				else
 				{

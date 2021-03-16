@@ -1,3 +1,4 @@
+using GC = Godot.Collections;
 namespace Game.Actor.State
 {
 	public class Stun : TakeDamage
@@ -9,5 +10,6 @@ namespace Game.Actor.State
 			ClearOnAttackedSignals(whosAttacking);
 			character.regenTimer.Stop();
 		}
+		public override GC.Dictionary Serialize() { return new GC.Dictionary(); }
 	}
 }

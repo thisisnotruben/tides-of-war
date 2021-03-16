@@ -1,5 +1,4 @@
 using System.Linq;
-using Game.Database;
 namespace Game.Actor.State
 {
 	public class MoveNpcAttack : Move

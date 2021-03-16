@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System;
-using Game.Database;
 using Godot;
+using GC = Godot.Collections;
+using Game.Database;
 namespace Game.Actor.State
 {
 	public class MoveNpcRoam : Move
 	{
-		private Queue<Vector2> waypoints = new Queue<Vector2>();
+		public Queue<Vector2> waypoints = new Queue<Vector2>();
 		private bool reversePath = false;
 
 		public override void Start()
@@ -83,6 +84,26 @@ namespace Game.Actor.State
 
 			waypoints = new Queue<Vector2>(mapPatrolPath);
 			waypoints.Dequeue();
+		}
+		public override GC.Dictionary Serialize()
+		{
+			GC.Dictionary payload = base.Serialize();
+			payload[NameDB.SaveTag.REVERSE] = reversePath;
+
+			GC.Array wayPointArr = new GC.Array();
+			foreach (Vector2 point in waypoints.ToArray())
+			{
+				wayPointArr.Add(point.x);
+				wayPointArr.Add(point.y);
+			}
+			payload[NameDB.SaveTag.WAY_POINTS] = wayPointArr;
+
+			return payload;
+		}
+		public override void Deserialize(GC.Dictionary payload)
+		{
+			base.Deserialize(payload);
+			reversePath = (bool)payload[NameDB.SaveTag.REVERSE];
 		}
 	}
 }

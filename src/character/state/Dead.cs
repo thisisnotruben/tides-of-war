@@ -5,6 +5,7 @@ using Game.Actor.Doodads;
 using Game.Database;
 using Game.Quest;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Actor.State
 {
 	public class Dead : StateBehavior
@@ -77,15 +78,7 @@ namespace Game.Actor.State
 			Player player = character as Player;
 			if (player != null)
 			{
-				// instance tomb
-				Tomb tomb = (Tomb)SceneDB.tomb.Instance();
-				tomb.Init(player, player.menu.confirmPopup);
-				Map.Map.map.AddZChild(tomb);
-				tomb.GlobalPosition = Map.Map.map.GetGridPosition(character.GlobalPosition);
-
-				// set map death effects
-				Map.Map.map.SetVeil(true);
-				player.camera.SetEffect(CharacterCamera.Effect.DEATH);
+				((Tomb)SceneDB.tomb.Instance()).Init(player, Map.Map.map.GetGridPosition(character.GlobalPosition));
 
 				// spawn to nearest graveyard
 				Dictionary<int, Vector2> graveSites = new Dictionary<int, Vector2>();
@@ -100,12 +93,7 @@ namespace Game.Actor.State
 			else
 			{
 				// npc
-				character.Hide();
-				character.sight.Monitoring = false;
-				if (!IsInGroup(Globals.SAVE_GROUP))
-				{
-					AddToGroup(Globals.SAVE_GROUP);
-				}
+				character.Visible = character.sight.Monitoring = false;
 				character.GlobalPosition = Globals.unitDB.GetData(character.Name).spawnPos;
 
 				// set spawn timer
@@ -118,6 +106,30 @@ namespace Game.Actor.State
 			{
 				character.sight.Monitoring = true;
 				fsm.ChangeState(FSM.State.ALIVE);
+			}
+		}
+		public override GC.Dictionary Serialize()
+		{
+			GC.Dictionary payload = base.Serialize();
+			payload[NameDB.SaveTag.TIME_LEFT] = timer.TimeLeft;
+			return payload;
+		}
+		public override void Deserialize(GC.Dictionary payload)
+		{
+			base.Deserialize(payload);
+
+			float animPos = (float)payload[NameDB.SaveTag.ANIM_POSITION],
+				timeLeft = (float)payload[NameDB.SaveTag.TIME_LEFT];
+
+			if (animPos > 0.0)
+			{
+				character.anim.Seek(animPos, true);
+			}
+			else if (timeLeft > 0.0f)
+			{
+				character.anim.Stop();
+				DieEnd(deathAnim);
+				timer.Start(timeLeft);
 			}
 		}
 	}

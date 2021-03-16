@@ -1,18 +1,21 @@
 using Godot;
+using GC = Godot.Collections;
+using Game.Database;
 namespace Game.Actor.State
 {
-	public abstract class StateBehavior : Node
+	public abstract class StateBehavior : Node, ISerializable
 	{
-		protected FSM fsm;
-		protected Character character;
-
-		[Signal] public delegate void PlayerWantsToMove(bool wantsToMove);
-
-		public void Init(FSM FSM, Character character)
+		public FSM fsm;
+		protected Character character
 		{
-			this.fsm = FSM;
-			this.character = character;
+			get
+			{
+				return fsm.character;
+			}
 		}
+
+		[Signal] public delegate void PlayerWantsToMove(Vector2 desiredPosition);
+
 		public abstract void Start();
 		public abstract void Exit();
 		public virtual void UnhandledInput(InputEvent @event)
@@ -20,7 +23,7 @@ namespace Game.Actor.State
 			if (@event is InputEventScreenTouch && @event.IsPressed()
 			&& Map.Map.map.IsValidMove(character.GlobalPosition, character.GetGlobalMousePosition()))
 			{
-				EmitSignal(nameof(PlayerWantsToMove), true);
+				EmitSignal(nameof(PlayerWantsToMove), character.GetGlobalMousePosition());
 				// any valid move overrides any state from player
 				fsm.ChangeState(fsm.IsDead()
 							? FSM.State.PLAYER_MOVE_DEAD
@@ -67,5 +70,17 @@ namespace Game.Actor.State
 				whosAttacking.Disconnect(nameof(Character.NotifyAttack), character, nameof(Character.OnAttacked));
 			}
 		}
+		public virtual GC.Dictionary Serialize()
+		{
+			return new GC.Dictionary()
+			{
+				{NameDB.SaveTag.ANIM_POSITION,
+					!character.anim.CurrentAnimation.Equals(string.Empty)
+						? character.anim.CurrentAnimationPosition
+						: 0.0f
+				}
+			};
+		}
+		public virtual void Deserialize(GC.Dictionary payload) { }
 	}
 }

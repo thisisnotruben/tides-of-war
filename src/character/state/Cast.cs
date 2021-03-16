@@ -1,4 +1,6 @@
 using Game.Ability;
+using Game.Database;
+using GC = Godot.Collections;
 namespace Game.Actor.State
 {
 	public class Cast : TakeDamage
@@ -27,6 +29,25 @@ namespace Game.Actor.State
 		{
 			spell?.Start();
 			fsm.RevertState();
+		}
+		public override GC.Dictionary Serialize()
+		{
+			GC.Dictionary payload = base.Serialize();
+			if (spell != null)
+			{
+				payload[NameDB.SaveTag.SPELL] = spell.worldName;
+			}
+			return payload;
+		}
+		public override void Deserialize(GC.Dictionary payload)
+		{
+			base.Deserialize(payload);
+
+			float animPos = (float)payload[NameDB.SaveTag.ANIM_POSITION];
+			if (animPos > 0.0f)
+			{
+				character.anim.Seek(animPos, true);
+			}
 		}
 	}
 }

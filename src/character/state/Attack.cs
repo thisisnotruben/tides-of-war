@@ -7,6 +7,7 @@ using Game.Projectile;
 using Game.Factory;
 using Game.Ability;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Actor.State
 {
 	public class Attack : TakeDamage
@@ -272,7 +273,7 @@ namespace Game.Actor.State
 		{
 			if (fsm.GetState() != FSM.State.ATTACK)
 			{
-				character.target?.RemovePursuantUnitId(character.GetInstanceId());
+				character.target?.RemovePursuantUnitId(character);
 				return false;
 			}
 			else if (character.target?.dead ?? true)
@@ -293,13 +294,13 @@ namespace Game.Actor.State
 					(character as Player)?.menu.ClearTarget();
 				}
 
-				character.target?.RemovePursuantUnitId(character.GetInstanceId());
+				character.target?.RemovePursuantUnitId(character);
 				fsm.ChangeState(state);
 				return false;
 			}
 			else if (character.pos.DistanceTo(character.target.pos) > character.stats.weaponRange.value)
 			{
-				character.target?.RemovePursuantUnitId(character.GetInstanceId());
+				character.target?.RemovePursuantUnitId(character);
 				fsm.ChangeState(
 					character is Npc
 					? FSM.State.NPC_MOVE_ATTACK
@@ -308,10 +309,13 @@ namespace Game.Actor.State
 			}
 			return true;
 		}
-		public void SetPlayerSpell(Spell spell)
+		public void SetSpell(Spell spell)
 		{
 			this.spell = spell;
-			AttackStart();
+			if (character is Player)
+			{
+				AttackStart();
+			}
 		}
 		private static bool TryGetNpcSpell(out Spell spell, Character character)
 		{
@@ -389,6 +393,33 @@ namespace Game.Actor.State
 
 			spellEffect.Init(target, spellName, target);
 			spellEffect.OnHit();
+		}
+		public override GC.Dictionary Serialize()
+		{
+			GC.Dictionary payload = base.Serialize();
+			payload[NameDB.SaveTag.TIME_LEFT] = timer.TimeLeft;
+			if (spell != null)
+			{
+				payload[NameDB.SaveTag.SPELL] = spell.worldName;
+			}
+			return payload;
+		}
+		public override void Deserialize(GC.Dictionary payload)
+		{
+			base.Deserialize(payload);
+
+			float timeLeft = (float)payload[NameDB.SaveTag.TIME_LEFT],
+				animPos = (float)payload[NameDB.SaveTag.ANIM_POSITION];
+			if (timeLeft > 0.0f)
+			{
+				timer.Start(timeLeft);
+			}
+			else if (animPos > 0.0f)
+			{
+				timer.Stop();
+				OnAttackSpeedTimeout();
+				character.anim.Seek(animPos, true);
+			}
 		}
 	}
 }

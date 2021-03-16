@@ -73,5 +73,9 @@ namespace Game.Actor
 		// makes sure player clicks on unit and not mistakingly select the tile to move to
 		public void _OnAreaMouseEnteredExited(bool entered) { Player.player.SetProcessUnhandledInput(!entered); }
 		public virtual void _OnSelectPressed() { Player.player.menu.NpcInteract(this); }
+		public bool ShouldSerialize()
+		{
+			return hp < stats.hpMax.valueI || mana < stats.manaMax.valueI || dead || moving || attacking;
+		}
 	}
 }

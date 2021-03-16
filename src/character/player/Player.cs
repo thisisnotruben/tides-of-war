@@ -53,7 +53,6 @@ namespace Game.Actor
 
 			menu = GetNode<MenuMasterController>("menu");
 			menu.ConnectPlayerToHud(this);
-			AddToGroup(Globals.SAVE_GROUP);
 		}
 		protected override void SetImg(string imgName)
 		{
@@ -105,14 +104,20 @@ namespace Game.Actor
 					 inventoryModel.GetCommodityStack(i)
 				};
 			}
-			payload[NameDB.SaveTag.INVENTORY] = inventory;
-			payload[NameDB.SaveTag.INVENTORY_SLOTS] = menu.inventorySlots.Serialize();
+			if (inventory.Count > 0)
+			{
+				payload[NameDB.SaveTag.INVENTORY] = inventory;
+				payload[NameDB.SaveTag.INVENTORY_SLOTS] = menu.inventorySlots.Serialize();
+			}
 
 			// spellBook
 			GC.Array commodities = new GC.Array();
 			menu.gameMenu.playerSpellBook.GetCommodities().ForEach(c => commodities.Add(c));
-			payload[NameDB.SaveTag.SPELL_BOOK] = commodities;
-			payload[NameDB.SaveTag.SPELL_BOOK_SLOTS] = menu.spellSlots.Serialize();
+			if (commodities.Count > 0)
+			{
+				payload[NameDB.SaveTag.SPELL_BOOK] = commodities;
+				payload[NameDB.SaveTag.SPELL_BOOK_SLOTS] = menu.spellSlots.Serialize();
+			}
 
 			// hudSlots
 			GC.Dictionary hudSlots = new GC.Dictionary();
@@ -125,15 +130,25 @@ namespace Game.Actor
 					hudSlots[node.Name] = slot.Serialize();
 				}
 			}
-			payload[NameDB.SaveTag.HUD_SLOTS] = hudSlots;
+			if (hudSlots.Count > 0)
+			{
+				payload[NameDB.SaveTag.HUD_SLOTS] = hudSlots;
+			}
 
 			// weapon & armor
-			payload[NameDB.SaveTag.WEAPON] = weapon?.worldName ?? string.Empty;
-			payload[NameDB.SaveTag.ARMOR] = vest?.worldName ?? string.Empty;
+			if (weapon != null)
+			{
+				payload[NameDB.SaveTag.WEAPON] = weapon.worldName;
+			}
+			if (vest != null)
+			{
+				payload[NameDB.SaveTag.ARMOR] = vest.worldName;
+			}
 
 			// misc
 			payload[NameDB.SaveTag.XP] = xp;
 			payload[NameDB.SaveTag.GOLD] = gold;
+			payload[NameDB.SaveTag.LEVEL] = level;
 
 			return payload;
 		}
@@ -200,14 +215,14 @@ namespace Game.Actor
 
 					case NameDB.SaveTag.WEAPON:
 						string weaponName = payload[key].ToString();
-						weapon = !weaponName.Equals(string.Empty)
+						weapon = Globals.itemDB.HasData(weaponName)
 							? itemFactory.Make(this, weaponName)
 							: null;
 						break;
 
 					case NameDB.SaveTag.ARMOR:
 						string armorName = payload[key].ToString();
-						vest = !armorName.Equals(string.Empty)
+						vest = Globals.itemDB.HasData(armorName)
 							? itemFactory.Make(this, armorName)
 							: null;
 						break;
@@ -218,6 +233,10 @@ namespace Game.Actor
 
 					case NameDB.SaveTag.GOLD:
 						gold = payload[key].ToString().ToInt();
+						break;
+
+					case NameDB.SaveTag.LEVEL:
+						level = payload[key].ToString().ToInt();
 						break;
 				}
 			}

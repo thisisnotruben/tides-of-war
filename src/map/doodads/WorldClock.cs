@@ -41,14 +41,14 @@ namespace Game.Map.Doodads
 			{
 				{NameDB.SaveTag.DAY_LIGHT, dayLight},
 				{NameDB.SaveTag.TIME_LEFT, TimeLeft},
-				{NameDB.SaveTag.POSITION, !anim.CurrentAnimation.Equals(string.Empty) ? anim.CurrentAnimationPosition : 0.0f}
+				{NameDB.SaveTag.ANIM_POSITION, !anim.CurrentAnimation.Equals(string.Empty) ? anim.CurrentAnimationPosition : 0.0f}
 			};
 		}
 		public void Deserialize(GC.Dictionary payload)
 		{
 			dayLight = (bool)payload[NameDB.SaveTag.DAY_LIGHT];
 			float timeLeft = (float)payload[NameDB.SaveTag.TIME_LEFT],
-				animPos = (float)payload[NameDB.SaveTag.POSITION];
+				animPos = (float)payload[NameDB.SaveTag.ANIM_POSITION];
 
 			if (timeLeft > 0.0f)
 			{
@@ -59,7 +59,7 @@ namespace Game.Map.Doodads
 			else
 			{
 				anim.Play(ANIM_NAME, -1.0f, dayLight ? 1.0f : -1.0f, !dayLight);
-				anim.Seek(animPos);
+				anim.Seek(animPos, true);
 			}
 		}
 	}

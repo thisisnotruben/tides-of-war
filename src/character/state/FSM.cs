@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using Godot;
+using GC = Godot.Collections;
 using Game.Ability;
 using Game.Projectile;
+using Game.Database;
+using Game.Factory;
 namespace Game.Actor.State
 {
-	public class FSM : Node
+	public class FSM : Node, ISerializable
 	{
 		private const int HISTORY_MAX = 10, HISTORY_CUT = HISTORY_MAX / 2;
 		public enum State
@@ -17,7 +21,7 @@ namespace Game.Actor.State
 		private readonly Dictionary<State, StateBehavior> stateMap = new Dictionary<State, StateBehavior>();
 		private Stack<State> stateHistory = new Stack<State>();
 
-		string characterEditorName = string.Empty;
+		public Character character;
 		public bool lockState;
 
 		[Signal] public delegate void StateChanged(State state);
@@ -39,12 +43,12 @@ namespace Game.Actor.State
 		}
 		public void Init(Character character)
 		{
-			this.characterEditorName = character.Name;
+			this.character = character;
 
 			bool isPlayer = character is Player;
 			foreach (StateBehavior stateBehavior in GetChildren())
 			{
-				stateBehavior.Init(this, character);
+				stateBehavior.fsm = this;
 
 				if (isPlayer
 				&& stateBehavior != stateMap[State.PLAYER_MOVE]
@@ -58,11 +62,19 @@ namespace Game.Actor.State
 			}
 			stateMap[State.ATTACK].Connect(nameof(Attack.CastSpell), stateMap[State.CAST], nameof(Cast.SetSpell));
 
-			// call when map has finished loading
-			CallDeferred(nameof(SetState),
-				Globals.unitDB.HasData(characterEditorName) && Globals.unitDB.GetData(characterEditorName).path.Length > 0
+			// call when map/character has finished loading
+			CallDeferred(nameof(DeferredSetState),
+				Globals.unitDB.HasData(character.Name) && Globals.unitDB.GetData(character.Name).path.Length > 0
 				? State.NPC_MOVE_ROAM
 				: State.IDLE);
+		}
+		private void DeferredSetState(State state)
+		{
+			// if came from save file, then this wouldn't override saved state
+			if (stateHistory.Count == 0)
+			{
+				SetState(state);
+			}
 		}
 		public void ConnectMissileHit(Missile missile, Character character, Character target, Spell spell = null)
 		{
@@ -75,7 +87,7 @@ namespace Game.Actor.State
 			if (requiresTarget)
 			{
 				state = State.ATTACK;
-				((Attack)stateMap[state]).SetPlayerSpell(spell);
+				((Attack)stateMap[state]).SetSpell(spell);
 				if (state != GetState())
 				{
 					ChangeState(state);
@@ -125,8 +137,8 @@ namespace Game.Actor.State
 					break;
 
 				case State.ALIVE:
-					lastState = Globals.unitDB.HasData(characterEditorName)
-						&& Globals.unitDB.GetData(characterEditorName).path.Length > 0
+					lastState = Globals.unitDB.HasData(character.Name)
+						&& Globals.unitDB.GetData(character.Name).path.Length > 0
 						? State.NPC_MOVE_ROAM
 						: State.IDLE;
 					break;
@@ -199,5 +211,60 @@ namespace Game.Actor.State
 		public void OnAttacked(Character whosAttacking) { stateMap[GetState()].OnAttacked(whosAttacking); }
 		public void Harm(int damage, Vector2 direction) { (stateMap[GetState()] as TakeDamage)?.Harm(damage, direction); }
 		public void UnhandledInput(InputEvent @event) { stateMap[GetState()].UnhandledInput(@event); }
+		public bool ShouldSerialize() { return stateMap[GetState()].Serialize().Count > 0; }
+		public GC.Dictionary Serialize()
+		{
+			return new GC.Dictionary()
+			{
+				{NameDB.SaveTag.INDEX, GetState().ToString()},
+				{NameDB.SaveTag.STATE, stateMap[GetState()].Serialize()}
+			};
+		}
+		public void Deserialize(GC.Dictionary payload)
+		{
+			State state = (State)Enum.Parse(typeof(State), payload[NameDB.SaveTag.INDEX].ToString());
+			GC.Dictionary package = (GC.Dictionary)payload[NameDB.SaveTag.STATE];
+			StateBehavior stateBehavior = stateMap[state];
+
+			string spellKey = NameDB.SaveTag.SPELL;
+			switch (state)
+			{
+				case State.ATTACK:
+					if (payload.Contains(spellKey))
+					{
+						((Attack)stateBehavior).SetSpell(new SpellFactory().Make(
+							character, payload[NameDB.SaveTag.SPELL].ToString()));
+						break;
+					}
+					break;
+
+				case State.CAST:
+					if (payload.Contains(spellKey))
+					{
+						((Cast)stateBehavior).SetSpell(new SpellFactory().Make(
+							character, payload[NameDB.SaveTag.SPELL].ToString()));
+					}
+					break;
+
+				case State.PLAYER_MOVE:
+					MovePlayer movePlayer = (MovePlayer)stateBehavior;
+					GC.Array pos = (GC.Array)package[NameDB.SaveTag.POSITION];
+					movePlayer.desiredPosition = new Vector2((float)pos[0], (float)pos[1]);
+					break;
+
+				case State.NPC_MOVE_ROAM:
+					MoveNpcRoam moveNpcRoam = (MoveNpcRoam)stateBehavior;
+					moveNpcRoam.waypoints.Clear();
+					GC.Array wayPointArr = (GC.Array)package[NameDB.SaveTag.WAY_POINTS];
+					for (int i = 0; i < wayPointArr.Count - 1; i += 2)
+					{
+						moveNpcRoam.waypoints.Enqueue(new Vector2((float)wayPointArr[i], (float)wayPointArr[i + 1]));
+					}
+					break;
+			}
+
+			ChangeState(state);
+			stateBehavior.Deserialize(package);
+		}
 	}
 }

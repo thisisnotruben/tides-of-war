@@ -1,5 +1,5 @@
 using System;
-using Game.Database;
+using GC = Godot.Collections;
 using Godot;
 namespace Game.Actor.State
 {
@@ -16,8 +16,8 @@ namespace Game.Actor.State
 		public override void Start()
 		{
 			// animate transparency
-			tween.InterpolateProperty(character, ":modulate", character.Modulate,
-				new Color("ffffff"), 0.5f, Tween.TransitionType.Quart, Tween.EaseType.Out);
+			tween.InterpolateProperty(character, "modulate", character.Modulate,
+				Color.ColorN("white"), 0.5f, Tween.TransitionType.Quart, Tween.EaseType.Out);
 			tween.Start();
 
 			// reset clock for health/mana regen
@@ -43,10 +43,6 @@ namespace Game.Actor.State
 				// reset health
 				character.hp = character.stats.hpMax.valueI;
 				character.mana = character.stats.manaMax.valueI;
-				if (IsInGroup(Globals.SAVE_GROUP))
-				{
-					RemoveFromGroup(Globals.SAVE_GROUP);
-				}
 			}
 
 			// notify those you see around you
@@ -61,5 +57,6 @@ namespace Game.Actor.State
 				: FSM.State.IDLE);
 		}
 		public override void Exit() { }
+		public override GC.Dictionary Serialize() { return new GC.Dictionary(); }
 	}
 }

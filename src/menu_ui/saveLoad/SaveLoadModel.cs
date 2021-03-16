@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Game.Database;
 using Game.Mine;
 using Game.Projectile;
+using Game.Actor;
+using Game.Actor.Doodads;
 using Godot;
 using GC = Godot.Collections;
 namespace Game.Ui
@@ -91,14 +93,28 @@ namespace Game.Ui
 					{
 						missilesToSave.Add(saveNode.Serialize());
 					}
-					else
+					else if (node is MoveCursorController)
+					{
+						masterSave[NameDB.SaveTag.CURSOR] = saveNode.Serialize();
+					}
+					else if (node is Tomb)
+					{
+						masterSave[NameDB.SaveTag.TOMB] = saveNode.Serialize();
+					}
+					else if ((node as Npc)?.ShouldSerialize() ?? true)
 					{
 						masterSave[node.GetPath()] = saveNode.Serialize();
 					}
 				}
 			}
-			masterSave[NameDB.SaveTag.LAND_MINES] = landMinesToSave;
-			masterSave[NameDB.SaveTag.MISSILES] = missilesToSave;
+			if (landMinesToSave.Count > 0)
+			{
+				masterSave[NameDB.SaveTag.LAND_MINES] = landMinesToSave;
+			}
+			if (missilesToSave.Count > 0)
+			{
+				masterSave[NameDB.SaveTag.MISSILES] = missilesToSave;
+			}
 
 			// save to file
 			Directory directory = new Directory();

@@ -9,10 +9,12 @@ namespace Game.Ui
 {
 	public class SlotController : Control, ISerializable
 	{
+		public enum SlotTypes : byte { NORMAL, HUD, EQUIP }
+
 		[Signal] public delegate void OnSlotPressed(string itemName);
 		[Signal] public delegate void OnSlotDragMoved(string itemName, NodePath slotFrom, NodePath slotTo);
-		[Export] private bool hudSlot;
-
+		[Export] public SlotTypes slotType;
+		[Export] public ItemDB.ItemType slotEquipType;
 		protected Tween tween;
 		protected ColorRect cooldownOverlay;
 		protected Label coolDownText, stackCount;
@@ -26,7 +28,7 @@ namespace Game.Ui
 		public override void _EnterTree()
 		{
 			base._EnterTree();
-			if (hudSlot)
+			if (slotType == SlotTypes.HUD)
 			{
 				AddToGroup(Globals.HUD_SHORTCUT_GROUP);
 			}
@@ -116,10 +118,21 @@ namespace Game.Ui
 				return false;
 			}
 
-			SlotController slotController = GetNode<SlotController>((NodePath)dropData["slotPath"]);
-			return slotController != this
-			&& ((slotController.hudSlot == hudSlot)
-			|| (!slotController.hudSlot && hudSlot));
+			SlotController slotFrom = GetNode<SlotController>((NodePath)dropData["slotPath"]);
+
+			if (slotFrom == this
+			|| (slotFrom.slotType == SlotTypes.HUD
+			&& slotType == SlotTypes.NORMAL))
+			{
+				return false;
+			}
+
+			string itemName = dropData["itemName"].ToString();
+
+			return slotType == SlotTypes.EQUIP
+				? Globals.itemDB.HasData(itemName)
+					&& Globals.itemDB.GetData(itemName).type == slotEquipType
+				: true;
 		}
 		public new void DropData(Vector2 position, object data)
 		{
@@ -135,7 +148,7 @@ namespace Game.Ui
 
 			slotFrom.OnButtonChanged(false);
 
-			if (hudSlot)
+			if (slotType == SlotTypes.HUD)
 			{
 				InventoryModel inventoryModel = Globals.spellDB.HasData(itemName)
 					? Player.player.menu.gameMenu.playerSpellBook
@@ -148,7 +161,7 @@ namespace Game.Ui
 					: 1;
 
 				// remove duplicates
-				if (slotFrom.hudSlot)
+				if (slotFrom.slotType == SlotTypes.HUD)
 				{
 					slotFrom.ClearDisplay();
 				}
@@ -166,7 +179,7 @@ namespace Game.Ui
 					}
 				}
 			}
-			else
+			else if (slotFrom.slotType != SlotTypes.HUD)
 			{
 				slotFrom.ClearDisplay();
 			}

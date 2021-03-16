@@ -50,7 +50,7 @@ custom_constants/margin_top = 7
 custom_constants/margin_left = 7
 custom_constants/margin_bottom = 7
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="icon" type="TextureRect" parent="margin"]
@@ -84,7 +84,6 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 105.0
 margin_bottom = 105.0
-rect_pivot_offset = Vector2( 0, 49 )
 size_flags_vertical = 1
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 1 )

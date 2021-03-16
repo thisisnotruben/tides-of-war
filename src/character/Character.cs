@@ -52,13 +52,9 @@ namespace Game.Actor
 			set
 			{
 				_hp = value;
-				if (hp >= stats.hpMax.valueI)
+				if (hp > stats.hpMax.valueI)
 				{
 					_hp = stats.hpMax.valueI;
-					if (this is Npc && IsInGroup(Globals.SAVE_GROUP))
-					{
-						RemoveFromGroup(Globals.SAVE_GROUP);
-					}
 				}
 				else if (hp <= 0)
 				{
@@ -66,11 +62,7 @@ namespace Game.Actor
 					mana = 0;
 					state = FSM.State.DEAD;
 				}
-				else if (this is Npc && !IsInGroup(Globals.SAVE_GROUP))
-				{
-					AddToGroup(Globals.SAVE_GROUP);
-				}
-				if (hp > 0 && dead)
+				else if (hp > 0 && dead)
 				{
 					state = FSM.State.ALIVE;
 				}
@@ -83,19 +75,11 @@ namespace Game.Actor
 			set
 			{
 				_mana = value;
-				if (mana >= stats.manaMax.valueI)
+				if (mana > stats.manaMax.valueI)
 				{
 					_mana = stats.manaMax.valueI;
-					if (this is Npc && IsInGroup(Globals.SAVE_GROUP))
-					{
-						RemoveFromGroup(Globals.SAVE_GROUP);
-					}
 				}
-				else if (this is Npc && !IsInGroup(Globals.SAVE_GROUP))
-				{
-					AddToGroup(Globals.SAVE_GROUP);
-				}
-				if (mana < 0)
+				else if (mana < 0)
 				{
 					_mana = 0;
 				}
@@ -130,6 +114,8 @@ namespace Game.Actor
 			// always starting with full health on init
 			hp = stats.hpMax.valueI;
 			mana = stats.manaMax.valueI;
+
+			AddToGroup(Globals.SAVE_GROUP);
 		}
 		protected virtual void SetImg(string imgName)
 		{
@@ -186,9 +172,9 @@ namespace Game.Actor
 			combatText.Init(text, textType, img.Position);
 			combatTextHandler.AddCombatText(combatText);
 		}
-		public void RemovePursuantUnitId(ulong id)
+		public void RemovePursuantUnitId(Character character)
 		{
-			pursuantUnitIds.Remove(id);
+			pursuantUnitIds.Remove(character.GetInstanceId());
 			if (pursuantUnitIds.Count == 0)
 			{
 				regenTimer.Start();
@@ -214,32 +200,40 @@ namespace Game.Actor
 		}
 		public virtual GC.Dictionary Serialize()
 		{
-			return new GC.Dictionary()
+			GC.Dictionary payload = new GC.Dictionary()
 			{
 				{NameDB.SaveTag.POSITION, new GC.Array(){GlobalPosition.x, GlobalPosition.y}},
-				{NameDB.SaveTag.LEVEL, level},
-				{NameDB.SaveTag.HP, hp},
-				{NameDB.SaveTag.MANA, mana},
-				{NameDB.SaveTag.TIME_LEFT, regenTimer.TimeLeft},
-				{NameDB.SaveTag.TARGET, target?.Name ?? string.Empty},
-				{NameDB.SaveTag.STATE, state},
-				{NameDB.SaveTag.ANIM_POSITION, !anim.CurrentAnimation.Equals(string.Empty) ? anim.CurrentAnimationPosition : 0.0f}
+				{NameDB.SaveTag.TIME_LEFT, regenTimer.TimeLeft}
 			};
+
+			if (hp < stats.hpMax.valueI)
+			{
+				payload[NameDB.SaveTag.HP] = hp;
+			}
+			if (mana < stats.manaMax.valueI)
+			{
+				payload[NameDB.SaveTag.MANA] = mana;
+			}
+			if (target != null)
+			{
+				payload[NameDB.SaveTag.TARGET] = target.Name;
+			}
+			if (fsm.ShouldSerialize())
+			{
+				payload[NameDB.SaveTag.STATE] = fsm.Serialize();
+			}
+
+			return payload;
 		}
 		public virtual void Deserialize(GC.Dictionary payload)
 		{
-			// set in no specific order
 			foreach (string key in payload.Keys)
 			{
 				switch (key)
 				{
 					case NameDB.SaveTag.POSITION:
-						GC.Array posArray = (GC.Array)payload[key];
-						GlobalPosition = new Vector2((float)posArray[0], (float)posArray[1]);
-						break;
-
-					case NameDB.SaveTag.LEVEL:
-						level = payload[key].ToString().ToInt();
+						GC.Array pos = (GC.Array)payload[key];
+						GlobalPosition = new Vector2((float)pos[0], (float)pos[1]);
 						break;
 
 					case NameDB.SaveTag.HP:
@@ -268,20 +262,10 @@ namespace Game.Actor
 				}
 			}
 
-			// set in specific order
 			string k = NameDB.SaveTag.STATE;
 			if (payload.Contains(k))
 			{
-				state = (FSM.State)payload[k].ToString().ToInt();
-			}
-			k = NameDB.SaveTag.ANIM_POSITION;
-			if (payload.Contains(k))
-			{
-				float seek = (float)payload[k];
-				if (seek > 0.0f)
-				{
-					anim.Seek(seek);
-				}
+				fsm.Deserialize((GC.Dictionary)payload[k]);
 			}
 		}
 	}

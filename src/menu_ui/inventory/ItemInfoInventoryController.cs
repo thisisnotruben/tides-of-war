@@ -30,42 +30,45 @@ namespace Game.Ui
 					unequipBttn.Visible = (player.weapon?.worldName.Equals(commodityWorldName) ?? false)
 						|| (player.vest?.worldName.Equals(commodityWorldName) ?? false);
 					equipBttn.Visible = !unequipBttn.Visible;
+					iconView.slotType = SlotController.SlotTypes.EQUIP;
 					break;
 				default:
 					unequipBttn.Visible = equipBttn.Visible = false;
+					iconView.slotType = SlotController.SlotTypes.NORMAL;
 					break;
 			}
 		}
 		private void EquipItem(bool on, string worldName)
 		{
-			Item item = new ItemFactory().Make(player, worldName);
+			Item item = new ItemFactory().Make(player, worldName), equippedItem;
 			switch (Globals.itemDB.GetData(worldName).type)
 			{
 				case ItemDB.ItemType.WEAPON:
-					// add back to inventory
-					if (!on && player.weapon != null)
-					{
-						inventoryModel.AddCommodity(player.weapon.worldName);
-					}
-
+					equippedItem = player.weapon;
 					player.weapon = on ? item : null;
 					break;
 				case ItemDB.ItemType.ARMOR:
-					// add back to inventory
-					if (!on && player.vest != null)
-					{
-						inventoryModel.AddCommodity(player.vest.worldName);
-					}
-
+					equippedItem = player.vest;
 					player.vest = on ? item : null;
 					break;
 				default:
 					return;
 			}
+
 			if (on)
 			{
 				RemoveFromInventory();
 			}
+			else
+			{
+				int modelIndex = inventoryModel.AddCommodity(equippedItem.worldName);
+				if (modelIndex != -1 && selectedSlotIdx != -1)
+				{
+					slotGridController.DisplaySlot(selectedSlotIdx,
+						modelIndex, equippedItem.worldName);
+				}
+			}
+
 			EmitSignal(nameof(RefreshSlots));
 		}
 		private void RemoveFromInventory()
@@ -106,7 +109,7 @@ namespace Game.Ui
 			EmitSignal(nameof(RefreshSlots));
 			Hide();
 		}
-		private void OnEquipPressed()
+		public void OnEquipPressed()
 		{
 			ItemDB.ItemType itemType = Globals.itemDB.GetData(commodityWorldName).type;
 			Item playerWeapon = player.weapon,
@@ -145,7 +148,7 @@ namespace Game.Ui
 				Hide();
 			}
 		}
-		private void OnUnequipPressed()
+		public void OnUnequipPressed()
 		{
 			if (inventoryModel.IsFull(commodityWorldName))
 			{
@@ -172,9 +175,6 @@ namespace Game.Ui
 			PlaySound(NameDB.UI.CLICK2);
 			PlaySound(NameDB.UI.INVENTORY_DROP);
 
-			EquipItem(false, commodityWorldName); // just in case if it's equipped
-
-			// TODO: index is never set, just = 0
 			RemoveFromInventory();
 
 			CheckHudSlots(inventoryModel, commodityWorldName);
@@ -198,6 +198,17 @@ namespace Game.Ui
 			);
 
 			Hide();
+		}
+		public int GetSlotIndexFromHud(string itemName)
+		{
+			foreach (SlotController slot in slotGridController.GetSlots())
+			{
+				if (slot.commodityWorldName.Equals(itemName))
+				{
+					return slot.GetIndex();
+				}
+			}
+			return -1;
 		}
 	}
 }

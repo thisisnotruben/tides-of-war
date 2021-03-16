@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Godot;
 using GC = Godot.Collections;
 using Game.Actor;
+using Game.Actor.Doodads;
 using Game.Database;
 using Game.Mine;
 using Game.Factory;
@@ -37,45 +38,73 @@ namespace Game.Ui
 		}
 		private bool TrySetLoadData()
 		{
-			if (loadData.Count > 0)
+			if (loadData.Count == 0)
 			{
-				foreach (string nodePath in loadData.Keys)
-				{
-					if (HasNode(nodePath))
-					{
-						(GetNode(nodePath) as ISerializable)?.Deserialize((GC.Dictionary)loadData[nodePath]);
-					}
-				}
-
-				string characterPath;
-				foreach (GC.Dictionary landMineData in (GC.Array)loadData[NameDB.SaveTag.LAND_MINES])
-				{
-					characterPath = landMineData[NameDB.SaveTag.CHARACTER].ToString();
-					if (HasNode(characterPath))
-					{
-						((LandMine)SceneDB.landMine.Instance()).Init(
-							landMineData[NameDB.SaveTag.NAME].ToString(),
-							GetNode<Character>(characterPath), false).Deserialize(landMineData);
-					}
-				}
-
-				string targetPath;
-				MissileFactory missileFactory = new MissileFactory();
-				foreach (GC.Dictionary missileData in (GC.Array)loadData[NameDB.SaveTag.MISSILES])
-				{
-					characterPath = missileData[NameDB.SaveTag.CHARACTER].ToString();
-					targetPath = missileData[NameDB.SaveTag.TARGET].ToString();
-					if (HasNode(characterPath) && HasNode(targetPath))
-					{
-						missileFactory.Make(GetNode<Character>(characterPath), GetNode<Character>(targetPath),
-							missileData[NameDB.SaveTag.SPELL].ToString()).Deserialize(missileData);
-					}
-				}
-
-				loadData.Clear();
-				return true;
+				return false;
 			}
-			return false;
+
+			foreach (string key in loadData.Keys)
+			{
+				if (HasNode(key))
+				{
+					(GetNode(key) as ISerializable)?.Deserialize((GC.Dictionary)loadData[key]);
+				}
+			}
+
+			GC.Array pos;
+			string characterPath, targetPath;
+			foreach (string key in loadData.Keys)
+			{
+				switch (key)
+				{
+					case NameDB.SaveTag.LAND_MINES:
+						foreach (GC.Dictionary landMineData in (GC.Array)loadData[key])
+						{
+							characterPath = landMineData[NameDB.SaveTag.CHARACTER].ToString();
+							if (HasNode(characterPath))
+							{
+								((LandMine)SceneDB.landMine.Instance()).Init(
+									landMineData[NameDB.SaveTag.NAME].ToString(),
+									GetNode<Character>(characterPath), false).Deserialize(landMineData);
+							}
+						}
+						break;
+
+					case NameDB.SaveTag.MISSILES:
+						MissileFactory missileFactory = new MissileFactory();
+						foreach (GC.Dictionary missileData in (GC.Array)loadData[key])
+						{
+							characterPath = missileData[NameDB.SaveTag.CHARACTER].ToString();
+							targetPath = missileData[NameDB.SaveTag.TARGET].ToString();
+							if (HasNode(characterPath) && HasNode(targetPath))
+							{
+								missileFactory.Make(GetNode<Character>(characterPath), GetNode<Character>(targetPath),
+									missileData[NameDB.SaveTag.SPELL].ToString()).Deserialize(missileData);
+							}
+						}
+						break;
+
+					case NameDB.SaveTag.CURSOR:
+						GC.Dictionary cursorData = (GC.Dictionary)loadData[key];
+						if (cursorData.Count > 0)
+						{
+							pos = (GC.Array)cursorData[NameDB.SaveTag.POSITION];
+							((MoveCursorController)SceneDB.moveCursor.Instance()).AddToMap(new Vector2((float)pos[0], (float)pos[1]));
+						}
+						break;
+
+					case NameDB.SaveTag.TOMB:
+						GC.Dictionary tombData = (GC.Dictionary)loadData[key];
+						if (tombData.Count > 0)
+						{
+							pos = (GC.Array)tombData[NameDB.SaveTag.POSITION];
+							((Tomb)SceneDB.tomb.Instance()).Init(Player.player, new Vector2((float)pos[0], (float)pos[1]));
+						}
+						break;
+				}
+			}
+			loadData.Clear();
+			return true;
 		}
 		public override void _Process(float delta)
 		{

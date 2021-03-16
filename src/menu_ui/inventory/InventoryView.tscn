@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://src/menu_ui/components/ItemInfoSlotView.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/menu_ui/components/ItemInfoView.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/menu_ui/components/SlotGrid.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/menu_ui/components/SlotEquippedView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/menu_ui/inventory/ItemInfoInventoryController.cs" type="Script" id=8]
 [ext_resource path="res://src/menu_ui/inventory/InventoryController.cs" type="Script" id=9]
 [ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=10]
@@ -38,17 +38,21 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="weapon" parent="s/v/slots" instance=ExtResource( 4 )]
+[node name="weapon" parent="s/v/slots" instance=ExtResource( 1 )]
 margin_left = 172.0
 margin_right = 300.0
 margin_bottom = 128.0
-theme = null
+rect_min_size = Vector2( 128, 128 )
+slotType = 2
+slotEquipType = 1
 
-[node name="armor" parent="s/v/slots" instance=ExtResource( 4 )]
+[node name="armor" parent="s/v/slots" instance=ExtResource( 1 )]
 margin_left = 420.0
 margin_right = 548.0
 margin_bottom = 128.0
-theme = null
+rect_min_size = Vector2( 128, 128 )
+slotType = 2
+slotEquipType = 2
 
 [node name="c" type="CenterContainer" parent="s/v"]
 margin_top = 136.0
@@ -65,5 +69,3 @@ visible = false
 theme = null
 script = ExtResource( 8 )
 [connection signal="draw" from="." to="." method="OnDraw"]
-[connection signal="pressed" from="s/v/slots/weapon" to="." method="OnEquippedSlotPressed" binds= [ true ]]
-[connection signal="pressed" from="s/v/slots/armor" to="." method="OnEquippedSlotPressed" binds= [ false ]]

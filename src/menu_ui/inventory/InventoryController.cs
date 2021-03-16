@@ -9,16 +9,24 @@ namespace Game.Ui
 		public SlotGridController inventorySlots;
 		public ItemInfoInventoryController inventoryItemInfo;
 		protected Control mainContent;
-		protected TextureRect weaponIcon, armorIcon;
+		protected SlotController weaponSlot, armorSlot;
 
 		public override void _Ready()
 		{
 			mainContent = GetChild<Control>(0);
 
-			weaponIcon = GetNode<TextureRect>("s/v/slots/weapon/m/icon");
-			armorIcon = GetNode<TextureRect>("s/v/slots/armor/m/icon");
+			weaponSlot = GetNode<SlotController>("s/v/slots/weapon");
+			weaponSlot.Connect(nameof(SlotController.OnSlotDragMoved), this, nameof(OnItemDraggedEquip));
+			weaponSlot.button.Connect("pressed", this, nameof(OnEquippedSlotPressed),
+				new Godot.Collections.Array() { true });
+
+			armorSlot = GetNode<SlotController>("s/v/slots/armor");
+			armorSlot.Connect(nameof(SlotController.OnSlotDragMoved), this, nameof(OnItemDraggedEquip));
+			armorSlot.button.Connect("pressed", this, nameof(OnEquippedSlotPressed),
+				new Godot.Collections.Array() { false });
 
 			inventorySlots = GetNode<SlotGridController>("s/v/c/SlotGrid");
+			inventorySlots.Connect(nameof(SlotGridController.UnhandledSlotMove), this, nameof(OnItemDraggedEquip));
 
 			inventoryItemInfo = GetChild<ItemInfoInventoryController>(1);
 			inventoryItemInfo.inventoryModel = inventory;
@@ -38,15 +46,22 @@ namespace Game.Ui
 		private void OnDraw() { RefreshSlots(); }
 		public void RefreshSlots()
 		{
-			Item playerWeapon = player.weapon,
-				playerArmor = player.vest;
-
-			weaponIcon.Texture = playerWeapon == null
-				? null
-				: Globals.itemDB.GetData(playerWeapon.worldName).icon;
-			armorIcon.Texture = playerArmor == null
-				? null
-				: Globals.itemDB.GetData(playerArmor.worldName).icon;
+			if (player.weapon == null)
+			{
+				weaponSlot.ClearDisplay();
+			}
+			else
+			{
+				weaponSlot.Display(player.weapon.worldName);
+			}
+			if (player.vest == null)
+			{
+				armorSlot.ClearDisplay();
+			}
+			else
+			{
+				armorSlot.Display(player.vest.worldName);
+			}
 
 			for (int i = 0; i < inventory.count; i++)
 			{
@@ -92,7 +107,27 @@ namespace Game.Ui
 			{
 				mainContent.Hide();
 				inventoryItemInfo.Display(weapon ? player.weapon.worldName : player.vest.worldName, false);
+				inventoryItemInfo.dropBttn.Hide();
 			}
+		}
+		private void OnItemDraggedEquip(string itemName, NodePath slotFrom, NodePath slotTo)
+		{
+			inventoryItemInfo.commodityWorldName = itemName;
+
+			if (slotTo.ToString().Equals(weaponSlot.GetPath().ToString())
+			|| slotTo.ToString().Equals(armorSlot.GetPath().ToString()))
+			{
+				inventoryItemInfo.selectedSlotIdx = GetNode(slotFrom).Owner == inventorySlots
+					? inventorySlots.GetSlots().IndexOf(GetNode<SlotController>(slotFrom))
+					: inventoryItemInfo.GetSlotIndexFromHud(itemName);
+				inventoryItemInfo.OnEquipPressed();
+			}
+			else
+			{
+				inventoryItemInfo.selectedSlotIdx = GetNode(slotTo).GetIndex();
+				inventoryItemInfo.OnUnequipPressed();
+			}
+			inventoryItemInfo.selectedSlotIdx = -1;
 		}
 	}
 }

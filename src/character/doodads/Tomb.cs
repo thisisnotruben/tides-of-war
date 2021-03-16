@@ -2,9 +2,10 @@ using Game.Actor.State;
 using Game.Database;
 using Game.Ui;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Actor.Doodads
 {
-	public class Tomb : Node2D
+	public class Tomb : Node2D, ISerializable
 	{
 		private Player deceasedPlayer;
 		private Tween tween;
@@ -16,12 +17,19 @@ namespace Game.Actor.Doodads
 			tween = GetChild<Tween>(0);
 			sight = GetNode<Area2D>("img/sight");
 		}
-		public void Init(Player deceasedPlayer, HudPopupConfirmController confirmPopup)
+		public Tomb Init(Player deceasedPlayer, Vector2 spawnPos)
 		{
 			this.deceasedPlayer = deceasedPlayer;
-			this.confirmPopup = confirmPopup;
+			this.confirmPopup = deceasedPlayer.menu.confirmPopup;
 
-			GlobalPosition = Map.Map.map.GetGridPosition(deceasedPlayer.GlobalPosition);
+			Map.Map.map.AddZChild(this);
+
+			GlobalPosition = spawnPos;
+
+			Map.Map.map.SetVeil(true);
+			deceasedPlayer.camera.SetEffect(CharacterCamera.Effect.DEATH);
+
+			return this;
 		}
 		public void OnTweenAllCompleted() { QueueFree(); }
 		public void _OnAreaEntered(Area2D area2D)
@@ -60,5 +68,13 @@ namespace Game.Actor.Doodads
 				0.75f, Tween.TransitionType.Circ, Tween.EaseType.Out);
 			tween.Start();
 		}
+		public GC.Dictionary Serialize()
+		{
+			return new GC.Dictionary()
+			{
+				{NameDB.SaveTag.POSITION, new GC.Array() {GlobalPosition.x, GlobalPosition.y}}
+			};
+		}
+		public void Deserialize(GC.Dictionary payload) { }
 	}
 }

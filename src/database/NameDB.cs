@@ -115,7 +115,12 @@ namespace Game.Database
 				HUD_SLOTS = "hudSlots",
 				LAND_MINES = "landMines",
 				MISSILES = "missiles",
-				VERSION = "version";
+				VERSION = "version",
+				PATH = "path",
+				CURSOR = "cursor",
+				WAY_POINTS = "wayPoints",
+				REVERSE = "reverse",
+				TOMB = "tomb";
 		}
 	}
 }

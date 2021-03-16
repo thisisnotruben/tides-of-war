@@ -84,7 +84,7 @@ namespace Game.Projectile
 				{
 					spellEffect.OnHit();
 					anim.Play(ANIM_NAME);
-					anim.Seek(animLeft);
+					anim.Seek(animLeft, true);
 				}
 				else if (timeLeft > 0.0f)
 				{

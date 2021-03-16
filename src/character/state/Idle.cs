@@ -1,3 +1,4 @@
+using GC = Godot.Collections;
 namespace Game.Actor.State
 {
 	public class Idle : TakeDamage
@@ -17,5 +18,6 @@ namespace Game.Actor.State
 			}
 		}
 		public override void Exit() { Map.Map.map.OccupyCell(character.GlobalPosition, false); }
+		public override GC.Dictionary Serialize() { return new GC.Dictionary(); }
 	}
 }
