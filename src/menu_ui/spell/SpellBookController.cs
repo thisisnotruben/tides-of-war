@@ -1,4 +1,3 @@
-using Game.GameItem;
 using Game.Database;
 using Godot;
 namespace Game.Ui
@@ -43,7 +42,7 @@ namespace Game.Ui
 						i,
 						spellBook.GetCommodity(i),
 						spellBook.GetCommodityStack(i),
-						Commodity.GetCoolDown(player.GetPath(), spellBook.GetCommodity(i))
+						Globals.cooldownMaster.GetCoolDown(player.GetPath(), spellBook.GetCommodity(i))
 					);
 				}
 			}

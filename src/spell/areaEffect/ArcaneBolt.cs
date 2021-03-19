@@ -1,6 +1,5 @@
 using System;
 using Game.Actor;
-using Game.Database;
 namespace Game.Ability
 {
 	public class ArcaneBolt : SpellAreaEffect
@@ -13,10 +12,8 @@ namespace Game.Ability
 			{
 				base.StartAreaEffect(character);
 
-				SpellEffect spellEffect = (SpellEffect)Globals.spellEffectDB.GetData(
-					Globals.spellDB.GetData(worldName).spellEffect).Instance();
-				spellEffect.Init(character, worldName, character);
-				spellEffect.OnHit();
+				((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
+					worldName).spellEffect).Instance()).Init(character, worldName, character).OnHit();
 			}
 		}
 	}

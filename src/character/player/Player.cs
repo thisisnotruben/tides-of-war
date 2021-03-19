@@ -6,7 +6,6 @@ using Game.Factory;
 using Godot;
 using GC = Godot.Collections;
 using System;
-using System.Collections.Generic;
 namespace Game.Actor
 {
 	public class Player : Character
@@ -71,9 +70,7 @@ namespace Game.Actor
 			}
 			else if (xp > 0 && xp < Stats.MAX_XP && showLabel)
 			{
-				CombatText combatText = (CombatText)SceneDB.combatText.Instance();
-				AddChild(combatText);
-				combatText.Init($"+{xp}", CombatText.TextType.XP, img.Position);
+				SpawnCombatText(xp.ToString(), CombatText.TextType.XP);
 			}
 			int _level = Stats.CheckLevel(xp);
 			if (level != _level && level < Stats.MAX_LEVEL)
@@ -166,39 +163,45 @@ namespace Game.Actor
 				{
 					case NameDB.SaveTag.INVENTORY:
 						packet = (GC.Dictionary)payload[key];
-						List<string> indexes = new List<string>();
-						foreach (string index in packet.Keys)
-						{
-							indexes.Add(index);
-						}
-						indexes.Sort();
+						GC.Array package;
 
 						InventoryModel inventoryModel = menu.gameMenu.playerInventory;
-						GC.Array package;
-						indexes.ForEach(i =>
+						foreach (string modelIndex in packet.Keys)
 						{
-							package = (GC.Array)packet[i];
+							package = (GC.Array)packet[modelIndex];
 							inventoryModel.PushCommodity(package[0].ToString(),
 								package[1].ToString().ToInt());
-						});
+						}
 
 						k = NameDB.SaveTag.INVENTORY_SLOTS;
 						if (payload.Contains(k))
 						{
 							menu.inventorySlots.Deserialize((GC.Dictionary)payload[k]);
 						}
+
+						foreach (string itemName in inventoryModel.GetCommodities(false))
+						{
+							menu.CheckHudSlots(inventoryModel, itemName);
+						}
 						break;
 
 					case NameDB.SaveTag.SPELL_BOOK:
-						foreach (string spellName in (GC.Array)payload[key])
+						GC.Array spellNames = (GC.Array)payload[key];
+						foreach (string spellName in spellNames)
 						{
 							menu.gameMenu.playerSpellBook.AddCommodity(spellName);
+							menu.gameMenu.CheckHudSlots(menu.gameMenu.playerSpellBook, spellName);
 						}
 
 						k = NameDB.SaveTag.SPELL_BOOK_SLOTS;
 						if (payload.Contains(k))
 						{
 							menu.spellSlots.Deserialize((GC.Dictionary)payload[k]);
+						}
+
+						foreach (string spellName in spellNames)
+						{
+							menu.CheckHudSlots(menu.gameMenu.playerSpellBook, spellName);
 						}
 						break;
 

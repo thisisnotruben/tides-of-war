@@ -52,9 +52,7 @@ namespace Game.Map.Doodads
 
 			if (timeLeft > 0.0f)
 			{
-				Stop();
-				WaitTime = timeLeft;
-				Start();
+				Start(timeLeft);
 			}
 			else
 			{

@@ -120,7 +120,13 @@ namespace Game.Database
 				CURSOR = "cursor",
 				WAY_POINTS = "wayPoints",
 				REVERSE = "reverse",
-				TOMB = "tomb";
+				TOMB = "tomb",
+				USE_TIME_LEFT = "usetimeLeft",
+				USE_COUNT_LEFT = "useCountLeft",
+				BASE_ITEMS = "baseItems",
+				MODIFIERS = "modifiers",
+				TEXT = "text",
+				COMBAT_TEXT = "combatText";
 		}
 	}
 }

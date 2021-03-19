@@ -1,5 +1,4 @@
 using Godot;
-using Game.GameItem;
 using Game.Database;
 namespace Game.Ui
 {
@@ -72,7 +71,7 @@ namespace Game.Ui
 						i,
 						inventory.GetCommodity(i),
 						inventory.GetCommodityStack(i),
-						Commodity.GetCoolDown(player.GetPath(), inventory.GetCommodity(i))
+						Globals.cooldownMaster.GetCoolDown(player.GetPath(), inventory.GetCommodity(i))
 					);
 				}
 			}

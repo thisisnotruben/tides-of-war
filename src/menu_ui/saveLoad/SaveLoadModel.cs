@@ -101,6 +101,10 @@ namespace Game.Ui
 					{
 						masterSave[NameDB.SaveTag.TOMB] = saveNode.Serialize();
 					}
+					else if (node is CooldownMaster)
+					{
+						masterSave[NameDB.SaveTag.COOLDOWNS] = saveNode.Serialize();
+					}
 					else if ((node as Npc)?.ShouldSerialize() ?? true)
 					{
 						masterSave[node.GetPath()] = saveNode.Serialize();
@@ -147,6 +151,8 @@ namespace Game.Ui
 			{
 				return;
 			}
+
+			Globals.cooldownMaster.ClearCooldowns();
 
 			// load file
 			file.Open(loadPath, File.ModeFlags.Read);

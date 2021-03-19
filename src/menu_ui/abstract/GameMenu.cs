@@ -1,7 +1,6 @@
 using Godot;
 using Game.Actor;
 using Game.Database;
-using Game.GameItem;
 using System.Linq;
 namespace Game.Ui
 {
@@ -26,7 +25,7 @@ namespace Game.Ui
 							   where commodityWorldName.Equals(commodityName)
 							   select commodityName).Count()
 							: 1);
-						hudSlot.SetCooldown(Commodity.GetCoolDown(player.GetPath(), commodityWorldName));
+						hudSlot.SetCooldown(Globals.cooldownMaster.GetCoolDown(player.GetPath(), commodityWorldName));
 					}
 					else
 					{

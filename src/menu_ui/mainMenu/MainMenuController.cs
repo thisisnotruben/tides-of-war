@@ -73,6 +73,7 @@ namespace Game.Ui
 		private void OnExitMenuPressed()
 		{
 			PlaySound(NameDB.UI.CLICK0);
+			Globals.cooldownMaster.ClearCooldowns();
 			SceneLoaderController.Init().SetScene(PathManager.startScene, Map.Map.map);
 		}
 		public void NpcInteract(Npc npc)

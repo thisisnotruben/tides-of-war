@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Game.Actor;
+using Game.Database;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Ability
 {
 	public class SpellAreaEffect : Spell
@@ -12,7 +14,7 @@ namespace Game.Ability
 		{
 			base._Ready();
 
-			area = GetNode<Area2D>("area");
+			area = GetChild<Area2D>(0);
 
 			if (Globals.areaEffectDB.HasData(worldName))
 			{
@@ -51,5 +53,13 @@ namespace Game.Ability
 			spell.Start();
 		}
 		protected virtual void ExitAreaEffect(Character character) { }
+		public override void Deserialize(GC.Dictionary payload)
+		{
+			// same as base method, but forces 'Start' on base class not here
+			useCount = payload[NameDB.SaveTag.USE_COUNT_LEFT].ToString().ToInt();
+			base.Start();
+			useTimer.Start((float)payload[NameDB.SaveTag.USE_TIME_LEFT]);
+			durTimer.Start((float)payload[NameDB.SaveTag.TIME_LEFT]);
+		}
 	}
 }

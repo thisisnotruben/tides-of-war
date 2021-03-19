@@ -1,3 +1,4 @@
+using Game.GameItem;
 namespace Game.Actor.Stat
 {
 	public class StatModifier
@@ -6,17 +7,15 @@ namespace Game.Actor.Stat
 		internal readonly float value;
 		internal readonly StatModType statModType;
 		internal readonly int order;
-		internal readonly object source;
+		internal readonly Commodity source;
 
-		public StatModifier(float value, StatModType statModType, int order, object source)
+		public StatModifier(float value, StatModType statModType, int order, Commodity source)
 		{
 			this.value = value;
 			this.statModType = statModType;
 			this.order = order;
 			this.source = source;
 		}
-		public StatModifier(float value, StatModType statModType) : this(value, statModType, (int)statModType, null) { }
-		public StatModifier(float value, StatModType statModType, int order) : this(value, statModType, order, null) { }
-		public StatModifier(float value, StatModType statModType, object source) : this(value, statModType, (int)statModType, source) { }
+		public StatModifier(float value, StatModType statModType, Commodity source) : this(value, statModType, (int)statModType, source) { }
 	}
 }

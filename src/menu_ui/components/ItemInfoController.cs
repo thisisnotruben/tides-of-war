@@ -72,7 +72,7 @@ namespace Game.Ui
 				{
 					case ItemDB.ItemType.FOOD:
 					case ItemDB.ItemType.POTION:
-						if (!Commodity.IsCoolingDown(player.GetPath(), commodityWorldName))
+						if (!Globals.cooldownMaster.IsCoolingDown(player.GetPath(), commodityWorldName))
 						{
 							showBttns[1] = useBttn;
 							useBttn.Text = itemType == ItemDB.ItemType.FOOD ? "Eat" : "Drink";

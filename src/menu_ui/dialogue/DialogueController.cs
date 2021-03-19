@@ -90,7 +90,7 @@ namespace Game.Ui
 					if (extraContentData.gold > 0)
 					{
 						player.gold += extraContentData.gold;
-						player.SpawnCombatText($"+{extraContentData.gold}", CombatText.TextType.GOLD);
+						player.SpawnCombatText(extraContentData.gold.ToString(), CombatText.TextType.GOLD);
 					}
 				}
 			}
@@ -132,7 +132,7 @@ namespace Game.Ui
 				PlaySound(NameDB.UI.QUEST_FINISH);
 				QuestMaster.CompleteQuest(worldQuest.quest.questName);
 				player.gold += worldQuest.quest.goldReward;
-				player.SpawnCombatText($"+{worldQuest.quest.goldReward}", CombatText.TextType.GOLD);
+				player.SpawnCombatText(worldQuest.quest.goldReward.ToString(), CombatText.TextType.GOLD);
 			}
 		}
 	}

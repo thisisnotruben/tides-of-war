@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Godot;
 using GC = Godot.Collections;
-using Game.GameItem;
 using Game.Database;
 namespace Game.Ui
 {
@@ -67,7 +66,7 @@ namespace Game.Ui
 				slotItemName = slots[s].commodityWorldName;
 
 				slots[s].Display(slotItemName, inventoryModel.GetCommodityStack(slotModelMap[s]));
-				slots[s].SetCooldown(Commodity.GetCoolDown(player.GetPath(), slotItemName));
+				slots[s].SetCooldown(Globals.cooldownMaster.GetCoolDown(player.GetPath(), slotItemName));
 			}
 		}
 		public int GetNextSlot(int slotIndex, bool forward, bool usedSlot = true)

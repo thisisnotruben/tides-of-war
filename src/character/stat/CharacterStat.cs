@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System;
 using Godot;
 namespace Game.Actor.Stat
@@ -24,8 +23,7 @@ namespace Game.Actor.Stat
 				return _value;
 			}
 		}
-		public readonly ReadOnlyCollection<StatModifier> StatModifiers;
-		private readonly List<StatModifier> statModifiers;
+		public readonly List<StatModifier> statModifiers = new List<StatModifier>();
 		private bool isDirty = true;
 		private float _value;
 		private float lastBaseValue = float.MinValue;
@@ -34,8 +32,6 @@ namespace Game.Actor.Stat
 		public CharacterStat(StatManager statManager)
 		{
 			manager = statManager;
-			statModifiers = new List<StatModifier>();
-			StatModifiers = statModifiers.AsReadOnly();
 			baseValue = CalculateBaseValue();
 		}
 		public CharacterStat(StatManager statManager, float baseValue) : this(statManager)
@@ -73,17 +69,14 @@ namespace Game.Actor.Stat
 			}
 			return didRemove;
 		}
-		public virtual float CalculateBaseValue()
-		{
-			return baseValue;
-		}
+		public virtual float CalculateBaseValue() { return baseValue; }
 		private float CalculateFinalValue()
 		{
 			float finalValue = CalculateBaseValue();
 			float sumPercentAdd = 0.0f;
 			StatModifier mod;
 
-			for (int i = 0; i < StatModifiers.Count; i++)
+			for (int i = 0; i < statModifiers.Count; i++)
 			{
 				mod = statModifiers[i];
 

@@ -112,6 +112,18 @@ namespace Game.Actor.State
 		}
 		public void OnAttackAnimationFinished(string animName)
 		{
+			Action setSpellCooldown = () =>
+			{
+				Globals.cooldownMaster.AddCooldown(character.GetPath(), spell.worldName,
+					Globals.spellDB.GetData(spell.worldName).coolDown);
+
+				Player player = character as Player;
+				if (player != null)
+				{
+					player.menu.CheckHudSlots(player.menu.gameMenu.playerSpellBook, spell.worldName);
+				}
+			};
+
 			if (!ValidTarget())
 			{
 				return;
@@ -125,9 +137,7 @@ namespace Game.Actor.State
 					{
 						InstancSpellEffect(spell.worldName, character.target);
 					}
-
-					spell.AddCooldown(character.GetPath(), spell.worldName,
-						Globals.spellDB.GetData(spell.worldName).coolDown);
+					setSpellCooldown();
 				}
 
 				AttackHit(character, character.target, spell);
@@ -158,9 +168,7 @@ namespace Game.Actor.State
 							Globals.soundPlayer.PlaySound(spellSound, character.player2D);
 						}
 					}
-
-					spell.AddCooldown(character.GetPath(), spell.worldName,
-						Globals.spellDB.GetData(spell.worldName).coolDown);
+					setSpellCooldown();
 				}
 
 				fsm.ConnectMissileHit(missile, character, character.target, spell);
@@ -235,21 +243,20 @@ namespace Game.Actor.State
 				return;
 			}
 
-			if (damage == 0)
-			{
-				spell?.QueueFree();
-			}
-			else
-			{
-				spell?.Start();
-			}
-
 			if (spell != null)
 			{
-				string spellSound = Globals.spellDB.GetData(spell.worldName).sound;
-				if (!spellSound.Equals(string.Empty))
+				if (damage == 0)
 				{
-					soundName = spellSound;
+					spell.QueueFree();
+				}
+				else
+				{
+					spell.Start();
+					string spellSound = Globals.spellDB.GetData(spell.worldName).sound;
+					if (!spellSound.Equals(string.Empty))
+					{
+						soundName = spellSound;
+					}
 				}
 			}
 
@@ -332,6 +339,9 @@ namespace Game.Actor.State
 					return false;
 				}
 
+				// TODO: check for cooldowns and loop until a spell is found or cancel if all spells are cooling down
+
+				// get all spell-types from character spells
 				IEnumerable<SpellDB.SpellTypes> characterSpellTypes =
 					from spellName in contentData.spells
 					select Globals.spellDB.GetData(spellName).type;
@@ -340,11 +350,13 @@ namespace Game.Actor.State
 				SpellDB.SpellTypes spellType;
 				IEnumerable<string> spells;
 
+				// randomly choose a spell-type that character has
 				do
 				{
 					spellType = (SpellDB.SpellTypes)spellTypes.GetValue(rand.Next(spellTypes.Length));
 				} while (!characterSpellTypes.Contains(spellType));
 
+				// get all spells from character that equal ramdom spell-type
 				spells = from spellName in contentData.spells
 						 where Globals.spellDB.GetData(spellName).type.Equals(spellType)
 						 select spellName;
@@ -386,13 +398,10 @@ namespace Game.Actor.State
 		{
 			return Globals.imageDB.GetData(character.img.Texture.ResourcePath.GetFile().BaseName());
 		}
-		private static void InstancSpellEffect(string spellName, Character target)
+	private static void InstancSpellEffect(string spellName, Character target)
 		{
-			SpellEffect spellEffect = (SpellEffect)Globals.spellEffectDB.GetData(
-				Globals.spellDB.GetData(spellName).spellEffect).Instance();
-
-			spellEffect.Init(target, spellName, target);
-			spellEffect.OnHit();
+			((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
+				spellName).spellEffect).Instance()).Init(target, spellName, target).OnHit();
 		}
 		public override GC.Dictionary Serialize()
 		{

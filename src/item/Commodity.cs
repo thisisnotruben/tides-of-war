@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using Game.Database;
 using Game.Actor;
+using Game.Actor.Doodads;
 using Game.Actor.Stat;
 using Godot;
 using GC = Godot.Collections;
@@ -9,16 +10,10 @@ namespace Game.GameItem
 {
 	public class Commodity : WorldObject, ISerializable
 	{
-		[Signal] public delegate void OnStarted(string worldName);
-
-		// characterNodePath: commodityName: timeLeft
-		private static readonly Dictionary<string, Dictionary<string, SceneTreeTimer>> cooldowns =
-			new Dictionary<string, Dictionary<string, SceneTreeTimer>>();
-
 		private Dictionary<CharacterStat, StatModifier> modifiers;
 		protected Character character;
-		private Timer useTimer = new Timer(), durTimer = new Timer();
-		private int useCount = 0;
+		protected Timer useTimer = new Timer(), durTimer = new Timer();
+		protected int useCount = 0;
 
 		public override void _Ready()
 		{
@@ -158,58 +153,24 @@ namespace Game.GameItem
 			}
 			return modifierDict;
 		}
-		public static float GetCoolDown(string rootNodePath, string worldName)
+		public virtual void ArmUse(bool start)
 		{
-			return IsCoolingDown(rootNodePath, worldName)
-				? cooldowns[rootNodePath][worldName].TimeLeft
-				: 0.0f;
-		}
-		public static bool IsCoolingDown(string rootNodePath, string worldName)
-		{
-			if (cooldowns.ContainsKey(rootNodePath) && cooldowns[rootNodePath].ContainsKey(worldName))
+			if (Globals.useDB.HasData(worldName))
 			{
-				if (cooldowns[rootNodePath][worldName].TimeLeft == 0.0f)
+				UseDB.Use use = Globals.useDB.GetData(worldName);
+
+				if (start)
 				{
-					cooldowns[rootNodePath].Remove(worldName);
-					return false;
+					StartUse(use);
 				}
-				return true;
-			}
-			return false;
-		}
-		public static void OnCooldownTimeout(string rootNodePath, string worldName)
-		{
-			if (cooldowns.ContainsKey(rootNodePath) && cooldowns[rootNodePath].ContainsKey(worldName))
-			{
-				cooldowns[rootNodePath].Remove(worldName);
-				if (cooldowns[rootNodePath].Count == 0)
+				if (use.repeatSec > 0)
 				{
-					cooldowns.Remove(rootNodePath);
+					useTimer.Connect("timeout", this, nameof(OnUseTimeout), new GC.Array() { use });
+					useTimer.Start(use.repeatSec);
 				}
 			}
 		}
-		public bool AddCooldown(string rootNodePath, string worldName, float cooldownSec)
-		{
-			if (IsCoolingDown(rootNodePath, worldName))
-			{
-				return false;
-			}
-
-			SceneTreeTimer cooldown = character.GetTree().CreateTimer(cooldownSec, false);
-			cooldown.Connect("timeout", this, nameof(OnCooldownTimeout),
-				new GC.Array() { character.GetPath(), worldName });
-
-			if (cooldowns.ContainsKey(rootNodePath))
-			{
-				cooldowns[rootNodePath].Add(worldName, cooldown);
-			}
-			else
-			{
-				cooldowns.Add(rootNodePath, new Dictionary<string, SceneTreeTimer>() { { worldName, cooldown } });
-			}
-			return true;
-		}
-		public virtual void StartUse(UseDB.Use use, int durationSec)
+		public virtual void StartUse(UseDB.Use use)
 		{
 			if (use.hp.value != 0)
 			{
@@ -217,30 +178,30 @@ namespace Game.GameItem
 					? (int)use.hp.value
 					: (int)Math.Round(use.hp.value * character.stats.hpMax.value);
 			}
+
 			if (use.mana.value != 0)
 			{
 				character.mana += (use.mana.type == StatModifier.StatModType.FLAT)
 					? (int)use.mana.value
 					: (int)Math.Round(use.mana.value * character.stats.hpMax.value);
 			}
-			if (use.damage.value != 0)
+
+			int damage = (int)use.damage.value;
+			if (damage != 0)
 			{
-				character.Harm((int)use.damage.value, Vector2.Zero);
+				character.Harm(damage, Vector2.Zero);
+				character.SpawnCombatText(damage.ToString(), CombatText.TextType.HIT);
 			}
 
-			// iterate through use count
-			if (useTimer.IsStopped() && use.repeatSec > 0)
-			{
-				useTimer.Connect("timeout", this, nameof(OnUseTimeout),
-					new GC.Array() { use, durationSec });
-				useTimer.Start(use.repeatSec);
-			}
+			useCount++;
 		}
-		public void OnUseTimeout(UseDB.Use use, int durationSec)
+		public void OnUseTimeout(UseDB.Use use)
 		{
-			if (++useCount < durationSec / use.repeatSec)
+			if (use.repeatSec > 0
+			&& Globals.modDB.HasData(worldName)
+			&& useCount < Globals.modDB.GetData(worldName).durationSec / use.repeatSec)
 			{
-				StartUse(use, durationSec);
+				StartUse(use);
 			}
 			else
 			{
@@ -249,39 +210,23 @@ namespace Game.GameItem
 		}
 		public virtual void Start()
 		{
-			if (IsCoolingDown(character.GetPath(), worldName))
-			{
-				return;
-			}
-
-			int duration = Globals.modDB.HasData(worldName)
-				? Globals.modDB.GetData(worldName).durationSec
-				: 0,
-			coolDown = Globals.spellDB.HasData(worldName)
-				? Globals.spellDB.GetData(worldName).coolDown
-				: Globals.itemDB.GetData(worldName).coolDown;
-
-			if (coolDown > 0)
-			{
-				AddCooldown(character.GetPath(), worldName, coolDown);
-			}
+			// adds only if there isn't a cooldown of same type
+			Globals.cooldownMaster.AddCooldown(character.GetPath(), worldName,
+				Globals.spellDB.HasData(worldName)
+					? Globals.spellDB.GetData(worldName).coolDown
+					: Globals.itemDB.GetData(worldName).coolDown);
 
 			foreach (CharacterStat stat in modifiers.Keys)
 			{
 				stat.AddModifier(modifiers[stat]);
 			}
 
-			if (Globals.useDB.HasData(worldName))
-			{
-				StartUse(Globals.useDB.GetData(worldName), duration);
-			}
+			ArmUse(useCount == 0);
 
-			if (duration > 0)
+			if (Globals.modDB.HasData(worldName))
 			{
-				// upon timeout, will exit
-				durTimer.Start(duration);
+				durTimer.Start(Globals.modDB.GetData(worldName).durationSec);
 			}
-			EmitSignal(nameof(OnStarted), worldName);
 		}
 		public virtual void Exit()
 		{
@@ -290,39 +235,21 @@ namespace Game.GameItem
 				stat.RemoveModifier(modifiers[stat]);
 			}
 		}
-		public GC.Dictionary Serialize()
+		public virtual GC.Dictionary Serialize()
 		{
-			// TODO: save
-			GC.Dictionary savedCooldowns = new GC.Dictionary();
-			foreach (string nodePath in cooldowns.Keys)
-			{
-				savedCooldowns[nodePath.ToString()] = new GC.Dictionary<string, float>();
-				foreach (string commodityName in cooldowns[nodePath].Keys)
-				{
-					savedCooldowns[commodityName] = cooldowns[nodePath][commodityName].TimeLeft;
-				}
-			}
-
 			return new GC.Dictionary()
 			{
-				{NameDB.SaveTag.COOLDOWNS, savedCooldowns}
+				{NameDB.SaveTag.TIME_LEFT, durTimer.TimeLeft},
+				{NameDB.SaveTag.USE_TIME_LEFT, useTimer.TimeLeft},
+				{NameDB.SaveTag.USE_COUNT_LEFT, useCount}
 			};
 		}
-		public void Deserialize(GC.Dictionary payload)
+		public virtual void Deserialize(GC.Dictionary payload)
 		{
-			// TODO: save
-			GC.Dictionary savedCooldowns = (GC.Dictionary)payload[NameDB.SaveTag.COOLDOWNS];
-			GC.Dictionary<string, float> specificCooldowns;
-
-			foreach (string nodePath in savedCooldowns.Keys)
-			{
-				specificCooldowns = (GC.Dictionary<string, float>)savedCooldowns[nodePath];
-
-				foreach (string commodityName in specificCooldowns.Keys)
-				{
-					AddCooldown(nodePath, commodityName, specificCooldowns[commodityName]);
-				}
-			}
+			useCount = payload[NameDB.SaveTag.USE_COUNT_LEFT].ToString().ToInt();
+			Start();
+			useTimer.Start((float)payload[NameDB.SaveTag.USE_TIME_LEFT]);
+			durTimer.Start((float)payload[NameDB.SaveTag.TIME_LEFT]);
 		}
 	}
 }

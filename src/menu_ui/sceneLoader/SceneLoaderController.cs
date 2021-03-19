@@ -43,6 +43,23 @@ namespace Game.Ui
 				return false;
 			}
 
+			// load cooldowns first
+			string k = NameDB.SaveTag.COOLDOWNS;
+			if (loadData.Contains(k))
+			{
+				Globals.cooldownMaster.Deserialize((GC.Dictionary)loadData[k]);
+			}
+
+			GC.Array pos;
+			// set all positions first then load rest of data
+			foreach (string key in loadData.Keys)
+			{
+				if (HasNode(key) && GetNode(key) is Character)
+				{
+					pos = (GC.Array)((GC.Dictionary)loadData[key])[NameDB.SaveTag.POSITION];
+					GetNode<Node2D>(key).GlobalPosition = new Vector2((float)pos[0], (float)pos[1]);
+				}
+			}
 			foreach (string key in loadData.Keys)
 			{
 				if (HasNode(key))
@@ -51,7 +68,6 @@ namespace Game.Ui
 				}
 			}
 
-			GC.Array pos;
 			string characterPath, targetPath;
 			foreach (string key in loadData.Keys)
 			{

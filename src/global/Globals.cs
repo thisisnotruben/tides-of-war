@@ -11,6 +11,7 @@ namespace Game
 			GRAVE_GROUP = "graveSite";
 
 		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
+		public static readonly CooldownMaster cooldownMaster = new CooldownMaster();
 
 		public static readonly AreaEffectDB areaEffectDB = new AreaEffectDB(PathManager.areaEffect);
 		public static readonly ContentDB contentDB = new ContentDB();
@@ -25,7 +26,11 @@ namespace Game
 		public static readonly UnitDB unitDB = new UnitDB();
 		public static readonly UseDB useDB = new UseDB(PathManager.use);
 
-		public override void _Ready() { AddChild(soundPlayer); }
+		public override void _Ready()
+		{
+			AddChild(soundPlayer);
+			AddChild(cooldownMaster);
+		}
 
 		// util function
 		public static void TryLinkSignal(Godot.Object source, string sourceSignal, Godot.Object target, string targetMethod, bool link)

@@ -1,6 +1,5 @@
 using Godot;
 using Game.Database;
-using Game.GameItem;
 using Game.Factory;
 using Game.Ability;
 using Game.Actor.State;
@@ -27,7 +26,7 @@ namespace Game.Ui
 
 			// disaply cast option if spell not cooling down and player not dead
 			HideExcept(
-				Commodity.IsCoolingDown(player.GetPath(), commodityWorldName) || player.dead
+				Globals.cooldownMaster.IsCoolingDown(player.GetPath(), commodityWorldName) || player.dead
 					? new Control[] { }
 					: new Control[] { castBttn });
 		}
@@ -40,7 +39,7 @@ namespace Game.Ui
 			{
 				errorText = "Can't Cast\nWhile Dead!";
 			}
-			else if (Commodity.IsCoolingDown(player.GetPath(), commodityWorldName))
+			else if (Globals.cooldownMaster.IsCoolingDown(player.GetPath(), commodityWorldName))
 			{
 				errorText = "Cooling\nDown!";
 			}
@@ -81,13 +80,10 @@ namespace Game.Ui
 				PlaySound(NameDB.UI.CLICK2);
 				Hide();
 
-				Spell spell = new SpellFactory().Make(player, commodityWorldName);
-				spell.Connect(nameof(Spell.OnStarted), this, nameof(OnCasted));
-
-				EmitSignal(nameof(PlayerWantstoCast), spell,
+				EmitSignal(nameof(PlayerWantstoCast),
+					new SpellFactory().Make(player, commodityWorldName),
 					Globals.spellDB.GetData(commodityWorldName).requiresTarget);
 			}
 		}
-		public void OnCasted(string spellName) { CheckHudSlots(inventoryModel, spellName); }
 	}
 }

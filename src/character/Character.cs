@@ -222,6 +222,14 @@ namespace Game.Actor
 			{
 				payload[NameDB.SaveTag.STATE] = fsm.Serialize();
 			}
+			if (stats.ShouldSerialize())
+			{
+				payload[NameDB.SaveTag.MODIFIERS] = stats.Serialize();
+			}
+			if (combatTextHandler.ShouldSerialize())
+			{
+				payload[NameDB.SaveTag.COMBAT_TEXT] = combatTextHandler.Serialize();
+			}
 
 			return payload;
 		}
@@ -258,6 +266,14 @@ namespace Game.Actor
 						{
 							target = GetParent().GetNode<Character>(targetName);
 						}
+						break;
+
+					case NameDB.SaveTag.MODIFIERS:
+						stats.Deserialize((GC.Dictionary)payload[key]);
+						break;
+
+					case NameDB.SaveTag.COMBAT_TEXT:
+						combatTextHandler.Deserialize((GC.Dictionary)payload[key]);
 						break;
 				}
 			}

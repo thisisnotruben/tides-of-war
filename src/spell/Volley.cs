@@ -1,3 +1,6 @@
+using Godot;
+using GC = Godot.Collections;
+using Game.Database;
 using Game.Actor.State;
 namespace Game.Ability
 {
@@ -24,6 +27,17 @@ namespace Game.Ability
 			{
 				Exit();
 			}
+		}
+		public override GC.Dictionary Serialize()
+		{
+			GC.Dictionary payload = base.Serialize();
+			payload[NameDB.SaveTag.HIT] = hit;
+			return payload;
+		}
+		public override void Deserialize(GC.Dictionary payload)
+		{
+			hit = payload[NameDB.SaveTag.HIT].ToString().ToInt();
+			base.Deserialize(payload);
 		}
 	}
 }

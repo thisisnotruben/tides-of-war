@@ -3,7 +3,6 @@ using System.Linq;
 using Godot;
 using GC = Godot.Collections;
 using Game.Database;
-using Game.GameItem;
 using Game.Actor;
 namespace Game.Ui
 {
@@ -190,7 +189,7 @@ namespace Game.Ui
 
 			if ((bool)dropData["isCoolingDown"])
 			{
-				SetCooldown(Commodity.GetCoolDown(Player.player.GetPath(), itemName));
+				SetCooldown(Globals.cooldownMaster.GetCoolDown(Player.player.GetPath(), itemName));
 			}
 		}
 		public void _OnSlotPressed() { EmitSignal(nameof(OnSlotPressed), commodityWorldName); }
@@ -200,14 +199,12 @@ namespace Game.Ui
 			{
 				{NameDB.SaveTag.NAME, commodityWorldName},
 				{NameDB.SaveTag.STACK, stackCount.Text.ToString().ToInt()},
-				{NameDB.SaveTag.COOLDOWNS, tween.Tell()}
 			};
 		}
 		public void Deserialize(GC.Dictionary payload)
 		{
 			Display(payload[NameDB.SaveTag.NAME].ToString(),
 				payload[NameDB.SaveTag.STACK].ToString().ToInt());
-			SetCooldown((float)payload[NameDB.SaveTag.COOLDOWNS]);
 		}
 	}
 }

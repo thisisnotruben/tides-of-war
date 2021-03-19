@@ -87,6 +87,7 @@
     <Compile Include="src\global\Stats.cs" />
     <Compile Include="src\global\WorldObject.cs" />
     <Compile Include="src\item\Commodity.cs" />
+    <Compile Include="src\item\CooldownMaster.cs" />
     <Compile Include="src\item\Item.cs" />
     <Compile Include="src\item\TreasureChest.cs" />
     <Compile Include="src\landMine\ICombustible.cs" />

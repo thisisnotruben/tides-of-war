@@ -18,16 +18,35 @@ namespace Game.Actor.State
 			Map.Map.map.OccupyCell(character.GlobalPosition, true);
 			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(OnCastFinished), true);
 			character.anim.Play("casting", -1.0f, character.stats.animSpeed.value);
+
+			if (Globals.spellEffectDB.HasData(spell.worldName))
+			{
+				((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
+					spell.worldName).spellEffect).Instance()).Init(character, spell.worldName, character).OnHit();
+			}
 		}
 		public override void Exit()
 		{
 			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(OnCastFinished), false);
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
 		}
-		public void SetSpell(Spell spell) { this.spell = spell; }
+		public void SetSpell(Spell spell)
+		{
+			this.spell = spell;
+			character.CallDeferred("add_child", spell);
+		}
 		private void OnCastFinished(string animName)
 		{
-			spell?.Start();
+			if (spell != null)
+			{
+				spell.Start();
+
+				Player player = character as Player;
+				if (player != null)
+				{
+					player.menu.CheckHudSlots(player.menu.gameMenu.playerSpellBook, spell.worldName);
+				}
+			}
 			fsm.RevertState();
 		}
 		public override GC.Dictionary Serialize()
