@@ -102,8 +102,8 @@ namespace Game.Actor.State
 		}
 		public override void Deserialize(GC.Dictionary payload)
 		{
-			base.Deserialize(payload);
 			reversePath = (bool)payload[NameDB.SaveTag.REVERSE];
+			base.Deserialize(payload);
 		}
 	}
 }

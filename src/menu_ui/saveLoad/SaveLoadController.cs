@@ -72,16 +72,6 @@ namespace Game.Ui
 			label.Text = string.Format("{0}/{1} Slots Used", currentSaveCount, SaveLoadModel.MAX_SAVES);
 			saveBttn.Visible = currentSaveCount < SaveLoadModel.MAX_SAVES;
 		}
-		private void RouteConnection(string toMethod)
-		{
-			BaseButton yesBttn = popup.yesBttn;
-			string signal = "pressed";
-			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
-			{
-				yesBttn.Disconnect(signal, this, connectionPacket["method"].ToString());
-			}
-			yesBttn.Connect(signal, this, toMethod);
-		}
 		private void OnHide()
 		{
 			focusedEntryOptions.Visible = popup.Visible = false;
@@ -109,7 +99,7 @@ namespace Game.Ui
 		{
 			PlaySound(NameDB.UI.CLICK1);
 			focusedEntryOptions.Hide();
-			RouteConnection(nameof(OnDeleteConfirm));
+			popup.RouteConnection(nameof(OnDeleteConfirm), this);
 			popup.ShowConfirm("Delete?");
 		}
 		private void OnDeleteConfirm()
@@ -129,7 +119,7 @@ namespace Game.Ui
 			else
 			{
 				focusedEntryOptions.Hide();
-				RouteConnection(nameof(OnSaveConfirm));
+				popup.RouteConnection(nameof(OnSaveConfirm), this);
 				popup.ShowConfirm("Overwrite?");
 			}
 		}
@@ -139,6 +129,20 @@ namespace Game.Ui
 			OnHide();
 		}
 		private void OnLoadPressed()
+		{
+			if (SaveLoadModel.dirty)
+			{
+				PlaySound(NameDB.UI.CLICK1);
+				focusedEntryOptions.Hide();
+				popup.RouteConnection(nameof(OnLoadConfirm), this);
+				popup.ShowConfirm("Lose Save\nData?");
+			}
+			else
+			{
+				OnLoadConfirm();
+			}
+		}
+		private void OnLoadConfirm()
 		{
 			PlaySound(NameDB.UI.CLICK0);
 			saveLoadModel.LoadGame(focusedEntry.saveIndex);

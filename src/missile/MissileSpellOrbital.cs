@@ -12,6 +12,9 @@ namespace Game.Projectile
 			this.target = target;
 			targetHitBox = target.hitBox;
 
+			Map.Map.map.AddZChild(this);
+			Owner = Map.Map.map;
+
 			Transform2D ctrans = character.GetCanvasTransform();
 			Vector2 minPos = -ctrans.origin / ctrans.Scale,
 					maxPos = minPos + character.GetViewportRect().Size / ctrans.Scale;

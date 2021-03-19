@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://src/character/npc/targetDummy/targetDummy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/character/npc/npc.tscn" type="PackedScene" id=4]
 [ext_resource path="res://2d_env.tres" type="Environment" id=7]
@@ -156,6 +157,9 @@ position = Vector2( 376, 384 )
 [node name="light2D" parent="zed/z1/63-firePit" instance=ExtResource( 13 )]
 position = Vector2( 0, -8 )
 texture_scale = 0.15625
+
+[node name="target_dummy" parent="zed/z1" instance=ExtResource( 1 )]
+position = Vector2( 264.065, 215.974 )
 
 [node name="z2" type="TileMap" parent="zed"]
 tile_set = ExtResource( 14 )

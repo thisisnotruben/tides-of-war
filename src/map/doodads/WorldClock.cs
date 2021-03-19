@@ -57,7 +57,10 @@ namespace Game.Map.Doodads
 			else
 			{
 				anim.Play(ANIM_NAME, -1.0f, dayLight ? 1.0f : -1.0f, !dayLight);
-				anim.Seek(animPos, true);
+				if (animPos > 0.0f && animPos < anim.GetAnimation(ANIM_NAME).Length)
+				{
+					anim.Seek(animPos, true);
+				}
 			}
 		}
 	}

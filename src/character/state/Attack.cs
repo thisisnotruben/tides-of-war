@@ -107,7 +107,7 @@ namespace Game.Actor.State
 			character.anim.Play(
 				spell != null
 				? Globals.spellDB.GetData(spell.worldName).characterAnim
-				: "attacking",
+				: Character.ANIM_ATTACK,
 				-1.0f, character.stats.animSpeed.value);
 		}
 		public void OnAttackAnimationFinished(string animName)
@@ -398,10 +398,10 @@ namespace Game.Actor.State
 		{
 			return Globals.imageDB.GetData(character.img.Texture.ResourcePath.GetFile().BaseName());
 		}
-	private static void InstancSpellEffect(string spellName, Character target)
+		private static void InstancSpellEffect(string spellName, Character target)
 		{
 			((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
-				spellName).spellEffect).Instance()).Init(target, spellName, target).OnHit();
+				spellName).spellEffect).Instance()).Init(target, spellName).OnHit();
 		}
 		public override GC.Dictionary Serialize()
 		{
@@ -423,7 +423,8 @@ namespace Game.Actor.State
 			{
 				timer.Start(timeLeft);
 			}
-			else if (animPos > 0.0f)
+			else if (animPos > 0.0f
+			&& animPos < character.anim.GetAnimation(Character.ANIM_ATTACK).Length)
 			{
 				timer.Stop();
 				OnAttackSpeedTimeout();

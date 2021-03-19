@@ -13,7 +13,7 @@ namespace Game.Ability
 				base.StartAreaEffect(character);
 
 				((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
-					worldName).spellEffect).Instance()).Init(character, worldName, character).OnHit();
+					worldName).spellEffect).Instance()).Init(character, worldName).OnHit();
 			}
 		}
 	}

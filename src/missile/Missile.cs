@@ -105,11 +105,11 @@ namespace Game.Projectile
 
 			if (hit)
 			{
-				float animLeft = (float)payload[NameDB.SaveTag.ANIM_POSITION];
-				if (animLeft > 0.0f)
+				float animPos = (float)payload[NameDB.SaveTag.ANIM_POSITION];
+				if (animPos > 0.0f && animPos < anim.GetAnimation(ANIM_NAME).Length)
 				{
 					anim.Play(ANIM_NAME);
-					anim.Seek(animLeft, true);
+					anim.Seek(animPos, true);
 				}
 				else
 				{

@@ -15,6 +15,7 @@ namespace Game.Ui
 		public static Dictionary<int, Texture> saveFileIcons = new Dictionary<int, Texture>();
 		private static readonly File file = new File();
 		private Image currentGameImage;
+		public static bool dirty;
 
 		static SaveLoadModel() { LoadSavedFileNames(); }
 		public static void LoadSavedFileNames()
@@ -64,6 +65,8 @@ namespace Game.Ui
 		}
 		public int SaveGame(int index)
 		{
+			dirty = false;
+
 			GC.Dictionary date = OS.GetDatetime();
 			string saveTime = string.Format("{0}-{1}-{2} {3}:{4}:{5}",
 				date["year"], date["month"], date["day"],
@@ -184,6 +187,7 @@ namespace Game.Ui
 		}
 		public void SetCurrentGameImage()
 		{
+			dirty = true;
 			currentGameImage = GetViewport().GetTexture().GetData();
 			currentGameImage.FlipY();
 			currentGameImage = currentGameImage.GetRect(new Rect2(

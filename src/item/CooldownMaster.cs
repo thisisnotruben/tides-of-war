@@ -5,8 +5,8 @@ namespace Game
 	public class CooldownMaster : Node, ISerializable
 	{
 		// structure: rootNode (character) with list of items with their respective cooldowns
-		private readonly GC.Dictionary<string, GC.Dictionary<string, SceneTreeTimer>> cooldowns =
-				new GC.Dictionary<string, GC.Dictionary<string, SceneTreeTimer>>();
+		private readonly GC.Dictionary<string, GC.Dictionary<string, Timer>> cooldowns =
+				new GC.Dictionary<string, GC.Dictionary<string, Timer>>();
 
 		public override void _Ready()
 		{
@@ -29,9 +29,12 @@ namespace Game
 				return;
 			}
 
-			SceneTreeTimer cooldownTimer = GetTree().CreateTimer(cooldownSec, false);
+			Timer cooldownTimer = new Timer();
+			AddChild(cooldownTimer, true);
+			cooldownTimer.OneShot = true;
 			cooldownTimer.Connect("timeout", this, nameof(OnCooldownTimeout),
-				new GC.Array() { rootNodePath, worldName });
+				new GC.Array() { rootNodePath, worldName, cooldownTimer });
+			cooldownTimer.Start(cooldownSec);
 
 			if (cooldowns.ContainsKey(rootNodePath))
 			{
@@ -39,7 +42,7 @@ namespace Game
 			}
 			else
 			{
-				cooldowns[rootNodePath] = new GC.Dictionary<string, SceneTreeTimer>() { { worldName, cooldownTimer } };
+				cooldowns[rootNodePath] = new GC.Dictionary<string, Timer>() { { worldName, cooldownTimer } };
 			}
 		}
 		public float GetCoolDown(string rootNodePath, string worldName)
@@ -54,16 +57,13 @@ namespace Game
 		}
 		public void ClearCooldowns()
 		{
-			foreach (GC.Dictionary key in cooldowns.Values)
-			{
-				foreach (SceneTreeTimer timer in key.Values)
-				{
-					timer.Free();
-				}
-			}
 			cooldowns.Clear();
+			for (int i = 0; i < GetChildCount(); i++)
+			{
+				GetChild(i).QueueFree();
+			}
 		}
-		public void OnCooldownTimeout(string rootNodePath, string worldName)
+		public void OnCooldownTimeout(string rootNodePath, string worldName, Timer timer)
 		{
 			if (cooldowns.ContainsKey(rootNodePath) && cooldowns[rootNodePath].ContainsKey(worldName))
 			{
@@ -73,6 +73,7 @@ namespace Game
 					cooldowns.Remove(rootNodePath);
 				}
 			}
+			timer?.QueueFree();
 		}
 		public GC.Dictionary Serialize()
 		{

@@ -191,6 +191,8 @@ namespace Game.Ui
 			{
 				SetCooldown(Globals.cooldownMaster.GetCoolDown(Player.player.GetPath(), itemName));
 			}
+
+			SaveLoadModel.dirty = true;
 		}
 		public void _OnSlotPressed() { EmitSignal(nameof(OnSlotPressed), commodityWorldName); }
 		public GC.Dictionary Serialize()

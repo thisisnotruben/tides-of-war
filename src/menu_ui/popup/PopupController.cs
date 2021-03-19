@@ -4,10 +4,9 @@ namespace Game.Ui
 {
 	public class PopupController : GameMenu
 	{
-		public Control yesNoView, errorView, exitView, filterView;
+		public Control yesNoView, errorView, filterView;
 		public Label yesNoLabel, errorLabel;
-		public Button yesBttn, noBttn, okayBttn, exitGameBttn,
-			exitMenuBttn, allBttn, activeBttn, completedBttn;
+		public Button yesBttn, noBttn, okayBttn, allBttn, activeBttn, completedBttn;
 
 		public override void _Ready()
 		{
@@ -24,10 +23,6 @@ namespace Game.Ui
 			errorLabel = errorView.GetNode<Label>("label");
 			okayBttn = errorView.GetNode<Button>("okay");
 
-			exitView = popupContainer.GetNode<Control>("exit");
-			exitGameBttn = exitView.GetNode<Button>("exit_game");
-			exitMenuBttn = exitView.GetNode<Button>("exit_menu");
-
 			filterView = popupContainer.GetNode<Control>("filter_options");
 			allBttn = filterView.GetNode<Button>("all");
 			activeBttn = filterView.GetNode<Button>("active");
@@ -40,6 +35,15 @@ namespace Game.Ui
 			{
 				control.Hide();
 			}
+		}
+		public void RouteConnection(string toMethod, Node target)
+		{
+			string signal = "pressed";
+			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
+			{
+				yesBttn.Disconnect(signal, target, connectionPacket["method"].ToString());
+			}
+			yesBttn.Connect(signal, target, toMethod);
 		}
 		public void ShowError(string errorText)
 		{

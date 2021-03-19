@@ -21,7 +21,7 @@ namespace Game.Actor
 				SetImg(unitData.img);
 			}
 		}
-		public void _OnCharacterEnteredSight(Area2D area2D)
+		public virtual void _OnCharacterEnteredSight(Area2D area2D)
 		{
 			Character character = area2D.Owner as Character;
 			if (!attacking && character != null)
@@ -29,7 +29,8 @@ namespace Game.Actor
 				Npc npc = character as Npc;
 
 				if ((character is Player && enemy)
-				|| (npc != null && npc.enemy != enemy))
+				|| (npc != null && npc.enemy != enemy
+				&& !(npc is TargetDummy)))
 				{
 					// attack
 					target = character;
@@ -40,7 +41,7 @@ namespace Game.Actor
 				}
 			}
 		}
-		public void _OnCharacterExitedSight(Area2D area2D)
+		public virtual void _OnCharacterExitedSight(Area2D area2D)
 		{
 			Character character = area2D.Owner as Character;
 
@@ -73,7 +74,7 @@ namespace Game.Actor
 		// makes sure player clicks on unit and not mistakingly select the tile to move to
 		public void _OnAreaMouseEnteredExited(bool entered) { Player.player.SetProcessUnhandledInput(!entered); }
 		public virtual void _OnSelectPressed() { Player.player.menu.NpcInteract(this); }
-		public bool ShouldSerialize()
+		public virtual bool ShouldSerialize()
 		{
 			return hp < stats.hpMax.valueI || mana < stats.manaMax.valueI || dead || moving || attacking;
 		}

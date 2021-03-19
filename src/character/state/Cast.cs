@@ -17,12 +17,12 @@ namespace Game.Actor.State
 
 			Map.Map.map.OccupyCell(character.GlobalPosition, true);
 			Globals.TryLinkSignal(character.anim, "animation_finished", this, nameof(OnCastFinished), true);
-			character.anim.Play("casting", -1.0f, character.stats.animSpeed.value);
+			character.anim.Play(Character.ANIM_CAST, -1.0f, character.stats.animSpeed.value);
 
 			if (Globals.spellEffectDB.HasData(spell.worldName))
 			{
 				((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
-					spell.worldName).spellEffect).Instance()).Init(character, spell.worldName, character).OnHit();
+					spell.worldName).spellEffect).Instance()).Init(character, spell.worldName).OnHit();
 			}
 		}
 		public override void Exit()
@@ -63,7 +63,8 @@ namespace Game.Actor.State
 			base.Deserialize(payload);
 
 			float animPos = (float)payload[NameDB.SaveTag.ANIM_POSITION];
-			if (animPos > 0.0f)
+			if (animPos > 0.0f
+			&& animPos < character.anim.GetAnimation(Character.ANIM_CAST).Length)
 			{
 				character.anim.Seek(animPos, true);
 			}

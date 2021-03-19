@@ -10,7 +10,6 @@ namespace Game.Actor.State
 {
 	public class Dead : StateBehavior
 	{
-		private const string deathAnim = "dying";
 		private Timer timer = new Timer();
 
 		public override void _Ready()
@@ -61,11 +60,11 @@ namespace Game.Actor.State
 			}
 
 			// play death animation
-			character.anim.Play(deathAnim);
+			character.anim.Play(Character.ANIM_DIE);
 		}
 		private void DieEnd(string animName)
 		{
-			if (!animName.Equals(deathAnim))
+			if (!animName.Equals(Character.ANIM_DIE))
 			{
 				return;
 			}
@@ -121,14 +120,15 @@ namespace Game.Actor.State
 			float animPos = (float)payload[NameDB.SaveTag.ANIM_POSITION],
 				timeLeft = (float)payload[NameDB.SaveTag.TIME_LEFT];
 
-			if (animPos > 0.0)
+			if (animPos > 0.0
+			&& animPos < character.anim.GetAnimation(Character.ANIM_DIE).Length)
 			{
 				character.anim.Seek(animPos, true);
 			}
 			else if (timeLeft > 0.0f)
 			{
 				character.anim.Stop();
-				DieEnd(deathAnim);
+				DieEnd(Character.ANIM_DIE);
 				timer.Start(timeLeft);
 			}
 		}

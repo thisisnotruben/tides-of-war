@@ -2218,5 +2218,25 @@
 		"swing": "swing_large",
 		"body": "minotaur",
 		"melee": true
+	},
+	"target_dummy": {
+		"moving": 1,
+		"dying": 1,
+		"attacking": 1,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "",
+		"melee": true
+	},
+	"target_dummy_desert": {
+		"moving": 1,
+		"dying": 1,
+		"attacking": 1,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "",
+		"melee": true
 	}
 }

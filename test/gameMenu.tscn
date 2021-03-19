@@ -208,6 +208,4 @@ visible = false
 [connection signal="visibility_changed" from="." to="." method="OnVisibilityChanged"]
 [connection signal="tab_changed" from="playerMenu" to="." method="OnTabChanged"]
 [connection signal="draw" from="playerMenu/Stats/richTextLabel" to="playerMenu/Stats" method="OnDraw"]
-[connection signal="pressed" from="playerMenu/Settings/centerContainer/vBoxContainer/exitGame" to="." method="OnExitGamePressed"]
-[connection signal="pressed" from="playerMenu/Settings/centerContainer/vBoxContainer/exitMenu" to="." method="OnExitMenuPressed"]
 [connection signal="tab_changed" from="npcMenu" to="." method="OnTabChanged"]

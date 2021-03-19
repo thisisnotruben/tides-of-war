@@ -1,33 +1,142 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/character/npc/npc.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/npc/targetDummy/TargetDummy.cs" type="Script" id=2]
 [ext_resource path="res://asset/img/character/target_dummy.png" type="Texture" id=3]
 
+[sub_resource type="Animation" id=1]
+resource_local_to_scene = true
+resource_name = "attacking"
+tracks/0/type = "value"
+tracks/0/path = NodePath("img:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10, 16 ]
+}
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Animation" id=2]
+resource_local_to_scene = true
+resource_name = "casting"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("img:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_local_to_scene = true
+resource_name = "dying"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("img:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 2 ),
+"update": 0,
+"values": [ 3, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_local_to_scene = true
+resource_name = "moving"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("img:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 2 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_OnFootStep"
+}, {
+"args": [ false ],
+"method": "_OnFootStep"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 6, 13 )
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=6]
 radius = 6.0
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 6, 13 )
 
 [node name="target_dummy" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="anim" parent="." index="2"]
+anims/attacking = SubResource( 1 )
+anims/casting = SubResource( 2 )
+anims/dying = SubResource( 3 )
+anims/moving = SubResource( 4 )
+
 [node name="head" parent="." index="3"]
 position = Vector2( 0, -26 )
 
-[node name="img" parent="." index="5"]
+[node name="img" parent="." index="4"]
 position = Vector2( 0, -16 )
 texture = ExtResource( 3 )
 
 [node name="body" parent="area" index="0"]
 position = Vector2( 0, -13 )
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="body2" type="CollisionShape2D" parent="area" index="1"]
 position = Vector2( -12.5, -17.5 )
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
-[node name="sight" parent="." index="7"]
-visible = false
+[node name="sight" parent="." index="6"]
+monitoring = false
+
+[node name="select" parent="." index="8"]
+position = Vector2( 0, -13 )
+shape = SubResource( 7 )
+shape_centered = false

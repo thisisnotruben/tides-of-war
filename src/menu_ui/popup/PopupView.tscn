@@ -96,38 +96,6 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Okay"
 
-[node name="exit" type="VBoxContainer" parent="marginContainer"]
-visible = false
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 386.0
-margin_bottom = 394.0
-theme = ExtResource( 8 )
-alignment = 1
-
-[node name="exit_game" type="Button" parent="marginContainer/exit"]
-margin_right = 336.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Exit Game"
-
-[node name="exit_menu" type="Button" parent="marginContainer/exit"]
-margin_top = 116.0
-margin_right = 336.0
-margin_bottom = 228.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "To Menu"
-
-[node name="back" type="Button" parent="marginContainer/exit"]
-margin_top = 232.0
-margin_right = 336.0
-margin_bottom = 344.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Back"
-
 [node name="filter_options" type="VBoxContainer" parent="marginContainer"]
 visible = false
 margin_left = 50.0
@@ -171,5 +139,4 @@ text = "Back"
 [connection signal="resized" from="marginContainer" to="." method="OnResized"]
 [connection signal="pressed" from="marginContainer/yes_no/no" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="marginContainer/error/okay" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="marginContainer/exit/back" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="marginContainer/filter_options/back" to="." method="_OnBackPressed"]

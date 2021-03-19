@@ -2,6 +2,7 @@ using Godot;
 using GC = Godot.Collections;
 using Game.Database;
 using Game.Actor.State;
+using Game.Actor;
 namespace Game.Ability
 {
 	public class Volley : Spell
@@ -23,7 +24,7 @@ namespace Game.Ability
 		}
 		public void OnCharacterAnimFinished(string animName)
 		{
-			if (!animName.Equals("attacking") || --hit == 0)
+			if (!animName.Equals(Character.ANIM_ATTACK) || --hit == 0)
 			{
 				Exit();
 			}

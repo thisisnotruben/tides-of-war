@@ -1,26 +1,19 @@
 using Godot;
-using Game.Database;
 namespace Game.Actor
 {
 	public class TargetDummy : Npc
 	{
-		public override void _OnSelectPressed()
+		public override void _Ready()
 		{
-			if (Player.player.target == this)
-			{
-				Player.player.target = null;
-				target = null;
-			}
-			else
-			{
-				Globals.soundPlayer.PlaySound(NameDB.UI.CLICK4);
-				Tween tween = GetNode<Tween>("tween");
-				tween.InterpolateProperty(img, ":scale", img.Scale, new Vector2(1.03f, 1.03f),
-					0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
-				tween.Start();
-				target = Player.player;
-				Player.player.target = this;
-			}
+			base._Ready();
+			enemy = true;
+			worldName = "Target Dummy";
+			RemoveFromGroup(Globals.SAVE_GROUP);
 		}
+		public override void Harm(int damage, Vector2 direction) { }
+		public override void OnAttacked(Character whosAttacking) { }
+		public override void _OnCharacterEnteredSight(Area2D area2D) { }
+		public override void _OnCharacterExitedSight(Area2D area2D) { }
+		public override bool ShouldSerialize() { return false; }
 	}
 }

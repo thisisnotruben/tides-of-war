@@ -2,6 +2,7 @@ using Game.Database;
 using Game.Actor.Doodads;
 using Game.Actor.State;
 using Game.Actor.Stat;
+using Game.Ability;
 using Godot;
 using GC = Godot.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Game.Actor
 		public const uint COLL_MASK_PLAYER = 0b_00000_00000_00000_10000,
 			COLL_MASK_NPC = 0b_00000_00000_00000_00010,
 			COLL_MASK_DEAD = 0b_00000_00000_00000_00100;
+		public const string ANIM_ATTACK = "attacking", ANIM_CAST = "casting",
+			ANIM_DIE = "dying", ANIM_MOVE = "moving";
 
 		public FSM fsm;
 		public CombatTextHandler combatTextHandler;
@@ -138,16 +141,16 @@ namespace Game.Actor
 			stats.Recalculate();
 
 			// set sprite animation key-frames
-			Animation animRes = anim.GetAnimation("attacking");
+			Animation animRes = anim.GetAnimation(ANIM_ATTACK);
 			animRes.TrackSetKeyValue(0, 0, imageData.moving + imageData.dying);
 			animRes.TrackSetKeyValue(0, 1, imageData.total - 1);
-			animRes = anim.GetAnimation("moving");
+			animRes = anim.GetAnimation(ANIM_MOVE);
 			animRes.TrackSetKeyValue(0, 0, 0);
 			animRes.TrackSetKeyValue(0, 1, imageData.moving);
-			animRes = anim.GetAnimation("dying");
+			animRes = anim.GetAnimation(ANIM_DIE);
 			animRes.TrackSetKeyValue(0, 0, imageData.moving);
 			animRes.TrackSetKeyValue(0, 1, imageData.dying);
-			animRes = anim.GetAnimation("casting");
+			animRes = anim.GetAnimation(ANIM_CAST);
 			animRes.TrackSetKeyValue(0, 0, imageData.moving);
 			animRes.TrackSetKeyValue(0, 1, imageData.moving + 3);
 
@@ -163,8 +166,8 @@ namespace Game.Actor
 			select.Position = new Vector2(-hitBoxTexture.GetWidth() / 2.0f, -hitBoxTexture.GetHeight());
 			sightDistance.Position = areaBody.Position;
 		}
-		public void Harm(int damage, Vector2 direction) { fsm.Harm(damage, direction); }
-		public void OnAttacked(Character whosAttacking) { fsm.OnAttacked(whosAttacking); }
+		public virtual void Harm(int damage, Vector2 direction) { fsm.Harm(damage, direction); }
+		public virtual void OnAttacked(Character whosAttacking) { fsm.OnAttacked(whosAttacking); }
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
 			CombatText combatText = (CombatText)SceneDB.combatText.Instance();
@@ -231,6 +234,21 @@ namespace Game.Actor
 				payload[NameDB.SaveTag.COMBAT_TEXT] = combatTextHandler.Serialize();
 			}
 
+			GC.Array spellEffectArr = new GC.Array();
+			SpellEffect spellEffect;
+			foreach (Node node in GetChildren())
+			{
+				spellEffect = node as SpellEffect;
+				if (spellEffect != null)
+				{
+					spellEffectArr.Add(spellEffect.Serialize());
+				}
+			}
+			if (spellEffectArr.Count > 0)
+			{
+				payload[NameDB.SaveTag.SPELL_EFFECTS] = spellEffectArr;
+			}
+
 			return payload;
 		}
 		public virtual void Deserialize(GC.Dictionary payload)
@@ -274,6 +292,16 @@ namespace Game.Actor
 
 					case NameDB.SaveTag.COMBAT_TEXT:
 						combatTextHandler.Deserialize((GC.Dictionary)payload[key]);
+						break;
+
+					case NameDB.SaveTag.SPELL_EFFECTS:
+						foreach (GC.Dictionary spellEffectData in (GC.Array)payload[key])
+						{
+							((SpellEffect)Globals.spellEffectDB.GetData(
+								spellEffectData[NameDB.SaveTag.NAME].ToString()).Instance()
+								).Init(this, spellEffectData[NameDB.SaveTag.SPELL].ToString()
+								).Deserialize(spellEffectData);
+						}
 						break;
 				}
 			}

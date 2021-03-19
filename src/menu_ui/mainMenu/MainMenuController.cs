@@ -40,8 +40,10 @@ namespace Game.Ui
 				nameof(SpellBookController.RefreshSlots));
 
 			popup = GetChild<PopupController>(2);
-			popup.exitGameBttn.Connect("pressed", this, nameof(OnExitGamePressed));
-			popup.exitMenuBttn.Connect("pressed", this, nameof(OnExitMenuPressed));
+			GetNode<BaseButton>("playerMenu/Settings/centerContainer/vBoxContainer/exitGame").Connect(
+				"pressed", this, nameof(CheckExit), new Godot.Collections.Array() { true });
+			GetNode<BaseButton>("playerMenu/Settings/centerContainer/vBoxContainer/exitMenu").Connect(
+				"pressed", this, nameof(CheckExit), new Godot.Collections.Array() { false });
 
 			string[] textureNames = new string[] { "chest", "power", "person", "flag", "save", "gear" };
 			int i;
@@ -68,13 +70,29 @@ namespace Game.Ui
 			}
 		}
 		private void OnTabChanged(int index) { PlaySound(NameDB.UI.CLICK1); }
-		private void OnExitPressed() { popup.exitView.Show(); }
-		private void OnExitGamePressed() { GetTree().Quit(); }
-		private void OnExitMenuPressed()
+		private void ExitGame() { GetTree().Quit(); }
+		private void ExitMenu()
 		{
 			PlaySound(NameDB.UI.CLICK0);
 			Globals.cooldownMaster.ClearCooldowns();
 			SceneLoaderController.Init().SetScene(PathManager.startScene, Map.Map.map);
+		}
+		private void CheckExit(bool exitGame)
+		{
+			if (SaveLoadModel.dirty)
+			{
+				popup.RouteConnection(exitGame ? nameof(ExitGame)
+					: nameof(ExitMenu), this);
+				popup.ShowConfirm("Lose Save\nData?");
+			}
+			else if (exitGame)
+			{
+				ExitGame();
+			}
+			else
+			{
+				ExitMenu();
+			}
 		}
 		public void NpcInteract(Npc npc)
 		{

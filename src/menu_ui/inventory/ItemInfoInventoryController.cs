@@ -70,6 +70,7 @@ namespace Game.Ui
 			}
 
 			EmitSignal(nameof(RefreshSlots));
+			SaveLoadModel.dirty = true;
 		}
 		private void RemoveFromInventory()
 		{
@@ -166,7 +167,7 @@ namespace Game.Ui
 		{
 			PlaySound(NameDB.UI.CLICK2);
 
-			RouteConnections(nameof(OnDropConfirm));
+			popup.RouteConnection(nameof(OnDropConfirm), this);
 			mainContent.Hide();
 			popup.ShowConfirm("Drop?");
 		}

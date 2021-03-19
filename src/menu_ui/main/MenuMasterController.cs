@@ -5,6 +5,7 @@ using Game.Quest;
 using Game.Loot;
 using Game.Database;
 using Game.Actor.State;
+using System;
 namespace Game.Ui
 {
 	public class MenuMasterController : GameMenu
@@ -56,12 +57,16 @@ namespace Game.Ui
 		private void OnHudPausePressed(bool toggled)
 		{
 			PlaySound(NameDB.UI.CLICK5);
-			gameMenu.Visible = toggled;
-			if (toggled)
+
+			if (!gameMenu.Visible)
 			{
 				// just in case the player wants to save
 				saveLoadModel.SetCurrentGameImage();
+			}
 
+			gameMenu.Visible = toggled;
+			if (toggled)
+			{
 				HideExceptMenu(gameMenu);
 				gameMenu.npcMenu.Hide();
 				gameMenu.playerMenu.Show();
@@ -114,6 +119,13 @@ namespace Game.Ui
 				return;
 			}
 
+			Action showNpcMenu = () =>
+			{
+				saveLoadModel.SetCurrentGameImage();
+				HideExceptMenu(gameMenu);
+				gameMenu.NpcInteract(npc);
+			};
+
 			bool interactable = !npc.enemy &&
 				(Globals.contentDB.HasData(npc.Name) || QuestMaster.HasQuestOrQuestExtraContent(npc.worldName, npc.GetPath()))
 				&& 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
@@ -122,8 +134,7 @@ namespace Game.Ui
 			{
 				if (interactable)
 				{
-					HideExceptMenu(gameMenu);
-					gameMenu.NpcInteract(npc);
+					showNpcMenu();
 				}
 				else
 				{
@@ -141,8 +152,7 @@ namespace Game.Ui
 				}
 				else if (interactable)
 				{
-					HideExceptMenu(gameMenu);
-					gameMenu.NpcInteract(npc);
+					showNpcMenu();
 				}
 			}
 		}

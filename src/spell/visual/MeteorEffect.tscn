@@ -65,10 +65,10 @@ scale = 3.0
 scale_curve = ExtResource( 5 )
 color_ramp = ExtResource( 2 )
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=10]
 light_mode = 1
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=9]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
@@ -116,11 +116,11 @@ local_coords = false
 process_material = SubResource( 7 )
 
 [node name="bolt" type="Particles2D" parent="idle" index="3"]
-material = SubResource( 9 )
+material = SubResource( 10 )
 amount = 1
 lifetime = 2.0
 preprocess = 10.0
-process_material = SubResource( 8 )
+process_material = SubResource( 9 )
 texture = ExtResource( 6 )
 
 [node name="smoke2" type="Particles2D" parent="explode" index="0"]

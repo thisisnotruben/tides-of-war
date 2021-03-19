@@ -99,17 +99,6 @@ namespace Game.Ui
 				node.Visible = nodesToShow.Contains(node) || node == backBttn;
 			}
 		}
-		protected void RouteConnections(string toMethod)
-		{
-			BaseButton yesBttn = popup.yesBttn;
-			string signal = "pressed";
-
-			foreach (Godot.Collections.Dictionary connectionPacket in yesBttn.GetSignalConnectionList(signal))
-			{
-				yesBttn.Disconnect(signal, this, connectionPacket["method"].ToString());
-			}
-			yesBttn.Connect(signal, this, toMethod);
-		}
 		protected virtual void OnHide()
 		{
 			popup.Hide();

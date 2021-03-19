@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using Game.Actor;
 using Game.Database;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Ability
 {
-	public class SpellEffect : WorldObject
+	public class SpellEffect : WorldObject, ISerializable
 	{
 		[Export] protected float lightFadeDelay = 0.65f;
 		[Export] protected bool fadeLight = true;
@@ -40,8 +41,13 @@ namespace Game.Ability
 				node2D.UseParentMaterial = true;
 			}
 		}
+		public SpellEffect Init(Character character, string spellWorldName)
+		{
+			return Init(character, spellWorldName, character);
+		}
 		public SpellEffect Init(Character character, string spellWorldName, Node attachTo)
 		{
+			worldName = spellWorldName;
 			sound = Globals.spellDB.GetData(spellWorldName).sound;
 
 			attachTo.AddChild(this);
@@ -58,7 +64,7 @@ namespace Game.Ability
 			Routine fadeLightRoutine = () =>
 			{
 				FadeLight();
-				SetEmitting(idleParticles, false);
+				GetParticles(idleParticles).ForEach(p => p.Emitting = false);
 				timer.Start();
 			};
 
@@ -71,8 +77,8 @@ namespace Game.Ability
 					AddBehavior(() => Position = character.head.Position);
 					onTimeOut = () =>
 					{
-						tween.InterpolateProperty(this, ":modulate", Modulate,
-							new Color("00ffffff"), lightFadeDelay,
+						tween.InterpolateProperty(this, "modulate", Modulate,
+							Color.ColorN("white", 0.0f), lightFadeDelay,
 							Tween.TransitionType.Linear, Tween.EaseType.InOut);
 						tween.Start();
 						fadeLightRoutine();
@@ -119,18 +125,17 @@ namespace Game.Ability
 					AddBehavior(() =>
 					{
 						Node2D bolt = idleParticles.GetNode<Node2D>("bolt");
-						tween.InterpolateProperty(bolt, ":modulate", bolt.Modulate,
-							new Color("00ffffff"), lightFadeDelay,
+						tween.InterpolateProperty(bolt, "modulate", bolt.Modulate,
+							Color.ColorN("white", 0.0f), lightFadeDelay,
 							Tween.TransitionType.Linear, Tween.EaseType.In);
 					});
 					break;
 
 				case NameDB.Spell.CONCUSSIVE_SHOT:
-					// remember, bash effect can change and this with it
 					string bashName = NameDB.Spell.BASH;
-					SpellEffect bashEffect = (SpellEffect)Globals.spellEffectDB.GetData(
-						Globals.spellDB.GetData(bashName).spellEffect).Instance();
-					bashEffect.Init(character, bashName, character);
+					SpellEffect bashEffect = ((SpellEffect)Globals.spellEffectDB.GetData(
+						Globals.spellDB.GetData(bashName).spellEffect).Instance()).Init(
+						character, bashName);
 
 					polyBehavior.Push(() =>
 						{
@@ -149,8 +154,8 @@ namespace Game.Ability
 		private void AddBehavior(Routine routine) { polyBehavior.Push(routine); }
 		public void FadeLight()
 		{
-			tween.InterpolateProperty(light, ":modulate", light.Modulate,
-				new Color("00ffffff"), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.In);
+			tween.InterpolateProperty(light, "modulate", light.Modulate,
+				Color.ColorN("white", 0.0f), lightFadeDelay, Tween.TransitionType.Linear, Tween.EaseType.In);
 		}
 		public void _OnTimerTimeout() { onTimeOut?.Invoke(); }
 		public void OnHit()
@@ -163,7 +168,7 @@ namespace Game.Ability
 			active = true;
 			Globals.soundPlayer.PlaySound(sound, player2D);
 
-			tween.InterpolateProperty(this, ":scale", new Vector2(0.75f, 0.75f),
+			tween.InterpolateProperty(this, "scale", new Vector2(0.75f, 0.75f),
 				Vector2.One, 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);
 
 			if (fadeLight)
@@ -171,25 +176,51 @@ namespace Game.Ability
 				FadeLight();
 			}
 
-			SetEmitting(idleParticles, false);
-			SetEmitting(explodeParticles, true);
+			GetParticles(idleParticles).ForEach(p => p.Emitting = false);
+			GetParticles(explodeParticles).ForEach(p => p.Emitting = true);
 
 			while (polyBehavior.Count > 0)
 			{
 				polyBehavior.Pop().Invoke();
 			}
 		}
-		private void SetEmitting(Node parent, bool emitting)
+		private List<Particles2D> GetParticles(Node parent)
 		{
-			Particles2D particles;
-			foreach (Node node in parent.GetChildren())
+			List<Particles2D> particles2D = new List<Particles2D>();
+			for (int i = 0; i < parent.GetChildCount(); i++)
 			{
-				particles = node as Particles2D;
-				if (particles != null)
+				if (GetChild(i) is Particles2D)
 				{
-					particles.Emitting = emitting;
+					particles2D.Add(GetChild<Particles2D>(i));
 				}
 			}
+			return particles2D;
+		}
+		public GC.Dictionary Serialize()
+		{
+			return new GC.Dictionary()
+			{
+				{ NameDB.SaveTag.NAME, Filename.GetFile().BaseName() },
+				{ NameDB.SaveTag.SPELL, worldName },
+				{ NameDB.SaveTag.TIME_LEFT, timer.TimeLeft },
+				{ NameDB.SaveTag.ANIM_POSITION, tween.Tell() }
+		};
+		}
+		public void Deserialize(GC.Dictionary payload)
+		{
+			float timeLeft = (float)payload[NameDB.SaveTag.TIME_LEFT],
+				timeAdvanced = timer.WaitTime - timeLeft;
+
+			if (timeAdvanced > 0.0f)
+			{
+				GetParticles(idleParticles).ForEach(p => p.Preprocess = timeAdvanced);
+				GetParticles(explodeParticles).ForEach(p => p.Preprocess = timeAdvanced);
+			}
+
+			OnHit();
+
+			timer.Start(timeLeft);
+			tween.Seek((float)payload[NameDB.SaveTag.ANIM_POSITION]);
 		}
 	}
 }

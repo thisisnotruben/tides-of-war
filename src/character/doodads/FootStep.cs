@@ -10,8 +10,8 @@ namespace Game.Actor.Doodads
 		public override void _Draw() { DrawRect(STEP, BEGIN_COLOR); }
 		public void OnTimerTimeout()
 		{
-			Tween tween = GetNode<Tween>("tween");
-			tween.InterpolateProperty(this, ":modulate", Modulate,
+			Tween tween = GetChild<Tween>(0);
+			tween.InterpolateProperty(this, "modulate", Modulate,
 				END_COLOR, STEP_FADE_DURATION,
 				Tween.TransitionType.Linear, Tween.EaseType.In);
 			tween.Start();

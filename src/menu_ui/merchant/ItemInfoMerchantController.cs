@@ -42,7 +42,7 @@ namespace Game.Ui
 		}
 		private void OnBuyPressed()
 		{
-			RouteConnections(nameof(OnBuyConfirm));
+			popup.RouteConnection(nameof(OnBuyConfirm), this);
 			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
 			if (Globals.spellDB.HasData(commodityWorldName)
@@ -74,7 +74,7 @@ namespace Game.Ui
 		}
 		private void OnSellPressed()
 		{
-			RouteConnections(nameof(_OnSellConfirm));
+			popup.RouteConnection(nameof(_OnSellConfirm), this);
 			PlaySound(NameDB.UI.CLICK2);
 			mainContent.Hide();
 			popup.ShowConfirm("Sell?");

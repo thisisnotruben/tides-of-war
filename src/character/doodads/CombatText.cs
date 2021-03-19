@@ -8,6 +8,7 @@ namespace Game.Actor.Doodads
 	{
 		public enum TextType : byte { XP, GOLD, CRITICAL, MANA, DODGE, PARRY, MISS, HIT }
 		private const float TIME = 1.1f, DISTANCE = 12.0f;
+		private const string ANIM_NAME = "labelFade";
 
 		private Tween tween;
 		private Label label;
@@ -69,7 +70,7 @@ namespace Game.Actor.Doodads
 		public void Start()
 		{
 			tween.Start();
-			anim.Play("labelFade");
+			anim.Play(ANIM_NAME);
 		}
 		public void OnMidwayThroughAnimation() { EmitSignal(nameof(MidwayThrough)); } // called by anim
 		public void OnAnimationFinished(string animName) { EmitSignal(nameof(Finished)); }
@@ -88,7 +89,7 @@ namespace Game.Actor.Doodads
 		public void Deserialize(GC.Dictionary payload)
 		{
 			float timeLeft = (float)payload[NameDB.SaveTag.TIME_LEFT];
-			if (timeLeft > 0.0f)
+			if (timeLeft > 0.0f && timeLeft < anim.GetAnimation(ANIM_NAME).Length)
 			{
 				tween.Seek(timeLeft);
 				anim.Seek(timeLeft, true);

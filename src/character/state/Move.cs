@@ -38,7 +38,7 @@ namespace Game.Actor.State
 		public override void Start()
 		{
 			character.img.FlipH = false;
-			character.anim.Play("moving", -1, character.stats.animSpeed.value);
+			character.anim.Play(Character.ANIM_MOVE, -1, character.stats.animSpeed.value);
 			character.anim.Seek(0.33f, true);
 		}
 		public override void Exit()
@@ -149,7 +149,8 @@ namespace Game.Actor.State
 			MoveCharacter(new Vector2((float)targetPos[0], (float)targetPos[1]));
 
 			float animPos = (float)payload[NameDB.SaveTag.ANIM_POSITION];
-			if (animPos > 0.0f)
+			if (animPos > 0.0f
+			&& animPos < character.anim.GetAnimation(Character.ANIM_MOVE).Length)
 			{
 				character.anim.Seek(animPos, true);
 			}
