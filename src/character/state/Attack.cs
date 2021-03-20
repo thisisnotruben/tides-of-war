@@ -330,53 +330,58 @@ namespace Game.Actor.State
 
 			if (character is Npc
 			&& Stats.CHANCE_NPC_SPELL >= rand.Next(1, 101)
-			&& Globals.contentDB.HasData(character.worldName))
+			&& Globals.contentDB.HasData(character.Name))
 			{
-				ContentDB.ContentData contentData = Globals.contentDB.GetData(character.worldName);
-				if (contentData.spells.Length == 0)
+				IEnumerable<string> spellCandidates,
+					spells = from spellName in Globals.contentDB.GetData(character.Name).spells
+							 where !Globals.cooldownMaster.IsCoolingDown(character.GetPath(), spellName)
+							 && character.mana >= Globals.spellDB.GetData(spellName).manaCost
+							 select spellName;
+
+				if (!spells.Any())
 				{
 					spell = null;
 					return false;
 				}
 
-				// TODO: check for cooldowns and loop until a spell is found or cancel if all spells are cooling down
-
-				// get all spell-types from character spells
 				IEnumerable<SpellDB.SpellTypes> characterSpellTypes =
-					from spellName in contentData.spells
+					from spellName in spells
 					select Globals.spellDB.GetData(spellName).type;
 
-				Array spellTypes = Enum.GetValues(typeof(SpellDB.SpellTypes));
-				SpellDB.SpellTypes spellType;
-				IEnumerable<string> spells;
+				Array allSpellTypes = Enum.GetValues(typeof(SpellDB.SpellTypes));
+				SpellDB.SpellTypes chosenSpellType;
 
-				// randomly choose a spell-type that character has
 				do
 				{
-					spellType = (SpellDB.SpellTypes)spellTypes.GetValue(rand.Next(spellTypes.Length));
-				} while (!characterSpellTypes.Contains(spellType));
+					do // randomly choose a spell-type that character has
+					{
+						chosenSpellType = (SpellDB.SpellTypes)allSpellTypes.GetValue(rand.Next(allSpellTypes.Length));
+					} while (!characterSpellTypes.Contains(chosenSpellType));
 
-				// get all spells from character that equal ramdom spell-type
-				spells = from spellName in contentData.spells
-						 where Globals.spellDB.GetData(spellName).type.Equals(spellType)
-						 select spellName;
-
-				if (spellType.Equals(SpellDB.SpellTypes.HIT_HOSTILE))
-				{
-					// select only spells within range
-					spells =
+					spellCandidates = // get all spells from character that equal randomly chosen spell-type
 						from spellName in spells
-						where Globals.spellDB.GetData(spellName).range >= character.pos.DistanceTo(character.target.pos)
+						where Globals.spellDB.GetData(spellName).type == chosenSpellType
 						select spellName;
-				}
 
-				if (spells.Any())
-				{
-					spell = new SpellFactory().Make(character, spells.ElementAt(rand.Next(spells.Count())));
-					SetSpellNodeInTree(spell, character);
-					return true;
-				}
+					if (chosenSpellType == SpellDB.SpellTypes.HIT_HOSTILE)
+					{
+						spellCandidates = // select only spells within range
+							from spellName in spellCandidates
+							where Globals.spellDB.GetData(spellName).range >= character.pos.DistanceTo(character.target.pos)
+							select spellName;
 
+						// if none are in range and this is the only type we have
+						if (!spellCandidates.Any() && characterSpellTypes.Count() == 1)
+						{
+							spell = null;
+							return false;
+						}
+					}
+				} while (!spellCandidates.Any()); // loop until we have spells
+
+				spell = new SpellFactory().Make(character, spellCandidates.ElementAt(rand.Next(spellCandidates.Count())));
+				SetSpellNodeInTree(spell, character);
+				return true;
 			}
 			spell = null;
 			return false;

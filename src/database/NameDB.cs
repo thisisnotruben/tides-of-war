@@ -105,7 +105,6 @@ namespace Game.Database
 				TIME_LEFT = "timeLeft",
 				TIME = "time",
 				COOLDOWNS = "coolDowns",
-				IMG_FRAME = "imgFrame",
 				MAP = "map",
 				DAY_LIGHT = "dayLight",
 				STATE = "state",
