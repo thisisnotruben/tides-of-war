@@ -1,15 +1,20 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://src/character/npc/targetDummy/targetDummy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/character/player/player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/character/npc/npc.tscn" type="PackedScene" id=4]
-[ext_resource path="res://2d_env.tres" type="Environment" id=7]
+[ext_resource path="res://src/character/player/Player.cs" type="Script" id=1]
+[ext_resource path="res://src/character/npc/Npc.cs" type="Script" id=2]
+[ext_resource path="res://src/character/npc/npc.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/map/doodads/WorldClock.cs" type="Script" id=4]
+[ext_resource path="res://src/character/player/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://2d_env.tres" type="Environment" id=6]
+[ext_resource path="res://src/map/doodads/WorldClock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/map/Map.cs" type="Script" id=8]
-[ext_resource path="res://src/map/doodads/WorldClock.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/map/doodads/VeilFog.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/light/lightSource.tscn" type="PackedScene" id=13]
-[ext_resource path="res://asset/img/map/worldTileset.tres" type="TileSet" id=14]
-[ext_resource path="res://src/light/firePit.tscn" type="PackedScene" id=15]
+[ext_resource path="res://asset/img/light/light.png" type="Texture" id=9]
+[ext_resource path="res://src/map/doodads/VeilFog.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/light/LightSource.cs" type="Script" id=11]
+[ext_resource path="res://src/light/lightSource.tscn" type="PackedScene" id=12]
+[ext_resource path="res://asset/img/light/gradient/fireLight.tres" type="Gradient" id=13]
+[ext_resource path="res://src/light/firePit.tscn" type="PackedScene" id=14]
+[ext_resource path="res://asset/img/map/worldTileset.tres" type="TileSet" id=15]
 
 [sub_resource type="Curve" id=1]
 min_value = 0.99
@@ -36,18 +41,34 @@ position = Vector2( 0, 16 )
 script = ExtResource( 8 )
 
 [node name="worldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 7 )
+environment = ExtResource( 6 )
 
-[node name="worldClock" parent="." instance=ExtResource( 9 )]
+[node name="worldClock" type="Timer" parent="." instance=ExtResource( 7 )]
+wait_time = 210.0
+one_shot = true
+autostart = true
+script = ExtResource( 4 )
 
-[node name="VeilFog" parent="." instance=ExtResource( 11 )]
+[node name="VeilFog" type="Particles2D" parent="." instance=ExtResource( 10 )]
+visible = false
+position = Vector2( 400, 400 )
+rotation = -1.5708
+z_index = 1
+emitting = false
+amount = 400
+lifetime = 3.0
+preprocess = 1.0
+speed_scale = 0.75
+randomness = 1.0
+visibility_rect = Rect2( -400, -400, 800, 800 )
+local_coords = false
 process_material = SubResource( 3 )
 
 [node name="ground" type="Node2D" parent="."]
 
 [node name="g0" type="TileMap" parent="ground"]
 light_mask = 2
-tile_set = ExtResource( 14 )
+tile_set = ExtResource( 15 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
 cell_y_sort = true
@@ -57,7 +78,7 @@ tile_data = PoolIntArray( 0, 216, 0, 1, 216, 0, 2, 216, 0, 3, 216, 0, 4, 797, 0,
 
 [node name="g1" type="TileMap" parent="ground"]
 light_mask = 2
-tile_set = ExtResource( 14 )
+tile_set = ExtResource( 15 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
 cell_y_sort = true
@@ -67,7 +88,7 @@ tile_data = PoolIntArray( 0, 595, 0, 1, 595, 0, 2, 595, 0, 3, 595, 0, 4, 595, 0,
 
 [node name="g2" type="TileMap" parent="ground"]
 light_mask = 2
-tile_set = ExtResource( 14 )
+tile_set = ExtResource( 15 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
 cell_y_sort = true
@@ -78,7 +99,7 @@ tile_data = PoolIntArray( 29, 530, 0, 30, 531, 0, 31, 532, 0, 65553, 530, 0, 655
 [node name="zed" type="Node2D" parent="."]
 
 [node name="z1" type="TileMap" parent="zed"]
-tile_set = ExtResource( 14 )
+tile_set = ExtResource( 15 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 cell_clip_uv = true
@@ -86,83 +107,229 @@ occluder_light_mask = 2
 format = 1
 tile_data = PoolIntArray( 4, 2766, 0, 5, 2767, 0, 6, 2768, 0, 65553, 2769, 0, 65554, 2770, 0, 65555, 2771, 0, 131074, 2769, 0, 131075, 2770, 0, 131076, 2771, 0, 131080, 2775, 0, 131081, 2776, 0, 131082, 2777, 0, 131083, 2769, 0, 131084, 2770, 0, 131085, 2771, 0, 131093, 2775, 0, 131094, 2776, 0, 131095, 2777, 0, 131096, 2769, 0, 131097, 2770, 0, 131098, 2771, 0, 131100, 2772, 0, 131101, 2773, 0, 131102, 2774, 0, 196608, 2776, 0, 196609, 2777, 0, 196613, 2775, 0, 196614, 2776, 0, 196615, 2777, 0, 196622, 2775, 0, 196623, 2776, 0, 196624, 2777, 0, 196638, 2775, 0, 196639, 2776, 0, 262145, 2769, 0, 262146, 2770, 0, 262147, 2771, 0, 262161, 2769, 0, 262162, 2770, 0, 262163, 2771, 0, 327683, 2772, 0, 327684, 2773, 0, 327685, 2774, 0, 327689, 2766, 0, 327690, 2767, 0, 327691, 2768, 0, 458782, 2769, 0, 458783, 2770, 0, 524289, 2766, 0, 524290, 2767, 0, 524291, 2768, 0, 524302, 20359, 0, 524303, 20360, 0, 524304, 20361, 0, 524310, 9971, 0, 589831, 18823, 0, 589832, 18824, 0, 589833, 18825, 0, 655384, 2769, 0, 655385, 2770, 0, 655386, 2771, 0, 720899, 2772, 0, 720900, 2773, 0, 720901, 2774, 0, 720915, 19340, 0, 720916, 19341, 0, 720917, 19342, 0, 720918, 2769, 0, 720919, 2770, 0, 720920, 2771, 0, 720923, 2766, 0, 720924, 2767, 0, 720925, 2768, 0, 786440, 9970, 0, 786462, 2772, 0, 786463, 2773, 0, 851968, 2775, 0, 851969, 2776, 0, 851970, 2777, 0, 851972, 2769, 0, 851973, 2770, 0, 851974, 2771, 0, 851975, 15565, 0, 851991, 2772, 0, 851992, 2773, 0, 851993, 2774, 0, 917524, 2772, 0, 917525, 2773, 0, 917526, 2774, 0, 917529, 2769, 0, 917530, 2770, 0, 917531, 2771, 0, 983059, 2772, 0, 983060, 2773, 0, 983061, 2774, 0, 983062, 2775, 0, 983063, 2776, 0, 983064, 2777, 0, 983068, 2766, 0, 983069, 2767, 0, 983070, 2768, 0, 1048593, 2766, 0, 1048594, 2767, 0, 1048595, 2768, 0, 1048602, 2772, 0, 1048603, 2773, 0, 1048604, 2774, 0, 1048606, 2769, 0, 1048607, 2770, 0, 1114127, 2769, 0, 1114128, 2770, 0, 1114129, 2771, 0, 1179660, 8719, 0, 1245210, 2892, 0, 1245214, 2832, 0, 1310745, 9972, 0, 1376287, 15237, 0, 1441819, 536886149, 0, 1507357, 19356, 0, 1507358, 19357, 0, 1572895, 15237, 0, 1638401, 2766, 0, 1638402, 2767, 0, 1638403, 2768, 0, 1638419, 9970, 0, 1703936, 2770, 0, 1703937, 2771, 0, 1703944, 2775, 0, 1703945, 2776, 0, 1703946, 2777, 0, 1703948, 2769, 0, 1703949, 2770, 0, 1703950, 2771, 0, 1703952, 2893, 0, 1703954, 536886149, 0, 1703962, 536886149, 0, 1769475, 19719, 0, 1769476, 19720, 0, 1769502, 15237, 0, 1769503, 2894, 0, 1835008, 2772, 0, 1835009, 2773, 0, 1835010, 2774, 0, 1835018, 2772, 0, 1835019, 2773, 0, 1835020, 2774, 0, 1835025, 536886149, 0, 1835029, 15237, 0, 1835033, 536886149, 0, 1835035, 19358, 0, 1835036, 19359, 0, 1835037, 19360, 0, 1900557, 2896, 0, 1900563, 19356, 0, 1900564, 19357, 0, 1900565, 9972, 0, 1900573, 15237, 0, 1966080, 2770, 0, 1966081, 2771, 0, 1966088, 2766, 0, 1966089, 2767, 0, 1966090, 2768, 0, 1966098, 2893, 0, 1966101, 15237, 0, 1966110, 2891, 0, 2031620, 2769, 0, 2031621, 2770, 0, 2031622, 2771, 0, 2031623, 2772, 0, 2031624, 2773, 0, 2031625, 2774, 0, 2031641, 2892, 0 )
 
-[node name="player" parent="zed/z1" instance=ExtResource( 3 )]
+[node name="player" type="Node2D" parent="zed/z1" instance=ExtResource( 5 )]
 position = Vector2( 216, 200 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="33-treant" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="33-treant" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 376, 56 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="39-treant" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="39-treant" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 440, 72 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="38-treant" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="38-treant" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 344, 88 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="43-critter" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="43-critter" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 456, 104 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="50-human" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="50-human" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 296, 104 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="4-Trainer" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="4-Trainer" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 232, 152 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="10-Merchant" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="10-Merchant" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 184, 152 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="45-critter" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="45-critter" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 120, 184 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="6-Quest Giver" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="6-Quest Giver" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 296, 200 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="47-robot" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="47-robot" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 152, 216 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="26-orc" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="26-orc" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 360, 296 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="11-warthog" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="11-warthog" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 440, 328 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="21-robot" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="21-robot" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 200, 344 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="18-robot" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="18-robot" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 72, 360 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="13-warthog" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="13-warthog" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 456, 392 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="14-warthog" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="14-warthog" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 376, 440 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="20-robot" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="20-robot" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 104, 440 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="16-warthog" parent="zed/z1" instance=ExtResource( 4 )]
+[node name="16-warthog" type="Node2D" parent="zed/z1" instance=ExtResource( 3 )]
 position = Vector2( 264, 456 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_vertical_guides_": [  ]
+}
 
-[node name="64-firePit" parent="zed/z1" instance=ExtResource( 15 )]
+[node name="64-firePit" type="Node2D" parent="zed/z1" instance=ExtResource( 14 )]
 position = Vector2( 232, 224 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="light2D" parent="zed/z1/64-firePit" instance=ExtResource( 13 )]
+[node name="light2D" type="Light2D" parent="zed/z1/64-firePit" instance=ExtResource( 12 )]
 position = Vector2( 0, -8 )
+texture = ExtResource( 9 )
 texture_scale = 0.15625
-energy = 0.65
+color = Color( 0.972549, 0.764706, 0.658824, 1 )
+energy = 0.75
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_gradient_length = 2.5
+shadow_filter = 2
+shadow_filter_smooth = 14.0
+shadow_item_cull_mask = 2
+script = ExtResource( 11 )
+gradient = ExtResource( 13 )
+gradientSpeed = 1.0
+minBrightness = 0.75
+maxBrightness = 1.0
+dimSpeed = 2.0
 
-[node name="63-firePit" parent="zed/z1" instance=ExtResource( 15 )]
+[node name="63-firePit" type="Node2D" parent="zed/z1" instance=ExtResource( 14 )]
 position = Vector2( 376, 384 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="light2D" parent="zed/z1/63-firePit" instance=ExtResource( 13 )]
+[node name="light2D" type="Light2D" parent="zed/z1/63-firePit" instance=ExtResource( 12 )]
 position = Vector2( 0, -8 )
+texture = ExtResource( 9 )
 texture_scale = 0.15625
-
-[node name="target_dummy" parent="zed/z1" instance=ExtResource( 1 )]
-position = Vector2( 264.065, 215.974 )
+color = Color( 0.972549, 0.764706, 0.658824, 1 )
+energy = 0.75
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_gradient_length = 2.5
+shadow_filter = 2
+shadow_filter_smooth = 14.0
+shadow_item_cull_mask = 2
+script = ExtResource( 11 )
+gradient = ExtResource( 13 )
+gradientSpeed = 1.0
+minBrightness = 0.75
+maxBrightness = 1.0
+dimSpeed = 2.0
 
 [node name="z2" type="TileMap" parent="zed"]
-tile_set = ExtResource( 14 )
+tile_set = ExtResource( 15 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
 cell_y_sort = true
@@ -175,8 +342,9 @@ tile_data = PoolIntArray( 2, 2705, 0, 3, 2706, 0, 4, 2707, 0, 8, 2711, 0, 9, 271
 visible = false
 
 [node name="coll_nav" type="TileMap" parent="meta"]
+visible = false
 modulate = Color( 1, 1, 1, 0.501961 )
-tile_set = ExtResource( 14 )
+tile_set = ExtResource( 15 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
 cell_y_sort = true

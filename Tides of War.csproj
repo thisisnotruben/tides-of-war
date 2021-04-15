@@ -77,6 +77,7 @@
     <Compile Include="src\database\SpellEffectDB.cs" />
     <Compile Include="src\database\UnitDB.cs" />
     <Compile Include="src\database\UseDB.cs" />
+    <Compile Include="src\dialogic\Dialogic.cs" />
     <Compile Include="src\factory\Factory.cs" />
     <Compile Include="src\factory\ItemFactory.cs" />
     <Compile Include="src\factory\MissileFactory.cs" />

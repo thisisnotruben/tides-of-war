@@ -1,6 +1,7 @@
 using Godot;
 using Game.Sound;
 using Game.Database;
+using Game.DialogicAdapter;
 namespace Game
 {
 	public class Globals : Node
@@ -25,6 +26,8 @@ namespace Game
 		public static readonly SpellEffectDB spellEffectDB = new SpellEffectDB(PathManager.spellEffectDir);
 		public static readonly UnitDB unitDB = new UnitDB();
 		public static readonly UseDB useDB = new UseDB(PathManager.use);
+
+		public static readonly Dialogic dialogic = new Dialogic();
 
 		public override void _Ready()
 		{

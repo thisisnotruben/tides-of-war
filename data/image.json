@@ -2238,5 +2238,405 @@
 		"swing": "swing_medium",
 		"body": "",
 		"melee": true
+	},
+	"human-30": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "mace",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "human_armored",
+		"melee": true
+	},
+	"human-31": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "mace",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "human_armored",
+		"melee": true
+	},
+	"human-32": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "human_armored",
+		"melee": true
+	},
+	"human-33": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "human_armored",
+		"melee": true
+	},
+	"human-34": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "human_armored",
+		"melee": true
+	},
+	"human-35": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "human_armored",
+		"melee": true
+	},
+	"human-36": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "human_armored",
+		"melee": true
+	},
+	"human-37": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "human_armored",
+		"melee": true
+	},
+	"human-38": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "human_unarmored",
+		"melee": false
+	},
+	"human-39": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "human_unarmored",
+		"melee": false
+	},
+	"human-40": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "human_unarmored",
+		"melee": false
+	},
+	"human-41": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "human_unarmored",
+		"melee": true
+	},
+	"human-42": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "human_unarmored",
+		"melee": true
+	},
+	"human-43": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "human_unarmored",
+		"melee": true
+	},
+	"human-44": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "human_unarmored",
+		"melee": true
+	},
+	"human-45": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "gun",
+		"weaponMaterial": "",
+		"swing": "",
+		"body": "human_unarmored",
+		"melee": false
+	},
+	"human-46": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "gun",
+		"weaponMaterial": "",
+		"swing": "",
+		"body": "human_unarmored",
+		"melee": false
+	},
+	"human-47": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "gun",
+		"weaponMaterial": "",
+		"swing": "",
+		"body": "human_unarmored",
+		"melee": false
+	},
+	"human-48": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "human_unarmored",
+		"melee": true
+	},
+	"critter-27": {
+		"moving": 3,
+		"dying": 6,
+		"attacking": 5,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "wolf",
+		"melee": true
+	},
+	"critter-28": {
+		"moving": 3,
+		"dying": 6,
+		"attacking": 5,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "wolf",
+		"melee": true
+	},
+	"critter-29": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "spider",
+		"melee": true
+	},
+	"critter-30": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_medium",
+		"body": "spider",
+		"melee": true
+	},
+	"gnoll-10": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "gnoll",
+		"melee": false
+	},
+	"gnoll-11": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "gnoll",
+		"melee": false
+	},
+	"gnoll-12": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-13": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_small",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-14": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-15": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "club",
+		"weaponMaterial": "wood",
+		"swing": "swing_small",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-16": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_small",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-17": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "gnoll",
+		"melee": false
+	},
+	"gnoll-18": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "gnoll",
+		"melee": false
+	},
+	"gnoll-19": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "gnoll",
+		"melee": false
+	},
+	"gnoll-20": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-21": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_small",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-22": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "gnoll",
+		"melee": false
+	},
+	"gnoll-23": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "gnoll",
+		"melee": false
+	},
+	"gnoll-24": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-25": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_small",
+		"body": "gnoll",
+		"melee": true
+	},
+	"gnoll-26": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "gnoll",
+		"melee": true
 	}
 }

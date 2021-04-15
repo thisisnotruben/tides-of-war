@@ -8,9 +8,38 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Dialogic",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicClass.gd"
+}, {
+"base": "Control",
+"class": "DialogicBackgroundMusic",
+"language": "GDScript",
+"path": "res://addons/dialogic/Nodes/BackgroundMusic.gd"
+}, {
+"base": "Node",
+"class": "DialogicDefinitionsUtil",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicDefinitionsUtil.gd"
+}, {
+"base": "Reference",
+"class": "DialogicResources",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicResources.gd"
+}, {
+"base": "Reference",
+"class": "DialogicUtil",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicUtil.gd"
+} ]
 _global_script_class_icons={
-
+"Dialogic": "",
+"DialogicBackgroundMusic": "",
+"DialogicDefinitionsUtil": "",
+"DialogicResources": "",
+"DialogicUtil": ""
 }
 
 [application]
@@ -25,6 +54,7 @@ config/quit_on_go_back=false
 [autoload]
 
 Globals="*res://src/global/Globals.cs"
+DialogicSingleton="*res://addons/dialogic/Other/DialogicSingleton.gd"
 
 [debug]
 
@@ -42,7 +72,7 @@ window/handheld/emulate_touchscreen=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "vnen.tiled_importer" )
+enabled=PoolStringArray( "dialogic", "vnen.tiled_importer" )
 
 [gdnative]
 

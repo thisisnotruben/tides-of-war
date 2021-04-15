@@ -8,6 +8,8 @@
 [ext_resource path="res://src/menu_ui/components/ItemInfoView.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=10]
 
+
+
 [node name="merchantView" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

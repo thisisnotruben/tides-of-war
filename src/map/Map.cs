@@ -170,7 +170,10 @@ namespace Game.Map
 			{
 				Queue<Vector2> path = new Queue<Vector2>(aStar.GetPointPath(worldStartPointIdx, worldEndPointIdx));
 				// first point is where worldStart is at
-				path.Dequeue();
+				if (path.Count > 0)
+				{
+					path.Dequeue();
+				}
 				return path;
 			}
 			return new Queue<Vector2>();
