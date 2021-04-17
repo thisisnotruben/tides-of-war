@@ -114,14 +114,12 @@ namespace Game.Util
 
 			// add worldClock scene
 			Node worldClock = worldClockScene.Instance();
-			map.AddChild(worldClock);
-			map.MoveChild(worldClock, 1);
+			map.AddChildBelowNode(worldEnvironment, worldClock);
 			worldClock.Owner = map;
 
 			// add veil scene
 			Node2D veil = (Node2D)veilScene.Instance();
-			map.AddChild(veil);
-			map.MoveChild(veil, 2);
+			map.AddChildBelowNode(worldClock, veil);
 			veil.Owner = map;
 			veil.Hide();
 

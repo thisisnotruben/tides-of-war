@@ -120,7 +120,7 @@ namespace Game.Actor.State
 				Player player = character as Player;
 				if (player != null)
 				{
-					player.menu.CheckHudSlots(player.menu.gameMenu.playerSpellBook, spell.worldName);
+					player.menu.CheckHudSlots(player.menu.playerMenu.playerSpellBook, spell.worldName);
 				}
 			};
 

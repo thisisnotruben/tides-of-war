@@ -3,8 +3,8 @@
 		"name": "Trainer",
 		"img": "oliphant-1",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			232,
@@ -15,8 +15,8 @@
 		"name": "Quest Giver",
 		"img": "orc-8",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			296,
@@ -27,8 +27,8 @@
 		"name": "Merchant",
 		"img": "human-2",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			184,
@@ -39,8 +39,8 @@
 		"name": "",
 		"img": "warthog-3",
 		"enemy": true,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			440,
@@ -51,8 +51,8 @@
 		"name": "",
 		"img": "warthog-0",
 		"enemy": true,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			456,
@@ -63,8 +63,8 @@
 		"name": "",
 		"img": "warthog-5",
 		"enemy": true,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			376,
@@ -75,8 +75,8 @@
 		"name": "",
 		"img": "warthog-4",
 		"enemy": true,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			264,
@@ -87,8 +87,8 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			72,
@@ -99,8 +99,8 @@
 		"name": "",
 		"img": "robot-0",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			104,
@@ -111,8 +111,8 @@
 		"name": "",
 		"img": "robot-2",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [
 			[
 				200,
@@ -204,8 +204,8 @@
 		"name": "",
 		"img": "orc-2",
 		"enemy": true,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			360,
@@ -216,8 +216,8 @@
 		"name": "",
 		"img": "treant-2",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			376,
@@ -228,8 +228,8 @@
 		"name": "",
 		"img": "treant-1",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			344,
@@ -240,8 +240,8 @@
 		"name": "",
 		"img": "treant-3",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			440,
@@ -252,8 +252,8 @@
 		"name": "",
 		"img": "critter-25",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			456,
@@ -263,9 +263,9 @@
 	"45-critter": {
 		"name": "",
 		"img": "critter-4",
-		"enemy": false,
+		"enemy": true,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			120,
@@ -276,8 +276,8 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			152,
@@ -288,8 +288,8 @@
 		"name": "",
 		"img": "human-27",
 		"enemy": false,
+		"dialogue": false,
 		"level": 1,
-		"dialogue": "",
 		"path": [],
 		"spawnPos": [
 			296,

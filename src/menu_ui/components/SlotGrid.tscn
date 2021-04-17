@@ -7,11 +7,11 @@
 [node name="SlotGrid" type="GridContainer"]
 margin_right = 560.0
 margin_bottom = 560.0
-rect_min_size = Vector2( 560, 560 )
+rect_min_size = Vector2( 672, 560 )
 theme = ExtResource( 3 )
 custom_constants/vseparation = 112
 custom_constants/hseparation = 112
-columns = 5
+columns = 6
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -42,108 +42,136 @@ margin_right = 448.0
 margin_bottom = 0.0
 
 [node name="slot6" parent="." instance=ExtResource( 1 )]
+margin_left = 560.0
+margin_right = 560.0
+margin_bottom = 0.0
+
+[node name="slot7" parent="." instance=ExtResource( 1 )]
 margin_top = 112.0
 margin_right = 0.0
 
-[node name="slot7" parent="." instance=ExtResource( 1 )]
+[node name="slot8" parent="." instance=ExtResource( 1 )]
 margin_left = 112.0
 margin_top = 112.0
 
-[node name="slot8" parent="." instance=ExtResource( 1 )]
+[node name="slot9" parent="." instance=ExtResource( 1 )]
 margin_left = 224.0
 margin_top = 112.0
 margin_right = 224.0
 
-[node name="slot9" parent="." instance=ExtResource( 1 )]
+[node name="slot10" parent="." instance=ExtResource( 1 )]
 margin_left = 336.0
 margin_top = 112.0
 margin_right = 336.0
 
-[node name="slot10" parent="." instance=ExtResource( 1 )]
+[node name="slot11" parent="." instance=ExtResource( 1 )]
 margin_left = 448.0
 margin_top = 112.0
 margin_right = 448.0
 
-[node name="slot11" parent="." instance=ExtResource( 1 )]
-margin_top = 224.0
-margin_right = 0.0
-margin_bottom = 224.0
-
 [node name="slot12" parent="." instance=ExtResource( 1 )]
-margin_left = 112.0
-margin_top = 224.0
-margin_bottom = 224.0
+margin_left = 560.0
+margin_top = 112.0
+margin_right = 560.0
 
 [node name="slot13" parent="." instance=ExtResource( 1 )]
-margin_left = 224.0
 margin_top = 224.0
-margin_right = 224.0
+margin_right = 0.0
 margin_bottom = 224.0
 
 [node name="slot14" parent="." instance=ExtResource( 1 )]
-margin_left = 336.0
+margin_left = 112.0
 margin_top = 224.0
-margin_right = 336.0
 margin_bottom = 224.0
 
 [node name="slot15" parent="." instance=ExtResource( 1 )]
+margin_left = 224.0
+margin_top = 224.0
+margin_right = 224.0
+margin_bottom = 224.0
+
+[node name="slot16" parent="." instance=ExtResource( 1 )]
+margin_left = 336.0
+margin_top = 224.0
+margin_right = 336.0
+margin_bottom = 224.0
+
+[node name="slot17" parent="." instance=ExtResource( 1 )]
 margin_left = 448.0
 margin_top = 224.0
 margin_right = 448.0
 margin_bottom = 224.0
 
-[node name="slot16" parent="." instance=ExtResource( 1 )]
-margin_top = 336.0
-margin_right = 0.0
-margin_bottom = 336.0
-
-[node name="slot17" parent="." instance=ExtResource( 1 )]
-margin_left = 112.0
-margin_top = 336.0
-margin_bottom = 336.0
-
 [node name="slot18" parent="." instance=ExtResource( 1 )]
-margin_left = 224.0
-margin_top = 336.0
-margin_right = 224.0
-margin_bottom = 336.0
+margin_left = 560.0
+margin_top = 224.0
+margin_right = 560.0
+margin_bottom = 224.0
 
 [node name="slot19" parent="." instance=ExtResource( 1 )]
-margin_left = 336.0
 margin_top = 336.0
-margin_right = 336.0
+margin_right = 0.0
 margin_bottom = 336.0
 
 [node name="slot20" parent="." instance=ExtResource( 1 )]
+margin_left = 112.0
+margin_top = 336.0
+margin_bottom = 336.0
+
+[node name="slot21" parent="." instance=ExtResource( 1 )]
+margin_left = 224.0
+margin_top = 336.0
+margin_right = 224.0
+margin_bottom = 336.0
+
+[node name="slot22" parent="." instance=ExtResource( 1 )]
+margin_left = 336.0
+margin_top = 336.0
+margin_right = 336.0
+margin_bottom = 336.0
+
+[node name="slot23" parent="." instance=ExtResource( 1 )]
 margin_left = 448.0
 margin_top = 336.0
 margin_right = 448.0
 margin_bottom = 336.0
 
-[node name="slot21" parent="." instance=ExtResource( 1 )]
+[node name="slot24" parent="." instance=ExtResource( 1 )]
+margin_left = 560.0
+margin_top = 336.0
+margin_right = 560.0
+margin_bottom = 336.0
+
+[node name="slot25" parent="." instance=ExtResource( 1 )]
 margin_top = 448.0
 margin_right = 0.0
 margin_bottom = 448.0
 
-[node name="slot22" parent="." instance=ExtResource( 1 )]
+[node name="slot26" parent="." instance=ExtResource( 1 )]
 margin_left = 112.0
 margin_top = 448.0
 margin_bottom = 448.0
 
-[node name="slot23" parent="." instance=ExtResource( 1 )]
+[node name="slot27" parent="." instance=ExtResource( 1 )]
 margin_left = 224.0
 margin_top = 448.0
 margin_right = 224.0
 margin_bottom = 448.0
 
-[node name="slot24" parent="." instance=ExtResource( 1 )]
+[node name="slot28" parent="." instance=ExtResource( 1 )]
 margin_left = 336.0
 margin_top = 448.0
 margin_right = 336.0
 margin_bottom = 448.0
 
-[node name="slot25" parent="." instance=ExtResource( 1 )]
+[node name="slot29" parent="." instance=ExtResource( 1 )]
 margin_left = 448.0
 margin_top = 448.0
 margin_right = 448.0
+margin_bottom = 448.0
+
+[node name="slot30" parent="." instance=ExtResource( 1 )]
+margin_left = 560.0
+margin_top = 448.0
+margin_right = 560.0
 margin_bottom = 448.0

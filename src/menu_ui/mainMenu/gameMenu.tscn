@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/menu_ui/inventory/InventoryView.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/menu_ui/stats/StatsController.cs" type="Script" id=2]
@@ -7,8 +7,6 @@
 [ext_resource path="res://src/menu_ui/spell/SkillBookView.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/menu_ui/popup/PopupView.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/menu_ui/mainMenu/MainMenuController.cs" type="Script" id=7]
-[ext_resource path="res://src/menu_ui/dialogue/DialogueView.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/menu_ui/merchant/MerchantView.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/menu_ui/saveLoad/SaveLoadView.tscn" type="PackedScene" id=10]
 
 [node name="gameMenu" type="Control"]
@@ -22,7 +20,6 @@ __meta__ = {
 }
 
 [node name="playerMenu" type="TabContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -34,17 +31,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 67.0
 margin_bottom = -4.0
-custom_constants/margin_right = 32
+custom_constants/margin_right = 16
 custom_constants/margin_top = 32
-custom_constants/margin_left = 32
+custom_constants/margin_left = 16
 custom_constants/margin_bottom = 32
 
 [node name="InventoryView" parent="playerMenu/Inventory" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 32.0
+margin_left = 16.0
 margin_top = 32.0
-margin_right = 688.0
+margin_right = 704.0
 margin_bottom = 1177.0
 
 [node name="Skills" type="MarginContainer" parent="playerMenu"]
@@ -53,17 +50,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 67.0
 margin_bottom = -4.0
-custom_constants/margin_right = 32
+custom_constants/margin_right = 16
 custom_constants/margin_top = 32
-custom_constants/margin_left = 32
+custom_constants/margin_left = 16
 custom_constants/margin_bottom = 32
 
 [node name="SkillBookView" parent="playerMenu/Skills" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 32.0
+margin_left = 16.0
 margin_top = 32.0
-margin_right = 688.0
+margin_right = 704.0
 margin_bottom = 1177.0
 
 [node name="Stats" type="MarginContainer" parent="playerMenu"]
@@ -72,16 +69,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 67.0
 margin_bottom = -4.0
-custom_constants/margin_right = 32
+custom_constants/margin_right = 16
 custom_constants/margin_top = 32
-custom_constants/margin_left = 32
+custom_constants/margin_left = 16
 custom_constants/margin_bottom = 32
 script = ExtResource( 2 )
 
 [node name="richTextLabel" type="RichTextLabel" parent="playerMenu/Stats"]
-margin_left = 32.0
+margin_left = 16.0
 margin_top = 32.0
-margin_right = 688.0
+margin_right = 704.0
 margin_bottom = 1177.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -93,17 +90,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 67.0
 margin_bottom = -4.0
-custom_constants/margin_right = 32
+custom_constants/margin_right = 16
 custom_constants/margin_top = 32
-custom_constants/margin_left = 32
+custom_constants/margin_left = 16
 custom_constants/margin_bottom = 32
 
 [node name="QuestLogView" parent="playerMenu/Quest Log" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 32.0
+margin_left = 16.0
 margin_top = 32.0
-margin_right = 688.0
+margin_right = 704.0
 margin_bottom = 1177.0
 
 [node name="Save Load" type="MarginContainer" parent="playerMenu"]
@@ -112,17 +109,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 67.0
 margin_bottom = -4.0
-custom_constants/margin_right = 32
+custom_constants/margin_right = 16
 custom_constants/margin_top = 32
-custom_constants/margin_left = 32
+custom_constants/margin_left = 16
 custom_constants/margin_bottom = 32
 
 [node name="SaveLoadView" parent="playerMenu/Save Load" instance=ExtResource( 10 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 32.0
+margin_left = 16.0
 margin_top = 32.0
-margin_right = 688.0
+margin_right = 704.0
 margin_bottom = 1177.0
 
 [node name="Settings" type="MarginContainer" parent="playerMenu"]
@@ -131,21 +128,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 67.0
 margin_bottom = -4.0
-custom_constants/margin_right = 32
+custom_constants/margin_right = 16
 custom_constants/margin_top = 32
-custom_constants/margin_left = 32
+custom_constants/margin_left = 16
 custom_constants/margin_bottom = 32
 
 [node name="centerContainer" type="CenterContainer" parent="playerMenu/Settings"]
-margin_left = 32.0
+margin_left = 16.0
 margin_top = 32.0
-margin_right = 688.0
+margin_right = 704.0
 margin_bottom = 1177.0
 
 [node name="vBoxContainer" type="VBoxContainer" parent="playerMenu/Settings/centerContainer"]
-margin_left = 187.0
+margin_left = 203.0
 margin_top = 474.0
-margin_right = 469.0
+margin_right = 485.0
 margin_bottom = 670.0
 
 [node name="exitGame" type="Button" parent="playerMenu/Settings/centerContainer/vBoxContainer"]
@@ -159,53 +156,8 @@ margin_right = 332.0
 margin_bottom = 220.0
 text = "Exit Menu"
 
-[node name="npcMenu" type="TabContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Dialogue" type="MarginContainer" parent="npcMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 67.0
-margin_bottom = -4.0
-custom_constants/margin_right = 32
-custom_constants/margin_top = 32
-custom_constants/margin_left = 32
-custom_constants/margin_bottom = 32
-
-[node name="DialogueView" parent="npcMenu/Dialogue" instance=ExtResource( 8 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 688.0
-margin_bottom = 1177.0
-
-[node name="Store" type="MarginContainer" parent="npcMenu"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 67.0
-margin_bottom = -4.0
-custom_constants/margin_right = 32
-custom_constants/margin_top = 32
-custom_constants/margin_left = 32
-custom_constants/margin_bottom = 32
-
-[node name="merchantView" parent="npcMenu/Store" instance=ExtResource( 9 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 688.0
-margin_bottom = 1177.0
-
 [node name="popup" parent="." instance=ExtResource( 6 )]
 visible = false
 [connection signal="visibility_changed" from="." to="." method="OnVisibilityChanged"]
 [connection signal="tab_changed" from="playerMenu" to="." method="OnTabChanged"]
 [connection signal="draw" from="playerMenu/Stats/richTextLabel" to="playerMenu/Stats" method="OnDraw"]
-[connection signal="tab_changed" from="npcMenu" to="." method="OnTabChanged"]

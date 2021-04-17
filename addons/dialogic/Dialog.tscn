@@ -58,10 +58,8 @@ bg_color = Color( 0.196078, 0.196078, 0.196078, 0 )
 [node name="DialogNode" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
@@ -90,6 +88,7 @@ anchor_bottom = 1.0
 margin_top = 1080.0
 margin_right = 720.0
 margin_bottom = 1280.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -97,6 +96,7 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="TextBubble"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0.14902, 0.14902, 0.14902, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -106,6 +106,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 1
@@ -121,6 +122,7 @@ margin_top = 8.0
 margin_right = -16.0
 margin_bottom = -8.0
 rect_clip_content = false
+mouse_filter = 2
 custom_styles/normal = SubResource( 1 )
 custom_fonts/normal_font = ExtResource( 1 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -148,6 +150,7 @@ margin_top = -35.9016
 margin_right = 14.5721
 margin_bottom = 49.1356
 rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 2
 texture = ExtResource( 3 )
 stretch_mode = 4
 __meta__ = {
@@ -236,6 +239,8 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 376.0
 margin_bottom = 78.0
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="FX" type="Control" parent="."]
 anchor_right = 1.0

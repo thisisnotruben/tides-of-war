@@ -156,14 +156,14 @@ namespace Game.Actor
 
 			// center nodes based sprite
 			Texture hitBoxTexture = GD.Load<Texture>($"res://asset/img/character/resource/bodies/body-{imageData.body}.tres");
-			TouchScreenButton select = GetNode<TouchScreenButton>("select");
+			TextureButton select = GetNode<TextureButton>("select");
 			Node2D sightDistance = sight.GetNode<Node2D>("distance"),
 				areaBody = hitBox.GetNode<Node2D>("body");
 
-			select.Normal = hitBoxTexture;
+			select.TextureNormal = hitBoxTexture;
 			head.Position = new Vector2(0.0f, -hitBoxTexture.GetHeight());
 			areaBody.Position = new Vector2(0.0f, -hitBoxTexture.GetHeight() / 2.0f);
-			select.Position = new Vector2(-hitBoxTexture.GetWidth() / 2.0f, -hitBoxTexture.GetHeight());
+			select.RectPosition = new Vector2(-hitBoxTexture.GetWidth() / 2.0f, -hitBoxTexture.GetHeight());
 			sightDistance.Position = areaBody.Position;
 		}
 		public virtual void Harm(int damage, Vector2 direction) { fsm.Harm(damage, direction); }

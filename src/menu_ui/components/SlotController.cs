@@ -150,8 +150,8 @@ namespace Game.Ui
 			if (slotType == SlotTypes.HUD)
 			{
 				InventoryModel inventoryModel = Globals.spellDB.HasData(itemName)
-					? Player.player.menu.gameMenu.playerSpellBook
-					: Player.player.menu.gameMenu.playerInventory;
+					? Player.player.menu.playerMenu.playerSpellBook
+					: Player.player.menu.playerMenu.playerInventory;
 
 				stack = PickableDB.GetStackSize(itemName) > 1
 					? (from commodityName in inventoryModel.GetCommodities()

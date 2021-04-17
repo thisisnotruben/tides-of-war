@@ -148,5 +148,6 @@
     <Compile Include="src\spell\areaEffect\Stomp.cs" />
     <Compile Include="src\spell\visual\master\SpellEffect.cs" />
     <Compile Include="src\util\MapImporter.cs" />
+    <Compile Include="src\menu_ui\mainMenu\NpcMenu.cs" />
   </ItemGroup>
 </Project>

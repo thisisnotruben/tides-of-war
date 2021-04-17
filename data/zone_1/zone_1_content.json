@@ -1,0 +1,16 @@
+{
+	"1152-human": {
+		"healer": false,
+		"healerCost": 0,
+		"drops": [],
+		"spells": [],
+		"merchandise": [
+			"Bloodforged Sword",
+			"Chord of Justice",
+			"Seashell",
+			"Spice Bread",
+			"Queenfish",
+			"Major Mana Potion"
+		]
+	}
+}

@@ -30,6 +30,7 @@ namespace Game.Ui
 			}
 
 			commodityWorldName = itemName;
+			selectedSlotIdx = GetSlotIndexFromHud(itemName);
 
 			switch (Globals.itemDB.GetData(itemName).type)
 			{
@@ -41,7 +42,6 @@ namespace Game.Ui
 					break;
 
 				default:
-					selectedSlotIdx = GetSlotIndexFromHud(itemName);
 					Display(itemName, false);
 					tabContainer.SelfModulate = Color.ColorN("white");
 					tabContainer.Visible = parent.Visible = Visible = true;

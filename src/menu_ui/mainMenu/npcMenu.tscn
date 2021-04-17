@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/menu_ui/mainMenu/NpcMenu.cs" type="Script" id=1]
+[ext_resource path="res://src/menu_ui/merchant/MerchantView.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=3]
+
+[node name="npcMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/separation = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="merchantView" parent="v" instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 720.0
+margin_bottom = 984.0
+size_flags_vertical = 3
+
+[node name="dialoguePopup" type="Button" parent="v"]
+visible = false
+margin_top = 984.0
+margin_right = 720.0
+margin_bottom = 1184.0
+rect_min_size = Vector2( 0, 200 )
+flat = true
+
+[node name="mainButtonGroup" type="HBoxContainer" parent="v"]
+margin_top = 1184.0
+margin_right = 720.0
+margin_bottom = 1280.0
+mouse_filter = 0
+custom_constants/separation = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="speak" type="Button" parent="v/mainButtonGroup"]
+margin_right = 240.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+text = "Talk To"
+
+[node name="trade" type="Button" parent="v/mainButtonGroup"]
+margin_left = 240.0
+margin_right = 480.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+text = "Trade"
+
+[node name="sellBuy" type="Button" parent="v/mainButtonGroup"]
+visible = false
+margin_left = 389.0
+margin_right = 554.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Sell"
+
+[node name="close" type="Button" parent="v/mainButtonGroup"]
+margin_left = 480.0
+margin_right = 720.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+text = "Close"

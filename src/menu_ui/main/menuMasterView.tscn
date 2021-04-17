@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/menu_ui/main/MenuMasterController.cs" type="Script" id=1]
-[ext_resource path="res://test/gameMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/menu_ui/mainMenu/gameMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/menu_ui/hud/hudView.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/menu_ui/components/ItemInfoView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=5]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/menu_ui/hud/ItemInfoHudSpellController.cs" type="Script" id=8]
 [ext_resource path="res://src/menu_ui/hud/HudPopupErrorController.cs" type="Script" id=9]
 [ext_resource path="res://src/menu_ui/hud/HudPopupConfirmController.cs" type="Script" id=10]
+[ext_resource path="res://src/menu_ui/mainMenu/npcMenu.tscn" type="PackedScene" id=11]
 
 [node name="menu" type="Control"]
 anchor_right = 1.0
@@ -47,7 +48,7 @@ size_flags_vertical = 3
 visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 720.0
-margin_bottom = 887.0
+margin_bottom = 591.0
 size_flags_vertical = 3
 tabs_visible = false
 
@@ -66,7 +67,7 @@ anchor_bottom = 0.0
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 688.0
-margin_bottom = 851.0
+margin_bottom = 555.0
 script = ExtResource( 6 )
 
 [node name="Spells" type="MarginContainer" parent="canvasLayer/split/hudMenu"]
@@ -85,7 +86,7 @@ anchor_bottom = 0.0
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 688.0
-margin_bottom = 851.0
+margin_bottom = 555.0
 script = ExtResource( 8 )
 
 [node name="confirmPopup" type="CenterContainer" parent="canvasLayer/split"]
@@ -121,7 +122,7 @@ margin_left = 32.0
 margin_top = 32.0
 margin_right = 394.0
 margin_bottom = 140.0
-text = "Revivedfgd"
+text = "Revive"
 
 [node name="errorPopup" type="CenterContainer" parent="canvasLayer/split"]
 visible = false
@@ -161,6 +162,14 @@ wait_time = 2.0
 one_shot = true
 
 [node name="tween" type="Tween" parent="canvasLayer/split/errorPopup"]
+
+[node name="npcMenu" parent="canvasLayer/split" instance=ExtResource( 11 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 720.0
+margin_bottom = 887.0
+size_flags_vertical = 3
 
 [node name="hud" parent="canvasLayer/split" instance=ExtResource( 3 )]
 [connection signal="pressed" from="canvasLayer/split/confirmPopup/panel/marginContainer/button" to="canvasLayer/split/confirmPopup" method="OnConfirm"]

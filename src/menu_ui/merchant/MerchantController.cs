@@ -8,24 +8,17 @@ namespace Game.Ui
 	{
 		[Signal] public delegate void OnTransactionMade();
 
+		// EXTERNAL
+		private Button sellBuyButton;
+		private InventoryModel playerSpellBook, playerInventory;
+		private SlotGridController playerInventorySlots, playerSpellBookSlots;
+
+		// INTERNAL
 		private readonly InventoryModel store = new InventoryModel();
+		private SlotGridController storeSlots;
 		private Control mainContent;
 		private Label header;
-		public Button buySellButton, closeButton;
 		private ItemInfoMerchantController storeItemInfo;
-		public SlotGridController storeSlots, playerInventoryGridController,
-			playerSpellBookGridController;
-		private InventoryModel _playerSpellBook;
-		public InventoryModel playerSpellBook
-		{
-			get { return _playerSpellBook; }
-			set
-			{
-				_playerSpellBook = value;
-				storeItemInfo.playerSpellBook = value;
-			}
-		}
-		public InventoryModel playerInventory;
 		private Npc _merchant;
 		public Npc merchant
 		{
@@ -34,8 +27,7 @@ namespace Game.Ui
 			{
 				_merchant = value;
 				// resets store
-				buySellButton.Text = "Sell";
-				storeItemInfo.Visible = buySellButton.Pressed = false;
+				storeItemInfo.Visible = false;
 				mainContent.Show();
 				if (value != null)
 				{
@@ -47,11 +39,9 @@ namespace Game.Ui
 		public override void _Ready()
 		{
 			mainContent = GetChild<Control>(0);
-			header = mainContent.GetChild<Label>(0);
-			storeSlots = mainContent.GetNode<SlotGridController>("c/SlotGrid");
-			closeButton = mainContent.GetNode<Button>("gridContainer/close");
-			buySellButton = mainContent.GetNode<Button>("gridContainer/buySell");
-			buySellButton.Connect("toggled", this, nameof(OnBuySellToggled));
+			header = mainContent.GetNode<Label>("label");
+
+			storeSlots = mainContent.GetNode<SlotGridController>("c/store");
 			foreach (SlotController slot in storeSlots.GetSlots())
 			{
 				slot.allowDrag = false;
@@ -65,6 +55,21 @@ namespace Game.Ui
 			storeItemInfo.Connect(nameof(ItemInfoMerchantController.OnTransaction), this, nameof(OnTransaction));
 			storeItemInfo.inventoryModel = store;
 			storeItemInfo.slotGridController = storeSlots;
+		}
+		public MerchantController Init(InventoryModel playerInventory, InventoryController inventoryController,
+		InventoryModel playerSpellBook, SpellBookController spellBookController, Button sellBuyButton)
+		{
+			this.playerInventory = playerInventory;
+			this.playerSpellBook = storeItemInfo.playerSpellBook = playerSpellBook;
+			this.playerInventorySlots = inventoryController.inventorySlots;
+			this.playerSpellBookSlots = spellBookController.spellSlots;
+			this.sellBuyButton = sellBuyButton;
+			this.sellBuyButton.Connect("toggled", this, nameof(OnBuySellToggled));
+
+			Connect(nameof(OnTransactionMade), inventoryController, nameof(InventoryController.RefreshSlots));
+			Connect(nameof(OnTransactionMade), spellBookController, nameof(SpellBookController.RefreshSlots));
+
+			return this;
 		}
 		private void OnTransaction(string commodityName, int goldAmount, bool bought, int slotIndex)
 		{
@@ -80,14 +85,14 @@ namespace Game.Ui
 				if (isSpell)
 				{
 					playerSpellBook.RemoveCommodity(commodityName);
-					playerSpellBookGridController.ClearSlot(slotIndex);
+					playerSpellBookSlots.ClearSlot(slotIndex);
 					storeSlots.ClearSlot(slotIndex);
 				}
 				else
 				{
-					if (playerInventory.RemoveCommodity(playerInventoryGridController.GetSlotToModelIndex(slotIndex)))
+					if (playerInventory.RemoveCommodity(playerInventorySlots.GetSlotToModelIndex(slotIndex)))
 					{
-						playerInventoryGridController.ClearSlot(slotIndex);
+						playerInventorySlots.ClearSlot(slotIndex);
 						storeSlots.ClearSlot(slotIndex);
 					}
 				}
@@ -118,9 +123,9 @@ namespace Game.Ui
 					store.PushCommodity(playerInventory.GetCommodity(s),
 						playerInventory.GetCommodityStack(s));
 				}
-				if (playerInventoryGridController.IsSlotUsed(s))
+				if (playerInventorySlots.IsSlotUsed(s))
 				{
-					m = playerInventoryGridController.GetSlotToModelIndex(s);
+					m = playerInventorySlots.GetSlotToModelIndex(s);
 					storeSlots.DisplaySlot(s, m, store.GetCommodity(m), store.GetCommodityStack(m));
 				}
 			}
@@ -142,7 +147,6 @@ namespace Game.Ui
 		private void OnStoreSlotSelected(int slotIndex)
 		{
 			// don't want to click on an empty slot
-
 			if (!storeSlots.IsSlotUsed(slotIndex))
 			{
 				return;
@@ -167,12 +171,12 @@ namespace Game.Ui
 			// show item details and switch view
 			mainContent.Hide();
 			storeItemInfo.selectedSlotIdx = slotIndex;
-			storeItemInfo.Display(CommodityName, true, !buySellButton.Pressed, alreadyHave);
+			storeItemInfo.Display(CommodityName, true, !sellBuyButton.Pressed, alreadyHave);
 		}
 		private void OnBuySellToggled(bool buttonPressed)
 		{
 			PlaySound(NameDB.UI.CLICK1);
-			buySellButton.Text = buttonPressed ? "Buy" : "Sell";
+			sellBuyButton.Text = buttonPressed ? "Buy" : "Sell";
 			if (player != null && merchant != null)
 			{
 				if (buttonPressed)

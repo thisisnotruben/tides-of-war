@@ -1,17 +1,15 @@
 using Godot;
 using GC = Godot.Collections;
 using Game.Actor;
-using Game.Quest;
 using Game.Loot;
 using Game.Database;
-using Game.Actor.State;
-using System;
 namespace Game.Ui
 {
 	public class MenuMasterController : GameMenu
 	{
-		public MainMenuController gameMenu;
-		private HudControlController hud;
+		public MainMenuController playerMenu;
+		private NpcMenu npcMenu;
+		public HudControlController hud;
 		public HudPopupConfirmController confirmPopup;
 		public HudPopupErrorController errorPopup;
 		public SlotGridController inventorySlots, spellSlots;
@@ -21,11 +19,11 @@ namespace Game.Ui
 		public override void _Ready()
 		{
 			menuContainer = GetNode<CanvasItem>("canvasLayer/split");
-			gameMenu = menuContainer.GetChild<MainMenuController>(0);
-			inventorySlots = gameMenu.GetNode<InventoryController>("playerMenu/Inventory/InventoryView").inventorySlots;
-			spellSlots = gameMenu.GetNode<SpellBookController>("playerMenu/Skills/SkillBookView").spellSlots;
+			playerMenu = menuContainer.GetChild<MainMenuController>(0);
+			inventorySlots = playerMenu.GetNode<InventoryController>("playerMenu/Inventory/InventoryView").inventorySlots;
+			spellSlots = playerMenu.GetNode<SpellBookController>("playerMenu/Skills/SkillBookView").spellSlots;
 
-			saveLoadModel = gameMenu.playerMenu.GetNode<SaveLoadController>("Save Load/SaveLoadView").saveLoadModel;
+			saveLoadModel = playerMenu.GetNode<SaveLoadController>("playerMenu/Save Load/SaveLoadView").saveLoadModel;
 
 			hudMenuContainer = menuContainer.GetChild<CanvasItem>(1);
 			hudMenuContainer.Connect("visibility_changed", this, nameof(OnHudMenuVisibilityChanged));
@@ -33,21 +31,26 @@ namespace Game.Ui
 			confirmPopup = menuContainer.GetChild<HudPopupConfirmController>(2);
 			errorPopup = menuContainer.GetChild<HudPopupErrorController>(3);
 
-			hud = menuContainer.GetChild<HudControlController>(4);
+			npcMenu = menuContainer.GetChild<NpcMenu>(4).Init(
+				this, playerMenu.inventoryController, playerMenu.spellBookController,
+				playerMenu.playerInventory, playerMenu.playerSpellBook, saveLoadModel);
+			npcMenu.store.Connect("draw", this, nameof(HideExceptMenu), new GC.Array() { npcMenu });
+
+			hud = menuContainer.GetChild<HudControlController>(5);
+			hud.targetContainer.Connect("hide", this, nameof(OnTargetCleared));
 			hud.pause.Connect("toggled", this, nameof(OnHudPausePressed));
-			hud.targetContainer.Connect("hide", this, nameof(OnNpcCloseHud));
 
 			ItemInfoHudController itemInfoHudController = hudMenuContainer.GetNode<ItemInfoHudController>("Inventory/itemInfo");
-			itemInfoHudController.inventoryModel = gameMenu.playerInventory;
+			itemInfoHudController.inventoryModel = playerMenu.playerInventory;
 			itemInfoHudController.slotGridController = inventorySlots;
-			gameMenu.Connect("draw", itemInfoHudController, nameof(ItemInfoHudController.OnGameMenuVisibilityChanged), new GC.Array() { true });
-			gameMenu.Connect("hide", itemInfoHudController, nameof(ItemInfoHudController.OnGameMenuVisibilityChanged), new GC.Array() { false });
+			playerMenu.Connect("draw", itemInfoHudController, nameof(ItemInfoHudController.OnGameMenuVisibilityChanged), new GC.Array() { true });
+			playerMenu.Connect("hide", itemInfoHudController, nameof(ItemInfoHudController.OnGameMenuVisibilityChanged), new GC.Array() { false });
 
 			ItemInfoHudSpellController infoHudSpellController = hudMenuContainer.GetNode<ItemInfoHudSpellController>("Spells/itemInfo");
-			infoHudSpellController.inventoryModel = gameMenu.playerSpellBook;
+			infoHudSpellController.inventoryModel = playerMenu.playerSpellBook;
 			infoHudSpellController.slotGridController = spellSlots;
-			gameMenu.Connect("draw", infoHudSpellController, nameof(ItemInfoHudSpellController.OnGameMenuVisibilityChanged), new GC.Array() { true });
-			gameMenu.Connect("hide", infoHudSpellController, nameof(ItemInfoHudSpellController.OnGameMenuVisibilityChanged), new GC.Array() { false });
+			playerMenu.Connect("draw", infoHudSpellController, nameof(ItemInfoHudSpellController.OnGameMenuVisibilityChanged), new GC.Array() { true });
+			playerMenu.Connect("hide", infoHudSpellController, nameof(ItemInfoHudSpellController.OnGameMenuVisibilityChanged), new GC.Array() { false });
 
 			itemInfoHudController.tabContainer = infoHudSpellController.tabContainer = hudMenuContainer;
 
@@ -58,18 +61,16 @@ namespace Game.Ui
 		{
 			PlaySound(NameDB.UI.CLICK5);
 
-			if (!gameMenu.Visible)
+			if (!playerMenu.Visible)
 			{
 				// just in case the player wants to save
 				saveLoadModel.SetCurrentGameImage();
 			}
 
-			gameMenu.Visible = toggled;
+			playerMenu.Visible = toggled;
 			if (toggled)
 			{
-				HideExceptMenu(gameMenu);
-				gameMenu.npcMenu.Hide();
-				gameMenu.playerMenu.Show();
+				HideExceptMenu(playerMenu);
 			}
 		}
 		private void OnHudMenuVisibilityChanged()
@@ -78,13 +79,6 @@ namespace Game.Ui
 			if (hudMenuContainer.Visible)
 			{
 				HideExceptMenu(hudMenuContainer);
-			}
-		}
-		private void OnNpcCloseHud()
-		{
-			if (gameMenu.npcMenu.Visible)
-			{
-				HideExceptMenu(null);
 			}
 		}
 		private void HideExceptMenu(CanvasItem hideExcept)
@@ -112,50 +106,15 @@ namespace Game.Ui
 			player.target = null;
 			hud.targetStatus.Clear(false);
 		}
-		public void NpcInteract(Npc npc)
+		private void OnTargetCleared()
 		{
-			if (player.dead)
+			npcMenu.Hide();
+			if (!playerMenu.Visible)
 			{
-				return;
-			}
-
-			Action showNpcMenu = () =>
-			{
-				saveLoadModel.SetCurrentGameImage();
-				HideExceptMenu(gameMenu);
-				gameMenu.NpcInteract(npc);
-			};
-
-			bool interactable = !npc.enemy &&
-				(Globals.contentDB.HasData(npc.Name) || QuestMaster.HasQuestOrQuestExtraContent(npc.worldName, npc.GetPath()))
-				&& 3 >= Map.Map.map.getAPath(player.GlobalPosition, npc.GlobalPosition).Count;
-
-			if (hud.targetStatus.IsCharacterConnected(npc))
-			{
-				if (interactable)
-				{
-					showNpcMenu();
-				}
-				else
-				{
-					ClearTarget();
-				}
-			}
-			else
-			{
-				SetTargetDisplay(npc);
-
-				player.target = npc;
-				if (npc.enemy && player.pos.DistanceTo(npc.pos) <= player.stats.weaponRange.value)
-				{
-					player.state = FSM.State.ATTACK;
-				}
-				else if (interactable)
-				{
-					showNpcMenu();
-				}
+				GetTree().Paused = false;
 			}
 		}
-		public void LootInteract(TreasureChest lootChest) { gameMenu.LootInteract(lootChest); }
+		public void NpcInteract(Npc npc) { npcMenu.NpcInteract(npc); }
+		public void LootInteract(TreasureChest lootChest) { playerMenu.LootInteract(lootChest); }
 	}
 }

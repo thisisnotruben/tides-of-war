@@ -45,7 +45,8 @@ namespace Game.Ui
 			}
 
 			header.Text = npc.worldName;
-			richTextLabel.BbcodeText = Globals.unitDB.GetData(npc.Name).dialogue;
+			// TODO
+			// richTextLabel.BbcodeText = Globals.unitDB.GetData(npc.Name).dialogue;
 
 			if (Globals.contentDB.HasData(npc.Name))
 			{

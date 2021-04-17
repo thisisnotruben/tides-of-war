@@ -7,14 +7,13 @@ namespace Game.Database
 		public class UnitData
 		{
 			public readonly string name, img;
-			public readonly bool enemy;
+			public readonly bool enemy, dialogue;
 			public readonly int level;
-			public readonly string dialogue;
 			public readonly Vector2[] path;
 			public readonly Vector2 spawnPos;
 
 			public UnitData(string name, string img, bool enemy,
-			int level, string dialogue, Vector2[] path, Vector2 spawnPos)
+			int level, bool dialogue, Vector2[] path, Vector2 spawnPos)
 			{
 				this.name = name;
 				this.img = img;
@@ -54,7 +53,7 @@ namespace Game.Database
 					img: dict[nameof(UnitData.img)].ToString(),
 					enemy: (bool)dict[nameof(UnitData.enemy)],
 					level: dict[nameof(UnitData.level)].ToString().ToInt(),
-					dialogue: dict[nameof(UnitData.dialogue)].ToString(),
+					dialogue: (bool)dict[nameof(UnitData.dialogue)],
 					path: unitPath,
 					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1])
 				));

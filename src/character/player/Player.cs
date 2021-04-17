@@ -92,7 +92,7 @@ namespace Game.Actor
 
 			// inventory
 			GC.Dictionary inventory = new GC.Dictionary();
-			InventoryModel inventoryModel = menu.gameMenu.playerInventory;
+			InventoryModel inventoryModel = menu.playerMenu.playerInventory;
 			for (int i = 0; i < inventoryModel.count; i++)
 			{
 				inventory[i] = new GC.Array()
@@ -109,7 +109,7 @@ namespace Game.Actor
 
 			// spellBook
 			GC.Array commodities = new GC.Array();
-			menu.gameMenu.playerSpellBook.GetCommodities().ForEach(c => commodities.Add(c));
+			menu.playerMenu.playerSpellBook.GetCommodities().ForEach(c => commodities.Add(c));
 			if (commodities.Count > 0)
 			{
 				payload[NameDB.SaveTag.SPELL_BOOK] = commodities;
@@ -165,7 +165,7 @@ namespace Game.Actor
 						packet = (GC.Dictionary)payload[key];
 						GC.Array package;
 
-						InventoryModel inventoryModel = menu.gameMenu.playerInventory;
+						InventoryModel inventoryModel = menu.playerMenu.playerInventory;
 						foreach (string modelIndex in packet.Keys)
 						{
 							package = (GC.Array)packet[modelIndex];
@@ -189,8 +189,8 @@ namespace Game.Actor
 						GC.Array spellNames = (GC.Array)payload[key];
 						foreach (string spellName in spellNames)
 						{
-							menu.gameMenu.playerSpellBook.AddCommodity(spellName);
-							menu.gameMenu.CheckHudSlots(menu.gameMenu.playerSpellBook, spellName);
+							menu.playerMenu.playerSpellBook.AddCommodity(spellName);
+							menu.playerMenu.CheckHudSlots(menu.playerMenu.playerSpellBook, spellName);
 						}
 
 						k = NameDB.SaveTag.SPELL_BOOK_SLOTS;
@@ -201,7 +201,7 @@ namespace Game.Actor
 
 						foreach (string spellName in spellNames)
 						{
-							menu.CheckHudSlots(menu.gameMenu.playerSpellBook, spellName);
+							menu.CheckHudSlots(menu.playerMenu.playerSpellBook, spellName);
 						}
 						break;
 

@@ -17,7 +17,7 @@ namespace Game.Ui
 		}
 		private List<Slot> slots = new List<Slot>();
 		public int count { get { return slots.Count; } }
-		public int maxSlots = 25;
+		public int maxSlots = 30;
 
 		public string GetCommodity(int index) { return slots[index].commodityName; }
 		public int GetCommodityStack(int index) { return slots[index].stackSize; }
