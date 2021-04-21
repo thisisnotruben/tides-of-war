@@ -11,7 +11,7 @@ namespace Game.Quest
 
 		public readonly QuestDB.QuestData quest;
 		private readonly Dictionary<string, int> objectives = new Dictionary<string, int>();
-		private readonly List<NodePath> charactersTalkedTo = new List<NodePath>();
+		private readonly List<string> charactersTalkedTo = new List<string>();
 
 		public WorldQuest(QuestDB.QuestData quest)
 		{
@@ -23,27 +23,33 @@ namespace Game.Quest
 		}
 		public bool UpdateQuest(string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
 		{
-			if (!objectives.ContainsKey(objectiveName)
-			|| quest.objectives[objectiveName].questType != questType
+			if (status != QuestMaster.QuestStatus.ACTIVE
+			|| !IsPartOfObjective(objectiveName, questType)
 			|| (!countTowardsObjective && quest.objectives[objectiveName].amount == objectives[objectiveName]))
 			{
 				return false;
 			}
+
 			objectives[objectiveName] += countTowardsObjective ? -1 : 1;
+			if (IsCompleted())
+			{
+				status = QuestMaster.QuestStatus.COMPLETED;
+			}
 			return true;
 		}
-		public bool UpdateQuest(NodePath characterPath, string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
+		public bool UpdateQuest(string characterPath, string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
 		{
-			if (charactersTalkedTo.Contains(characterPath))
-			{
-				return false;
-			}
-			else if (UpdateQuest(objectiveName, questType, countTowardsObjective))
+			if (!charactersTalkedTo.Contains(characterPath)
+			&& UpdateQuest(objectiveName, questType, countTowardsObjective))
 			{
 				charactersTalkedTo.Add(characterPath);
 				return true;
 			}
 			return false;
+		}
+		public bool IsPartOfObjective(string name, QuestDB.QuestType questType)
+		{
+			return objectives.ContainsKey(name) && quest.objectives[name].questType == questType;
 		}
 		public bool IsCompleted()
 		{
@@ -71,7 +77,7 @@ namespace Game.Quest
 				}
 			}
 		}
-		public bool HasCharacterPath(NodePath characterPath) { return charactersTalkedTo.Contains(characterPath); }
+		public bool HasCharacterPath(string characterPath) { return charactersTalkedTo.Contains(characterPath); }
 		public GC.Dictionary Serialize()
 		{
 			GC.Array charactersPaths = new GC.Array();
@@ -95,7 +101,7 @@ namespace Game.Quest
 			string characterPathKey = NameDB.SaveTag.TALKED_TO;
 			foreach (string characterPath in (GC.Array)payload[characterPathKey])
 			{
-				charactersTalkedTo.Add(new NodePath(characterPath));
+				charactersTalkedTo.Add(characterPath);
 			}
 
 			payload.Remove(characterPathKey);

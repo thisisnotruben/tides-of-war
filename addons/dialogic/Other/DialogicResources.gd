@@ -23,14 +23,14 @@ static func load_json(path: String, default: Dictionary={}) -> Dictionary:
 	var final_data = data_parse.result
 	if typeof(final_data) == TYPE_DICTIONARY:
 		return final_data
-	
+
 	# If everything else fails
 	return default
 
 
 static func init_dialogic_files() -> void:
 	# This functions makes sure that the needed files and folders
-	# exists when the plugin is loaded. If they don't, we create 
+	# exists when the plugin is loaded. If they don't, we create
 	# them.
 	# WARNING: only call while in the editor
 	var directory = Directory.new()
@@ -68,7 +68,7 @@ static func get_config_files_paths() -> Dictionary:
 static func init_saves(overwrite: bool=true):
 	var err = init_working_dir()
 	var paths := get_config_files_paths()
-	
+
 	if err == OK:
 		init_state_saves(overwrite)
 		init_definitions_saves(overwrite)
@@ -84,7 +84,7 @@ static func init_working_dir():
 static func init_state_saves(overwrite: bool=true):
 	var file := File.new()
 	var paths := get_config_files_paths()
-	
+
 	if not file.file_exists(paths["SAVED_STATE_FILE"]) or overwrite:
 		var err = file.open(paths["SAVED_STATE_FILE"], File.WRITE)
 		if err == OK:
@@ -108,7 +108,7 @@ static func init_definitions_saves(overwrite: bool=true):
 			sink.close()
 		else:
 			print('[Dialogic] Error opening saved definitions file: ' + str(err))
-	
+
 	err = sink.open(paths["SAVED_DEFINITIONS_FILE"], File.READ_WRITE)
 	if err == OK:
 		if overwrite or sink.get_len() == 0:
@@ -121,7 +121,7 @@ static func init_definitions_saves(overwrite: bool=true):
 			print('[Dialogic] Did not overwrite previous saved definitions')
 	else:
 		print('[Dialogic] Error opening saved definitions file: ' + str(err))
-	
+
 	source.close()
 	sink.close()
 

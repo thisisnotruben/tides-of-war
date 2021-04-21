@@ -191,7 +191,7 @@ namespace Game.Ui
 			treasureChest.Owner = map;
 			treasureChest.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
 
-			QuestMaster.CheckQuests(commodityWorldName,
+			Globals.questMaster.CheckQuests(commodityWorldName,
 				Globals.spellDB.HasData(commodityWorldName)
 					? QuestDB.QuestType.LEARN
 					: QuestDB.QuestType.COLLECT,

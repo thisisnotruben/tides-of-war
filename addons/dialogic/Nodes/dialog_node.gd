@@ -556,37 +556,38 @@ func add_choice_button(option):
 	var button = ChoiceButton.instance()
 	button.text = option['label']
 	# Text
-	button.set('custom_fonts/font', load(theme.get_value('text', 'font', "res://addons/dialogic/Fonts/DefaultFont.tres")))
+	#* don't want this; rather get from default theme
+	# button.set('custom_fonts/font', load(theme.get_value('text', 'font', "res://addons/dialogic/Fonts/DefaultFont.tres")))
 
-	var text_color = Color(theme.get_value('text', 'color', "#ffffffff"))
-	button.set('custom_colors/font_color', text_color)
-	button.set('custom_colors/font_color_hover', text_color)
-	button.set('custom_colors/font_color_pressed', text_color)
+	# var text_color = Color(theme.get_value('text', 'color', "#ffffffff"))
+	# button.set('custom_colors/font_color', text_color)
+	# button.set('custom_colors/font_color_hover', text_color)
+	# button.set('custom_colors/font_color_pressed', text_color)
 
-	if theme.get_value('buttons', 'text_color_enabled', true):
-		var button_text_color = Color(theme.get_value('buttons', 'text_color', "#ffffffff"))
-		button.set('custom_colors/font_color', button_text_color)
-		button.set('custom_colors/font_color_hover', button_text_color)
-		button.set('custom_colors/font_color_pressed', button_text_color)
+	# if theme.get_value('buttons', 'text_color_enabled', true):
+	# 	var button_text_color = Color(theme.get_value('buttons', 'text_color', "#ffffffff"))
+	# 	button.set('custom_colors/font_color', button_text_color)
+	# 	button.set('custom_colors/font_color_hover', button_text_color)
+	# 	button.set('custom_colors/font_color_pressed', button_text_color)
 
 	# Background
-	button.get_node('ColorRect').color = Color(theme.get_value('buttons', 'background_color', '#ff000000'))
-	button.get_node('ColorRect').visible = theme.get_value('buttons', 'use_background_color', false)
+	# button.get_node('ColorRect').color = Color(theme.get_value('buttons', 'background_color', '#ff000000'))
+	# button.get_node('ColorRect').visible = theme.get_value('buttons', 'use_background_color', false)
 
-	button.get_node('TextureRect').visible = theme.get_value('buttons', 'use_image', true)
-	if theme.get_value('buttons', 'use_image', true):
-		button.get_node('TextureRect').texture = load(theme.get_value('buttons', 'image', "res://addons/dialogic/Images/background/background-2.png"))
+	# button.get_node('TextureRect').visible = theme.get_value('buttons', 'use_image', true)
+	# if theme.get_value('buttons', 'use_image', true):
+		# button.get_node('TextureRect').texture = load(theme.get_value('buttons', 'image', "res://addons/dialogic/Images/background/background-2.png"))
 
 	var padding = theme.get_value('buttons', 'padding', Vector2(5,5))
-	button.get_node('ColorRect').set('margin_left', -1 * padding.x)
-	button.get_node('ColorRect').set('margin_right',  padding.x)
-	button.get_node('ColorRect').set('margin_top', -1 * padding.y)
-	button.get_node('ColorRect').set('margin_bottom', padding.y)
+	# button.get_node('ColorRect').set('margin_left', -1 * padding.x)
+	# button.get_node('ColorRect').set('margin_right',  padding.x)
+	# button.get_node('ColorRect').set('margin_top', -1 * padding.y)
+	# button.get_node('ColorRect').set('margin_bottom', padding.y)
 
-	button.get_node('TextureRect').set('margin_left', -1 * padding.x)
-	button.get_node('TextureRect').set('margin_right',  padding.x)
-	button.get_node('TextureRect').set('margin_top', -1 * padding.y)
-	button.get_node('TextureRect').set('margin_bottom', padding.y)
+	# button.get_node('TextureRect').set('margin_left', -1 * padding.x)
+	# button.get_node('TextureRect').set('margin_right',  padding.x)
+	# button.get_node('TextureRect').set('margin_top', -1 * padding.y)
+	# button.get_node('TextureRect').set('margin_bottom', padding.y)
 
 	$Options.set('custom_constants/separation', theme.get_value('buttons', 'gap', 20) + (padding.y*2))
 

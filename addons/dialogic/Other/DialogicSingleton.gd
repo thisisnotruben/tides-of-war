@@ -86,7 +86,7 @@ func get_glossary(name: String) -> Dictionary:
 	for d in current_definitions['glossary']:
 		if d['name'] == name:
 			return d
-	return { 
+	return {
 		'title': '',
 		'text': '',
 		'extra': ''
@@ -108,5 +108,3 @@ func set_current_timeline(timeline: String):
 
 func get_current_timeline() -> String:
 	return current_timeline
-
-

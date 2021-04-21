@@ -75,7 +75,7 @@ namespace Game.Ui
 				}
 				else
 				{
-					QuestMaster.CheckQuests(lootChest.commodityWorldName, QuestDB.QuestType.LEARN, true);
+					Globals.questMaster.CheckQuests(lootChest.commodityWorldName, QuestDB.QuestType.LEARN, true);
 					playerSpellBook.AddCommodity(lootChest.commodityWorldName);
 					lootChest.Collect();
 				}
@@ -88,7 +88,7 @@ namespace Game.Ui
 				}
 				else
 				{
-					QuestMaster.CheckQuests(lootChest.commodityWorldName, QuestDB.QuestType.COLLECT, true);
+					Globals.questMaster.CheckQuests(lootChest.commodityWorldName, QuestDB.QuestType.COLLECT, true);
 					playerInventory.AddCommodity(lootChest.commodityWorldName);
 					lootChest.Collect();
 				}

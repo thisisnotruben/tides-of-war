@@ -17,10 +17,10 @@ namespace Game.DialogicAdapter
 		}
 		public GC.Dictionary GetDefaultDefinitions() { return (GC.Dictionary)dialogicSingleton.Call("get_default_definitions"); }
 		public GC.Dictionary GetDefinitions() { return (GC.Dictionary)dialogicSingleton.Call("get_definitions"); }
-		public Error SaveDefinitions() { return (Error)dialogicSingleton.Call("save_definitions"); }
+		public void SaveDefinitions() { dialogicSingleton.Call("save_definitions"); }
 		public void ResetSaves() { dialogicSingleton.Call("reset_saves"); }
 		public string GetVariable(string name) { return dialogicSingleton.Call("get_variable", name).ToString(); }
-		public string SetVariable(string name, string value) { return dialogicSingleton.Call("set_variable", name, value).ToString(); }
+		public void SetVariable(string name, string value) { dialogicSingleton.Call("set_variable", name, value); }
 		public GC.Dictionary GetGlossary(string name) { return (GC.Dictionary)dialogicSingleton.Call("get_glossary", name); }
 		public void SetGlossary(string name, string title, string text, string extra) { dialogicSingleton.Call("set_glossary", name, title, text, extra); }
 		public string GetCurrentTimeline() { return dialogicSingleton.Call("get_current_timeline").ToString(); }

@@ -1,4 +1,5 @@
 using Godot;
+using Game.Quest;
 using Game.Sound;
 using Game.Database;
 using Game.DialogicAdapter;
@@ -10,9 +11,6 @@ namespace Game
 			SAVE_GROUP = "save",
 			LIGHT_GROUP = "light",
 			GRAVE_GROUP = "graveSite";
-
-		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
-		public static readonly CooldownMaster cooldownMaster = new CooldownMaster();
 
 		public static readonly AreaEffectDB areaEffectDB = new AreaEffectDB(PathManager.areaEffect);
 		public static readonly ContentDB contentDB = new ContentDB();
@@ -27,6 +25,9 @@ namespace Game
 		public static readonly UnitDB unitDB = new UnitDB();
 		public static readonly UseDB useDB = new UseDB(PathManager.use);
 
+		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
+		public static readonly CooldownMaster cooldownMaster = new CooldownMaster();
+		public static readonly QuestMaster questMaster = new QuestMaster();
 		public static readonly Dialogic dialogic = new Dialogic();
 
 		public override void _Ready()

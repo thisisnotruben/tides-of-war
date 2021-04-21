@@ -98,7 +98,7 @@ namespace Game.Ui
 				}
 			}
 
-			QuestMaster.CheckQuests(commodityName,
+			Globals.questMaster.CheckQuests(commodityName,
 				isSpell
 					? QuestDB.QuestType.LEARN
 					: QuestDB.QuestType.COLLECT,

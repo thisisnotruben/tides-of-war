@@ -13,6 +13,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,6 +24,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0

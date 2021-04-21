@@ -2,8 +2,10 @@ using Godot;
 using GC = Godot.Collections;
 using Game.Actor;
 using Game.Actor.State;
+using Game.Actor.Doodads;
 using System;
 using Game.Quest;
+using Game.Database;
 namespace Game.Ui
 {
 	public class NpcMenu : GameMenu
@@ -14,21 +16,18 @@ namespace Game.Ui
 
 		// Internal
 		public MerchantController store;
-		private Control dialogueContainer, dialogue;
+		private Control dialogue;
 		private Button speak, trade, sellBuy;
 
-		private Npc focusedNpc;
-		private bool canTrade, canTalk, hasQuest;
+		private Npc npc;
+		private bool canTrade, canTalk;
 		private Control focusedControl;
+		private WorldQuest worldQuest;
 
 		public override void _Ready()
 		{
 			store = GetNode<MerchantController>("v/merchantView");
 			store.Connect("visibility_changed", this, nameof(OnStoreVisibilityChanged));
-
-			dialogueContainer = GetNode<BaseButton>("v/dialoguePopup");
-			dialogueContainer.Connect("pressed", this, nameof(OnDialogueNext));
-			dialogueContainer.Connect("visibility_changed", this, nameof(OnDialogueVisibilityChanged));
 
 			Control optionsContainer = GetNode<Control>("v/mainButtonGroup");
 			optionsContainer.GetNode("speak").Connect("pressed", this, nameof(StartDialogue));
@@ -59,10 +58,10 @@ namespace Game.Ui
 		}
 		private void OnHide()
 		{
-			store.Visible = dialogueContainer.Visible =
-				canTrade = canTalk = hasQuest = false;
+			store.Visible = canTrade = canTalk = false;
 			focusedControl = null;
-			focusedNpc = null;
+			worldQuest = null;
+			npc = null;
 			ClearDialogue();
 			SetProcess(false);
 
@@ -90,79 +89,185 @@ namespace Game.Ui
 				Hide();
 			}
 		}
-		/* 
+		/*
 		 * DIALOGUE Start
 		*/
 		private void StartDialogue()
 		{
-			focusedControl = dialogueContainer;
+			if (dialogue != null || npc == null)
+			{
+				return; // to avoid double-clicking
+			}
 
-			dialogue = Globals.dialogic.Start(Map.Map.map.Name + "-" + focusedNpc.Name.Split("-")[0]);
+			// setup dialogic variables
+			Func<QuestMaster.QuestStatus, bool> isStatus = (QuestMaster.QuestStatus status) =>
+		   {
+			   return worldQuest != null ? worldQuest.status == status : false;
+		   };
+
+			GC.Dictionary<string, bool> questDefinitions = new GC.Dictionary<string, bool>()
+			{
+				{"questActive", isStatus(QuestMaster.QuestStatus.ACTIVE)},
+				{"questAvailable", isStatus(QuestMaster.QuestStatus.AVAILABLE)},
+				{"questCompleted", isStatus(QuestMaster.QuestStatus.COMPLETED)},
+				{"questDelivered", isStatus(QuestMaster.QuestStatus.DELIVERED)},
+				{"questObjective", worldQuest?.IsPartOfObjective(npc.GetPath(),
+					QuestDB.QuestType.TALK) ?? false}
+			};
+
+			bool questAny = false;
+			foreach (string definition in questDefinitions.Keys)
+			{
+				questAny = questAny || questDefinitions[definition];
+
+				Globals.dialogic.SetVariable(definition,
+					(questDefinitions[definition] ? 1 : 0).ToString());
+			}
+
+			Globals.dialogic.SetVariable("npcName", npc.Name);
+			Globals.dialogic.SetVariable("questAny", (questAny ? 1 : 0).ToString());
+
+			// init dialogic
+			dialogue = focusedControl = Globals.dialogic.Start(
+				worldQuest?.quest.dialogue ?? Globals.unitDB.GetData(npc.Name).dialogue, false
+			);
+
 			dialogue.Connect("tree_exiting", this, nameof(ClearDialogue));
+			dialogue.Connect("visibility_changed", this, nameof(OnDialogueVisibilityChanged));
+			dialogue.Connect("dialogic_signal", this, nameof(OnDialogueSignalCallback));
 
-			dialogueContainer.AddChild(dialogue);
+			// add dialogic to scene
+			store.GetParent().AddChildBelowNode(store, dialogue);
 			dialogue.RectPosition = Vector2.Zero;
-
 			store.Hide();
-			dialogueContainer.Show();
 		}
 		private void ClearDialogue()
 		{
-			dialogueContainer.Hide();
-			focusedControl = null;
-
+			if (focusedControl == dialogue)
+			{
+				focusedControl = null;
+			}
+			dialogue?.Hide();
 			dialogue?.QueueFree();
 			dialogue = null;
 		}
-		private void OnDialogueVisibilityChanged() { speak.Visible = canTalk && !dialogueContainer.Visible; }
+		private void OnDialogueVisibilityChanged() { speak.Visible = (canTalk || worldQuest != null) && (!dialogue?.Visible ?? true); }
+		private void OnDialogueSignalCallback(object value)
+		{
+			switch (value.ToString().Trim().ToLower())
+			{
+				case "start":
+					if (worldQuest != null)
+					{
+						PlaySound(NameDB.UI.QUEST_ACCEPT);
+						Globals.questMaster.ActivateQuest(worldQuest.quest.questName);
+						// TODO: add quest to quest log
+					}
+					break;
+
+				case "complete":
+					if (worldQuest?.IsCompleted() ?? false)
+					{
+						PlaySound(NameDB.UI.QUEST_FINISH);
+
+						// turn in items
+						if (!worldQuest.quest.keepRewardItems)
+						{
+							worldQuest.TurnInItems(player.menu.playerMenu.playerInventory);
+						}
+
+						// start next quest dialogue if anys
+						WorldQuest nextQuest = Globals.questMaster.DeliverQuest(worldQuest.quest.questName);
+						if (nextQuest != null)
+						{
+							if (dialogue == null)
+							{
+								OnDialogueNext(nextQuest);
+							}
+							else
+							{
+								dialogue.Connect("tree_exited", this, nameof(OnDialogueNext),
+									new GC.Array() { nextQuest });
+							}
+						}
+
+						// reward gold if any
+						if (player.gold > 0)
+						{
+							player.gold += worldQuest.quest.goldReward;
+							player.SpawnCombatText(worldQuest.quest.goldReward.ToString(), CombatText.TextType.GOLD);
+						}
+					}
+					break;
+
+				case "objective":
+					QuestDB.ExtraContentData extraContentData;
+
+					if (Globals.questMaster.CheckQuests(npc.GetPath(), npc.worldName, QuestDB.QuestType.TALK)
+					&& Globals.questMaster.TryGetExtraQuestContent(npc.worldName, out extraContentData))
+					{
+						if (extraContentData.gold > 0)
+						{
+							player.gold += extraContentData.gold;
+							player.SpawnCombatText(extraContentData.gold.ToString(), CombatText.TextType.GOLD);
+						}
+
+						if (Globals.itemDB.HasData(extraContentData.reward)
+						&& player.menu.playerMenu.playerInventory.AddCommodity(extraContentData.reward) == -1)
+						{
+							// TODO: what if is inventory full
+						}
+					}
+					break;
+			}
+		}
 		private void CheckInteractionValid(FSM.State state)
 		{
 			if (!GetTree().Paused)
 			{
 				if (player.attacking
-				|| (focusedNpc?.attacking ?? true)
-				|| !WithinSpeakingDistance(focusedNpc.GlobalPosition))
+				|| (npc?.attacking ?? true)
+				|| !WithinSpeakingDistance(npc.GlobalPosition))
 				{
 					Hide();
 				}
-				else if (player.moving || focusedNpc.moving)
+				else if (player.moving || npc.moving)
 				{
 					SetProcess(true);
 				}
 			}
 		}
-		private void OnDialogueNext() // dialogic can only read this type of input
-		{
-			InputEventAction dialogueNext = new InputEventAction();
-			dialogueNext.Action = "dialogue_next";
-			dialogueNext.Pressed = true;
-			Input.ParseInputEvent(dialogueNext);
-		}
 		public override void _Process(float delta) // only used for 'CheckInteractionValid'
 		{
-			if (focusedNpc == null || !WithinSpeakingDistance(focusedNpc.GlobalPosition))
+			if (npc == null || !WithinSpeakingDistance(npc.GlobalPosition))
 			{
 				Hide();
 			}
-			else if (!focusedNpc.moving && !player.moving)
+			else if (!npc.moving && !player.moving)
 			{
 				SetProcess(false);
 			}
 		}
-		/* 
-		* DIALOGUE END 
+		private void OnDialogueNext(WorldQuest nextQuest)
+		{
+			worldQuest = nextQuest;
+			StartDialogue();
+		}
+		/*
+		* DIALOGUE END
 		* STORE STAT
 		*/
 		private void StartStore()
 		{
+			ClearDialogue();
 			focusedControl = store;
 
 			saveLoadModel.SetCurrentGameImage();
 
-			dialogueContainer.Visible = sellBuy.Pressed = false;
+			sellBuy.Pressed = false;
 			sellBuy.Text = "Sell";
 
-			store.merchant = focusedNpc;
+			store.merchant = npc;
 			store.Show();
 		}
 		private void OnStoreVisibilityChanged()
@@ -172,39 +277,44 @@ namespace Game.Ui
 
 			trade.Visible = canTrade && !isVisible;
 		}
-		/* 
+		/*
 		* STORE END
 		*/
 		private bool WithinSpeakingDistance(Vector2 npcGlobalPos) { return 3 >= Map.Map.map.getAPath(player.GlobalPosition, npcGlobalPos).Count; }
 		public void NpcInteract(Npc npc)
 		{
-			if (player.dead || focusedNpc == npc)
+			Hide(); // resets view
+
+			if (player.dead)
 			{
-				Hide();
 				return;
 			}
 
-			Hide(); // resets view
+			this.npc = npc;
 
-			focusedNpc = npc;
+			canTalk = Globals.unitDB.HasData(npc.Name) && !Globals.unitDB.GetData(npc.Name).dialogue.Empty();
 			canTrade = Globals.contentDB.HasData(npc.Name) && Globals.contentDB.GetData(npc.Name).merchandise.Length > 0;
-			canTalk = Globals.unitDB.HasData(npc.Name) && Globals.unitDB.GetData(npc.Name).dialogue;
-			hasQuest = QuestMaster.HasQuestOrQuestExtraContent(npc.worldName, npc.GetPath());
 
-			bool interactable = !npc.enemy && WithinSpeakingDistance(npc.GlobalPosition) && (canTalk || canTrade);
+			bool hasQuest =
+				Globals.questMaster.IsPartOfObjective(npc.GetPath(), out worldQuest, QuestDB.QuestType.TALK)
+				|| Globals.questMaster.HasOutstandingQuest(npc.GetPath(), out worldQuest)
+				|| Globals.questMaster.HasQuestToOffer(npc.GetPath(), out worldQuest)
+				|| Globals.questMaster.TryGetLastDeliveredQuest(npc.GetPath(), out worldQuest);
+
+			bool interactable = !npc.enemy && WithinSpeakingDistance(npc.GlobalPosition) && (canTalk || canTrade || hasQuest);
 
 			Action showNpcMenuOptions = () =>
 			{
 				ClearDialogue();
-				speak.Visible = canTalk;
+				speak.Visible = canTalk || hasQuest;
 				trade.Visible = canTrade;
 				sellBuy.Visible = false;
-				Visible = canTalk || canTrade;
+				Visible = canTalk || canTrade || hasQuest;
 
 				if (Visible)
 				{
 					Globals.TryLinkSignal(player.fsm, nameof(FSM.StateChanged), this, nameof(CheckInteractionValid), true);
-					Globals.TryLinkSignal(focusedNpc.fsm, nameof(FSM.StateChanged), this, nameof(CheckInteractionValid), true);
+					Globals.TryLinkSignal(npc.fsm, nameof(FSM.StateChanged), this, nameof(CheckInteractionValid), true);
 				}
 			};
 

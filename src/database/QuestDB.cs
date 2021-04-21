@@ -10,27 +10,22 @@ namespace Game.Database
 
 		public class QuestData
 		{
-			public readonly NodePath questGiver, questCompleter;
-			public readonly string questName, available, active, completed, delivered;
-			public readonly string[] nextQuest, reward;
+			public readonly string questGiverPath, questName, dialogue, nextQuest;
+			public readonly string[] reward, startQuests;
 			public readonly bool keepRewardItems;
 			public readonly int goldReward;
 			public readonly Dictionary<string, ObjectiveData> objectives;
 
-			public QuestData(NodePath questGiver, NodePath questCompleter, string questName,
-			string available, string active, string completed, string delivered,
-			string[] nextQuest, string[] reward, bool keepRewardItems, int goldReward,
+			public QuestData(string questGiverPath, string questName,
+			string dialogue, string nextQuest, string[] reward, string[] startQuests, bool keepRewardItems, int goldReward,
 			Dictionary<string, ObjectiveData> objectives)
 			{
-				this.questGiver = questGiver;
-				this.questCompleter = questCompleter;
+				this.questGiverPath = questGiverPath;
 				this.questName = questName;
-				this.available = available;
-				this.active = active;
-				this.completed = completed;
-				this.delivered = delivered;
+				this.dialogue = dialogue;
 				this.nextQuest = nextQuest;
 				this.reward = reward;
+				this.startQuests = startQuests;
 				this.keepRewardItems = keepRewardItems;
 				this.goldReward = goldReward;
 				this.objectives = objectives;
@@ -53,12 +48,11 @@ namespace Game.Database
 		}
 		public class ExtraContentData
 		{
-			public readonly string dialogue, reward;
+			public readonly string reward;
 			public readonly int gold;
 
-			public ExtraContentData(string dialogue, string reward, int gold)
+			public ExtraContentData(string reward, int gold)
 			{
-				this.dialogue = dialogue;
 				this.reward = reward;
 				this.gold = gold;
 			}
@@ -87,7 +81,6 @@ namespace Game.Database
 						questType: (QuestType)Enum.Parse(typeof(QuestType), objective[nameof(ObjectiveData.questType)].ToString()),
 						amount: objective[nameof(ObjectiveData.amount)].ToString().ToInt(),
 						extraContent: new ExtraContentData(
-							dialogue: extraContentDict[nameof(ExtraContentData.dialogue)].ToString(),
 							reward: extraContentDict[nameof(ExtraContentData.reward)].ToString(),
 							gold: extraContentDict[nameof(ExtraContentData.gold)].ToString().ToInt()
 						)
@@ -96,16 +89,13 @@ namespace Game.Database
 
 				data.Add(questName, new QuestData(
 					questName: questName,
-					nextQuest: ContentDB.GetWorldNames((GC.Array)dict[nameof(QuestData.nextQuest)]),
+					nextQuest: dict[nameof(QuestData.nextQuest)].ToString(),
 					reward: ContentDB.GetWorldNames((GC.Array)dict[nameof(QuestData.reward)]),
+					startQuests: ContentDB.GetWorldNames((GC.Array)dict[nameof(QuestData.startQuests)]),
 					keepRewardItems: (bool)dict[nameof(QuestData.keepRewardItems)],
 					goldReward: dict[nameof(QuestData.goldReward)].ToString().ToInt(),
-					questGiver: new NodePath(dict[nameof(QuestData.questGiver)].ToString()),
-					questCompleter: new NodePath(dict[nameof(QuestData.questCompleter)].ToString()),
-					available: dict[nameof(QuestData.available)].ToString(),
-					active: dict[nameof(QuestData.active)].ToString(),
-					completed: dict[nameof(QuestData.completed)].ToString(),
-					delivered: dict[nameof(QuestData.delivered)].ToString(),
+					questGiverPath: dict["questGiver"].ToString(),
+					dialogue: dict[nameof(QuestData.dialogue)].ToString(),
 					objectives: objectives
 				));
 			}

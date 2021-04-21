@@ -45,7 +45,7 @@ namespace Game.Actor.State
 			// clear targets
 			if (character is Npc)
 			{
-				QuestMaster.CheckQuests(character.worldName, QuestDB.QuestType.KILL, true);
+				Globals.questMaster.CheckQuests(character.worldName, QuestDB.QuestType.KILL, true);
 
 				if (character.target != null
 				&& character.target is Player

@@ -3,7 +3,7 @@
 		"name": "",
 		"img": "orc-4",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -15,7 +15,7 @@
 		"name": "",
 		"img": "orc-4",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -27,7 +27,7 @@
 		"name": "",
 		"img": "orc-18",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -39,7 +39,7 @@
 		"name": "",
 		"img": "orc-18",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -51,7 +51,7 @@
 		"name": "",
 		"img": "orc-3",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -63,7 +63,7 @@
 		"name": "",
 		"img": "orc-10",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -75,7 +75,7 @@
 		"name": "",
 		"img": "orc-0",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -87,7 +87,7 @@
 		"name": "",
 		"img": "orc-9",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -99,7 +99,7 @@
 		"name": "",
 		"img": "orc-22",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -111,7 +111,7 @@
 		"name": "",
 		"img": "orc-20",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -123,7 +123,7 @@
 		"name": "",
 		"img": "orc-9",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -135,7 +135,7 @@
 		"name": "",
 		"img": "orc-22",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -147,7 +147,7 @@
 		"name": "",
 		"img": "orc-10",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -159,7 +159,7 @@
 		"name": "",
 		"img": "orc-13",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -171,7 +171,7 @@
 		"name": "",
 		"img": "orc-15",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -183,7 +183,7 @@
 		"name": "",
 		"img": "orc-17",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -195,7 +195,7 @@
 		"name": "",
 		"img": "orc-6",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -207,7 +207,7 @@
 		"name": "",
 		"img": "orc-1",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -219,7 +219,7 @@
 		"name": "",
 		"img": "orc-7",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -231,7 +231,7 @@
 		"name": "",
 		"img": "orc-6",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -243,7 +243,7 @@
 		"name": "",
 		"img": "orc-10",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -255,7 +255,7 @@
 		"name": "",
 		"img": "orc-23",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -267,7 +267,7 @@
 		"name": "",
 		"img": "orc-3",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -279,7 +279,7 @@
 		"name": "",
 		"img": "orc-15",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -291,7 +291,7 @@
 		"name": "",
 		"img": "orc-14",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -303,7 +303,7 @@
 		"name": "",
 		"img": "orc-20",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -315,7 +315,7 @@
 		"name": "",
 		"img": "orc-4",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -327,7 +327,7 @@
 		"name": "",
 		"img": "orc-4",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -339,7 +339,7 @@
 		"name": "",
 		"img": "orc-19",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -351,7 +351,7 @@
 		"name": "",
 		"img": "warthog-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -363,7 +363,7 @@
 		"name": "",
 		"img": "warthog-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -375,7 +375,7 @@
 		"name": "",
 		"img": "warthog-5",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -387,7 +387,7 @@
 		"name": "",
 		"img": "warthog-0",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -399,7 +399,7 @@
 		"name": "",
 		"img": "warthog-6",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -411,7 +411,7 @@
 		"name": "",
 		"img": "warthog-9",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -423,7 +423,7 @@
 		"name": "",
 		"img": "minotaur-19",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -435,7 +435,7 @@
 		"name": "",
 		"img": "minotaur-19",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -447,7 +447,7 @@
 		"name": "",
 		"img": "warthog-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -459,7 +459,7 @@
 		"name": "",
 		"img": "warthog-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -471,7 +471,7 @@
 		"name": "",
 		"img": "warthog-7",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -483,7 +483,7 @@
 		"name": "",
 		"img": "warthog-7",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -495,7 +495,7 @@
 		"name": "",
 		"img": "warthog-4",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -507,7 +507,7 @@
 		"name": "",
 		"img": "warthog-0",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -519,7 +519,7 @@
 		"name": "",
 		"img": "warthog-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -531,7 +531,7 @@
 		"name": "",
 		"img": "warthog-6",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -543,7 +543,7 @@
 		"name": "",
 		"img": "warthog-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -555,7 +555,7 @@
 		"name": "",
 		"img": "warthog-0",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -567,7 +567,7 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -579,7 +579,7 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -591,7 +591,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -603,7 +603,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -615,7 +615,7 @@
 		"name": "",
 		"img": "robot-0",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -627,7 +627,7 @@
 		"name": "",
 		"img": "robot-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -639,7 +639,7 @@
 		"name": "",
 		"img": "robot-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -651,7 +651,7 @@
 		"name": "",
 		"img": "robot-0",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -663,7 +663,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -675,7 +675,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -687,7 +687,7 @@
 		"name": "",
 		"img": "robot-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -699,7 +699,7 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -711,7 +711,7 @@
 		"name": "",
 		"img": "robot-0",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -723,7 +723,7 @@
 		"name": "",
 		"img": "robot-0",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -735,7 +735,7 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -747,7 +747,7 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -759,7 +759,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -771,7 +771,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -783,7 +783,7 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -795,7 +795,7 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -807,7 +807,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -819,7 +819,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -831,7 +831,7 @@
 		"name": "",
 		"img": "robot-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -843,7 +843,7 @@
 		"name": "",
 		"img": "robot-1",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -855,7 +855,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -867,7 +867,7 @@
 		"name": "",
 		"img": "robot-3",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -879,7 +879,7 @@
 		"name": "",
 		"img": "human-24",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -891,7 +891,7 @@
 		"name": "",
 		"img": "human-22",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -903,7 +903,7 @@
 		"name": "",
 		"img": "human-22",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -915,7 +915,7 @@
 		"name": "",
 		"img": "human-20",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -927,7 +927,7 @@
 		"name": "",
 		"img": "human-18",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -939,7 +939,7 @@
 		"name": "",
 		"img": "human-20",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -951,7 +951,7 @@
 		"name": "",
 		"img": "human-23",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -963,7 +963,7 @@
 		"name": "",
 		"img": "human-20",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -975,7 +975,7 @@
 		"name": "",
 		"img": "human-20",
 		"enemy": false,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -987,7 +987,7 @@
 		"name": "",
 		"img": "critter-20",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -999,7 +999,7 @@
 		"name": "",
 		"img": "critter-19",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1011,7 +1011,7 @@
 		"name": "",
 		"img": "critter-6",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1023,7 +1023,7 @@
 		"name": "",
 		"img": "critter-10",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1035,7 +1035,7 @@
 		"name": "",
 		"img": "critter-25",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1047,7 +1047,7 @@
 		"name": "",
 		"img": "critter-24",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1059,7 +1059,7 @@
 		"name": "",
 		"img": "critter-13",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1071,7 +1071,7 @@
 		"name": "",
 		"img": "critter-11",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1083,7 +1083,7 @@
 		"name": "",
 		"img": "critter-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1095,7 +1095,7 @@
 		"name": "",
 		"img": "critter-13",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1107,7 +1107,7 @@
 		"name": "",
 		"img": "critter-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1119,7 +1119,7 @@
 		"name": "",
 		"img": "critter-2",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1131,7 +1131,7 @@
 		"name": "",
 		"img": "critter-21",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1143,7 +1143,7 @@
 		"name": "",
 		"img": "critter-23",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1155,7 +1155,7 @@
 		"name": "",
 		"img": "critter-22",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1167,7 +1167,7 @@
 		"name": "",
 		"img": "critter-24",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1179,7 +1179,7 @@
 		"name": "",
 		"img": "critter-25",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
@@ -1191,7 +1191,7 @@
 		"name": "",
 		"img": "critter-11",
 		"enemy": true,
-		"dialogue": false,
+		"dialogue": "",
 		"level": 1,
 		"path": [],
 		"spawnPos": [
