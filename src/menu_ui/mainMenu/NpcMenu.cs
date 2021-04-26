@@ -83,6 +83,7 @@ namespace Game.Ui
 			{
 				focusedControl.Hide();
 				focusedControl = null;
+				ClearDialogue();
 			}
 			else
 			{

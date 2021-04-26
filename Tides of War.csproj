@@ -1,4 +1,4 @@
-﻿<Project Sdk="Godot.NET.Sdk/3.2.3">
+﻿<Project Sdk="Godot.NET.Sdk/3.3.0">
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
     <TargetFramework>net472</TargetFramework>
@@ -18,9 +18,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\character\Character.cs" />
-    <Compile Include="src\character\player\CharacterCamera.cs" />
     <Compile Include="src\character\doodads\BuffAnim.cs" />
     <Compile Include="src\character\doodads\CombatText.cs" />
     <Compile Include="src\character\doodads\CombatTextHandler.cs" />
@@ -28,6 +26,7 @@
     <Compile Include="src\character\doodads\Tomb.cs" />
     <Compile Include="src\character\npc\Npc.cs" />
     <Compile Include="src\character\npc\targetDummy\TargetDummy.cs" />
+    <Compile Include="src\character\player\CharacterCamera.cs" />
     <Compile Include="src\character\player\Player.cs" />
     <Compile Include="src\character\stat\CharacterStat.cs" />
     <Compile Include="src\character\stat\StatManager.cs" />
@@ -96,9 +95,9 @@
     <Compile Include="src\landMine\LandMine.cs" />
     <Compile Include="src\light\LightSource.cs" />
     <Compile Include="src\map\Map.cs" />
+    <Compile Include="src\map\Zone2.cs" />
     <Compile Include="src\map\doodads\TransitionZone.cs" />
     <Compile Include="src\map\doodads\WorldClock.cs" />
-    <Compile Include="src\map\Zone2.cs" />
     <Compile Include="src\menu_ui\about\AboutController.cs" />
     <Compile Include="src\menu_ui\abstract\GameMenu.cs" />
     <Compile Include="src\menu_ui\components\ItemInfoController.cs" />
@@ -108,17 +107,19 @@
     <Compile Include="src\menu_ui\components\SlotGridController.cs" />
     <Compile Include="src\menu_ui\cursor\MoveCursorController.cs" />
     <Compile Include="src\menu_ui\dialogue\DialogueController.cs" />
-    <Compile Include="src\menu_ui\hud\ItemInfoHudController.cs" />
-    <Compile Include="src\menu_ui\hud\ItemInfoHudSpellController.cs" />
-    <Compile Include="src\menu_ui\hud\HudPopupErrorController.cs" />
-    <Compile Include="src\menu_ui\hud\HudPopupConfirmController.cs" />
-    <Compile Include="src\menu_ui\main\MenuMasterController.cs" />
     <Compile Include="src\menu_ui\hud\CharacterStatusController.cs" />
     <Compile Include="src\menu_ui\hud\HudControlController.cs" />
+    <Compile Include="src\menu_ui\hud\HudPopupConfirmController.cs" />
+    <Compile Include="src\menu_ui\hud\HudPopupErrorController.cs" />
+    <Compile Include="src\menu_ui\hud\ItemInfoHudController.cs" />
+    <Compile Include="src\menu_ui\hud\ItemInfoHudSpellController.cs" />
     <Compile Include="src\menu_ui\inventory\InventoryController.cs" />
     <Compile Include="src\menu_ui\inventory\InventoryModel.cs" />
     <Compile Include="src\menu_ui\inventory\ItemInfoInventoryController.cs" />
     <Compile Include="src\menu_ui\mainMenu\MainMenuController.cs" />
+    <Compile Include="src\menu_ui\mainMenu\NpcMenu.cs" />
+    <Compile Include="src\menu_ui\main\MenuMasterController.cs" />
+    <Compile Include="src\menu_ui\main\StartMenuController.cs" />
     <Compile Include="src\menu_ui\merchant\ItemInfoMerchantController.cs" />
     <Compile Include="src\menu_ui\merchant\MerchantController.cs" />
     <Compile Include="src\menu_ui\miniMap\MiniMapController.cs" />
@@ -131,7 +132,6 @@
     <Compile Include="src\menu_ui\sceneLoader\SceneLoaderController.cs" />
     <Compile Include="src\menu_ui\spell\ItemInfoSpellController.cs" />
     <Compile Include="src\menu_ui\spell\SpellBookController.cs" />
-    <Compile Include="src\menu_ui\main\StartMenuController.cs" />
     <Compile Include="src\menu_ui\stats\StatsController.cs" />
     <Compile Include="src\missile\Missile.cs" />
     <Compile Include="src\missile\MissileSpell.cs" />
@@ -149,6 +149,6 @@
     <Compile Include="src\spell\areaEffect\Stomp.cs" />
     <Compile Include="src\spell\visual\master\SpellEffect.cs" />
     <Compile Include="src\util\MapImporter.cs" />
-    <Compile Include="src\menu_ui\mainMenu\NpcMenu.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 </Project>

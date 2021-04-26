@@ -158,6 +158,7 @@ text = "Exit Menu"
 
 [node name="popup" parent="." instance=ExtResource( 6 )]
 visible = false
+
 [connection signal="visibility_changed" from="." to="." method="OnVisibilityChanged"]
 [connection signal="tab_changed" from="playerMenu" to="." method="OnTabChanged"]
 [connection signal="draw" from="playerMenu/Stats/richTextLabel" to="playerMenu/Stats" method="OnDraw"]

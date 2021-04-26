@@ -25,6 +25,7 @@ namespace Game.Database
 			contentDataTemplate = "res://data/{0}/{0}_content.json",
 			sceneMapPath = "res://src/map/{0}.tscn",
 			savePathDir = "user://data/save/",
-			assetMissileSpellPath = "res://asset/img/missile-spell/{0}.tres";
+			assetMissileSpellPath = "res://asset/img/missile-spell/{0}.tres",
+			menuIconPath = "res://asset/img/ui/{0}.png";
 	}
 }

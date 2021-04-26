@@ -176,6 +176,7 @@ size_flags_vertical = 3
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Quit"
+
 [connection signal="pressed" from="v_box_container/button" to="." method="MakeTileset"]
 [connection signal="pressed" from="v_box_container/exportAllMaps" to="." method="ExportAllMaps"]
 [connection signal="pressed" from="v_box_container/zone0" to="." method="ImportMap" binds= [ "res://src/map/zone_0.tscn" ]]

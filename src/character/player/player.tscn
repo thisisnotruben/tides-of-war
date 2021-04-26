@@ -116,5 +116,6 @@ collision_mask = 2
 
 [node name="camera" parent="." index="9" instance=ExtResource( 4 )]
 current = true
+smoothing_enabled = false
 
 [node name="menu" parent="." index="10" instance=ExtResource( 3 )]

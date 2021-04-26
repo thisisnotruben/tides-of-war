@@ -91,6 +91,8 @@ namespace Game.Actor.State
 			}
 			else
 			{
+				// TODO: drop loot
+
 				// npc
 				character.Visible = character.sight.Monitoring = false;
 				character.GlobalPosition = Globals.unitDB.GetData(character.Name).spawnPos;

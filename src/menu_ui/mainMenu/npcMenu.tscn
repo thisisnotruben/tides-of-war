@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/menu_ui/mainMenu/NpcMenu.cs" type="Script" id=1]
 [ext_resource path="res://src/menu_ui/merchant/MerchantView.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=3]
+[ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=4]
 
 [node name="npcMenu" type="Control"]
 anchor_right = 1.0
@@ -33,7 +34,7 @@ margin_bottom = 984.0
 size_flags_vertical = 3
 
 [node name="mainButtonGroup" type="HBoxContainer" parent="v"]
-margin_top = 1184.0
+margin_top = 1197.0
 margin_right = 720.0
 margin_bottom = 1280.0
 mouse_filter = 0
@@ -45,15 +46,17 @@ __meta__ = {
 
 [node name="speak" type="Button" parent="v/mainButtonGroup"]
 margin_right = 240.0
-margin_bottom = 96.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
 text = "Talk To"
 
 [node name="trade" type="Button" parent="v/mainButtonGroup"]
 margin_left = 240.0
 margin_right = 480.0
-margin_bottom = 96.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
 text = "Trade"
 
 [node name="sellBuy" type="Button" parent="v/mainButtonGroup"]
@@ -62,12 +65,14 @@ margin_left = 389.0
 margin_right = 554.0
 margin_bottom = 96.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = true
 text = "Sell"
 
 [node name="close" type="Button" parent="v/mainButtonGroup"]
 margin_left = 480.0
 margin_right = 720.0
-margin_bottom = 96.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
 text = "Close"

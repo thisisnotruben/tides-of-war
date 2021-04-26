@@ -4,5 +4,6 @@
 resource_name = "Limiter"
 
 [resource]
+bus/0/volume_db = -80.0
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = true

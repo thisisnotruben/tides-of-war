@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://asset/img/font/mago1_48.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/dialogic/Images/background/background-2.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://addons/dialogic/Nodes/dialog_node.gd" type="Script" id=6]
 [ext_resource path="res://addons/dialogic/Nodes/BackgroundMusic.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/dialogic/DialogicInput.cs" type="Script" id=8]
+[ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0 )
@@ -60,6 +61,7 @@ bg_color = Color( 0.196078, 0.196078, 0.196078, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+size_flags_vertical = 3
 custom_constants/separation = 0
 alignment = 2
 script = ExtResource( 6 )
@@ -78,9 +80,43 @@ __meta__ = {
 }
 
 [node name="Portraits" type="Control" parent="."]
-margin_top = 1080.0
+margin_right = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
 margin_right = 720.0
 margin_bottom = 1080.0
+mouse_filter = 2
+size_flags_vertical = 3
+theme = ExtResource( 9 )
+
+[node name="panel" type="PanelContainer" parent="CenterContainer"]
+margin_left = 344.0
+margin_top = 524.0
+margin_right = 376.0
+margin_bottom = 556.0
+
+[node name="marginContainer" type="MarginContainer" parent="CenterContainer/panel"]
+margin_right = 32.0
+margin_bottom = 32.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="VBoxContainer" parent="CenterContainer/panel/marginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -99,7 +135,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0.14902, 0.14902, 0.14902, 1 )
+color = Color( 0.14902, 0.14902, 0.14902, 0.501961 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -150,7 +186,7 @@ anchor_bottom = 1.0
 margin_left = -36.4279
 margin_top = -35.9016
 margin_right = 14.5721
-margin_bottom = 33.7894
+margin_bottom = 21.3564
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 2
 texture = ExtResource( 3 )
@@ -211,17 +247,6 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Options" type="HBoxContainer" parent="."]
-margin_top = 1280.0
-margin_right = 720.0
-margin_bottom = 1280.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -352,6 +377,7 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="DefinitionInfo"]
 
 [node name="WaitSeconds" type="Timer" parent="."]
+
 [connection signal="meta_hover_ended" from="TextBubble/RichTextLabel" to="." method="_on_RichTextLabel_meta_hover_ended"]
 [connection signal="meta_hover_started" from="TextBubble/RichTextLabel" to="." method="_on_RichTextLabel_meta_hover_started"]
 [connection signal="tween_completed" from="TextBubble/Tween" to="." method="_on_Tween_tween_completed"]

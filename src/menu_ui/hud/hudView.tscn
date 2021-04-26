@@ -11,11 +11,9 @@
 atlas = ExtResource( 5 )
 region = Rect2( 0, 48, 16, 15 )
 
-[node name="hud" type="Panel"]
-margin_top = 887.0
-margin_right = 720.0
-margin_bottom = 1280.0
-rect_min_size = Vector2( 0, 393 )
+[node name="hud" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme = ExtResource( 7 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -23,8 +21,8 @@ __meta__ = {
 }
 
 [node name="margin" type="MarginContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 720.0
+margin_bottom = 1280.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
 custom_constants/margin_left = 16
@@ -34,25 +32,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="split" type="VSplitContainer" parent="margin"]
+[node name="split" type="VBoxContainer" parent="margin"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 704.0
-margin_bottom = 377.0
-custom_constants/separation = 0
-dragger_visibility = 1
+margin_bottom = 1264.0
+alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="characterStatus" type="HSplitContainer" parent="margin/split"]
+[node name="characterStatus" type="HBoxContainer" parent="margin/split"]
+margin_top = 891.0
 margin_right = 688.0
-margin_bottom = 127.0
+margin_bottom = 1018.0
 custom_constants/separation = 0
-dragger_visibility = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="playerStatus" parent="margin/split/characterStatus" instance=ExtResource( 8 )]
 anchor_right = 0.0
@@ -85,9 +79,9 @@ __meta__ = {
 }
 
 [node name="center" type="CenterContainer" parent="margin/split"]
-margin_top = 135.0
+margin_top = 1022.0
 margin_right = 688.0
-margin_bottom = 361.0
+margin_bottom = 1248.0
 
 [node name="actionBar" type="GridContainer" parent="margin/split/center"]
 margin_left = 3.0
@@ -180,6 +174,7 @@ margin_left = 456.0
 margin_top = 114.0
 margin_right = 568.0
 margin_bottom = 226.0
+rect_min_size = Vector2( 112, 112 )
 icon = ExtResource( 3 )
 expand_icon = true
 __meta__ = {
@@ -192,6 +187,7 @@ margin_left = 570.0
 margin_top = 114.0
 margin_right = 682.0
 margin_bottom = 226.0
+rect_min_size = Vector2( 112, 112 )
 toggle_mode = true
 icon = SubResource( 1 )
 expand_icon = true

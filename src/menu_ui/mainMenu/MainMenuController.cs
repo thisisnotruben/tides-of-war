@@ -31,7 +31,8 @@ namespace Game.Ui
 			for (int i = 0; i < playerMenu.GetChildCount(); i++)
 			{
 				playerMenu.SetTabTitle(i, string.Empty);
-				playerMenu.SetTabIcon(i, GD.Load<Texture>($"res://asset/img/ui/{textureNames[i]}.png"));
+				playerMenu.SetTabIcon(i, GD.Load<Texture>(
+					string.Format(PathManager.menuIconPath, textureNames[i])));
 			}
 		}
 		private void OnVisibilityChanged() { GetTree().Paused = Visible; }

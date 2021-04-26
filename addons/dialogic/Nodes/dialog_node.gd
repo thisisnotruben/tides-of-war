@@ -36,6 +36,10 @@ onready var Portrait = load("res://addons/dialogic/Nodes/Portrait.tscn")
 var dialog_script = {}
 var questions #for keeping track of the questions answered
 
+# custom
+onready var optionsContainer = $CenterContainer
+onready var options = optionsContainer.get_node("panel/marginContainer/Options")
+
 func _ready():
 	# Loading the config files
 	load_config_files()
@@ -266,9 +270,9 @@ func _process(delta):
 	if not Engine.is_editor_hint():
 		# Multiple choices
 		if waiting_for_answer:
-			$Options.visible = finished
+			optionsContainer.visible = finished
 		else:
-			$Options.visible = false
+			optionsContainer.visible = false
 
 
 func _input(event: InputEvent) -> void:
@@ -546,7 +550,7 @@ func _on_input_set(variable):
 
 func reset_options():
 	# Clearing out the options after one was selected.
-	for option in $Options.get_children():
+	for option in options.get_children():
 		option.queue_free()
 
 
@@ -589,11 +593,11 @@ func add_choice_button(option):
 	# button.get_node('TextureRect').set('margin_top', -1 * padding.y)
 	# button.get_node('TextureRect').set('margin_bottom', padding.y)
 
-	$Options.set('custom_constants/separation', theme.get_value('buttons', 'gap', 20) + (padding.y*2))
+	options.set('custom_constants/separation', theme.get_value('buttons', 'gap', 20) + (padding.y*2))
 
 	button.connect("pressed", self, "answer_question", [button, option['event_id'], option['question_id']])
 
-	$Options.add_child(button)
+	options.add_child(button)
 
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_VISIBLE:
 		last_mouse_mode = Input.get_mouse_mode()
