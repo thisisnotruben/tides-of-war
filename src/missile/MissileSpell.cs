@@ -48,9 +48,9 @@ namespace Game.Projectile
 
 			if (Globals.spellEffectDB.HasData(spellWorldName))
 			{
-				spellEffect = ((SpellEffect)Globals.spellEffectDB.GetData(
-					Globals.spellDB.GetData(spellWorldName).spellEffect).Instance()
-					).Init(target, spellWorldName, this);
+				spellEffect = Globals.spellEffectDB.GetData(
+					Globals.spellDB.GetData(spellWorldName).spellEffect).Instance<SpellEffect>()
+					.Init(target, spellWorldName, this);
 
 				Connect(nameof(OnHit), spellEffect, nameof(SpellEffect.OnHit));
 			}

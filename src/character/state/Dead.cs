@@ -3,7 +3,6 @@ using System.Linq;
 using System;
 using Game.Actor.Doodads;
 using Game.Database;
-using Game.Quest;
 using Godot;
 using GC = Godot.Collections;
 namespace Game.Actor.State
@@ -77,7 +76,7 @@ namespace Game.Actor.State
 			Player player = character as Player;
 			if (player != null)
 			{
-				((Tomb)SceneDB.tomb.Instance()).Init(player, Map.Map.map.GetGridPosition(character.GlobalPosition));
+				SceneDB.tomb.Instance<Tomb>().Init(player, Map.Map.map.GetGridPosition(character.GlobalPosition));
 
 				// spawn to nearest graveyard
 				Dictionary<int, Vector2> graveSites = new Dictionary<int, Vector2>();

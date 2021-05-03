@@ -1,7 +1,6 @@
 using Godot;
 using Game.Loot;
 using Game.Database;
-using Game.Quest;
 namespace Game.Ui
 {
 	public class MainMenuController : GameMenu
@@ -42,7 +41,7 @@ namespace Game.Ui
 		{
 			PlaySound(NameDB.UI.CLICK0);
 			Globals.cooldownMaster.ClearCooldowns();
-			SceneLoaderController.Init().SetScene(PathManager.startScene, Map.Map.map);
+			Globals.sceneLoader.SetScene(PathManager.startScene, Map.Map.map);
 		}
 		private void CheckExit(bool exitGame)
 		{

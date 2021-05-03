@@ -166,7 +166,7 @@ namespace Game.Ui
 			Node root = GetTree().Root,
 				recentScene = root.GetChild(root.GetChildren().Count - 1);
 
-			SceneLoaderController.Init().SetScene(payload[NameDB.SaveTag.MAP].ToString(), recentScene, payload);
+			Globals.sceneLoader.SetScene(payload[NameDB.SaveTag.MAP].ToString(), recentScene, payload);
 		}
 		public void DeleteSaveFile(int index)
 		{

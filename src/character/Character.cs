@@ -170,7 +170,7 @@ namespace Game.Actor
 		public virtual void OnAttacked(Character whosAttacking) { fsm.OnAttacked(whosAttacking); }
 		public void SpawnCombatText(string text, CombatText.TextType textType)
 		{
-			CombatText combatText = (CombatText)SceneDB.combatText.Instance();
+			CombatText combatText = SceneDB.combatText.Instance<CombatText>();
 			combatTextHandler.AddChild(combatText);
 			combatText.Init(text, textType, img.Position);
 			combatTextHandler.AddCombatText(combatText);
@@ -193,7 +193,7 @@ namespace Game.Actor
 			// called from 'moving' animation
 			if (!dead)
 			{
-				FootStep footStep = (FootStep)SceneDB.footStep.Instance();
+				FootStep footStep = SceneDB.footStep.Instance<FootStep>();
 				Vector2 stepPos = GlobalPosition;
 				stepPos.y -= 3;
 				stepPos.x += (rightStep) ? 1.0f : -4.0f;
@@ -297,9 +297,9 @@ namespace Game.Actor
 					case NameDB.SaveTag.SPELL_EFFECTS:
 						foreach (GC.Dictionary spellEffectData in (GC.Array)payload[key])
 						{
-							((SpellEffect)Globals.spellEffectDB.GetData(
-								spellEffectData[NameDB.SaveTag.NAME].ToString()).Instance()
-								).Init(this, spellEffectData[NameDB.SaveTag.SPELL].ToString()
+							Globals.spellEffectDB.GetData(
+								spellEffectData[NameDB.SaveTag.NAME].ToString()).Instance<SpellEffect>()
+								.Init(this, spellEffectData[NameDB.SaveTag.SPELL].ToString()
 								).Deserialize(spellEffectData);
 						}
 						break;

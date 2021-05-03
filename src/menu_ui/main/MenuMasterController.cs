@@ -13,7 +13,7 @@ namespace Game.Ui
 		public HudPopupConfirmController confirmPopup;
 		public HudPopupErrorController errorPopup;
 		public SlotGridController inventorySlots, spellSlots;
-		private CanvasItem hudMenuContainer, menuContainer;
+		private CanvasItem hudMenuContainer, menuContainer, loadView;
 		private SaveLoadModel saveLoadModel;
 
 		public override void _Ready()
@@ -28,15 +28,19 @@ namespace Game.Ui
 			hudMenuContainer = menuContainer.GetChild<CanvasItem>(1);
 			hudMenuContainer.Connect("visibility_changed", this, nameof(OnHudMenuVisibilityChanged));
 
-			confirmPopup = menuContainer.GetChild<HudPopupConfirmController>(2);
-			errorPopup = menuContainer.GetChild<HudPopupErrorController>(3);
+			confirmPopup = menuContainer.GetNode<HudPopupConfirmController>("confirmPopup");
+			errorPopup = menuContainer.GetNode<HudPopupErrorController>("errorPopup");
 
-			npcMenu = menuContainer.GetChild<NpcMenu>(4).Init(
+			loadView = menuContainer.GetNode<CanvasItem>("loadView");
+			Globals.sceneLoader.progressBar = loadView.GetNode<Range>(
+				"panelContainer/marginContainer/vBoxContainer/progressBar");
+
+			npcMenu = menuContainer.GetNode<NpcMenu>("npcMenu").Init(
 				this, playerMenu.inventoryController, playerMenu.spellBookController,
 				playerMenu.playerInventory, playerMenu.playerSpellBook, saveLoadModel);
 			npcMenu.store.Connect("draw", this, nameof(HideExceptMenu), new GC.Array() { npcMenu });
 
-			hud = menuContainer.GetChild<HudControlController>(5);
+			hud = menuContainer.GetNode<HudControlController>("hud");
 			hud.targetContainer.Connect("hide", this, nameof(OnTargetCleared));
 			hud.pause.Connect("toggled", this, nameof(OnHudPausePressed));
 
@@ -92,6 +96,17 @@ namespace Game.Ui
 					menu.Hide();
 				}
 			}
+		}
+		public void ShowLoadView()
+		{
+			HideExceptMenu(null);
+			loadView.Show();
+		}
+		public void ShowTransitionDialogue(CanvasItem dialogic)
+		{
+			menuContainer.AddChild(dialogic);
+			menuContainer.MoveChild(dialogic, 0);
+			HideExceptMenu(dialogic);
 		}
 		public void ConnectPlayerToHud(Player player) { hud.playerStatus.ConnectCharacterStatusAndUpdate(player); }
 		public void SetTargetDisplay(Character target)

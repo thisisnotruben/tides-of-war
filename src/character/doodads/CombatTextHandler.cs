@@ -71,7 +71,7 @@ namespace Game.Actor.Doodads
 			foreach (GC.Dictionary combatTextData in combatTextArr)
 			{
 				combatTextPosArr = (GC.Array)combatTextData[NameDB.SaveTag.POSITION];
-				combatText = (CombatText)SceneDB.combatText.Instance();
+				combatText = SceneDB.combatText.Instance<CombatText>();
 
 				AddChild(combatText);
 				combatText.Init(combatTextData[NameDB.SaveTag.TEXT].ToString(),

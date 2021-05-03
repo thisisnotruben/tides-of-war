@@ -7,7 +7,7 @@ namespace Game.Ability
 		public override void Start()
 		{
 			base.Start();
-			((LandMine)SceneDB.landMine.Instance()).Init(worldName, character);
+			SceneDB.landMine.Instance<LandMine>().Init(worldName, character);
 		}
 	}
 }

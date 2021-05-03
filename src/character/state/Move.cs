@@ -35,12 +35,7 @@ namespace Game.Actor.State
 			base._Ready();
 			SetPhysicsProcess(false);
 		}
-		public override void Start()
-		{
-			character.img.FlipH = false;
-			character.anim.Play(Character.ANIM_MOVE, -1, character.stats.animSpeed.value);
-			character.anim.Seek(0.33f, true);
-		}
+		public override void Start() { PlayMoveAnim(); }
 		public override void Exit()
 		{
 			SetPhysicsProcess(false);
@@ -52,6 +47,12 @@ namespace Game.Actor.State
 			{
 				ResetPoint();
 			}
+		}
+		protected void PlayMoveAnim()
+		{
+			character.img.FlipH = false;
+			character.anim.Play(Character.ANIM_MOVE, -1, character.stats.animSpeed.value);
+			character.anim.Seek(0.33f, true);
 		}
 		public override void OnAttacked(Character whosAttacking)
 		{
@@ -106,6 +107,12 @@ namespace Game.Actor.State
 		{
 			this.targetPosition = targetPosition;
 			SetPhysicsProcess(true);
+
+			// needed for animation not playing at times.
+			if (!character.anim.CurrentAnimation.Equals(Character.ANIM_MOVE))
+			{
+				PlayMoveAnim();
+			}
 		}
 		protected virtual void OnMovePointFinished()
 		{

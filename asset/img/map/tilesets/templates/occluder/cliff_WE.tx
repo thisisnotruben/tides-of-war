@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="cliff_WE" type="occluder">
+  <polygon points="0,0 2,0 2,-16 0,-16"/>
+ </object>
+</template>

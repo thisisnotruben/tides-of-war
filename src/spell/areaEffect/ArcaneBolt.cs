@@ -12,8 +12,8 @@ namespace Game.Ability
 			{
 				base.StartAreaEffect(character);
 
-				((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
-					worldName).spellEffect).Instance()).Init(character, worldName).OnHit();
+				Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
+					worldName).spellEffect).Instance<SpellEffect>().Init(character, worldName).OnHit();
 			}
 		}
 	}

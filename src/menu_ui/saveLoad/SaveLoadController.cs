@@ -50,7 +50,7 @@ namespace Game.Ui
 		}
 		private void AddEntry(int i)
 		{
-			LoadEntryController loadEntry = (LoadEntryController)SceneDB.loadEntryScene.Instance();
+			LoadEntryController loadEntry = SceneDB.loadEntryScene.Instance<LoadEntryController>();
 			loadEntry.saveIndex = i;
 
 			entryList.AddChild(loadEntry);

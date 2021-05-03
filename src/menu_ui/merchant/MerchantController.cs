@@ -1,7 +1,6 @@
 using Godot;
 using Game.Actor;
 using Game.Database;
-using Game.Quest;
 namespace Game.Ui
 {
 	public class MerchantController : GameMenu

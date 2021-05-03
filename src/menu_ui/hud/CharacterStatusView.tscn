@@ -78,6 +78,7 @@ __meta__ = {
 }
 
 [node name="healthBar" type="TextureProgress" parent="healthHeader"]
+modulate = Color( 1, 0, 0, 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 show_behind_parent = true
 anchor_right = 1.0

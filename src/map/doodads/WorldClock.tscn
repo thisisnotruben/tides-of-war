@@ -35,11 +35,12 @@ tracks/1/keys = {
 [node name="worldClock" type="Timer"]
 wait_time = 210.0
 one_shot = true
-autostart = true
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "waiting for godot 4.0, until then, have 'Autostart' to false'"
+}
 
 [node name="color" type="CanvasModulate" parent="."]
 
 [node name="anim" type="AnimationPlayer" parent="."]
 anims/SunUpDown = SubResource( 1 )
-[connection signal="animation_finished" from="anim" to="." method="OnAnimFinished"]

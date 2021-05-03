@@ -133,8 +133,8 @@ namespace Game.Ability
 
 				case NameDB.Spell.CONCUSSIVE_SHOT:
 					string bashName = NameDB.Spell.BASH;
-					SpellEffect bashEffect = ((SpellEffect)Globals.spellEffectDB.GetData(
-						Globals.spellDB.GetData(bashName).spellEffect).Instance()).Init(
+					SpellEffect bashEffect = Globals.spellEffectDB.GetData(
+						Globals.spellDB.GetData(bashName).spellEffect).Instance<SpellEffect>().Init(
 						character, bashName);
 
 					polyBehavior.Push(() =>

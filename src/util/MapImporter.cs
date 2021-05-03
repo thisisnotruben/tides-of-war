@@ -1,6 +1,7 @@
 using Godot;
 using GC = Godot.Collections;
 using Game.Light;
+using Game.Actor;
 using System;
 namespace Game.Util
 {
@@ -42,11 +43,11 @@ namespace Game.Util
 
 		private PackedScene npcScene = GD.Load<PackedScene>("res://src/character/npc/npc.tscn"),
 			playerScene = GD.Load<PackedScene>("res://src/character/player/player.tscn"),
-			transitionScene = GD.Load<PackedScene>("res://src/map/doodads/TransitionZone.tscn"),
 			worldClockScene = GD.Load<PackedScene>("res://src/map/doodads/WorldClock.tscn"),
 			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn"),
 			lightScene = GD.Load<PackedScene>("res://src/light/light.tscn"),
-			lightSource = GD.Load<PackedScene>("res://src/light/lightSource.tscn");
+			lightSource = GD.Load<PackedScene>("res://src/light/lightSource.tscn"),
+			transitionSign = GD.Load<PackedScene>("res://src/map/doodads/transitionSign.tscn");
 
 		private Resource environment = GD.Load<Godot.Environment>("res://2d_env.tres");
 
@@ -88,7 +89,7 @@ namespace Game.Util
 		}
 		private Godot.Error CheckMap(PackedScene mapToImport)
 		{
-			map = (Node2D)mapToImport.Instance();
+			map = mapToImport.Instance<Node2D>();
 			map.GlobalPosition = new Vector2(0.0f, CELL_SIZE.y);
 
 			Node2D meta = map.GetNode<Node2D>("meta"),
@@ -96,6 +97,7 @@ namespace Game.Util
 				targetDummys = zedGroup.GetNode<Node2D>("target_dummys"),
 				characters = zedGroup.GetNode<Node2D>("characters"),
 				transitionsZones = meta.GetNode<Node2D>("transitionZones"),
+				transitionsSigns = zedGroup.GetNode<Node2D>("transitionSigns"),
 				lights = meta.GetNode<Node2D>("lights"),
 				graveSites = meta.GetNode<Node2D>("gravesites"),
 				transitions = meta.GetNode<Node2D>("transitions"),
@@ -118,7 +120,7 @@ namespace Game.Util
 			worldClock.Owner = map;
 
 			// add veil scene
-			Node2D veil = (Node2D)veilScene.Instance();
+			Node2D veil = veilScene.Instance<Node2D>();
 			map.AddChildBelowNode(worldClock, veil);
 			veil.Owner = map;
 			veil.Hide();
@@ -126,11 +128,11 @@ namespace Game.Util
 			zedGroup.MoveChild(characters, 0);
 			zedGroup.MoveChild(targetDummys, 1);
 
+			SetTransitions(transitionsZones, transitionsSigns, transitions);
 			SetUnits(characters, transitions);
 			SetTargetDummys(targetDummys);
 			SetLights(zedGroup, lights, lightSpace);
 			SetShaderData();
-			SetTransitions(transitionsZones, transitions);
 			SetWorldTileset();
 
 			// center gravesites on map to cell
@@ -141,7 +143,7 @@ namespace Game.Util
 			}
 
 			// delete now useless nodes
-			foreach (Node node in new Node[] { characters, targetDummys, paths, lights, lightSpace })
+			foreach (Node node in new Node[] { characters, targetDummys, paths, lights, lightSpace, transitionsZones })
 			{
 				node.Owner = null;
 				node.QueueFree();
@@ -167,7 +169,7 @@ namespace Game.Util
 			Node2D character;
 			foreach (Node2D node in characters.GetChildren())
 			{
-				character = (Node2D)npcScene.Instance();
+				character = npcScene.Instance<Node2D>();
 				zed.AddChild(character);
 				character.Owner = map;
 				character.Name = node.Name;
@@ -184,7 +186,7 @@ namespace Game.Util
 				_ => "playerSpawn"
 			};
 
-			character = (Node2D)playerScene.Instance();
+			character = playerScene.Instance<Node2D>();
 			zed.AddChild(character);
 			character.Owner = map;
 			character.Name = "player";
@@ -200,7 +202,7 @@ namespace Game.Util
 			{
 				scene = GD.Load<PackedScene>(string.Format(targetDummyPath, GetParsedName(node.Name)));
 
-				character = (Node2D)scene.Instance();
+				character = scene.Instance<Node2D>();
 				zed.AddChild(character);
 				character.Owner = map;
 				character.Name = node.Name;
@@ -218,7 +220,7 @@ namespace Game.Util
 				parsedName = GetParsedName(node.Name);
 				lightScene = GD.Load<PackedScene>(String.Format(lightPath, parsedName));
 
-				light = (Node2D)lightScene.Instance();
+				light = lightScene.Instance<Node2D>();
 				zed.AddChild(light);
 				light.Owner = map;
 				light.Name = node.Name;
@@ -267,7 +269,7 @@ namespace Game.Util
 						continue;
 					}
 
-					light = (Node2D)lightScene.Instance();
+					light = lightScene.Instance<Node2D>();
 
 					drawIndex = tileMap.GetIndex() + 1;
 					(drawIndex > zedGroup.GetChildCount() - 1
@@ -306,7 +308,7 @@ namespace Game.Util
 
 			Action<Node, Node2D> addLightSpace = (Node parent, Node2D source) =>
 			{
-				light2D = (LightSource)lightSource.Instance();
+				light2D = lightSource.Instance<LightSource>();
 				parent.AddChild(light2D);
 				light2D.Owner = map;
 
@@ -341,30 +343,39 @@ namespace Game.Util
 				}
 			}
 		}
-		private void SetTransitions(Node transitionZones, Node transitions)
+		private void SetTransitions(Node transitionZones, Node transitionSigns, Node transitions)
 		{
-			Node2D transition;
-			string transitionName;
-			Node collisionLayer;
-			foreach (Node2D node2D in transitionZones.GetChildren())
+			foreach (Sprite sign in transitionSigns.GetChildren())
 			{
-				transition = (Node2D)transitionScene.Instance();
-				transitionZones.AddChild(transition);
-				transition.Owner = map;
+				Sprite sprite = transitionSign.Instance<Sprite>(PackedScene.GenEditState.Instance);
 
-				transitionName = node2D.Name;
-				node2D.Name = transitionName + "-DELETE";
-				transition.Name = transitionName;
+				zed.AddChild(sprite);
+				sprite.Owner = map;
+				sprite.Name = map.Name + "-" + sign.Name;
+				sprite.GlobalPosition = new Vector2(sign.GlobalPosition.x + HALF_CELL_SIZE.x, sign.GlobalPosition.y - CELL_SIZE.y);
+				sprite.Texture = sign.Texture;
+				sprite.RegionRect = sign.RegionRect;
 
-				transition.GlobalPosition = new Vector2(node2D.GlobalPosition.x, node2D.GlobalPosition.y - CELL_SIZE.y);
+				Area2D area2D = new Area2D();
+				sprite.AddChild(area2D);
+				area2D.Owner = map;
+				area2D.Name = "area2D";
+				area2D.Monitorable = false;
+				area2D.CollisionLayer = 0;
+				area2D.CollisionMask = Player.COLL_MASK_PLAYER;
+
+				Node2D transitionArea = transitionZones.GetNode<Node2D>(sign.Name);
+				area2D.GlobalPosition = new Vector2(transitionArea.GlobalPosition.x, transitionArea.GlobalPosition.y - CELL_SIZE.y);
 
 				// remove collision layer from tiled node and set it to node with script for detection purposes
-				collisionLayer = node2D.GetChild(0);
-				node2D.RemoveChild(collisionLayer);
-				node2D.Owner = null;
-				transition.AddChild(collisionLayer);
-				collisionLayer.Owner = map;
+				Node2D collisionShape = transitionArea.GetChild<Node2D>(0);
+				transitionArea.RemoveChild(collisionShape);
+				area2D.AddChild(collisionShape);
+				collisionShape.Owner = map;
 			}
+
+			transitionSigns.Owner = null;
+			transitionSigns.QueueFree();
 
 			foreach (Node2D node2D in transitions.GetChildren())
 			{

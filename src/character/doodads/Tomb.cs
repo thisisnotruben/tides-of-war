@@ -45,7 +45,7 @@ namespace Game.Actor.Doodads
 			if (area2D.Owner == deceasedPlayer)
 			{
 				Globals.TryLinkSignal(confirmPopup.button, "pressed", this, nameof(Revive), false);
-				confirmPopup.HideConfirm();
+				confirmPopup.Hide();
 			}
 		}
 		public void Revive()
@@ -55,7 +55,7 @@ namespace Game.Actor.Doodads
 			// hide button to avoid double click
 			sight.Monitoring = false;
 			Globals.TryLinkSignal(confirmPopup.button, "pressed", this, nameof(Revive), false);
-			confirmPopup.HideConfirm();
+			confirmPopup.Hide();
 
 			// revive
 			Map.Map.map.SetVeil(false);

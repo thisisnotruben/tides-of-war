@@ -9,16 +9,16 @@ namespace Game.Factory
 		{
 			Spell spell = worldName switch
 			{
-				NameDB.Spell.ARCANE_BOLT => (ArcaneBolt)SceneDB.arcaneBoltAreaEffect.Instance(),
+				NameDB.Spell.ARCANE_BOLT => SceneDB.arcaneBoltAreaEffect.Instance<ArcaneBolt>(),
 				NameDB.Spell.BASH => new Bash(),
 				NameDB.Spell.EXPLOSIVE_TRAP => new ExplosiveTrap(),
 				NameDB.Spell.OVERPOWER => new Overpower(),
 				NameDB.Spell.SIPHON_MANA => new SiphonMana(),
-				NameDB.Spell.STOMP => (Stomp)SceneDB.stompAreaEffect.Instance(),
+				NameDB.Spell.STOMP => SceneDB.stompAreaEffect.Instance<Stomp>(),
 				NameDB.Spell.VOLLEY => new Volley(),
 				_ => Globals.spellDB.HasData(worldName)
 					? Globals.areaEffectDB.HasData(worldName)
-						? (SpellAreaEffect)SceneDB.spellAreaEffect.Instance()
+						? SceneDB.spellAreaEffect.Instance<SpellAreaEffect>()
 						: new Spell()
 					: null
 			};

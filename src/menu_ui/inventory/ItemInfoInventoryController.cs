@@ -2,7 +2,6 @@ using Game.Actor.Doodads;
 using Game.GameItem;
 using Game.Database;
 using Game.Factory;
-using Game.Quest;
 using Game.Loot;
 using Godot;
 namespace Game.Ui
@@ -97,7 +96,7 @@ namespace Game.Ui
 					break;
 				case ItemDB.ItemType.POTION:
 					sndName = NameDB.UI.DRINK;
-					player.img.AddChild(((BuffAnim)SceneDB.buffAnimScene.Instance()).Init(commodityWorldName));
+					player.img.AddChild(SceneDB.buffAnimScene.Instance<BuffAnim>().Init(commodityWorldName));
 					break;
 			}
 			PlaySound(sndName);
@@ -181,11 +180,9 @@ namespace Game.Ui
 			CheckHudSlots(inventoryModel, commodityWorldName);
 			EmitSignal(nameof(RefreshSlots));
 
-			// instance treasure chest
-			TreasureChest treasureChest = (TreasureChest)SceneDB.treasureChest.Instance();
-			treasureChest.Init(commodityWorldName);
-
 			// place treasure chest in map
+			TreasureChest treasureChest = SceneDB.treasureChest.Instance<TreasureChest>().Init(commodityWorldName);
+
 			Map.Map map = Map.Map.map;
 			map.AddZChild(treasureChest);
 			treasureChest.Owner = map;

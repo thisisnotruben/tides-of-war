@@ -1,0 +1,1 @@
+{"events":[{"options":[],"question":"Adventure forth to the Human Kingdom?"},{"choice":"Yes"},{"emit_signal":"zone_1"},{"choice":"No"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620004506.json","name":"zone_2-zone_1"}}

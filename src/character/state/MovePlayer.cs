@@ -54,12 +54,13 @@ namespace Game.Actor.State
 			ResetPoint();
 			path = Map.Map.map.getAPath(character.GlobalPosition, desiredPosition);
 			MoveTo(path);
-
-			// set cursor animation
+		}
+		private void SpawnCuror(Vector2 worldPosition)
+		{
 			EmitSignal(nameof(PositionChanged));
-			MoveCursorController cursor = (MoveCursorController)SceneDB.moveCursor.Instance();
+			MoveCursorController cursor = SceneDB.moveCursor.Instance<MoveCursorController>();
 			Connect(nameof(PositionChanged), cursor, nameof(MoveCursorController.Delete));
-			cursor.AddToMap(Map.Map.map.GetGridPosition(desiredPosition));
+			cursor.AddToMap(Map.Map.map.GetGridPosition(worldPosition));
 		}
 		protected override void OnMoveAnomaly(MoveAnomalyType moveAnomalyType) { fsm.ChangeState(fsm.IsDead() ? FSM.State.IDLE_DEAD : FSM.State.IDLE); }
 		public override GC.Dictionary Serialize()

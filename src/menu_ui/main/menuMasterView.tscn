@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/menu_ui/main/MenuMasterController.cs" type="Script" id=1]
 [ext_resource path="res://src/menu_ui/mainMenu/gameMenu.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/menu_ui/hud/HudPopupErrorController.cs" type="Script" id=9]
 [ext_resource path="res://src/menu_ui/hud/HudPopupConfirmController.cs" type="Script" id=10]
 [ext_resource path="res://src/menu_ui/mainMenu/npcMenu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/menu_ui/sceneLoader/sceneLoaderView.tscn" type="PackedScene" id=12]
 
 [node name="menu" type="Control"]
 anchor_right = 1.0
@@ -22,6 +23,7 @@ __meta__ = {
 }
 
 [node name="canvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="split" type="VBoxContainer" parent="canvasLayer"]
 pause_mode = 2
@@ -41,14 +43,14 @@ visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 720.0
-margin_bottom = 887.0
+margin_bottom = 891.0
 size_flags_vertical = 3
 
 [node name="hudMenu" type="TabContainer" parent="canvasLayer/split"]
 visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 720.0
-margin_bottom = 591.0
+margin_bottom = 891.0
 size_flags_vertical = 3
 tabs_visible = false
 
@@ -67,7 +69,7 @@ anchor_bottom = 0.0
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 688.0
-margin_bottom = 555.0
+margin_bottom = 855.0
 script = ExtResource( 6 )
 
 [node name="Spells" type="MarginContainer" parent="canvasLayer/split/hudMenu"]
@@ -86,42 +88,21 @@ anchor_bottom = 0.0
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 688.0
-margin_bottom = 555.0
+margin_bottom = 855.0
 script = ExtResource( 8 )
 
 [node name="confirmPopup" type="CenterContainer" parent="canvasLayer/split"]
 visible = false
+margin_top = 795.0
 margin_right = 720.0
-margin_bottom = 445.0
-mouse_filter = 2
-size_flags_vertical = 3
+margin_bottom = 891.0
 script = ExtResource( 10 )
 
-[node name="tween" type="Tween" parent="canvasLayer/split/confirmPopup"]
-
-[node name="panel" type="Panel" parent="canvasLayer/split/confirmPopup"]
-margin_left = 147.0
-margin_top = 136.0
-margin_right = 573.0
-margin_bottom = 308.0
-rect_min_size = Vector2( 426, 172 )
-
-[node name="marginContainer" type="MarginContainer" parent="canvasLayer/split/confirmPopup/panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 32
-custom_constants/margin_top = 32
-custom_constants/margin_left = 32
-custom_constants/margin_bottom = 32
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="button" type="Button" parent="canvasLayer/split/confirmPopup/panel/marginContainer"]
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 394.0
-margin_bottom = 140.0
+[node name="confirm" type="Button" parent="canvasLayer/split/confirmPopup"]
+margin_left = 240.0
+margin_right = 480.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 240, 0 )
 text = "Revive"
 
 [node name="errorPopup" type="CenterContainer" parent="canvasLayer/split"]
@@ -163,11 +144,19 @@ one_shot = true
 
 [node name="tween" type="Tween" parent="canvasLayer/split/errorPopup"]
 
+[node name="loadView" parent="canvasLayer/split" instance=ExtResource( 12 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 720.0
+margin_bottom = 891.0
+
 [node name="npcMenu" parent="canvasLayer/split" instance=ExtResource( 11 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 51.0
 margin_right = 720.0
 margin_bottom = 891.0
 size_flags_vertical = 3
@@ -179,6 +168,5 @@ margin_top = 891.0
 margin_right = 720.0
 margin_bottom = 1280.0
 
-[connection signal="pressed" from="canvasLayer/split/confirmPopup/panel/marginContainer/button" to="canvasLayer/split/confirmPopup" method="OnConfirm"]
 [connection signal="timeout" from="canvasLayer/split/errorPopup/timer" to="canvasLayer/split/errorPopup" method="OnTimerTimeout"]
 [connection signal="tween_all_completed" from="canvasLayer/split/errorPopup/tween" to="canvasLayer/split/errorPopup" method="OnTweenAllCompleted"]

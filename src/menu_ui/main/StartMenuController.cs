@@ -25,8 +25,7 @@ namespace Game.Ui
 		public void _OnNewGamePressed()
 		{
 			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK0);
-			SceneLoaderController.rootNode = GetTree().Root;
-			SceneLoaderController.Init().SetScene(string.Format(PathManager.sceneMapPath, "zone_1"), this);
+			Globals.sceneLoader.SetScene(string.Format(PathManager.sceneMapPath, "zone_1"), this);
 		}
 		public void _OnLoadPressed() { Transition(saveLoadController); }
 		public void _OnAboutPressed() { Transition(aboutController); }

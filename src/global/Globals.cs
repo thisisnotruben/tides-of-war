@@ -1,4 +1,5 @@
 using Godot;
+using Game.Ui;
 using Game.Quest;
 using Game.Sound;
 using Game.Database;
@@ -29,11 +30,13 @@ namespace Game
 		public static readonly CooldownMaster cooldownMaster = new CooldownMaster();
 		public static readonly QuestMaster questMaster = new QuestMaster();
 		public static readonly Dialogic dialogic = new Dialogic();
+		public static readonly SceneLoader sceneLoader = new SceneLoader();
 
 		public override void _Ready()
 		{
 			AddChild(soundPlayer);
 			AddChild(cooldownMaster);
+			AddChild(sceneLoader);
 		}
 
 		// util function

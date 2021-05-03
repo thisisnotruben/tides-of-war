@@ -24,7 +24,11 @@ namespace Game.Loot
 			img = GetNode<Sprite>("img");
 			player2D = GetNode<AudioStreamPlayer2D>("snd");
 		}
-		public void Init(string commodityWorldName) { this.commodityWorldName = commodityWorldName; }
+		public TreasureChest Init(string commodityWorldName)
+		{
+			this.commodityWorldName = commodityWorldName;
+			return this;
+		}
 		private void Delete() { QueueFree(); }
 		public void Collect()
 		{

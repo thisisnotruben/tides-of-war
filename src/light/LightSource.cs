@@ -17,16 +17,24 @@ namespace Game.Light
 
 		public override void _Ready()
 		{
+			// * TOOD: waiting for godot 4.0 to fix lights, huge fps drop
+			Enabled = false;
+
 			tween = GetChild<Tween>(0);
-			visibilityNotifier2D = GetChild<VisibilityNotifier2D>(1);
+			// tween.Connect("tween_all_completed", this, nameof(OnTweenAllCompleted));
 
 			Vector2 textureSize = Texture.GetSize() * TextureScale;
+
+			visibilityNotifier2D = GetChild<VisibilityNotifier2D>(1);
 			visibilityNotifier2D.Rect = new Rect2(textureSize / -2.0f, textureSize);
-			StartTween();
+			// visibilityNotifier2D.Connect("screen_entered", this, nameof(OnScreenEnteredExited));
+			// visibilityNotifier2D.Connect("screen_exited", this, nameof(OnScreenEnteredExited));
+
+			// StartTween();
 			AddToGroup(Globals.LIGHT_GROUP);
 		}
-		public void OnTweenAllCompleted() { StartTween(); } // connected from scene
-		public void OnScreenEnteredExited() { tween.SetActive(visibilityNotifier2D.IsOnScreen()); }
+		private void OnTweenAllCompleted() { /* StartTween(); */ }
+		private void OnScreenEnteredExited() { /* tween.SetActive(visibilityNotifier2D.IsOnScreen()); */ }
 		private void StartTween()
 		{
 			// loop through gradient colors
@@ -51,17 +59,8 @@ namespace Game.Light
 		}
 		public void DimLight(bool dimDown)
 		{
-			float brightness = dimDown ? minBrightness : maxBrightness;
-			if (visibilityNotifier2D.IsOnScreen())
-			{
-				tween.InterpolateProperty(this, "energy", Energy, brightness,
-					dimSpeed, Tween.TransitionType.Linear, Tween.EaseType.In);
-				tween.Start();
-			}
-			else
-			{
-				Energy = brightness;
-			}
+			ShadowEnabled = dimDown;
+			Energy = dimDown ? 0.75f : 0.65f;
 		}
 	}
 }

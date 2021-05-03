@@ -16,7 +16,6 @@ namespace Game.Database
 			spellAreaEffect = GD.Load<PackedScene>("res://src/spell/areaEffect/SpellAreaEffect.tscn"),
 			stompAreaEffect = GD.Load<PackedScene>("res://src/spell/areaEffect/Stomp.tscn"),
 			arcaneBoltAreaEffect = GD.Load<PackedScene>("res://src/spell/areaEffect/ArcaneBolt.tscn"),
-			sceneLoader = GD.Load<PackedScene>("res://src/menu_ui/sceneLoader/SceneLoaderView.tscn"),
 			buffAnimScene = GD.Load<PackedScene>("res://src/character/doodads/BuffAnim.tscn"),
 			loadEntryScene = GD.Load<PackedScene>("res://src/menu_ui/saveLoad/LoadEntryView.tscn");
 

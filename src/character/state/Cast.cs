@@ -21,8 +21,8 @@ namespace Game.Actor.State
 
 			if (Globals.spellEffectDB.HasData(spell.worldName))
 			{
-				((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
-					spell.worldName).spellEffect).Instance()).Init(character, spell.worldName).OnHit();
+				Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
+					spell.worldName).spellEffect).Instance<SpellEffect>().Init(character, spell.worldName).OnHit();
 			}
 		}
 		public override void Exit()

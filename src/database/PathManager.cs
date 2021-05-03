@@ -20,7 +20,7 @@ namespace Game.Database
 			spellEffectDir = "res://src/spell/visual/",
 			questDir = "res://data/quest/",
 			sndDir = "res://asset/snd/",
-			startScene = "res://src/menu_ui/startMenu/StartMenuView.tscn",
+			startScene = "res://src/menu_ui/main/StartMenuView.tscn",
 			unitDataTemplate = "res://data/{0}/{0}.json",
 			contentDataTemplate = "res://data/{0}/{0}_content.json",
 			sceneMapPath = "res://src/map/{0}.tscn",

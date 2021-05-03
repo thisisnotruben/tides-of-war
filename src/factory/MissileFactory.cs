@@ -10,10 +10,10 @@ namespace Game.Factory
 			return Globals.missileSpellDB.HasData(spellName)
 				? (spellName switch
 				{
-					NameDB.Spell.METEOR => (MissileSpellOrbital)SceneDB.missileSpelOrbital.Instance(),
-					_ => (MissileSpell)SceneDB.missileSpell.Instance()
+					NameDB.Spell.METEOR => SceneDB.missileSpelOrbital.Instance<MissileSpellOrbital>(),
+					_ => SceneDB.missileSpell.Instance<MissileSpell>()
 				}).Init(character, target, spellName)
-				: ((Missile)SceneDB.missile.Instance()).Init(character, target);
+				: SceneDB.missile.Instance<Missile>().Init(character, target);
 		}
 		protected override Missile Create(Character character, string worldName)
 		{

@@ -405,8 +405,8 @@ namespace Game.Actor.State
 		}
 		private static void InstancSpellEffect(string spellName, Character target)
 		{
-			((SpellEffect)Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
-				spellName).spellEffect).Instance()).Init(target, spellName).OnHit();
+			Globals.spellEffectDB.GetData(Globals.spellDB.GetData(
+				spellName).spellEffect).Instance<SpellEffect>().Init(target, spellName).OnHit();
 		}
 		public override GC.Dictionary Serialize()
 		{

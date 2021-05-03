@@ -96,7 +96,7 @@
     <Compile Include="src\light\LightSource.cs" />
     <Compile Include="src\map\Map.cs" />
     <Compile Include="src\map\Zone2.cs" />
-    <Compile Include="src\map\doodads\TransitionZone.cs" />
+    <Compile Include="src\map\doodads\TransitionSign.cs" />
     <Compile Include="src\map\doodads\WorldClock.cs" />
     <Compile Include="src\menu_ui\about\AboutController.cs" />
     <Compile Include="src\menu_ui\abstract\GameMenu.cs" />
@@ -129,7 +129,7 @@
     <Compile Include="src\menu_ui\saveLoad\LoadEntryController.cs" />
     <Compile Include="src\menu_ui\saveLoad\SaveLoadController.cs" />
     <Compile Include="src\menu_ui\saveLoad\SaveLoadModel.cs" />
-    <Compile Include="src\menu_ui\sceneLoader\SceneLoaderController.cs" />
+    <Compile Include="src\menu_ui\sceneLoader\SceneLoader.cs" />
     <Compile Include="src\menu_ui\spell\ItemInfoSpellController.cs" />
     <Compile Include="src\menu_ui\spell\SpellBookController.cs" />
     <Compile Include="src\menu_ui\stats\StatsController.cs" />

@@ -5,7 +5,7 @@ uniform sampler2D gradient;
 uniform float color_speed = 1.0;
 uniform float scale_speed = 1.0;
 uniform float energy = 1.0;
-uniform vec2 scale;
+uniform vec2 scale = vec2(1.0);
 
 void vertex() {
 	float map = scale.x + abs(sin(TIME * scale_speed)) * (scale.y - scale.x);
@@ -13,7 +13,8 @@ void vertex() {
 }
 
 void fragment() {
-	vec3 color = texture(gradient, vec2(abs(sin(TIME * color_speed)), UV.y)).rgb;
-	float alpha = texture(TEXTURE, UV).a * energy;
-	COLOR = vec4(color, alpha);
+	vec4 color = texture(gradient, vec2(abs(sin(TIME * color_speed)), UV.y));
+	color.a *= texture(TEXTURE, UV).a *  energy;
+
+	COLOR = color;
 }

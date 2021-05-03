@@ -15,17 +15,16 @@ namespace Game.Map.Doodads
 		public override void _Ready()
 		{
 			anim = GetNode<AnimationPlayer>("anim");
-			Globals.TryLinkSignal(this, "timeout", this, nameof(OnTimerTimeout), true);
-			AddToGroup(Globals.SAVE_GROUP);
+			// * TODO: waiting for godot 4.0 to fix lights, huge fps drop
+			// Globals.TryLinkSignal(anim, "animation_finished", this, nameof(OnAnimFinished), true);
+			// Globals.TryLinkSignal(this, "timeout", this, nameof(OnTimerTimeout), true);
+			// AddToGroup(Globals.SAVE_GROUP);
 		}
-		public void OnTimerTimeout()
-		{
-			anim.Play(ANIM_NAME, -1.0f, dayLight ? 1.0f : -1.0f, !dayLight);
-			dayLight = !dayLight;
-		}
-		public void OnAnimFinished(string animName) // connected from scene
+		public void OnTimerTimeout() { anim.Play(ANIM_NAME, -1.0f, dayLight ? 1.0f : -1.0f, !dayLight); }
+		public void OnAnimFinished(string animName)
 		{
 			WaitTime = LENGTH_OF_DAY;
+			dayLight = !dayLight;
 			Start();
 		}
 		public void TriggerLights() // called from animation
@@ -56,10 +55,10 @@ namespace Game.Map.Doodads
 			}
 			else
 			{
-				anim.Play(ANIM_NAME, -1.0f, dayLight ? 1.0f : -1.0f, !dayLight);
+				OnTimerTimeout();
 				if (animPos > 0.0f && animPos < anim.GetAnimation(ANIM_NAME).Length)
 				{
-					anim.Seek(animPos, true);
+					anim.Advance(animPos);
 				}
 			}
 		}

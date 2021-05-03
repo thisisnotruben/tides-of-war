@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="cactus2" type="occluder">
+  <polygon points="0,0 7,0 7,-2 0,-2"/>
+ </object>
+</template>
