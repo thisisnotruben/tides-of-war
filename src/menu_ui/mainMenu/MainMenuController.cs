@@ -8,6 +8,7 @@ namespace Game.Ui
 		public InventoryController inventoryController;
 		public SpellBookController spellBookController;
 		public InventoryModel playerInventory, playerSpellBook;
+		public QuestLogController questLogController;
 		private TabContainer playerMenu;
 		private PopupController popup;
 
@@ -19,6 +20,8 @@ namespace Game.Ui
 			spellBookController = playerMenu.GetNode<SpellBookController>("Skills/SkillBookView");
 			playerInventory = inventoryController.inventory;
 			playerSpellBook = spellBookController.spellBook;
+
+			questLogController = playerMenu.GetNode<QuestLogController>("Quest Log/QuestLogView");
 
 			popup = GetChild<PopupController>(1);
 			GetNode<BaseButton>("playerMenu/Settings/centerContainer/vBoxContainer/exitGame").Connect(
@@ -60,37 +63,37 @@ namespace Game.Ui
 				ExitMenu();
 			}
 		}
-		public void LootInteract(TreasureChest lootChest)
+		public void LootInteract(ICollectable collectable, string itemName)
 		{
 			if (player.dead)
 			{
 				return;
 			}
 
-			if (Globals.spellDB.HasData(lootChest.commodityWorldName))
+			if (Globals.spellDB.HasData(itemName))
 			{
-				if (playerSpellBook.IsFull(lootChest.commodityWorldName))
+				if (playerSpellBook.IsFull(itemName))
 				{
 					popup.ShowError("Spell Book\nFull!");
 				}
 				else
 				{
-					Globals.questMaster.CheckQuests(lootChest.commodityWorldName, QuestDB.QuestType.LEARN, true);
-					playerSpellBook.AddCommodity(lootChest.commodityWorldName);
-					lootChest.Collect();
+					Globals.questMaster.CheckQuests(itemName, QuestDB.QuestType.LEARN, true);
+					playerSpellBook.AddCommodity(itemName);
+					collectable.Collect();
 				}
 			}
-			else
+			else if (Globals.itemDB.HasData(itemName))
 			{
-				if (playerInventory.IsFull(lootChest.commodityWorldName))
+				if (playerInventory.IsFull(itemName))
 				{
 					popup.ShowError("Inventory\nFull!");
 				}
 				else
 				{
-					Globals.questMaster.CheckQuests(lootChest.commodityWorldName, QuestDB.QuestType.COLLECT, true);
-					playerInventory.AddCommodity(lootChest.commodityWorldName);
-					lootChest.Collect();
+					Globals.questMaster.CheckQuests(itemName, QuestDB.QuestType.COLLECT, true);
+					playerInventory.AddCommodity(itemName);
+					collectable.Collect();
 				}
 			}
 		}

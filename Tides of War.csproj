@@ -23,6 +23,7 @@
     <Compile Include="src\character\doodads\CombatText.cs" />
     <Compile Include="src\character\doodads\CombatTextHandler.cs" />
     <Compile Include="src\character\doodads\FootStep.cs" />
+    <Compile Include="src\character\doodads\QuestMarker.cs" />
     <Compile Include="src\character\doodads\Tomb.cs" />
     <Compile Include="src\character\npc\Npc.cs" />
     <Compile Include="src\character\npc\targetDummy\TargetDummy.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="src\database\ImageDB.cs" />
     <Compile Include="src\database\ItemDB.cs" />
     <Compile Include="src\database\LandMineDB.cs" />
+    <Compile Include="src\database\MapQuestItemDB.cs" />
     <Compile Include="src\database\MissileSpellDB.cs" />
     <Compile Include="src\database\ModDB.cs" />
     <Compile Include="src\database\NameDB.cs" />
@@ -89,11 +91,13 @@
     <Compile Include="src\global\WorldObject.cs" />
     <Compile Include="src\item\Commodity.cs" />
     <Compile Include="src\item\CooldownMaster.cs" />
+    <Compile Include="src\item\ICollectable.cs" />
     <Compile Include="src\item\Item.cs" />
     <Compile Include="src\item\TreasureChest.cs" />
     <Compile Include="src\landMine\ICombustible.cs" />
     <Compile Include="src\landMine\LandMine.cs" />
     <Compile Include="src\light\LightSource.cs" />
+    <Compile Include="src\map\doodads\InteractItem.cs" />
     <Compile Include="src\map\Map.cs" />
     <Compile Include="src\map\Zone2.cs" />
     <Compile Include="src\map\doodads\TransitionSign.cs" />

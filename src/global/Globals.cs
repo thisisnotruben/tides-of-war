@@ -25,6 +25,7 @@ namespace Game
 		public static readonly SpellEffectDB spellEffectDB = new SpellEffectDB(PathManager.spellEffectDir);
 		public static readonly UnitDB unitDB = new UnitDB();
 		public static readonly UseDB useDB = new UseDB(PathManager.use);
+		public static readonly MapQuestItemDB mapQuestItemDB = new MapQuestItemDB();
 
 		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
 		public static readonly CooldownMaster cooldownMaster = new CooldownMaster();
@@ -37,8 +38,8 @@ namespace Game
 			AddChild(soundPlayer);
 			AddChild(cooldownMaster);
 			AddChild(sceneLoader);
+			AddChild(questMaster);
 		}
-
 		// util function
 		public static void TryLinkSignal(Godot.Object source, string sourceSignal, Godot.Object target, string targetMethod, bool link)
 		{

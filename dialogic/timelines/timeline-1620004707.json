@@ -1,1 +1,1 @@
-{"events":[{"options":[],"question":"Adventure forth to the magical forest?"},{"choice":"Yes"},{"emit_signal":"zone_4"},{"choice":"No"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620004707.json","name":"zone_3-zone_4"}}
+{"events":[{"options":[],"question":"Adventure forth to the Emerald Grove?"},{"choice":"Yes"},{"emit_signal":"zone_4"},{"choice":"No"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620004707.json","name":"zone_3-zone_4"}}

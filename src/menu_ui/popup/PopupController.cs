@@ -4,9 +4,9 @@ namespace Game.Ui
 {
 	public class PopupController : GameMenu
 	{
-		public Control yesNoView, errorView, filterView;
+		private Control yesNoView, errorView, filterView;
 		public Label yesNoLabel, errorLabel;
-		public Button yesBttn, noBttn, okayBttn, allBttn, activeBttn, completedBttn;
+		private Button yesBttn, okayBttn;
 
 		public override void _Ready()
 		{
@@ -17,16 +17,10 @@ namespace Game.Ui
 			yesNoView = popupContainer.GetNode<Control>("yes_no");
 			yesNoLabel = yesNoView.GetNode<Label>("label");
 			yesBttn = yesNoView.GetNode<Button>("yes");
-			noBttn = yesNoView.GetNode<Button>("no");
 
 			errorView = popupContainer.GetNode<Control>("error");
 			errorLabel = errorView.GetNode<Label>("label");
 			okayBttn = errorView.GetNode<Button>("okay");
-
-			filterView = popupContainer.GetNode<Control>("filter_options");
-			allBttn = filterView.GetNode<Button>("all");
-			activeBttn = filterView.GetNode<Button>("active");
-			completedBttn = filterView.GetNode<Button>("completed");
 		}
 		public void OnResized() { GetChild<Control>(0).RectMinSize = GetChild<Control>(1).RectSize; }
 		public void OnHide()

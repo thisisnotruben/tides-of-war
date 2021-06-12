@@ -1,3 +1,5 @@
+using Game.Actor;
+using Game.Actor.Doodads;
 using Game.Database;
 using Godot;
 using GC = Godot.Collections;
@@ -5,35 +7,40 @@ using System.Collections.Generic;
 using Game.Ui;
 namespace Game.Quest
 {
-	public class WorldQuest : ISerializable
+	public class WorldQuest : Node, ISerializable
 	{
 		public QuestMaster.QuestStatus status = QuestMaster.QuestStatus.UNAVAILABLE;
 
-		public readonly QuestDB.QuestData quest;
-		private readonly Dictionary<string, int> objectives = new Dictionary<string, int>();
+		public QuestDB.QuestData quest;
+		public Dictionary<string, int> objectives { private set; get; }
 		private readonly List<string> charactersTalkedTo = new List<string>();
 
-		public WorldQuest(QuestDB.QuestData quest)
+		public WorldQuest Init(QuestDB.QuestData quest)
 		{
 			this.quest = quest;
+
+			objectives = new Dictionary<string, int>();
 			foreach (string objectiveName in quest.objectives.Keys)
 			{
-				objectives[objectiveName] = quest.objectives[objectiveName].amount;
+				objectives[objectiveName] = 0;
 			}
+			return this;
 		}
 		public bool UpdateQuest(string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
 		{
 			if (status != QuestMaster.QuestStatus.ACTIVE
+			|| status != QuestMaster.QuestStatus.COMPLETED
 			|| !IsPartOfObjective(objectiveName, questType)
-			|| (!countTowardsObjective && quest.objectives[objectiveName].amount == objectives[objectiveName]))
+			|| (!countTowardsObjective && objectives[objectiveName] == 0))
 			{
 				return false;
 			}
 
-			objectives[objectiveName] += countTowardsObjective ? -1 : 1;
+			objectives[objectiveName] += countTowardsObjective ? 1 : -1;
 			if (IsCompleted())
 			{
 				status = QuestMaster.QuestStatus.COMPLETED;
+				GetNodeOrNull<Npc>(quest.questGiverPath)?.questMarker.ShowMarker(QuestMarker.MarkerType.COMPLETED);
 			}
 			return true;
 		}
@@ -53,9 +60,9 @@ namespace Game.Quest
 		}
 		public bool IsCompleted()
 		{
-			foreach (int objectiveAmount in objectives.Values)
+			foreach (string objectiveName in objectives.Keys)
 			{
-				if (objectiveAmount > 0)
+				if (objectives[objectiveName] >= quest.objectives[objectiveName].amount)
 				{
 					return false;
 				}

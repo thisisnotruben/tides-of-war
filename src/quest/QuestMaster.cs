@@ -1,14 +1,17 @@
 using Game.Database;
+using Game.Map.Doodads;
+using Game.Actor;
+using Game.Actor.Doodads;
 using Godot;
-using System;
 using System.Collections.Generic;
 namespace Game.Quest
 {
-	public class QuestMaster
+	public class QuestMaster : Node
 	{
 		public enum QuestStatus : byte { UNAVAILABLE, AVAILABLE, ACTIVE, COMPLETED, DELIVERED }
 		private readonly List<WorldQuest> quests = new List<WorldQuest>();
 
+		public override void _Ready() { Name = nameof(QuestMaster); }
 		public QuestMaster()
 		{
 			Directory directory = new Directory();
@@ -35,7 +38,7 @@ namespace Game.Quest
 
 			foreach (string questName in questData.Keys)
 			{
-				quests.Add(new WorldQuest(questData[questName]));
+				quests.Add(new WorldQuest().Init(questData[questName]));
 
 				if (!questData[questName].nextQuest.Empty())
 				{
@@ -51,6 +54,9 @@ namespace Game.Quest
 			// make quest availables that are independent from other quests
 			quests.ForEach(q =>
 			{
+				AddChild(q);
+				q.Name = $"quest{q.GetIndex()}";
+
 				if (!dependentQuests.Contains(q.quest.questName))
 				{
 					q.status = QuestStatus.AVAILABLE;
@@ -60,6 +66,44 @@ namespace Game.Quest
 		/*
 		* UTIL FUNCTIONS START
 		*/
+		public List<WorldQuest> GetAllPlayerQuests()
+		{
+			List<WorldQuest> worldQuests = new List<WorldQuest>();
+			quests.ForEach(q =>
+			{
+				switch (q.status)
+				{
+					case QuestStatus.ACTIVE:
+					case QuestStatus.COMPLETED:
+					case QuestStatus.DELIVERED:
+						worldQuests.Add(q);
+						break;
+				}
+			});
+			return worldQuests;
+		}
+		public void ShowQuestMarkers()
+		{
+			QuestMarker.MarkerType markerType;
+			foreach (WorldQuest worldQuest in quests)
+			{
+				switch (worldQuest.status)
+				{
+					case QuestStatus.AVAILABLE:
+						markerType = QuestMarker.MarkerType.AVAILABLE;
+						break;
+					case QuestStatus.ACTIVE:
+						markerType = QuestMarker.MarkerType.ACTIVE;
+						break;
+					case QuestStatus.COMPLETED:
+						markerType = QuestMarker.MarkerType.COMPLETED;
+						break;
+					default:
+						continue;
+				}
+				GetNodeOrNull<Npc>(worldQuest.quest.questGiverPath)?.questMarker.ShowMarker(markerType);
+			}
+		}
 		public bool IsPartOfObjective(string characterPath, out WorldQuest quest, QuestDB.QuestType questType)
 		{
 			WorldQuest foundQuest = null;
@@ -151,6 +195,33 @@ namespace Game.Quest
 			extraContentData = foundContent;
 			return foundContent != null;
 		}
+		private void AcitvateQuestMapItems(WorldQuest worldQuest, bool activate)
+		{
+			if (worldQuest == null
+			|| !Globals.mapQuestItemDB.HasData(worldQuest.quest.dialogue)) // dialogue == quest id
+			{
+				return;
+			}
+
+			Node node;
+			InteractItem interactItem;
+			foreach (MapQuestItemDB.QuestItem item in Globals.mapQuestItemDB.GetData(worldQuest.quest.dialogue).mapItems)
+			{
+				node = Map.Map.map.GetGameChild(item.name);
+				if (node != null)
+				{
+					interactItem = node as InteractItem;
+					if (interactItem != null)
+					{
+						interactItem.Visible = activate;
+						interactItem.SetInteractType(
+							activate ? item.type : string.Empty,
+							activate ? item.value : string.Empty
+						);
+					}
+				}
+			}
+		}
 		/*
 		* PROGRESS CHECK START
 		*/
@@ -183,16 +254,28 @@ namespace Game.Quest
 		/*
 		* STATUS CHANGES
 		*/
-		public void ActivateQuest(string questName) { SwitchStatus(questName, QuestStatus.ACTIVE); }
+		public void ActivateQuest(string questName)
+		{
+			AcitvateQuestMapItems(SwitchStatus(questName, QuestStatus.ACTIVE), true);
+		}
 		public WorldQuest DeliverQuest(string questName)
 		{
 			WorldQuest worldQuest = SwitchStatus(questName, QuestStatus.DELIVERED),
 				chainedQuest = null;
 
+			AcitvateQuestMapItems(worldQuest, false);
+
 			if (worldQuest != null
 			&& TryGetQuestByName(worldQuest.quest.nextQuest, out chainedQuest))
 			{
-				chainedQuest.status = QuestStatus.AVAILABLE;
+				if (chainedQuest.status == QuestStatus.UNAVAILABLE)
+				{
+					chainedQuest.status = QuestStatus.AVAILABLE;
+				}
+				else
+				{
+					chainedQuest = null;
+				}
 			}
 
 			return chainedQuest;

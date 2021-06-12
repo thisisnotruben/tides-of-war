@@ -1,5 +1,6 @@
 using Godot;
 using GC = Godot.Collections;
+using System.Collections.Generic;
 namespace Game.Database
 {
 	public class UnitDB : AbstractDB<UnitDB.UnitData>
@@ -25,14 +26,47 @@ namespace Game.Database
 			}
 		}
 
+		private readonly Dictionary<string, Dictionary<string, UnitData>> cache =
+			new Dictionary<string, Dictionary<string, UnitData>>();
+
+		public UnitDB()
+		{
+			Directory directory = new Directory();
+			directory.Open(PathManager.dataDir);
+			directory.ListDirBegin(true, true);
+
+			string resourceName = directory.GetNext(),
+				unitDataPath;
+
+			while (!resourceName.Empty())
+			{
+				if (directory.CurrentIsDir())
+				{
+					unitDataPath = string.Format(PathManager.unitDataTemplate, resourceName);
+					if (directory.FileExists(unitDataPath))
+					{
+						LoadData(unitDataPath);
+					}
+				}
+				resourceName = directory.GetNext();
+			}
+			directory.ListDirEnd();
+		}
 		public override void LoadData(string path)
 		{
-			data.Clear();
+			string zoneName = path.GetFile().BaseName();
+			if (cache.ContainsKey(zoneName))
+			{
+				this.data = cache[zoneName];
+				return;
+			}
 
 			GC.Dictionary dict, rawDict = LoadJson(path);
 			GC.Array spawnPos, rawPath;
 			int i;
 			Vector2[] unitPath;
+
+			Dictionary<string, UnitData> data = new Dictionary<string, UnitData>();
 
 			foreach (string itemName in rawDict.Keys)
 			{
@@ -58,6 +92,17 @@ namespace Game.Database
 					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1])
 				));
 			}
+
+			cache.Add(zoneName, data);
+			this.data = data;
+		}
+		public UnitData GetDataFromCache(string zoneName, string dataName)
+		{
+			return cache[zoneName][dataName];
+		}
+		public bool HasDataFromCache(string zoneName, string dataName)
+		{
+			return cache.ContainsKey(zoneName) && cache[zoneName].ContainsKey(dataName);
 		}
 	}
 }

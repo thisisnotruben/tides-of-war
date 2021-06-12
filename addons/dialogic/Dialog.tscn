@@ -87,16 +87,16 @@ __meta__ = {
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_right = 720.0
-margin_bottom = 1080.0
+margin_bottom = 1056.0
 mouse_filter = 2
 size_flags_vertical = 3
 theme = ExtResource( 9 )
 
 [node name="panel" type="PanelContainer" parent="CenterContainer"]
 margin_left = 344.0
-margin_top = 524.0
+margin_top = 512.0
 margin_right = 376.0
-margin_bottom = 556.0
+margin_bottom = 544.0
 
 [node name="marginContainer" type="MarginContainer" parent="CenterContainer/panel"]
 margin_right = 32.0
@@ -122,10 +122,10 @@ __meta__ = {
 }
 
 [node name="TextBubble" type="Control" parent="."]
-margin_top = 1080.0
+margin_top = 1056.0
 margin_right = 720.0
 margin_bottom = 1280.0
-rect_min_size = Vector2( 0, 200 )
+rect_min_size = Vector2( 0, 224 )
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -163,7 +163,7 @@ rect_clip_content = false
 mouse_filter = 2
 custom_styles/normal = SubResource( 1 )
 custom_fonts/normal_font = ExtResource( 1 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 0 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -186,7 +186,7 @@ anchor_bottom = 1.0
 margin_left = -36.4279
 margin_top = -35.9016
 margin_right = 14.5721
-margin_bottom = 21.3564
+margin_bottom = 53.2925
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 2
 texture = ExtResource( 3 )
@@ -207,7 +207,7 @@ margin_right = 58.0
 size_flags_vertical = 1
 custom_styles/normal = SubResource( 5 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 0 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2

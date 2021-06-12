@@ -1,0 +1,1 @@
+{"events":[{"options":[],"question":"Adventure forth to the Searing Caverns?"},{"choice":"Yes"},{"emit_signal":"zone_4"},{"choice":"No"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620060640.json","name":"zone_5-zone_4"}}

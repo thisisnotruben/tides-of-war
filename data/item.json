@@ -2297,5 +2297,16 @@
 		"subType": "DEFENSE",
 		"material": "glass",
 		"stackSize": 5
+	},
+	"Supply cache": {
+		"type": "QUEST",
+		"icon": 943,
+		"level": 1,
+		"goldCost": 0,
+		"blurb": "",
+		"coolDown": 0,
+		"subType": "",
+		"material": "cloth",
+		"stackSize": 5
 	}
 }

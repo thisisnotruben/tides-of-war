@@ -32,9 +32,19 @@ namespace Game.Map
 			MakeNav();
 			SetVeilSize();
 			SetCameraLimits(Player.player.camera);
+			Globals.questMaster.ShowQuestMarkers();
 		}
 		public void AddGChild(Node node) { ground.AddChild(node); }
 		public void AddZChild(Node node) { zed.AddChild(node); }
+		public Node GetGameChild(string nodeName)
+		{
+			Node node = zed.GetNodeOrNull(nodeName);
+			if (node is null)
+			{
+				node = ground.GetNodeOrNull(nodeName);
+			}
+			return node;
+		}
 		public void SetVeil(bool on) { veilFog.Visible = veilFog.Emitting = on; }
 		private void SetCameraLimits(Camera2D camera2D)
 		{

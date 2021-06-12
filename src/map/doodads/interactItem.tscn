@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/map/doodads/InteractItem.cs" type="Script" id=1]
+[ext_resource path="res://asset/img/missile-spell/color_ramp.shader" type="Shader" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.995652 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 2 )
+shader_param/color_speed = 1.0
+shader_param/scale_speed = 1.0
+shader_param/energy = 0.1
+shader_param/scale = Vector2( 1, 1 )
+shader_param/gradient = SubResource( 2 )
+
+[node name="sprite" type="Sprite"]
+offset = Vector2( 0, -8 )
+region_enabled = true
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="highlighter" type="Sprite" parent="."]
+material = SubResource( 3 )
+offset = Vector2( 0, -8 )
+region_enabled = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="tween" type="Tween" parent="."]
+
+[node name="select" type="TextureButton" parent="."]
+margin_left = -8.0
+margin_top = -16.0
+margin_right = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

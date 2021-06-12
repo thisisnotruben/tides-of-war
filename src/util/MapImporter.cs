@@ -47,7 +47,8 @@ namespace Game.Util
 			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn"),
 			lightScene = GD.Load<PackedScene>("res://src/light/light.tscn"),
 			lightSource = GD.Load<PackedScene>("res://src/light/lightSource.tscn"),
-			transitionSign = GD.Load<PackedScene>("res://src/map/doodads/transitionSign.tscn");
+			transitionSign = GD.Load<PackedScene>("res://src/map/doodads/interactItem.tscn"),
+			interactItem = GD.Load<PackedScene>("res://src/map/doodads/interactItem.tscn");
 
 		private Resource environment = GD.Load<Godot.Environment>("res://2d_env.tres");
 
@@ -105,6 +106,15 @@ namespace Game.Util
 				collNav = meta.GetNode<Node2D>("coll_nav"),
 				lightSpace = meta.GetNode<Node2D>("lightSpace");
 
+			GC.Array<Node2D> quests = new GC.Array<Node2D>();
+			foreach (Node group in new Node[] { zedGroup, map.GetNode("ground") })
+			{
+				if (group.HasNode("quest"))
+				{
+					quests.Add(group.GetNode<Node2D>("quest"));
+				}
+			}
+
 			zed = zedGroup.GetNode<TileMap>("z1");
 
 			// add worldEnvironment
@@ -131,6 +141,7 @@ namespace Game.Util
 			SetTransitions(transitionsZones, transitionsSigns, transitions);
 			SetUnits(characters, transitions);
 			SetTargetDummys(targetDummys);
+			SetQuestItems(quests);
 			SetLights(zedGroup, lights, lightSpace);
 			SetShaderData();
 			SetWorldTileset();
@@ -347,7 +358,7 @@ namespace Game.Util
 		{
 			foreach (Sprite sign in transitionSigns.GetChildren())
 			{
-				Sprite sprite = transitionSign.Instance<Sprite>(PackedScene.GenEditState.Instance);
+				Sprite sprite = transitionSign.Instance<Sprite>();
 
 				zed.AddChild(sprite);
 				sprite.Owner = map;
@@ -380,6 +391,49 @@ namespace Game.Util
 			foreach (Node2D node2D in transitions.GetChildren())
 			{
 				node2D.GlobalPosition = GetCenterPos(node2D.GlobalPosition);
+			}
+		}
+		private void SetQuestItems(GC.Array<Node2D> quests)
+		{
+			foreach (Node questLayer in quests)
+			{
+				GC.Array children = questLayer.GetChildren();
+				foreach (Sprite questLoot in children)
+				{
+					Sprite sprite = interactItem.Instance<Sprite>();
+
+					zed.AddChild(sprite);
+					sprite.Owner = map;
+					sprite.Name = questLoot.Name;
+					sprite.GlobalPosition = new Vector2(questLoot.GlobalPosition.x + HALF_CELL_SIZE.x, questLoot.GlobalPosition.y - CELL_SIZE.y);
+					sprite.Texture = questLoot.Texture;
+					sprite.RegionRect = questLoot.RegionRect;
+					if (questLoot.RegionRect.Size.y == 32.0f)
+					{
+						sprite.Offset = new Vector2(0.0f, -16.0f);
+					}
+
+					Area2D area2D = new Area2D();
+					sprite.AddChild(area2D);
+					area2D.Owner = map;
+					area2D.Name = "area2D";
+					area2D.Monitorable = false;
+					area2D.CollisionLayer = 0;
+					area2D.CollisionMask = Player.COLL_MASK_PLAYER;
+					area2D.Position = sprite.Offset / 2.0f;
+
+					CollisionShape2D collisionShape2D = new CollisionShape2D();
+					area2D.AddChild(collisionShape2D, true);
+					collisionShape2D.Owner = map;
+
+					CircleShape2D circleShape2D = new CircleShape2D();
+					circleShape2D.Radius = 16.0f;
+					collisionShape2D.Shape = circleShape2D;
+
+					sprite.Hide();
+				}
+				questLayer.Owner = null;
+				questLayer.QueueFree();
 			}
 		}
 		private void SetShaderData()

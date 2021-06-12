@@ -4,7 +4,7 @@ namespace Game.Database
 {
 	public abstract class AbstractDB<T>
 	{
-		public readonly Dictionary<string, T> data = new Dictionary<string, T>();
+		public Dictionary<string, T> data = new Dictionary<string, T>();
 
 		public AbstractDB(string path) { LoadData(path); }
 		public AbstractDB() { }

@@ -3,7 +3,7 @@ using Game.Database;
 using Godot;
 namespace Game.Loot
 {
-	public class TreasureChest : Node2D
+	public class TreasureChest : Node2D, ICollectable
 	{
 		public string commodityWorldName { get; private set; }
 		private Timer timer;
@@ -64,7 +64,7 @@ namespace Game.Loot
 			Globals.soundPlayer.PlaySound(NameDB.UI.CHEST_OPEN, player2D);
 			animationPlayer.Queue("close_chest");
 		}
-		public void _OnSelectPressed() { Player.player.menu.LootInteract(this); }
+		public void _OnSelectPressed() { Player.player.menu.LootInteract(this, commodityWorldName); }
 		public void OnTweenCompleted(Godot.Object gObject, NodePath key)
 		{
 			Node2D node2D = gObject as Node2D;

@@ -96,47 +96,7 @@ rect_min_size = Vector2( 336, 112 )
 theme = ExtResource( 8 )
 text = "Okay"
 
-[node name="filter_options" type="VBoxContainer" parent="marginContainer"]
-visible = false
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 386.0
-margin_bottom = 510.0
-theme = ExtResource( 8 )
-alignment = 1
-
-[node name="all" type="Button" parent="marginContainer/filter_options"]
-margin_right = 336.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "All"
-
-[node name="active" type="Button" parent="marginContainer/filter_options"]
-margin_top = 116.0
-margin_right = 336.0
-margin_bottom = 228.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Active"
-
-[node name="completed" type="Button" parent="marginContainer/filter_options"]
-margin_top = 232.0
-margin_right = 336.0
-margin_bottom = 344.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Completed"
-
-[node name="back" type="Button" parent="marginContainer/filter_options"]
-margin_top = 348.0
-margin_right = 336.0
-margin_bottom = 460.0
-rect_min_size = Vector2( 336, 112 )
-theme = ExtResource( 8 )
-text = "Back"
 [connection signal="hide" from="." to="." method="OnHide"]
 [connection signal="resized" from="marginContainer" to="." method="OnResized"]
 [connection signal="pressed" from="marginContainer/yes_no/no" to="." method="_OnBackPressed"]
 [connection signal="pressed" from="marginContainer/error/okay" to="." method="_OnBackPressed"]
-[connection signal="pressed" from="marginContainer/filter_options/back" to="." method="_OnBackPressed"]

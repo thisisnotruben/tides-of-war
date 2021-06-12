@@ -1,14 +1,18 @@
 using Game.Database;
 using Game.Actor.State;
+using Game.Actor.Doodads;
 using Godot;
 namespace Game.Actor
 {
 	public class Npc : Character
 	{
+		public QuestMarker questMarker;
+
 		public override void _Ready()
 		{
 			base._Ready();
 
+			questMarker = GetNode<QuestMarker>("questMarker");
 			if (Globals.unitDB.HasData(Name))
 			{
 				UnitDB.UnitData unitData = Globals.unitDB.GetData(Name);
@@ -20,6 +24,12 @@ namespace Game.Actor
 				}
 				SetImg(unitData.img);
 			}
+		}
+		protected override void SetImg(string imgName)
+		{
+			base.SetImg(imgName);
+			questMarker.Position = new Vector2(0.0f, -img.Texture.GetHeight() - 4.0f);
+			questMarker.Hide();
 		}
 		public virtual void _OnCharacterEnteredSight(Area2D area2D)
 		{

@@ -1,0 +1,22 @@
+{
+	"Supply Cache Quest": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 500,
+		"questGiver": "/root/zone_1/zed/z1/1161-Quartermaster Arndell",
+		"dialogue": "q1.1161.0",
+		"startQuests": [],
+		"objectives": {
+			"Supply cache": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 4,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	}
+}

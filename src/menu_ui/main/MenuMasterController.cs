@@ -40,6 +40,9 @@ namespace Game.Ui
 				playerMenu.playerInventory, playerMenu.playerSpellBook, saveLoadModel);
 			npcMenu.store.Connect("draw", this, nameof(HideExceptMenu), new GC.Array() { npcMenu });
 
+			npcMenu.Connect(nameof(NpcMenu.QuestStarted), playerMenu.questLogController,
+				nameof(QuestLogController.AddEntry));
+
 			hud = menuContainer.GetNode<HudControlController>("hud");
 			hud.targetContainer.Connect("hide", this, nameof(OnTargetCleared));
 			hud.pause.Connect("toggled", this, nameof(OnHudPausePressed));
@@ -130,6 +133,6 @@ namespace Game.Ui
 			}
 		}
 		public void NpcInteract(Npc npc) { npcMenu.NpcInteract(npc); }
-		public void LootInteract(TreasureChest lootChest) { playerMenu.LootInteract(lootChest); }
+		public void LootInteract(ICollectable collectable, string itemName) { playerMenu.LootInteract(collectable, itemName); }
 	}
 }

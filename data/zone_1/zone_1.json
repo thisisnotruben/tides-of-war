@@ -311,8 +311,8 @@
 			104
 		]
 	},
-	"931-human": {
-		"name": "",
+	"931-Marshal Augustus": {
+		"name": "Marshal Augustus",
 		"img": "human-43",
 		"dialogue": "",
 		"enemy": false,
@@ -587,8 +587,8 @@
 			488
 		]
 	},
-	"995-human": {
-		"name": "",
+	"995-Jameson": {
+		"name": "Jameson",
 		"img": "human-12",
 		"dialogue": "",
 		"enemy": false,
@@ -1319,8 +1319,8 @@
 			1592
 		]
 	},
-	"1152-human": {
-		"name": "",
+	"1152-Lieutenant Waltkins": {
+		"name": "Lieutenant Waltkins",
 		"img": "human-48",
 		"dialogue": "",
 		"enemy": false,
@@ -1367,8 +1367,8 @@
 			1496
 		]
 	},
-	"1161-human": {
-		"name": "",
+	"1161-Quartermaster Arndell": {
+		"name": "Quartermaster Arndell",
 		"img": "human-44",
 		"dialogue": "",
 		"enemy": false,
@@ -1379,8 +1379,8 @@
 			1464
 		]
 	},
-	"1166-human": {
-		"name": "",
+	"1166-Captain Harden": {
+		"name": "Captain Harden",
 		"img": "human-35",
 		"dialogue": "",
 		"enemy": false,
@@ -1411,7 +1411,7 @@
 		"level": 1,
 		"path": [],
 		"spawnPos": [
-			1016,
+			1032,
 			1368
 		]
 	},
@@ -1427,8 +1427,8 @@
 			1528
 		]
 	},
-	"1175-human": {
-		"name": "",
+	"1175-Denton": {
+		"name": "Denton",
 		"img": "human-2",
 		"dialogue": "",
 		"enemy": false,
@@ -1483,12 +1483,12 @@
 		"level": 1,
 		"path": [],
 		"spawnPos": [
-			1112,
+			1192,
 			1400
 		]
 	},
-	"1194-human": {
-		"name": "",
+	"1194-Edvard": {
+		"name": "Edvard",
 		"img": "human-2",
 		"dialogue": "",
 		"enemy": false,
@@ -1499,8 +1499,8 @@
 			1448
 		]
 	},
-	"1195-human": {
-		"name": "",
+	"1195-Norwell": {
+		"name": "Norwell",
 		"img": "human-42",
 		"dialogue": "",
 		"enemy": false,
@@ -2267,8 +2267,8 @@
 			616
 		]
 	},
-	"1407-human": {
-		"name": "",
+	"1407-Lieutenant Chapman": {
+		"name": "Lieutenant Chapman",
 		"img": "human-4",
 		"dialogue": "",
 		"enemy": false,
@@ -2339,8 +2339,8 @@
 			984
 		]
 	},
-	"1417-human": {
-		"name": "",
+	"1417-Amaury": {
+		"name": "Amaury",
 		"img": "human-41",
 		"dialogue": "",
 		"enemy": false,

@@ -125,7 +125,7 @@ namespace Game.Actor
 			ImageDB.ImageData imageData = Globals.imageDB.GetData(imgName);
 
 			// set sprite
-			Texture imgTexture = GD.Load<Texture>($"res://asset/img/character/{imgName}.png");
+			Texture imgTexture = GD.Load<Texture>(string.Format(PathManager.characterTexturePath, imgName));
 			img.Texture = imgTexture;
 			img.Hframes = imageData.total;
 			img.Position = new Vector2(0.0f, -imgTexture.GetHeight() / 2.0f);

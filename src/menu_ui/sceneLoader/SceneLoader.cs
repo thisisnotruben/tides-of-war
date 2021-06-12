@@ -171,7 +171,8 @@ namespace Game.Ui
 			// load map specific data
 			string mapName = scenePath.GetFile().BaseName(),
 				unitDataPath = string.Format(PathManager.unitDataTemplate, mapName),
-				contentDataPath = string.Format(PathManager.contentDataTemplate, mapName);
+				contentDataPath = string.Format(PathManager.contentDataTemplate, mapName),
+				mapQuestItemPath = string.Format(PathManager.mapQuestItemTemplate, mapName);
 
 			Directory directory = new Directory();
 			if (directory.FileExists(unitDataPath))
@@ -181,6 +182,10 @@ namespace Game.Ui
 			if (directory.FileExists(contentDataPath))
 			{
 				Globals.contentDB.LoadData(contentDataPath);
+			}
+			if (directory.FileExists(mapQuestItemPath))
+			{
+				Globals.mapQuestItemDB.LoadData(mapQuestItemPath);
 			}
 
 			CallDeferred(nameof(SetSceneDeferred), scenePath);

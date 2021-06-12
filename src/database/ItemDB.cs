@@ -4,7 +4,7 @@ namespace Game.Database
 {
 	public class ItemDB : AbstractDB<ItemDB.ItemData>
 	{
-		public enum ItemType { NONE, WEAPON, ARMOR, POTION, FOOD, MISC }
+		public enum ItemType { NONE, WEAPON, ARMOR, POTION, FOOD, MISC, QUEST }
 		public class ItemData
 		{
 			public readonly ItemType type;

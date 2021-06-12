@@ -81,7 +81,7 @@ func save_definitions():
 
 
 ## Resets data to default values. This is the same as calling start with reset_saves to true
-func reset_saves():
+static func reset_saves():
 	DialogicSingleton.init(true)
 
 

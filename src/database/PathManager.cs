@@ -21,11 +21,14 @@ namespace Game.Database
 			questDir = "res://data/quest/",
 			sndDir = "res://asset/snd/",
 			startScene = "res://src/menu_ui/main/StartMenuView.tscn",
+			dataDir = "res://data/",
 			unitDataTemplate = "res://data/{0}/{0}.json",
 			contentDataTemplate = "res://data/{0}/{0}_content.json",
+			mapQuestItemTemplate = "res://data/{0}/{0}_questLoot.json",
 			sceneMapPath = "res://src/map/{0}.tscn",
 			savePathDir = "user://data/save/",
 			assetMissileSpellPath = "res://asset/img/missile-spell/{0}.tres",
-			menuIconPath = "res://asset/img/ui/{0}.png";
+			menuIconPath = "res://asset/img/ui/{0}.png",
+			characterTexturePath = "res://asset/img/character/{0}.png";
 	}
 }

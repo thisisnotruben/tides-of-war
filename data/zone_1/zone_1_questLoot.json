@@ -1,0 +1,24 @@
+{
+	"q1.1161.0": [
+		{
+			"name": "1445-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "1446-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "1447-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "1449-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		}
+	]
+}

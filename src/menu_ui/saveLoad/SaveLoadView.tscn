@@ -109,6 +109,7 @@ text = "Back"
 
 [node name="popup" parent="." instance=ExtResource( 8 )]
 visible = false
+
 [connection signal="hide" from="." to="." method="OnHide"]
 [connection signal="pressed" from="vBoxContainer/button" to="." method="OnSavePressed"]
 [connection signal="pressed" from="focusedEntry/gridContainer/save" to="." method="OnSavePressed"]

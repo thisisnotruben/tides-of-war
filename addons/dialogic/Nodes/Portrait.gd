@@ -19,7 +19,7 @@ func init(expression: String = '', position_offset = 'left') -> void:
 	rect_position += positions[position_offset]
 	direction = position_offset
 	modulate = Color(1,1,1,0)
-	
+
 	# Setting the scale of the portrait
 	var custom_scale = Vector2(1, 1)
 	if character_data.has('data'):
@@ -64,7 +64,7 @@ func set_portrait(expression: String) -> void:
 # Tween stuff
 func fade_in(node = self, time = 0.5):
 	tween_modulate(Color(1,1,1,0), Color(1,1,1,1), time)
-	
+
 	var end_pos = Vector2(0, -40) # starting at center
 	if direction == 'right':
 		end_pos = Vector2(+40, 0)
@@ -72,7 +72,7 @@ func fade_in(node = self, time = 0.5):
 		end_pos = Vector2(-40, 0)
 	else:
 		node.rect_position += Vector2(0, 40)
-	
+
 	var tween_node = node.get_node('Tween')
 	tween_node.interpolate_property(
 		node, "rect_position", node.rect_position, node.rect_position + end_pos, time,

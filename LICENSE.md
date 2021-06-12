@@ -10,7 +10,7 @@ Copyright (c) 2020 Ruben Alvarez Reyes
 
 ## Images / Fonts
 
-- [magofonts](https://magodev.itch.io/magosfonts) by [magodev](https://magodev.itch.io) is licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- [magofonts](https://nimblebeastscollective.itch.io/pixel-font-mago1-latin-cyrillic-and-eye-candy) by [nimblebeastscollective](https://nimblebeastscollective.itch.io/) is licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 
 - [Roguelike/RPG pack](https://kenney.nl/assets/roguelike-rpg-pack) by [kenney](https://kenney.nl/) is licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 

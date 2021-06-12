@@ -1,31 +1,24 @@
 using Godot;
+using Game.Quest;
 namespace Game.Ui
 {
 	public class QuestEntryController : Control
 	{
-		// TODO
-		// private Quest _quest;
-		// public Quest quest
-		// {
-		// 	get
-		// 	{
-		// 		return _quest;
-		// 	}
-		// 	set
-		// 	{
-		// 		_quest = value;
-		// 		GetNode<Label>("label").Text = quest.questName;
-		// 		Name = quest.questName;
-		// 	}
-		// }
-		public void AddToQuestLog(Node questLog)
+		private Label label;
+		public BaseButton button { get; private set; }
+
+		public WorldQuest worldQuest;
+
+		public override void _Ready()
 		{
-			questLog.GetNode("s/v/s/v").AddChild(this);
-			questLog.GetNode("s/v/s/v").MoveChild(this, 0);
+			label = GetNode<Label>("colorRect/marginContainer/label");
+			button = GetNode<BaseButton>("colorRect/marginContainer/label/button");
 		}
-		public void _OnQuestSlotPressed()
+		public QuestEntryController Init(WorldQuest worldQuest)
 		{
-			// Globals.player.menu.ShowQuestText(quest);
+			this.worldQuest = worldQuest;
+			return this;
 		}
+		public void Display(string text) { label.Text = text; }
 	}
 }

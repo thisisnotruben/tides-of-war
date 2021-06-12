@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/character/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/character/npc/Npc.cs" type="Script" id=2]
+[ext_resource path="res://src/character/doodads/questMarker.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_local_to_scene = true
@@ -118,6 +119,10 @@ visible = true
 visible = true
 
 [node name="tween" type="Tween" parent="." index="9"]
+
+[node name="questMarker" parent="." index="10" instance=ExtResource( 3 )]
+visible = false
+
 [connection signal="mouse_entered" from="area" to="." method="_OnAreaMouseEnteredExited" binds= [ true ]]
 [connection signal="mouse_exited" from="area" to="." method="_OnAreaMouseEnteredExited" binds= [ false ]]
 [connection signal="area_entered" from="sight" to="." method="_OnCharacterEnteredSight"]

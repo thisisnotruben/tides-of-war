@@ -10,6 +10,8 @@ namespace Game.Ui
 {
 	public class NpcMenu : GameMenu
 	{
+		[Signal] public delegate void QuestStarted(WorldQuest worldQuest);
+
 		// External
 		private SaveLoadModel saveLoadModel;
 		private MenuMasterController menuMaster;
@@ -161,8 +163,9 @@ namespace Game.Ui
 					if (worldQuest != null)
 					{
 						PlaySound(NameDB.UI.QUEST_ACCEPT);
+						npc.questMarker.ShowMarker(QuestMarker.MarkerType.ACTIVE);
 						Globals.questMaster.ActivateQuest(worldQuest.quest.questName);
-						// TODO: add quest to quest log
+						EmitSignal(nameof(QuestStarted), worldQuest);
 					}
 					break;
 
@@ -179,8 +182,12 @@ namespace Game.Ui
 
 						// start next quest dialogue if anys
 						WorldQuest nextQuest = Globals.questMaster.DeliverQuest(worldQuest.quest.questName);
+						npc.questMarker.Visible = nextQuest != null;
+
 						if (nextQuest != null)
 						{
+							npc.questMarker.ShowMarker(QuestMarker.MarkerType.AVAILABLE);
+
 							if (dialogue == null)
 							{
 								OnDialogueNext(nextQuest);
@@ -193,11 +200,12 @@ namespace Game.Ui
 						}
 
 						// reward gold if any
-						if (player.gold > 0)
+						if (worldQuest.quest.goldReward > 0)
 						{
 							player.gold += worldQuest.quest.goldReward;
 							player.SpawnCombatText(worldQuest.quest.goldReward.ToString(), CombatText.TextType.GOLD);
 						}
+
 					}
 					break;
 
