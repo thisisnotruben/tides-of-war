@@ -71,8 +71,8 @@
 			728
 		]
 	},
-	"878-human": {
-		"name": "",
+	"878-Dobbs": {
+		"name": "Dobbs",
 		"img": "human-0",
 		"dialogue": "",
 		"enemy": false,
@@ -479,8 +479,8 @@
 			280
 		]
 	},
-	"971-human": {
-		"name": "",
+	"971-Roswald": {
+		"name": "Roswald",
 		"img": "human-42",
 		"dialogue": "",
 		"enemy": false,
@@ -683,8 +683,8 @@
 			200
 		]
 	},
-	"1032-human": {
-		"name": "",
+	"1032-Hawel": {
+		"name": "Hawel",
 		"img": "human-12",
 		"dialogue": "",
 		"enemy": false,
@@ -767,8 +767,8 @@
 			536
 		]
 	},
-	"1049-human": {
-		"name": "",
+	"1049-Edeline": {
+		"name": "Edeline",
 		"img": "human-8",
 		"dialogue": "",
 		"enemy": false,
@@ -2315,8 +2315,8 @@
 			1064
 		]
 	},
-	"1412-human": {
-		"name": "",
+	"1412-Rhett": {
+		"name": "Rhett",
 		"img": "human-0",
 		"dialogue": "",
 		"enemy": false,
@@ -2327,8 +2327,8 @@
 			1080
 		]
 	},
-	"1414-human": {
-		"name": "",
+	"1414-Rowan": {
+		"name": "Rowan",
 		"img": "human-12",
 		"dialogue": "",
 		"enemy": false,
@@ -2351,8 +2351,8 @@
 			984
 		]
 	},
-	"1418-human": {
-		"name": "",
+	"1418-Aleah": {
+		"name": "Aleah",
 		"img": "human-8",
 		"dialogue": "",
 		"enemy": false,

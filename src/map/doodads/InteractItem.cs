@@ -1,5 +1,8 @@
 using Game.Actor;
+using Game.Ui;
+using Game.Database;
 using Godot;
+using System;
 namespace Game.Map.Doodads
 {
 	public class InteractItem : Sprite, ICollectable
@@ -110,6 +113,30 @@ namespace Game.Map.Doodads
 			ClearDialoguePtr();
 		}
 		protected void ClearDialoguePtr() { dialogue = null; }
-		protected virtual void OnDialogueSignalCallback(object value) { }
+		protected virtual void OnDialogueSignalCallback(object value)
+		{
+			// util
+			MenuMasterController menuMaster = Player.player.menu;
+			Action<string> showError = (string errorMsg) =>
+			{
+				Globals.soundPlayer.PlaySound(NameDB.UI.CLICK6);
+				menuMaster.errorPopup.ShowError(errorMsg);
+			};
+
+			// add to inventory/spellbook if not full
+			string itemName = value.ToString().Trim();
+			if (Globals.itemDB.HasData(itemName) && menuMaster.playerMenu.playerInventory.AddCommodity(itemName) == -1)
+			{
+				showError("Inventory Full!");
+			}
+			else if (Globals.spellDB.HasData(itemName) && menuMaster.playerMenu.playerSpellBook.AddCommodity(itemName) == -1)
+			{
+				showError("Spellbook Full!");
+			}
+			else
+			{
+				GD.PrintErr($"{GetPath()}: {itemName} not in database.");
+			}
+		}
 	}
 }

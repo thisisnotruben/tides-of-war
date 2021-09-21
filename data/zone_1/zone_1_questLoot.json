@@ -20,5 +20,471 @@
 			"type": "loot",
 			"value": "Supply cache"
 		}
+	],
+	"q1.1175.1": [
+		{
+			"name": "1450-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1451-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1452-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1453-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1456-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1457-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1459-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1460-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1463-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1464-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1467-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1468-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1469-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1471-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1473-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1474-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1476-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1477-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1478-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1479-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1480-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1481-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1482-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1483-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1484-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1485-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1486-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1488-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1489-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1490-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1491-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1492-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1493-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1494-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1496-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1497-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1498-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1499-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1500-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1501-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1502-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1503-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1504-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1506-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1507-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1508-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1509-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1510-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1511-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1512-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1513-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1514-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1515-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1516-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1517-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1518-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1519-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1520-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1521-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1522-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1523-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1524-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1525-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1527-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1528-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1529-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1530-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1531-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1532-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1533-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1534-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1535-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1536-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1538-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1540-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1541-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1542-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		},
+		{
+			"name": "1550-questLoot",
+			"type": "loot",
+			"value": "Wild Mushroom"
+		}
+	],
+	"q1.1152.1": [
+		{
+			"name": "1543-questLoot",
+			"type": "talk",
+			"value": "q1.1152.1-questItem"
+		},
+		{
+			"name": "1544-questLoot",
+			"type": "talk",
+			"value": "q1.1152.1-questItem"
+		}
+	],
+	"q1.1175.0": [
+		{
+			"name": "1545-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1546-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1547-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1548-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1549-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1551-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1552-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1553-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1554-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1555-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1556-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		},
+		{
+			"name": "1557-questLoot",
+			"type": "loot",
+			"value": "Bluescale Salmon"
+		}
 	]
 }

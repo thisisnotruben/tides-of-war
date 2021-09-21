@@ -211,21 +211,23 @@ namespace Game.Ui
 
 				case "objective":
 					QuestDB.ExtraContentData extraContentData;
-
-					if (Globals.questMaster.CheckQuests(npc.GetPath(), npc.worldName, QuestDB.QuestType.TALK)
-					&& Globals.questMaster.TryGetExtraQuestContent(npc.worldName, out extraContentData))
+					if (Globals.questMaster.TryGetExtraQuestContent(npc.worldName, out extraContentData))
 					{
+						if (Globals.itemDB.HasData(extraContentData.reward)
+						&& player.menu.playerMenu.playerInventory.AddCommodity(extraContentData.reward) == -1)
+						{
+							PlaySound(NameDB.UI.CLICK6);
+							player.menu.errorPopup.ShowError("Inventory Full!");
+							return;
+						}
+
 						if (extraContentData.gold > 0)
 						{
 							player.gold += extraContentData.gold;
 							player.SpawnCombatText(extraContentData.gold.ToString(), CombatText.TextType.GOLD);
 						}
 
-						if (Globals.itemDB.HasData(extraContentData.reward)
-						&& player.menu.playerMenu.playerInventory.AddCommodity(extraContentData.reward) == -1)
-						{
-							// TODO: what if is inventory full
-						}
+						Globals.questMaster.CheckQuests(npc.GetPath(), npc.worldName, QuestDB.QuestType.TALK);
 					}
 					break;
 			}

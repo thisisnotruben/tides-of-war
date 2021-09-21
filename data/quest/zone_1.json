@@ -1,9 +1,187 @@
 {
-	"Supply Cache Quest": {
+	"Supplying The Frontier": {
 		"nextQuest": "",
 		"reward": [],
 		"keepRewardItems": false,
-		"goldReward": 500,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1417-Amaury",
+		"dialogue": "q1.1417.0",
+		"startQuests": [],
+		"objectives": {
+			"Food Supplies": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"Weapon Supplies": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"Miscellaneous Supplies": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Missing Scouts": {
+		"nextQuest": "Bounty on the Finfolk",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1152-Lieutenant Waltkins",
+		"dialogue": "q1.1152.1",
+		"startQuests": [],
+		"objectives": {
+			"Scout Report": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 2,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Bounty on the Finfolk": {
+		"nextQuest": "Report to Marshal Augustus",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1152-Lieutenant Waltkins",
+		"dialogue": "q1.1152.2",
+		"startQuests": [],
+		"objectives": {
+			"Finfolk Amulet": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 15,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Report to Marshal Augustus": {
+		"nextQuest": "Border Concerns",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1152-Lieutenant Waltkins",
+		"dialogue": "q1.1152.3",
+		"startQuests": [],
+		"objectives": {
+			"931-Marshal Augustus": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Border Concerns": {
+		"nextQuest": "Gnoll Messenger",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/931-Marshal Augustus",
+		"dialogue": "q1.931.0",
+		"startQuests": [],
+		"objectives": {
+			"1407-Lieutenant Chapman": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Gnoll Messenger": {
+		"nextQuest": "Gnoll Camp Cleanup",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1407-Lieutenant Chapman",
+		"dialogue": "q1.1407.0",
+		"startQuests": [],
+		"objectives": {
+			"Gnoll Plans": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Gnoll Camp Cleanup": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1407-Lieutenant Chapman",
+		"dialogue": "q1.1407.1",
+		"startQuests": [],
+		"objectives": {
+			"gnoll": {
+				"keepWorldObject": false,
+				"questType": "KILL",
+				"amount": 7,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Amuary Armorer": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1407-Lieutenant Chapman",
+		"dialogue": "q1.1407.2",
+		"startQuests": [],
+		"objectives": {
+			"1417-Amaury": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Southwood Supplies": {
+		"nextQuest": "Captain Harden",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
 		"questGiver": "/root/zone_1/zed/z1/1161-Quartermaster Arndell",
 		"dialogue": "q1.1161.0",
 		"startQuests": [],
@@ -12,6 +190,217 @@
 				"keepWorldObject": false,
 				"questType": "COLLECT",
 				"amount": 4,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Captain Harden": {
+		"nextQuest": "Band of Traitors",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1161-Quartermaster Arndell",
+		"dialogue": "q1.1161.1",
+		"startQuests": [],
+		"objectives": {
+			"1166-Captain Harden": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Band of Traitors": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1166-Captain Harden",
+		"dialogue": "q1.1166.0",
+		"startQuests": [],
+		"objectives": {
+			"Raider Bandanna": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 10,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Fishy Dilemma": {
+		"nextQuest": "Southwood Spider Stew",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1175-Denton",
+		"dialogue": "q1.1175.0",
+		"startQuests": [
+			"Hungry Stomachs"
+		],
+		"objectives": {
+			"Bluescale Salmon": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 10,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Southwood Spider Stew": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1175-Denton",
+		"dialogue": "q1.1175.1",
+		"startQuests": [],
+		"objectives": {
+			"Spider Eye": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 7,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"Wild Mushroom": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 20,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Aggressive Frontier": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1195-Norwell",
+		"dialogue": "q1.1195.0",
+		"startQuests": [
+			"Shipment from Jameson"
+		],
+		"objectives": {
+			"Wolf Pelt": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 10,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Shipment from Jameson": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1194-Edvard",
+		"dialogue": "q1.1194.0",
+		"startQuests": [],
+		"objectives": {
+			"995-Jameson": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "Jameson's Shipment",
+					"gold": 0
+				}
+			},
+			"Jameson's Shipment": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Stolen Wedding Ring": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1418-Aleah",
+		"dialogue": "q1.1418.0",
+		"startQuests": [],
+		"objectives": {
+			"Aleah's Wedding Ring": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Hungry Stomachs": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1412-Rhett",
+		"dialogue": "q1.1412.0",
+		"startQuests": [],
+		"objectives": {
+			"Bluescale Salmon Cuisine": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 2,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"Refreshing Water": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 2,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Erotomania": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1049-Edeline",
+		"dialogue": "q1.1049.0",
+		"startQuests": [],
+		"objectives": {
+			"Crab Pincer": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 5,
 				"extraContent": {
 					"reward": "",
 					"gold": 0

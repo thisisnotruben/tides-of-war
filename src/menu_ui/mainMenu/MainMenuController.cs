@@ -1,5 +1,4 @@
 using Godot;
-using Game.Loot;
 using Game.Database;
 namespace Game.Ui
 {
@@ -9,6 +8,7 @@ namespace Game.Ui
 		public SpellBookController spellBookController;
 		public InventoryModel playerInventory, playerSpellBook;
 		public QuestLogController questLogController;
+		public StatsController statsController;
 		private TabContainer playerMenu;
 		private PopupController popup;
 
@@ -22,6 +22,7 @@ namespace Game.Ui
 			playerSpellBook = spellBookController.spellBook;
 
 			questLogController = playerMenu.GetNode<QuestLogController>("Quest Log/QuestLogView");
+			statsController = playerMenu.GetNode<StatsController>("Stats/StatsView");
 
 			popup = GetChild<PopupController>(1);
 			GetNode<BaseButton>("playerMenu/Settings/centerContainer/vBoxContainer/exitGame").Connect(
@@ -37,7 +38,14 @@ namespace Game.Ui
 					string.Format(PathManager.menuIconPath, textureNames[i])));
 			}
 		}
-		private void OnVisibilityChanged() { GetTree().Paused = Visible; }
+		private void OnVisibilityChanged()
+		{
+			GetTree().Paused = Visible;
+			if (Visible)
+			{
+				statsController.OnDraw();
+			}
+		}
 		private void OnTabChanged(int index) { PlaySound(NameDB.UI.CLICK1); }
 		private void ExitGame() { GetTree().Quit(); }
 		private void ExitMenu()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/menu_ui/inventory/InventoryView.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/menu_ui/stats/StatsController.cs" type="Script" id=2]
+[ext_resource path="res://src/menu_ui/stats/StatsView.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/menu_ui/theme/ToWTheme.tres" type="Theme" id=3]
 [ext_resource path="res://src/menu_ui/quest/QuestLogView.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/menu_ui/spell/SkillBookView.tscn" type="PackedScene" id=5]
@@ -73,16 +73,14 @@ custom_constants/margin_right = 16
 custom_constants/margin_top = 32
 custom_constants/margin_left = 16
 custom_constants/margin_bottom = 32
-script = ExtResource( 2 )
 
-[node name="richTextLabel" type="RichTextLabel" parent="playerMenu/Stats"]
+[node name="StatsView" parent="playerMenu/Stats" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 32.0
 margin_right = 704.0
 margin_bottom = 1177.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Quest Log" type="MarginContainer" parent="playerMenu"]
 visible = false
@@ -140,9 +138,9 @@ margin_right = 704.0
 margin_bottom = 1177.0
 
 [node name="vBoxContainer" type="VBoxContainer" parent="playerMenu/Settings/centerContainer"]
-margin_left = 203.0
+margin_left = 180.0
 margin_top = 474.0
-margin_right = 485.0
+margin_right = 507.0
 margin_bottom = 670.0
 
 [node name="exitGame" type="Button" parent="playerMenu/Settings/centerContainer/vBoxContainer"]
@@ -161,4 +159,3 @@ visible = false
 
 [connection signal="visibility_changed" from="." to="." method="OnVisibilityChanged"]
 [connection signal="tab_changed" from="playerMenu" to="." method="OnTabChanged"]
-[connection signal="draw" from="playerMenu/Stats/richTextLabel" to="playerMenu/Stats" method="OnDraw"]

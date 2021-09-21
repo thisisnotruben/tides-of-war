@@ -1,7 +1,6 @@
 using Godot;
 using GC = Godot.Collections;
 using Game.Actor;
-using Game.Loot;
 using Game.Database;
 namespace Game.Ui
 {
