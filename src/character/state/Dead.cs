@@ -10,6 +10,7 @@ namespace Game.Actor.State
 	public class Dead : StateBehavior
 	{
 		private Timer timer = new Timer();
+		private List<string> addedLootToDrop = new List<string>();
 
 		public override void _Ready()
 		{
@@ -30,6 +31,7 @@ namespace Game.Actor.State
 		private void DieStart()
 		{
 			Map.Map.map.OccupyCell(character.GlobalPosition, false);
+			addedLootToDrop.Clear();
 
 			// changing character detection
 			character.hitBox.CollisionLayer = Character.COLL_MASK_DEAD;
@@ -44,7 +46,11 @@ namespace Game.Actor.State
 			// clear targets
 			if (character is Npc)
 			{
-				Globals.questMaster.CheckQuests(character.worldName, QuestDB.QuestType.KILL, true);
+				// get quest drops if any to add to standard drops
+				string questId = Globals.questMaster.CheckQuests(
+					character.worldName, QuestDB.QuestType.KILL, true)?.quest.dialogue
+					?? string.Empty;
+				Globals.mapQuestItemDropDB.HasUnitDrop(questId, character.Name, out addedLootToDrop);
 
 				if (character.target != null
 				&& character.target is Player
@@ -90,7 +96,8 @@ namespace Game.Actor.State
 			}
 			else
 			{
-				// TODO: drop loot
+				addedLootToDrop.ForEach(d => character.dropSystem.AddDrop(d));
+				character.dropSystem.Drop();
 
 				// npc
 				character.Visible = character.sight.Monitoring = false;

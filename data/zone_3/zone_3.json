@@ -5,6 +5,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1512,
@@ -17,6 +18,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1528,
@@ -29,6 +31,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1704,
@@ -41,6 +44,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1848,
@@ -53,6 +57,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1960,
@@ -65,6 +70,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1880,
@@ -77,6 +83,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1960,
@@ -89,6 +96,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1832,
@@ -101,6 +109,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1832,
@@ -113,6 +122,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1544,
@@ -125,6 +135,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1832,
@@ -137,6 +148,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1832,
@@ -149,6 +161,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1720,
@@ -161,6 +174,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1896,
@@ -173,6 +187,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1688,
@@ -185,6 +200,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1736,
@@ -197,6 +213,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1976,
@@ -209,6 +226,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1944,
@@ -221,6 +239,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			2008,
@@ -233,6 +252,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1976,
@@ -245,6 +265,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1768,
@@ -257,6 +278,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1784,
@@ -269,6 +291,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1528,
@@ -281,6 +304,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1992,
@@ -293,6 +317,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1960,
@@ -305,6 +330,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1688,
@@ -317,6 +343,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1560,
@@ -329,6 +356,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1464,
@@ -341,6 +369,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1512,
@@ -353,6 +382,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			632,
@@ -365,6 +395,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			568,
@@ -377,6 +408,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			488,
@@ -389,6 +421,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			280,
@@ -401,6 +434,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			168,
@@ -413,6 +447,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			216,
@@ -425,6 +460,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			216,
@@ -437,6 +473,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			264,
@@ -449,6 +486,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			168,
@@ -461,6 +499,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			408,
@@ -473,6 +512,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			296,
@@ -485,6 +525,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			392,
@@ -497,6 +538,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			424,
@@ -509,6 +551,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			728,
@@ -521,6 +564,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			712,
@@ -533,6 +577,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			760,
@@ -545,6 +590,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			648,
@@ -557,6 +603,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			984,
@@ -569,6 +616,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			136,
@@ -581,6 +629,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			760,
@@ -593,6 +642,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			536,
@@ -605,6 +655,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			40,
@@ -617,6 +668,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			408,
@@ -629,6 +681,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			296,
@@ -641,6 +694,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			504,
@@ -653,6 +707,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			760,
@@ -665,6 +720,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			632,
@@ -677,6 +733,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			856,
@@ -689,6 +746,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1016,
@@ -701,6 +759,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1080,
@@ -713,6 +772,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			424,
@@ -725,6 +785,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			296,
@@ -737,6 +798,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			104,
@@ -749,6 +811,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			184,
@@ -761,6 +824,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			472,
@@ -773,6 +837,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			56,
@@ -785,6 +850,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			344,
@@ -797,6 +863,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			472,
@@ -809,6 +876,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			264,
@@ -821,6 +889,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			232,
@@ -833,6 +902,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			408,
@@ -845,6 +915,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			936,
@@ -857,6 +928,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			232,
@@ -869,6 +941,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			56,
@@ -881,6 +954,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.6",
 		"path": [],
 		"spawnPos": [
 			1848,
@@ -893,6 +967,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1880,
@@ -905,6 +980,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1816,
@@ -917,6 +993,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1928,
@@ -929,6 +1006,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1592,
@@ -941,6 +1019,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1576,
@@ -953,6 +1032,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1544,
@@ -965,6 +1045,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1848,
@@ -977,6 +1058,7 @@
 		"dialogue": "",
 		"enemy": false,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1944,
@@ -989,6 +1071,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.8",
 		"path": [],
 		"spawnPos": [
 			1816,
@@ -1001,6 +1084,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.8",
 		"path": [],
 		"spawnPos": [
 			1832,
@@ -1013,6 +1097,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.8",
 		"path": [],
 		"spawnPos": [
 			1960,
@@ -1025,6 +1110,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1384,
@@ -1037,6 +1123,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1352,
@@ -1049,6 +1136,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1176,
@@ -1061,6 +1149,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1512,
@@ -1073,6 +1162,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1272,
@@ -1085,6 +1175,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1352,
@@ -1097,6 +1188,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1176,
@@ -1109,6 +1201,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			744,
@@ -1121,6 +1214,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			520,
@@ -1133,6 +1227,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1176,
@@ -1145,6 +1240,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1624,
@@ -1157,6 +1253,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1592,
@@ -1169,6 +1266,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1304,
@@ -1181,6 +1279,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			1464,
@@ -1193,6 +1292,7 @@
 		"dialogue": "",
 		"enemy": true,
 		"level": 1,
+		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
 			936,

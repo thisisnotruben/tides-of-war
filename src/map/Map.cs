@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using Game.Actor;
+using Game.Loot;
 using Game.Database;
 using Godot;
 namespace Game.Map
@@ -36,6 +37,14 @@ namespace Game.Map
 		}
 		public void AddGChild(Node node) { ground.AddChild(node); }
 		public void AddZChild(Node node) { zed.AddChild(node); }
+		public void AddDrop(Vector2 location, string gameItemName)
+		{
+			TreasureChest treasureChest = SceneDB.treasureChest.Instance<TreasureChest>().Init(gameItemName);
+
+			AddZChild(treasureChest);
+			treasureChest.Owner = this;
+			treasureChest.GlobalPosition = SetGetPickableLoc(location, true);
+		}
 		public Node GetGameChild(string nodeName)
 		{
 			Node node = zed.GetNodeOrNull(nodeName);

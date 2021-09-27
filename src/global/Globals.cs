@@ -25,7 +25,8 @@ namespace Game
 		public static readonly SpellEffectDB spellEffectDB = new SpellEffectDB(PathManager.spellEffectDir);
 		public static readonly UnitDB unitDB = new UnitDB();
 		public static readonly UseDB useDB = new UseDB(PathManager.use);
-		public static readonly MapQuestItemDB mapQuestItemDB = new MapQuestItemDB();
+		public static readonly MapQuestItemDB mapQuestItemLootDB = new MapQuestItemDB();
+		public static readonly MapQuestItemDropDB mapQuestItemDropDB = new MapQuestItemDropDB();
 
 		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
 		public static readonly CooldownMaster cooldownMaster = new CooldownMaster();

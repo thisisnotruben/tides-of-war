@@ -25,6 +25,7 @@ namespace Game.Actor
 		public AnimationPlayer anim;
 		public Area2D hitBox, sight;
 		public AudioStreamPlayer2D player2D { get; protected set; }
+		public DropSystem dropSystem { get; protected set; }
 
 		public bool enemy { get; protected set; }
 		public bool dead { get { return fsm.IsDead(); } }
@@ -110,6 +111,7 @@ namespace Game.Actor
 			hitBox = GetNode<Area2D>("area");
 			sight = GetNode<Area2D>("sight");
 			stats = new StatManager(this);
+			dropSystem = new DropSystem(this);
 
 			fsm.Init(this);
 

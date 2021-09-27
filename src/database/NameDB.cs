@@ -126,7 +126,8 @@ namespace Game.Database
 				MODIFIERS = "modifiers",
 				TEXT = "text",
 				COMBAT_TEXT = "combatText",
-				SPELL_EFFECTS = "spellEffects";
+				SPELL_EFFECTS = "spellEffects",
+				QUESTS = "quests";
 		}
 	}
 }

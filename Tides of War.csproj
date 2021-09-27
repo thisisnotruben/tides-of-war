@@ -25,6 +25,7 @@
     <Compile Include="src\character\doodads\FootStep.cs" />
     <Compile Include="src\character\doodads\QuestMarker.cs" />
     <Compile Include="src\character\doodads\Tomb.cs" />
+    <Compile Include="src\character\DropSystem.cs" />
     <Compile Include="src\character\npc\Npc.cs" />
     <Compile Include="src\character\npc\targetDummy\TargetDummy.cs" />
     <Compile Include="src\character\player\CharacterCamera.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="src\database\ItemDB.cs" />
     <Compile Include="src\database\LandMineDB.cs" />
     <Compile Include="src\database\MapQuestItemDB.cs" />
+    <Compile Include="src\database\MapQuestItemDropDB.cs" />
     <Compile Include="src\database\MissileSpellDB.cs" />
     <Compile Include="src\database\ModDB.cs" />
     <Compile Include="src\database\NameDB.cs" />

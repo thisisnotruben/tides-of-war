@@ -10,16 +10,18 @@ namespace Game.Database
 			public readonly string name, img, dialogue;
 			public readonly bool enemy;
 			public readonly int level;
+			public readonly float dropRate;
 			public readonly Vector2[] path;
 			public readonly Vector2 spawnPos;
 
 			public UnitData(string name, string img, bool enemy,
-			int level, string dialogue, Vector2[] path, Vector2 spawnPos)
+			int level, float dropRate, string dialogue, Vector2[] path, Vector2 spawnPos)
 			{
 				this.name = name;
 				this.img = img;
 				this.enemy = enemy;
 				this.level = level;
+				this.dropRate = dropRate;
 				this.dialogue = dialogue;
 				this.path = path;
 				this.spawnPos = spawnPos;
@@ -87,6 +89,7 @@ namespace Game.Database
 					img: dict[nameof(UnitData.img)].ToString(),
 					enemy: (bool)dict[nameof(UnitData.enemy)],
 					level: dict[nameof(UnitData.level)].ToString().ToInt(),
+					dropRate: dict[nameof(UnitData.dropRate)].ToString().ToFloat(),
 					dialogue: dict[nameof(UnitData.dialogue)].ToString(),
 					path: unitPath,
 					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1])

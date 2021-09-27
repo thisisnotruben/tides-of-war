@@ -172,7 +172,8 @@ namespace Game.Ui
 			string mapName = scenePath.GetFile().BaseName(),
 				unitDataPath = string.Format(PathManager.unitDataTemplate, mapName),
 				contentDataPath = string.Format(PathManager.contentDataTemplate, mapName),
-				mapQuestItemPath = string.Format(PathManager.mapQuestItemTemplate, mapName);
+				mapQuestItemLootPath = string.Format(PathManager.mapQuestItemLootTemplate, mapName),
+				mapQuestItemDropPath = string.Format(PathManager.mapQuestItemDropTemplate, mapName);
 
 			Directory directory = new Directory();
 			if (directory.FileExists(unitDataPath))
@@ -183,9 +184,13 @@ namespace Game.Ui
 			{
 				Globals.contentDB.LoadData(contentDataPath);
 			}
-			if (directory.FileExists(mapQuestItemPath))
+			if (directory.FileExists(mapQuestItemLootPath))
 			{
-				Globals.mapQuestItemDB.LoadData(mapQuestItemPath);
+				Globals.mapQuestItemLootDB.LoadData(mapQuestItemLootPath);
+			}
+			if (directory.FileExists(mapQuestItemDropPath))
+			{
+				Globals.mapQuestItemDropDB.LoadData(mapQuestItemDropPath);
 			}
 
 			CallDeferred(nameof(SetSceneDeferred), scenePath);

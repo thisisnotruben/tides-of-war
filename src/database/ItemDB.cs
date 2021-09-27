@@ -10,10 +10,11 @@ namespace Game.Database
 			public readonly ItemType type;
 			public readonly Texture icon;
 			public readonly int level, goldCost, stackSize, coolDown;
+			public readonly float dropRate;
 			public readonly string blurb, subType, material;
 
 			public ItemData(ItemType type, Texture icon, int level, int goldCost, int stackSize,
-			int coolDown, string blurb, string subType, string material)
+			int coolDown, float dropRate, string blurb, string subType, string material)
 			{
 				this.type = type;
 				this.icon = icon;
@@ -21,6 +22,7 @@ namespace Game.Database
 				this.goldCost = goldCost;
 				this.stackSize = stackSize;
 				this.coolDown = coolDown;
+				this.dropRate = dropRate;
 				this.blurb = blurb;
 				this.subType = subType;
 				this.material = material;
@@ -44,7 +46,8 @@ namespace Game.Database
 					subType: dict[nameof(ItemData.subType)].ToString(),
 					material: dict[nameof(ItemData.material)].ToString(),
 					stackSize: dict[nameof(ItemData.stackSize)].ToString().ToInt(),
-					coolDown: dict[nameof(ItemData.coolDown)].ToString().ToInt()
+					coolDown: dict[nameof(ItemData.coolDown)].ToString().ToInt(),
+					dropRate: dict[nameof(ItemData.dropRate)].ToString().ToFloat()
 				));
 			}
 		}

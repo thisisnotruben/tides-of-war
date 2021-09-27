@@ -3,15 +3,20 @@ using Game.Map.Doodads;
 using Game.Actor;
 using Game.Actor.Doodads;
 using Godot;
+using GC = Godot.Collections;
 using System.Collections.Generic;
 namespace Game.Quest
 {
-	public class QuestMaster : Node
+	public class QuestMaster : Node, ISerializable
 	{
 		public enum QuestStatus : byte { UNAVAILABLE, AVAILABLE, ACTIVE, COMPLETED, DELIVERED }
 		private readonly List<WorldQuest> quests = new List<WorldQuest>();
 
-		public override void _Ready() { Name = nameof(QuestMaster); }
+		public override void _Ready()
+		{
+			Name = nameof(QuestMaster);
+			AddToGroup(Globals.SAVE_GROUP);
+		}
 		public QuestMaster()
 		{
 			Directory directory = new Directory();
@@ -31,7 +36,11 @@ namespace Game.Quest
 				resourceName = directory.GetNext();
 			}
 			directory.ListDirEnd();
-
+			ResetQuests();
+		}
+		private void ResetQuests()
+		{
+			quests.Clear();
 			// put all quest data to WorldQuests class and query for dependent quests
 			Dictionary<string, QuestDB.QuestData> questData = Globals.questDB.data;
 			HashSet<string> dependentQuests = new HashSet<string>();
@@ -198,14 +207,14 @@ namespace Game.Quest
 		private void AcitvateQuestMapItems(WorldQuest worldQuest, bool activate)
 		{
 			if (worldQuest == null
-			|| !Globals.mapQuestItemDB.HasData(worldQuest.quest.dialogue)) // dialogue == quest id
+			|| !Globals.mapQuestItemLootDB.HasData(worldQuest.quest.dialogue)) // dialogue == quest id
 			{
 				return;
 			}
 
 			Node node;
 			InteractItem interactItem;
-			foreach (MapQuestItemDB.QuestItem item in Globals.mapQuestItemDB.GetData(worldQuest.quest.dialogue).mapItems)
+			foreach (MapQuestItemDB.QuestItem item in Globals.mapQuestItemLootDB.GetData(worldQuest.quest.dialogue).mapItems)
 			{
 				node = Map.Map.map.GetGameChild(item.name);
 				if (node != null)
@@ -225,18 +234,17 @@ namespace Game.Quest
 		/*
 		* PROGRESS CHECK START
 		*/
-		public bool CheckQuests(string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
+		public WorldQuest CheckQuests(string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
 		{
-			bool partOfQuest = false;
-			quests.ForEach(q =>
+			foreach (WorldQuest worldQuest in quests)
 			{
-				if (q.status == QuestStatus.ACTIVE
-				&& q.UpdateQuest(objectiveName, questType, countTowardsObjective))
+				if (worldQuest.status == QuestStatus.ACTIVE
+				&& worldQuest.UpdateQuest(objectiveName, questType, countTowardsObjective))
 				{
-					partOfQuest = true;
+					return worldQuest;
 				}
-			});
-			return partOfQuest;
+			}
+			return null;
 		}
 		public bool CheckQuests(string characterPath, string objectiveName, QuestDB.QuestType questType)
 		{
@@ -302,6 +310,31 @@ namespace Game.Quest
 			});
 			quest = foundQuest;
 			return foundQuest != null;
+		}
+
+		public GC.Dictionary Serialize()
+		{
+			GC.Array questsToSave = new GC.Array();
+			quests.ForEach(q =>
+			{
+				if (q.status != QuestStatus.UNAVAILABLE)
+				{
+					questsToSave.Add(q.Serialize());
+				}
+			});
+			return new GC.Dictionary() { { NameDB.SaveTag.QUESTS, questsToSave } };
+		}
+		public void Deserialize(GC.Dictionary payload)
+		{
+			ResetQuests();
+			WorldQuest worldQuest;
+			foreach (GC.Dictionary questData in payload)
+			{
+				if (TryGetQuestByName(questData[NameDB.SaveTag.NAME].ToString(), out worldQuest))
+				{
+					worldQuest.Deserialize(questData);
+				}
+			}
 		}
 	}
 }

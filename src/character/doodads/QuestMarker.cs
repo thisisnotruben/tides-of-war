@@ -14,7 +14,7 @@ namespace Game.Actor.Doodads
 			{
 				case MarkerType.AVAILABLE:
 					color = Color.ColorN("yellow");
-					Frame = 0;
+					frame = 0;
 					break;
 
 				case MarkerType.COMPLETED:

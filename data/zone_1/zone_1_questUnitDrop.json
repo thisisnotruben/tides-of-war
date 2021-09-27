@@ -1,0 +1,125 @@
+{
+	"q1.1152.2": {
+		"Finfolk Amulet": [
+			"1090-finfolk",
+			"1091-finfolk",
+			"1093-finfolk",
+			"1094-finfolk",
+			"1095-finfolk",
+			"1097-finfolk",
+			"1098-finfolk",
+			"1099-finfolk",
+			"1100-finfolk",
+			"1101-finfolk",
+			"1102-finfolk",
+			"1105-finfolk",
+			"1108-finfolk",
+			"1110-finfolk",
+			"1111-finfolk",
+			"1114-finfolk",
+			"1115-finfolk",
+			"1117-finfolk",
+			"1118-finfolk",
+			"1120-finfolk",
+			"1122-finfolk",
+			"1123-finfolk",
+			"1124-finfolk"
+		]
+	},
+	"q1.1175.0": {
+		"Bluescale Salmon": [
+			"1090-finfolk",
+			"1091-finfolk",
+			"1093-finfolk",
+			"1094-finfolk",
+			"1095-finfolk",
+			"1097-finfolk",
+			"1098-finfolk",
+			"1099-finfolk",
+			"1100-finfolk",
+			"1101-finfolk",
+			"1102-finfolk",
+			"1105-finfolk",
+			"1108-finfolk",
+			"1110-finfolk",
+			"1111-finfolk",
+			"1114-finfolk",
+			"1115-finfolk",
+			"1116-finfolk",
+			"1117-finfolk",
+			"1118-finfolk",
+			"1119-finfolk",
+			"1120-finfolk",
+			"1122-finfolk",
+			"1123-finfolk",
+			"1124-finfolk"
+		]
+	},
+	"q1.1166.0": {
+		"Raider Bandanna": [
+			"1129-human",
+			"1130-human",
+			"1132-human",
+			"1133-human",
+			"1135-human",
+			"1136-human",
+			"1137-human",
+			"1138-human",
+			"1139-human",
+			"1140-human",
+			"1141-human",
+			"1397-human",
+			"1400-human",
+			"1401-human",
+			"1403-human"
+		]
+	},
+	"q1.1195.0": {
+		"Wolf Pelt": [
+			"1228-critter",
+			"1236-critter",
+			"1237-critter",
+			"1247-critter",
+			"1248-critter",
+			"1249-critter",
+			"1253-critter",
+			"1254-critter",
+			"1263-critter",
+			"1264-critter",
+			"1265-critter",
+			"1295-critter",
+			"1296-critter",
+			"1337-critter",
+			"1339-critter",
+			"1343-critter",
+			"1385-critter",
+			"1391-critter",
+			"1393-critter",
+			"1405-critter",
+			"1406-critter"
+		]
+	},
+	"q1.1175.1": {
+		"Spider Eye": [
+			"1276-critter",
+			"1277-critter",
+			"1278-critter",
+			"1279-critter",
+			"1281-critter",
+			"1287-critter",
+			"1288-critter",
+			"1289-critter",
+			"1290-critter",
+			"1291-critter",
+			"1292-critter"
+		]
+	},
+	"q1.1049.0": {
+		"Crab Pincer": [
+			"1376-critter",
+			"1377-critter",
+			"1383-critter",
+			"1388-critter"
+		]
+	}
+}

@@ -180,14 +180,7 @@ namespace Game.Ui
 			CheckHudSlots(inventoryModel, commodityWorldName);
 			EmitSignal(nameof(RefreshSlots));
 
-			// place treasure chest in map
-			TreasureChest treasureChest = SceneDB.treasureChest.Instance<TreasureChest>().Init(commodityWorldName);
-
-			Map.Map map = Map.Map.map;
-			map.AddZChild(treasureChest);
-			treasureChest.Owner = map;
-			treasureChest.GlobalPosition = map.SetGetPickableLoc(player.GlobalPosition, true);
-
+			Map.Map.map.AddDrop(player.GlobalPosition, commodityWorldName);
 			Globals.questMaster.CheckQuests(commodityWorldName,
 				Globals.spellDB.HasData(commodityWorldName)
 					? QuestDB.QuestType.LEARN
