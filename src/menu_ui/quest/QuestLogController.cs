@@ -191,9 +191,9 @@ namespace Game.Ui
 
 			questProgressDes.Hide();
 
-			Globals.dialogic.ResetSaves();
-			Globals.dialogic.SetVariable("questAvailable", "1");
-			dialogue = Globals.dialogic.Start(focusedWorldQuest.quest.dialogue, false);
+			DialogicSharp.ResetSaves();
+			DialogicSharp.SetVariable("questAvailable", "1");
+			dialogue = DialogicSharp.Start(focusedWorldQuest.quest.dialogue, false);
 			dialogue.GetNode<Control>("TextBubble").SizeFlagsVertical = (int)Control.SizeFlags.ExpandFill;
 
 			focusedEntry.AddChildBelowNode(questProgressDes, dialogue);

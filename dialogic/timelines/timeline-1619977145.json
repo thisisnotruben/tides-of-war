@@ -1,1 +1,32 @@
-{"events":[{"options":[],"question":"Adventure forth to the Marshlands?"},{"choice":"Yes"},{"emit_signal":"zone_2"},{"choice":"No"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1619977145.json","name":"zone_1-zone_2"}}
+{
+	"events": [
+		{
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"question": "Adventure forth to the Marshlands?"
+		},
+		{
+			"choice": "Yes",
+			"event_id": "dialogic_011"
+		},
+		{
+			"emit_signal": "zone_2",
+			"event_id": "dialogic_040"
+		},
+		{
+			"choice": "No",
+			"event_id": "dialogic_011"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1619977145.json",
+		"name": "zone_1-zone_2"
+	}
+}

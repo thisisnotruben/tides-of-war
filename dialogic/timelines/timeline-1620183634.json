@@ -1,1 +1,65 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"Hello, fellow adventurer. My brother Edvard and I are fellow traders here at Southwood and are in dire need of your help.\nThe wild animals in the northern frontier have been growing more and more aggressive recently and have been scaring away our customers.\nThis is not good for business.\nBring me 10 wolf pelts and you'll be well compensated for your troubles."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"Our customers aren't getting any braver."},{"endbranch":""},{"condition":"==","definition":"1618423829-648","value":"1"},{"character":"","portrait":"","text":"You've been busy! I'm not sure what's been driving these wolves mad. But for your troubles, your reward."},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620183634.json","name":"q1.1195.0"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Hello, fellow adventurer. My brother Edvard and I are fellow traders here at Southwood and are in dire need of your help.\nThe wild animals in the northern frontier have been growing more and more aggressive recently and have been scaring away our customers.\nThis is not good for business.\nBring me 10 wolf pelts and you'll be well compensated for your troubles."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Our customers aren't getting any braver."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "You've been busy! I'm not sure what's been driving these wolves mad. But for your troubles, your reward."
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620183634.json",
+		"name": "q1.1195.0"
+	}
+}

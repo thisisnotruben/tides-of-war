@@ -109,7 +109,7 @@ func get_glossary(name: String) -> Dictionary:
 	for d in current_definitions['glossary']:
 		if d['name'] == name:
 			return d
-	return { 
+	return {
 		'title': '',
 		'text': '',
 		'extra': ''

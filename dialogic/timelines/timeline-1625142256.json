@@ -1,1 +1,65 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"We're so hungry, we haven't ate in days.\nI hear Denton down in Southwood cooks a delicious Bluescale salmon cuisine with a Refreshing water.\nBring me two Bluescale salmon cuisine and Refreshing waters."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"We're starving here."},{"endbranch":""},{"condition":"==","definition":"1618423829-648","value":"1"},{"character":"","portrait":"","text":"We feel the strength returning to us. Thank you so much stranger."},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1625142256.json","name":"q1.1412.0"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "We're so hungry, we haven't ate in days.\nI hear Denton down in Southwood cooks a delicious Bluescale salmon cuisine with a Refreshing water.\nBring me two Bluescale salmon cuisine and Refreshing waters."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "We're starving here."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "We feel the strength returning to us. Thank you so much stranger."
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1625142256.json",
+		"name": "q1.1412.0"
+	}
+}

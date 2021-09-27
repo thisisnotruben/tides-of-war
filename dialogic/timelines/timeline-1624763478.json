@@ -1,1 +1,65 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"My husband and I were attacked by a band of thieves close to the river near here.\nI haven't told my husband Rowan, but the only thing they managed to get off us was my wedding ring.\nI don't want to break his heart that it got stolen, but if you could get if for me I'm sure I can make you some food."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"Rowan hasn't found out about my wedding ring yet, have you got it?"},{"endbranch":""},{"condition":"==","definition":"1618423829-648","value":"1"},{"character":"","portrait":"","text":"You got it! I thought it was lost forever. Thank you dear.\nWhile you were gone, I made this for you."},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1624763478.json","name":"q1.1418.0"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "My husband and I were attacked by a band of thieves close to the river near here.\nI haven't told my husband Rowan, but the only thing they managed to get off us was my wedding ring.\nI don't want to break his heart that it got stolen, but if you could get if for me I'm sure I can make you some food."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Rowan hasn't found out about my wedding ring yet, have you got it?"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "You got it! I thought it was lost forever. Thank you dear.\nWhile you were gone, I made this for you."
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1624763478.json",
+		"name": "q1.1418.0"
+	}
+}

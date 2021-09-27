@@ -1,1 +1,65 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"The band of raiders in your report is concerning. We've been able to keep the peace here with what we have, but it seems their numbers are growing.\nThe price of peace is often times paid with blood and there is no greater treason than defiling our great kingdom.\nI want you to reduce their numbers by bringing me 10 of these raider's bandannas. Dispatch immediately and let it be known we don't tolerate such behavior."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"The people of Southwood are not safe until the raiders have been taken care of."},{"endbranch":""},{"condition":"==","definition":"1618423829-648","value":"1"},{"character":"","portrait":"","text":"There is no greater honor than defending our great kingdom. The people of Southwood have nothing but gratitude for you."},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620180743.json","name":"q1.1166.0"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "The band of raiders in your report is concerning. We've been able to keep the peace here with what we have, but it seems their numbers are growing.\nThe price of peace is often times paid with blood and there is no greater treason than defiling our great kingdom.\nI want you to reduce their numbers by bringing me 10 of these raider's bandannas. Dispatch immediately and let it be known we don't tolerate such behavior."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "The people of Southwood are not safe until the raiders have been taken care of."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "There is no greater honor than defending our great kingdom. The people of Southwood have nothing but gratitude for you."
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620180743.json",
+		"name": "q1.1166.0"
+	}
+}

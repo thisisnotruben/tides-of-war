@@ -1,1 +1,65 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"Our supply line to Strahmholde has choked due to the gnoll threat down here, and all our supplies have been used.\nYou seemed to sneak past the gnolls here so I'm assigning you the task of going back to Strahmholde.\nGo speak to Roswald for weaponry, Hawel for food and Dobbs for miscellaneous supplies.\nThey'll all give you packages then report back to me."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"Have got what we need? Supplies are running low."},{"endbranch":""},{"condition":"==","definition":"1618423829-648","value":"1"},{"character":"","portrait":"","text":"This all will do nicely. I'll have the wepons sent to the men and dispurse the food amongst ourselves."},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620611370.json","name":"q1.1417.0"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Our supply line to Strahmholde has choked due to the gnoll threat down here, and all our supplies have been used.\nYou seemed to sneak past the gnolls here so I'm assigning you the task of going back to Strahmholde.\nGo speak to Roswald for weaponry, Hawel for food and Dobbs for miscellaneous supplies.\nThey'll all give you packages then report back to me."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Have got what we need? Supplies are running low."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This all will do nicely. I'll have the wepons sent to the men and dispurse the food amongst ourselves."
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620611370.json",
+		"name": "q1.1417.0"
+	}
+}

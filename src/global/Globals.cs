@@ -31,7 +31,6 @@ namespace Game
 		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
 		public static readonly CooldownMaster cooldownMaster = new CooldownMaster();
 		public static readonly QuestMaster questMaster = new QuestMaster();
-		public static readonly Dialogic dialogic = new Dialogic();
 		public static readonly SceneLoader sceneLoader = new SceneLoader();
 
 		public override void _Ready()

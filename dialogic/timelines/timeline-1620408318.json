@@ -1,1 +1,69 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"I've sent word to Marshal Augustus about your doings and he is most pleased.\nHe requests your presence immediately. He can found east of the keep in the city of Strahmholde. I wouldn't keep him waiting."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"Marshal Augustus requests your presence."},{"endbranch":""},{"condition":"==","definition":"1618688181-648","value":"1"},{"character":"","portrait":"","text":"Hail, so your the one that put an end to that aching problem with the finfolk. Good job on putting the kingdom to ease, but we still have bigger problems."},{"emit_signal":"objective"},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620408318.json","name":"q1.1152.3"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I've sent word to Marshal Augustus about your doings and he is most pleased.\nHe requests your presence immediately. He can found east of the keep in the city of Strahmholde. I wouldn't keep him waiting."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Marshal Augustus requests your presence."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618688181-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Hail, so your the one that put an end to that aching problem with the finfolk. Good job on putting the kingdom to ease, but we still have bigger problems."
+		},
+		{
+			"emit_signal": "objective",
+			"event_id": "dialogic_040"
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620408318.json",
+		"name": "q1.1152.3"
+	}
+}

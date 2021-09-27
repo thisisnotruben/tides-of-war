@@ -32,7 +32,7 @@ static func load_json(path: String, default: Dictionary={}) -> Dictionary:
 	var final_data = data_parse.result
 	if typeof(final_data) == TYPE_DICTIONARY:
 		return final_data
-	
+
 	# If everything else fails
 	return default
 
@@ -52,7 +52,7 @@ static func set_json(path: String, data: Dictionary):
 
 static func init_dialogic_files() -> void:
 	# This functions makes sure that the needed files and folders
-	# exists when the plugin is loaded. If they don't, we create 
+	# exists when the plugin is loaded. If they don't, we create
 	# them.
 	# WARNING: only call while in the editor
 	var directory = Directory.new()
@@ -137,7 +137,7 @@ static func init_definitions_saves():
 			print('[Dialogic] Error opening default definitions file: ' + str(err))
 	else:
 		print('[Dialogic] Error opening saved definitions file: ' + str(err))
-	
+
 	source.close()
 	sink.close()
 
@@ -189,7 +189,7 @@ static func create_empty_file(path):
 static func remove_file(path: String):
 	var dir = Directory.new()
 	var _err = dir.remove(path)
-	
+
 	if _err != OK:
 		print("[D] There was an error when deleting file at {filepath}. Error: {error}".format(
 			{"filepath":path,"error":_err}
@@ -200,26 +200,26 @@ static func copy_file(path_from, path_to):
 	if (path_from == ''):
 		push_error("[Dialogic] Could not copy empty filename")
 		return ERR_FILE_BAD_PATH
-		
+
 	if (path_to == ''):
 		push_error("[Dialogic] Could not copy to empty filename")
 		return ERR_FILE_BAD_PATH
-	
+
 	var dir = Directory.new()
 	if (not dir.file_exists(path_from)):
 		push_error("[Dialogic] Could not copy file %s, File does not exists" % [ path_from ])
 		return ERR_FILE_NOT_FOUND
-		
+
 	if (dir.file_exists(path_to)):
 		push_error("[Dialogic] Could not copy file to %s, file already exists" % [ path_to ])
 		return ERR_ALREADY_EXISTS
-		
+
 	var error = dir.copy(path_from, path_to)
 	if (error):
 		push_error("[Dialogic] Error while copying %s to %s" % [ path_from, path_to ])
 		push_error(error)
 		return error
-		
+
 	return OK
 	pass
 
@@ -307,8 +307,8 @@ static func add_theme(filename: String):
 
 static func delete_theme(filename: String):
 	remove_file(get_path('THEME_DIR', filename))
-	
-	
+
+
 static func duplicate_theme(from_filename: String, to_filename: String):
 	copy_file(get_path('THEME_DIR', from_filename), get_path('THEME_DIR', to_filename))
 
@@ -403,7 +403,7 @@ static func save_saved_definitions(data: Dictionary):
 # Can only be edited in the editor
 
 static func get_resource_folder_structure() -> Dictionary:
-	return load_json(get_config_files_paths()['FOLDER_STRUCTURE_FILE'], 
+	return load_json(get_config_files_paths()['FOLDER_STRUCTURE_FILE'],
 		{"folders":
 			{"Timelines":
 				{
@@ -429,10 +429,10 @@ static func get_resource_folder_structure() -> Dictionary:
 					"files":[],
 					'metadata':{'color':null, 'folded':false}
 				},
-			}, 
+			},
 		"files":[]
 		})
 
 static func save_resource_folder_structure(data):
 	set_json(get_config_files_paths()['FOLDER_STRUCTURE_FILE'], data)
-	
+

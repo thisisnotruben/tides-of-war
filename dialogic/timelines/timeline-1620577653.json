@@ -1,1 +1,69 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"We've halted their expansion for the time being, but they're a plague to the lands and must be driven out.\nBefore doing a full frontal assult we must gather more men and supplies.\nReport to Amaury here at Farwatch, he will tell you what we need."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"Report to Amaury here at Farwath. "},{"endbranch":""},{"condition":"==","definition":"1618688181-648","value":"1"},{"character":"","portrait":"","text":"Greetings, we have much to prepare."},{"emit_signal":"objective"},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620577653.json","name":"q1.1407.2"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "We've halted their expansion for the time being, but they're a plague to the lands and must be driven out.\nBefore doing a full frontal assult we must gather more men and supplies.\nReport to Amaury here at Farwatch, he will tell you what we need."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Report to Amaury here at Farwath. "
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618688181-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Greetings, we have much to prepare."
+		},
+		{
+			"emit_signal": "objective",
+			"event_id": "dialogic_040"
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620577653.json",
+		"name": "q1.1407.2"
+	}
+}

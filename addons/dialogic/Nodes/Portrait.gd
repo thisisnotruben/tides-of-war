@@ -27,7 +27,7 @@ func _ready():
 func set_portrait(expression: String) -> void:
 	if expression == '':
 		expression = 'Default'
-	
+
 	# Clearing old custom scenes
 	for n in get_children():
 		if 'DialogicCustomPortraitScene' in n.name:
@@ -41,7 +41,7 @@ func set_portrait(expression: String) -> void:
 				var instance = custom_node.instance()
 				instance.name = 'DialogicCustomPortraitScene'
 				add_child(instance)
-				
+
 				$TextureRect.texture = ImageTexture.new()
 				return
 			else:
@@ -53,7 +53,7 @@ func set_portrait(expression: String) -> void:
 		# Saving what the default is to fallback to it.
 		if p['name'] == 'Default':
 			default = p['path']
-	
+
 	# Everything failed, go with the default one
 	if ResourceLoader.exists(default):
 		$TextureRect.texture = load(default)
@@ -78,12 +78,12 @@ func move_to_position(position_offset, time = 0.5):
 		'center': Vector2(0, 0),
 		'center_right': Vector2(200, 0),
 		'center_left': Vector2(-200, 0)}
-	
+
 	direction = position_offset
 	modulate = Color(1,1,1,0)
 	tween_modulate(modulate, Color(1,1,1, 1), time)
 	rect_position = positions[position_offset]
-	
+
 	# Setting the scale of the portrait
 	var custom_scale = Vector2(1, 1)
 	if character_data.has('data'):
@@ -98,20 +98,20 @@ func move_to_position(position_offset, time = 0.5):
 				character_data['data']['offset_x'],
 				character_data['data']['offset_y']
 			)
-			
+
 	if $TextureRect.get('texture'):
 		rect_position -= Vector2(
 			$TextureRect.texture.get_width() * 0.5,
 			$TextureRect.texture.get_height()
 		) * custom_scale
-		
+
 	fade_in()
 
 
 # Tween stuff
 func fade_in(time = 0.5):
 	tween_modulate(modulate, Color(1,1,1, 1), time)
-	
+
 	if single_portrait_mode == false:
 		var end_pos = Vector2(0, -40) # starting at center
 		if direction == 'right':

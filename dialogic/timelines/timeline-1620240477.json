@@ -1,1 +1,81 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"Thanks for helping us clear out the way for our customers. But we still need supplies from the capitol to fulfill our orders down here.\nTake this, it's an invoice for a fellow named Jameson down west in Strahmholde where the trade district is at.\nHe has our shipment of goods that we need."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"Any word from Jameson about our shipment?"},{"endbranch":""},{"condition":"==","definition":"1618423829-648","value":"1"},{"character":"","portrait":"","text":"Wonderful! I should be able to complete all of our orders in time thanks to you. To show my appreciation, I would like to offer some monetary compensation for your troubles."},{"endbranch":""},{"condition":"==","definition":"1618688181-648","value":"1"},{"character":"","portrait":"","text":"Hello, what's this? Oh, it's the order for those two brothers. Let me just package that up for you. Here you go, ready for delivery."},{"emit_signal":"objective"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620240477.json","name":"q1.1194.0"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Thanks for helping us clear out the way for our customers. But we still need supplies from the capitol to fulfill our orders down here.\nTake this, it's an invoice for a fellow named Jameson down west in Strahmholde where the trade district is at.\nHe has our shipment of goods that we need."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Any word from Jameson about our shipment?"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Wonderful! I should be able to complete all of our orders in time thanks to you. To show my appreciation, I would like to offer some monetary compensation for your troubles."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618688181-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Hello, what's this? Oh, it's the order for those two brothers. Let me just package that up for you. Here you go, ready for delivery."
+		},
+		{
+			"emit_signal": "objective",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620240477.json",
+		"name": "q1.1194.0"
+	}
+}

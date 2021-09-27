@@ -1,1 +1,32 @@
-{"events":[{"options":[],"question":"Adventure forth to the Emerald Grove?"},{"choice":"Yes"},{"emit_signal":"zone_4"},{"choice":"No"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620004707.json","name":"zone_3-zone_4"}}
+{
+	"events": [
+		{
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"question": "Adventure forth to the Emerald Grove?"
+		},
+		{
+			"choice": "Yes",
+			"event_id": "dialogic_011"
+		},
+		{
+			"emit_signal": "zone_4",
+			"event_id": "dialogic_040"
+		},
+		{
+			"choice": "No",
+			"event_id": "dialogic_011"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620004707.json",
+		"name": "zone_3-zone_4"
+	}
+}

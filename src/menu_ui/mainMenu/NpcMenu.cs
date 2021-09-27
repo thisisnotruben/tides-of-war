@@ -123,15 +123,15 @@ namespace Game.Ui
 			{
 				questAny = questAny || questDefinitions[definition];
 
-				Globals.dialogic.SetVariable(definition,
+				DialogicSharp.SetVariable(definition,
 					(questDefinitions[definition] ? 1 : 0).ToString());
 			}
 
-			Globals.dialogic.SetVariable("npcName", npc.Name);
-			Globals.dialogic.SetVariable("questAny", (questAny ? 1 : 0).ToString());
+			DialogicSharp.SetVariable("npcName", npc.Name);
+			DialogicSharp.SetVariable("questAny", (questAny ? 1 : 0).ToString());
 
 			// init dialogic
-			dialogue = focusedControl = Globals.dialogic.Start(
+			dialogue = focusedControl = DialogicSharp.Start(
 				worldQuest?.quest.dialogue ?? Globals.unitDB.GetData(npc.Name).dialogue, false
 			);
 

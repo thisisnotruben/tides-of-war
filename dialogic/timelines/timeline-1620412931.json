@@ -1,1 +1,69 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"Our control on the borders grow weaker each day. Angry Towns folk have turned their backs on us and made brotherhoods undermining our great kingdom.\nThe emergence of the finfolk coming from the waters put is into a dire position since our navy went back eastward.\nNow we have a new developing threat in the west that cripples our expansion and security. Our outpost Farwatch has been getting the most hit and needs your help.\nReport to Lieutenant Chapman down at Farwatch for further orders."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"Report to Lieutenant Chapman down at Farwatch for further orders."},{"endbranch":""},{"condition":"==","definition":"1618688181-648","value":"1"},{"character":"","portrait":"","text":"Greetings, word from Marshal Augustus reached to me about your doings. I'm glad we have someone of your caliber to help with the threat down here."},{"emit_signal":"objective"},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620412931.json","name":"q1.931.0"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Our control on the borders grow weaker each day. Angry Towns folk have turned their backs on us and made brotherhoods undermining our great kingdom.\nThe emergence of the finfolk coming from the waters put is into a dire position since our navy went back eastward.\nNow we have a new developing threat in the west that cripples our expansion and security. Our outpost Farwatch has been getting the most hit and needs your help.\nReport to Lieutenant Chapman down at Farwatch for further orders."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Report to Lieutenant Chapman down at Farwatch for further orders."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618688181-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Greetings, word from Marshal Augustus reached to me about your doings. I'm glad we have someone of your caliber to help with the threat down here."
+		},
+		{
+			"emit_signal": "objective",
+			"event_id": "dialogic_040"
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620412931.json",
+		"name": "q1.931.0"
+	}
+}

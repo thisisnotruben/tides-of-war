@@ -1,0 +1,111 @@
+{
+	"files": [
+
+	],
+	"folders": {
+		"Characters": {
+			"files": [
+
+			],
+			"folders": {
+
+			},
+			"metadata": {
+				"color": null,
+				"folded": false
+			}
+		},
+		"Definitions": {
+			"files": [
+				"1618683699-648",
+				"1618668193-648",
+				"1618668214-787",
+				"1618423829-648",
+				"1618688181-648",
+				"1618754825-648",
+				"1618668314-366"
+			],
+			"folders": {
+
+			},
+			"metadata": {
+				"color": null,
+				"folded": true
+			}
+		},
+		"Themes": {
+			"files": [
+				"theme-1618375686.cfg"
+			],
+			"folders": {
+
+			},
+			"metadata": {
+				"color": null,
+				"folded": false
+			}
+		},
+		"Timelines": {
+			"files": [
+				"timeline-1618371874.json"
+			],
+			"folders": {
+				"transitionSigns": {
+					"files": [
+						"timeline-1620004707.json",
+						"timeline-1620004658.json",
+						"timeline-1620004604.json",
+						"timeline-1619977145.json",
+						"timeline-1620060716.json",
+						"timeline-1620060640.json",
+						"timeline-1620004791.json",
+						"timeline-1620004506.json"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				},
+				"zone1": {
+					"files": [
+						"timeline-1625142256.json",
+						"timeline-1620159076.json",
+						"timeline-1620408318.json",
+						"timeline-1620611370.json",
+						"timeline-1620577653.json",
+						"timeline-1618780112.json",
+						"timeline-1620240477.json",
+						"timeline-1620146789.json",
+						"timeline-1620183634.json",
+						"timeline-1620179513.json",
+						"timeline-1620412931.json",
+						"timeline-1625154175.json",
+						"timeline-1624461063.json",
+						"timeline-1624763478.json",
+						"timeline-1620576528.json",
+						"timeline-1620268746.json",
+						"timeline-1620414797.json",
+						"timeline-1620180743.json",
+						"timeline-1620176641.json",
+						"timeline-1620405344.json",
+						"timeline-1625542222.json"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": false
+					}
+				}
+			},
+			"metadata": {
+				"color": null,
+				"folded": false
+			}
+		}
+	}
+}

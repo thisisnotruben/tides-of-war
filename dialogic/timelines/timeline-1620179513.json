@@ -1,1 +1,69 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"Getting those supply caches was a great deed for our town, but I'm worried of what you said in your report.\nGo speak with Captain Harden to the tower northwest in Southwood."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"Captain Harden is waiting for you."},{"endbranch":""},{"condition":"==","definition":"1618688181-648","value":"1"},{"character":"","portrait":"","text":"So you're the one who Quartermaster Arndell spoke highly of."},{"emit_signal":"objective"},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1620179513.json","name":"q1.1161.1"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Getting those supply caches was a great deed for our town, but I'm worried of what you said in your report.\nGo speak with Captain Harden to the tower northwest in Southwood."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Captain Harden is waiting for you."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618688181-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "So you're the one who Quartermaster Arndell spoke highly of."
+		},
+		{
+			"emit_signal": "objective",
+			"event_id": "dialogic_040"
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1620179513.json",
+		"name": "q1.1161.1"
+	}
+}

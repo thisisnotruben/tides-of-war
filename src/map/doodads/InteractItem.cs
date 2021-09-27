@@ -100,7 +100,7 @@ namespace Game.Map.Doodads
 		}
 		protected void ShowDialogue(string DialogueName)
 		{
-			dialogue = Globals.dialogic.Start(DialogueName);
+			dialogue = DialogicSharp.Start(DialogueName);
 			dialogue.Connect("dialogic_signal", this, nameof(OnDialogueSignalCallback));
 			dialogue.Connect("tree_exited", this, nameof(ClearDialoguePtr));
 			dialogue.Connect("hide", this, nameof(OnDialogueHide));

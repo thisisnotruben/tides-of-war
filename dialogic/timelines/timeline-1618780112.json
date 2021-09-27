@@ -1,1 +1,65 @@
-{"events":[{"condition":"==","definition":"1618668214-787","value":"1"},{"character":"","portrait":"","text":"Hello, I'm Lieutenant Waltkins and I look over this town of Southwood.\nGlad too see that Marshal Augustus over at Strahmholde is finally sending me recruits. Glad to have you on board.\nWe're hard pressed around here and the locals are in dire need of your help.\nHelp them, and then report back to me when you're done to prove you're a champion of the people and i'll give you your first formal assignment."},{"emit_signal":"start"},{"endbranch":""},{"condition":"==","definition":"1618668193-648","value":"1"},{"character":"","portrait":"","text":"There are locals still in need of your help. Report back to me when you're done."},{"endbranch":""},{"condition":"==","definition":"1618423829-648","value":"1"},{"character":"","portrait":"","text":"Well done soldier, With some stability in Southwood we can finally address the real problems this town faces."},{"emit_signal":"complete"},{"endbranch":""}],"metadata":{"dialogic-version":"1.0","file":"timeline-1618780112.json","name":"q1.1152.0"}}
+{
+	"events": [
+		{
+			"condition": "==",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Hello, I'm Lieutenant Waltkins and I look over this town of Southwood.\nGlad too see that Marshal Augustus over at Strahmholde is finally sending me recruits. Glad to have you on board.\nWe're hard pressed around here and the locals are in dire need of your help.\nHelp them, and then report back to me when you're done to prove you're a champion of the people and i'll give you your first formal assignment."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "There are locals still in need of your help. Report back to me when you're done."
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Well done soldier, With some stability in Southwood we can finally address the real problems this town faces."
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"endbranch": "",
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1618780112.json",
+		"name": "q1.1152.0"
+	}
+}
