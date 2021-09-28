@@ -3,7 +3,6 @@ using Game.Ui;
 using Game.Quest;
 using Game.Sound;
 using Game.Database;
-using Game.DialogicAdapter;
 namespace Game
 {
 	public class Globals : Node

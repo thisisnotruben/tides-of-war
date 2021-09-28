@@ -40,7 +40,7 @@ func update_text(text):
 	var result = null
 	# Removing commands from the text
 	#text = text.replace('[p]', '')
-	
+
 	text = text.replace('[nw]', '')
 	if '[nw=' in text:
 		regex.compile("\\[nw=(.+?)\\](.*?)")
@@ -49,7 +49,7 @@ func update_text(text):
 			var wait_settings = result.get_string()
 			text = text.replace(wait_settings, '')
 			result = null
-	
+
 	# Speed
 	text_speed = theme_text_speed # Resetting the speed to the default
 	# Regexing the speed tag
@@ -60,11 +60,11 @@ func update_text(text):
 		var value = float(speed_settings.split('=')[1]) * 0.01
 		text_speed = value
 		text = text.replace(speed_settings, '')
-	
+
 	# Updating the text and starting the animation from 0
 	text_label.bbcode_text = text
 	text_label.visible_characters = 0
-	
+
 	start_text_timer()
 	return true
 
@@ -90,8 +90,8 @@ func load_theme(theme: ConfigFile):
 	text_label.set('custom_fonts/bold_font', DialogicUtil.path_fixer_load(theme.get_value('text', 'bold_font', 'res://addons/dialogic/Example Assets/Fonts/DefaultBoldFont.tres')))
 	text_label.set('custom_fonts/italics_font', DialogicUtil.path_fixer_load(theme.get_value('text', 'italic_font', 'res://addons/dialogic/Example Assets/Fonts/DefaultItalicFont.tres')))
 	name_label.set('custom_fonts/font', DialogicUtil.path_fixer_load(theme.get_value('name', 'font', 'res://addons/dialogic/Example Assets/Fonts/NameFont.tres')))
-	
-	
+
+
 	var text_color = Color(theme.get_value('text', 'color', '#ffffffff'))
 	text_label.set('custom_colors/default_color', text_color)
 	name_label.set('custom_colors/font_color', text_color)
@@ -106,7 +106,7 @@ func load_theme(theme: ConfigFile):
 	var shadow_offset = theme.get_value('text', 'shadow_offset', Vector2(2,2))
 	text_label.set('custom_constants/shadow_offset_x', shadow_offset.x)
 	text_label.set('custom_constants/shadow_offset_y', shadow_offset.y)
-	
+
 
 	# Text speed
 	text_speed = theme.get_value('text','speed', 2) * 0.01
@@ -135,10 +135,10 @@ func load_theme(theme: ConfigFile):
 	$NextIndicatorContainer.rect_position = Vector2(0,0)
 	next_indicator.texture = DialogicUtil.path_fixer_load(theme.get_value('next_indicator', 'image', 'res://addons/dialogic/Example Assets/next-indicator/next-indicator.png'))
 	# Reset for up and down animation
-	next_indicator.margin_top = 0 
-	next_indicator.margin_bottom = 0 
-	next_indicator.margin_left = 0 
-	next_indicator.margin_right = 0 
+	next_indicator.margin_top = 0
+	next_indicator.margin_bottom = 0
+	next_indicator.margin_left = 0
+	next_indicator.margin_right = 0
 	# Scale
 	var indicator_scale = theme.get_value('next_indicator', 'scale', 0.4)
 	next_indicator.rect_scale = Vector2(indicator_scale, indicator_scale)
@@ -146,19 +146,19 @@ func load_theme(theme: ConfigFile):
 	var offset = theme.get_value('next_indicator', 'offset', Vector2(13, 10))
 	next_indicator.rect_position = theme.get_value('box', 'size', Vector2(910, 167)) - (next_indicator.texture.get_size() * indicator_scale)
 	next_indicator.rect_position -= offset
-	
+
 	# Character Name
 	$NameLabel/ColorRect.visible = theme.get_value('name', 'background_visible', false)
 	$NameLabel/ColorRect.color = Color(theme.get_value('name', 'background', '#282828'))
 	$NameLabel/TextureRect.visible = theme.get_value('name', 'image_visible', false)
 	$NameLabel/TextureRect.texture = DialogicUtil.path_fixer_load(theme.get_value('name','image', "res://addons/dialogic/Example Assets/backgrounds/background-2.png"))
-	
+
 	var name_padding = theme.get_value('name', 'name_padding', Vector2( 10, 0 ))
 	var name_style = name_label.get('custom_styles/normal')
 	name_style.set('content_margin_left', name_padding.x)
 	name_style.set('content_margin_right', name_padding.x)
 	name_style.set('content_margin_bottom', name_padding.y)
-	
+
 	var name_shadow_offset = theme.get_value('name', 'shadow_offset', Vector2(2,2))
 	if theme.get_value('name', 'shadow_visible', true):
 		name_label.set('custom_colors/font_color_shadow', Color(theme.get_value('name', 'shadow', '#9e000000')))
@@ -169,28 +169,28 @@ func load_theme(theme: ConfigFile):
 		$NameLabel/TextureRect.modulate = Color(theme.get_value('name', 'modulation_color', '#ffffffff'))
 	else:
 		$NameLabel/TextureRect.modulate = Color('#ffffffff')
-	
-	
+
+
 	# Setting next indicator animation
 	next_indicator.self_modulate = Color('#ffffff')
 	var animation = theme.get_value('next_indicator', 'animation', 'Up and down')
 	next_indicator.get_node('AnimationPlayer').play(animation)
-	
+
 	# Setting typing SFX
 	var sound_effect_path = theme.get_value('typing_sfx', 'path', "res://addons/dialogic/Example Assets/Sound Effects/Keyboard Noises")
-	
+
 	var file_system = Directory.new()
 	if file_system.dir_exists(sound_effect_path):
 		$TypingSFX.load_samples_from_folder(sound_effect_path)
 	elif file_system.file_exists(sound_effect_path) or file_system.file_exists(sound_effect_path + '.import'):
 		$TypingSFX.samples = [load(sound_effect_path)]
-	
+
 	$TypingSFX.set_volume_db(theme.get_value('typing_sfx', 'volume', -10))
 	$TypingSFX.random_volume_range = theme.get_value('typing_sfx', 'random_volume_range', 5)
 	$TypingSFX.random_pitch_range = theme.get_value('typing_sfx', 'random_pitch_range', 0.2)
 	$TypingSFX.set_bus(theme.get_value('typing_sfx', 'audio_bus', "Master"))
-	
-	
+
+
 	# Saving reference to the current theme
 	_theme = theme
 
@@ -203,10 +203,10 @@ func load_theme(theme: ConfigFile):
 func _on_writing_timer_timeout():
 	if _finished == false:
 		text_label.visible_characters += 1
-		
+
 		if text_label.visible_characters > text_label.get_total_character_count():
 			_handle_text_completed()
-			
+
 			if $TypingSFX.is_playing():
 				var sfx_time_left = $TypingSFX.stream.get_length() - $TypingSFX.get_playback_position()
 				$WritingTimer.start(sfx_time_left)
@@ -233,7 +233,7 @@ func _handle_text_completed():
 	$WritingTimer.stop()
 	_finished = true
 	emit_signal("text_completed")
-	
+
 func align_name_label():
 	var name_padding = _theme.get_value('name', 'name_padding', Vector2( 10, 0 ))
 	var horizontal_offset = _theme.get_value('name', 'horizontal_offset', 0)

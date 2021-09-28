@@ -82,14 +82,14 @@ static func start_from_save(initial_timeline: String, dialog_scene_path: String=
 ##
 ## @returns						Dictionary in the format {'variables': [], 'glossary': []}
 static func get_default_definitions() -> Dictionary:
-	return Engine.get_singleton('DialogicSingleton').get_default_definitions()
+	return DialogicSingleton.get_default_definitions()
 
 
 ## Gets currently saved values for definitions.
 ##
 ## @returns						Dictionary in the format {'variables': [], 'glossary': []}
 static func get_definitions() -> Dictionary:
-	return Engine.get_singleton('DialogicSingleton').get_definitions()
+	return DialogicSingleton.get_definitions()
 
 
 ## Save current definitions to the filesystem.
@@ -98,8 +98,8 @@ static func get_definitions() -> Dictionary:
 ## @returns						Error status, OK if all went well
 static func save_definitions():
 	# Always try to save as much as possible.
-	var err1 = Engine.get_singleton('DialogicSingleton').save_definitions()
-	var err2 = Engine.get_singleton('DialogicSingleton').save_state()
+	var err1 = DialogicSingleton.save_definitions()
+	var err2 = DialogicSingleton.save_state()
 
 	# Try to combine the two error states in a way that makes sense.
 	return err1 if err1 != OK else err2
@@ -107,17 +107,17 @@ static func save_definitions():
 
 ## Sets whether to use Dialogic's built-in autosave functionality.
 static func set_autosave(save: bool) -> void:
-	Engine.get_singleton('DialogicSingleton').set_autosave(save);
+	DialogicSingleton.set_autosave(save);
 
 
 ## Gets whether to use Dialogic's built-in autosave functionality.
 static func get_autosave() -> bool:
-	return Engine.get_singleton('DialogicSingleton').get_autosave();
+	return DialogicSingleton.get_autosave();
 
 
 ## Resets data to default values. This is the same as calling start with reset_saves to true
 static func reset_saves():
-	Engine.get_singleton('DialogicSingleton').init(true)
+	DialogicSingleton.init(true)
 
 
 ## Gets the value for the variable with the given name.
@@ -130,11 +130,10 @@ static func reset_saves():
 ## @returns						The variable's value as string, or an empty string if not found.
 static func get_variable(name: String) -> String:
 	if Engine.is_editor_hint():
-		return Engine.get_singleton('DialogicSingleton').get_variable(name)
+		return DialogicSingleton.get_variable(name)
 	else:
-		var cursed_singleton
-		if Engine.has_singleton('DialogicSingleton'):
-			cursed_singleton = Engine.get_singleton('DialogicSingleton')
+		var cursed_singleton = DialogicSingleton
+		if cursed_singleton:
 			return cursed_singleton.get_variable(name)
 		else:
 			return ''
@@ -148,11 +147,10 @@ static func get_variable(name: String) -> String:
 ## @param value					The value to set the variable to.
 static func set_variable(name: String, value) -> void:
 	if Engine.is_editor_hint():
-		Engine.get_singleton('DialogicSingleton').set_variable(name)
+		DialogicSingleton.set_variable(name, value)
 	else:
-		var cursed_singleton
-		if Engine.has_singleton('DialogicSingleton'):
-			cursed_singleton = Engine.get_singleton('DialogicSingleton')
+		var cursed_singleton = DialogicSingleton
+		if cursed_singleton:
 			cursed_singleton.set_variable(name, value)
 
 
@@ -165,11 +163,10 @@ static func set_variable(name: String, value) -> void:
 ## 								A structure with empty strings is returned if the glossary was not found.
 static func get_glossary(name: String) -> Dictionary:
 	if Engine.is_editor_hint():
-		return Engine.get_singleton('DialogicSingleton').get_glossary(name)
+		return DialogicSingleton.get_glossary(name)
 	else:
-		var cursed_singleton
-		if Engine.has_singleton('DialogicSingleton'):
-			cursed_singleton = Engine.get_singleton('DialogicSingleton')
+		var cursed_singleton = DialogicSingleton
+		if cursed_singleton:
 			return cursed_singleton.get_glossary(name)
 		else:
 			return {}
@@ -183,11 +180,10 @@ static func get_glossary(name: String) -> Dictionary:
 ## @param extra					The extra information at the bottom of the box.
 static func set_glossary(name: String, title: String, text: String, extra: String) -> void:
 	if Engine.is_editor_hint():
-		Engine.get_singleton('DialogicSingleton').set_glossary(name, title, text, extra)
+		DialogicSingleton.set_glossary(name, title, text, extra)
 	else:
-		var cursed_singleton
-		if Engine.has_singleton('DialogicSingleton'):
-			cursed_singleton = Engine.get_singleton('DialogicSingleton')
+		var cursed_singleton = DialogicSingleton
+		if cursed_singleton:
 			cursed_singleton.set_glossary(name, title, text, extra)
 
 
@@ -198,11 +194,10 @@ static func set_glossary(name: String, title: String, text: String, extra: Strin
 ## @returns						The current timeline filename, or an empty string if none was saved.
 static func get_current_timeline() -> String:
 	if Engine.is_editor_hint():
-		return Engine.get_singleton('DialogicSingleton').get_current_timeline()
+		return DialogicSingleton.get_current_timeline()
 	else:
-		var cursed_singleton
-		if Engine.has_singleton('DialogicSingleton'):
-			cursed_singleton = Engine.get_singleton('DialogicSingleton')
+		var cursed_singleton = DialogicSingleton
+		if cursed_singleton:
 			return cursed_singleton.get_current_timeline()
 		else:
 			return ''
@@ -214,11 +209,10 @@ static func get_current_timeline() -> String:
 ## @param timelinie						The new timeline to save.
 static func set_current_timeline(new_timeline: String) -> String:
 	if Engine.is_editor_hint():
-		return Engine.get_singleton('DialogicSingleton').set_current_timeline(new_timeline)
+		return DialogicSingleton.set_current_timeline(new_timeline)
 	else:
-		var cursed_singleton
-		if Engine.has_singleton('DialogicSingleton'):
-			cursed_singleton = Engine.get_singleton('DialogicSingleton')
+		var cursed_singleton = DialogicSingleton
+		if cursed_singleton:
 			return cursed_singleton.set_current_timeline(new_timeline)
 		else:
 			return ''
@@ -231,11 +225,10 @@ static func set_current_timeline(new_timeline: String) -> String:
 ## @return						A dictionary of data that can be later provided to import().
 static func export() -> Dictionary:
 	if Engine.is_editor_hint():
-		return Engine.get_singleton('DialogicSingleton').export()
+		return DialogicSingleton.export()
 	else:
-		var cursed_singleton
-		if Engine.has_singleton('DialogicSingleton'):
-			cursed_singleton = Engine.get_singleton('DialogicSingleton')
+		var cursed_singleton = DialogicSingleton
+		if cursed_singleton:
 			return cursed_singleton.export()
 		else:
 			return {}
@@ -248,9 +241,8 @@ static func export() -> Dictionary:
 ## @param data				A dictionary of data as created by export().
 static func import(data: Dictionary) -> void:
 	if Engine.is_editor_hint():
-		Engine.get_singleton('DialogicSingleton').import(data)
+		DialogicSingleton.import(data)
 	else:
-		var cursed_singleton
-		if Engine.has_singleton('DialogicSingleton'):
-			cursed_singleton = Engine.get_singleton('DialogicSingleton')
+		var cursed_singleton = DialogicSingleton
+		if cursed_singleton:
 			cursed_singleton.import(data)

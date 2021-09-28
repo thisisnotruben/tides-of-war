@@ -43,6 +43,8 @@ onready var Background = load("res://addons/dialogic/Nodes/Background.tscn")
 var dialog_script: Dictionary = {}
 var questions #for keeping track of the questions answered
 
+onready var options = $CenterContainer/panel/marginContainer/Options
+
 
 func _ready():
 	# Loading the config files
@@ -110,8 +112,8 @@ func resize_main():
 		set_global_position(Vector2(0,0))
 		reference = get_viewport().get_visible_rect().size
 
-	$Options.rect_position.x = (reference.x / 2) - ($Options.rect_size.x / 2)
-	$Options.rect_position.y = (reference.y / 2) - ($Options.rect_size.y / 2)
+	options.rect_position.x = (reference.x / 2) - (options.rect_size.x / 2)
+	options.rect_position.y = (reference.y / 2) - (options.rect_size.y / 2)
 
 	$TextBubble.rect_position.x = (reference.x / 2) - ($TextBubble.rect_size.x / 2)
 	if current_theme != null:
@@ -341,10 +343,10 @@ func _insert_glossary_definitions(text: String):
 
 func _process(delta):
 	$TextBubble/NextIndicatorContainer/NextIndicator.visible = finished
-	if $Options.get_child_count() > 0:
+	if options.get_child_count() > 0:
 		$TextBubble/NextIndicatorContainer/NextIndicator.visible = false # Hide if question
 		if waiting_for_answer and Input.is_action_just_released(input_next):
-			$Options.get_child(0).grab_focus()
+			options.get_child(0).grab_focus()
 
 	# Hide if no input is required
 	if current_event.has('text'):
@@ -778,12 +780,12 @@ func event_handler(event: Dictionary):
 			visible = false
 			dprint('[D] Other event. ', event)
 
-	$Options.visible = waiting_for_answer
+	options.visible = waiting_for_answer
 
 
 func reset_options():
 	# Clearing out the options after one was selected.
-	for option in $Options.get_children():
+	for option in options.get_children():
 		option.queue_free()
 
 
@@ -831,7 +833,7 @@ func get_classic_choice_button(label: String):
 			button.rect_min_size = size
 			button.rect_size = size
 
-		$Options.set('custom_constants/separation', theme.get_value('buttons', 'gap', 20))
+		options.set('custom_constants/separation', theme.get_value('buttons', 'gap', 20))
 
 		# Different styles
 		var default_background = 'res://addons/dialogic/Example Assets/backgrounds/background-2.png'
@@ -908,11 +910,11 @@ func add_choice_button(option: Dictionary):
 		button = get_classic_choice_button(option['label'])
 
 	if use_native_choice_button() or use_custom_choice_button():
-		$Options.set('custom_constants/separation', current_theme.get_value('buttons', 'gap', 20))
-	$Options.add_child(button)
+		options.set('custom_constants/separation', current_theme.get_value('buttons', 'gap', 20))
+	options.add_child(button)
 
 	# Selecting the first button added
-	if $Options.get_child_count() == 1:
+	if options.get_child_count() == 1:
 		button.grab_focus()
 
 	button.set_meta('event_idx', option['event_idx'])
@@ -1129,6 +1131,6 @@ func _on_close_dialog_timeout():
 
 
 func _on_OptionsDelayedInput_timeout():
-	for button in $Options.get_children():
+	for button in options.get_children():
 		if button.is_connected("pressed", self, "answer_question") == false:
 			button.connect("pressed", self, "answer_question", [button, button.get_meta('event_idx'), button.get_meta('question_idx')])
