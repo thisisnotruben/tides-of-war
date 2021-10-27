@@ -137,3 +137,6 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.375

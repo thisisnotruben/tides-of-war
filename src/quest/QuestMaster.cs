@@ -113,7 +113,7 @@ namespace Game.Quest
 				GetNodeOrNull<Npc>(worldQuest.quest.questGiverPath)?.questMarker.ShowMarker(markerType);
 			}
 		}
-		public bool IsPartOfObjective(string characterPath, out WorldQuest quest, QuestDB.QuestType questType)
+		public bool IsPartOfObjective(string characterName, out WorldQuest quest, QuestDB.QuestType questType)
 		{
 			WorldQuest foundQuest = null;
 			quests.ForEach(q =>
@@ -122,7 +122,7 @@ namespace Game.Quest
 				{
 					case QuestStatus.ACTIVE:
 					case QuestStatus.COMPLETED:
-						if (q.IsPartOfObjective(characterPath, questType))
+						if (q.IsPartOfObjective(characterName, questType))
 						{
 							foundQuest = q;
 							return;
@@ -163,22 +163,6 @@ namespace Game.Quest
 							return;
 						}
 						break;
-				}
-			});
-			quest = foundQuest;
-			return foundQuest != null;
-		}
-		public bool TryGetLastDeliveredQuest(string characterPath, out WorldQuest quest)
-		{
-			WorldQuest foundQuest = null;
-			quests.ForEach(q =>
-			{
-				if (q.status == QuestStatus.DELIVERED
-				&& q.quest.questGiverPath.Equals(characterPath)
-				&& q.quest.nextQuest.Empty())
-				{
-					foundQuest = q;
-					return;
 				}
 			});
 			quest = foundQuest;

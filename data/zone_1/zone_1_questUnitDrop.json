@@ -1,4 +1,20 @@
 {
+	"q1.1417.0": {
+		"Weapon Supplies": [
+			"971-Roswald"
+		],
+		"Food Supplies": [
+			"1032-Hawel"
+		],
+		"Miscellaneous Supplies": [
+			"878-Dobbs"
+		]
+	},
+	"q1.1194.0": {
+		"Jameson's Shipment": [
+			"995-Jameson"
+		]
+	},
 	"q1.1152.2": {
 		"Finfolk Amulet": [
 			"1090-finfolk",
@@ -120,6 +136,19 @@
 			"1377-critter",
 			"1383-critter",
 			"1388-critter"
+		]
+	},
+	"q1.1418.0": {
+		"Aleah's Wedding Ring": [
+			"1397-human",
+			"1400-human",
+			"1401-human",
+			"1403-human"
+		]
+	},
+	"q1.1407.0": {
+		"Gnoll Plans": [
+			"1560-Gnoll Messanger"
 		]
 	}
 }

@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "We have the curiosity of my men here but don't serve all who come.\nHowever our regulars have been rather demanding lately and I know just remedy.\nI need about five crab pincers; from them I can make a formula to help serenade our clients.\nYou can get them from the crabs near the river down south."
+			"text": "We have the curiosity of my men here but don't serve all who come.\nHowever our regulars have been rather demanding lately and I know just remedy.\nI need about four crab pincers. From them I can make a formula to help serenade our clients.\nYou can get them from the crabs near the river down south."
 		},
 		{
 			"emit_signal": "start",
@@ -58,7 +58,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "",
+		"dialogic-version": "1.2.5",
 		"file": "timeline-1625154175.json",
 		"name": "q1.1049.0"
 	}

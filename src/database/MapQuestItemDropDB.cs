@@ -37,26 +37,21 @@ namespace Game.Database
 				data.Add(questId, new QuestDrop(questDropDict));
 			}
 		}
-		public bool HasUnitDrop(string questId, string editorName, out List<string> dropItemNames)
+		public List<string> GetUnitDrop(string questId, string editorName)
 		{
+			List<string> dropItemNames = new List<string>();
 			if (data.ContainsKey(questId))
 			{
-				List<string> drops = new List<string>();
-
 				foreach (string dropItem in data[questId].drops.Keys)
 				{
 					if (data[questId].drops[dropItem].Contains(editorName))
 					{
-						drops.Add(dropItem);
+						dropItemNames.Add(dropItem);
 					}
 				}
-
-				dropItemNames = drops;
-				return drops.Count > 0;
 			}
 
-			dropItemNames = new List<string>();
-			return false;
+			return dropItemNames;
 		}
 	}
 }

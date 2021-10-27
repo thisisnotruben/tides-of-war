@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Our control on the borders grow weaker each day. Angry Towns folk have turned their backs on us and made brotherhoods undermining our great kingdom.\nThe emergence of the finfolk coming from the waters put is into a dire position since our navy went back eastward.\nNow we have a new developing threat in the west that cripples our expansion and security. Our outpost Farwatch has been getting the most hit and needs your help.\nReport to Lieutenant Chapman down at Farwatch for further orders."
+			"text": "Our control on the borders grows weaker each day. Angry Towns folk have turned their backs on us and made brotherhoods undermining our great kingdom.\nThe emergence of the finfolk coming from the waters put is into a dire position since our navy went back eastward.\nNow we have a new developing threat in the west that cripples our expansion and security. Our outpost Farwatch has been getting the most hit and needs your help.\nReport to Lieutenant Chapman down at Farwatch for further orders."
 		},
 		{
 			"emit_signal": "start",
@@ -62,7 +62,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "",
+		"dialogic-version": "1.2.5",
 		"file": "timeline-1620412931.json",
 		"name": "q1.931.0"
 	}

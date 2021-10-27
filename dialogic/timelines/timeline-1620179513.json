@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Getting those supply caches was a great deed for our town, but I'm worried of what you said in your report.\nGo speak with Captain Harden to the tower northwest in Southwood."
+			"text": "Getting those supply caches was a great deed for our town, but I'm worried of what you said in your report.\nGo speak with Captain Harden to the tower in Southwood."
 		},
 		{
 			"emit_signal": "start",
@@ -62,7 +62,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "",
+		"dialogic-version": "1.2.5",
 		"file": "timeline-1620179513.json",
 		"name": "q1.1161.1"
 	}

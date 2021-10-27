@@ -65,7 +65,7 @@
 			"text": "Hello, what's this? Oh, it's the order for those two brothers. Let me just package that up for you. Here you go, ready for delivery."
 		},
 		{
-			"emit_signal": "objective",
+			"emit_signal": "drop",
 			"event_id": "dialogic_040"
 		},
 		{
@@ -74,7 +74,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "",
+		"dialogic-version": "1.2.5",
 		"file": "timeline-1620240477.json",
 		"name": "q1.1194.0"
 	}

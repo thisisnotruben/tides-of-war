@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "The whole town loves my Bluescale salmon cuisine, but I can make  much more than a fish dish!\nI have another dish: Spider Stew, that involves a taboo ingredient... spider eyes.\nHear me out! It sounds kooky, and maybe a bit spooky, but the spider eyes have a nice savory texture that makes my recipe all the buzz!\nThere are a bunch of those polyleg'ed critters southwest of here. Bring me about 7 of their eyes and 20 wild mushrooms around that area. "
+			"text": "The whole town loves my Bluescale salmon cuisine, but I can make much more than a fish dish!\nI have another dish: Spider Stew, that involves a taboo ingredient... spider eyes.\nHear me out! It sounds kooky, and maybe a bit spooky, but the spider eyes have a nice savory texture that makes my recipe all the buzz!\nThere are a bunch of those polyleg'ed critters southwest of here. Bring me about 7 of their eyes and 20 wild mushrooms around that area. "
 		},
 		{
 			"emit_signal": "start",
@@ -58,7 +58,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "",
+		"dialogic-version": "1.2.5",
 		"file": "timeline-1620159076.json",
 		"name": "q1.1175.1"
 	}

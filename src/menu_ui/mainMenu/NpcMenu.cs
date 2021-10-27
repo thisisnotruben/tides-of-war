@@ -113,27 +113,24 @@ namespace Game.Ui
 				{"questActive", isStatus(QuestMaster.QuestStatus.ACTIVE)},
 				{"questAvailable", isStatus(QuestMaster.QuestStatus.AVAILABLE)},
 				{"questCompleted", isStatus(QuestMaster.QuestStatus.COMPLETED)},
-				{"questDelivered", isStatus(QuestMaster.QuestStatus.DELIVERED)},
-				{"questObjective", worldQuest?.IsPartOfObjective(npc.GetPath(),
-					QuestDB.QuestType.TALK) ?? false}
+				{"questDelivered", isStatus(QuestMaster.QuestStatus.DELIVERED)}
 			};
 
-			bool questAny = false;
+			bool partOfObjective = worldQuest?.IsPartOfObjective(npc.Name,
+					QuestDB.QuestType.TALK) ?? false;
+
 			foreach (string definition in questDefinitions.Keys)
 			{
-				questAny = questAny || questDefinitions[definition];
-
 				DialogicSharp.SetVariable(definition,
-					(questDefinitions[definition] ? 1 : 0).ToString());
+					(questDefinitions[definition] && !partOfObjective ? 1 : 0).ToString());
 			}
 
+			DialogicSharp.SetVariable("questObjective", (partOfObjective ? 1 : 0).ToString());
 			DialogicSharp.SetVariable("npcName", npc.Name);
-			DialogicSharp.SetVariable("questAny", (questAny ? 1 : 0).ToString());
 
 			// init dialogic
 			dialogue = focusedControl = DialogicSharp.Start(
-				worldQuest?.quest.dialogue ?? Globals.unitDB.GetData(npc.Name).dialogue, false
-			);
+				worldQuest?.quest.dialogue ?? Globals.unitDB.GetData(npc.Name).dialogue, false);
 
 			dialogue.Connect("tree_exiting", this, nameof(ClearDialogue));
 			dialogue.Connect("visibility_changed", this, nameof(OnDialogueVisibilityChanged));
@@ -157,6 +154,19 @@ namespace Game.Ui
 		private void OnDialogueVisibilityChanged() { speak.Visible = (canTalk || worldQuest != null) && (!dialogue?.Visible ?? true); }
 		private void OnDialogueSignalCallback(object value)
 		{
+			Func<string, bool> addToInventory = (string itemName) =>
+			{
+				if (Globals.itemDB.HasData(itemName)
+				&& player.menu.playerMenu.playerInventory.AddCommodity(itemName) == -1)
+				{
+					PlaySound(NameDB.UI.CLICK6);
+					player.menu.errorPopup.ShowError("Inventory Full!");
+					return false;
+				}
+				Globals.questMaster.CheckQuests(itemName, QuestDB.QuestType.COLLECT, true);
+				return true;
+			};
+
 			switch (value.ToString().Trim().ToLower())
 			{
 				case "start":
@@ -170,6 +180,19 @@ namespace Game.Ui
 					break;
 
 				case "complete":
+					Action<WorldQuest> spawnNextDialogue = (WorldQuest nextQuest) =>
+					{
+						if (dialogue == null)
+						{
+							OnDialogueNext(nextQuest);
+						}
+						else
+						{
+							dialogue.Connect("tree_exited", this, nameof(OnDialogueNext),
+								new GC.Array() { nextQuest });
+						}
+					};
+
 					if (worldQuest?.IsCompleted() ?? false)
 					{
 						PlaySound(NameDB.UI.QUEST_FINISH);
@@ -180,22 +203,16 @@ namespace Game.Ui
 							worldQuest.TurnInItems(player.menu.playerMenu.playerInventory);
 						}
 
-						// start next quest dialogue if anys
-						WorldQuest nextQuest = Globals.questMaster.DeliverQuest(worldQuest.quest.questName);
-						npc.questMarker.Visible = nextQuest != null;
-
-						if (nextQuest != null)
+						// start next quest dialogue if any
+						Npc questGiver = GetNodeOrNull<Npc>(worldQuest.quest.questGiverPath);
+						if (questGiver != null)
 						{
-							npc.questMarker.ShowMarker(QuestMarker.MarkerType.AVAILABLE);
-
-							if (dialogue == null)
+							WorldQuest nextQuest = Globals.questMaster.DeliverQuest(worldQuest.quest.questName);
+							questGiver.questMarker.Visible = nextQuest != null;
+							if (nextQuest != null)
 							{
-								OnDialogueNext(nextQuest);
-							}
-							else
-							{
-								dialogue.Connect("tree_exited", this, nameof(OnDialogueNext),
-									new GC.Array() { nextQuest });
+								questGiver.questMarker.ShowMarker(QuestMarker.MarkerType.AVAILABLE);
+								spawnNextDialogue(nextQuest);
 							}
 						}
 
@@ -206,6 +223,10 @@ namespace Game.Ui
 							player.SpawnCombatText(worldQuest.quest.goldReward.ToString(), CombatText.TextType.GOLD);
 						}
 
+						if (questGiver != npc && CheckIfHasQuest())
+						{
+							spawnNextDialogue(worldQuest);
+						}
 					}
 					break;
 
@@ -213,11 +234,8 @@ namespace Game.Ui
 					QuestDB.ExtraContentData extraContentData;
 					if (Globals.questMaster.TryGetExtraQuestContent(npc.worldName, out extraContentData))
 					{
-						if (Globals.itemDB.HasData(extraContentData.reward)
-						&& player.menu.playerMenu.playerInventory.AddCommodity(extraContentData.reward) == -1)
+						if (Globals.itemDB.HasData(extraContentData.reward) && !addToInventory(extraContentData.reward))
 						{
-							PlaySound(NameDB.UI.CLICK6);
-							player.menu.errorPopup.ShowError("Inventory Full!");
 							return;
 						}
 
@@ -229,6 +247,16 @@ namespace Game.Ui
 
 						Globals.questMaster.CheckQuests(npc.GetPath(), npc.worldName, QuestDB.QuestType.TALK);
 					}
+					break;
+
+				case "drop":
+					Globals.mapQuestItemDropDB.GetUnitDrop(worldQuest.quest.dialogue, npc.Name).ForEach(ItemName =>
+					{
+						if (!addToInventory(ItemName))
+						{
+							return;
+						}
+					});
 					break;
 			}
 		}
@@ -291,6 +319,12 @@ namespace Game.Ui
 		/*
 		* STORE END
 		*/
+		private bool CheckIfHasQuest()
+		{
+			return Globals.questMaster.IsPartOfObjective(npc.Name, out worldQuest, QuestDB.QuestType.TALK)
+				|| Globals.questMaster.HasOutstandingQuest(npc.GetPath(), out worldQuest)
+				|| Globals.questMaster.HasQuestToOffer(npc.GetPath(), out worldQuest);
+		}
 		private bool WithinSpeakingDistance(Vector2 npcGlobalPos) { return 3 >= Map.Map.map.getAPath(player.GlobalPosition, npcGlobalPos).Count; }
 		public void NpcInteract(Npc npc)
 		{
@@ -305,12 +339,7 @@ namespace Game.Ui
 
 			canTalk = Globals.unitDB.HasData(npc.Name) && !Globals.unitDB.GetData(npc.Name).dialogue.Empty();
 			canTrade = Globals.contentDB.HasData(npc.Name) && Globals.contentDB.GetData(npc.Name).merchandise.Length > 0;
-
-			bool hasQuest =
-				Globals.questMaster.IsPartOfObjective(npc.GetPath(), out worldQuest, QuestDB.QuestType.TALK)
-				|| Globals.questMaster.HasOutstandingQuest(npc.GetPath(), out worldQuest)
-				|| Globals.questMaster.HasQuestToOffer(npc.GetPath(), out worldQuest)
-				|| Globals.questMaster.TryGetLastDeliveredQuest(npc.GetPath(), out worldQuest);
+			bool hasQuest = CheckIfHasQuest();
 
 			bool interactable = !npc.enemy && WithinSpeakingDistance(npc.GlobalPosition) && (canTalk || canTrade || hasQuest);
 

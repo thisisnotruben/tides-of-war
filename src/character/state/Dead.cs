@@ -50,7 +50,7 @@ namespace Game.Actor.State
 				string questId = Globals.questMaster.CheckQuests(
 					character.worldName, QuestDB.QuestType.KILL, true)?.quest.dialogue
 					?? string.Empty;
-				Globals.mapQuestItemDropDB.HasUnitDrop(questId, character.Name, out addedLootToDrop);
+				addedLootToDrop = Globals.mapQuestItemDropDB.GetUnitDrop(questId, character.Name);
 
 				if (character.target != null
 				&& character.target is Player

@@ -1,42 +1,4 @@
 {
-	"Supplying The Frontier": {
-		"nextQuest": "",
-		"reward": [],
-		"keepRewardItems": false,
-		"goldReward": 0,
-		"questGiver": "/root/zone_1/zed/z1/1417-Amaury",
-		"dialogue": "q1.1417.0",
-		"startQuests": [],
-		"objectives": {
-			"Food Supplies": {
-				"keepWorldObject": false,
-				"questType": "COLLECT",
-				"amount": 1,
-				"extraContent": {
-					"reward": "",
-					"gold": 0
-				}
-			},
-			"Weapon Supplies": {
-				"keepWorldObject": false,
-				"questType": "COLLECT",
-				"amount": 1,
-				"extraContent": {
-					"reward": "",
-					"gold": 0
-				}
-			},
-			"Miscellaneous Supplies": {
-				"keepWorldObject": false,
-				"questType": "COLLECT",
-				"amount": 1,
-				"extraContent": {
-					"reward": "",
-					"gold": 0
-				}
-			}
-		}
-	},
 	"Missing Scouts": {
 		"nextQuest": "Bounty on the Finfolk",
 		"reward": [],
@@ -138,7 +100,7 @@
 		}
 	},
 	"Gnoll Camp Cleanup": {
-		"nextQuest": "",
+		"nextQuest": "Amuary Armorer",
 		"reward": [],
 		"keepRewardItems": false,
 		"goldReward": 0,
@@ -158,7 +120,7 @@
 		}
 	},
 	"Amuary Armorer": {
-		"nextQuest": "",
+		"nextQuest": "Supplying The Frontier",
 		"reward": [],
 		"keepRewardItems": false,
 		"goldReward": 0,
@@ -169,6 +131,44 @@
 			"1417-Amaury": {
 				"keepWorldObject": false,
 				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Supplying The Frontier": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1417-Amaury",
+		"dialogue": "q1.1417.0",
+		"startQuests": [],
+		"objectives": {
+			"Food Supplies": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"Weapon Supplies": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"Miscellaneous Supplies": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
 				"amount": 1,
 				"extraContent": {
 					"reward": "",
@@ -319,15 +319,6 @@
 		"dialogue": "q1.1194.0",
 		"startQuests": [],
 		"objectives": {
-			"995-Jameson": {
-				"keepWorldObject": false,
-				"questType": "TALK",
-				"amount": 1,
-				"extraContent": {
-					"reward": "Jameson's Shipment",
-					"gold": 0
-				}
-			},
 			"Jameson's Shipment": {
 				"keepWorldObject": false,
 				"questType": "COLLECT",
@@ -400,7 +391,7 @@
 			"Crab Pincer": {
 				"keepWorldObject": false,
 				"questType": "COLLECT",
-				"amount": 5,
+				"amount": 4,
 				"extraContent": {
 					"reward": "",
 					"gold": 0

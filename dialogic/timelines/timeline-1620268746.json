@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "A few days ago we sent two scouts to investigate the activities of the finfolk and report back their findings, they have not returned since.\nTravel southwest to their base and find the scouts to collect their reports.\t"
+			"text": "A few days ago we sent two scouts to investigate the activities of the finfolk and to report back their findings, they have not returned since.\nTravel southwest to their base and find the scouts to collect their reports.\t"
 		},
 		{
 			"emit_signal": "start",
@@ -58,7 +58,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "",
+		"dialogic-version": "1.2.5",
 		"file": "timeline-1620268746.json",
 		"name": "q1.1152.1"
 	}

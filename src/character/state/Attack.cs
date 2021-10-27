@@ -216,7 +216,7 @@ namespace Game.Actor.State
 				hitType = CombatText.TextType.DODGE;
 				damage = 0;
 			}
-			else if (diceRoll <= attackTable.parry && imageData.melee == targetImageData.melee)
+			else if (diceRoll <= attackTable.parry && targetImageData.melee)
 			{
 				if (imageData.weaponMaterial.Equals(targetImageData.weaponMaterial))
 				{

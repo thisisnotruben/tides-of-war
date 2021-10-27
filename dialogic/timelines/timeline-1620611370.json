@@ -46,7 +46,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "This all will do nicely. I'll have the wepons sent to the men and dispurse the food amongst ourselves."
+			"text": "This all will do nicely. I'll have the weapons sent to the men and dispurse the food and supplies amongst ourselves."
 		},
 		{
 			"emit_signal": "complete",
@@ -55,10 +55,67 @@
 		{
 			"endbranch": "",
 			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618754825-648",
+			"event_id": "dialogic_012",
+			"value": "Roswald"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Amaury sent you? Anything for them boys down there. Here ya go!"
+		},
+		{
+			"emit_signal": "drop",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618754825-648",
+			"event_id": "dialogic_012",
+			"value": "Hawel"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "You want an order of how many?!?! Oh, it's for them farwatch bellies."
+		},
+		{
+			"emit_signal": "drop",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1618754825-648",
+			"event_id": "dialogic_012",
+			"value": "Dobbs"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "The only thing keeping me in business is those boys down here. Here are the supplies, off you go now!"
+		},
+		{
+			"emit_signal": "drop",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
 		}
 	],
 	"metadata": {
-		"dialogic-version": "",
+		"dialogic-version": "1.2.5",
 		"file": "timeline-1620611370.json",
 		"name": "q1.1417.0"
 	}
