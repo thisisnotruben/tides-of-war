@@ -222,7 +222,7 @@ namespace Game.Quest
 		{
 			foreach (WorldQuest worldQuest in quests)
 			{
-				if (worldQuest.status == QuestStatus.ACTIVE
+				if ((worldQuest.status == QuestStatus.ACTIVE || worldQuest.status == QuestStatus.COMPLETED)
 				&& worldQuest.UpdateQuest(objectiveName, questType, countTowardsObjective))
 				{
 					return worldQuest;

@@ -28,10 +28,15 @@ namespace Game.Quest
 		}
 		public bool UpdateQuest(string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
 		{
-			if (status != QuestMaster.QuestStatus.ACTIVE
-			|| status != QuestMaster.QuestStatus.COMPLETED
-			|| !IsPartOfObjective(objectiveName, questType)
-			|| (!countTowardsObjective && objectives[objectiveName] == 0))
+			switch (status)
+			{
+				case QuestMaster.QuestStatus.UNAVAILABLE:
+				case QuestMaster.QuestStatus.AVAILABLE:
+				case QuestMaster.QuestStatus.DELIVERED:
+					return false;
+			}
+
+			if (!IsPartOfObjective(objectiveName, questType) || (!countTowardsObjective && objectives[objectiveName] == 0))
 			{
 				return false;
 			}
@@ -62,7 +67,7 @@ namespace Game.Quest
 		{
 			foreach (string objectiveName in objectives.Keys)
 			{
-				if (objectives[objectiveName] >= quest.objectives[objectiveName].amount)
+				if (objectives[objectiveName] < quest.objectives[objectiveName].amount)
 				{
 					return false;
 				}
@@ -76,11 +81,15 @@ namespace Game.Quest
 				return;
 			}
 
+			int i;
 			foreach (string objectiveName in quest.objectives.Keys)
 			{
 				if (!quest.objectives[objectiveName].keepWorldObject)
 				{
-					playerInventory.RemoveCommodity(objectiveName);
+					for (i = 0; i < quest.objectives[objectiveName].amount; i++)
+					{
+						playerInventory.RemoveCommodity(objectiveName);
+					}
 				}
 			}
 		}

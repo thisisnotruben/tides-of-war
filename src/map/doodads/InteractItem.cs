@@ -12,6 +12,7 @@ namespace Game.Map.Doodads
 		private Control dialogue;
 		private ShaderMaterial shaderMaterial;
 
+		private bool justUsed;
 		private string interactType = string.Empty,
 			value = string.Empty;
 
@@ -96,10 +97,16 @@ namespace Game.Map.Doodads
 		public void Collect()
 		{
 			Hide();
+			justUsed = true;
 			// TODO: set a timer for it pop back into existance?
 		}
 		protected void ShowDialogue(string DialogueName)
 		{
+			if (dialogue != null)
+			{
+				OnDialogueHide();
+			}
+
 			dialogue = DialogicSharp.Start(DialogueName);
 			dialogue.Connect("dialogic_signal", this, nameof(OnDialogueSignalCallback));
 			dialogue.Connect("tree_exited", this, nameof(ClearDialoguePtr));
@@ -115,6 +122,11 @@ namespace Game.Map.Doodads
 		protected void ClearDialoguePtr() { dialogue = null; }
 		protected virtual void OnDialogueSignalCallback(object value)
 		{
+			if (justUsed)
+			{
+				return;
+			}
+
 			// util
 			MenuMasterController menuMaster = Player.player.menu;
 			Action<string> showError = (string errorMsg) =>
@@ -125,18 +137,34 @@ namespace Game.Map.Doodads
 
 			// add to inventory/spellbook if not full
 			string itemName = value.ToString().Trim();
-			if (Globals.itemDB.HasData(itemName) && menuMaster.playerMenu.playerInventory.AddCommodity(itemName) == -1)
+			if (Globals.itemDB.HasData(itemName))
 			{
-				showError("Inventory Full!");
+				if (menuMaster.playerMenu.playerInventory.AddCommodity(itemName) == -1)
+				{
+					showError("Inventory Full!");
+				}
+				else
+				{
+					Globals.questMaster.CheckQuests(itemName, QuestDB.QuestType.COLLECT, true);
+				}
 			}
-			else if (Globals.spellDB.HasData(itemName) && menuMaster.playerMenu.playerSpellBook.AddCommodity(itemName) == -1)
+			else if (Globals.spellDB.HasData(itemName))
 			{
-				showError("Spellbook Full!");
+				if (menuMaster.playerMenu.playerSpellBook.AddCommodity(itemName) == -1)
+				{
+					showError("Spellbook Full!");
+				}
+				else
+				{
+					Globals.questMaster.CheckQuests(itemName, QuestDB.QuestType.LEARN, true);
+				}
 			}
 			else
 			{
 				GD.PrintErr($"{GetPath()}: {itemName} not in database.");
 			}
+
+			Collect();
 		}
 	}
 }

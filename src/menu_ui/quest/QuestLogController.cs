@@ -26,6 +26,8 @@ namespace Game.Ui
 			entryTree.CreateItem();
 
 			focusedEntry = GetChild<Control>(1);
+			focusedEntry.Connect("draw", this, nameof(OnFocusedDraw));
+
 			questTitle = focusedEntry.GetNode<Label>("questTitle");
 			questGiverName = focusedEntry.GetNode<Label>("hBoxContainer/QuestGiverName");
 			questGiverPortrait = focusedEntry.GetNode<TextureRect>("hBoxContainer/QuestGiverPortrait");
@@ -39,7 +41,8 @@ namespace Game.Ui
 			ShowQuests(true);
 			Connect("draw", this, nameof(OnDraw));
 		}
-		public void OnDraw()
+		public void OnDraw() { ShowQuests(isCurrentQuests); }
+		private void ColorQuestEntries()
 		{
 			WorldQuest worldQuest;
 			TreeItem section = entryTree.GetRoot().GetChildren(),
@@ -65,6 +68,8 @@ namespace Game.Ui
 		}
 		public void ShowQuests(bool current)
 		{
+			entryTree.Clear();
+			entryTree.CreateItem();
 			Globals.questMaster.GetAllPlayerQuests().ForEach(q =>
 			{
 				if ((current && q.status != QuestMaster.QuestStatus.DELIVERED)
@@ -73,6 +78,7 @@ namespace Game.Ui
 					AddEntry(q);
 				}
 			});
+			ColorQuestEntries();
 		}
 		public void AddEntry(WorldQuest worldQuest)
 		{
@@ -146,7 +152,17 @@ namespace Game.Ui
 				questGiverPortrait.Texture = null;
 			}
 
-			// show quest progress text
+			ShowQuestTextProgress(worldQuest);
+			main.Hide();
+			focusedEntry.Visible = questProgressDes.Visible = true;
+		}
+		private void ShowQuestTextProgress(WorldQuest worldQuest)
+		{
+			if (worldQuest == null)
+			{
+				return;
+			}
+
 			string questProgess = string.Empty;
 			int objectiveAmount;
 			foreach (string objectiveName in worldQuest.objectives.Keys)
@@ -159,22 +175,14 @@ namespace Game.Ui
 			}
 			questProgess = questProgess.Remove(questProgess.FindLast("\n"));
 			questProgressDes.BbcodeText = questProgess;
-
-			// show
-			main.Hide();
-			focusedEntry.Visible = questProgressDes.Visible = true;
 		}
 		private void OnSwitchQuestLogPressed()
 		{
 			isCurrentQuests = !isCurrentQuests;
-
-			entryTree.Clear();
-			entryTree.CreateItem();
 			ShowQuests(isCurrentQuests);
-
 			switchQuestLogButton.Text = isCurrentQuests
 				? "Show Archived"
-				: "Show Current";
+				: "Show Active";
 		}
 		private void OnShowDialoguePressed()
 		{
@@ -218,6 +226,7 @@ namespace Game.Ui
 				? "Show Dialogue"
 				: "Show Progress";
 		}
+		private void OnFocusedDraw() { ShowQuestTextProgress(focusedWorldQuest); }
 		private void OnFocusedEntryBack()
 		{
 			PlaySound(NameDB.UI.CLICK3);
