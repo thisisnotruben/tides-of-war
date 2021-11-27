@@ -10,6 +10,8 @@ namespace Game.Ui
 {
 	public class SceneLoader : Node
 	{
+		[Signal] public delegate void OnSetNewScene();
+
 		private ResourceInteractiveLoader mapLoader;
 		private Node currentScene;
 		public Range progressBar;

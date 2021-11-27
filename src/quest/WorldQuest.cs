@@ -94,6 +94,19 @@ namespace Game.Quest
 			}
 		}
 		public bool HasCharacterPath(string characterPath) { return charactersTalkedTo.Contains(characterPath); }
+		public void SetEvents()
+		{
+			foreach (string editorName in Globals.unitDB.data.Keys)
+			{
+				if (!quest.dialogue.Empty()
+				&& quest.dialogue.Equals(Globals.unitDB.GetData(editorName).eventTrigger))
+				{
+					Map.Map.map.SpawnUnit(editorName,
+					   status == QuestMaster.QuestStatus.ACTIVE
+					   || status == QuestMaster.QuestStatus.COMPLETED);
+				}
+			}
+		}
 		public GC.Dictionary Serialize()
 		{
 			GC.Array charactersPaths = new GC.Array();

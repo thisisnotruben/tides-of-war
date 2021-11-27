@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GC = Godot.Collections;
 using Godot;
 namespace Game.Database
@@ -21,6 +22,8 @@ namespace Game.Database
 				this.merchandise = merchandise;
 			}
 		}
+
+		private readonly Dictionary<string, ContentData> tempUnits = new Dictionary<string, ContentData>();
 
 		public override void LoadData(string path)
 		{
@@ -49,5 +52,7 @@ namespace Game.Database
 			}
 			return worldNames;
 		}
+		public void AddTempUnit(string editorName, ContentData contentData) { tempUnits[editorName] = contentData; }
+		public bool RemoveTempUnit(string editorName) { return tempUnits.Remove(editorName); }
 	}
 }

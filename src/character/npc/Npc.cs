@@ -6,6 +6,7 @@ namespace Game.Actor
 {
 	public class Npc : Character
 	{
+		public string editorName = string.Empty;
 		public QuestMarker questMarker;
 
 		public override void _Ready()
@@ -13,9 +14,15 @@ namespace Game.Actor
 			base._Ready();
 
 			questMarker = GetNode<QuestMarker>("questMarker");
-			if (Globals.unitDB.HasData(Name))
+
+			if (editorName.Empty())
 			{
-				UnitDB.UnitData unitData = Globals.unitDB.GetData(Name);
+				editorName = Name;
+			}
+
+			if (Globals.unitDB.HasData(editorName))
+			{
+				UnitDB.UnitData unitData = Globals.unitDB.GetData(editorName);
 				enemy = unitData.enemy;
 				level = unitData.level;
 				if (!unitData.name.Empty())

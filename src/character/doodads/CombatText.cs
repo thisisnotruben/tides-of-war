@@ -81,7 +81,7 @@ namespace Game.Actor.Doodads
 				{NameDB.SaveTag.TEXT, label.Text},
 				{NameDB.SaveTag.STATE, textType.ToString()},
 				{NameDB.SaveTag.POSITION, new GC.Array() { localCenterPos.x, localCenterPos.y}},
-				{NameDB.SaveTag.TIME_LEFT, !anim.CurrentAnimation.Equals(string.Empty)
+				{NameDB.SaveTag.TIME_LEFT, !anim.CurrentAnimation.Empty()
 					? anim.CurrentAnimationPosition : 0.0f
 				}
 			};

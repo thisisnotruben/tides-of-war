@@ -159,7 +159,7 @@ namespace Game.Actor.State
 					if (Globals.missileSpellDB.HasData(spell.worldName))
 					{
 						string spellSound = Globals.missileSpellDB.GetData(spell.worldName).sound;
-						if (spellSound.Equals(string.Empty))
+						if (spellSound.Empty())
 						{
 							Globals.soundPlayer.PlaySoundRandomized("bow", character.player2D);
 						}

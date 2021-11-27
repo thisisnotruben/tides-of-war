@@ -3,6 +3,7 @@ using System;
 using Game.Actor;
 using Game.Loot;
 using Game.Database;
+using Game.Ui;
 using Godot;
 namespace Game.Map
 {
@@ -11,7 +12,8 @@ namespace Game.Map
 		private const float ASTAR_NORMAL_WEIGHT = 1.0f,
 			ASTAR_OCCUPIED_WEIGHT = 50.0f,
 			ASTAR_ITEM_WEIGHT = 25.0f;
-		private static readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
+		private static readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f),
+			OFFSET = new Vector2(0.0f, -16.0f);
 		public static Map map;
 
 		private readonly AStar2D aStar = new AStar2D();
@@ -34,6 +36,8 @@ namespace Game.Map
 			SetVeilSize();
 			SetCameraLimits(Player.player.camera);
 			Globals.questMaster.ShowQuestMarkers();
+
+			Globals.sceneLoader.EmitSignal(nameof(SceneLoader.OnSetNewScene));
 		}
 		public void AddGChild(Node node) { ground.AddChild(node); }
 		public void AddZChild(Node node) { zed.AddChild(node); }
@@ -44,6 +48,26 @@ namespace Game.Map
 			AddZChild(treasureChest);
 			treasureChest.Owner = this;
 			treasureChest.GlobalPosition = SetGetPickableLoc(location, true);
+		}
+		public bool SpawnUnit(string editorName, bool spawn)
+		{
+			if (spawn)
+			{
+				if (!zed.HasNode(editorName))
+				{
+					Npc npc = SceneDB.npcScene.Instance<Npc>();
+					npc.editorName = editorName;
+					AddZChild(npc);
+					npc.Owner = map;
+					npc.GlobalPosition = Globals.unitDB.GetData(editorName).spawnPos;
+					return true;
+				}
+			}
+			else
+			{
+				zed.GetNodeOrNull(editorName)?.QueueFree();
+			}
+			return false;
 		}
 		public Node GetGameChild(string nodeName)
 		{

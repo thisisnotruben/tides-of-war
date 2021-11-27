@@ -69,7 +69,7 @@ namespace Game.Ui
 				errorText = "Not Enough\nMana!";
 			}
 
-			if (!errorText.Equals(string.Empty))
+			if (!errorText.Empty())
 			{
 				mainContent.Hide();
 				popup.ShowError(errorText);

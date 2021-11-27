@@ -18,7 +18,7 @@ namespace Game.Projectile
 			timer = GetNode<Timer>("timer");
 
 			// can't add in Init due to this section needing nodes
-			if (!spellWorldName.Equals(string.Empty) && Globals.missileSpellDB.HasData(spellWorldName))
+			if (!spellWorldName.Empty() && Globals.missileSpellDB.HasData(spellWorldName))
 			{
 				MissileSpellDB.SpellMissileData spellMissileData = Globals.missileSpellDB.GetData(spellWorldName);
 				img.Texture = spellMissileData.img;

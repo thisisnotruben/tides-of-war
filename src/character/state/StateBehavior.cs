@@ -75,7 +75,7 @@ namespace Game.Actor.State
 			return new GC.Dictionary()
 			{
 				{NameDB.SaveTag.ANIM_POSITION,
-					!character.anim.CurrentAnimation.Equals(string.Empty)
+					!character.anim.CurrentAnimation.Empty()
 						? character.anim.CurrentAnimationPosition
 						: 0.0f
 				}

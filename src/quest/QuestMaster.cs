@@ -1,6 +1,7 @@
 using Game.Database;
 using Game.Map.Doodads;
 using Game.Actor;
+using Game.Ui;
 using Game.Actor.Doodads;
 using Godot;
 using GC = Godot.Collections;
@@ -16,6 +17,7 @@ namespace Game.Quest
 		{
 			Name = nameof(QuestMaster);
 			AddToGroup(Globals.SAVE_GROUP);
+			Globals.sceneLoader.Connect(nameof(SceneLoader.OnSetNewScene), this, nameof(RefreshQuestEvents));
 		}
 		public QuestMaster()
 		{
@@ -72,6 +74,7 @@ namespace Game.Quest
 				}
 			});
 		}
+		public void RefreshQuestEvents() { quests.ForEach(q => q.SetEvents()); }
 		/*
 		* UTIL FUNCTIONS START
 		*/
@@ -278,6 +281,7 @@ namespace Game.Quest
 			if (TryGetQuestByName(questName, out worldQuest))
 			{
 				worldQuest.status = status;
+				worldQuest.SetEvents();
 			}
 			return worldQuest;
 		}

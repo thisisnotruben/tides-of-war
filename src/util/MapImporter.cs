@@ -1,6 +1,7 @@
 using Godot;
 using GC = Godot.Collections;
 using Game.Light;
+using Game.Database;
 using Game.Actor;
 using System;
 namespace Game.Util
@@ -41,7 +42,7 @@ namespace Game.Util
 			string.Format(tilesetPath, "buildings")
 		};
 
-		private PackedScene npcScene = GD.Load<PackedScene>("res://src/character/npc/npc.tscn"),
+		private PackedScene
 			playerScene = GD.Load<PackedScene>("res://src/character/player/player.tscn"),
 			worldClockScene = GD.Load<PackedScene>("res://src/map/doodads/WorldClock.tscn"),
 			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn"),
@@ -176,11 +177,24 @@ namespace Game.Util
 		}
 		private void SetUnits(Node characters, Node transitions)
 		{
+			string dataPath = string.Format(PathManager.unitDataTemplate, map.Name);
+			File file = new File();
+			if (file.FileExists(dataPath))
+			{
+				Globals.unitDB.LoadData(dataPath);
+			}
+
 			// spawn npc's
 			Node2D character;
 			foreach (Node2D node in characters.GetChildren())
 			{
-				character = npcScene.Instance<Node2D>();
+				if (Globals.unitDB.HasData(node.Name)
+				&& !Globals.unitDB.GetData(node.Name).eventTrigger.Empty())
+				{
+					continue;
+				}
+
+				character = SceneDB.npcScene.Instance<Node2D>();
 				zed.AddChild(character);
 				character.Owner = map;
 				character.Name = node.Name;

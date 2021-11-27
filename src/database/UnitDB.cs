@@ -7,7 +7,7 @@ namespace Game.Database
 	{
 		public class UnitData
 		{
-			public readonly string name, img, dialogue;
+			public readonly string name, img, dialogue, eventTrigger;
 			public readonly bool enemy;
 			public readonly int level;
 			public readonly float dropRate;
@@ -15,7 +15,8 @@ namespace Game.Database
 			public readonly Vector2 spawnPos;
 
 			public UnitData(string name, string img, bool enemy,
-			int level, float dropRate, string dialogue, Vector2[] path, Vector2 spawnPos)
+			int level, float dropRate, string dialogue, string eventTrigger,
+			Vector2[] path, Vector2 spawnPos)
 			{
 				this.name = name;
 				this.img = img;
@@ -23,6 +24,7 @@ namespace Game.Database
 				this.level = level;
 				this.dropRate = dropRate;
 				this.dialogue = dialogue;
+				this.eventTrigger = eventTrigger;
 				this.path = path;
 				this.spawnPos = spawnPos;
 			}
@@ -30,6 +32,7 @@ namespace Game.Database
 
 		private readonly Dictionary<string, Dictionary<string, UnitData>> cache =
 			new Dictionary<string, Dictionary<string, UnitData>>();
+		private readonly Dictionary<string, UnitData> tempUnits = new Dictionary<string, UnitData>();
 
 		public UnitDB()
 		{
@@ -91,6 +94,7 @@ namespace Game.Database
 					level: dict[nameof(UnitData.level)].ToString().ToInt(),
 					dropRate: dict[nameof(UnitData.dropRate)].ToString().ToFloat(),
 					dialogue: dict[nameof(UnitData.dialogue)].ToString(),
+					eventTrigger: dict["event"].ToString(),
 					path: unitPath,
 					spawnPos: new Vector2((float)spawnPos[0], (float)spawnPos[1])
 				));
@@ -99,6 +103,8 @@ namespace Game.Database
 			cache.Add(zoneName, data);
 			this.data = data;
 		}
+		public override UnitData GetData(string dataName) { return base.GetData(dataName) ?? tempUnits[dataName]; }
+		public override bool HasData(string dataName) { return base.HasData(dataName) || tempUnits.ContainsKey(dataName); }
 		public UnitData GetDataFromCache(string zoneName, string dataName)
 		{
 			return cache[zoneName][dataName];
@@ -107,5 +113,7 @@ namespace Game.Database
 		{
 			return cache.ContainsKey(zoneName) && cache[zoneName].ContainsKey(dataName);
 		}
+		public void AddTempUnit(string editorName, UnitData unitData) { tempUnits[editorName] = unitData; }
+		public bool RemoveTempUnit(string editorName) { return tempUnits.Remove(editorName); }
 	}
 }

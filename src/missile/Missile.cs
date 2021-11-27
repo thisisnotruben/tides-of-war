@@ -89,7 +89,7 @@ namespace Game.Projectile
 				{NameDB.SaveTag.HIT, hit},
 				{NameDB.SaveTag.SPAWN_POSITION, new GC.Array() { spawnPos.x,spawnPos.y }},
 				{NameDB.SaveTag.POSITION, new GC.Array() { GlobalPosition.x, GlobalPosition.y }},
-				{NameDB.SaveTag.ANIM_POSITION, !anim.CurrentAnimation.Equals(string.Empty) ? anim.CurrentAnimationPosition : 0.0f},
+				{NameDB.SaveTag.ANIM_POSITION, !anim.CurrentAnimation.Empty() ? anim.CurrentAnimationPosition : 0.0f},
 				{NameDB.SaveTag.SPELL, string.Empty} // for missile factory
 			};
 		}

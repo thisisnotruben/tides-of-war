@@ -19,7 +19,7 @@ namespace Game.Ui
 			{
 				{NameDB.SaveTag.POSITION, new GC.Array() { GlobalPosition.x, GlobalPosition.y }},
 				{NameDB.SaveTag.ANIM_POSITION,
-					!anim.CurrentAnimation.Equals(string.Empty)
+					!anim.CurrentAnimation.Empty()
 						? anim.CurrentAnimationPosition
 						: 0.0f
 				}

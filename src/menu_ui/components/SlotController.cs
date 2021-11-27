@@ -96,7 +96,7 @@ namespace Game.Ui
 				return new GC.Dictionary()
 				{
 					{"itemName", commodityWorldName},
-					{"stack", stackCount.Text.Equals(string.Empty) ? 0 : stackCount.Text.ToInt()},
+					{"stack", stackCount.Text.Empty() ? 0 : stackCount.Text.ToInt()},
 					{"isCoolingDown", cooldownOverlay.Visible},
 					{"slotPath", GetPath()}
 				};

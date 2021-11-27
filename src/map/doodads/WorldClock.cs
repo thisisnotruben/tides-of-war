@@ -40,7 +40,7 @@ namespace Game.Map.Doodads
 			{
 				{NameDB.SaveTag.DAY_LIGHT, dayLight},
 				{NameDB.SaveTag.TIME_LEFT, TimeLeft},
-				{NameDB.SaveTag.ANIM_POSITION, !anim.CurrentAnimation.Equals(string.Empty) ? anim.CurrentAnimationPosition : 0.0f}
+				{NameDB.SaveTag.ANIM_POSITION, !anim.CurrentAnimation.Empty() ? anim.CurrentAnimationPosition : 0.0f}
 			};
 		}
 		public void Deserialize(GC.Dictionary payload)
