@@ -2698,5 +2698,29 @@
 		"subType": "",
 		"material": "misc",
 		"stackSize": 1
+	},
+	"Bruiseclaw's Hand": {
+		"type": "QUEST",
+		"icon": 341,
+		"level": 0,
+		"goldCost": 0,
+		"blurb": "",
+		"coolDown": 0,
+		"dropRate": 1.0,
+		"subType": "",
+		"material": "misc",
+		"stackSize": 1
+	},
+	"Quest Finished": {
+		"type": "EVENT",
+		"icon": 971,
+		"level": 0,
+		"goldCost": 0,
+		"blurb": "",
+		"coolDown": 0,
+		"dropRate": 0.0,
+		"subType": "",
+		"material": "misc",
+		"stackSize": 1
 	}
 }

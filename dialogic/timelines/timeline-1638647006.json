@@ -1,0 +1,62 @@
+{
+	"events": [
+		{
+			"condition": "",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "There is one last undertaking to deal with. Bruiseclaw and his invasive companions up north must be eliminated.\nWith our troops furnished with the supplies you've helped obtain we'll make them pay for their desecration.\nWe have a force waiting for you by their entrance. Once we start, kill Bruiseclaw."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "What are you doing here!? Bruiseclaw must be killed!"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This deed is most welcoming news. The people of this great kingdom cannot thank you enough for your valiant efforts.\nWith Bruiseclaw dead, the others should flee and peace should grace this land once again."
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1638647006.json",
+		"name": "q1.1407.3"
+	}
+}

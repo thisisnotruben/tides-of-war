@@ -1,4 +1,30 @@
 {
+	"Helping the Town": {
+		"nextQuest": "Missing Scouts",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1152-Lieutenant Waltkins",
+		"dialogue": "q1.1152.0",
+		"startQuests": [
+			"Southwood Supplies",
+			"Fishy Dilemma",
+			"Aggressive Frontier",
+			"Stolen Wedding Ring",
+			"Erotomania"
+		],
+		"objectives": {
+			"Quests Finished": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 2,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
 	"Missing Scouts": {
 		"nextQuest": "Bounty on the Finfolk",
 		"reward": [],
@@ -140,7 +166,7 @@
 		}
 	},
 	"Supplying The Frontier": {
-		"nextQuest": "",
+		"nextQuest": "Thy Kingdom Come",
 		"reward": [],
 		"keepRewardItems": false,
 		"goldReward": 0,
@@ -167,6 +193,26 @@
 				}
 			},
 			"Miscellaneous Supplies": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Thy Kingdom Come": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1407-Lieutenant Chapman",
+		"dialogue": "q1.1407.3",
+		"startQuests": [],
+		"objectives": {
+			"Bruiseclaw's Hand": {
 				"keepWorldObject": false,
 				"questType": "COLLECT",
 				"amount": 1,

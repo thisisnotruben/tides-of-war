@@ -260,16 +260,26 @@ namespace Game.Quest
 
 			AcitvateQuestMapItems(worldQuest, false);
 
-			if (worldQuest != null
-			&& TryGetQuestByName(worldQuest.quest.nextQuest, out chainedQuest))
+			if (worldQuest != null)
 			{
-				if (chainedQuest.status == QuestStatus.UNAVAILABLE)
+				quests.ForEach(q =>
 				{
-					chainedQuest.status = QuestStatus.AVAILABLE;
-				}
-				else
+					if (q != worldQuest)
+					{
+						q.UpdateQuest(NameDB.Item.QUEST_FINISH, QuestDB.QuestType.COLLECT, true);
+					}
+				});
+
+				if (TryGetQuestByName(worldQuest.quest.nextQuest, out chainedQuest))
 				{
-					chainedQuest = null;
+					if (chainedQuest.status == QuestStatus.UNAVAILABLE)
+					{
+						chainedQuest.status = QuestStatus.AVAILABLE;
+					}
+					else
+					{
+						chainedQuest = null;
+					}
 				}
 			}
 

@@ -15,18 +15,18 @@ namespace Game.Quest
 		public Dictionary<string, int> objectives { private set; get; }
 		private readonly List<string> charactersTalkedTo = new List<string>();
 
-		public WorldQuest Init(QuestDB.QuestData quest)
+		public WorldQuest() { objectives = new Dictionary<string, int>(); }
+		public virtual WorldQuest Init(QuestDB.QuestData quest)
 		{
 			this.quest = quest;
 
-			objectives = new Dictionary<string, int>();
 			foreach (string objectiveName in quest.objectives.Keys)
 			{
 				objectives[objectiveName] = 0;
 			}
 			return this;
 		}
-		public bool UpdateQuest(string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
+		public virtual bool UpdateQuest(string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
 		{
 			switch (status)
 			{
@@ -49,7 +49,7 @@ namespace Game.Quest
 			}
 			return true;
 		}
-		public bool UpdateQuest(string characterPath, string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
+		public virtual bool UpdateQuest(string characterPath, string objectiveName, QuestDB.QuestType questType, bool countTowardsObjective)
 		{
 			if (!charactersTalkedTo.Contains(characterPath)
 			&& UpdateQuest(objectiveName, questType, countTowardsObjective))
@@ -94,7 +94,7 @@ namespace Game.Quest
 			}
 		}
 		public bool HasCharacterPath(string characterPath) { return charactersTalkedTo.Contains(characterPath); }
-		public void SetEvents()
+		public virtual void SetEvents()
 		{
 			foreach (string editorName in Globals.unitDB.data.Keys)
 			{
@@ -107,7 +107,7 @@ namespace Game.Quest
 				}
 			}
 		}
-		public GC.Dictionary Serialize()
+		public virtual GC.Dictionary Serialize()
 		{
 			GC.Array charactersPaths = new GC.Array();
 			charactersTalkedTo.ForEach(p => charactersPaths.Add(p.ToString()));
@@ -125,7 +125,7 @@ namespace Game.Quest
 
 			return payload;
 		}
-		public void Deserialize(GC.Dictionary payload)
+		public virtual void Deserialize(GC.Dictionary payload)
 		{
 			string characterPathKey = NameDB.SaveTag.TALKED_TO;
 			foreach (string characterPath in (GC.Array)payload[characterPathKey])

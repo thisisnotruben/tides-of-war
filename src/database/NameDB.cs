@@ -129,5 +129,10 @@ namespace Game.Database
 				SPELL_EFFECTS = "spellEffects",
 				QUESTS = "quests";
 		}
+		public class Item
+		{
+			public const string
+				QUEST_FINISH = "Quest Finished";
+		}
 	}
 }
