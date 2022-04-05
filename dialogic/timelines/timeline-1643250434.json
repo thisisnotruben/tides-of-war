@@ -1,0 +1,19 @@
+{
+	"events": [
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "You inspect Killrok's lifeless body and see foul magic emanating from his corpse corrupt the land around him.\nThis mushroom sprouts; surely this is something that should be brought to the shamans in Nur Murk."
+		},
+		{
+			"emit_signal": "Foul Mushroom",
+			"event_id": "dialogic_040"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1643250434.json",
+		"name": "q2.940.0-questItem"
+	}
+}

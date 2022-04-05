@@ -1,0 +1,62 @@
+{
+	"events": [
+		{
+			"condition": "",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "To the west of here lies the Marshlands; full of rich soils and treasures.\nOur forces are nonexistant there and we've chosen you to go and scout out the area.\nThere's an orc encampment there that we believe is friendly, go there and earn their trust.\nFind whatever is worthwhile and report back to us."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Anything worthwhile to report from the Marshlands?"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": ""
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1639685716.json",
+		"name": "q1.931.1"
+	}
+}

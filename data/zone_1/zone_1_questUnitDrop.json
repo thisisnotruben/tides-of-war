@@ -1,13 +1,13 @@
 {
 	"q1.1417.0": {
-		"Miscellaneous Supplies": [
-			"878-Dobbs"
-		],
 		"Weapon Supplies": [
 			"971-Roswald"
 		],
 		"Food Supplies": [
 			"1032-Hawel"
+		],
+		"Miscellaneous Supplies": [
+			"878-Dobbs"
 		]
 	},
 	"q1.1194.0": {
@@ -25,7 +25,6 @@
 			"1097-finfolk",
 			"1098-finfolk",
 			"1099-finfolk",
-			"1100-finfolk",
 			"1101-finfolk",
 			"1102-finfolk",
 			"1105-finfolk",
@@ -52,7 +51,6 @@
 			"1097-finfolk",
 			"1098-finfolk",
 			"1099-finfolk",
-			"1100-finfolk",
 			"1101-finfolk",
 			"1102-finfolk",
 			"1105-finfolk",
@@ -97,21 +95,16 @@
 			"1237-critter",
 			"1247-critter",
 			"1248-critter",
-			"1249-critter",
 			"1253-critter",
-			"1254-critter",
 			"1263-critter",
 			"1264-critter",
 			"1265-critter",
 			"1295-critter",
 			"1296-critter",
-			"1337-critter",
 			"1339-critter",
-			"1343-critter",
 			"1385-critter",
 			"1391-critter",
 			"1393-critter",
-			"1405-critter",
 			"1406-critter"
 		]
 	},

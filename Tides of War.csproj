@@ -85,6 +85,7 @@
     <Compile Include="src\factory\Factory.cs" />
     <Compile Include="src\factory\ItemFactory.cs" />
     <Compile Include="src\factory\MissileFactory.cs" />
+    <Compile Include="src\factory\QuestFactory.cs" />
     <Compile Include="src\factory\SpellFactory.cs" />
     <Compile Include="src\global\Globals.cs" />
     <Compile Include="src\global\ISerializable.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="src\missile\Missile.cs" />
     <Compile Include="src\missile\MissileSpell.cs" />
     <Compile Include="src\missile\MissileSpellOrbital.cs" />
+    <Compile Include="src\quest\customQuest\q1_1407_3.cs" />
     <Compile Include="src\quest\QuestMaster.cs" />
     <Compile Include="src\quest\WorldQuest.cs" />
     <Compile Include="src\spell\Bash.cs" />

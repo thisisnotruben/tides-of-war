@@ -9,6 +9,7 @@ namespace Game.Actor.State
 		public enum MoveAnomalyType { INVALID_PATH, OBSTRUCTION_DETECTED }
 		public const float CHARACTER_SPEED = 32.0f, MIN_ARRIVAL_DIST = 1.0f;
 
+		public readonly float speed;
 		public bool moving
 		{
 			get { return IsPhysicsProcessing(); }
@@ -30,6 +31,8 @@ namespace Game.Actor.State
 			}
 		}
 
+		public Move(float speed) { this.speed = speed; }
+		public Move() : this(CHARACTER_SPEED) { }
 		public override void _Ready()
 		{
 			base._Ready();
@@ -80,7 +83,7 @@ namespace Game.Actor.State
 			}
 			else
 			{
-				character.GlobalPosition += character.GlobalPosition.DirectionTo(targetPosition) * CHARACTER_SPEED * delta;
+				character.GlobalPosition += character.GlobalPosition.DirectionTo(targetPosition) * speed * delta;
 			}
 		}
 		protected void MoveTo(Queue<Vector2> route)

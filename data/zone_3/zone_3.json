@@ -1,6 +1,6 @@
 {
 	"262-orc": {
-		"name": "",
+		"name": "Kruzgol Grunt",
 		"img": "orc-4",
 		"dialogue": "",
 		"event": "",
@@ -14,7 +14,7 @@
 		]
 	},
 	"263-orc": {
-		"name": "",
+		"name": "Kruzgol Grunt",
 		"img": "orc-4",
 		"dialogue": "",
 		"event": "",
@@ -28,7 +28,7 @@
 		]
 	},
 	"264-orc": {
-		"name": "",
+		"name": "Kruzgol Swordsman",
 		"img": "orc-18",
 		"dialogue": "",
 		"event": "",
@@ -42,7 +42,7 @@
 		]
 	},
 	"265-orc": {
-		"name": "",
+		"name": "Kruzgol Swordsman",
 		"img": "orc-18",
 		"dialogue": "",
 		"event": "",
@@ -56,7 +56,7 @@
 		]
 	},
 	"266-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-3",
 		"dialogue": "",
 		"event": "",
@@ -70,7 +70,7 @@
 		]
 	},
 	"268-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-10",
 		"dialogue": "",
 		"event": "",
@@ -84,7 +84,7 @@
 		]
 	},
 	"269-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-0",
 		"dialogue": "",
 		"event": "",
@@ -98,7 +98,7 @@
 		]
 	},
 	"273-orc": {
-		"name": "",
+		"name": "Kruzgol Seer",
 		"img": "orc-9",
 		"dialogue": "",
 		"event": "",
@@ -112,7 +112,7 @@
 		]
 	},
 	"277-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-22",
 		"dialogue": "",
 		"event": "",
@@ -126,7 +126,7 @@
 		]
 	},
 	"278-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-20",
 		"dialogue": "",
 		"event": "",
@@ -140,7 +140,7 @@
 		]
 	},
 	"280-orc": {
-		"name": "",
+		"name": "Kruzgol Seer",
 		"img": "orc-9",
 		"dialogue": "",
 		"event": "",
@@ -154,7 +154,7 @@
 		]
 	},
 	"283-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-22",
 		"dialogue": "",
 		"event": "",
@@ -168,7 +168,7 @@
 		]
 	},
 	"284-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-10",
 		"dialogue": "",
 		"event": "",
@@ -182,7 +182,7 @@
 		]
 	},
 	"286-orc": {
-		"name": "",
+		"name": "Kruzgol Brawler",
 		"img": "orc-13",
 		"dialogue": "",
 		"event": "",
@@ -196,7 +196,7 @@
 		]
 	},
 	"292-orc": {
-		"name": "",
+		"name": "Kruzgol Archer",
 		"img": "orc-15",
 		"dialogue": "",
 		"event": "",
@@ -210,7 +210,7 @@
 		]
 	},
 	"293-orc": {
-		"name": "",
+		"name": "Kruzgol Archer",
 		"img": "orc-17",
 		"dialogue": "",
 		"event": "",
@@ -224,7 +224,7 @@
 		]
 	},
 	"294-orc": {
-		"name": "",
+		"name": "Kruzgol Peon",
 		"img": "orc-6",
 		"dialogue": "",
 		"event": "",
@@ -238,7 +238,7 @@
 		]
 	},
 	"299-orc": {
-		"name": "",
+		"name": "Kruzgol Peon",
 		"img": "orc-1",
 		"dialogue": "",
 		"event": "",
@@ -252,7 +252,7 @@
 		]
 	},
 	"300-orc": {
-		"name": "",
+		"name": "Kruzgol Peon",
 		"img": "orc-7",
 		"dialogue": "",
 		"event": "",
@@ -266,7 +266,7 @@
 		]
 	},
 	"301-orc": {
-		"name": "",
+		"name": "Kruzgol Peon",
 		"img": "orc-6",
 		"dialogue": "",
 		"event": "",
@@ -280,7 +280,7 @@
 		]
 	},
 	"302-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-10",
 		"dialogue": "",
 		"event": "",
@@ -294,7 +294,7 @@
 		]
 	},
 	"304-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-23",
 		"dialogue": "",
 		"event": "",
@@ -308,7 +308,7 @@
 		]
 	},
 	"307-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-3",
 		"dialogue": "",
 		"event": "",
@@ -322,7 +322,7 @@
 		]
 	},
 	"316-orc": {
-		"name": "",
+		"name": "Kruzgol Archer",
 		"img": "orc-15",
 		"dialogue": "",
 		"event": "",
@@ -336,7 +336,7 @@
 		]
 	},
 	"321-orc": {
-		"name": "",
+		"name": "Kruzgol Brawler",
 		"img": "orc-14",
 		"dialogue": "",
 		"event": "",
@@ -350,7 +350,7 @@
 		]
 	},
 	"322-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-20",
 		"dialogue": "",
 		"event": "",
@@ -364,7 +364,7 @@
 		]
 	},
 	"324-orc": {
-		"name": "",
+		"name": "Kruzgol Grunt",
 		"img": "orc-4",
 		"dialogue": "",
 		"event": "",
@@ -378,7 +378,7 @@
 		]
 	},
 	"325-orc": {
-		"name": "",
+		"name": "Kruzgol Grunt",
 		"img": "orc-4",
 		"dialogue": "",
 		"event": "",
@@ -392,7 +392,7 @@
 		]
 	},
 	"330-orc": {
-		"name": "",
+		"name": "Kruzgol Swordsman",
 		"img": "orc-19",
 		"dialogue": "",
 		"event": "",
@@ -406,7 +406,7 @@
 		]
 	},
 	"366-warthog": {
-		"name": "",
+		"name": "Thornhusk Brawler",
 		"img": "warthog-3",
 		"dialogue": "",
 		"event": "",
@@ -420,7 +420,7 @@
 		]
 	},
 	"367-warthog": {
-		"name": "",
+		"name": "Thornhusk Warrior",
 		"img": "warthog-1",
 		"dialogue": "",
 		"event": "",
@@ -434,7 +434,7 @@
 		]
 	},
 	"369-warthog": {
-		"name": "",
+		"name": "Thornhusk Mauler",
 		"img": "warthog-5",
 		"dialogue": "",
 		"event": "",
@@ -448,7 +448,7 @@
 		]
 	},
 	"370-warthog": {
-		"name": "",
+		"name": "Thornhusk Mauler",
 		"img": "warthog-0",
 		"dialogue": "",
 		"event": "",
@@ -462,7 +462,7 @@
 		]
 	},
 	"371-warthog": {
-		"name": "",
+		"name": "Thornhusk Brawler",
 		"img": "warthog-6",
 		"dialogue": "",
 		"event": "",
@@ -476,7 +476,7 @@
 		]
 	},
 	"375-warthog": {
-		"name": "",
+		"name": "Thornhusk Blademaster",
 		"img": "warthog-9",
 		"dialogue": "",
 		"event": "",
@@ -490,7 +490,7 @@
 		]
 	},
 	"379-minotaur": {
-		"name": "",
+		"name": "Bloodhorn Marauder",
 		"img": "minotaur-19",
 		"dialogue": "",
 		"event": "",
@@ -504,7 +504,7 @@
 		]
 	},
 	"380-minotaur": {
-		"name": "",
+		"name": "Bloodhorn Marauder",
 		"img": "minotaur-19",
 		"dialogue": "",
 		"event": "",
@@ -518,7 +518,7 @@
 		]
 	},
 	"390-warthog": {
-		"name": "",
+		"name": "Thornhusk Warrior",
 		"img": "warthog-2",
 		"dialogue": "",
 		"event": "",
@@ -532,7 +532,7 @@
 		]
 	},
 	"391-warthog": {
-		"name": "",
+		"name": "Thornhusk Warrior",
 		"img": "warthog-2",
 		"dialogue": "",
 		"event": "",
@@ -546,7 +546,7 @@
 		]
 	},
 	"393-warthog": {
-		"name": "",
+		"name": "Thornhusk Blademaster",
 		"img": "warthog-7",
 		"dialogue": "",
 		"event": "",
@@ -560,7 +560,7 @@
 		]
 	},
 	"394-warthog": {
-		"name": "",
+		"name": "Thornhusk Blademaster",
 		"img": "warthog-7",
 		"dialogue": "",
 		"event": "",
@@ -574,7 +574,7 @@
 		]
 	},
 	"400-warthog": {
-		"name": "",
+		"name": "Thornhusk Brawler",
 		"img": "warthog-4",
 		"dialogue": "",
 		"event": "",
@@ -588,7 +588,7 @@
 		]
 	},
 	"404-warthog": {
-		"name": "",
+		"name": "Thornhusk Mauler",
 		"img": "warthog-0",
 		"dialogue": "",
 		"event": "",
@@ -602,7 +602,7 @@
 		]
 	},
 	"406-warthog": {
-		"name": "",
+		"name": "Thornhusk Warrior",
 		"img": "warthog-1",
 		"dialogue": "",
 		"event": "",
@@ -616,7 +616,7 @@
 		]
 	},
 	"407-warthog": {
-		"name": "",
+		"name": "Thornhusk Brawler",
 		"img": "warthog-6",
 		"dialogue": "",
 		"event": "",
@@ -630,7 +630,7 @@
 		]
 	},
 	"408-warthog": {
-		"name": "",
+		"name": "Thornhusk Brawler",
 		"img": "warthog-3",
 		"dialogue": "",
 		"event": "",
@@ -644,7 +644,7 @@
 		]
 	},
 	"410-warthog": {
-		"name": "",
+		"name": "Thornhusk Mauler",
 		"img": "warthog-0",
 		"dialogue": "",
 		"event": "",
@@ -658,7 +658,7 @@
 		]
 	},
 	"439-robot": {
-		"name": "",
+		"name": "Kan-Slugger",
 		"img": "robot-1",
 		"dialogue": "",
 		"event": "",
@@ -672,7 +672,7 @@
 		]
 	},
 	"440-robot": {
-		"name": "",
+		"name": "Kan-Slugger",
 		"img": "robot-1",
 		"dialogue": "",
 		"event": "",
@@ -686,7 +686,7 @@
 		]
 	},
 	"441-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -700,7 +700,7 @@
 		]
 	},
 	"442-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -714,7 +714,7 @@
 		]
 	},
 	"443-robot": {
-		"name": "",
+		"name": "Assaultron",
 		"img": "robot-0",
 		"dialogue": "",
 		"event": "",
@@ -728,7 +728,7 @@
 		]
 	},
 	"444-robot": {
-		"name": "",
+		"name": "Flying Machine",
 		"img": "robot-2",
 		"dialogue": "",
 		"event": "",
@@ -742,7 +742,7 @@
 		]
 	},
 	"445-robot": {
-		"name": "",
+		"name": "Flying Machine",
 		"img": "robot-2",
 		"dialogue": "",
 		"event": "",
@@ -756,7 +756,7 @@
 		]
 	},
 	"446-robot": {
-		"name": "",
+		"name": "Assaultron",
 		"img": "robot-0",
 		"dialogue": "",
 		"event": "",
@@ -770,7 +770,7 @@
 		]
 	},
 	"450-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -784,7 +784,7 @@
 		]
 	},
 	"453-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -798,7 +798,7 @@
 		]
 	},
 	"455-robot": {
-		"name": "",
+		"name": "Flying Machine",
 		"img": "robot-2",
 		"dialogue": "",
 		"event": "",
@@ -812,7 +812,7 @@
 		]
 	},
 	"456-robot": {
-		"name": "",
+		"name": "Kan-Slugger",
 		"img": "robot-1",
 		"dialogue": "",
 		"event": "",
@@ -826,7 +826,7 @@
 		]
 	},
 	"458-robot": {
-		"name": "",
+		"name": "Assaultron",
 		"img": "robot-0",
 		"dialogue": "",
 		"event": "",
@@ -840,7 +840,7 @@
 		]
 	},
 	"459-robot": {
-		"name": "",
+		"name": "Assaultron",
 		"img": "robot-0",
 		"dialogue": "",
 		"event": "",
@@ -854,7 +854,7 @@
 		]
 	},
 	"460-robot": {
-		"name": "",
+		"name": "Kan-Slugger",
 		"img": "robot-1",
 		"dialogue": "",
 		"event": "",
@@ -868,7 +868,7 @@
 		]
 	},
 	"461-robot": {
-		"name": "",
+		"name": "Kan-Slugger",
 		"img": "robot-1",
 		"dialogue": "",
 		"event": "",
@@ -882,7 +882,7 @@
 		]
 	},
 	"462-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -896,7 +896,7 @@
 		]
 	},
 	"463-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -910,7 +910,7 @@
 		]
 	},
 	"464-robot": {
-		"name": "",
+		"name": "Kan-Slugger",
 		"img": "robot-1",
 		"dialogue": "",
 		"event": "",
@@ -924,7 +924,7 @@
 		]
 	},
 	"465-robot": {
-		"name": "",
+		"name": "Kan-Slugger",
 		"img": "robot-1",
 		"dialogue": "",
 		"event": "",
@@ -938,7 +938,7 @@
 		]
 	},
 	"469-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -952,7 +952,7 @@
 		]
 	},
 	"470-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -966,7 +966,7 @@
 		]
 	},
 	"471-robot": {
-		"name": "",
+		"name": "Flying Machine",
 		"img": "robot-2",
 		"dialogue": "",
 		"event": "",
@@ -980,7 +980,7 @@
 		]
 	},
 	"472-robot": {
-		"name": "",
+		"name": "Kan-Slugger",
 		"img": "robot-1",
 		"dialogue": "",
 		"event": "",
@@ -994,7 +994,7 @@
 		]
 	},
 	"475-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -1008,7 +1008,7 @@
 		]
 	},
 	"476-robot": {
-		"name": "",
+		"name": "Octotron",
 		"img": "robot-3",
 		"dialogue": "",
 		"event": "",
@@ -1022,7 +1022,7 @@
 		]
 	},
 	"593-human": {
-		"name": "",
+		"name": "Rogue Sorcerer",
 		"img": "human-24",
 		"dialogue": "",
 		"event": "",
@@ -1036,11 +1036,11 @@
 		]
 	},
 	"594-human": {
-		"name": "",
+		"name": "Rogue Pikeman",
 		"img": "human-22",
 		"dialogue": "",
 		"event": "",
-		"enemy": false,
+		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
 		"path": [],
@@ -1050,11 +1050,11 @@
 		]
 	},
 	"595-human": {
-		"name": "",
+		"name": "Rogue Pikeman",
 		"img": "human-22",
 		"dialogue": "",
 		"event": "",
-		"enemy": false,
+		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
 		"path": [],
@@ -1064,11 +1064,11 @@
 		]
 	},
 	"598-human": {
-		"name": "",
+		"name": "Rogue Bowman",
 		"img": "human-20",
 		"dialogue": "",
 		"event": "",
-		"enemy": false,
+		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
 		"path": [],
@@ -1078,11 +1078,11 @@
 		]
 	},
 	"601-human": {
-		"name": "",
+		"name": "Rogue Footman",
 		"img": "human-18",
 		"dialogue": "",
 		"event": "",
-		"enemy": false,
+		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
 		"path": [],
@@ -1092,11 +1092,11 @@
 		]
 	},
 	"607-human": {
-		"name": "",
+		"name": "Rogue Bowman",
 		"img": "human-20",
 		"dialogue": "",
 		"event": "",
-		"enemy": false,
+		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
 		"path": [],
@@ -1106,11 +1106,11 @@
 		]
 	},
 	"609-human": {
-		"name": "",
+		"name": "Rogue Footman",
 		"img": "human-23",
 		"dialogue": "",
 		"event": "",
-		"enemy": false,
+		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
 		"path": [],
@@ -1120,11 +1120,11 @@
 		]
 	},
 	"616-human": {
-		"name": "",
+		"name": "Rogue Bowman",
 		"img": "human-20",
 		"dialogue": "",
 		"event": "",
-		"enemy": false,
+		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
 		"path": [],
@@ -1134,11 +1134,11 @@
 		]
 	},
 	"619-human": {
-		"name": "",
+		"name": "Rogue Bowman",
 		"img": "human-20",
 		"dialogue": "",
 		"event": "",
-		"enemy": false,
+		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
 		"path": [],
@@ -1148,7 +1148,7 @@
 		]
 	},
 	"634-critter": {
-		"name": "",
+		"name": "Desert Crawler",
 		"img": "critter-20",
 		"dialogue": "",
 		"event": "",
@@ -1162,7 +1162,7 @@
 		]
 	},
 	"635-critter": {
-		"name": "",
+		"name": "Desert Crawler",
 		"img": "critter-19",
 		"dialogue": "",
 		"event": "",
@@ -1176,7 +1176,7 @@
 		]
 	},
 	"637-critter": {
-		"name": "",
+		"name": "Desert Crawler",
 		"img": "critter-6",
 		"dialogue": "",
 		"event": "",
@@ -1190,7 +1190,7 @@
 		]
 	},
 	"690-critter": {
-		"name": "",
+		"name": "Desert Snake",
 		"img": "critter-10",
 		"dialogue": "",
 		"event": "",
@@ -1204,7 +1204,7 @@
 		]
 	},
 	"691-critter": {
-		"name": "",
+		"name": "Desert Snake",
 		"img": "critter-25",
 		"dialogue": "",
 		"event": "",
@@ -1218,7 +1218,7 @@
 		]
 	},
 	"692-critter": {
-		"name": "",
+		"name": "Desert Snake",
 		"img": "critter-24",
 		"dialogue": "",
 		"event": "",
@@ -1232,7 +1232,7 @@
 		]
 	},
 	"693-critter": {
-		"name": "",
+		"name": "Scorpioid Lasher",
 		"img": "critter-13",
 		"dialogue": "",
 		"event": "",
@@ -1246,7 +1246,7 @@
 		]
 	},
 	"694-critter": {
-		"name": "",
+		"name": "Scorpioid Lasher",
 		"img": "critter-11",
 		"dialogue": "",
 		"event": "",
@@ -1260,7 +1260,7 @@
 		]
 	},
 	"695-critter": {
-		"name": "",
+		"name": "Scorpioid Lasher",
 		"img": "critter-2",
 		"dialogue": "",
 		"event": "",
@@ -1274,7 +1274,7 @@
 		]
 	},
 	"697-critter": {
-		"name": "",
+		"name": "Scorpioid Lasher",
 		"img": "critter-13",
 		"dialogue": "",
 		"event": "",
@@ -1288,7 +1288,7 @@
 		]
 	},
 	"706-critter": {
-		"name": "",
+		"name": "Scorpioid Lasher",
 		"img": "critter-2",
 		"dialogue": "",
 		"event": "",
@@ -1302,7 +1302,7 @@
 		]
 	},
 	"707-critter": {
-		"name": "",
+		"name": "Scorpioid Lasher",
 		"img": "critter-2",
 		"dialogue": "",
 		"event": "",
@@ -1316,7 +1316,7 @@
 		]
 	},
 	"713-critter": {
-		"name": "",
+		"name": "Desert Swarmer",
 		"img": "critter-21",
 		"dialogue": "",
 		"event": "",
@@ -1330,7 +1330,7 @@
 		]
 	},
 	"715-critter": {
-		"name": "",
+		"name": "Desert Swarmer",
 		"img": "critter-23",
 		"dialogue": "",
 		"event": "",
@@ -1344,7 +1344,7 @@
 		]
 	},
 	"716-critter": {
-		"name": "",
+		"name": "Desert Swarmer",
 		"img": "critter-22",
 		"dialogue": "",
 		"event": "",
@@ -1358,7 +1358,7 @@
 		]
 	},
 	"721-critter": {
-		"name": "",
+		"name": "Desert Snake",
 		"img": "critter-24",
 		"dialogue": "",
 		"event": "",
@@ -1372,7 +1372,7 @@
 		]
 	},
 	"722-critter": {
-		"name": "",
+		"name": "Desert Snake",
 		"img": "critter-25",
 		"dialogue": "",
 		"event": "",
@@ -1386,7 +1386,7 @@
 		]
 	},
 	"724-critter": {
-		"name": "",
+		"name": "Scorpioid Lasher",
 		"img": "critter-11",
 		"dialogue": "",
 		"event": "",

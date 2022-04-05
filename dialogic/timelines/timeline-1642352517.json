@@ -1,0 +1,62 @@
+{
+	"events": [
+		{
+			"condition": "",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Our brethren have fallen from venomous sting of those swamp stingers that you'll find south of here.\nThe antidote of those flying insects come from the venom extracted from their stingers. We are reaching critical low supplies of the antidote.\nCollect the stingers from those flying buzzards and bring them back to me."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Have you got those stingers? Those flying buzzards have been poisoning our people."
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Glad you have these here stingers, what was your reward again? "
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1642352517.json",
+		"name": "q2.250.0"
+	}
+}

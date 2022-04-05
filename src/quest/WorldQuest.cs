@@ -9,7 +9,19 @@ namespace Game.Quest
 {
 	public class WorldQuest : Node, ISerializable
 	{
-		public QuestMaster.QuestStatus status = QuestMaster.QuestStatus.UNAVAILABLE;
+		private QuestMaster.QuestStatus _status = QuestMaster.QuestStatus.UNAVAILABLE;
+		public QuestMaster.QuestStatus status
+		{
+			set
+			{
+				_status = value;
+				OnStatusChanged(value);
+			}
+			get
+			{
+				return _status;
+			}
+		}
 
 		public QuestDB.QuestData quest;
 		public Dictionary<string, int> objectives { private set; get; }
@@ -94,16 +106,17 @@ namespace Game.Quest
 			}
 		}
 		public bool HasCharacterPath(string characterPath) { return charactersTalkedTo.Contains(characterPath); }
+		public virtual void OnStatusChanged(QuestMaster.QuestStatus status) { }
 		public virtual void SetEvents()
 		{
 			foreach (string editorName in Globals.unitDB.data.Keys)
 			{
-				if (!quest.dialogue.Empty()
-				&& quest.dialogue.Equals(Globals.unitDB.GetData(editorName).eventTrigger))
+				if (!quest.dialogue.Empty())
 				{
 					Map.Map.map.SpawnUnit(editorName,
-					   status == QuestMaster.QuestStatus.ACTIVE
-					   || status == QuestMaster.QuestStatus.COMPLETED);
+						quest.dialogue.Equals(Globals.unitDB.GetData(editorName).eventTrigger)
+							&& (status == QuestMaster.QuestStatus.ACTIVE
+							|| status == QuestMaster.QuestStatus.COMPLETED));
 				}
 			}
 		}

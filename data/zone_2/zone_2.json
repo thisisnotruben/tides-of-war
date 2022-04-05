@@ -1,6 +1,6 @@
 {
 	"228-orc": {
-		"name": "",
+		"name": "Kruzgol Seer",
 		"img": "orc-9",
 		"dialogue": "",
 		"event": "",
@@ -14,21 +14,74 @@
 		]
 	},
 	"230-orc": {
-		"name": "",
+		"name": "Kruzgol Grunt",
 		"img": "orc-4",
 		"dialogue": "",
 		"event": "",
 		"enemy": false,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1672,
+				504
+			],
+			[
+				1512,
+				616
+			],
+			[
+				1448,
+				728
+			],
+			[
+				1512,
+				616
+			],
+			[
+				1432,
+				568
+			],
+			[
+				1352,
+				552
+			],
+			[
+				1352,
+				424
+			],
+			[
+				1320,
+				360
+			],
+			[
+				1144,
+				456
+			],
+			[
+				1320,
+				360
+			],
+			[
+				1400,
+				328
+			],
+			[
+				1496,
+				312
+			],
+			[
+				1656,
+				392
+			]
+		],
 		"spawnPos": [
 			1672,
 			504
 		]
 	},
 	"245-minotaur": {
-		"name": "",
+		"name": "Umbralhide Drudger",
 		"img": "minotaur-14",
 		"dialogue": "",
 		"event": "",
@@ -42,7 +95,7 @@
 		]
 	},
 	"250-minotaur": {
-		"name": "",
+		"name": "Skyhorn Sentry",
 		"img": "minotaur-16",
 		"dialogue": "",
 		"event": "",
@@ -56,7 +109,7 @@
 		]
 	},
 	"255-minotaur": {
-		"name": "",
+		"name": "Umbralhide Sentry",
 		"img": "minotaur-17",
 		"dialogue": "",
 		"event": "",
@@ -70,7 +123,7 @@
 		]
 	},
 	"256-orc": {
-		"name": "",
+		"name": "Kruzgol Seer",
 		"img": "orc-9",
 		"dialogue": "",
 		"event": "",
@@ -84,7 +137,7 @@
 		]
 	},
 	"257-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-8",
 		"dialogue": "",
 		"event": "",
@@ -98,7 +151,7 @@
 		]
 	},
 	"258-minotaur": {
-		"name": "",
+		"name": "Wildhoof Drudger",
 		"img": "minotaur-18",
 		"dialogue": "",
 		"event": "",
@@ -112,7 +165,7 @@
 		]
 	},
 	"263-finfolk": {
-		"name": "",
+		"name": "Mudfin Myrmidon",
 		"img": "finfolk-0",
 		"dialogue": "",
 		"event": "",
@@ -126,553 +179,406 @@
 		]
 	},
 	"268-finfolk": {
-		"name": "",
+		"name": "Mudfin Myrmidon",
 		"img": "finfolk-0",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1784,
+				1112
+			],
+			[
+				1832,
+				1064
+			],
+			[
+				1896,
+				1064
+			],
+			[
+				1928,
+				1080
+			],
+			[
+				2008,
+				1080
+			],
+			[
+				2024,
+				1000
+			]
+		],
 		"spawnPos": [
 			1784,
 			1112
 		]
 	},
-	"299-orc": {
-		"name": "",
-		"img": "orc-11",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1544,
-			1592
-		]
-	},
-	"300-orc": {
-		"name": "",
-		"img": "orc-11",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1464,
-			1656
-		]
-	},
-	"302-orc": {
-		"name": "",
-		"img": "orc-9",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1928,
-			1640
-		]
-	},
-	"303-orc": {
-		"name": "",
-		"img": "orc-9",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1992,
-			1672
-		]
-	},
-	"305-orc": {
-		"name": "",
-		"img": "orc-4",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1960,
-			1976
-		]
-	},
-	"308-orc": {
-		"name": "",
-		"img": "orc-4",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1672,
-			1960
-		]
-	},
-	"309-orc": {
-		"name": "",
-		"img": "orc-11",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1816,
-			1832
-		]
-	},
-	"310-orc": {
-		"name": "",
-		"img": "orc-11",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1736,
-			1832
-		]
-	},
-	"312-orc": {
-		"name": "",
-		"img": "orc-5",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1752,
-			1608
-		]
-	},
-	"315-orc": {
-		"name": "",
-		"img": "orc-5",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1400,
-			1864
-		]
-	},
-	"318-orc": {
-		"name": "",
-		"img": "orc-12",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1752,
-			1448
-		]
-	},
-	"319-orc": {
-		"name": "",
-		"img": "orc-13",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1992,
-			1416
-		]
-	},
-	"324-orc": {
-		"name": "",
-		"img": "orc-4",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1864,
-			1368
-		]
-	},
-	"327-orc": {
-		"name": "",
-		"img": "orc-14",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1544,
-			1464
-		]
-	},
-	"328-orc": {
-		"name": "",
-		"img": "orc-4",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1528,
-			1784
-		]
-	},
-	"329-orc": {
-		"name": "",
-		"img": "orc-11",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1560,
-			2008
-		]
-	},
-	"332-orc": {
-		"name": "",
-		"img": "orc-13",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			2024,
-			1784
-		]
-	},
-	"333-orc": {
-		"name": "",
-		"img": "orc-14",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1992,
-			1848
-		]
-	},
-	"334-orc": {
-		"name": "",
-		"img": "orc-12",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1384,
-			1992
-		]
-	},
-	"336-orc": {
-		"name": "",
-		"img": "orc-13",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1144,
-			1704
-		]
-	},
-	"337-orc": {
-		"name": "",
-		"img": "orc-11",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1272,
-			1752
-		]
-	},
-	"339-orc": {
-		"name": "",
-		"img": "orc-15",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1656,
-			1384
-		]
-	},
-	"340-orc": {
-		"name": "",
-		"img": "orc-16",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1848,
-			1944
-		]
-	},
-	"341-orc": {
-		"name": "",
-		"img": "orc-16",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1560,
-			1720
-		]
-	},
-	"342-orc": {
-		"name": "",
-		"img": "orc-16",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1752,
-			2008
-		]
-	},
-	"343-orc": {
-		"name": "",
-		"img": "orc-17",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1768,
-			1560
-		]
-	},
-	"344-orc": {
-		"name": "",
-		"img": "orc-15",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1688,
-			1576
-		]
-	},
-	"345-orc": {
-		"name": "",
-		"img": "orc-17",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1272,
-			1624
-		]
-	},
-	"347-orc": {
-		"name": "",
-		"img": "orc-9",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1480,
-			1896
-		]
-	},
-	"348-orc": {
-		"name": "",
-		"img": "orc-18",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1768,
-			1864
-		]
-	},
 	"361-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-12",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				984,
+				1032
+			],
+			[
+				952,
+				1096
+			],
+			[
+				920,
+				1128
+			],
+			[
+				968,
+				1208
+			],
+			[
+				1016,
+				1240
+			]
+		],
 		"spawnPos": [
-			920,
-			1080
+			984,
+			1032
 		]
 	},
 	"362-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1176,
+				840
+			],
+			[
+				1240,
+				872
+			],
+			[
+				1256,
+				920
+			],
+			[
+				1208,
+				952
+			],
+			[
+				1176,
+				920
+			],
+			[
+				1160,
+				904
+			],
+			[
+				1112,
+				936
+			]
+		],
 		"spawnPos": [
 			1176,
-			904
+			840
 		]
 	},
 	"363-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-0",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1640,
+				1192
+			],
+			[
+				1688,
+				1160
+			],
+			[
+				1688,
+				1128
+			],
+			[
+				1688,
+				1160
+			],
+			[
+				1576,
+				1256
+			],
+			[
+				1592,
+				1304
+			]
+		],
 		"spawnPos": [
 			1640,
 			1192
 		]
 	},
 	"364-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-9",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1432,
+				1240
+			],
+			[
+				1464,
+				1240
+			],
+			[
+				1480,
+				1288
+			],
+			[
+				1544,
+				1320
+			],
+			[
+				1480,
+				1288
+			],
+			[
+				1464,
+				1240
+			],
+			[
+				1400,
+				1240
+			],
+			[
+				1384,
+				1208
+			],
+			[
+				1368,
+				1208
+			]
+		],
 		"spawnPos": [
-			1400,
-			1272
+			1432,
+			1240
 		]
 	},
 	"366-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-12",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1304,
+				1496
+			],
+			[
+				1160,
+				1624
+			],
+			[
+				1096,
+				1624
+			],
+			[
+				1064,
+				1592
+			],
+			[
+				1112,
+				1528
+			],
+			[
+				1048,
+				1480
+			]
+		],
 		"spawnPos": [
 			1304,
 			1496
 		]
 	},
 	"373-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-14",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1048,
+				936
+			],
+			[
+				1080,
+				952
+			],
+			[
+				1048,
+				936
+			],
+			[
+				1048,
+				904
+			],
+			[
+				1000,
+				904
+			],
+			[
+				1000,
+				888
+			],
+			[
+				968,
+				888
+			],
+			[
+				952,
+				856
+			],
+			[
+				984,
+				776
+			],
+			[
+				1048,
+				760
+			]
+		],
 		"spawnPos": [
 			1048,
 			936
 		]
 	},
 	"380-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-16",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1464,
+				984
+			],
+			[
+				1512,
+				936
+			],
+			[
+				1560,
+				936
+			],
+			[
+				1560,
+				968
+			],
+			[
+				1512,
+				1000
+			],
+			[
+				1544,
+				1064
+			],
+			[
+				1592,
+				1064
+			]
+		],
 		"spawnPos": [
 			1464,
 			984
 		]
 	},
 	"398-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-2",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				360,
+				280
+			],
+			[
+				392,
+				312
+			],
+			[
+				360,
+				344
+			],
+			[
+				376,
+				376
+			],
+			[
+				392,
+				408
+			],
+			[
+				440,
+				408
+			],
+			[
+				392,
+				408
+			],
+			[
+				360,
+				344
+			],
+			[
+				328,
+				312
+			],
+			[
+				248,
+				328
+			]
+		],
 		"spawnPos": [
 			360,
 			280
 		]
 	},
 	"405-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-1",
 		"dialogue": "",
 		"event": "",
@@ -686,7 +592,7 @@
 		]
 	},
 	"410-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-3",
 		"dialogue": "",
 		"event": "",
@@ -700,7 +606,7 @@
 		]
 	},
 	"411-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-6",
 		"dialogue": "",
 		"event": "",
@@ -714,21 +620,50 @@
 		]
 	},
 	"418-critter": {
-		"name": "",
+		"name": "Cave Stalker",
 		"img": "critter-12",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				472,
+				152
+			],
+			[
+				536,
+				152
+			],
+			[
+				568,
+				152
+			],
+			[
+				584,
+				120
+			],
+			[
+				568,
+				152
+			],
+			[
+				600,
+				216
+			],
+			[
+				632,
+				280
+			]
+		],
 		"spawnPos": [
 			472,
 			152
 		]
 	},
 	"422-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-2",
 		"dialogue": "",
 		"event": "",
@@ -737,12 +672,12 @@
 		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
-			88,
+			72,
 			392
 		]
 	},
 	"423-critter": {
-		"name": "",
+		"name": "Cave Stalker",
 		"img": "critter-5",
 		"dialogue": "",
 		"event": "",
@@ -756,7 +691,7 @@
 		]
 	},
 	"424-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-7",
 		"dialogue": "",
 		"event": "",
@@ -766,11 +701,11 @@
 		"path": [],
 		"spawnPos": [
 			312,
-			344
+			296
 		]
 	},
 	"426-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-1",
 		"dialogue": "",
 		"event": "",
@@ -784,7 +719,7 @@
 		]
 	},
 	"427-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-0",
 		"dialogue": "",
 		"event": "",
@@ -798,7 +733,7 @@
 		]
 	},
 	"430-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-9",
 		"dialogue": "",
 		"event": "",
@@ -808,39 +743,81 @@
 		"path": [],
 		"spawnPos": [
 			600,
-			152
+			136
 		]
 	},
 	"438-critter": {
-		"name": "",
+		"name": "Cave Stalker",
 		"img": "critter-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				360,
+				584
+			],
+			[
+				376,
+				504
+			],
+			[
+				280,
+				568
+			],
+			[
+				104,
+				488
+			],
+			[
+				104,
+				424
+			]
+		],
 		"spawnPos": [
 			360,
 			584
 		]
 	},
 	"439-critter": {
-		"name": "",
+		"name": "Cave Stalker",
 		"img": "critter-12",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				440,
+				456
+			],
+			[
+				504,
+				456
+			],
+			[
+				632,
+				328
+			],
+			[
+				744,
+				328
+			],
+			[
+				792,
+				280
+			]
+		],
 		"spawnPos": [
 			440,
 			456
 		]
 	},
 	"442-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-7",
 		"dialogue": "",
 		"event": "",
@@ -854,7 +831,7 @@
 		]
 	},
 	"445-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-0",
 		"dialogue": "",
 		"event": "",
@@ -868,21 +845,58 @@
 		]
 	},
 	"452-critter": {
-		"name": "",
+		"name": "Cave Stalker",
 		"img": "critter-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				632,
+				88
+			],
+			[
+				632,
+				40
+			],
+			[
+				680,
+				40
+			],
+			[
+				744,
+				136
+			],
+			[
+				712,
+				168
+			],
+			[
+				664,
+				120
+			],
+			[
+				616,
+				120
+			],
+			[
+				616,
+				152
+			],
+			[
+				568,
+				184
+			]
+		],
 		"spawnPos": [
 			632,
 			88
 		]
 	},
 	"453-critter": {
-		"name": "",
+		"name": "Cave Stalker",
 		"img": "critter-12",
 		"dialogue": "",
 		"event": "",
@@ -896,7 +910,7 @@
 		]
 	},
 	"455-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-11",
 		"dialogue": "",
 		"event": "",
@@ -910,7 +924,7 @@
 		]
 	},
 	"456-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-11",
 		"dialogue": "",
 		"event": "",
@@ -924,7 +938,7 @@
 		]
 	},
 	"457-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-10",
 		"dialogue": "",
 		"event": "",
@@ -938,7 +952,7 @@
 		]
 	},
 	"458-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-13",
 		"dialogue": "",
 		"event": "",
@@ -952,7 +966,7 @@
 		]
 	},
 	"459-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-14",
 		"dialogue": "",
 		"event": "",
@@ -966,7 +980,7 @@
 		]
 	},
 	"460-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-11",
 		"dialogue": "",
 		"event": "",
@@ -975,12 +989,12 @@
 		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
-			104,
-			296
+			88,
+			312
 		]
 	},
 	"461-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-12",
 		"dialogue": "",
 		"event": "",
@@ -994,7 +1008,7 @@
 		]
 	},
 	"462-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-8",
 		"dialogue": "",
 		"event": "",
@@ -1008,7 +1022,7 @@
 		]
 	},
 	"463-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-1",
 		"dialogue": "",
 		"event": "",
@@ -1022,7 +1036,7 @@
 		]
 	},
 	"464-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-0",
 		"dialogue": "",
 		"event": "",
@@ -1036,7 +1050,7 @@
 		]
 	},
 	"465-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-7",
 		"dialogue": "",
 		"event": "",
@@ -1050,7 +1064,7 @@
 		]
 	},
 	"466-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-3",
 		"dialogue": "",
 		"event": "",
@@ -1064,7 +1078,7 @@
 		]
 	},
 	"467-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-0",
 		"dialogue": "",
 		"event": "",
@@ -1078,147 +1092,430 @@
 		]
 	},
 	"473-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-15",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1224,
+				1368
+			],
+			[
+				1304,
+				1320
+			],
+			[
+				1400,
+				1384
+			],
+			[
+				1368,
+				1432
+			],
+			[
+				1400,
+				1384
+			],
+			[
+				1304,
+				1320
+			],
+			[
+				1208,
+				1400
+			],
+			[
+				1240,
+				1448
+			]
+		],
 		"spawnPos": [
 			1224,
 			1368
 		]
 	},
 	"474-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				680,
+				1464
+			],
+			[
+				616,
+				1416
+			],
+			[
+				568,
+				1448
+			],
+			[
+				552,
+				1416
+			],
+			[
+				584,
+				1368
+			],
+			[
+				552,
+				1336
+			],
+			[
+				568,
+				1288
+			],
+			[
+				552,
+				1240
+			],
+			[
+				552,
+				1208
+			],
+			[
+				600,
+				1208
+			]
+		],
 		"spawnPos": [
 			680,
 			1464
 		]
 	},
 	"475-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-12",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				904,
+				1400
+			],
+			[
+				856,
+				1464
+			],
+			[
+				808,
+				1416
+			],
+			[
+				824,
+				1352
+			],
+			[
+				904,
+				1336
+			],
+			[
+				920,
+				1368
+			],
+			[
+				952,
+				1304
+			]
+		],
 		"spawnPos": [
 			904,
 			1400
 		]
 	},
 	"479-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-14",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				952,
+				1592
+			],
+			[
+				904,
+				1512
+			],
+			[
+				840,
+				1528
+			],
+			[
+				808,
+				1496
+			],
+			[
+				776,
+				1528
+			],
+			[
+				760,
+				1560
+			],
+			[
+				840,
+				1576
+			],
+			[
+				840,
+				1608
+			],
+			[
+				904,
+				1608
+			],
+			[
+				920,
+				1576
+			]
+		],
 		"spawnPos": [
-			936,
-			1528
-		]
-	},
-	"480-critter": {
-		"name": "",
-		"img": "critter-15",
-		"dialogue": "",
-		"event": "",
-		"enemy": true,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			568,
-			1304
+			952,
+			1592
 		]
 	},
 	"481-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-16",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1144,
+				1528
+			],
+			[
+				1112,
+				1480
+			],
+			[
+				1128,
+				1416
+			],
+			[
+				1048,
+				1416
+			],
+			[
+				1016,
+				1384
+			],
+			[
+				968,
+				1416
+			],
+			[
+				968,
+				1448
+			],
+			[
+				920,
+				1464
+			]
+		],
 		"spawnPos": [
 			1144,
 			1528
 		]
 	},
 	"482-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-9",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				904,
+				1224
+			],
+			[
+				888,
+				1240
+			],
+			[
+				824,
+				1208
+			],
+			[
+				776,
+				1224
+			],
+			[
+				792,
+				1272
+			],
+			[
+				856,
+				1288
+			],
+			[
+				856,
+				1320
+			],
+			[
+				888,
+				1272
+			],
+			[
+				952,
+				1256
+			],
+			[
+				936,
+				1224
+			]
+		],
 		"spawnPos": [
-			888,
-			1240
+			904,
+			1224
 		]
 	},
 	"483-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-14",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				984,
+				1352
+			],
+			[
+				1032,
+				1304
+			],
+			[
+				1080,
+				1352
+			],
+			[
+				1144,
+				1352
+			],
+			[
+				1032,
+				1288
+			],
+			[
+				968,
+				1304
+			]
+		],
 		"spawnPos": [
-			1000,
-			1336
+			984,
+			1352
 		]
 	},
 	"484-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-14",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				696,
+				1224
+			],
+			[
+				744,
+				1160
+			],
+			[
+				808,
+				1144
+			],
+			[
+				840,
+				1176
+			],
+			[
+				872,
+				1112
+			],
+			[
+				808,
+				1112
+			],
+			[
+				648,
+				1192
+			],
+			[
+				632,
+				1160
+			]
+		],
 		"spawnPos": [
 			696,
-			1192
+			1224
 		]
 	},
 	"493-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-13",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				840,
+				1848
+			],
+			[
+				824,
+				1800
+			],
+			[
+				872,
+				1800
+			],
+			[
+				904,
+				1816
+			],
+			[
+				936,
+				1816
+			]
+		],
 		"spawnPos": [
 			840,
 			1848
 		]
 	},
 	"498-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-5",
 		"dialogue": "",
 		"event": "",
@@ -1232,7 +1529,7 @@
 		]
 	},
 	"502-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-12",
 		"dialogue": "",
 		"event": "",
@@ -1245,50 +1542,82 @@
 			1816
 		]
 	},
-	"504-critter": {
-		"name": "",
-		"img": "critter-5",
-		"dialogue": "",
-		"event": "",
-		"enemy": true,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1064,
-			1960
-		]
-	},
 	"512-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				600,
+				1880
+			],
+			[
+				600,
+				1928
+			],
+			[
+				568,
+				1928
+			],
+			[
+				568,
+				1976
+			],
+			[
+				536,
+				1944
+			],
+			[
+				584,
+				1880
+			]
+		],
 		"spawnPos": [
-			568,
+			600,
 			1880
 		]
 	},
 	"516-critter": {
-		"name": "",
+		"name": "Cave Stalker",
 		"img": "critter-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				440,
+				1976
+			],
+			[
+				504,
+				1912
+			],
+			[
+				472,
+				1864
+			],
+			[
+				504,
+				1912
+			],
+			[
+				568,
+				1880
+			]
+		],
 		"spawnPos": [
-			472,
-			1944
+			440,
+			1976
 		]
 	},
 	"521-aberration": {
-		"name": "",
+		"name": "Revenant",
 		"img": "aberration-0",
 		"dialogue": "",
 		"event": "",
@@ -1302,7 +1631,7 @@
 		]
 	},
 	"524-minotaur": {
-		"name": "",
+		"name": "Bloodhorn Marauder",
 		"img": "minotaur-13",
 		"dialogue": "",
 		"event": "",
@@ -1316,7 +1645,7 @@
 		]
 	},
 	"609-minotaur": {
-		"name": "",
+		"name": "Ragemane Guardian",
 		"img": "minotaur-11",
 		"dialogue": "",
 		"event": "",
@@ -1330,7 +1659,7 @@
 		]
 	},
 	"626-orc": {
-		"name": "",
+		"name": "Kruzgol Swordsman",
 		"img": "orc-18",
 		"dialogue": "",
 		"event": "",
@@ -1344,7 +1673,7 @@
 		]
 	},
 	"628-orc": {
-		"name": "",
+		"name": "Kruzgol Peon",
 		"img": "orc-6",
 		"dialogue": "",
 		"event": "",
@@ -1358,7 +1687,7 @@
 		]
 	},
 	"630-minotaur": {
-		"name": "",
+		"name": "Umbralhide Drudger",
 		"img": "minotaur-14",
 		"dialogue": "",
 		"event": "",
@@ -1372,7 +1701,7 @@
 		]
 	},
 	"631-minotaur": {
-		"name": "",
+		"name": "Skyhorn Drudger",
 		"img": "minotaur-21",
 		"dialogue": "",
 		"event": "",
@@ -1386,7 +1715,7 @@
 		]
 	},
 	"632-minotaur": {
-		"name": "",
+		"name": "Skyhorn Drudger",
 		"img": "minotaur-21",
 		"dialogue": "",
 		"event": "",
@@ -1400,7 +1729,7 @@
 		]
 	},
 	"644-minotaur": {
-		"name": "",
+		"name": "Grimhorn Warrior",
 		"img": "minotaur-22",
 		"dialogue": "",
 		"event": "",
@@ -1414,7 +1743,7 @@
 		]
 	},
 	"646-minotaur": {
-		"name": "",
+		"name": "Grimhorn Drudger",
 		"img": "minotaur-23",
 		"dialogue": "",
 		"event": "",
@@ -1428,7 +1757,7 @@
 		]
 	},
 	"654-minotaur": {
-		"name": "",
+		"name": "Skyhorn Protector",
 		"img": "minotaur-8",
 		"dialogue": "",
 		"event": "",
@@ -1442,7 +1771,7 @@
 		]
 	},
 	"656-orc": {
-		"name": "",
+		"name": "Kruzgol Peon",
 		"img": "orc-1",
 		"dialogue": "",
 		"event": "",
@@ -1456,7 +1785,7 @@
 		]
 	},
 	"657-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-10",
 		"dialogue": "",
 		"event": "",
@@ -1470,7 +1799,7 @@
 		]
 	},
 	"659-orc": {
-		"name": "",
+		"name": "Kruzgol Swordsman",
 		"img": "orc-11",
 		"dialogue": "",
 		"event": "",
@@ -1484,7 +1813,7 @@
 		]
 	},
 	"660-orc": {
-		"name": "",
+		"name": "Kruzgol Swordsman",
 		"img": "orc-11",
 		"dialogue": "",
 		"event": "",
@@ -1498,7 +1827,7 @@
 		]
 	},
 	"670-minotaur": {
-		"name": "",
+		"name": "Ragemane Protector",
 		"img": "minotaur-12",
 		"dialogue": "",
 		"event": "",
@@ -1512,7 +1841,7 @@
 		]
 	},
 	"675-minotaur": {
-		"name": "",
+		"name": "Wildhoof Protector",
 		"img": "minotaur-9",
 		"dialogue": "",
 		"event": "",
@@ -1526,7 +1855,7 @@
 		]
 	},
 	"677-minotaur": {
-		"name": "",
+		"name": "Skyhorn Protector",
 		"img": "minotaur-8",
 		"dialogue": "",
 		"event": "",
@@ -1540,7 +1869,7 @@
 		]
 	},
 	"681-minotaur": {
-		"name": "",
+		"name": "Wildhoof Guardian",
 		"img": "minotaur-2",
 		"dialogue": "",
 		"event": "",
@@ -1554,7 +1883,7 @@
 		]
 	},
 	"689-minotaur": {
-		"name": "",
+		"name": "Ragemane Drudger",
 		"img": "minotaur-25",
 		"dialogue": "",
 		"event": "",
@@ -1568,7 +1897,7 @@
 		]
 	},
 	"690-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-0",
 		"dialogue": "",
 		"event": "",
@@ -1582,7 +1911,7 @@
 		]
 	},
 	"701-finfolk": {
-		"name": "",
+		"name": "Mudfin Myrmidon",
 		"img": "finfolk-1",
 		"dialogue": "",
 		"event": "",
@@ -1596,7 +1925,7 @@
 		]
 	},
 	"707-finfolk": {
-		"name": "",
+		"name": "Mudfin Warrior",
 		"img": "finfolk-10",
 		"dialogue": "",
 		"event": "",
@@ -1605,12 +1934,12 @@
 		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
-			1768,
-			1016
+			1784,
+			1000
 		]
 	},
 	"708-finfolk": {
-		"name": "",
+		"name": "Mudfin Sentry",
 		"img": "finfolk-13",
 		"dialogue": "",
 		"event": "",
@@ -1624,7 +1953,7 @@
 		]
 	},
 	"709-finfolk": {
-		"name": "",
+		"name": "Mudfin Myrmidon",
 		"img": "finfolk-12",
 		"dialogue": "",
 		"event": "",
@@ -1638,7 +1967,7 @@
 		]
 	},
 	"711-finfolk": {
-		"name": "",
+		"name": "Mudfin Warrior",
 		"img": "finfolk-14",
 		"dialogue": "",
 		"event": "",
@@ -1652,49 +1981,128 @@
 		]
 	},
 	"712-finfolk": {
-		"name": "",
+		"name": "Mudfin Warrior",
 		"img": "finfolk-3",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				2008,
+				1176
+			],
+			[
+				1960,
+				1240
+			],
+			[
+				1928,
+				1240
+			],
+			[
+				1928,
+				1224
+			],
+			[
+				1880,
+				1224
+			],
+			[
+				1880,
+				1208
+			],
+			[
+				1864,
+				1208
+			]
+		],
 		"spawnPos": [
-			1976,
-			1208
+			2008,
+			1176
 		]
 	},
 	"713-finfolk": {
-		"name": "",
+		"name": "Mudfin Sentry",
 		"img": "finfolk-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1896,
+				1176
+			],
+			[
+				1832,
+				1160
+			],
+			[
+				1784,
+				1144
+			],
+			[
+				1752,
+				1176
+			],
+			[
+				1720,
+				1160
+			]
+		],
 		"spawnPos": [
 			1896,
 			1176
 		]
 	},
 	"714-finfolk": {
-		"name": "",
+		"name": "Mudfin Sentry",
 		"img": "finfolk-7",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1704,
+				952
+			],
+			[
+				1768,
+				952
+			],
+			[
+				1800,
+				936
+			],
+			[
+				1816,
+				920
+			],
+			[
+				1832,
+				920
+			],
+			[
+				1880,
+				984
+			],
+			[
+				1944,
+				968
+			]
+		],
 		"spawnPos": [
 			1704,
 			952
 		]
 	},
 	"715-finfolk": {
-		"name": "",
+		"name": "Mudfin Warrior",
 		"img": "finfolk-4",
 		"dialogue": "",
 		"event": "",
@@ -1708,7 +2116,7 @@
 		]
 	},
 	"723-orc": {
-		"name": "",
+		"name": "Kruzgol Drudger",
 		"img": "orc-10",
 		"dialogue": "",
 		"event": "",
@@ -1722,63 +2130,144 @@
 		]
 	},
 	"724-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-22",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1176,
+				1176
+			],
+			[
+				1224,
+				1208
+			],
+			[
+				1128,
+				1320
+			],
+			[
+				1064,
+				1288
+			]
+		],
 		"spawnPos": [
-			1224,
-			1224
-		]
-	},
-	"732-orc": {
-		"name": "",
-		"img": "orc-18",
-		"dialogue": "",
-		"event": "",
-		"enemy": false,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1288,
-			1912
+			1176,
+			1176
 		]
 	},
 	"734-critter": {
-		"name": "",
+		"name": "Swamp Stinger",
 		"img": "critter-21",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				856,
+				952
+			],
+			[
+				824,
+				1000
+			],
+			[
+				792,
+				1000
+			],
+			[
+				776,
+				1016
+			],
+			[
+				744,
+				1032
+			],
+			[
+				712,
+				1016
+			],
+			[
+				680,
+				1016
+			],
+			[
+				648,
+				984
+			],
+			[
+				616,
+				984
+			],
+			[
+				600,
+				952
+			]
+		],
 		"spawnPos": [
-			760,
-			1032
+			856,
+			952
 		]
 	},
 	"739-finfolk": {
-		"name": "",
+		"name": "Mudfin Myrmidon",
 		"img": "finfolk-1",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				184,
+				1128
+			],
+			[
+				152,
+				1112
+			],
+			[
+				152,
+				1096
+			],
+			[
+				184,
+				1064
+			],
+			[
+				232,
+				1096
+			],
+			[
+				248,
+				1128
+			],
+			[
+				184,
+				1144
+			],
+			[
+				184,
+				1176
+			],
+			[
+				168,
+				1208
+			]
+		],
 		"spawnPos": [
 			184,
 			1128
 		]
 	},
 	"742-finfolk": {
-		"name": "",
+		"name": "Mudfin Sentry",
 		"img": "finfolk-9",
 		"dialogue": "",
 		"event": "",
@@ -1792,21 +2281,46 @@
 		]
 	},
 	"743-finfolk": {
-		"name": "",
+		"name": "Mudfin Warrior",
 		"img": "finfolk-14",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				216,
+				1240
+			],
+			[
+				232,
+				1272
+			],
+			[
+				296,
+				1272
+			],
+			[
+				328,
+				1240
+			],
+			[
+				296,
+				1192
+			],
+			[
+				248,
+				1192
+			]
+		],
 		"spawnPos": [
 			216,
 			1240
 		]
 	},
 	"745-finfolk": {
-		"name": "",
+		"name": "Mudfin Warrior",
 		"img": "finfolk-3",
 		"dialogue": "",
 		"event": "",
@@ -1820,77 +2334,234 @@
 		]
 	},
 	"746-finfolk": {
-		"name": "",
+		"name": "Mudfin Sentry",
 		"img": "finfolk-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				360,
+				1048
+			],
+			[
+				344,
+				1016
+			],
+			[
+				376,
+				984
+			],
+			[
+				408,
+				1000
+			],
+			[
+				440,
+				952
+			],
+			[
+				488,
+				1000
+			]
+		],
 		"spawnPos": [
 			360,
 			1048
 		]
 	},
 	"747-finfolk": {
-		"name": "",
+		"name": "Mudfin Myrmidon",
 		"img": "finfolk-1",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				440,
+				1112
+			],
+			[
+				472,
+				1048
+			],
+			[
+				504,
+				1048
+			],
+			[
+				552,
+				1096
+			],
+			[
+				504,
+				1192
+			]
+		],
 		"spawnPos": [
 			440,
 			1112
 		]
 	},
 	"751-finfolk": {
-		"name": "",
+		"name": "Mudfin Warrior",
 		"img": "finfolk-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				424,
+				1288
+			],
+			[
+				472,
+				1288
+			],
+			[
+				504,
+				1240
+			],
+			[
+				456,
+				1240
+			],
+			[
+				456,
+				1208
+			],
+			[
+				392,
+				1240
+			]
+		],
 		"spawnPos": [
 			424,
 			1288
 		]
 	},
 	"752-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-0",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				760,
+				1288
+			],
+			[
+				776,
+				1336
+			],
+			[
+				744,
+				1368
+			],
+			[
+				696,
+				1368
+			],
+			[
+				664,
+				1336
+			],
+			[
+				728,
+				1272
+			],
+			[
+				664,
+				1256
+			],
+			[
+				616,
+				1240
+			],
+			[
+				616,
+				1288
+			],
+			[
+				632,
+				1320
+			],
+			[
+				616,
+				1368
+			],
+			[
+				568,
+				1368
+			],
+			[
+				552,
+				1352
+			],
+			[
+				520,
+				1352
+			]
+		],
 		"spawnPos": [
 			760,
 			1288
 		]
 	},
 	"753-critter": {
-		"name": "",
+		"name": "Moss Lurker",
 		"img": "critter-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				952,
+				1640
+			],
+			[
+				1032,
+				1608
+			],
+			[
+				1016,
+				1544
+			],
+			[
+				1000,
+				1464
+			],
+			[
+				1048,
+				1448
+			],
+			[
+				1128,
+				1400
+			],
+			[
+				1208,
+				1448
+			]
+		],
 		"spawnPos": [
-			984,
-			1624
+			952,
+			1640
 		]
 	},
 	"754-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-9",
 		"dialogue": "",
 		"event": "",
@@ -1904,7 +2575,7 @@
 		]
 	},
 	"755-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-10",
 		"dialogue": "",
 		"event": "",
@@ -1918,7 +2589,7 @@
 		]
 	},
 	"756-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-0",
 		"dialogue": "",
 		"event": "",
@@ -1932,7 +2603,7 @@
 		]
 	},
 	"757-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-2",
 		"dialogue": "",
 		"event": "",
@@ -1946,7 +2617,7 @@
 		]
 	},
 	"767-minotaur": {
-		"name": "",
+		"name": "Bloodhorn Marauder",
 		"img": "minotaur-19",
 		"dialogue": "",
 		"event": "",
@@ -1960,7 +2631,7 @@
 		]
 	},
 	"769-minotaur": {
-		"name": "",
+		"name": "Bloodhorn Corrupter",
 		"img": "minotaur-7",
 		"dialogue": "",
 		"event": "",
@@ -1974,35 +2645,85 @@
 		]
 	},
 	"778-aberration": {
-		"name": "",
+		"name": "Examiner",
 		"img": "aberration-3",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				376,
+				1608
+			],
+			[
+				408,
+				1672
+			],
+			[
+				456,
+				1672
+			],
+			[
+				408,
+				1672
+			],
+			[
+				360,
+				1704
+			]
+		],
 		"spawnPos": [
 			376,
 			1608
 		]
 	},
 	"779-aberration": {
-		"name": "",
+		"name": "Revenant",
 		"img": "aberration-1",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				344,
+				1704
+			],
+			[
+				280,
+				1688
+			],
+			[
+				200,
+				1688
+			],
+			[
+				168,
+				1720
+			],
+			[
+				200,
+				1688
+			],
+			[
+				280,
+				1688
+			],
+			[
+				392,
+				1736
+			]
+		],
 		"spawnPos": [
-			296,
+			344,
 			1704
 		]
 	},
 	"781-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-0",
 		"dialogue": "",
 		"event": "",
@@ -2016,7 +2737,7 @@
 		]
 	},
 	"783-minotaur": {
-		"name": "",
+		"name": "Bloodhorn Marauder",
 		"img": "minotaur-13",
 		"dialogue": "",
 		"event": "",
@@ -2030,21 +2751,42 @@
 		]
 	},
 	"786-aberration": {
-		"name": "",
+		"name": "Examiner",
 		"img": "aberration-3",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1000,
+				2024
+			],
+			[
+				968,
+				2024
+			],
+			[
+				968,
+				1976
+			],
+			[
+				936,
+				1976
+			],
+			[
+				904,
+				1944
+			]
+		],
 		"spawnPos": [
-			920,
-			1992
+			1000,
+			2024
 		]
 	},
 	"787-minotaur": {
-		"name": "",
+		"name": "Bloodhorn Corrupter",
 		"img": "minotaur-20",
 		"dialogue": "",
 		"event": "",
@@ -2058,35 +2800,85 @@
 		]
 	},
 	"788-bog": {
-		"name": "",
+		"name": "Spore Savage",
 		"img": "bog-10",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				648,
+				1736
+			],
+			[
+				680,
+				1736
+			],
+			[
+				712,
+				1768
+			],
+			[
+				744,
+				1768
+			],
+			[
+				760,
+				1784
+			],
+			[
+				760,
+				1800
+			],
+			[
+				712,
+				1800
+			],
+			[
+				664,
+				1784
+			]
+		],
 		"spawnPos": [
-			664,
-			1800
+			648,
+			1736
 		]
 	},
 	"792-critter": {
-		"name": "",
+		"name": "Cave Stalker",
 		"img": "critter-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				184,
+				1656
+			],
+			[
+				136,
+				1576
+			],
+			[
+				152,
+				1544
+			],
+			[
+				232,
+				1512
+			]
+		],
 		"spawnPos": [
 			184,
 			1656
 		]
 	},
 	"794-bog": {
-		"name": "",
+		"name": "Spore Brood",
 		"img": "bog-2",
 		"dialogue": "",
 		"event": "",
@@ -2100,21 +2892,46 @@
 		]
 	},
 	"795-bog": {
-		"name": "",
+		"name": "Spore Drone",
 		"img": "bog-9",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				328,
+				1528
+			],
+			[
+				408,
+				1528
+			],
+			[
+				424,
+				1560
+			],
+			[
+				408,
+				1576
+			],
+			[
+				392,
+				1576
+			],
+			[
+				344,
+				1512
+			]
+		],
 		"spawnPos": [
 			328,
 			1528
 		]
 	},
 	"797-minotaur": {
-		"name": "",
+		"name": "Bloodhorn Corrupter",
 		"img": "minotaur-20",
 		"dialogue": "",
 		"event": "",
@@ -2128,21 +2945,50 @@
 		]
 	},
 	"798-aberration": {
-		"name": "",
+		"name": "Examiner",
 		"img": "aberration-3",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				472,
+				1816
+			],
+			[
+				392,
+				1752
+			],
+			[
+				456,
+				1800
+			],
+			[
+				536,
+				1768
+			],
+			[
+				552,
+				1736
+			],
+			[
+				536,
+				1768
+			],
+			[
+				616,
+				1816
+			]
+		],
 		"spawnPos": [
 			472,
 			1816
 		]
 	},
 	"800-orc": {
-		"name": "",
+		"name": "Blacktusk Brawler",
 		"img": "orc-25",
 		"dialogue": "",
 		"event": "",
@@ -2156,7 +3002,7 @@
 		]
 	},
 	"801-orc": {
-		"name": "",
+		"name": "Bonefang Raider",
 		"img": "orc-42",
 		"dialogue": "",
 		"event": "",
@@ -2170,21 +3016,42 @@
 		]
 	},
 	"805-aberration": {
-		"name": "",
+		"name": "Revenant",
 		"img": "aberration-2",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				184,
+				1784
+			],
+			[
+				136,
+				1848
+			],
+			[
+				136,
+				1864
+			],
+			[
+				120,
+				1864
+			],
+			[
+				152,
+				1928
+			]
+		],
 		"spawnPos": [
 			184,
-			1800
+			1784
 		]
 	},
 	"806-aberration": {
-		"name": "",
+		"name": "Revenant",
 		"img": "aberration-0",
 		"dialogue": "",
 		"event": "",
@@ -2193,12 +3060,12 @@
 		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
-			104,
+			72,
 			1976
 		]
 	},
 	"808-aberration": {
-		"name": "",
+		"name": "Examiner",
 		"img": "aberration-3",
 		"dialogue": "",
 		"event": "",
@@ -2209,6 +3076,809 @@
 		"spawnPos": [
 			56,
 			1736
+		]
+	},
+	"939-orc": {
+		"name": "Urrebog Peon",
+		"img": "orc-52",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1384,
+			1992
+		]
+	},
+	"940-orc": {
+		"name": "Urrebog Bruiser",
+		"img": "orc-56",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1288,
+			1912
+		]
+	},
+	"941-orc": {
+		"name": "Urrebog Soldier",
+		"img": "orc-49",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1400,
+			1864
+		]
+	},
+	"942-orc": {
+		"name": "Urrebog Seer",
+		"img": "orc-50",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1480,
+			1896
+		]
+	},
+	"943-orc": {
+		"name": "Urrebog Brute",
+		"img": "orc-48",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1528,
+			1784
+		]
+	},
+	"944-orc": {
+		"name": "Urrebog Archer",
+		"img": "orc-54",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1560,
+			1720
+		]
+	},
+	"945-orc": {
+		"name": "Urrebog Outrunner",
+		"img": "orc-53",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1688,
+			1576
+		]
+	},
+	"946-orc": {
+		"name": "Urrebog Poacher",
+		"img": "orc-55",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1768,
+			1560
+		]
+	},
+	"947-orc": {
+		"name": "Urrebog Seer",
+		"img": "orc-50",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1928,
+			1640
+		]
+	},
+	"948-orc": {
+		"name": "Urrebog Seer",
+		"img": "orc-50",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1992,
+			1672
+		]
+	},
+	"949-orc": {
+		"name": "Urrebog Peon",
+		"img": "orc-51",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			2024,
+			1784
+		]
+	},
+	"951-orc": {
+		"name": "Urrebog Peon",
+		"img": "orc-52",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1992,
+			1848
+		]
+	},
+	"953-orc": {
+		"name": "Urrebog Brute",
+		"img": "orc-48",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1960,
+			1976
+		]
+	},
+	"954-orc": {
+		"name": "Urrebog Archer",
+		"img": "orc-54",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1848,
+			1944
+		]
+	},
+	"955-orc": {
+		"name": "Urrebog Archer",
+		"img": "orc-54",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1752,
+			2008
+		]
+	},
+	"956-orc": {
+		"name": "Urrebog Brute",
+		"img": "orc-48",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1672,
+			1960
+		]
+	},
+	"957-orc": {
+		"name": "Urrebog Bruiser",
+		"img": "orc-56",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1768,
+			1864
+		]
+	},
+	"958-orc": {
+		"name": "Urrebog Soldier",
+		"img": "orc-49",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1640,
+				1672
+			],
+			[
+				1704,
+				1624
+			],
+			[
+				1736,
+				1624
+			],
+			[
+				1752,
+				1640
+			],
+			[
+				1784,
+				1640
+			],
+			[
+				1864,
+				1592
+			],
+			[
+				1928,
+				1688
+			],
+			[
+				1928,
+				1784
+			],
+			[
+				1944,
+				1800
+			],
+			[
+				1944,
+				1832
+			],
+			[
+				1928,
+				1832
+			],
+			[
+				1912,
+				1848
+			],
+			[
+				1864,
+				1848
+			],
+			[
+				1784,
+				1896
+			],
+			[
+				1768,
+				1896
+			],
+			[
+				1736,
+				1864
+			],
+			[
+				1704,
+				1864
+			],
+			[
+				1656,
+				1896
+			],
+			[
+				1624,
+				1896
+			],
+			[
+				1624,
+				1928
+			],
+			[
+				1640,
+				1944
+			],
+			[
+				1640,
+				2008
+			],
+			[
+				1624,
+				2008
+			],
+			[
+				1608,
+				2024
+			],
+			[
+				1624,
+				2008
+			],
+			[
+				1640,
+				2008
+			],
+			[
+				1640,
+				1944
+			],
+			[
+				1624,
+				1928
+			],
+			[
+				1624,
+				1896
+			],
+			[
+				1560,
+				1848
+			],
+			[
+				1608,
+				1704
+			],
+			[
+				1576,
+				1672
+			],
+			[
+				1608,
+				1704
+			],
+			[
+				1560,
+				1848
+			],
+			[
+				1560,
+				1880
+			],
+			[
+				1480,
+				1928
+			],
+			[
+				1464,
+				1928
+			],
+			[
+				1400,
+				1896
+			],
+			[
+				1384,
+				1896
+			],
+			[
+				1368,
+				1912
+			],
+			[
+				1336,
+				1912
+			],
+			[
+				1320,
+				1896
+			]
+		],
+		"spawnPos": [
+			1640,
+			1672
+		]
+	},
+	"959-orc": {
+		"name": "Urrebog Peon",
+		"img": "orc-51",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1992,
+				1416
+			],
+			[
+				2024,
+				1432
+			],
+			[
+				2024,
+				1528
+			],
+			[
+				1944,
+				1480
+			],
+			[
+				1976,
+				1448
+			]
+		],
+		"spawnPos": [
+			1992,
+			1416
+		]
+	},
+	"960-orc": {
+		"name": "Urrebog Soldier",
+		"img": "orc-49",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1864,
+				1368
+			],
+			[
+				1960,
+				1368
+			],
+			[
+				2024,
+				1320
+			],
+			[
+				2040,
+				1352
+			],
+			[
+				2040,
+				1384
+			],
+			[
+				1896,
+				1384
+			],
+			[
+				1880,
+				1416
+			]
+		],
+		"spawnPos": [
+			1864,
+			1368
+		]
+	},
+	"961-orc": {
+		"name": "Urrebog Outrunner",
+		"img": "orc-53",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1656,
+				1384
+			],
+			[
+				1688,
+				1336
+			],
+			[
+				1752,
+				1336
+			],
+			[
+				1800,
+				1384
+			],
+			[
+				1816,
+				1384
+			],
+			[
+				1848,
+				1352
+			]
+		],
+		"spawnPos": [
+			1656,
+			1384
+		]
+	},
+	"962-orc": {
+		"name": "Urrebog Peon",
+		"img": "orc-52",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1720,
+				1480
+			],
+			[
+				1816,
+				1480
+			],
+			[
+				1816,
+				1448
+			],
+			[
+				1896,
+				1480
+			]
+		],
+		"spawnPos": [
+			1720,
+			1480
+		]
+	},
+	"964-orc": {
+		"name": "Urrebog Peon",
+		"img": "orc-52",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1560,
+				1480
+			],
+			[
+				1512,
+				1464
+			],
+			[
+				1464,
+				1464
+			],
+			[
+				1432,
+				1432
+			],
+			[
+				1448,
+				1416
+			]
+		],
+		"spawnPos": [
+			1560,
+			1480
+		]
+	},
+	"965-orc": {
+		"name": "Urrebog Poacher",
+		"img": "orc-55",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1288,
+				1608
+			],
+			[
+				1240,
+				1640
+			],
+			[
+				1240,
+				1672
+			],
+			[
+				1272,
+				1704
+			],
+			[
+				1208,
+				1736
+			]
+		],
+		"spawnPos": [
+			1288,
+			1608
+		]
+	},
+	"966-orc": {
+		"name": "Urrebog Peon",
+		"img": "orc-51",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1096,
+				1704
+			],
+			[
+				1160,
+				1768
+			],
+			[
+				1192,
+				1768
+			],
+			[
+				1192,
+				1720
+			],
+			[
+				1208,
+				1704
+			],
+			[
+				1224,
+				1704
+			],
+			[
+				1224,
+				1640
+			],
+			[
+				1192,
+				1640
+			],
+			[
+				1144,
+				1640
+			],
+			[
+				1160,
+				1704
+			]
+		],
+		"spawnPos": [
+			1096,
+			1704
+		]
+	},
+	"967-orc": {
+		"name": "Urrebog Swordsman",
+		"img": "orc-57",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1816,
+			1832
+		]
+	},
+	"968-orc": {
+		"name": "Urrebog Swordsman",
+		"img": "orc-57",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1736,
+			1832
+		]
+	},
+	"969-orc": {
+		"name": "Urrebog Swordsman",
+		"img": "orc-57",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1560,
+			2008
+		]
+	},
+	"970-orc": {
+		"name": "Urrebog Swordsman",
+		"img": "orc-57",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1544,
+			1592
+		]
+	},
+	"971-orc": {
+		"name": "Urrebog Swordsman",
+		"img": "orc-57",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1464,
+			1656
+		]
+	},
+	"972-orc": {
+		"name": "Urrebog Swordsman",
+		"img": "orc-57",
+		"dialogue": "",
+		"event": "",
+		"enemy": true,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1272,
+				1752
+			],
+			[
+				1352,
+				1752
+			],
+			[
+				1400,
+				1720
+			],
+			[
+				1384,
+				1688
+			],
+			[
+				1336,
+				1688
+			],
+			[
+				1320,
+				1672
+			]
+		],
+		"spawnPos": [
+			1272,
+			1752
 		]
 	}
 }

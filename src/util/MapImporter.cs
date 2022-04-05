@@ -48,7 +48,7 @@ namespace Game.Util
 			veilScene = GD.Load<PackedScene>("res://src/map/doodads/VeilFog.tscn"),
 			lightScene = GD.Load<PackedScene>("res://src/light/light.tscn"),
 			lightSource = GD.Load<PackedScene>("res://src/light/lightSource.tscn"),
-			transitionSign = GD.Load<PackedScene>("res://src/map/doodads/interactItem.tscn"),
+			transitionSign = GD.Load<PackedScene>("res://src/map/doodads/transitionSign.tscn"),
 			interactItem = GD.Load<PackedScene>("res://src/map/doodads/interactItem.tscn");
 
 		private Resource environment = GD.Load<Godot.Environment>("res://2d_env.tres");

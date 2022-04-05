@@ -1,0 +1,62 @@
+{
+	"events": [
+		{
+			"condition": "",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I sent word to Marshal Augustus back in Strahmholde about your doings with Bruiseclaw.\nWith everything situated here at the time being, our troops can fend off further tasks here.\nAugustus is waiting for you."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Have you spoke to Marshal Augustus yet?"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618688181-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Hail, we meet again. The kingdom is at peace thanks to your actions.\nIn spite of all your rightful doings to help secure this great kingdom, we must expand our borders."
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1639674231.json",
+		"name": "q1.1407.4"
+	}
+}

@@ -1,0 +1,62 @@
+{
+	"events": [
+		{
+			"condition": "",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "When that bastard Killrok left our clan he took a good amount of us with him down south.\nHe broke pack with our Chieftain and spilled blood in this sacred land. Such treason will not be tolerated.\nThere is an outstanding bounty on Killrok's head. If you just manage to bring it to me, Nur Murk will reward you handsomely."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "What do you have there?"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618423829-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "So the dreaded killrok is dead? Good riddance. You've proven yourself in battle.--"
+		},
+		{
+			"emit_signal": "complete",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.5",
+		"file": "timeline-1642354953.json",
+		"name": "q2.976.0"
+	}
+}

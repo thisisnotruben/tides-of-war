@@ -1,6 +1,6 @@
 {
 	"837-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-34",
 		"dialogue": "",
 		"event": "",
@@ -14,7 +14,7 @@
 		]
 	},
 	"838-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-34",
 		"dialogue": "",
 		"event": "",
@@ -28,7 +28,7 @@
 		]
 	},
 	"857-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-37",
 		"dialogue": "",
 		"event": "",
@@ -42,7 +42,7 @@
 		]
 	},
 	"858-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-37",
 		"dialogue": "",
 		"event": "",
@@ -56,7 +56,7 @@
 		]
 	},
 	"874-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-39",
 		"dialogue": "",
 		"event": "",
@@ -70,7 +70,7 @@
 		]
 	},
 	"875-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-39",
 		"dialogue": "",
 		"event": "",
@@ -98,7 +98,7 @@
 		]
 	},
 	"885-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-12",
 		"dialogue": "",
 		"event": "",
@@ -112,7 +112,7 @@
 		]
 	},
 	"886-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-13",
 		"dialogue": "",
 		"event": "",
@@ -126,7 +126,7 @@
 		]
 	},
 	"887-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-9",
 		"dialogue": "",
 		"event": "",
@@ -140,7 +140,7 @@
 		]
 	},
 	"888-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-16",
 		"dialogue": "",
 		"event": "",
@@ -154,7 +154,7 @@
 		]
 	},
 	"891-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-5",
 		"dialogue": "",
 		"event": "",
@@ -168,7 +168,7 @@
 		]
 	},
 	"892-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-17",
 		"dialogue": "",
 		"event": "",
@@ -182,21 +182,114 @@
 		]
 	},
 	"893-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-2",
 		"dialogue": "",
 		"event": "",
 		"enemy": false,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1720,
+				616
+			],
+			[
+				1704,
+				632
+			],
+			[
+				1608,
+				632
+			],
+			[
+				1544,
+				536
+			],
+			[
+				1256,
+				536
+			],
+			[
+				1224,
+				504
+			],
+			[
+				1136,
+				384
+			],
+			[
+				992,
+				320
+			],
+			[
+				992,
+				256
+			],
+			[
+				1168,
+				208
+			],
+			[
+				1200,
+				224
+			],
+			[
+				1232,
+				272
+			],
+			[
+				1248,
+				336
+			],
+			[
+				1152,
+				384
+			],
+			[
+				1136,
+				384
+			],
+			[
+				1056,
+				352
+			],
+			[
+				984,
+				440
+			],
+			[
+				808,
+				424
+			],
+			[
+				776,
+				424
+			],
+			[
+				760,
+				488
+			],
+			[
+				760,
+				536
+			],
+			[
+				904,
+				616
+			],
+			[
+				952,
+				600
+			]
+		],
 		"spawnPos": [
 			1720,
 			616
 		]
 	},
 	"896-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-11",
 		"dialogue": "",
 		"event": "",
@@ -210,7 +303,7 @@
 		]
 	},
 	"901-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-33",
 		"dialogue": "",
 		"event": "",
@@ -224,35 +317,133 @@
 		]
 	},
 	"903-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-17",
 		"dialogue": "",
 		"event": "",
 		"enemy": false,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1928,
+				520
+			],
+			[
+				1864,
+				456
+			],
+			[
+				1816,
+				472
+			],
+			[
+				1768,
+				440
+			],
+			[
+				1704,
+				488
+			],
+			[
+				1624,
+				456
+			],
+			[
+				1640,
+				376
+			],
+			[
+				1656,
+				344
+			],
+			[
+				1640,
+				312
+			],
+			[
+				1704,
+				248
+			],
+			[
+				1768,
+				248
+			],
+			[
+				1896,
+				376
+			],
+			[
+				1960,
+				280
+			],
+			[
+				1960,
+				232
+			],
+			[
+				1912,
+				184
+			]
+		],
 		"spawnPos": [
 			1928,
 			520
 		]
 	},
 	"904-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-2",
 		"dialogue": "",
 		"event": "",
 		"enemy": false,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1944,
+				552
+			],
+			[
+				1944,
+				584
+			],
+			[
+				1912,
+				600
+			],
+			[
+				1896,
+				616
+			],
+			[
+				1912,
+				632
+			],
+			[
+				1944,
+				632
+			],
+			[
+				1960,
+				616
+			],
+			[
+				1784,
+				632
+			],
+			[
+				1768,
+				568
+			]
+		],
 		"spawnPos": [
 			1944,
 			552
 		]
 	},
 	"911-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-17",
 		"dialogue": "",
 		"event": "",
@@ -266,7 +457,7 @@
 		]
 	},
 	"921-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-42",
 		"dialogue": "",
 		"event": "",
@@ -280,7 +471,7 @@
 		]
 	},
 	"922-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-41",
 		"dialogue": "",
 		"event": "",
@@ -294,7 +485,7 @@
 		]
 	},
 	"923-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-12",
 		"dialogue": "",
 		"event": "",
@@ -308,7 +499,7 @@
 		]
 	},
 	"925-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-9",
 		"dialogue": "",
 		"event": "",
@@ -322,7 +513,7 @@
 		]
 	},
 	"926-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-16",
 		"dialogue": "",
 		"event": "",
@@ -336,7 +527,7 @@
 		]
 	},
 	"927-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-13",
 		"dialogue": "",
 		"event": "",
@@ -377,8 +568,8 @@
 			152
 		]
 	},
-	"933-human": {
-		"name": "",
+	"933-General Rolland": {
+		"name": "General Rolland",
 		"img": "human-44",
 		"dialogue": "",
 		"event": "",
@@ -392,7 +583,7 @@
 		]
 	},
 	"935-human": {
-		"name": "",
+		"name": "Bowman",
 		"img": "human-39",
 		"dialogue": "",
 		"event": "",
@@ -406,21 +597,90 @@
 		]
 	},
 	"939-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-32",
 		"dialogue": "",
 		"event": "",
 		"enemy": false,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1880,
+				184
+			],
+			[
+				1784,
+				248
+			],
+			[
+				1784,
+				280
+			],
+			[
+				1896,
+				376
+			],
+			[
+				1880,
+				456
+			],
+			[
+				1816,
+				472
+			],
+			[
+				1752,
+				440
+			],
+			[
+				1704,
+				488
+			],
+			[
+				1736,
+				552
+			],
+			[
+				1736,
+				600
+			],
+			[
+				1672,
+				632
+			],
+			[
+				1576,
+				632
+			],
+			[
+				1512,
+				536
+			],
+			[
+				1624,
+				456
+			],
+			[
+				1656,
+				344
+			],
+			[
+				1624,
+				312
+			],
+			[
+				1736,
+				232
+			]
+		],
 		"spawnPos": [
-			1944,
-			200
+			1880,
+			184
 		]
 	},
 	"944-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-33",
 		"dialogue": "",
 		"event": "",
@@ -434,7 +694,7 @@
 		]
 	},
 	"947-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-0",
 		"dialogue": "",
 		"event": "",
@@ -448,7 +708,7 @@
 		]
 	},
 	"948-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-2",
 		"dialogue": "",
 		"event": "",
@@ -462,21 +722,62 @@
 		]
 	},
 	"951-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-33",
 		"dialogue": "",
 		"event": "",
 		"enemy": false,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1656,
+				264
+			],
+			[
+				1592,
+				184
+			],
+			[
+				1560,
+				168
+			],
+			[
+				1512,
+				216
+			],
+			[
+				1560,
+				296
+			],
+			[
+				1496,
+				344
+			],
+			[
+				1288,
+				344
+			],
+			[
+				1176,
+				200
+			],
+			[
+				1000,
+				248
+			],
+			[
+				952,
+				216
+			]
+		],
 		"spawnPos": [
-			1624,
-			296
+			1656,
+			264
 		]
 	},
 	"953-human": {
-		"name": "",
+		"name": "Carabinier",
 		"img": "human-46",
 		"dialogue": "",
 		"event": "",
@@ -490,7 +791,7 @@
 		]
 	},
 	"961-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-2",
 		"dialogue": "",
 		"event": "",
@@ -504,7 +805,7 @@
 		]
 	},
 	"966-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-8",
 		"dialogue": "",
 		"event": "",
@@ -518,7 +819,7 @@
 		]
 	},
 	"967-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-13",
 		"dialogue": "",
 		"event": "",
@@ -532,7 +833,7 @@
 		]
 	},
 	"968-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-11",
 		"dialogue": "",
 		"event": "",
@@ -546,14 +847,47 @@
 		]
 	},
 	"969-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-0",
 		"dialogue": "",
 		"event": "",
 		"enemy": false,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				808,
+				280
+			],
+			[
+				792,
+				344
+			],
+			[
+				776,
+				344
+			],
+			[
+				792,
+				344
+			],
+			[
+				808,
+				296
+			],
+			[
+				872,
+				312
+			],
+			[
+				888,
+				328
+			],
+			[
+				968,
+				312
+			]
+		],
 		"spawnPos": [
 			808,
 			280
@@ -574,7 +908,7 @@
 		]
 	},
 	"976-human": {
-		"name": "",
+		"name": "Sorcerer",
 		"img": "human-15",
 		"dialogue": "",
 		"event": "",
@@ -588,7 +922,7 @@
 		]
 	},
 	"980-human": {
-		"name": "",
+		"name": "Sorcerer",
 		"img": "human-15",
 		"dialogue": "",
 		"event": "",
@@ -602,7 +936,7 @@
 		]
 	},
 	"981-human": {
-		"name": "",
+		"name": "Sorcerer",
 		"img": "human-24",
 		"dialogue": "",
 		"event": "",
@@ -616,7 +950,7 @@
 		]
 	},
 	"985-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-33",
 		"dialogue": "",
 		"event": "",
@@ -630,7 +964,7 @@
 		]
 	},
 	"988-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-16",
 		"dialogue": "",
 		"event": "",
@@ -644,7 +978,7 @@
 		]
 	},
 	"990-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-41",
 		"dialogue": "",
 		"event": "",
@@ -658,7 +992,7 @@
 		]
 	},
 	"993-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-17",
 		"dialogue": "",
 		"event": "",
@@ -672,7 +1006,7 @@
 		]
 	},
 	"994-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-5",
 		"dialogue": "",
 		"event": "",
@@ -700,7 +1034,7 @@
 		]
 	},
 	"996-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-2",
 		"dialogue": "",
 		"event": "",
@@ -714,7 +1048,7 @@
 		]
 	},
 	"997-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-13",
 		"dialogue": "",
 		"event": "",
@@ -728,7 +1062,7 @@
 		]
 	},
 	"1001-human": {
-		"name": "",
+		"name": "Paladin Defender",
 		"img": "human-27",
 		"dialogue": "",
 		"event": "",
@@ -742,7 +1076,7 @@
 		]
 	},
 	"1003-human": {
-		"name": "",
+		"name": "Paladin Archer",
 		"img": "human-28",
 		"dialogue": "",
 		"event": "",
@@ -756,7 +1090,7 @@
 		]
 	},
 	"1006-human": {
-		"name": "",
+		"name": "Paladin Swordsman",
 		"img": "human-25",
 		"dialogue": "",
 		"event": "",
@@ -770,7 +1104,7 @@
 		]
 	},
 	"1019-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-14",
 		"dialogue": "",
 		"event": "",
@@ -784,7 +1118,7 @@
 		]
 	},
 	"1030-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-16",
 		"dialogue": "",
 		"event": "",
@@ -812,7 +1146,7 @@
 		]
 	},
 	"1036-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-12",
 		"dialogue": "",
 		"event": "",
@@ -826,7 +1160,7 @@
 		]
 	},
 	"1038-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-32",
 		"dialogue": "",
 		"event": "",
@@ -840,7 +1174,7 @@
 		]
 	},
 	"1041-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-30",
 		"dialogue": "",
 		"event": "",
@@ -854,7 +1188,7 @@
 		]
 	},
 	"1045-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-5",
 		"dialogue": "",
 		"event": "",
@@ -868,7 +1202,7 @@
 		]
 	},
 	"1046-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-17",
 		"dialogue": "",
 		"event": "",
@@ -882,7 +1216,7 @@
 		]
 	},
 	"1047-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-9",
 		"dialogue": "",
 		"event": "",
@@ -910,7 +1244,7 @@
 		]
 	},
 	"1050-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-16",
 		"dialogue": "",
 		"event": "",
@@ -924,21 +1258,82 @@
 		]
 	},
 	"1055-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-36",
 		"dialogue": "",
 		"event": "",
 		"enemy": false,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				824,
+				632
+			],
+			[
+				936,
+				600
+			],
+			[
+				1048,
+				648
+			],
+			[
+				1064,
+				664
+			],
+			[
+				1128,
+				664
+			],
+			[
+				1224,
+				616
+			],
+			[
+				1224,
+				536
+			],
+			[
+				1192,
+				504
+			],
+			[
+				1144,
+				536
+			],
+			[
+				968,
+				488
+			],
+			[
+				936,
+				440
+			],
+			[
+				760,
+				424
+			],
+			[
+				712,
+				504
+			],
+			[
+				728,
+				536
+			],
+			[
+				824,
+				600
+			]
+		],
 		"spawnPos": [
 			824,
 			632
 		]
 	},
 	"1059-human": {
-		"name": "",
+		"name": "City Guard",
 		"img": "human-30",
 		"dialogue": "",
 		"event": "",
@@ -952,7 +1347,7 @@
 		]
 	},
 	"1060-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-41",
 		"dialogue": "",
 		"event": "",
@@ -966,7 +1361,7 @@
 		]
 	},
 	"1074-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-11",
 		"dialogue": "",
 		"event": "",
@@ -980,7 +1375,7 @@
 		]
 	},
 	"1075-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-13",
 		"dialogue": "",
 		"event": "",
@@ -994,7 +1389,7 @@
 		]
 	},
 	"1090-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-3",
 		"dialogue": "",
 		"event": "",
@@ -1008,7 +1403,7 @@
 		]
 	},
 	"1091-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-1",
 		"dialogue": "",
 		"event": "",
@@ -1017,26 +1412,55 @@
 		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
-			1832,
-			1432
+			1816,
+			1416
 		]
 	},
 	"1093-finfolk": {
-		"name": "",
+		"name": "Gillhide Sentry",
 		"img": "finfolk-9",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1928,
+				1400
+			],
+			[
+				1912,
+				1352
+			],
+			[
+				1928,
+				1320
+			],
+			[
+				1912,
+				1304
+			],
+			[
+				1896,
+				1336
+			],
+			[
+				1976,
+				1464
+			],
+			[
+				1944,
+				1512
+			]
+		],
 		"spawnPos": [
 			1928,
 			1400
 		]
 	},
 	"1094-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-14",
 		"dialogue": "",
 		"event": "",
@@ -1050,21 +1474,62 @@
 		]
 	},
 	"1095-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-2",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1912,
+				1512
+			],
+			[
+				1928,
+				1544
+			],
+			[
+				1896,
+				1560
+			],
+			[
+				1896,
+				1592
+			],
+			[
+				1976,
+				1672
+			],
+			[
+				1976,
+				1720
+			],
+			[
+				1992,
+				1736
+			],
+			[
+				1960,
+				1784
+			],
+			[
+				1912,
+				1784
+			],
+			[
+				1832,
+				1736
+			]
+		],
 		"spawnPos": [
 			1912,
 			1512
 		]
 	},
 	"1097-finfolk": {
-		"name": "",
+		"name": "Gillhide Sentry",
 		"img": "finfolk-6",
 		"dialogue": "",
 		"event": "",
@@ -1078,21 +1543,46 @@
 		]
 	},
 	"1098-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-11",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1672,
+				1576
+			],
+			[
+				1592,
+				1624
+			],
+			[
+				1544,
+				1608
+			],
+			[
+				1528,
+				1624
+			],
+			[
+				1624,
+				1640
+			],
+			[
+				1752,
+				1544
+			]
+		],
 		"spawnPos": [
 			1672,
 			1576
 		]
 	},
 	"1099-finfolk": {
-		"name": "",
+		"name": "Gillhide Sentry",
 		"img": "finfolk-13",
 		"dialogue": "",
 		"event": "",
@@ -1105,22 +1595,8 @@
 			1624
 		]
 	},
-	"1100-finfolk": {
-		"name": "",
-		"img": "finfolk-4",
-		"dialogue": "",
-		"event": "",
-		"enemy": true,
-		"level": 1,
-		"dropRate": "0.5",
-		"path": [],
-		"spawnPos": [
-			1688,
-			1656
-		]
-	},
 	"1101-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-2",
 		"dialogue": "",
 		"event": "",
@@ -1134,7 +1610,7 @@
 		]
 	},
 	"1102-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-10",
 		"dialogue": "",
 		"event": "",
@@ -1148,7 +1624,7 @@
 		]
 	},
 	"1105-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-1",
 		"dialogue": "",
 		"event": "",
@@ -1162,7 +1638,7 @@
 		]
 	},
 	"1108-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-4",
 		"dialogue": "",
 		"event": "",
@@ -1176,7 +1652,7 @@
 		]
 	},
 	"1110-finfolk": {
-		"name": "",
+		"name": "Gillhide Sentry",
 		"img": "finfolk-6",
 		"dialogue": "",
 		"event": "",
@@ -1190,49 +1666,124 @@
 		]
 	},
 	"1111-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-11",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1480,
+				1944
+			],
+			[
+				1512,
+				1960
+			],
+			[
+				1528,
+				1992
+			],
+			[
+				1560,
+				1960
+			],
+			[
+				1592,
+				1960
+			]
+		],
 		"spawnPos": [
 			1480,
 			1944
 		]
 	},
 	"1114-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-2",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1400,
+				1912
+			],
+			[
+				1368,
+				1944
+			],
+			[
+				1384,
+				1960
+			],
+			[
+				1432,
+				1944
+			]
+		],
 		"spawnPos": [
 			1400,
 			1912
 		]
 	},
 	"1115-finfolk": {
-		"name": "",
+		"name": "Gillhide Sentry",
 		"img": "finfolk-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1656,
+				1816
+			],
+			[
+				1688,
+				1768
+			],
+			[
+				1704,
+				1768
+			],
+			[
+				1720,
+				1784
+			],
+			[
+				1704,
+				1832
+			],
+			[
+				1832,
+				1944
+			],
+			[
+				1816,
+				1976
+			],
+			[
+				1736,
+				1976
+			],
+			[
+				1608,
+				1880
+			]
+		],
 		"spawnPos": [
 			1656,
 			1816
 		]
 	},
 	"1116-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-14",
 		"dialogue": "",
 		"event": "",
@@ -1246,7 +1797,7 @@
 		]
 	},
 	"1117-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-1",
 		"dialogue": "",
 		"event": "",
@@ -1260,7 +1811,7 @@
 		]
 	},
 	"1118-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-5",
 		"dialogue": "",
 		"event": "",
@@ -1274,7 +1825,7 @@
 		]
 	},
 	"1119-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-3",
 		"dialogue": "",
 		"event": "",
@@ -1288,7 +1839,7 @@
 		]
 	},
 	"1120-finfolk": {
-		"name": "",
+		"name": "Gillhide Sentry",
 		"img": "finfolk-7",
 		"dialogue": "",
 		"event": "",
@@ -1302,7 +1853,7 @@
 		]
 	},
 	"1122-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-3",
 		"dialogue": "",
 		"event": "",
@@ -1316,49 +1867,140 @@
 		]
 	},
 	"1123-finfolk": {
-		"name": "",
+		"name": "Gillhide Myrmidon",
 		"img": "finfolk-0",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1720,
+				1752
+			],
+			[
+				1752,
+				1672
+			],
+			[
+				1736,
+				1656
+			],
+			[
+				1752,
+				1640
+			],
+			[
+				1784,
+				1592
+			],
+			[
+				1832,
+				1608
+			],
+			[
+				1880,
+				1672
+			]
+		],
 		"spawnPos": [
 			1720,
 			1752
 		]
 	},
 	"1124-finfolk": {
-		"name": "",
+		"name": "Gillhide Warrior",
 		"img": "finfolk-14",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				1544,
+				1704
+			],
+			[
+				1560,
+				1752
+			],
+			[
+				1528,
+				1800
+			],
+			[
+				1592,
+				1816
+			],
+			[
+				1672,
+				1768
+			],
+			[
+				1704,
+				1720
+			],
+			[
+				1736,
+				1720
+			],
+			[
+				1768,
+				1704
+			],
+			[
+				1720,
+				1640
+			],
+			[
+				1688,
+				1640
+			],
+			[
+				1624,
+				1672
+			]
+		],
 		"spawnPos": [
-			1592,
-			1688
+			1544,
+			1704
 		]
 	},
 	"1129-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-1",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.75",
-		"path": [],
+		"path": [
+			[
+				904,
+				1800
+			],
+			[
+				936,
+				1784
+			],
+			[
+				1000,
+				1784
+			],
+			[
+				1048,
+				1752
+			]
+		],
 		"spawnPos": [
 			904,
 			1800
 		]
 	},
 	"1130-human": {
-		"name": "",
+		"name": "Rogue Sorcerer",
 		"img": "human-24",
 		"dialogue": "",
 		"event": "",
@@ -1372,7 +2014,7 @@
 		]
 	},
 	"1132-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-47",
 		"dialogue": "",
 		"event": "",
@@ -1386,21 +2028,66 @@
 		]
 	},
 	"1133-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-10",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.75",
-		"path": [],
+		"path": [
+			[
+				792,
+				1816
+			],
+			[
+				840,
+				1816
+			],
+			[
+				856,
+				1832
+			],
+			[
+				856,
+				1880
+			],
+			[
+				872,
+				1896
+			],
+			[
+				904,
+				1896
+			],
+			[
+				936,
+				1880
+			],
+			[
+				1000,
+				1880
+			],
+			[
+				1064,
+				1912
+			],
+			[
+				1160,
+				1912
+			],
+			[
+				1176,
+				1944
+			]
+		],
 		"spawnPos": [
 			792,
 			1816
 		]
 	},
 	"1135-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-1",
 		"dialogue": "",
 		"event": "",
@@ -1414,35 +2101,73 @@
 		]
 	},
 	"1136-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-10",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.75",
-		"path": [],
+		"path": [
+			[
+				984,
+				1864
+			],
+			[
+				952,
+				1848
+			],
+			[
+				920,
+				1848
+			],
+			[
+				888,
+				1864
+			],
+			[
+				856,
+				1800
+			]
+		],
 		"spawnPos": [
 			984,
 			1864
 		]
 	},
 	"1137-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-47",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.75",
-		"path": [],
+		"path": [
+			[
+				936,
+				1944
+			],
+			[
+				968,
+				1976
+			],
+			[
+				1032,
+				1976
+			],
+			[
+				1016,
+				1944
+			]
+		],
 		"spawnPos": [
 			936,
 			1944
 		]
 	},
 	"1138-human": {
-		"name": "",
+		"name": "Rogue Sorcerer",
 		"img": "human-24",
 		"dialogue": "",
 		"event": "",
@@ -1456,7 +2181,7 @@
 		]
 	},
 	"1139-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-10",
 		"dialogue": "",
 		"event": "",
@@ -1470,7 +2195,7 @@
 		]
 	},
 	"1140-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-47",
 		"dialogue": "",
 		"event": "",
@@ -1484,7 +2209,7 @@
 		]
 	},
 	"1141-human": {
-		"name": "",
+		"name": "Rogue Sorcerer",
 		"img": "human-24",
 		"dialogue": "",
 		"event": "",
@@ -1498,7 +2223,7 @@
 		]
 	},
 	"1144-human": {
-		"name": "",
+		"name": "Town Guard",
 		"img": "human-33",
 		"dialogue": "",
 		"event": "",
@@ -1512,7 +2237,7 @@
 		]
 	},
 	"1148-human": {
-		"name": "",
+		"name": "Town Guard",
 		"img": "human-32",
 		"dialogue": "",
 		"event": "",
@@ -1526,7 +2251,7 @@
 		]
 	},
 	"1149-human": {
-		"name": "",
+		"name": "Town Guard",
 		"img": "human-32",
 		"dialogue": "",
 		"event": "",
@@ -1554,7 +2279,7 @@
 		]
 	},
 	"1156-human": {
-		"name": "",
+		"name": "Footman",
 		"img": "human-31",
 		"dialogue": "",
 		"event": "",
@@ -1568,7 +2293,7 @@
 		]
 	},
 	"1157-human": {
-		"name": "",
+		"name": "Footman",
 		"img": "human-31",
 		"dialogue": "",
 		"event": "",
@@ -1582,7 +2307,7 @@
 		]
 	},
 	"1158-human": {
-		"name": "",
+		"name": "Town Guard",
 		"img": "human-4",
 		"dialogue": "",
 		"event": "",
@@ -1624,7 +2349,7 @@
 		]
 	},
 	"1171-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-0",
 		"dialogue": "",
 		"event": "",
@@ -1638,7 +2363,7 @@
 		]
 	},
 	"1172-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-8",
 		"dialogue": "",
 		"event": "",
@@ -1652,7 +2377,7 @@
 		]
 	},
 	"1173-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-16",
 		"dialogue": "",
 		"event": "",
@@ -1680,7 +2405,7 @@
 		]
 	},
 	"1180-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-12",
 		"dialogue": "",
 		"event": "",
@@ -1694,7 +2419,7 @@
 		]
 	},
 	"1181-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-41",
 		"dialogue": "",
 		"event": "",
@@ -1708,7 +2433,7 @@
 		]
 	},
 	"1182-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-5",
 		"dialogue": "",
 		"event": "",
@@ -1722,7 +2447,7 @@
 		]
 	},
 	"1191-human": {
-		"name": "",
+		"name": "Town Guard",
 		"img": "human-6",
 		"dialogue": "",
 		"event": "",
@@ -1731,8 +2456,8 @@
 		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
-			1192,
-			1400
+			1224,
+			1384
 		]
 	},
 	"1194-Edvard": {
@@ -1764,161 +2489,370 @@
 		]
 	},
 	"1228-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-28",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1144,
+				840
+			],
+			[
+				1208,
+				776
+			],
+			[
+				1160,
+				744
+			],
+			[
+				1048,
+				968
+			]
+		],
 		"spawnPos": [
 			1144,
 			840
 		]
 	},
 	"1236-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-27",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				904,
+				1144
+			],
+			[
+				952,
+				1048
+			],
+			[
+				1000,
+				1064
+			],
+			[
+				952,
+				1128
+			],
+			[
+				920,
+				1176
+			],
+			[
+				968,
+				1208
+			]
+		],
 		"spawnPos": [
 			904,
 			1144
 		]
 	},
 	"1237-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-28",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1128,
+				1128
+			],
+			[
+				1208,
+				1048
+			],
+			[
+				1224,
+				1080
+			],
+			[
+				1096,
+				1192
+			],
+			[
+				1016,
+				1176
+			]
+		],
 		"spawnPos": [
 			1128,
 			1128
 		]
 	},
 	"1247-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1688,
+				744
+			],
+			[
+				1640,
+				728
+			],
+			[
+				1592,
+				760
+			],
+			[
+				1560,
+				824
+			],
+			[
+				1624,
+				904
+			],
+			[
+				1672,
+				936
+			],
+			[
+				1736,
+				840
+			],
+			[
+				1752,
+				792
+			]
+		],
 		"spawnPos": [
-			1704,
-			792
+			1688,
+			744
 		]
 	},
 	"1248-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-27",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1624,
+				872
+			],
+			[
+				1592,
+				920
+			],
+			[
+				1624,
+				968
+			],
+			[
+				1656,
+				984
+			],
+			[
+				1704,
+				968
+			],
+			[
+				1752,
+				920
+			],
+			[
+				1736,
+				872
+			],
+			[
+				1768,
+				824
+			]
+		],
 		"spawnPos": [
 			1624,
 			872
 		]
 	},
-	"1249-critter": {
-		"name": "",
-		"img": "critter-28",
-		"dialogue": "",
-		"event": "",
-		"enemy": true,
-		"level": 1,
-		"dropRate": "0.65",
-		"path": [],
-		"spawnPos": [
-			1752,
-			936
-		]
-	},
 	"1253-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1928,
+				1000
+			],
+			[
+				1880,
+				1048
+			],
+			[
+				1816,
+				984
+			],
+			[
+				1768,
+				968
+			],
+			[
+				1704,
+				1016
+			],
+			[
+				1688,
+				1080
+			],
+			[
+				1720,
+				1128
+			],
+			[
+				1784,
+				1096
+			],
+			[
+				1832,
+				1048
+			],
+			[
+				1816,
+				1016
+			]
+		],
 		"spawnPos": [
-			1912,
-			1032
-		]
-	},
-	"1254-critter": {
-		"name": "",
-		"img": "critter-27",
-		"dialogue": "",
-		"event": "",
-		"enemy": true,
-		"level": 1,
-		"dropRate": "0.65",
-		"path": [],
-		"spawnPos": [
-			1720,
-			1048
+			1928,
+			1000
 		]
 	},
 	"1263-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-27",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1688,
+				1192
+			],
+			[
+				1608,
+				1320
+			],
+			[
+				1544,
+				1320
+			],
+			[
+				1480,
+				1256
+			]
+		],
 		"spawnPos": [
 			1688,
 			1192
 		]
 	},
 	"1264-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-28",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1512,
+				1208
+			],
+			[
+				1480,
+				1112
+			],
+			[
+				1512,
+				1080
+			],
+			[
+				1688,
+				1272
+			],
+			[
+				1672,
+				1304
+			]
+		],
 		"spawnPos": [
-			1496,
-			1224
+			1512,
+			1208
 		]
 	},
 	"1265-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1448,
+				1320
+			],
+			[
+				1560,
+				1192
+			],
+			[
+				1608,
+				1208
+			],
+			[
+				1640,
+				1240
+			],
+			[
+				1656,
+				1272
+			],
+			[
+				1624,
+				1304
+			],
+			[
+				1512,
+				1336
+			]
+		],
 		"spawnPos": [
-			1464,
-			1336
+			1448,
+			1320
 		]
 	},
 	"1276-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-29",
 		"dialogue": "",
 		"event": "",
@@ -1932,35 +2866,69 @@
 		]
 	},
 	"1277-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-29",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				56,
+				1704
+			],
+			[
+				88,
+				1768
+			],
+			[
+				72,
+				1816
+			]
+		],
 		"spawnPos": [
 			56,
 			1704
 		]
 	},
 	"1278-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-29",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				520,
+				1992
+			],
+			[
+				552,
+				2024
+			],
+			[
+				520,
+				2040
+			],
+			[
+				488,
+				2040
+			],
+			[
+				424,
+				1992
+			]
+		],
 		"spawnPos": [
 			520,
 			1992
 		]
 	},
 	"1279-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-0",
 		"dialogue": "",
 		"event": "",
@@ -1974,7 +2942,7 @@
 		]
 	},
 	"1281-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-30",
 		"dialogue": "",
 		"event": "",
@@ -1988,21 +2956,42 @@
 		]
 	},
 	"1287-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-30",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				88,
+				1976
+			],
+			[
+				136,
+				2024
+			],
+			[
+				200,
+				2024
+			],
+			[
+				248,
+				2040
+			],
+			[
+				312,
+				1992
+			]
+		],
 		"spawnPos": [
 			88,
 			1976
 		]
 	},
 	"1288-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-0",
 		"dialogue": "",
 		"event": "",
@@ -2016,91 +3005,249 @@
 		]
 	},
 	"1289-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-0",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				280,
+				1704
+			],
+			[
+				248,
+				1656
+			],
+			[
+				216,
+				1640
+			],
+			[
+				136,
+				1688
+			],
+			[
+				216,
+				1752
+			]
+		],
 		"spawnPos": [
 			280,
 			1704
 		]
 	},
 	"1290-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-30",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				168,
+				1768
+			],
+			[
+				232,
+				1784
+			],
+			[
+				168,
+				1832
+			],
+			[
+				136,
+				1896
+			],
+			[
+				184,
+				1960
+			],
+			[
+				232,
+				1960
+			]
+		],
 		"spawnPos": [
 			168,
 			1768
 		]
 	},
 	"1291-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-29",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				440,
+				1640
+			],
+			[
+				376,
+				1736
+			],
+			[
+				296,
+				1752
+			],
+			[
+				328,
+				1800
+			],
+			[
+				344,
+				1800
+			],
+			[
+				392,
+				1848
+			],
+			[
+				456,
+				1864
+			]
+		],
 		"spawnPos": [
 			440,
 			1640
 		]
 	},
 	"1292-critter": {
-		"name": "",
+		"name": "Cave Lurker",
 		"img": "critter-0",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				584,
+				1672
+			],
+			[
+				552,
+				1624
+			],
+			[
+				504,
+				1624
+			],
+			[
+				424,
+				1576
+			],
+			[
+				408,
+				1608
+			],
+			[
+				440,
+				1672
+			],
+			[
+				488,
+				1720
+			],
+			[
+				440,
+				1784
+			],
+			[
+				424,
+				1800
+			],
+			[
+				472,
+				1832
+			]
+		],
 		"spawnPos": [
 			584,
 			1672
 		]
 	},
 	"1295-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-27",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				680,
+				1416
+			],
+			[
+				664,
+				1384
+			],
+			[
+				616,
+				1352
+			],
+			[
+				536,
+				1400
+			],
+			[
+				648,
+				1448
+			]
+		],
 		"spawnPos": [
-			616,
-			1400
+			680,
+			1416
 		]
 	},
 	"1296-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				888,
+				1608
+			],
+			[
+				904,
+				1656
+			],
+			[
+				872,
+				1704
+			],
+			[
+				744,
+				1704
+			],
+			[
+				680,
+				1672
+			]
+		],
 		"spawnPos": [
 			888,
 			1608
 		]
 	},
 	"1317-gnoll": {
-		"name": "",
+		"name": "Woodpaw Brute",
 		"img": "gnoll-3",
 		"dialogue": "",
 		"event": "",
@@ -2114,21 +3261,34 @@
 		]
 	},
 	"1318-gnoll": {
-		"name": "",
+		"name": "Woodpaw Scavenger",
 		"img": "gnoll-0",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				264,
+				1336
+			],
+			[
+				264,
+				1288
+			],
+			[
+				216,
+				1240
+			]
+		],
 		"spawnPos": [
 			264,
 			1336
 		]
 	},
 	"1321-gnoll": {
-		"name": "",
+		"name": "Woodpaw Poacher",
 		"img": "gnoll-21",
 		"dialogue": "",
 		"event": "",
@@ -2142,21 +3302,54 @@
 		]
 	},
 	"1323-gnoll": {
-		"name": "",
+		"name": "Woodpaw Trapper",
 		"img": "gnoll-22",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				248,
+				1416
+			],
+			[
+				280,
+				1352
+			],
+			[
+				216,
+				1320
+			],
+			[
+				168,
+				1272
+			],
+			[
+				152,
+				1320
+			],
+			[
+				200,
+				1384
+			],
+			[
+				216,
+				1464
+			],
+			[
+				248,
+				1496
+			]
+		],
 		"spawnPos": [
 			248,
 			1416
 		]
 	},
 	"1329-gnoll": {
-		"name": "",
+		"name": "Woodpaw Mongrel",
 		"img": "gnoll-26",
 		"dialogue": "",
 		"event": "",
@@ -2170,21 +3363,50 @@
 		]
 	},
 	"1330-gnoll": {
-		"name": "",
+		"name": "Woodpaw Brute",
 		"img": "gnoll-4",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				280,
+				1496
+			],
+			[
+				328,
+				1528
+			],
+			[
+				360,
+				1480
+			],
+			[
+				312,
+				1464
+			],
+			[
+				248,
+				1464
+			],
+			[
+				216,
+				1400
+			],
+			[
+				264,
+				1352
+			]
+		],
 		"spawnPos": [
 			280,
 			1496
 		]
 	},
 	"1334-gnoll": {
-		"name": "",
+		"name": "Woodpaw Trapper",
 		"img": "gnoll-18",
 		"dialogue": "",
 		"event": "",
@@ -2197,64 +3419,74 @@
 			1528
 		]
 	},
-	"1337-critter": {
-		"name": "",
-		"img": "critter-27",
-		"dialogue": "",
-		"event": "",
-		"enemy": true,
-		"level": 1,
-		"dropRate": "0.65",
-		"path": [],
-		"spawnPos": [
-			504,
-			1144
-		]
-	},
 	"1339-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				600,
+				968
+			],
+			[
+				616,
+				920
+			],
+			[
+				568,
+				856
+			],
+			[
+				536,
+				888
+			]
+		],
 		"spawnPos": [
 			600,
-			952
-		]
-	},
-	"1343-critter": {
-		"name": "",
-		"img": "critter-28",
-		"dialogue": "",
-		"event": "",
-		"enemy": true,
-		"level": 1,
-		"dropRate": "0.65",
-		"path": [],
-		"spawnPos": [
-			472,
-			888
+			968
 		]
 	},
 	"1352-gnoll": {
-		"name": "",
+		"name": "Woodpaw Poacher",
 		"img": "gnoll-5",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				152,
+				200
+			],
+			[
+				232,
+				184
+			],
+			[
+				248,
+				152
+			],
+			[
+				312,
+				136
+			],
+			[
+				344,
+				152
+			]
+		],
 		"spawnPos": [
-			232,
-			184
+			152,
+			200
 		]
 	},
 	"1353-gnoll": {
-		"name": "",
+		"name": "Woodpaw Brute",
 		"img": "gnoll-14",
 		"dialogue": "",
 		"event": "",
@@ -2268,7 +3500,7 @@
 		]
 	},
 	"1354-gnoll": {
-		"name": "",
+		"name": "Woodpaw Trapper",
 		"img": "gnoll-9",
 		"dialogue": "",
 		"event": "",
@@ -2282,7 +3514,7 @@
 		]
 	},
 	"1358-gnoll": {
-		"name": "",
+		"name": "Woodpaw Mongrel",
 		"img": "gnoll-7",
 		"dialogue": "",
 		"event": "",
@@ -2296,21 +3528,34 @@
 		]
 	},
 	"1359-gnoll": {
-		"name": "",
+		"name": "Woodpaw Poacher",
 		"img": "gnoll-21",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				392,
+				344
+			],
+			[
+				408,
+				408
+			],
+			[
+				344,
+				440
+			]
+		],
 		"spawnPos": [
 			392,
 			344
 		]
 	},
 	"1360-gnoll": {
-		"name": "",
+		"name": "Woodpaw Trapper",
 		"img": "gnoll-22",
 		"dialogue": "",
 		"event": "",
@@ -2324,7 +3569,7 @@
 		]
 	},
 	"1361-gnoll": {
-		"name": "",
+		"name": "Woodpaw Scavenger",
 		"img": "gnoll-0",
 		"dialogue": "",
 		"event": "",
@@ -2338,7 +3583,7 @@
 		]
 	},
 	"1362-gnoll": {
-		"name": "",
+		"name": "Woodpaw Mongrel",
 		"img": "gnoll-26",
 		"dialogue": "",
 		"event": "",
@@ -2352,49 +3597,112 @@
 		]
 	},
 	"1364-gnoll": {
-		"name": "",
+		"name": "Woodpaw Trapper",
 		"img": "gnoll-1",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				136,
+				312
+			],
+			[
+				72,
+				376
+			],
+			[
+				104,
+				408
+			],
+			[
+				184,
+				360
+			]
+		],
 		"spawnPos": [
 			136,
-			328
+			312
 		]
 	},
 	"1368-gnoll": {
-		"name": "",
+		"name": "Woodpaw Scavenger",
 		"img": "gnoll-15",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				408,
+				136
+			],
+			[
+				440,
+				136
+			],
+			[
+				472,
+				136
+			],
+			[
+				504,
+				120
+			],
+			[
+				536,
+				168
+			],
+			[
+				520,
+				200
+			],
+			[
+				488,
+				232
+			]
+		],
 		"spawnPos": [
 			408,
 			136
 		]
 	},
 	"1369-gnoll": {
-		"name": "",
+		"name": "Woodpaw Scavenger",
 		"img": "gnoll-2",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				296,
+				424
+			],
+			[
+				248,
+				376
+			],
+			[
+				296,
+				296
+			],
+			[
+				248,
+				264
+			]
+		],
 		"spawnPos": [
-			312,
-			408
+			296,
+			424
 		]
 	},
 	"1371-gnoll": {
-		"name": "",
+		"name": "Woodpaw Mongrel",
 		"img": "gnoll-7",
 		"dialogue": "",
 		"event": "",
@@ -2408,7 +3716,7 @@
 		]
 	},
 	"1372-gnoll": {
-		"name": "",
+		"name": "Woodpaw Brute",
 		"img": "gnoll-14",
 		"dialogue": "",
 		"event": "",
@@ -2422,21 +3730,38 @@
 		]
 	},
 	"1373-gnoll": {
-		"name": "",
+		"name": "Woodpaw Brute",
 		"img": "gnoll-4",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.5",
-		"path": [],
+		"path": [
+			[
+				584,
+				312
+			],
+			[
+				568,
+				360
+			],
+			[
+				520,
+				328
+			],
+			[
+				424,
+				392
+			]
+		],
 		"spawnPos": [
 			584,
 			312
 		]
 	},
 	"1375-gnoll": {
-		"name": "",
+		"name": "Woodpaw Trapper",
 		"img": "gnoll-1",
 		"dialogue": "",
 		"event": "",
@@ -2450,105 +3775,232 @@
 		]
 	},
 	"1376-critter": {
-		"name": "",
+		"name": "Forest Crawler",
 		"img": "critter-6",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.8",
-		"path": [],
+		"path": [
+			[
+				904,
+				792
+			],
+			[
+				936,
+				920
+			],
+			[
+				1048,
+				888
+			],
+			[
+				952,
+				872
+			],
+			[
+				984,
+				760
+			]
+		],
 		"spawnPos": [
 			904,
 			792
 		]
 	},
 	"1377-critter": {
-		"name": "",
+		"name": "Forest Crawler",
 		"img": "critter-3",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.8",
-		"path": [],
+		"path": [
+			[
+				984,
+				856
+			],
+			[
+				1048,
+				904
+			],
+			[
+				984,
+				952
+			],
+			[
+				936,
+				824
+			],
+			[
+				1064,
+				760
+			]
+		],
 		"spawnPos": [
 			984,
 			856
 		]
 	},
 	"1383-critter": {
-		"name": "",
+		"name": "Forest Crawler",
 		"img": "critter-19",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.8",
-		"path": [],
+		"path": [
+			[
+				1000,
+				952
+			],
+			[
+				936,
+				792
+			],
+			[
+				1000,
+				712
+			]
+		],
 		"spawnPos": [
 			1000,
 			952
 		]
 	},
 	"1385-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				1048,
+				1032
+			],
+			[
+				1176,
+				936
+			],
+			[
+				1208,
+				984
+			],
+			[
+				1080,
+				1064
+			],
+			[
+				968,
+				1016
+			]
+		],
 		"spawnPos": [
 			1048,
 			1032
 		]
 	},
 	"1388-critter": {
-		"name": "",
+		"name": "Forest Crawler",
 		"img": "critter-3",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.8",
-		"path": [],
+		"path": [
+			[
+				1048,
+				744
+			],
+			[
+				1080,
+				776
+			],
+			[
+				952,
+				792
+			],
+			[
+				936,
+				888
+			]
+		],
 		"spawnPos": [
 			1048,
 			744
 		]
 	},
 	"1391-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				408,
+				1288
+			],
+			[
+				488,
+				1176
+			]
+		],
 		"spawnPos": [
 			408,
 			1288
 		]
 	},
 	"1393-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-8",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				648,
+				1096
+			],
+			[
+				584,
+				1032
+			],
+			[
+				552,
+				1064
+			],
+			[
+				568,
+				1080
+			],
+			[
+				472,
+				1160
+			],
+			[
+				424,
+				1192
+			]
+		],
 		"spawnPos": [
 			648,
 			1096
 		]
 	},
 	"1397-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-10",
 		"dialogue": "",
 		"event": "",
@@ -2562,7 +4014,7 @@
 		]
 	},
 	"1400-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-1",
 		"dialogue": "",
 		"event": "",
@@ -2576,7 +4028,7 @@
 		]
 	},
 	"1401-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-1",
 		"dialogue": "",
 		"event": "",
@@ -2590,7 +4042,7 @@
 		]
 	},
 	"1403-human": {
-		"name": "",
+		"name": "Bandit",
 		"img": "human-10",
 		"dialogue": "",
 		"event": "",
@@ -2603,32 +4055,35 @@
 			744
 		]
 	},
-	"1405-critter": {
-		"name": "",
-		"img": "critter-8",
-		"dialogue": "",
-		"event": "",
-		"enemy": true,
-		"level": 1,
-		"dropRate": "0.65",
-		"path": [],
-		"spawnPos": [
-			376,
-			728
-		]
-	},
 	"1406-critter": {
-		"name": "",
+		"name": "Timber Wolf",
 		"img": "critter-27",
 		"dialogue": "",
 		"event": "",
 		"enemy": true,
 		"level": 1,
 		"dropRate": "0.65",
-		"path": [],
+		"path": [
+			[
+				168,
+				712
+			],
+			[
+				216,
+				728
+			],
+			[
+				264,
+				696
+			],
+			[
+				312,
+				712
+			]
+		],
 		"spawnPos": [
-			200,
-			616
+			168,
+			712
 		]
 	},
 	"1407-Lieutenant Chapman": {
@@ -2646,7 +4101,7 @@
 		]
 	},
 	"1409-human": {
-		"name": "",
+		"name": "Footman",
 		"img": "human-6",
 		"dialogue": "",
 		"event": "",
@@ -2660,7 +4115,7 @@
 		]
 	},
 	"1410-human": {
-		"name": "",
+		"name": "Footman",
 		"img": "human-6",
 		"dialogue": "",
 		"event": "",
@@ -2674,7 +4129,7 @@
 		]
 	},
 	"1411-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-5",
 		"dialogue": "",
 		"event": "",
@@ -2744,7 +4199,7 @@
 		]
 	},
 	"1420-human": {
-		"name": "",
+		"name": "Carabinier",
 		"img": "human-46",
 		"dialogue": "",
 		"event": "",
@@ -2758,7 +4213,7 @@
 		]
 	},
 	"1421-human": {
-		"name": "",
+		"name": "Carabinier",
 		"img": "human-46",
 		"dialogue": "",
 		"event": "",
@@ -2772,7 +4227,7 @@
 		]
 	},
 	"1424-human": {
-		"name": "",
+		"name": "Pikeman",
 		"img": "human-35",
 		"dialogue": "",
 		"event": "",
@@ -2786,7 +4241,7 @@
 		]
 	},
 	"1425-human": {
-		"name": "",
+		"name": "Pikeman",
 		"img": "human-35",
 		"dialogue": "",
 		"event": "",
@@ -2800,7 +4255,7 @@
 		]
 	},
 	"1426-human": {
-		"name": "",
+		"name": "Peasant",
 		"img": "human-2",
 		"dialogue": "",
 		"event": "",
@@ -2901,7 +4356,7 @@
 		]
 	},
 	"1567-human": {
-		"name": "",
+		"name": "Bowman",
 		"img": "human-40",
 		"dialogue": "",
 		"event": "q1.1407.3",
@@ -2952,7 +4407,7 @@
 		]
 	},
 	"1570-human": {
-		"name": "",
+		"name": "Footman",
 		"img": "human-31",
 		"dialogue": "",
 		"event": "q1.1407.3",
@@ -2995,7 +4450,7 @@
 		]
 	},
 	"1572-human": {
-		"name": "",
+		"name": "Pikeman",
 		"img": "human-37",
 		"dialogue": "",
 		"event": "q1.1407.3",
@@ -3054,7 +4509,7 @@
 		]
 	},
 	"1573-human": {
-		"name": "",
+		"name": "Footman",
 		"img": "human-4",
 		"dialogue": "",
 		"event": "q1.1407.3",
@@ -3097,7 +4552,7 @@
 		]
 	},
 	"1574-human": {
-		"name": "",
+		"name": "Carabinier",
 		"img": "human-45",
 		"dialogue": "",
 		"event": "q1.1407.3",
@@ -3140,7 +4595,7 @@
 		]
 	},
 	"1575-human": {
-		"name": "",
+		"name": "Footman",
 		"img": "human-32",
 		"dialogue": "",
 		"event": "q1.1407.3",
@@ -3210,6 +4665,49 @@
 		"spawnPos": [
 			360,
 			280
+		]
+	},
+	"1646-human": {
+		"name": "Footman",
+		"img": "human-33",
+		"dialogue": "",
+		"event": "",
+		"enemy": false,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [
+			[
+				1176,
+				1512
+			],
+			[
+				1080,
+				1400
+			],
+			[
+				968,
+				1384
+			],
+			[
+				888,
+				1432
+			],
+			[
+				968,
+				1384
+			],
+			[
+				1080,
+				1400
+			],
+			[
+				1224,
+				1336
+			]
+		],
+		"spawnPos": [
+			1176,
+			1512
 		]
 	}
 }

@@ -1,6 +1,7 @@
 using Game.Database;
 using Game.Map.Doodads;
 using Game.Actor;
+using Game.Factory;
 using Game.Ui;
 using Game.Actor.Doodads;
 using Godot;
@@ -43,13 +44,19 @@ namespace Game.Quest
 		private void ResetQuests()
 		{
 			quests.Clear();
+			for (int i = 0; i < GetChildCount(); i++)
+			{
+				GetChild(i).QueueFree();
+			}
+
 			// put all quest data to WorldQuests class and query for dependent quests
 			Dictionary<string, QuestDB.QuestData> questData = Globals.questDB.data;
 			HashSet<string> dependentQuests = new HashSet<string>();
+			QuestFactory questFactory = new QuestFactory();
 
 			foreach (string questName in questData.Keys)
 			{
-				quests.Add(new WorldQuest().Init(questData[questName]));
+				quests.Add(questFactory.Create(questData[questName].dialogue).Init(questData[questName]));
 
 				if (!questData[questName].nextQuest.Empty())
 				{
@@ -66,7 +73,7 @@ namespace Game.Quest
 			quests.ForEach(q =>
 			{
 				AddChild(q);
-				q.Name = $"quest{q.GetIndex()}";
+				q.Name = q.quest.dialogue;
 
 				if (!dependentQuests.Contains(q.quest.questName))
 				{

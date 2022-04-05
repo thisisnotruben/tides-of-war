@@ -4,7 +4,7 @@
 [ext_resource path="res://src/character/player/CharacterCamera.cs" type="Script" id=2]
 
 [node name="camera" type="Camera2D"]
-zoom = Vector2( 0.175, 0.175 )
+zoom = Vector2( 0.22, 0.22 )
 process_mode = 0
 limit_smoothed = true
 drag_margin_h_enabled = true

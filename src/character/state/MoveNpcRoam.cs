@@ -10,6 +10,7 @@ namespace Game.Actor.State
 		public Queue<Vector2> waypoints = new Queue<Vector2>();
 		private bool reversePath = false;
 
+		public MoveNpcRoam() : base(CHARACTER_SPEED * 0.6f) { }
 		public override void Start()
 		{
 			base.Start();
