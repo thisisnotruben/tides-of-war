@@ -109,12 +109,14 @@ namespace Game.Quest
 		public virtual void OnStatusChanged(QuestMaster.QuestStatus status) { }
 		public virtual void SetEvents()
 		{
+			string eventTrigger;
 			foreach (string editorName in Globals.unitDB.data.Keys)
 			{
-				if (!quest.dialogue.Empty())
+				eventTrigger = Globals.unitDB.GetData(editorName).eventTrigger;
+				if (!quest.dialogue.Empty() && !eventTrigger.Empty())
 				{
 					Map.Map.map.SpawnUnit(editorName,
-						quest.dialogue.Equals(Globals.unitDB.GetData(editorName).eventTrigger)
+						quest.dialogue.Equals(eventTrigger)
 							&& (status == QuestMaster.QuestStatus.ACTIVE
 							|| status == QuestMaster.QuestStatus.COMPLETED));
 				}

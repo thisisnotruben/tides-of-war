@@ -10,20 +10,14 @@
 			"value": "0"
 		},
 		{
-			"id": "1618688181-648",
-			"name": "questObjective",
-			"type": 0,
-			"value": "0"
-		},
-		{
-			"id": "1618668193-648",
-			"name": "questActive",
-			"type": 0,
-			"value": "0"
-		},
-		{
 			"id": "1618423829-648",
 			"name": "questCompleted",
+			"type": 0,
+			"value": "0"
+		},
+		{
+			"id": "1618688181-648",
+			"name": "questObjective",
 			"type": 0,
 			"value": "0"
 		},
@@ -32,6 +26,18 @@
 			"name": "npcName",
 			"type": 0,
 			"value": ""
+		},
+		{
+			"id": "1618668193-648",
+			"name": "questActive",
+			"type": 0,
+			"value": "0"
+		},
+		{
+			"id": "1649372560-216",
+			"name": "questDelivered",
+			"type": 0,
+			"value": "0"
 		}
 	]
 }

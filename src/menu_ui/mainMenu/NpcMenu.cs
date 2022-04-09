@@ -130,7 +130,7 @@ namespace Game.Ui
 
 			// init dialogic
 			dialogue = focusedControl = DialogicSharp.Start(
-				worldQuest?.quest.dialogue ?? Globals.unitDB.GetData(npc.Name).dialogue, false);
+				worldQuest?.quest.dialogue ?? Globals.unitDB.GetData(npc.Name).dialogue);
 
 			dialogue.Connect("tree_exiting", this, nameof(ClearDialogue));
 			dialogue.Connect("visibility_changed", this, nameof(OnDialogueVisibilityChanged));

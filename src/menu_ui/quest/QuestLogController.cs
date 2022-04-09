@@ -201,7 +201,7 @@ namespace Game.Ui
 
 			DialogicSharp.ResetSaves();
 			DialogicSharp.SetVariable("questAvailable", "1");
-			dialogue = DialogicSharp.Start(focusedWorldQuest.quest.dialogue, false);
+			dialogue = DialogicSharp.Start(focusedWorldQuest.quest.dialogue);
 			dialogue.SizeFlagsVertical = dialogue.GetNode<Control>("TextBubble").SizeFlagsVertical
 				= (int)Control.SizeFlags.ExpandFill;
 
