@@ -2638,5 +2638,105 @@
 		"swing": "swing_medium",
 		"body": "gnoll",
 		"melee": true
+	},
+	"orc-48": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "orc",
+		"melee": true
+	},
+	"orc-49": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "orc",
+		"melee": true
+	},
+	"orc-50": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "magic",
+		"weaponMaterial": "",
+		"swing": "",
+		"body": "orc",
+		"melee": false
+	},
+	"orc-51": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "orc",
+		"melee": true
+	},
+	"orc-52": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "axe",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "orc",
+		"melee": true
+	},
+	"orc-53": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "orc",
+		"melee": false
+	},
+	"orc-54": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "orc",
+		"melee": false
+	},
+	"orc-55": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 6,
+		"weapon": "arrow_hit_armor",
+		"weaponMaterial": "wood",
+		"swing": "arrow_pass",
+		"body": "orc",
+		"melee": false
+	},
+	"orc-56": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "orc",
+		"melee": true
+	},
+	"orc-57": {
+		"moving": 3,
+		"dying": 7,
+		"attacking": 7,
+		"weapon": "sword",
+		"weaponMaterial": "metal",
+		"swing": "swing_medium",
+		"body": "orc",
+		"melee": true
 	}
 }

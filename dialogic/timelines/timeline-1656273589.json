@@ -1,7 +1,7 @@
 {
 	"events": [
 		{
-			"condition": "==",
+			"condition": "",
 			"definition": "1618668214-787",
 			"event_id": "dialogic_012",
 			"value": "1"
@@ -10,18 +10,17 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Getting those supply caches was a great deed for our town, but I'm worried of what you said in your report.\nGo speak with Captain Harden to the tower in Southwood."
+			"text": "Gogug might have an explanation for this corruption, go speak to him he'll most likey have something for you."
 		},
 		{
 			"emit_signal": "start",
 			"event_id": "dialogic_040"
 		},
 		{
-			"endbranch": "",
 			"event_id": "dialogic_013"
 		},
 		{
-			"condition": "==",
+			"condition": "",
 			"definition": "1618668193-648",
 			"event_id": "dialogic_012",
 			"value": "1"
@@ -30,14 +29,13 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Captain Harden is waiting for you."
+			"text": "Go speak to Gogug."
 		},
 		{
-			"endbranch": "",
 			"event_id": "dialogic_013"
 		},
 		{
-			"condition": "==",
+			"condition": "",
 			"definition": "1618688181-648",
 			"event_id": "dialogic_012",
 			"value": "1"
@@ -46,7 +44,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "So you're the one who Quartermaster Arndell spoke highly of."
+			"text": "Greetings, I'm Gogug."
 		},
 		{
 			"emit_signal": "objective",
@@ -57,13 +55,12 @@
 			"event_id": "dialogic_040"
 		},
 		{
-			"endbranch": "",
 			"event_id": "dialogic_013"
 		}
 	],
 	"metadata": {
 		"dialogic-version": "1.4.1",
-		"file": "timeline-1620179513.json",
-		"name": "q1.1161.1"
+		"file": "timeline-1656273589.json",
+		"name": "q2.256.1"
 	}
 }

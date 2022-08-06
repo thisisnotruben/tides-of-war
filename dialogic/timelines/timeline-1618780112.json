@@ -17,6 +17,10 @@
 			"event_id": "dialogic_040"
 		},
 		{
+			"emit_signal": "startQuests",
+			"event_id": "dialogic_040"
+		},
+		{
 			"endbranch": "",
 			"event_id": "dialogic_013"
 		},

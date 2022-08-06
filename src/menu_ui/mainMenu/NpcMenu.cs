@@ -173,7 +173,6 @@ namespace Game.Ui
 					if (worldQuest != null)
 					{
 						PlaySound(NameDB.UI.QUEST_ACCEPT);
-						npc.questMarker.ShowMarker(QuestMarker.MarkerType.ACTIVE);
 						Globals.questMaster.ActivateQuest(worldQuest.quest.questName);
 						EmitSignal(nameof(QuestStarted), worldQuest);
 					}
@@ -188,8 +187,7 @@ namespace Game.Ui
 						}
 						else
 						{
-							dialogue.Connect("tree_exited", this, nameof(OnDialogueNext),
-								new GC.Array() { nextQuest });
+							Globals.TryLinkSignal(dialogue, "tree_exited", this, nameof(OnDialogueNext), true, new GC.Array() { nextQuest });
 						}
 					};
 
@@ -211,7 +209,6 @@ namespace Game.Ui
 							questGiver.questMarker.Visible = nextQuest != null;
 							if (nextQuest != null)
 							{
-								questGiver.questMarker.ShowMarker(QuestMarker.MarkerType.AVAILABLE);
 								spawnNextDialogue(nextQuest);
 							}
 						}
@@ -232,21 +229,15 @@ namespace Game.Ui
 
 				case "objective":
 					QuestDB.ExtraContentData extraContentData;
-					if (Globals.questMaster.TryGetExtraQuestContent(npc.worldName, out extraContentData))
+					if (Globals.questMaster.TryGetExtraQuestContent(npc.worldName, out extraContentData)
+					&& Globals.itemDB.HasData(extraContentData.reward)
+					&& addToInventory(extraContentData.reward)
+					&& extraContentData.gold > 0)
 					{
-						if (Globals.itemDB.HasData(extraContentData.reward) && !addToInventory(extraContentData.reward))
-						{
-							return;
-						}
-
-						if (extraContentData.gold > 0)
-						{
-							player.gold += extraContentData.gold;
-							player.SpawnCombatText(extraContentData.gold.ToString(), CombatText.TextType.GOLD);
-						}
-
-						Globals.questMaster.CheckQuests(npc.GetPath(), npc.worldName, QuestDB.QuestType.TALK);
+						player.gold += extraContentData.gold;
+						player.SpawnCombatText(extraContentData.gold.ToString(), CombatText.TextType.GOLD);
 					}
+					Globals.questMaster.CheckQuests(npc.GetPath(), QuestDB.QuestType.TALK);
 					break;
 
 				case "drop":
@@ -257,6 +248,10 @@ namespace Game.Ui
 							return;
 						}
 					});
+					break;
+
+				case "startquests":
+					Globals.questMaster.AllowStartQuests(worldQuest);
 					break;
 			}
 		}

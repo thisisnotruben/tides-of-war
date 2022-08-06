@@ -57,7 +57,6 @@ namespace Game.Quest
 			if (IsCompleted())
 			{
 				status = QuestMaster.QuestStatus.COMPLETED;
-				GetNodeOrNull<Npc>(quest.questGiverPath)?.questMarker.ShowMarker(QuestMarker.MarkerType.COMPLETED);
 			}
 			return true;
 		}
@@ -66,6 +65,7 @@ namespace Game.Quest
 			if (!charactersTalkedTo.Contains(characterPath)
 			&& UpdateQuest(objectiveName, questType, countTowardsObjective))
 			{
+				GetNodeOrNull<Npc>(characterPath)?.questMarker.Revert();
 				charactersTalkedTo.Add(characterPath);
 				return true;
 			}
@@ -106,7 +106,38 @@ namespace Game.Quest
 			}
 		}
 		public bool HasCharacterPath(string characterPath) { return charactersTalkedTo.Contains(characterPath); }
-		public virtual void OnStatusChanged(QuestMaster.QuestStatus status) { }
+		public virtual void OnStatusChanged(QuestMaster.QuestStatus status) { ShowMarker(); }
+		public void ShowMarker()
+		{
+			if (!IsInsideTree())
+			{
+				return;
+			}
+
+			QuestMarker.MarkerType markerType;
+			switch (status)
+			{
+				case QuestMaster.QuestStatus.AVAILABLE:
+					markerType = QuestMarker.MarkerType.AVAILABLE;
+					break;
+				case QuestMaster.QuestStatus.ACTIVE:
+					markerType = QuestMarker.MarkerType.ACTIVE;
+					foreach (var objectiveName in quest.objectives.Keys)
+					{
+						if (quest.objectives[objectiveName].questType == QuestDB.QuestType.TALK)
+						{
+							(Map.Map.map?.GetGameChild(objectiveName) as Npc)?.questMarker.ShowMarker(QuestMarker.MarkerType.OBJECTIVE);
+						}
+					}
+					break;
+				case QuestMaster.QuestStatus.COMPLETED:
+					markerType = QuestMarker.MarkerType.COMPLETED;
+					break;
+				default:
+					return;
+			}
+			GetNodeOrNull<Npc>(quest.questGiverPath)?.questMarker.ShowMarker(markerType);
+		}
 		public virtual void SetEvents()
 		{
 			string eventTrigger;

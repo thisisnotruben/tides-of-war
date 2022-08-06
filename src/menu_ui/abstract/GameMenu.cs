@@ -8,7 +8,7 @@ namespace Game.Ui
 	{
 		public static Player player;
 
-		public void PlaySound(string soundName) { Globals.soundPlayer.PlaySound(soundName); }
+		public void PlaySound(string soundName) { Globals.audioPlayer.PlaySound(soundName); }
 		public void CheckHudSlots(InventoryModel inventoryModel, string commodityWorldName)
 		{
 			SlotController hudSlot;

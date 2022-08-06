@@ -131,7 +131,7 @@ namespace Game.Map.Doodads
 			MenuMasterController menuMaster = Player.player.menu;
 			Action<string> showError = (string errorMsg) =>
 			{
-				Globals.soundPlayer.PlaySound(NameDB.UI.CLICK6);
+				Globals.audioPlayer.PlaySound(NameDB.UI.CLICK6);
 				menuMaster.errorPopup.ShowError(errorMsg);
 			};
 

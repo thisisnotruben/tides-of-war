@@ -143,7 +143,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(Globals.itemDB.GetData(commodityWorldName).material, false);
+				Globals.audioPlayer.PlaySound(Globals.itemDB.GetData(commodityWorldName).material, false);
 				EquipItem(true, commodityWorldName);
 				Hide();
 			}

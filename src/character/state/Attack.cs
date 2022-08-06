@@ -148,7 +148,7 @@ namespace Game.Actor.State
 
 				if (spell == null)
 				{
-					Globals.soundPlayer.PlaySoundRandomized("bow", character.player2D);
+					Globals.audioPlayer.PlaySoundRandomized("bow", character.player2D);
 				}
 				else
 				{
@@ -161,11 +161,11 @@ namespace Game.Actor.State
 						string spellSound = Globals.missileSpellDB.GetData(spell.worldName).sound;
 						if (spellSound.Empty())
 						{
-							Globals.soundPlayer.PlaySoundRandomized("bow", character.player2D);
+							Globals.audioPlayer.PlaySoundRandomized("bow", character.player2D);
 						}
 						else
 						{
-							Globals.soundPlayer.PlaySound(spellSound, character.player2D);
+							Globals.audioPlayer.PlaySound(spellSound, character.player2D);
 						}
 					}
 					setSpellCooldown();
@@ -260,7 +260,7 @@ namespace Game.Actor.State
 				}
 			}
 
-			Globals.soundPlayer.PlaySoundRandomized(soundName, character.player2D);
+			Globals.audioPlayer.PlaySoundRandomized(soundName, character.player2D);
 
 			if (character is Player || target is Player)
 			{

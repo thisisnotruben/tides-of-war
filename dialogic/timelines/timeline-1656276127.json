@@ -1,0 +1,43 @@
+{
+	"events": [
+		{
+			"condition": "",
+			"definition": "1618668214-787",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Gogug and Jugog sent word to me that the Old Kingdom has came back from the dirt.\nOur ancestors spoke to us of fables fighting the Old Gods long ago, I'm afraid we're of no equal footing for them.\nYou've come looking to broker peace between us and you kind.\nSend word back to your Kingdom to assist us in pushing back these foul creatures and I'll send word to Khozgrogal."
+		},
+		{
+			"emit_signal": "start",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1618668193-648",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "The Old Gods are relentless, only together we can face them."
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.1",
+		"file": "timeline-1656276127.json",
+		"name": "q2.976.1"
+	}
+}

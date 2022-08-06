@@ -166,7 +166,7 @@ namespace Game.Ability
 			}
 
 			active = true;
-			Globals.soundPlayer.PlaySound(sound, player2D);
+			Globals.audioPlayer.PlaySound(sound, player2D);
 
 			tween.InterpolateProperty(this, "scale", new Vector2(0.75f, 0.75f),
 				Vector2.One, 0.5f, Tween.TransitionType.Elastic, Tween.EaseType.Out);

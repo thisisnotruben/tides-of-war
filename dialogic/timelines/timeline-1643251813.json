@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": ""
+			"text": "The corruption of the forest is of no coincidance with the opening of the Old Kingdom to the southwest.\nWhat opened the Old Kingdom lies a mystery, seems our next clues resides there."
 		},
 		{
 			"emit_signal": "complete",
@@ -29,7 +29,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": ""
+			"text": "Have you found what might be causing the corruption?"
 		},
 		{
 			"event_id": "dialogic_013"
@@ -44,7 +44,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": ""
+			"text": "That can't be... I'll need to send word to Garrox about this. Go see him."
 		},
 		{
 			"emit_signal": "complete",
@@ -55,7 +55,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.2.5",
+		"dialogic-version": "1.4.1",
 		"file": "timeline-1643251813.json",
 		"name": "q2.228.0"
 	}

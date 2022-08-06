@@ -89,7 +89,8 @@
     <Compile Include="src\factory\SpellFactory.cs" />
     <Compile Include="src\global\Globals.cs" />
     <Compile Include="src\global\ISerializable.cs" />
-    <Compile Include="src\global\SoundPlayer.cs" />
+    <Compile Include="src\global\AudioPlayer.cs" />
+    <Compile Include="src\global\MusicFSM.cs" />
     <Compile Include="src\global\Stats.cs" />
     <Compile Include="src\global\WorldObject.cs" />
     <Compile Include="src\item\Commodity.cs" />

@@ -132,7 +132,7 @@ namespace Game.Database
 		public class Item
 		{
 			public const string
-				QUEST_FINISH = "Quest Finished";
+				QUESTS_FINISHED = "Quests Finished";
 		}
 	}
 }

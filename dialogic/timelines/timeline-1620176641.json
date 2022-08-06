@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Hail, my name is Arndell and I'm the Quartermaster here at Southwood.\nOur situation here worsens everyday as we don't have the supplies nor weaponry to defend ourselves, and the heads in Strahmholde refuse to send us supplies.\nRecently, a band of thieves to the South of Southwood have been stealing our supplies and I need them recovered.\nI need you to bring me 4 supply caches from their base down south and report back to me when you're done."
+			"text": "Hail, my name is Arndell and I'm the Quartermaster here at Southwood.\nOur situation here worsens as we don't have the supplies nor weaponry to defend ourselves, and the heads in Strahmholde refuse to send us supplies.\nRecently, a band of thieves to the South of Southwood have been stealing our supplies and I need them recovered.\nI need you to bring me 4 supply caches from their base down south and report back to me when you're done."
 		},
 		{
 			"emit_signal": "start",
@@ -58,7 +58,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.2.5",
+		"dialogic-version": "1.4.1",
 		"file": "timeline-1620176641.json",
 		"name": "q1.1161.0"
 	}

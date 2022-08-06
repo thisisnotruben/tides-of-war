@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "We are in dire need of wood here, the type of wood that is hard and dry, not the wet-like spongy wood most commonly found here.\nThere are caches of wood out in the forest that have been cured by time and dried by the sun.\nGo out and retrieve them.."
+			"text": "We are in dire need of wood here, the type of wood that is hard and dry, not the wet-like spongy wood most commonly found here.\nThere are caches of wood out in the forest that have been cured by time and dried like a raisin by the sun.\nGo out and there wouldn't you retrieve this wood would ya?"
 		},
 		{
 			"emit_signal": "start",
@@ -29,7 +29,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Have you found the wood yet?"
+			"text": "Wouldn't you know? Have you found the caches of wood yet?"
 		},
 		{
 			"event_id": "dialogic_013"
@@ -41,6 +41,12 @@
 			"value": "1"
 		},
 		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I know it was understood that you would gather wood while I stood here.\nYou did good, so it betooks me to honor your work in this murk.\nHere ya go lad. best smithwork I've encountered in the land.\nBut before you jolt off in the distance..."
+		},
+		{
 			"emit_signal": "complete",
 			"event_id": "dialogic_040"
 		},
@@ -49,7 +55,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.2.5",
+		"dialogic-version": "1.4.1",
 		"file": "timeline-1642276267.json",
 		"name": "q2.723.0"
 	}

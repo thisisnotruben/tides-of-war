@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "The marshlands is a teeming ecosystem full of marvelous wonder at times creating its own life.\nThis life has been becoming hostile rather recently for reasons I'm not sure of.\nGo to the fungal forest west of here to investigate anything strange that might be the cause of their hostility."
+			"text": "The marshlands is a teeming ecosystem full of marvelous wonder, at times creating its very own life.\nThis life has been hostile rather recently for reasons I'm not sure of.\nGo to the fungal forest west of here to investigate anything strange that might be causing this hostility."
 		},
 		{
 			"emit_signal": "start",
@@ -44,7 +44,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Just as I feared, the corruption already spreaded and driven the spores mad. Hmmm... come back to me at a later time."
+			"text": "Just as I feared, the corruption has already spreaded and driven the spores mad. Hmmm..."
 		},
 		{
 			"emit_signal": "complete",
@@ -55,7 +55,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.2.5",
+		"dialogic-version": "1.4.1",
 		"file": "timeline-1642274550.json",
 		"name": "q2.256.0"
 	}

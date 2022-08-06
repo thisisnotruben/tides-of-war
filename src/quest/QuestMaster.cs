@@ -1,12 +1,11 @@
 using Game.Database;
 using Game.Map.Doodads;
-using Game.Actor;
 using Game.Factory;
 using Game.Ui;
-using Game.Actor.Doodads;
 using Godot;
 using GC = Godot.Collections;
 using System.Collections.Generic;
+using System.Linq;
 namespace Game.Quest
 {
 	public class QuestMaster : Node, ISerializable
@@ -73,11 +72,11 @@ namespace Game.Quest
 			quests.ForEach(q =>
 			{
 				AddChild(q);
-				q.Name = q.quest.dialogue;
+				q.Name = q.quest.dialogue + "-" + q.quest.questName;
 
 				if (!dependentQuests.Contains(q.quest.questName))
 				{
-					q.status = QuestStatus.AVAILABLE;
+					SwitchStatus(q, QuestStatus.AVAILABLE);
 				}
 			});
 		}
@@ -101,28 +100,7 @@ namespace Game.Quest
 			});
 			return worldQuests;
 		}
-		public void ShowQuestMarkers()
-		{
-			QuestMarker.MarkerType markerType;
-			foreach (WorldQuest worldQuest in quests)
-			{
-				switch (worldQuest.status)
-				{
-					case QuestStatus.AVAILABLE:
-						markerType = QuestMarker.MarkerType.AVAILABLE;
-						break;
-					case QuestStatus.ACTIVE:
-						markerType = QuestMarker.MarkerType.ACTIVE;
-						break;
-					case QuestStatus.COMPLETED:
-						markerType = QuestMarker.MarkerType.COMPLETED;
-						break;
-					default:
-						continue;
-				}
-				GetNodeOrNull<Npc>(worldQuest.quest.questGiverPath)?.questMarker.ShowMarker(markerType);
-			}
-		}
+		public void ShowQuestMarkers() { quests.ForEach(q => q.ShowMarker()); }
 		public bool IsPartOfObjective(string characterName, out WorldQuest quest, QuestDB.QuestType questType)
 		{
 			WorldQuest foundQuest = null;
@@ -206,22 +184,17 @@ namespace Game.Quest
 				return;
 			}
 
-			Node node;
 			InteractItem interactItem;
 			foreach (MapQuestItemDB.QuestItem item in Globals.mapQuestItemLootDB.GetData(worldQuest.quest.dialogue).mapItems)
 			{
-				node = Map.Map.map.GetGameChild(item.name);
-				if (node != null)
+				interactItem = Map.Map.map.GetGameChild(item.name) as InteractItem;
+				if (interactItem != null)
 				{
-					interactItem = node as InteractItem;
-					if (interactItem != null)
-					{
-						interactItem.Visible = activate;
-						interactItem.SetInteractType(
-							activate ? item.type : string.Empty,
-							activate ? item.value : string.Empty
-						);
-					}
+					interactItem.Visible = activate;
+					interactItem.SetInteractType(
+						activate ? item.type : string.Empty,
+						activate ? item.value : string.Empty
+					);
 				}
 			}
 		}
@@ -240,9 +213,11 @@ namespace Game.Quest
 			}
 			return null;
 		}
-		public bool CheckQuests(string characterPath, string objectiveName, QuestDB.QuestType questType)
+		public bool CheckQuests(string characterPath, QuestDB.QuestType questType)
 		{
 			bool partOfQuest = false;
+			NodePath characterNodePath = new NodePath(characterPath);
+			string objectiveName = characterNodePath.GetName(characterNodePath.GetNameCount() - 1);
 			quests.ForEach(q =>
 			{
 				if (q.status == QuestStatus.ACTIVE
@@ -256,38 +231,38 @@ namespace Game.Quest
 		/*
 		* STATUS CHANGES
 		*/
-		public void ActivateQuest(string questName)
+		public void AllowStartQuests(WorldQuest worldQuest)
 		{
-			AcitvateQuestMapItems(SwitchStatus(questName, QuestStatus.ACTIVE), true);
+			worldQuest.quest.startQuests.ToList().ForEach(questName => SwitchStatus(questName, QuestStatus.AVAILABLE));
 		}
+		public void ActivateQuest(string questName) { SwitchStatus(questName, QuestStatus.ACTIVE); }
 		public WorldQuest DeliverQuest(string questName)
 		{
 			WorldQuest worldQuest = SwitchStatus(questName, QuestStatus.DELIVERED),
 				chainedQuest = null;
 
+			if (worldQuest == null)
+			{
+				return null;
+			}
+
 			AcitvateQuestMapItems(worldQuest, false);
 
-			if (worldQuest != null)
+			quests.Where(q => q != worldQuest).ToList().ForEach(q =>
 			{
-				quests.ForEach(q =>
-				{
-					if (q != worldQuest)
-					{
-						q.UpdateQuest(NameDB.Item.QUEST_FINISH, QuestDB.QuestType.COLLECT, true);
-					}
-				});
+				q.UpdateQuest(NameDB.Item.QUESTS_FINISHED, QuestDB.QuestType.TALK, true);
 
-				if (TryGetQuestByName(worldQuest.quest.nextQuest, out chainedQuest))
+				if (worldQuest.quest.startQuests.Contains(q.quest.questName)
+				&& q.status == QuestStatus.UNAVAILABLE)
 				{
-					if (chainedQuest.status == QuestStatus.UNAVAILABLE)
-					{
-						chainedQuest.status = QuestStatus.AVAILABLE;
-					}
-					else
-					{
-						chainedQuest = null;
-					}
+					SwitchStatus(q.quest.questName, QuestStatus.AVAILABLE);
 				}
+			});
+
+			if (TryGetQuestByName(worldQuest.quest.nextQuest, out chainedQuest)
+			&& chainedQuest.status == QuestStatus.UNAVAILABLE)
+			{
+				SwitchStatus(chainedQuest, QuestStatus.AVAILABLE);
 			}
 
 			return chainedQuest;
@@ -297,10 +272,21 @@ namespace Game.Quest
 			WorldQuest worldQuest;
 			if (TryGetQuestByName(questName, out worldQuest))
 			{
-				worldQuest.status = status;
-				worldQuest.SetEvents();
+				SwitchStatus(worldQuest, status);
 			}
 			return worldQuest;
+		}
+		private void SwitchStatus(WorldQuest worldQuest, QuestStatus status)
+		{
+			worldQuest.status = status;
+			worldQuest.SetEvents();
+
+			switch (status)
+			{
+				case QuestStatus.ACTIVE:
+					AcitvateQuestMapItems(worldQuest, true);
+					break;
+			}
 		}
 		private bool TryGetQuestByName(string questName, out WorldQuest quest)
 		{
@@ -316,17 +302,11 @@ namespace Game.Quest
 			quest = foundQuest;
 			return foundQuest != null;
 		}
-
 		public GC.Dictionary Serialize()
 		{
 			GC.Array questsToSave = new GC.Array();
-			quests.ForEach(q =>
-			{
-				if (q.status != QuestStatus.UNAVAILABLE)
-				{
-					questsToSave.Add(q.Serialize());
-				}
-			});
+			quests.Where(q => q.status != QuestStatus.UNAVAILABLE).ToList()
+				.ForEach(q => questsToSave.Add(q.Serialize()));
 			return new GC.Dictionary() { { NameDB.SaveTag.QUESTS, questsToSave } };
 		}
 		public void Deserialize(GC.Dictionary payload)

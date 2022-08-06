@@ -50,7 +50,7 @@ namespace Game.Actor.Doodads
 		}
 		public void Revive()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK2);
+			Globals.audioPlayer.PlaySound(NameDB.UI.CLICK2);
 
 			// hide button to avoid double click
 			sight.Monitoring = false;

@@ -29,7 +29,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Those swamp creatures still have what belongs to Nur Murk."
+			"text": "Those swamp creatures still have what belongs to our town Nur Murk."
 		},
 		{
 			"event_id": "dialogic_013"
@@ -44,7 +44,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Those creatures should know now not to mess with our caravans, I'll gladly reward you."
+			"text": "Those fish should know now not to mess with our caravans, I'll gladly reward you now."
 		},
 		{
 			"emit_signal": "complete",
@@ -55,7 +55,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.2.5",
+		"dialogic-version": "1.4.1",
 		"file": "timeline-1642271884.json",
 		"name": "q2.631.0"
 	}

@@ -105,7 +105,8 @@ namespace Game.Util
 				transitions = meta.GetNode<Node2D>("transitions"),
 				paths = meta.GetNode<Node2D>("paths"),
 				collNav = meta.GetNode<Node2D>("coll_nav"),
-				lightSpace = meta.GetNode<Node2D>("lightSpace");
+				lightSpace = meta.GetNode<Node2D>("lightSpace"),
+				audio = meta.GetNode<Node2D>("audio");
 
 			GC.Array<Node2D> quests = new GC.Array<Node2D>();
 			foreach (Node group in new Node[] { zedGroup, map.GetNode("ground") })
@@ -144,6 +145,7 @@ namespace Game.Util
 			SetTargetDummys(targetDummys);
 			SetQuestItems(quests);
 			SetLights(zedGroup, lights, lightSpace);
+			SetAudioCollisions(audio);
 			SetShaderData();
 			SetWorldTileset();
 
@@ -368,6 +370,32 @@ namespace Game.Util
 				}
 			}
 		}
+		private void SetAudioCollisions(Node audio)
+		{
+			CollisionPolygon2D collisionPolygon2D;
+			Area2D area2D;
+			foreach (Node2D node2D in audio.GetChildren())
+			{
+				// Re-parent to area-2d
+				collisionPolygon2D = node2D.GetChild<CollisionPolygon2D>(0);
+				node2D.RemoveChild(collisionPolygon2D);
+				node2D.Name = node2D.Name + "-delete";
+				node2D.Owner = null;
+
+				area2D = new Area2D();
+				audio.AddChild(area2D);
+				area2D.Owner = map;
+
+				area2D.AddChild(collisionPolygon2D);
+				collisionPolygon2D.Owner = map;
+				collisionPolygon2D.BuildMode = CollisionPolygon2D.BuildModeEnum.Solids;
+				area2D.Name = node2D.Name.Split("-delete")[0];
+				area2D.GlobalPosition = new Vector2(node2D.GlobalPosition.x, node2D.GlobalPosition.y - CELL_SIZE.y);
+				area2D.CollisionMask = Character.COLL_MASK_PLAYER;
+				area2D.CollisionLayer = 0;
+				area2D.Monitorable = false;
+			}
+		}
 		private void SetTransitions(Node transitionZones, Node transitionSigns, Node transitions)
 		{
 			foreach (Sprite sign in transitionSigns.GetChildren())
@@ -387,7 +415,7 @@ namespace Game.Util
 				area2D.Name = "area2D";
 				area2D.Monitorable = false;
 				area2D.CollisionLayer = 0;
-				area2D.CollisionMask = Player.COLL_MASK_PLAYER;
+				area2D.CollisionMask = Character.COLL_MASK_PLAYER;
 
 				Node2D transitionArea = transitionZones.GetNode<Node2D>(sign.Name);
 				area2D.GlobalPosition = new Vector2(transitionArea.GlobalPosition.x, transitionArea.GlobalPosition.y - CELL_SIZE.y);
@@ -433,7 +461,7 @@ namespace Game.Util
 					area2D.Name = "area2D";
 					area2D.Monitorable = false;
 					area2D.CollisionLayer = 0;
-					area2D.CollisionMask = Player.COLL_MASK_PLAYER;
+					area2D.CollisionMask = Character.COLL_MASK_PLAYER;
 					area2D.Position = sprite.Offset / 2.0f;
 
 					CollisionShape2D collisionShape2D = new CollisionShape2D();

@@ -3,18 +3,19 @@ using System;
 using Game.Actor;
 using Game.Loot;
 using Game.Database;
+using Game.Audio;
 using Game.Ui;
 using Godot;
+using GC = Godot.Collections;
 namespace Game.Map
 {
 	public class Map : Node2D
 	{
-		private const float ASTAR_NORMAL_WEIGHT = 1.0f,
-			ASTAR_OCCUPIED_WEIGHT = 50.0f,
-			ASTAR_ITEM_WEIGHT = 25.0f;
-		private static readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f),
-			OFFSET = new Vector2(0.0f, -16.0f);
+		private const float ASTAR_NORMAL_WEIGHT = 1.0f, ASTAR_OCCUPIED_WEIGHT = 50.0f, ASTAR_ITEM_WEIGHT = 25.0f;
+		private static readonly Vector2 HALF_CELL_SIZE = new Vector2(8.0f, 8.0f);
 		public static Map map;
+
+		[Export] private string[] exploreMusic = new string[0];
 
 		private readonly AStar2D aStar = new AStar2D();
 		private TileMap collNav;
@@ -26,7 +27,9 @@ namespace Game.Map
 		public Map() { map = this; }
 		public override void _Ready()
 		{
-			collNav = GetNode<TileMap>("meta/coll_nav");
+			Node meta = GetNode("meta"),
+				audio = meta.GetNode("audio");
+			collNav = meta.GetNode<TileMap>("coll_nav");
 			ground = GetNode<Node2D>("ground");
 			zed = GetNode<Node2D>("zed/z1");
 			veilFog = GetNode<Particles2D>("VeilFog");
@@ -34,8 +37,11 @@ namespace Game.Map
 			mapSize = collNav.GetUsedRect().Size;
 			MakeNav();
 			SetVeilSize();
+			SetMusicSignals(audio);
 			SetCameraLimits(Player.player.camera);
 			Globals.questMaster.ShowQuestMarkers();
+			Globals.audioPlayer.musicFSM.SetExploreMusic(exploreMusic);
+			Globals.audioPlayer.musicFSM.PlayExploreMusic();
 
 			Globals.sceneLoader.EmitSignal(nameof(SceneLoader.OnSetNewScene));
 		}
@@ -79,6 +85,21 @@ namespace Game.Map
 			return node;
 		}
 		public void SetVeil(bool on) { veilFog.Visible = veilFog.Emitting = on; }
+		private void SetMusicSignals(Node audioParent)
+		{
+			foreach (Node node in audioParent.GetChildren())
+			{
+				if (node is Area2D)
+				{
+					node.Connect("area_entered", this, nameof(OnMusicAreaEnteredExited), new GC.Array() { node.Name, true });
+					node.Connect("area_exited", this, nameof(OnMusicAreaEnteredExited), new GC.Array() { node.Name, false });
+				}
+			}
+		}
+		public void OnMusicAreaEnteredExited(Area2D area2D, string songName, bool entered)
+		{
+			Globals.audioPlayer.musicFSM.PlayMusic(songName, entered, MusicFSM.MusicType.TRIGGER);
+		}
 		private void SetCameraLimits(Camera2D camera2D)
 		{
 			Rect2 mapBorders = collNav.GetUsedRect();

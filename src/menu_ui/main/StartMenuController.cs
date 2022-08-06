@@ -24,7 +24,7 @@ namespace Game.Ui
 		public void _OnWindowClosed() { main.Show(); }
 		public void _OnNewGamePressed()
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK0);
+			Globals.audioPlayer.PlaySound(NameDB.UI.CLICK0);
 			Globals.sceneLoader.SetScene(string.Format(PathManager.sceneMapPath, "zone_1"), this);
 		}
 		public void _OnLoadPressed() { Transition(saveLoadController); }
@@ -32,7 +32,7 @@ namespace Game.Ui
 		public void _OnExitPressed() { GetTree().Quit(); }
 		private void Transition(Control scene)
 		{
-			Globals.soundPlayer.PlaySound(NameDB.UI.CLICK1);
+			Globals.audioPlayer.PlaySound(NameDB.UI.CLICK1);
 			main.Hide();
 			scene.Show();
 		}

@@ -1,7 +1,7 @@
 {
 	"events": [
 		{
-			"condition": "==",
+			"condition": "",
 			"definition": "1618668214-787",
 			"event_id": "dialogic_012",
 			"value": "1"
@@ -10,18 +10,17 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Getting those supply caches was a great deed for our town, but I'm worried of what you said in your report.\nGo speak with Captain Harden to the tower in Southwood."
+			"text": "I might have one more favor needed from you. Our Officer of Affairs Naggob needs this wood.\nHe needs to ship this off to Khozgrogal, in case you haven't heard: the biggest city of the orcs!\nI here stacked this wood nice for him, I'd like you to go and tell to come and fetch it."
 		},
 		{
 			"emit_signal": "start",
 			"event_id": "dialogic_040"
 		},
 		{
-			"endbranch": "",
 			"event_id": "dialogic_013"
 		},
 		{
-			"condition": "==",
+			"condition": "",
 			"definition": "1618668193-648",
 			"event_id": "dialogic_012",
 			"value": "1"
@@ -30,14 +29,13 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Captain Harden is waiting for you."
+			"text": "My wood still here! I reckon you haven't spoke to him! Now git!"
 		},
 		{
-			"endbranch": "",
 			"event_id": "dialogic_013"
 		},
 		{
-			"condition": "==",
+			"condition": "",
 			"definition": "1618688181-648",
 			"event_id": "dialogic_012",
 			"value": "1"
@@ -46,7 +44,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "So you're the one who Quartermaster Arndell spoke highly of."
+			"text": "Dhabu sent you? Where's the shipment at? He wants us to go and get it?!\nAghhh!!! I've had it with that good for nothing greenskin. I'll send muscle to go and get it."
 		},
 		{
 			"emit_signal": "objective",
@@ -57,13 +55,12 @@
 			"event_id": "dialogic_040"
 		},
 		{
-			"endbranch": "",
 			"event_id": "dialogic_013"
 		}
 	],
 	"metadata": {
 		"dialogic-version": "1.4.1",
-		"file": "timeline-1620179513.json",
-		"name": "q1.1161.1"
+		"file": "timeline-1651096593.json",
+		"name": "q2.723.1"
 	}
 }

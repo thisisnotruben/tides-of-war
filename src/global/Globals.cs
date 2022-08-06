@@ -1,7 +1,8 @@
 using Godot;
+using GC = Godot.Collections;
 using Game.Ui;
 using Game.Quest;
-using Game.Sound;
+using Game.Audio;
 using Game.Database;
 namespace Game
 {
@@ -27,20 +28,20 @@ namespace Game
 		public static readonly MapQuestItemDB mapQuestItemLootDB = new MapQuestItemDB();
 		public static readonly MapQuestItemDropDB mapQuestItemDropDB = new MapQuestItemDropDB();
 
-		public static readonly SoundPlayer soundPlayer = new SoundPlayer();
+		public static readonly AudioPlayer audioPlayer = new AudioPlayer();
 		public static readonly CooldownMaster cooldownMaster = new CooldownMaster();
 		public static readonly QuestMaster questMaster = new QuestMaster();
 		public static readonly SceneLoader sceneLoader = new SceneLoader();
 
 		public override void _Ready()
 		{
-			AddChild(soundPlayer);
+			AddChild(audioPlayer);
 			AddChild(cooldownMaster);
 			AddChild(sceneLoader);
 			AddChild(questMaster);
 		}
 		// util function
-		public static void TryLinkSignal(Godot.Object source, string sourceSignal, Godot.Object target, string targetMethod, bool link)
+		public static void TryLinkSignal(Godot.Object source, string sourceSignal, Godot.Object target, string targetMethod, bool link, GC.Array args = null)
 		{
 			if (source == null || target == null)
 			{
@@ -49,7 +50,7 @@ namespace Game
 
 			if (link && !source.IsConnected(sourceSignal, target, targetMethod))
 			{
-				source.Connect(sourceSignal, target, targetMethod);
+				source.Connect(sourceSignal, target, targetMethod, args);
 			}
 			else if (!link && source.IsConnected(sourceSignal, target, targetMethod))
 			{

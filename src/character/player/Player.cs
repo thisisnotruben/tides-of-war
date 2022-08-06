@@ -78,7 +78,7 @@ namespace Game.Actor
 				level = _level;
 				if (!fromSaveFile)
 				{
-					Globals.soundPlayer.PlaySound(NameDB.UI.LEVEL_UP);
+					Globals.audioPlayer.PlaySound(NameDB.UI.LEVEL_UP);
 				}
 				if (level > Stats.MAX_LEVEL)
 				{

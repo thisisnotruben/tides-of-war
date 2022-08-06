@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Our brethren have fallen from venomous sting of those swamp stingers that you'll find south of here.\nThe antidote of those flying insects come from the venom extracted from their stingers. We are reaching critical low supplies of the antidote.\nCollect the stingers from those flying buzzards and bring them back to me."
+			"text": "Our brethren have fallen from venomous sting of those flying bugs that you'll find south of here.\nThe cure of the sting comes from the venom extracted from their stingers. However we are critically low in supplies of the antidote.\nCollect the stingers from those flying buzzards and bring them back to me."
 		},
 		{
 			"emit_signal": "start",
@@ -55,7 +55,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.2.5",
+		"dialogic-version": "1.4.1",
 		"file": "timeline-1642352517.json",
 		"name": "q2.250.0"
 	}

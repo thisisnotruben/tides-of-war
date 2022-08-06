@@ -44,7 +44,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "So the dreaded killrok is dead? Good riddance. You've proven yourself in battle.--"
+			"text": "So the dreaded killrok is dead? Good riddance. You've proven yourself in battle.\nSuch word will be sent back to Khozgrogal of your doings."
 		},
 		{
 			"emit_signal": "complete",
@@ -55,7 +55,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.2.5",
+		"dialogic-version": "1.4.1",
 		"file": "timeline-1642354953.json",
 		"name": "q2.976.0"
 	}

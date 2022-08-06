@@ -3,21 +3,23 @@ using Game.Database;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-namespace Game.Sound
+namespace Game.Audio
 {
-	public class SoundPlayer : Node
+	public class AudioPlayer : Node
 	{
 		private static readonly Dictionary<string, AudioStream> library = new Dictionary<string, AudioStream>();
 		private const byte INIT_PLAYERS = 10;
 
-		private List<AudioStreamPlayer> players = new List<AudioStreamPlayer>();
+		private readonly List<AudioStreamPlayer> players = new List<AudioStreamPlayer>();
+		public readonly MusicFSM musicFSM = new MusicFSM(library);
 		private readonly Random rand = new Random();
 
-		static SoundPlayer() { LoadSoundLibrary(PathManager.sndDir); }
+		static AudioPlayer() { LoadSoundLibrary(PathManager.sndDir); }
 		public override void _Ready()
 		{
-			Name = nameof(SoundPlayer);
+			Name = nameof(AudioPlayer);
 			PauseMode = PauseModeEnum.Process;
+			AddChild(musicFSM);
 			for (int i = 0; i < INIT_PLAYERS; i++)
 			{
 				players.Add(new AudioStreamPlayer());
@@ -57,6 +59,11 @@ namespace Game.Sound
 						audioStreamRandomPitch.AudioStream = audioStream;
 						audioStreamRandomPitch.RandomPitch = 1.15f;
 						audioStream = audioStreamRandomPitch;
+					}
+
+					if (audioStream is AudioStreamOGGVorbis)
+					{
+						((AudioStreamOGGVorbis)audioStream).Loop = false;
 					}
 
 					library.Add(resourceName.BaseName(), audioStream);

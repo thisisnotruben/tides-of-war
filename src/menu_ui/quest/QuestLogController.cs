@@ -206,10 +206,6 @@ namespace Game.Ui
 				= (int)Control.SizeFlags.ExpandFill;
 
 			focusedEntry.AddChildBelowNode(questProgressDes, dialogue);
-
-			dialogue.GetNode<RichTextLabel>("TextBubble/RichTextLabel").Set(
-				"custom_colors/default_color", new Color("#cccccc"));
-
 			dialogue.Connect("tree_exiting", this, nameof(OnDialogueExited));
 		}
 		private void OnDialogueExited()

@@ -44,7 +44,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": ""
+			"text": "Welcome back, it's great to see you again. Fill me in with what's happened... <Augustus leans back and listens>\nInteresting, your efforts have confirmed what the mages have been sensing.\nWell than, I'll Paladin Armond to gather is forces and head to the Marshlands at once."
 		},
 		{
 			"emit_signal": "complete",
@@ -55,7 +55,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.2.5",
+		"dialogic-version": "1.4.1",
 		"file": "timeline-1639685716.json",
 		"name": "q1.931.1"
 	}

@@ -111,7 +111,7 @@ namespace Game.Mine
 			exploded = true;
 			int damage = new Random().Next(minDamage, maxDamage + 1);
 
-			Globals.soundPlayer.PlaySound(soundName, player2D);
+			Globals.audioPlayer.PlaySound(soundName, player2D);
 
 			// show vfx
 			Particles2D particles2D;

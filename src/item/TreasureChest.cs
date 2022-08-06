@@ -38,7 +38,7 @@ namespace Game.Loot
 
 			// start all animations/sounds
 
-			Globals.soundPlayer.PlaySound(NameDB.UI.CHEST_COLLECT, player2D);
+			Globals.audioPlayer.PlaySound(NameDB.UI.CHEST_COLLECT, player2D);
 			animationPlayer.Queue("collect");
 		}
 		public void _OnSightAreaEntered(Area2D area2D)
@@ -51,7 +51,7 @@ namespace Game.Loot
 			select.Show();
 
 			// start all animations/sounds
-			Globals.soundPlayer.PlaySound(NameDB.UI.CHEST_OPEN, player2D);
+			Globals.audioPlayer.PlaySound(NameDB.UI.CHEST_OPEN, player2D);
 			animationPlayer.Queue("open_chest");
 			tween.Start();
 		}
@@ -61,7 +61,7 @@ namespace Game.Loot
 			select.Hide();
 
 			// start all animations/sounds
-			Globals.soundPlayer.PlaySound(NameDB.UI.CHEST_OPEN, player2D);
+			Globals.audioPlayer.PlaySound(NameDB.UI.CHEST_OPEN, player2D);
 			animationPlayer.Queue("close_chest");
 		}
 		public void _OnSelectPressed() { Player.player.menu.LootInteract(this, commodityWorldName); }

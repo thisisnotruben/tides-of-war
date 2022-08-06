@@ -164,7 +164,7 @@ namespace Game.Ui
 			}
 			else
 			{
-				Globals.soundPlayer.PlaySound(Globals.itemDB.GetData(CommodityName).material, true);
+				Globals.audioPlayer.PlaySound(Globals.itemDB.GetData(CommodityName).material, true);
 			}
 
 			// show item details and switch view
