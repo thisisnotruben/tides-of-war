@@ -218,6 +218,7 @@ pointing/emulate_touch_from_mouse=true
 
 [mono]
 
+project/assembly_name="Tides of War"
 debugger_agent/wait_for_debugger=true
 debugger_agent/wait_timeout=10000
 

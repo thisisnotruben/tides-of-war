@@ -440,39 +440,60 @@ namespace Game.Util
 			foreach (Node questLayer in quests)
 			{
 				GC.Array children = questLayer.GetChildren();
-				foreach (Sprite questLoot in children)
+				foreach (Node2D questLoot in children)
 				{
-					Sprite sprite = interactItem.Instance<Sprite>();
-
-					zed.AddChild(sprite);
-					sprite.Owner = map;
-					sprite.Name = questLoot.Name;
-					sprite.GlobalPosition = new Vector2(questLoot.GlobalPosition.x + HALF_CELL_SIZE.x, questLoot.GlobalPosition.y - CELL_SIZE.y);
-					sprite.Texture = questLoot.Texture;
-					sprite.RegionRect = questLoot.RegionRect;
-					if (questLoot.RegionRect.Size.y == 32.0f)
+					if (questLoot is Sprite)
 					{
-						sprite.Offset = new Vector2(0.0f, -16.0f);
+						Sprite sprite = interactItem.Instance<Sprite>(),
+							questLootSprite = (Sprite)questLoot;
+
+						zed.AddChild(sprite);
+						sprite.Owner = map;
+						sprite.Name = questLoot.Name;
+						sprite.GlobalPosition = new Vector2(questLoot.GlobalPosition.x + HALF_CELL_SIZE.x,
+							questLoot.GlobalPosition.y - CELL_SIZE.y);
+						sprite.Texture = questLootSprite.Texture;
+						sprite.RegionRect = questLootSprite.RegionRect;
+						if (questLootSprite.RegionRect.Size.y == 32.0f)
+						{
+							sprite.Offset = new Vector2(0.0f, -16.0f);
+						}
+
+						Area2D area2D = new Area2D();
+						sprite.AddChild(area2D, true);
+						area2D.Owner = map;
+						area2D.Monitorable = false;
+						area2D.CollisionLayer = 0;
+						area2D.CollisionMask = Character.COLL_MASK_PLAYER;
+						area2D.Position = sprite.Offset / 2.0f;
+
+						CollisionShape2D collisionShape2D = new CollisionShape2D();
+						area2D.AddChild(collisionShape2D, true);
+						collisionShape2D.Owner = map;
+
+						CircleShape2D circleShape2D = new CircleShape2D();
+						circleShape2D.Radius = 16.0f;
+						collisionShape2D.Shape = circleShape2D;
+
+						sprite.Hide();
 					}
+					else if (questLoot is StaticBody2D)
+					{
+						Area2D area2D = new Area2D();
+						zed.AddChild(area2D);
+						area2D.Owner = map;
+						area2D.Name = questLoot.Name;
+						area2D.GlobalPosition = new Vector2(questLoot.GlobalPosition.x, questLoot.GlobalPosition.y - CELL_SIZE.y);
 
-					Area2D area2D = new Area2D();
-					sprite.AddChild(area2D);
-					area2D.Owner = map;
-					area2D.Name = "area2D";
-					area2D.Monitorable = false;
-					area2D.CollisionLayer = 0;
-					area2D.CollisionMask = Character.COLL_MASK_PLAYER;
-					area2D.Position = sprite.Offset / 2.0f;
+						Node collisionShape = questLoot.GetChild(0);
+						questLoot.RemoveChild(collisionShape);
+						area2D.AddChild(collisionShape, true);
+						collisionShape.Owner = map;
 
-					CollisionShape2D collisionShape2D = new CollisionShape2D();
-					area2D.AddChild(collisionShape2D, true);
-					collisionShape2D.Owner = map;
-
-					CircleShape2D circleShape2D = new CircleShape2D();
-					circleShape2D.Radius = 16.0f;
-					collisionShape2D.Shape = circleShape2D;
-
-					sprite.Hide();
+						area2D.Monitoring = area2D.Monitorable = false;
+						area2D.CollisionLayer = 0;
+						area2D.CollisionMask = Character.COLL_MASK_PLAYER;
+					}
 				}
 				questLayer.Owner = null;
 				questLayer.QueueFree();

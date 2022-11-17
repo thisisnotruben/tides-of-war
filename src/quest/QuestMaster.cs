@@ -184,12 +184,16 @@ namespace Game.Quest
 				return;
 			}
 
+			Node gameChild;
 			InteractItem interactItem;
 			foreach (MapQuestItemDB.QuestItem item in Globals.mapQuestItemLootDB.GetData(worldQuest.quest.dialogue).mapItems)
 			{
-				interactItem = Map.Map.map.GetGameChild(item.name) as InteractItem;
-				if (interactItem != null)
+				gameChild = Map.Map.map.GetGameChild(item.name);
+				(gameChild as InteractItemScout)?.Activate(item.value, activate);
+
+				if (gameChild is InteractItem)
 				{
+					interactItem = (InteractItem)gameChild;
 					interactItem.Visible = activate;
 					interactItem.SetInteractType(
 						activate ? item.type : string.Empty,

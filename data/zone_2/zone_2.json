@@ -1,6 +1,6 @@
 {
-	"228-orc": {
-		"name": "Kruzgol Seer",
+	"228-Gogug": {
+		"name": "Gogug",
 		"img": "orc-9",
 		"dialogue": "",
 		"event": "",
@@ -94,8 +94,8 @@
 			632
 		]
 	},
-	"250-minotaur": {
-		"name": "Skyhorn Sentry",
+	"250-Rukohr": {
+		"name": "Rukohr",
 		"img": "minotaur-16",
 		"dialogue": "",
 		"event": "",
@@ -108,8 +108,8 @@
 			568
 		]
 	},
-	"255-minotaur": {
-		"name": "Umbralhide Sentry",
+	"255-Zurahg": {
+		"name": "Zurahg",
 		"img": "minotaur-17",
 		"dialogue": "",
 		"event": "",
@@ -122,8 +122,8 @@
 			552
 		]
 	},
-	"256-orc": {
-		"name": "Kruzgol Seer",
+	"256-Jugog": {
+		"name": "Jugog",
 		"img": "orc-9",
 		"dialogue": "",
 		"event": "",
@@ -1658,8 +1658,8 @@
 			152
 		]
 	},
-	"626-orc": {
-		"name": "Kruzgol Swordsman",
+	"626-Jakzod": {
+		"name": "Jakzod",
 		"img": "orc-18",
 		"dialogue": "",
 		"event": "",
@@ -1668,8 +1668,8 @@
 		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
-			1336,
-			312
+			1384,
+			296
 		]
 	},
 	"628-orc": {
@@ -1700,8 +1700,8 @@
 			776
 		]
 	},
-	"631-minotaur": {
-		"name": "Skyhorn Drudger",
+	"631-Wuntrak": {
+		"name": "Wuntrak",
 		"img": "minotaur-21",
 		"dialogue": "",
 		"event": "",
@@ -1756,8 +1756,8 @@
 			536
 		]
 	},
-	"654-minotaur": {
-		"name": "Skyhorn Protector",
+	"654-Zutor": {
+		"name": "Zutor",
 		"img": "minotaur-8",
 		"dialogue": "",
 		"event": "",
@@ -1766,8 +1766,8 @@
 		"dropRate": "0.5",
 		"path": [],
 		"spawnPos": [
-			1384,
-			296
+			1336,
+			312
 		]
 	},
 	"656-orc": {
@@ -1896,8 +1896,8 @@
 			312
 		]
 	},
-	"690-orc": {
-		"name": "Kruzgol Drudger",
+	"690-Naggob": {
+		"name": "Naggob",
 		"img": "orc-0",
 		"dialogue": "",
 		"event": "",
@@ -2115,8 +2115,8 @@
 			1000
 		]
 	},
-	"723-orc": {
-		"name": "Kruzgol Drudger",
+	"723-Dhabu": {
+		"name": "Dhabu",
 		"img": "orc-10",
 		"dialogue": "",
 		"event": "",
@@ -3092,8 +3092,8 @@
 			1992
 		]
 	},
-	"940-orc": {
-		"name": "Urrebog Bruiser",
+	"940-Killrok": {
+		"name": "Killrok",
 		"img": "orc-56",
 		"dialogue": "",
 		"event": "",
@@ -3879,6 +3879,20 @@
 		"spawnPos": [
 			1272,
 			1752
+		]
+	},
+	"976-Garrox": {
+		"name": "Garrox",
+		"img": "minotaur-16",
+		"dialogue": "",
+		"event": "",
+		"enemy": false,
+		"level": 1,
+		"dropRate": "0.5",
+		"path": [],
+		"spawnPos": [
+			1496,
+			568
 		]
 	}
 }

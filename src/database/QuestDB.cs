@@ -6,7 +6,7 @@ namespace Game.Database
 {
 	public class QuestDB : AbstractDB<QuestDB.QuestData>
 	{
-		public enum QuestType : byte { TALK, KILL, COLLECT, LEARN }
+		public enum QuestType : byte { TALK, KILL, COLLECT, LEARN, SCOUT }
 
 		public class QuestData
 		{

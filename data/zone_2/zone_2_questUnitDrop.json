@@ -1,1 +1,50 @@
-{}
+{
+	"q2.250.0": {
+		"Venomous Stinger": [
+			"373-critter",
+			"380-critter",
+			"473-critter",
+			"479-critter",
+			"481-critter",
+			"483-critter",
+			"484-critter"
+		]
+	},
+	"q2.256.0": {
+		"Corrupted Mushroom": [
+			"398-bog",
+			"405-bog",
+			"410-bog",
+			"411-bog",
+			"422-bog",
+			"424-bog",
+			"426-bog",
+			"427-bog",
+			"430-bog",
+			"442-bog",
+			"445-bog",
+			"455-bog",
+			"456-bog",
+			"457-bog",
+			"458-bog",
+			"459-bog",
+			"460-bog",
+			"461-bog",
+			"462-bog",
+			"463-bog",
+			"464-bog",
+			"465-bog",
+			"466-bog",
+			"467-bog",
+			"754-bog",
+			"755-bog",
+			"756-bog",
+			"757-bog"
+		]
+	},
+	"q2.976.0": {
+		"KIllrok's Head": [
+			"940-Killrok"
+		]
+	}
+}

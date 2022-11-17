@@ -1,1 +1,113 @@
-{}
+{
+	"q2.631.0": [
+		{
+			"name": "977-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "978-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "979-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "980-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "981-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		}
+	],
+	"q2.723.0": [
+		{
+			"name": "983-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "984-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "985-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "986-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "987-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "988-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "989-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "990-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "991-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "992-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "993-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "994-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "995-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "996-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		},
+		{
+			"name": "997-questLoot",
+			"type": "loot",
+			"value": "Supply cache"
+		}
+	],
+	"q2.228.0": [
+		{
+			"name": "999-questScout",
+			"type": "scout",
+			"value": "Scout for clues"
+		}
+	]
+}

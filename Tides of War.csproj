@@ -102,6 +102,7 @@
     <Compile Include="src\landMine\LandMine.cs" />
     <Compile Include="src\light\LightSource.cs" />
     <Compile Include="src\map\doodads\InteractItem.cs" />
+    <Compile Include="src\map\doodads\InteractItemScout.cs" />
     <Compile Include="src\map\Map.cs" />
     <Compile Include="src\map\Zone2.cs" />
     <Compile Include="src\map\doodads\TransitionSign.cs" />
