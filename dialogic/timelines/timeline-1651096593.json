@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "I might have one more favor needed from you. Our Officer of Affairs Naggob needs this wood.\nHe needs to ship this off to Khozgrogal, in case you haven't heard: the biggest city of the orcs!\nI here stacked this wood nice for him, I'd like you to go and tell to come and fetch it."
+			"text": "I might have one more favor needed ask from you...\nOur Officer of Affairs Naggob needs this wood shipped off to Khozgrogal.\nIn case you haven't heard: the biggest city of the orcs!\nI here stacked this wood nice for him, I'd like you to tell him to come and fetch it."
 		},
 		{
 			"emit_signal": "start",

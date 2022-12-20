@@ -1,0 +1,19 @@
+{
+	"events": [
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "You open the chest, it creaks and out comes an emanating light.\nYou feel a presense, one you haven't felt since..."
+		},
+		{
+			"emit_signal": "Lost Necklace",
+			"event_id": "dialogic_040"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.1",
+		"file": "timeline-1671077658.json",
+		"name": "q2.657.0-questItem"
+	}
+}

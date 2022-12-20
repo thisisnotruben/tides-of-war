@@ -415,12 +415,12 @@
 	],
 	"q1.1152.1": [
 		{
-			"name": "1543-questLoot",
+			"name": "1543-questTalk",
 			"type": "talk",
 			"value": "q1.1152.1-questItem"
 		},
 		{
-			"name": "1544-questLoot",
+			"name": "1544-questTalk",
 			"type": "talk",
 			"value": "q1.1152.1-questItem"
 		}

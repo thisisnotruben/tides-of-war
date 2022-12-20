@@ -10,10 +10,10 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "The corruption of the forest is of no coincidance with the opening of the Old Kingdom to the southwest.\nWhat opened the Old Kingdom lies a mystery, that seems where our next clue resides."
+			"text": "The old gods must be killed are you ready to start?"
 		},
 		{
-			"emit_signal": "complete",
+			"emit_signal": "start",
 			"event_id": "dialogic_040"
 		},
 		{
@@ -29,7 +29,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Have you found what might be causing the corruption?"
+			"text": "No time to talk, the old gods must be killed."
 		},
 		{
 			"event_id": "dialogic_013"
@@ -44,7 +44,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "That can't be... I'll need to send word to Garrox about this. Go see him."
+			"text": "TODO"
 		},
 		{
 			"emit_signal": "complete",
@@ -56,7 +56,7 @@
 	],
 	"metadata": {
 		"dialogic-version": "1.4.1",
-		"file": "timeline-1643251813.json",
-		"name": "q2.228.0"
+		"file": "timeline-1671078020.json",
+		"name": "q2.976.3"
 	}
 }

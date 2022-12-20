@@ -1,0 +1,43 @@
+{
+	"257-orc": {
+		"level": 0,
+		"enemy": false,
+		"healer": false,
+		"healerCost": 0,
+		"dialogue": "Hello, I'm you melee teacher",
+		"drops": [],
+		"spells": [],
+		"merchandise": [
+			"Devastate",
+			"Intimidating Shout",
+			"Cleave",
+			"Fortify",
+			"Bash",
+			"Hemorrhage",
+			"Stomp",
+			"Overpower",
+			"Frenzy"
+		]
+	},
+	"626-orc": {
+		"level": 0,
+		"enemy": false,
+		"healer": false,
+		"healerCost": 0,
+		"dialogue": "Hello, I'm you magic teacher",
+		"drops": [],
+		"spells": [],
+		"merchandise": [
+			"Fireball",
+			"Shadow bolt",
+			"Frost bolt",
+			"Divine heal",
+			"Siphon mana",
+			"Haste",
+			"Slow",
+			"Arcane bolt",
+			"Mind blast",
+			"Meteor"
+		]
+	}
+}

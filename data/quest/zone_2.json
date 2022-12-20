@@ -1,0 +1,220 @@
+{
+	"Missing Supplies": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/631-Wuntrak",
+		"dialogue": "q2.631.0",
+		"startQuests": [],
+		"objectives": {
+			"Supply cache": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 4,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Fungal Mystery\n": {
+		"nextQuest": "Inquiry of a Mystery",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/256-Jugog",
+		"dialogue": "q2.256.0",
+		"startQuests": [],
+		"objectives": {
+			"Corrupted Mushroom": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Inquiry of a Mystery": {
+		"nextQuest": "Disturbance in the Forest",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/256-Jugog",
+		"dialogue": "q2.256.1",
+		"startQuests": [],
+		"objectives": {
+			"228-Gogug": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Disturbance in the Forest": {
+		"nextQuest": "Covenant",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/228-Gogug",
+		"dialogue": "q2.228.0",
+		"startQuests": [],
+		"objectives": {
+			"Scout for clues": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Covenant": {
+		"nextQuest": "Inventory Run",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/976-Garrox",
+		"dialogue": "q2.976.1",
+		"startQuests": [],
+		"objectives": {
+			"Get help from Strahmholde": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Inventory Run": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/976-Garrox",
+		"dialogue": "q2.976.2",
+		"startQuests": [],
+		"objectives": {
+			"654-Zutor": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"255-Zurahg": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			},
+			"250-Rukohr": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Wood you help Me?": {
+		"nextQuest": "Wood you Deliver",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/723-Dhabu",
+		"dialogue": "q2.723.0",
+		"startQuests": [],
+		"objectives": {
+			"Sun Kissed Wood": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 10,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Wood you Deliver": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/723-Dhabu",
+		"dialogue": "",
+		"startQuests": [],
+		"objectives": {
+			"690-Naggob": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Sting of the Swamp": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/250-Rukohr",
+		"dialogue": "q2.250.0",
+		"startQuests": [],
+		"objectives": {
+			"Venomous Stinger": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 5,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Kill Killrok": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_2/zed/z1/976-Garrox",
+		"dialogue": "q2.976.0",
+		"startQuests": [],
+		"objectives": {
+			"KIllrok's Head": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	}
+}
