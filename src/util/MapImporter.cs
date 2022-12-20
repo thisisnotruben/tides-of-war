@@ -372,6 +372,11 @@ namespace Game.Util
 		}
 		private void SetAudioCollisions(Node audio)
 		{
+			if (audio == null)
+			{
+				return;
+			}
+
 			CollisionPolygon2D collisionPolygon2D;
 			Area2D area2D;
 			foreach (Node2D node2D in audio.GetChildren())

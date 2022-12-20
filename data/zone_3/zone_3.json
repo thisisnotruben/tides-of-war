@@ -293,8 +293,8 @@
 			1208
 		]
 	},
-	"304-orc": {
-		"name": "Kruzgol Drudger",
+	"304-Korgrak": {
+		"name": "Korgrak",
 		"img": "orc-23",
 		"dialogue": "",
 		"event": "",

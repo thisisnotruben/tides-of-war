@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Gogug and Jugog sent word to me that the Old Kingdom has came back from the dirt.\nOur ancestors spoke to us of fables fighting the Old Gods long ago, I'm afraid we're of no equal footing for them.\nYou've come looking to broker peace between us and you kind.\nSend word back to your Kingdom to assist us in pushing back these foul creatures and I'll send word to Khozgrogal."
+			"text": "Gogug and Jugog sent word to me that the Old Kingdom has came back from the dirt.\nOur ancestors spoke of fables fighting the Old Gods long ago, I'm afraid we're of no equal footing for them.\nYou've come to me looking to broker peace between us and you kind.\nSend word back to your Kingdom to assist us in pushing back these foul creatures and I'll send word to Khozgrogal."
 		},
 		{
 			"emit_signal": "start",

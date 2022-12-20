@@ -1,13 +1,13 @@
 {
 	"q1.1417.0": {
-		"Weapon Supplies": [
-			"971-Roswald"
-		],
 		"Miscellaneous Supplies": [
 			"878-Dobbs"
 		],
 		"Food Supplies": [
 			"1032-Hawel"
+		],
+		"Weapon Supplies": [
+			"971-Roswald"
 		]
 	},
 	"q1.1194.0": {

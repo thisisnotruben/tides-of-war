@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "The marshlands is a teeming ecosystem full of marvelous wonder, at times creating its very own life.\nThis life has been hostile rather recently for reasons I'm not sure of.\nGo to the fungal forest west of here to investigate anything strange that might be causing this hostility."
+			"text": "The marshlands is a teeming ecosystem full of marvelous wonder, at times creating its very own life.\nThis life has been rather hostile recently for reasons I'm not sure of.\nGo to the fungal forest west of here to investigate anything strange that might be causing this hostility."
 		},
 		{
 			"emit_signal": "start",

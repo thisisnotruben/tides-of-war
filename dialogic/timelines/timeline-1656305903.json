@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "By our ancestors you've come with help. This pack will be honored.\nBefore our push forward towards the Old Gods there are a few of our brethren you must meet.\nSeek out Zutor our Master at Arms, Zurahg our Magus, and Rukohr our trader."
+			"text": "By our ancestors you've come with help. This pack will be honored.\nBefore we push forward towards the Old Gods there are a few of our brethren you must meet first.\nSeek out Zutor our Master at Arms, Zurahg our Magus, and Rukohr our trader."
 		},
 		{
 			"emit_signal": "start",
@@ -101,7 +101,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "It's time, our warriors are by the entrance of the Old Kingdom waiting on you."
+			"text": "It's time, our warriors are by the entrance of the Old Kingdom waiting on you. Let me know when you are ready."
 		},
 		{
 			"event_id": "dialogic_013"

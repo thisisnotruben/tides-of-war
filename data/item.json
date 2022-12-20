@@ -2794,5 +2794,17 @@
 		"subType": "",
 		"material": "misc",
 		"stackSize": 1
+	},
+	"Lost Necklace": {
+		"type": "QUEST",
+		"icon": 47,
+		"level": 0,
+		"goldCost": 0,
+		"blurb": "",
+		"coolDown": 0,
+		"dropRate": 1.0,
+		"subType": "",
+		"material": "metal1",
+		"stackSize": 10
 	}
 }

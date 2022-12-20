@@ -1,0 +1,11 @@
+{
+	"631-minotaur": {
+		"healer": false,
+		"healerCost": 0,
+		"drops": [],
+		"spells": [],
+		"merchandise": [
+			"Queenfish"
+		]
+	}
+}

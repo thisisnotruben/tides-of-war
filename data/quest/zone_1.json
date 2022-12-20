@@ -204,7 +204,7 @@
 		}
 	},
 	"Thy Kingdom Come": {
-		"nextQuest": "",
+		"nextQuest": "Return to Marshal Augustus",
 		"reward": [],
 		"keepRewardItems": false,
 		"goldReward": 0,
@@ -213,6 +213,46 @@
 		"startQuests": [],
 		"objectives": {
 			"Bruiseclaw's Hand": {
+				"keepWorldObject": false,
+				"questType": "COLLECT",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Return to Marshal Augustus": {
+		"nextQuest": "Pilgrimage",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/1407-Lieutenant Chapman",
+		"dialogue": "q1.1407.4",
+		"startQuests": [],
+		"objectives": {
+			"931-Marshal Augustus": {
+				"keepWorldObject": false,
+				"questType": "TALK",
+				"amount": 1,
+				"extraContent": {
+					"reward": "",
+					"gold": 0
+				}
+			}
+		}
+	},
+	"Pilgrimage": {
+		"nextQuest": "",
+		"reward": [],
+		"keepRewardItems": false,
+		"goldReward": 0,
+		"questGiver": "/root/zone_1/zed/z1/931-Marshal Augustus",
+		"dialogue": "q1.931.1",
+		"startQuests": [],
+		"objectives": {
+			"Something Worthwhile": {
 				"keepWorldObject": false,
 				"questType": "COLLECT",
 				"amount": 1,

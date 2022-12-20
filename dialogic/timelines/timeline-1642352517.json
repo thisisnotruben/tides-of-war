@@ -10,7 +10,7 @@
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Our brethren have fallen from venomous sting of those flying bugs that you'll find south of here.\nThe cure of the sting comes from the venom extracted from their stingers. However we are critically low in supplies of the antidote.\nCollect the stingers from those flying buzzards and bring them back to me."
+			"text": "Our brethren have fallen from venomous sting of those flying bugs that you'll find south of here.\nWe are critically low in supplies of the antidote. The cure of the sting comes from the venom extracted from their stingers.\nCollect the stingers from those flying buzzards and bring them back to me."
 		},
 		{
 			"emit_signal": "start",

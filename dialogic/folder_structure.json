@@ -46,7 +46,8 @@
 		},
 		"Timelines": {
 			"files": [
-				"timeline-1618371874.json"
+				"timeline-1618371874.json",
+				"timeline-1671078020.json.tmp"
 			],
 			"folders": {
 				"transitionSigns": {
@@ -99,7 +100,7 @@
 					},
 					"metadata": {
 						"color": null,
-						"folded": true
+						"folded": false
 					}
 				},
 				"zone2": {
@@ -114,7 +115,10 @@
 						"timeline-1651096593.json",
 						"timeline-1656273589.json",
 						"timeline-1656276127.json",
-						"timeline-1656305903.json"
+						"timeline-1656305903.json",
+						"timeline-1668660931.json",
+						"timeline-1671077658.json",
+						"timeline-1671078020.json"
 					],
 					"folders": {
 
