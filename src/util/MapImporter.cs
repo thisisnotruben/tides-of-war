@@ -49,7 +49,8 @@ namespace Game.Util
 			lightScene = GD.Load<PackedScene>("res://src/light/light.tscn"),
 			lightSource = GD.Load<PackedScene>("res://src/light/lightSource.tscn"),
 			transitionSign = GD.Load<PackedScene>("res://src/map/doodads/transitionSign.tscn"),
-			interactItem = GD.Load<PackedScene>("res://src/map/doodads/interactItem.tscn");
+			interactItem = GD.Load<PackedScene>("res://src/map/doodads/interactItem.tscn"),
+			interactItemScout = GD.Load<PackedScene>("res://src/map/doodads/interactItemScout.tscn");
 
 		private Resource environment = GD.Load<Godot.Environment>("res://2d_env.tres");
 
@@ -484,7 +485,7 @@ namespace Game.Util
 					}
 					else if (questLoot is StaticBody2D)
 					{
-						Area2D area2D = new Area2D();
+						Area2D area2D = interactItemScout.Instance<Area2D>();
 						zed.AddChild(area2D);
 						area2D.Owner = map;
 						area2D.Name = questLoot.Name;

@@ -20,9 +20,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="list_of_menus" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -37,12 +34,13 @@ __meta__ = {
 }
 
 [node name="bg" type="ColorRect" parent="list_of_menus"]
+visible = false
 margin_left = 50.0
 margin_top = 50.0
 margin_right = 670.0
 margin_bottom = 1230.0
 theme = ExtResource( 10 )
-color = Color( 0.14902, 0.14902, 0.14902, 1 )
+color = Color( 0.8, 0.8, 0.8, 1 )
 
 [node name="m" type="MarginContainer" parent="list_of_menus"]
 margin_left = 50.0

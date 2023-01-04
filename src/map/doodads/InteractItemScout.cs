@@ -22,6 +22,7 @@ namespace Game.Map.Doodads
 			if (player != null && !player.dead && !scoutValue.Empty())
 			{
 				Globals.questMaster.CheckQuests(scoutValue, QuestDB.QuestType.SCOUT, true);
+				// TODO: play sound if quest checks out
 			}
 		}
 	}

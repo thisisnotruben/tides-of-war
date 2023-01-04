@@ -11,7 +11,8 @@ func set_map_script(scene_path: String) -> void:
 
 	var explore_music := [""]
 	match map.get_name():
-		"zone_1":
+		# TODO: would like each zone to have two tracks for exploring
+		"zone_1", "zone_2", "zone_3", "zone_5":
 			explore_music = ["zone_1_world_0", "zone_1_world_1"]
 		"zone_4":
 			explore_music = ["zone_4_world"]
