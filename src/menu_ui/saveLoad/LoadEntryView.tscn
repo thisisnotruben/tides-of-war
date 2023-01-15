@@ -11,18 +11,12 @@ rect_min_size = Vector2( 0, 224 )
 mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="colorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
-color = Color( 0.431373, 0.431373, 0.431373, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color( 0.164706, 0.466667, 0.309804, 1 )
 
 [node name="marginContainer" type="MarginContainer" parent="colorRect"]
 anchor_right = 1.0
@@ -32,9 +26,6 @@ custom_constants/margin_right = 32
 custom_constants/margin_top = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="hBoxContainer" type="HBoxContainer" parent="colorRect/marginContainer"]
 margin_left = 32.0
@@ -52,7 +43,7 @@ margin_right = 259.0
 margin_bottom = 1216.0
 mouse_filter = 1
 size_flags_horizontal = 3
-color = Color( 0.14902, 0.14902, 0.14902, 1 )
+color = Color( 0.466667, 0.309804, 0.164706, 1 )
 
 [node name="marginContainer" type="MarginContainer" parent="colorRect/marginContainer/hBoxContainer/colorRect"]
 anchor_right = 1.0
@@ -62,9 +53,6 @@ custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="textureRect" type="TextureRect" parent="colorRect/marginContainer/hBoxContainer/colorRect/marginContainer"]
 margin_left = 8.0
@@ -81,9 +69,6 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="label" type="Label" parent="colorRect/marginContainer/hBoxContainer"]
 margin_left = 267.0
@@ -104,10 +89,7 @@ show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
-color = Color( 0.14902, 0.14902, 0.14902, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color( 0.466667, 0.164706, 0.172549, 1 )
 
 [node name="button" type="Button" parent="colorRect/marginContainer/hBoxContainer/label"]
 modulate = Color( 1, 1, 1, 0 )

@@ -12,8 +12,8 @@ script = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme_type_variation = "button_hud"
 __meta__ = {
-"_edit_use_anchors_": false,
 "_editor_description_": "for reason that style keeps on reverting to inherited default"
 }
 

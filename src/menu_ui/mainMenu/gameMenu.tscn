@@ -15,22 +15,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 3 )
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="playerMenu" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Inventory" type="MarginContainer" parent="playerMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 67.0
-margin_bottom = -4.0
+margin_left = 8.0
+margin_top = 75.0
+margin_right = -8.0
+margin_bottom = -8.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 32
 custom_constants/margin_left = 16
@@ -41,15 +37,17 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 32.0
-margin_right = 704.0
-margin_bottom = 1177.0
+margin_right = 688.0
+margin_bottom = 1165.0
 
 [node name="Skills" type="MarginContainer" parent="playerMenu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 67.0
-margin_bottom = -4.0
+margin_left = 8.0
+margin_top = 75.0
+margin_right = -8.0
+margin_bottom = -8.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 32
 custom_constants/margin_left = 16
@@ -60,15 +58,17 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 32.0
-margin_right = 704.0
-margin_bottom = 1177.0
+margin_right = 688.0
+margin_bottom = 1165.0
 
 [node name="Stats" type="MarginContainer" parent="playerMenu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 67.0
-margin_bottom = -4.0
+margin_left = 8.0
+margin_top = 75.0
+margin_right = -8.0
+margin_bottom = -8.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 32
 custom_constants/margin_left = 16
@@ -79,15 +79,17 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 32.0
-margin_right = 704.0
-margin_bottom = 1177.0
+margin_right = 688.0
+margin_bottom = 1165.0
 
 [node name="Quest Log" type="MarginContainer" parent="playerMenu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 67.0
-margin_bottom = -4.0
+margin_left = 8.0
+margin_top = 75.0
+margin_right = -8.0
+margin_bottom = -8.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 32
 custom_constants/margin_left = 16
@@ -98,15 +100,17 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 32.0
-margin_right = 704.0
-margin_bottom = 1177.0
+margin_right = 688.0
+margin_bottom = 1165.0
 
 [node name="Save Load" type="MarginContainer" parent="playerMenu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 67.0
-margin_bottom = -4.0
+margin_left = 8.0
+margin_top = 75.0
+margin_right = -8.0
+margin_bottom = -8.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 32
 custom_constants/margin_left = 16
@@ -117,15 +121,17 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 32.0
-margin_right = 704.0
-margin_bottom = 1177.0
+margin_right = 688.0
+margin_bottom = 1165.0
 
 [node name="Settings" type="MarginContainer" parent="playerMenu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 67.0
-margin_bottom = -4.0
+margin_left = 8.0
+margin_top = 75.0
+margin_right = -8.0
+margin_bottom = -8.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 32
 custom_constants/margin_left = 16
@@ -134,24 +140,24 @@ custom_constants/margin_bottom = 32
 [node name="centerContainer" type="CenterContainer" parent="playerMenu/Settings"]
 margin_left = 16.0
 margin_top = 32.0
-margin_right = 704.0
-margin_bottom = 1177.0
+margin_right = 688.0
+margin_bottom = 1165.0
 
 [node name="vBoxContainer" type="VBoxContainer" parent="playerMenu/Settings/centerContainer"]
 margin_left = 180.0
-margin_top = 474.0
-margin_right = 507.0
-margin_bottom = 670.0
+margin_top = 484.0
+margin_right = 491.0
+margin_bottom = 648.0
 
 [node name="exitGame" type="Button" parent="playerMenu/Settings/centerContainer/vBoxContainer"]
-margin_right = 332.0
-margin_bottom = 108.0
+margin_right = 311.0
+margin_bottom = 80.0
 text = "Exit Game"
 
 [node name="exitMenu" type="Button" parent="playerMenu/Settings/centerContainer/vBoxContainer"]
-margin_top = 112.0
-margin_right = 332.0
-margin_bottom = 220.0
+margin_top = 84.0
+margin_right = 311.0
+margin_bottom = 164.0
 text = "Exit Menu"
 
 [node name="popup" parent="." instance=ExtResource( 6 )]

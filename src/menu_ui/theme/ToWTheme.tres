@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=2]
+[gd_resource type="Theme" load_steps=25 format=2]
 
 [ext_resource path="res://asset/img/font/mago1_64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu_ui/theme/HudMenuTheme.tres" type="StyleBox" id=2]
@@ -8,6 +8,18 @@
 [ext_resource path="res://asset/img/font/mago1_48.tres" type="DynamicFont" id=6]
 [ext_resource path="res://asset/img/ui/arrow-down-tree.png" type="Texture" id=7]
 [ext_resource path="res://asset/img/ui/arrow-right-tree.png" type="Texture" id=8]
+[ext_resource path="res://src/menu_ui/theme/button_normal.tres" type="StyleBox" id=9]
+[ext_resource path="res://src/menu_ui/theme/arrow_left.tres" type="StyleBox" id=10]
+[ext_resource path="res://src/menu_ui/theme/arrow_right.tres" type="StyleBox" id=11]
+[ext_resource path="res://src/menu_ui/theme/button_start_menu.tres" type="StyleBox" id=12]
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.164706, 0.466667, 0.462745, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.137255, 0.392157, 0.388235, 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.109804, 0.109804, 0.109804, 1 )
@@ -21,33 +33,35 @@ border_width_bottom = 4
 border_color = Color( 0.109804, 0.109804, 0.109804, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.14902, 0.14902, 0.14902, 1 )
-border_width_bottom = 4
-border_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+bg_color = Color( 0.164706, 0.321569, 0.466667, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.137255, 0.270588, 0.392157, 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 content_margin_left = 8.0
 content_margin_right = 8.0
 content_margin_top = 8.0
 content_margin_bottom = 8.0
-bg_color = Color( 0.14902, 0.14902, 0.14902, 1 )
+bg_color = Color( 0.164706, 0.466667, 0.462745, 1 )
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+border_color = Color( 0.137255, 0.392157, 0.388235, 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 content_margin_left = 8.0
 content_margin_right = 8.0
 content_margin_top = 8.0
 content_margin_bottom = 8.0
-bg_color = Color( 0.227451, 0.227451, 0.227451, 1 )
+bg_color = Color( 0.164706, 0.321569, 0.466667, 1 )
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+border_color = Color( 0.137255, 0.270588, 0.392157, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
@@ -55,6 +69,38 @@ border_color = Color( 0.109804, 0.109804, 0.109804, 1 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.14902, 0.14902, 0.14902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.160784, 0.160784, 0.160784, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.164706, 0.466667, 0.313726, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.137255, 0.392157, 0.262745, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.466667, 0.164706, 0.168627, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.392157, 0.137255, 0.141176, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [resource]
 default_font = ExtResource( 1 )
@@ -64,24 +110,24 @@ Button/colors/font_color_hover = Color( 0.8, 0.8, 0.8, 1 )
 Button/colors/font_color_pressed = Color( 0.8, 0.8, 0.8, 1 )
 Button/constants/hseparation = 8
 Button/fonts/font = ExtResource( 3 )
-Button/styles/disabled = ExtResource( 2 )
-Button/styles/focus = ExtResource( 2 )
-Button/styles/hover = ExtResource( 2 )
-Button/styles/normal = ExtResource( 2 )
-Button/styles/pressed = ExtResource( 2 )
+Button/styles/disabled = ExtResource( 9 )
+Button/styles/focus = ExtResource( 9 )
+Button/styles/hover = ExtResource( 9 )
+Button/styles/normal = ExtResource( 9 )
+Button/styles/pressed = ExtResource( 9 )
+GridContainer/constants/hseparation = 0
+GridContainer/constants/vseparation = 0
 Label/colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
-Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
-Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/fonts/font = ExtResource( 4 )
 Label/styles/normal = null
-Panel/styles/panel = ExtResource( 5 )
+Panel/styles/panel = SubResource( 10 )
 PanelContainer/styles/panel = ExtResource( 5 )
-ProgressBar/colors/font_color = Color( 0.941176, 0.941176, 0.941176, 1 )
-ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0.109804, 0.109804, 0.109804, 1 )
 ProgressBar/fonts/font = ExtResource( 6 )
 ProgressBar/styles/bg = SubResource( 1 )
 ProgressBar/styles/fg = SubResource( 2 )
@@ -102,7 +148,7 @@ RichTextLabel/fonts/mono_font = ExtResource( 1 )
 RichTextLabel/fonts/normal_font = ExtResource( 1 )
 RichTextLabel/styles/focus = null
 RichTextLabel/styles/normal = null
-TabContainer/colors/font_color_bg = Color( 0.8, 0.8, 0.8, 1 )
+TabContainer/colors/font_color_bg = Color( 0.109804, 0.109804, 0.109804, 1 )
 TabContainer/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
 TabContainer/colors/font_color_fg = Color( 0.8, 0.8, 0.8, 1 )
 TabContainer/constants/hseparation = 8
@@ -166,3 +212,36 @@ WindowDialog/fonts/title_font = ExtResource( 1 )
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = SubResource( 8 )
+button_arrow_left/base_type = "Button"
+button_arrow_left/styles/disabled = ExtResource( 10 )
+button_arrow_left/styles/focus = ExtResource( 10 )
+button_arrow_left/styles/hover = ExtResource( 10 )
+button_arrow_left/styles/normal = ExtResource( 10 )
+button_arrow_left/styles/pressed = ExtResource( 10 )
+button_arrow_right/base_type = "Button"
+button_arrow_right/styles/disabled = ExtResource( 11 )
+button_arrow_right/styles/focus = ExtResource( 11 )
+button_arrow_right/styles/hover = ExtResource( 11 )
+button_arrow_right/styles/normal = ExtResource( 11 )
+button_arrow_right/styles/pressed = ExtResource( 11 )
+button_hud/base_type = "Button"
+button_hud/styles/disabled = ExtResource( 2 )
+button_hud/styles/focus = ExtResource( 2 )
+button_hud/styles/hover = ExtResource( 2 )
+button_hud/styles/normal = ExtResource( 2 )
+button_hud/styles/pressed = ExtResource( 2 )
+button_start_menu/base_type = "Button"
+button_start_menu/styles/disabled = ExtResource( 12 )
+button_start_menu/styles/focus = ExtResource( 12 )
+button_start_menu/styles/hover = ExtResource( 12 )
+button_start_menu/styles/normal = ExtResource( 12 )
+button_start_menu/styles/pressed = ExtResource( 12 )
+label_error/base_type = "Label"
+label_error/colors/font_color = Color( 0.662745, 0, 0, 1 )
+label_error/colors/font_color_shadow = Color( 0.533333, 0.160784, 0.160784, 0 )
+panel_container_start_menu/base_type = "PanelContainer"
+panel_container_start_menu/styles/panel = SubResource( 16 )
+panel_container_type_2/base_type = "PanelContainer"
+panel_container_type_2/styles/panel = SubResource( 12 )
+panel_type_2/base_type = "Panel"
+panel_type_2/styles/panel = SubResource( 11 )

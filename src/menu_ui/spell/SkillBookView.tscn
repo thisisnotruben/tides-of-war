@@ -12,9 +12,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 11 )
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="c" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -25,9 +22,9 @@ __meta__ = {
 }
 
 [node name="InventoryGridView" parent="c" instance=ExtResource( 10 )]
-margin_left = 80.0
+margin_left = 24.0
 margin_top = 360.0
-margin_right = 640.0
+margin_right = 696.0
 margin_bottom = 920.0
 
 [node name="itemInfo" parent="." instance=ExtResource( 6 )]
@@ -36,5 +33,6 @@ script = ExtResource( 1 )
 
 [node name="popup" parent="." instance=ExtResource( 2 )]
 visible = false
+
 [connection signal="draw" from="." to="." method="OnDraw"]
 [connection signal="hide" from="." to="." method="OnHide"]

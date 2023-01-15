@@ -112,6 +112,10 @@ enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/vnen.
 
 singletons=[  ]
 
+[gui]
+
+theme/custom="res://src/menu_ui/theme/ToWTheme.tres"
+
 [importer_defaults]
 
 texture={

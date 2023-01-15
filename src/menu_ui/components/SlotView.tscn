@@ -35,9 +35,6 @@ custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
 expand_icon = true
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="margin" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -112,6 +109,7 @@ max_lines_visible = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="tween_all_completed" from="tween" to="." method="OnTweenAllCompleted"]
 [connection signal="button_down" from="button" to="." method="OnButtonChanged" binds= [ true ]]
 [connection signal="button_up" from="button" to="." method="OnButtonChanged" binds= [ false ]]
