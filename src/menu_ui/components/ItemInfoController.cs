@@ -14,9 +14,9 @@ namespace Game.Ui
 		protected RichTextLabel richTextLabel;
 		public string commodityWorldName;
 		protected Control mainContent, buttonContainer;
-		protected TextureButton leftbttn, rightBttn;
 		protected ItemInfoSlotController iconView;
-		public Button castBttn, useBttn, buyBttn, sellBttn, equipBttn, unequipBttn, dropBttn, backBttn;
+		public Button castBttn, useBttn, buyBttn, sellBttn, equipBttn,
+			unequipBttn, dropBttn, backBttn, leftbttn, rightBttn;
 
 		public override void _Ready()
 		{
@@ -36,9 +36,8 @@ namespace Game.Ui
 			unequipBttn = buttonContainer.GetNode<Button>("unequip");
 			dropBttn = buttonContainer.GetNode<Button>("drop");
 			backBttn = buttonContainer.GetNode<Button>("back");
-
-			leftbttn = GetNode<TextureButton>("s/hBoxContainer/left");
-			rightBttn = GetNode<TextureButton>("s/hBoxContainer/right");
+			leftbttn = GetNode<Button>("s/hBoxContainer/left");
+			rightBttn = GetNode<Button>("s/hBoxContainer/right");
 
 			// connect popup events
 			popup = GetChild<PopupController>(1);
